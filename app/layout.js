@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Yo. — Your AI Context Workspace',
+  title: '.Yo — Your AI Context Workspace',
   description: 'Capture context from any AI. Refine it. Recall it anywhere. Your conversations, your data, your desktop.',
 };
 

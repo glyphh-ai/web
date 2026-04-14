@@ -11,6 +11,7 @@ import Integrations from './components/Integrations';
 import Pricing from './components/Pricing';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import JumpingDot from './components/JumpingDot';
 
 export default function Home() {
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function Home() {
 
   return (
     <>
+      <JumpingDot />
       <Nav />
       <Hero />
       <AppPreview />

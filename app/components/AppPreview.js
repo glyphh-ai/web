@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react';
 
 const placeholders = [
-  'Ask Yo to refine...',
-  'Summarize this as a spec...',
-  'Extract the auth section...',
-  'Make this a README...',
+  '.yo refine this...',
+  '.yo summarize as a spec...',
+  '.sup auth flow...',
+  '.dip gemini...',
 ];
 
 export default function AppPreview() {
@@ -34,7 +34,7 @@ export default function AppPreview() {
             <div className="preview-dots">
               <span></span><span></span><span></span>
             </div>
-            <span className="preview-title">Yo.</span>
+            <span className="preview-title"><span className="dot">.</span>Yo</span>
           </div>
           <div className="preview-content">
             <div className="preview-sidebar">

@@ -4,8 +4,8 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <a href="/" className="footer-logo">Yo<span className="dot">.</span></a>
-            <p className="footer-tagline">Your AI context workspace.</p>
+            <a href="/" className="footer-logo"><span className="dot">.</span>Yo</a>
+            <p className="footer-tagline">Your AI context workspace</p>
           </div>
           <div className="footer-col">
             <h4>Product</h4>

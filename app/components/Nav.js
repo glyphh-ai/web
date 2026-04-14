@@ -16,7 +16,7 @@ export default function Nav() {
     <>
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
         <div className="nav-inner">
-          <a href="/" className="nav-logo">Yo<span className="dot">.</span></a>
+          <a href="/" className="nav-logo"><span className="dot">.</span>Yo</a>
           <div className="nav-links">
             <a href="#features">Features</a>
             <a href="#how-it-works">How It Works</a>

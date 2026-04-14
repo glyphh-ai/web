@@ -53,7 +53,7 @@ export default function Features() {
         <div className="section-label">{'{'}
           <span className="accent">EVERYTHING YOU NEED</span>
           {'}'}</div>
-        <h2 className="section-title">Built for developers who use AI daily</h2>
+        <h2 className="section-title">Built for anyone who uses AI daily</h2>
         <div className="grid-3">
           {features.map((f, i) => (
             <div key={i} className="feature reveal">
