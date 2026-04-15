@@ -1135,6 +1135,9 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .jumping-dot { display: none; }
+  .dot-hidden { color: var(--green) !important; }
+
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .nav-mobile-toggle { display: block; }

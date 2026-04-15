@@ -75,7 +75,7 @@ export default function JumpingDot() {
     let velX = 0;
     let velY = 0;
     let initialized = false;
-    const DOT_RADIUS = 10;
+    let DOT_RADIUS = 10;
     const SPRING = 0.06;
     const DAMPING = 0.82;
 
@@ -163,15 +163,19 @@ export default function JumpingDot() {
     function resize() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      // Recompute dot target when page resizes or goes mobile
+      if (initialized) updateTarget();
     }
     resize();
     window.addEventListener('resize', resize);
 
     function getDotPosition(el) {
       const rect = el.getBoundingClientRect();
+      // Scale dot radius to ~15% of the text line height
+      DOT_RADIUS = Math.min(11, Math.max(4, rect.height * 0.085));
       return {
-        x: rect.left + rect.width / 2 + 5,
-        y: rect.top + rect.height / 2 + 30,
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height * 0.72,
       };
     }
 
