@@ -89,15 +89,19 @@ export default function JumpingDot() {
     let idleHomeY = 0;
     let idleReturning = false;
     let hideSeekMode = false;
-    let hideSeekPhase = 'going'; // 'going', 'hiding', 'returning'
+    let hideSeekPhase = 'going'; // 'going', 'hiding', 'peek1', 'duck1', 'peek2', 'duck2', 'returning'
     let hideTargetX = 0;
     let hideTargetY = 0;
+    let hideBtnW = 0;
+    let hideBtnH = 0;
     let hideStartTime = 0;
+    let returnSpring = 0.015; // slow bouncy spring for the return
     const IDLE_DELAY = 3000;
     const HIDESEEK_DELAY = 12000;
 
     function startIdle() {
       if (idleMode || hideSeekMode) return;
+      if (currentTargetId !== 'hero-dot') return;
       idleMode = true;
       idleReturning = false;
       idleHomeX = targetX;
@@ -108,7 +112,10 @@ export default function JumpingDot() {
     }
 
     function startHideSeek() {
-      if (hideSeekMode || idleMode) return;
+      if (hideSeekMode) return;
+      if (currentTargetId !== 'hero-dot') return;
+      // Interrupt any active doodle
+      if (idleMode) stopIdle();
       // Find the "See How It Works" button
       const btn = document.querySelector('a[href="#how-it-works"].btn');
       if (!btn) return;
@@ -117,9 +124,11 @@ export default function JumpingDot() {
       hideSeekPhase = 'going';
       idleHomeX = targetX;
       idleHomeY = targetY;
-      // Target: behind the button center
+      // Store button geometry for peek positions
       hideTargetX = rect.left + rect.width / 2;
       hideTargetY = rect.top + rect.height / 2;
+      hideBtnW = rect.width / 2;
+      hideBtnH = rect.height / 2;
       hideStartTime = 0;
     }
 
@@ -135,6 +144,7 @@ export default function JumpingDot() {
       hideSeekPhase = 'going';
     }
 
+    // Called on user scroll — resets everything
     function resetIdleTimer() {
       if (idleTimer) clearTimeout(idleTimer);
       if (hideSeekTimer) clearTimeout(hideSeekTimer);
@@ -142,6 +152,12 @@ export default function JumpingDot() {
       if (hideSeekMode) stopHideSeek();
       idleTimer = setTimeout(startIdle, IDLE_DELAY);
       hideSeekTimer = setTimeout(startHideSeek, HIDESEEK_DELAY);
+    }
+
+    // Called when a doodle finishes — only restarts doodle, leaves hideSeek timer alone
+    function restartDoodleOnly() {
+      if (idleTimer) clearTimeout(idleTimer);
+      idleTimer = setTimeout(startIdle, IDLE_DELAY);
     }
 
     function resize() {
@@ -159,29 +175,38 @@ export default function JumpingDot() {
       };
     }
 
+    let currentTargetId = 'hero-dot';
+
     function updateTarget() {
       resetIdleTimer();
-      const viewCenter = window.innerHeight * 0.4;
 
       const ids = ['hero-dot', 'cmd-yo', 'cmd-sup', 'cmd-dip'];
-      let closest = null;
-      let minDist = Infinity;
+      let best = null;
+      let bestId = null;
+      let bestDist = Infinity;
 
       for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
-        const pos = getDotPosition(el);
-        const dist = Math.abs(pos.y - viewCenter);
-        if (dist < minDist) {
-          minDist = dist;
-          closest = pos;
+        const rect = el.getBoundingClientRect();
+        // Pick the element closest to being visible in the viewport
+        // Prefer elements whose vertical center is closest to viewport center
+        const elCenter = rect.top + rect.height / 2;
+        const viewCenter = window.innerHeight / 2;
+        const dist = Math.abs(elCenter - viewCenter);
+        // Only consider elements at least partially in viewport
+        if (rect.bottom > 0 && rect.top < window.innerHeight && dist < bestDist) {
+          bestDist = dist;
+          best = getDotPosition(el);
+          bestId = id;
         }
       }
 
-      if (!closest) return;
+      if (!best) return;
 
-      targetX = closest.x;
-      targetY = closest.y;
+      targetX = best.x;
+      targetY = best.y;
+      currentTargetId = bestId;
 
       if (!initialized) {
         dotX = targetX;
@@ -222,7 +247,7 @@ export default function JumpingDot() {
 
       if (hideSeekMode) {
         if (hideSeekPhase === 'going') {
-          // Fly toward the button
+          // Fly toward the button center
           moveTargetX = hideTargetX;
           moveTargetY = hideTargetY;
           const dist = Math.hypot(dotX - hideTargetX, dotY - hideTargetY);
@@ -232,14 +257,78 @@ export default function JumpingDot() {
             hideStartTime = Date.now();
           }
         } else if (hideSeekPhase === 'hiding') {
-          // Stay hidden behind the button for 1.5s
+          // Hidden behind button briefly
           moveTargetX = hideTargetX;
           moveTargetY = hideTargetY;
-          if (Date.now() - hideStartTime > 1500) {
+          if (Date.now() - hideStartTime > 1000) {
+            hideSeekPhase = 'peek-up';
+            hideStartTime = Date.now();
+          }
+        } else if (hideSeekPhase === 'peek-up') {
+          // Peek up above the button — just barely
+          moveTargetX = hideTargetX;
+          moveTargetY = hideTargetY - hideBtnH + 10;
+          const dist = Math.hypot(dotX - moveTargetX, dotY - moveTargetY);
+          if (dist < 4 && Date.now() - hideStartTime > 600) {
+            hideSeekPhase = 'duck-up';
+            hideStartTime = Date.now();
+          }
+        } else if (hideSeekPhase === 'duck-up') {
+          // Duck back behind
+          moveTargetX = hideTargetX;
+          moveTargetY = hideTargetY;
+          const dist = Math.hypot(dotX - hideTargetX, dotY - hideTargetY);
+          if (dist < 5 && Date.now() - hideStartTime > 700) {
+            hideSeekPhase = 'peek-left';
+            hideStartTime = Date.now();
+          }
+        } else if (hideSeekPhase === 'peek-left') {
+          // Peek out to the right of the button
+          moveTargetX = hideTargetX + hideBtnW + 10;
+          moveTargetY = hideTargetY;
+          const dist = Math.hypot(dotX - moveTargetX, dotY - moveTargetY);
+          if (dist < 4 && Date.now() - hideStartTime > 600) {
+            hideSeekPhase = 'duck-left';
+            hideStartTime = Date.now();
+          }
+        } else if (hideSeekPhase === 'duck-left') {
+          // Duck back behind
+          moveTargetX = hideTargetX;
+          moveTargetY = hideTargetY;
+          const dist = Math.hypot(dotX - hideTargetX, dotY - hideTargetY);
+          if (dist < 5 && Date.now() - hideStartTime > 800) {
+            hideSeekPhase = 'slow-up';
+            hideStartTime = Date.now();
+          }
+        } else if (hideSeekPhase === 'slow-up') {
+          // Super slow creep up above the button
+          moveTargetX = hideTargetX;
+          moveTargetY = hideTargetY - hideBtnH - 12;
+          // Don't transition immediately — let it creep
+          if (Date.now() - hideStartTime > 1200) {
+            hideSeekPhase = 'duck-slow';
+            hideStartTime = Date.now();
+          }
+        } else if (hideSeekPhase === 'duck-slow') {
+          // Duck back behind — caught!
+          moveTargetX = hideTargetX;
+          moveTargetY = hideTargetY;
+          const dist = Math.hypot(dotX - hideTargetX, dotY - hideTargetY);
+          if (dist < 5 && Date.now() - hideStartTime > 400) {
+            hideSeekPhase = 'laugh';
+            hideStartTime = Date.now();
+          }
+        } else if (hideSeekPhase === 'laugh') {
+          // Shoot out to the right of the button, laughing (bouncing up and down)
+          const t = Date.now() - hideStartTime;
+          moveTargetX = hideTargetX + hideBtnW + 30;
+          moveTargetY = hideTargetY + Math.sin(t * 0.015) * 8; // little bounce
+          spawnParticles(dotX, dotY, 1);
+          if (t > 1500) {
             hideSeekPhase = 'returning';
           }
         } else {
-          // Fly back home
+          // Slowly bounce back home
           moveTargetX = idleHomeX;
           moveTargetY = idleHomeY;
           const dist = Math.hypot(dotX - idleHomeX, dotY - idleHomeY);
@@ -274,18 +363,21 @@ export default function JumpingDot() {
           const distHome = Math.hypot(dotX - idleHomeX, dotY - idleHomeY);
           if (distHome < 3) {
             stopIdle();
-            resetIdleTimer();
+            restartDoodleOnly();
           }
         }
       }
 
-      // Spring physics toward current target
+      // Spring physics — slow for creep and return phases
+      const isSlowPhase = hideSeekMode && (hideSeekPhase === 'returning' || hideSeekPhase === 'slow-up');
+      const spring = isSlowPhase ? 0.012 : SPRING;
+      const damping = isSlowPhase ? 0.93 : DAMPING;
       const dx = moveTargetX - dotX;
       const dy = moveTargetY - dotY;
-      velX += dx * SPRING;
-      velY += dy * SPRING;
-      velX *= DAMPING;
-      velY *= DAMPING;
+      velX += dx * spring;
+      velY += dy * spring;
+      velX *= damping;
+      velY *= damping;
       dotX += velX;
       dotY += velY;
 
@@ -315,26 +407,30 @@ export default function JumpingDot() {
         ctx.fill();
       }
 
-      // Dot glow
-      const glowGrad = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, DOT_RADIUS * 3.5);
-      glowGrad.addColorStop(0, 'rgba(37, 199, 94, 0.18)');
-      glowGrad.addColorStop(1, 'rgba(37, 199, 94, 0)');
-      ctx.beginPath();
-      ctx.arc(dotX, dotY, DOT_RADIUS * 3.5, 0, Math.PI * 2);
-      ctx.fillStyle = glowGrad;
-      ctx.fill();
+      // Hide dot whenever it overlaps the button area
+      let dotHidden = false;
+      if (hideSeekMode && hideSeekPhase !== 'going' && hideSeekPhase !== 'laugh' && hideSeekPhase !== 'returning') {
+        const insideX = Math.abs(dotX - hideTargetX) < hideBtnW + DOT_RADIUS;
+        const insideY = Math.abs(dotY - hideTargetY) < hideBtnH + DOT_RADIUS;
+        dotHidden = insideX && insideY;
+      }
 
-      // Main dot
-      ctx.beginPath();
-      ctx.arc(dotX, dotY, DOT_RADIUS, 0, Math.PI * 2);
-      ctx.fillStyle = '#25C75E';
-      ctx.fill();
+      if (!dotHidden) {
+        // Dot glow
+        const glowGrad = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, DOT_RADIUS * 3.5);
+        glowGrad.addColorStop(0, 'rgba(37, 199, 94, 0.18)');
+        glowGrad.addColorStop(1, 'rgba(37, 199, 94, 0)');
+        ctx.beginPath();
+        ctx.arc(dotX, dotY, DOT_RADIUS * 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = glowGrad;
+        ctx.fill();
 
-      // Inner highlight
-      ctx.beginPath();
-      ctx.arc(dotX, dotY, DOT_RADIUS * 0.35, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
-      ctx.fill();
+        // Main dot
+        ctx.beginPath();
+        ctx.arc(dotX, dotY, DOT_RADIUS, 0, Math.PI * 2);
+        ctx.fillStyle = '#25C75E';
+        ctx.fill();
+      }
 
       raf = requestAnimationFrame(draw);
     }
