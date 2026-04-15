@@ -181,6 +181,9 @@ export default function JumpingDot() {
 
     let currentTargetId = 'hero-dot';
 
+    // Last known position of the final anchor (cmd-dip)
+    let lastAnchorPos = null;
+
     function updateTarget() {
       resetIdleTimer();
 
@@ -193,17 +196,31 @@ export default function JumpingDot() {
         const el = document.getElementById(id);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
+        const pos = getDotPosition(el);
+
+        // Track the last anchor's position while it's in the viewport
+        if (id === 'cmd-dip' && rect.bottom > 0 && rect.top < window.innerHeight) {
+          lastAnchorPos = { x: pos.x, y: pos.y };
+        }
+
         // Pick the element closest to being visible in the viewport
-        // Prefer elements whose vertical center is closest to viewport center
         const elCenter = rect.top + rect.height / 2;
         const viewCenter = window.innerHeight / 2;
         const dist = Math.abs(elCenter - viewCenter);
         // Only consider elements at least partially in viewport
         if (rect.bottom > 0 && rect.top < window.innerHeight && dist < bestDist) {
           bestDist = dist;
-          best = getDotPosition(el);
+          best = pos;
           bestId = id;
         }
+      }
+
+      // If no anchor is in viewport, clamp to the last anchor's saved position
+      if (!best && lastAnchorPos) {
+        targetX = lastAnchorPos.x;
+        targetY = lastAnchorPos.y;
+        // Don't update currentTargetId — keep it as whatever it was
+        return;
       }
 
       if (!best) return;

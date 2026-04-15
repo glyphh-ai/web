@@ -28,8 +28,26 @@ export default function Home() {
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    return () => observer.disconnect();
+    function observeAll() {
+      document.querySelectorAll('.reveal').forEach(el => {
+        // Re-add revealed if already in viewport (back-nav / bfcache)
+        el.classList.remove('revealed');
+        observer.observe(el);
+      });
+    }
+
+    observeAll();
+
+    // Handle bfcache restore (browser back/forward)
+    const onPageShow = (e) => {
+      if (e.persisted) observeAll();
+    };
+    window.addEventListener('pageshow', onPageShow);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('pageshow', onPageShow);
+    };
   }, []);
 
   return (
