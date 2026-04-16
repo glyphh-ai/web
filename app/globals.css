@@ -1426,6 +1426,80 @@ footer {
   color: var(--text-4);
 }
 
+/* ── Policy Pages ─────────────────────────────────────── */
+.policy-page {
+  min-height: 100vh;
+  padding: 6rem 1.5rem 4rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.policy-page .container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.policy-back {
+  display: inline-block;
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+  transition: color 0.2s;
+}
+
+.policy-back:hover {
+  color: var(--green);
+}
+
+.policy-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 2rem;
+  font-family: var(--font-sans);
+}
+
+.policy-page h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.policy-page p {
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.policy-page ul {
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.policy-page a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+.policy-page a:hover {
+  text-decoration: underline;
+}
+
+.policy-page code {
+  background: var(--surface-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
 /* ── Responsive ────────────────────────────────────────── */
 @media (max-width: 960px) {
   .command-grid {

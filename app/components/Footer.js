@@ -21,13 +21,14 @@ export default function Footer() {
             <a href="#">GitHub</a>
           </div>
           <div className="footer-col">
-            <h4>Company</h4>
-            <a href="#">About Glyphh AI</a>
-            <a href="#">Contact</a>
+            <h4>Legal</h4>
+            <a href="/terms">Terms of Use</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/refund">Refund Policy</a>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2026 Glyphh AI. All rights reserved.</p>
+          <p>&copy; 2026 Glyphh AI LLC. All rights reserved.</p>
         </div>
       </div>
     </footer>
