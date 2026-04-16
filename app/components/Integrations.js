@@ -20,7 +20,7 @@ export default function Integrations() {
           ))}
         </div>
         <p className="integration-note">
-          Yo captures from any web-based AI through its built-in browser panels. No extensions or plugins needed.
+          Each AI runs in its own panel inside the .Yo desktop app. Context flows between them automatically.
         </p>
       </div>
     </section>

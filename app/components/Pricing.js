@@ -9,7 +9,7 @@ const plans = [
     name: 'Basic',
     price: '8',
     period: '/month',
-    desc: 'For power users who want more from the extension.',
+    desc: 'For power users who want more from the app.',
     cta: 'Start Basic',
     href: `${SERVER_URL}/api/checkout?plan=basic`,
     btnStyle: 'btn-ghost-green',
@@ -50,7 +50,7 @@ export default function Pricing() {
       <SupernovaCanvas />
       <div className="container">
         <h2 className="section-title">Simple, transparent pricing</h2>
-        <p className="section-subtitle">The extension is free forever. Upgrade for more storage, cloud sync, and MCP.</p>
+        <p className="section-subtitle">The app is free forever. Upgrade for more storage, cloud sync, and MCP.</p>
 
         <div className="pricing-grid">
           {/* Free card */}
@@ -67,13 +67,13 @@ export default function Pricing() {
               <li><span className="check">&#10003;</span> 25 library items</li>
               <li><span className="check">&#10003;</span> 5 skills</li>
               <li><span className="check">&#10003;</span> All 5 dot-commands</li>
-              <li><span className="check">&#10003;</span> Works on any website</li>
+              <li><span className="check">&#10003;</span> Works across all your panels</li>
               <li><span className="check">&#10003;</span> BYOK — use your own API key</li>
               <li className="excluded"><span className="x">&times;</span> Cloud sync</li>
               <li className="excluded"><span className="x">&times;</span> MCP server</li>
             </ul>
-            <a href="https://chrome.google.com/webstore" className="btn btn-ghost-green btn-lg btn-full group">
-              <span className="btn-label">Install Extension</span>
+            <a href="#download" className="btn btn-ghost-green btn-lg btn-full group">
+              <span className="btn-label">Download Free</span>
               <span className="btn-fill"></span>
             </a>
           </div>

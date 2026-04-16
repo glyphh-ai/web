@@ -9,6 +9,7 @@ import HowItWorks from './components/HowItWorks';
 import Features from './components/Features';
 import Integrations from './components/Integrations';
 import Pricing from './components/Pricing';
+import Download from './components/Download';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import JumpingDot from './components/JumpingDot';
@@ -61,6 +62,7 @@ export default function Home() {
       <Features />
       <Integrations />
       <Pricing />
+      <Download />
       <FinalCTA />
       <Footer />
     </>

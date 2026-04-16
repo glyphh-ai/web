@@ -1281,6 +1281,31 @@ body {
   }
 }
 
+/* ── Download ──────────────────────────────────────────── */
+.download {
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-xl {
+  padding: 1.125rem 2.5rem;
+  font-size: 1.125rem;
+}
+
+.download-note {
+  margin-top: 1rem;
+  color: var(--text-2);
+  font-size: 0.875rem;
+}
+
 /* ── Final CTA ─────────────────────────────────────────── */
 .final-cta {
   padding: 4rem 0 8rem;

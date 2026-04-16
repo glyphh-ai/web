@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3001';
+const DOWNLOAD_BASE = process.env.NEXT_PUBLIC_DOWNLOAD_BASE_URL
+  || 'https://github.com/glyphh/yo-desktop/releases/latest/download';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
@@ -14,6 +16,12 @@ function SuccessContent() {
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
+  const [downloadUrl, setDownloadUrl] = useState(`${DOWNLOAD_BASE}/Yo.dmg`);
+
+  useEffect(() => {
+    const ua = (navigator.userAgent || '').toLowerCase();
+    if (ua.includes('win')) setDownloadUrl(`${DOWNLOAD_BASE}/Yo-Setup.exe`);
+  }, []);
 
   useEffect(() => {
     if (!sessionId) {
@@ -122,11 +130,11 @@ function SuccessContent() {
           <ol>
             <li>
               <span className="success-step-num">1</span>
-              <span>Install the <strong>.Yo</strong> Chrome extension</span>
+              <span>Download and install the <strong>.Yo</strong> desktop app</span>
             </li>
             <li>
               <span className="success-step-num">2</span>
-              <span>Open the side panel (<code>Cmd+Shift+Y</code>)</span>
+              <span>Open the app (<code>Cmd+Shift+Y</code>)</span>
             </li>
             <li>
               <span className="success-step-num">3</span>
@@ -136,8 +144,8 @@ function SuccessContent() {
         </div>
 
         <div className="success-actions">
-          <a href="https://chrome.google.com/webstore" className="btn btn-primary btn-lg group">
-            <span className="btn-label">Add to Chrome</span>
+          <a href={downloadUrl} className="btn btn-primary btn-lg group">
+            <span className="btn-label">Download .Yo</span>
             <span className="btn-fill"></span>
           </a>
           <a href="/" className="btn btn-ghost btn-lg group">

@@ -5,22 +5,22 @@ export default function HowItWorks() {
         <div className="section-label">{'{'}
           <span className="accent">HOW IT WORKS</span>
           {'}'}</div>
-        <h2 className="section-title">From conversation to context in seconds</h2>
+        <h2 className="section-title">One conversation. Every panel.</h2>
 
         <div className="steps">
           <div className="step reveal">
             <div className="step-number">01</div>
             <div className="step-content">
-              <h3>Chat with any AI</h3>
-              <p>Use Claude, Gemini, ChatGPT — Yo works alongside them all.
-                Each AI runs in its own panel inside Yo&apos;s desktop app.</p>
+              <h3>Open your panels</h3>
+              <p>Claude, Gemini, Slack, your IDE — each running in its own panel.
+                As you work, context is collected in the background. You never have to capture anything manually.</p>
             </div>
             <div className="step-visual">
               <div className="step-window">
                 <div className="step-panels">
                   <div className="step-panel active">Claude</div>
                   <div className="step-panel">Gemini</div>
-                  <div className="step-panel">ChatGPT</div>
+                  <div className="step-panel">Slack</div>
                 </div>
               </div>
             </div>
@@ -29,17 +29,17 @@ export default function HowItWorks() {
           <div className="step step-reverse reveal">
             <div className="step-number">02</div>
             <div className="step-content">
-              <h3>Type &quot;.yo&quot; to capture</h3>
-              <p>One command grabs the conversation. Yo&apos;s AI extracts the useful parts,
-                strips the noise, and opens it in the context workbench for refinement.</p>
+              <h3>.yo to speak</h3>
+              <p>Drop .yo anywhere. You&apos;re in the conversation. Background context from every open panel is right there —
+                ask, refine, direct. The AI that responds is the .sup.</p>
             </div>
             <div className="step-visual">
               <div className="step-capture">
                 <div className="step-cmd">
-                  <span className="step-prompt">&gt;</span> .yo extract the api design decisions
+                  <span className="step-prompt">&gt;</span> .yo what do you think of the code changes we just made?
                 </div>
                 <div className="step-arrow">&#8595;</div>
-                <div className="step-result">api-design-decisions.md</div>
+                <div className="step-result">gemini .sup — context loaded</div>
               </div>
             </div>
           </div>
@@ -47,17 +47,17 @@ export default function HowItWorks() {
           <div className="step reveal">
             <div className="step-number">03</div>
             <div className="step-content">
-              <h3>Type &quot;.sup&quot; to recall</h3>
-              <p>When you need that context again — in any AI, any conversation —
-                just type &quot;.sup&quot; and describe what you&apos;re looking for. It formats and loads instantly.</p>
+              <h3>.dip to move</h3>
+              <p>Head to a new panel with .dip. Drop .yo again and your context follows.
+                Crystallize the conversation into a summary, a spec, a message — wherever you land.</p>
             </div>
             <div className="step-visual">
               <div className="step-recall">
                 <div className="step-cmd">
-                  <span className="step-prompt">&gt;</span> .sup api decisions
+                  <span className="step-prompt">&gt;</span> .dip slack
                 </div>
                 <div className="step-arrow">&#8595;</div>
-                <div className="step-loaded">Context loaded into Claude</div>
+                <div className="step-loaded">Context travels with you</div>
               </div>
             </div>
           </div>

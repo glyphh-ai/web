@@ -23,11 +23,11 @@ export default function FinalCTA() {
     <section className="final-cta" id="get-started">
       <div className="container">
         <div className="cta-card" ref={cardRef}>
-          <h2>Stop losing your best AI conversations<span className="dot">.</span></h2>
-          <p>Add .Yo to Chrome and start building your context library today.</p>
+          <h2>Your context. Every panel. Every conversation<span className="dot">.</span></h2>
+          <p>Download .Yo and start working across every AI today.</p>
           <div className="cta-buttons">
-            <a href="https://chrome.google.com/webstore" className="btn btn-white btn-lg group">
-              <span className="btn-label">Add to Chrome — Free</span>
+            <a href="#download" className="btn btn-white btn-lg group">
+              <span className="btn-label">Download for Mac — Free</span>
               <span className="btn-fill btn-fill-dark"></span>
             </a>
             <a href="#pricing" className="btn btn-ghost-white btn-lg group">
@@ -35,7 +35,7 @@ export default function FinalCTA() {
               <span className="btn-fill"></span>
             </a>
           </div>
-          <p className="cta-version">Chrome &middot; Brave &middot; Edge &middot; Arc</p>
+          <p className="cta-version">Mac &middot; Windows</p>
         </div>
       </div>
     </section>

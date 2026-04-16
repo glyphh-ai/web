@@ -23,8 +23,8 @@ export default function Nav() {
             <a href="#pricing">Pricing</a>
           </div>
           <div className="nav-cta">
-            <a href="https://chrome.google.com/webstore" className="btn btn-ghost btn-sm group">
-              <span className="btn-label">Add to Chrome</span>
+            <a href="#download" className="btn btn-ghost btn-sm group">
+              <span className="btn-label">Download</span>
               <span className="btn-fill"></span>
             </a>
           </div>
@@ -41,7 +41,7 @@ export default function Nav() {
         <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
         <a href="#how-it-works" onClick={() => setMenuOpen(false)}>How It Works</a>
         <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
-        <a href="https://chrome.google.com/webstore" className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Add to Chrome</a>
+        <a href="#download" className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Download</a>
       </div>
     </>
   );

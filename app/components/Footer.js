@@ -12,7 +12,7 @@ export default function Footer() {
             <a href="#features">Features</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#pricing">Pricing</a>
-            <a href="https://chrome.google.com/webstore">Get Extension</a>
+            <a href="#download">Download</a>
           </div>
           <div className="footer-col">
             <h4>Resources</h4>

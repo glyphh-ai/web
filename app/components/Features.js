@@ -1,18 +1,18 @@
 const features = [
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
-    title: 'Capture Anything',
-    desc: 'Grab AI responses from Claude, ChatGPT, Gemini — any website. One command saves the conversation to your library.',
+    title: 'Always-On Context',
+    desc: 'Every panel you open collects context in the background. No manual capture. No lost conversations. It is just there when you .yo.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
-    title: 'Inject Context',
-    desc: 'Load saved context directly into any AI chat input. No copy-paste. Just type .sup and your context appears.',
+    title: 'Context Travels With You',
+    desc: 'When you .dip to a new panel, your context follows. .yo and you are already in the conversation — no copy-paste, no setup.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h18"/></svg>,
-    title: 'Smart Tab Switching',
-    desc: 'Jump between AI tabs instantly with .dip. Your context follows you across Claude, ChatGPT, and Gemini.',
+    title: 'Move Between Panels',
+    desc: '.dip to any panel and land in context. Claude, Gemini, Slack, your IDE — the conversation continues wherever you go.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>,
@@ -23,7 +23,7 @@ const features = [
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>,
     title: 'Reusable Skills',
-    desc: 'Save prompt templates as skills. Run them with .wassup — automate repetitive AI workflows in one command.',
+    desc: 'Save prompt templates as skills. .yo with a skill and your context is crystallized — summaries, specs, messages, anything repeatable.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
@@ -33,8 +33,8 @@ const features = [
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
-    title: 'Works Everywhere',
-    desc: 'Chrome extension that works on any website. Claude, ChatGPT, Gemini, Notion, Docs — if it has a text input, Yo works.',
+    title: 'Works Across Your Stack',
+    desc: 'Claude, ChatGPT, Gemini, Slack, your IDE — every panel is part of the conversation. Download the desktop app for Mac or Windows.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>,

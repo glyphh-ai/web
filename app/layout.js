@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: '.Yo — Your AI Context Workspace',
-  description: 'Capture context from any AI. Refine it. Recall it anywhere. Your conversations, your data, your desktop.',
+  title: '.Yo — Your AI Context Layer',
+  description: 'Context flows across every panel. .yo to speak. .sup to respond. .dip to move. Your conversations, always connected.',
   icons: {
     icon: '/favicon.svg',
   },

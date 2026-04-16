@@ -2,23 +2,23 @@ const commands = [
   {
     id: 'cmd-yo',
     word: 'Yo',
-    tagline: 'Capture anything. Refine everything.',
-    desc: "Grabs the AI conversation you're looking at — from Claude, Gemini, ChatGPT, or any URL. Then opens a workspace where you can refine, restructure, and save it as clean markdown.",
-    example: '.yo summarize this as a technical spec',
+    tagline: "You're always in the conversation.",
+    desc: "When you drop .yo, you're speaking into the system. Context from every panel you have open is already being collected in the background — it's there when you need it. You never have to think about session.",
+    example: '.yo what do you think of the code changes we just made?',
   },
   {
     id: 'cmd-sup',
     word: 'Sup',
-    tagline: 'Find it. Format it. Send it anywhere.',
-    desc: "Searches your saved library with AI-powered matching. Uses skills or LLM to format your context into any AI or app — ready to use, not just pasted.",
-    example: '.sup auth flow from last week',
+    tagline: 'The panel says hey back.',
+    desc: "When an AI or app responds, that's the .sup — the panel checking in. Claude, Gemini, Slack, your code editor — each one a voice in the conversation. Their responses feed back into your context automatically.",
+    example: '.yo just had a coding session — here is what we talked about',
   },
   {
     id: 'cmd-dip',
     word: 'Dip',
-    tagline: 'Switch apps. Instantly.',
-    desc: 'App-to-app transitions and layout navigation, instantly. Dip switches panels, rearranges your workspace, and moves between AI tools without losing your place.',
-    example: '.dip claude',
+    tagline: 'Move. Your context moves with you.',
+    desc: 'Drop into a new panel and your context travels with you. .yo again and you are already in the conversation — no setup, no copy-paste, no session to manage. The app is the context.',
+    example: '.dip slack',
   },
 ];
 
