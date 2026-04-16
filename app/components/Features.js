@@ -6,8 +6,8 @@ const features = [
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
-    title: 'Context Travels With You',
-    desc: 'When you .dip to a new panel, your context follows. .yo and you are already in the conversation — no copy-paste, no setup.',
+    title: '.yo Agent',
+    desc: 'A full agent that navigates your panels, clicks through apps, searches notes, manages skills and layouts. Just talk to it.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h18"/></svg>,
@@ -15,20 +15,20 @@ const features = [
     desc: '.dip to any panel and land in context. Claude, Gemini, Slack, your IDE — the conversation continues wherever you go.',
   },
   {
-    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>,
-    title: 'AI-Powered Search',
-    desc: 'Fuzzy semantic search across your entire library. Find saved context by meaning, not just keywords.',
-    badge: 'Basic+',
+    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>,
+    title: 'Voice Input',
+    desc: 'Talk to the .yo agent with your voice. Press the mic, speak naturally, and the agent acts on what you say.',
+    badge: 'Advanced',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>,
     title: 'Reusable Skills',
-    desc: 'Save prompt templates as skills. .yo with a skill and your context is crystallized — summaries, specs, messages, anything repeatable.',
+    desc: 'Save prompt templates as skills. .sup with a skill and your context is crystallized — summaries, specs, messages, anything repeatable.',
   },
   {
-    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
-    title: 'MCP Server',
-    desc: 'Connect your library to Claude Code, Cursor, or any MCP-compatible tool. Your context, everywhere you code.',
+    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>,
+    title: 'Custom Layouts',
+    desc: 'Design your own panel arrangements with custom grid sizes, spans, and proportions. Save and switch between workspaces instantly.',
     badge: 'Advanced',
   },
   {

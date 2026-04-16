@@ -14,32 +14,32 @@ const plans = [
     href: `${SERVER_URL}/api/checkout?plan=basic`,
     btnStyle: 'btn-ghost-green',
     features: [
-      { text: '100 library items', included: true },
+      { text: '50 apps', included: true },
       { text: '25 skills', included: true },
+      { text: '15 layouts', included: true },
       { text: 'Cloud sync across devices', included: true },
-      { text: 'All 5 dot-commands', included: true },
-      { text: 'AI-powered search', included: true },
-      { text: 'MCP server access', included: false },
-      { text: 'API keys for Claude Code / Cursor', included: false },
+      { text: 'All commands (.yo .dip .drip .sup)', included: true },
+      { text: 'Voice input', included: false },
+      { text: 'Custom layouts', included: false },
     ],
   },
   {
     name: 'Advanced',
-    price: '12',
+    price: '15',
     period: '/month',
-    desc: 'For developers who want .Yo in their IDE and AI tools.',
+    desc: 'Unlimited everything. Voice, custom layouts, full power.',
     cta: 'Start Advanced',
     href: `${SERVER_URL}/api/checkout?plan=advanced`,
     popular: true,
     btnStyle: 'btn-primary',
     features: [
-      { text: 'Unlimited library items', included: true },
+      { text: 'Unlimited apps', included: true },
       { text: 'Unlimited skills', included: true },
+      { text: 'Unlimited layouts', included: true },
       { text: 'Cloud sync across devices', included: true },
-      { text: 'All 5 dot-commands', included: true },
-      { text: 'AI-powered search', included: true },
-      { text: 'MCP server access', included: true },
-      { text: 'API keys for Claude Code / Cursor', included: true },
+      { text: 'All commands (.yo .dip .drip .sup)', included: true },
+      { text: 'Voice input', included: true },
+      { text: 'Custom layouts', included: true },
     ],
   },
 ];
@@ -50,7 +50,7 @@ export default function Pricing() {
       <SupernovaCanvas />
       <div className="container">
         <h2 className="section-title">Simple, transparent pricing</h2>
-        <p className="section-subtitle">The app is free forever. Upgrade for more storage, cloud sync, and MCP.</p>
+        <p className="section-subtitle">The app is free forever. Upgrade for more apps, cloud sync, and voice.</p>
 
         <div className="pricing-grid">
           {/* Free card */}
@@ -64,13 +64,13 @@ export default function Pricing() {
               <span className="pricing-period">forever</span>
             </div>
             <ul className="pricing-features">
-              <li><span className="check">&#10003;</span> 25 library items</li>
-              <li><span className="check">&#10003;</span> 5 skills</li>
-              <li><span className="check">&#10003;</span> All 5 dot-commands</li>
-              <li><span className="check">&#10003;</span> Works across all your panels</li>
+              <li><span className="check">&#10003;</span> 20 apps</li>
+              <li><span className="check">&#10003;</span> 10 skills</li>
+              <li><span className="check">&#10003;</span> 5 layouts</li>
+              <li><span className="check">&#10003;</span> All commands (.yo .dip .drip .sup)</li>
               <li><span className="check">&#10003;</span> BYOK — use your own API key</li>
               <li className="excluded"><span className="x">&times;</span> Cloud sync</li>
-              <li className="excluded"><span className="x">&times;</span> MCP server</li>
+              <li className="excluded"><span className="x">&times;</span> Voice input</li>
             </ul>
             <a href="#download" className="btn btn-ghost-green btn-lg btn-full group">
               <span className="btn-label">Download Free</span>
