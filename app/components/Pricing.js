@@ -1,3 +1,4 @@
+// v1.1.1
 import dynamic from 'next/dynamic';
 
 const SupernovaCanvas = dynamic(() => import('./SupernovaCanvas'), { ssr: false });
