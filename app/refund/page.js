@@ -19,8 +19,8 @@ export default function RefundPage() {
           <h2>1. Free Tier</h2>
           <p>The free tier of .Yo is available at no cost and requires no payment. No refund applies.</p>
 
-          <h2>2. Paid Subscriptions (Basic, Advanced)</h2>
-          <p>Paid plans are billed on a monthly subscription basis. You may cancel your subscription at any time.</p>
+          <h2>2. Paid Subscription (Pro)</h2>
+          <p>The Pro plan is billed on a monthly subscription basis. You may cancel your subscription at any time.</p>
 
           <h2>3. Refund Eligibility</h2>
           <p>We offer a full refund within 14 days of your first subscription payment (&ldquo;Refund Window&rdquo;) if you are not satisfied with the Service. To request a refund during this window, contact us at <a href="mailto:billing@glyphh.ai">billing@glyphh.ai</a> with your license key and the email associated with your account.</p>
@@ -29,7 +29,7 @@ export default function RefundPage() {
           <p>After the 14-day Refund Window, subscription payments are non-refundable. When you cancel your subscription, you retain access to paid features through the end of your current billing period. No partial refunds are issued for unused time within a billing cycle.</p>
 
           <h2>5. Plan Changes</h2>
-          <p>If you upgrade from Basic to Advanced, you will be charged the prorated difference for the remainder of your billing cycle. If you downgrade, the change takes effect at the start of your next billing cycle. No refunds are issued for downgrades.</p>
+          <p>If you cancel your Pro subscription, you retain access to Pro features through the end of your current billing period. No partial refunds are issued for unused time within a billing cycle.</p>
 
           <h2>6. Service Disruption</h2>
           <p>If the Service experiences a significant outage or disruption lasting more than 72 continuous hours, you may be eligible for a prorated credit at our discretion. Contact <a href="mailto:billing@glyphh.ai">billing@glyphh.ai</a> to report service disruptions.</p>

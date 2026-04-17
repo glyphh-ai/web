@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           </ul>
 
           <h2>3. Local-First Architecture</h2>
-          <p>.Yo is designed with a local-first architecture. Your data &mdash; including captured context, skills, layouts, preferences, and API keys &mdash; is stored exclusively on your local machine in the <code>~/yo/</code> directory. If you enable Cloud Sync (Basic plan and above), your library data is encrypted and synced to our servers. You can disable Cloud Sync at any time, and request deletion of cloud-stored data.</p>
+          <p>.Yo is designed with a local-first architecture. Your data &mdash; including captured context, skills, layouts, preferences, and API keys &mdash; is stored exclusively on your local machine in the <code>~/yo/</code> directory. If you enable Cloud Sync (Pro plan), your library data is encrypted and synced to our servers. You can disable Cloud Sync at any time, and request deletion of cloud-stored data.</p>
 
           <h2>4. How We Use Information</h2>
           <ul>

@@ -107,7 +107,7 @@ function SuccessContent() {
     );
   }
 
-  const tierLabel = data.tier === 'advanced' ? 'Advanced' : 'Basic';
+  const tierLabel = data.tier === 'pro' ? 'Pro' : data.tier;
 
   return (
     <div className="success-page">
