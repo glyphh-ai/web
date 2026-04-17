@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 
 const DOWNLOAD_BASE = process.env.NEXT_PUBLIC_DOWNLOAD_BASE_URL
-  || 'https://github.com/glyphh/yo-desktop/releases/latest/download';
+  || 'https://github.com/glyphh-ai/yo-client/releases/latest/download';
 
 const DOWNLOADS = {
   mac: {
