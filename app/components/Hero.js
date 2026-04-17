@@ -1,15 +1,25 @@
 import dynamic from 'next/dynamic';
+import { useState, useEffect } from 'react';
 
 const MatrixParticles = dynamic(() => import('./MatrixParticles'), { ssr: false });
 
 export default function Hero() {
+  const [version, setVersion] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/version')
+      .then(r => r.json())
+      .then(d => { if (d.version) setVersion(d.version); })
+      .catch(() => {});
+  }, []);
+
   return (
     <section className="hero">
       <MatrixParticles />
       <div className="hero-inner">
         <div className="hero-badge">
           <span className="badge-dot"></span>
-          Available for Mac &amp; Windows
+          Available for Mac &amp; Windows{version ? ` — ${version}` : ''}
         </div>
         <h1 className="hero-title">
           <span className="dot dot-hidden" id="hero-dot">.</span>Yo <span className="dot">.</span>Sup <span className="dot">.</span>Dip

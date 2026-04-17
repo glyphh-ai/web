@@ -11,7 +11,7 @@ export default function Pricing() {
       <SupernovaCanvas />
       <div className="container">
         <h2 className="section-title">Simple, transparent pricing</h2>
-        <p className="section-subtitle">The app is free forever. Upgrade to Pro for unlimited everything.</p>
+        <p className="section-subtitle">The app is free forever. Upgrade to Pro for unlimited everything. Need more? Contact us for Enterprise.</p>
 
         <div className="pricing-grid">
           {/* Free card */}
@@ -24,6 +24,7 @@ export default function Pricing() {
               </div>
               <span className="pricing-period">forever</span>
             </div>
+            <p className="pricing-desc">All the essentials, forever free. Bring your own API key.</p>
             <ul className="pricing-features">
               <li><span className="check">&#10003;</span> 20 apps</li>
               <li><span className="check">&#10003;</span> 10 skills</li>
@@ -63,6 +64,30 @@ export default function Pricing() {
             </ul>
             <a href={`${SERVER_URL}/api/checkout?plan=pro`} className="btn btn-primary btn-lg btn-full group">
               <span className="btn-label">Start Pro</span>
+              <span className="btn-fill"></span>
+            </a>
+          </div>
+          {/* Enterprise card */}
+          <div className="pricing-card pricing-card-enterprise reveal">
+            <div className="pricing-header">
+              <span className="pricing-plan-name">Enterprise</span>
+              <div className="pricing-amount pricing-amount-custom">
+                <span className="pricing-custom-label">Custom</span>
+              </div>
+              <span className="pricing-period">pricing</span>
+            </div>
+            <p className="pricing-desc">For teams that need custom deployments, SSO, and dedicated support.</p>
+            <ul className="pricing-features">
+              <li><span className="check">&#10003;</span> Everything in Pro</li>
+              <li><span className="check">&#10003;</span> Team management</li>
+              <li><span className="check">&#10003;</span> SSO / SAML</li>
+              <li><span className="check">&#10003;</span> Custom integrations</li>
+              <li><span className="check">&#10003;</span> Dedicated support</li>
+              <li><span className="check">&#10003;</span> SLA guarantee</li>
+              <li><span className="check">&#10003;</span> Custom deployment</li>
+            </ul>
+            <a href="mailto:sales@glyphh.ai" className="btn btn-ghost-green btn-lg btn-full group">
+              <span className="btn-label">Contact Sales</span>
               <span className="btn-fill"></span>
             </a>
           </div>
