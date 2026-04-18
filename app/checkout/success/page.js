@@ -5,8 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3001';
-const DOWNLOAD_BASE = process.env.NEXT_PUBLIC_DOWNLOAD_BASE_URL
-  || 'https://github.com/glyphh/yo-desktop/releases/latest/download';
+const DOWNLOAD_BASE = '/api/download';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
@@ -16,11 +15,11 @@ function SuccessContent() {
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
-  const [downloadUrl, setDownloadUrl] = useState(`${DOWNLOAD_BASE}/Yo.dmg`);
+  const [downloadUrl, setDownloadUrl] = useState(`${DOWNLOAD_BASE}?platform=mac`);
 
   useEffect(() => {
     const ua = (navigator.userAgent || '').toLowerCase();
-    if (ua.includes('win')) setDownloadUrl(`${DOWNLOAD_BASE}/Yo-Setup.exe`);
+    if (ua.includes('win')) setDownloadUrl(`${DOWNLOAD_BASE}?platform=win`);
   }, []);
 
   useEffect(() => {

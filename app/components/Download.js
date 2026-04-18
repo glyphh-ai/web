@@ -1,8 +1,5 @@
 'use client';
 
-const DOWNLOAD_BASE = process.env.NEXT_PUBLIC_DOWNLOAD_BASE_URL
-  || 'https://github.com/glyphh-ai/yo-client/releases/latest/download';
-
 export default function Download() {
   return (
     <section className="download" id="download">
@@ -12,7 +9,7 @@ export default function Download() {
 
         <div className="download-buttons reveal">
           <a
-            href={`${DOWNLOAD_BASE}/Yo.dmg`}
+            href="/api/download?platform=mac"
             className="btn btn-primary btn-xl group"
           >
             <span className="btn-label">Download for Mac</span>
