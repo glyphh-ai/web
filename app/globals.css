@@ -258,6 +258,12 @@ body {
   background: rgba(37, 199, 94, 0.1);
 }
 
+.btn.disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
 .btn-white {
   background: var(--white);
   color: var(--black);

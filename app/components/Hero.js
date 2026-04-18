@@ -19,7 +19,7 @@ export default function Hero() {
       <div className="hero-inner">
         <div className="hero-badge">
           <span className="badge-dot"></span>
-          Available for Mac &amp; Windows{version ? ` — ${version}` : ''}
+          Available for Mac{version ? ` — ${version}` : ''} &middot; Windows coming soon
         </div>
         <h1 className="hero-title">
           <span className="dot dot-hidden" id="hero-dot">.</span>Yo <span className="dot">.</span>Sup <span className="dot">.</span>Dip

@@ -25,7 +25,7 @@ export default function Pricing() {
               </div>
               <span className="pricing-period">/month</span>
             </div>
-            <p className="pricing-desc">Everything unlocked. 14-day free trial, then $24/month.</p>
+            <p className="pricing-desc">Everything unlocked. 14-day free trial, then $18/month.</p>
             <ul className="pricing-features">
               <li><span className="check">&#10003;</span> Unlimited apps</li>
               <li><span className="check">&#10003;</span> Unlimited skills</li>
