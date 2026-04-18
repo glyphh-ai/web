@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
+import DemoVideo from './components/DemoVideo';
 import AppPreview from './components/AppPreview';
 import Commands from './components/Commands';
 import HowItWorks from './components/HowItWorks';
@@ -56,6 +57,7 @@ export default function Home() {
       <JumpingDot />
       <Nav />
       <Hero />
+      <DemoVideo />
       <AppPreview />
       <Integrations />
       <Commands />
