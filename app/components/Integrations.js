@@ -1,26 +1,103 @@
-const integrations = [
-  { icon: 'C', name: 'Claude' },
-  { icon: 'G', name: 'Gemini' },
-  { icon: 'O', name: 'ChatGPT' },
-  { icon: '>_', name: 'Claude Code' },
-  { icon: '+', name: 'Any URL' },
+const APPS_ROW1 = [
+  { name: 'Claude', domain: 'claude.ai' },
+  { name: 'ChatGPT', domain: 'chatgpt.com' },
+  { name: 'Gemini', domain: 'gemini.google.com' },
+  { name: 'Perplexity', domain: 'perplexity.ai' },
+  { name: 'Grok', domain: 'grok.com' },
+  { name: 'GitHub', domain: 'github.com' },
+  { name: 'Notion', domain: 'notion.so' },
+  { name: 'Figma', domain: 'figma.com' },
+  { name: 'Slack', domain: 'app.slack.com' },
+  { name: 'Gmail', domain: 'mail.google.com' },
+  { name: 'Linear', domain: 'linear.app' },
+  { name: 'Vercel', domain: 'vercel.com' },
+  { name: 'Stripe', domain: 'dashboard.stripe.com' },
+  { name: 'Reddit', domain: 'reddit.com' },
+  { name: 'YouTube', domain: 'youtube.com' },
+  { name: 'Midjourney', domain: 'midjourney.com' },
 ];
+
+const APPS_ROW2 = [
+  { name: 'Copilot', domain: 'copilot.microsoft.com' },
+  { name: 'DeepSeek', domain: 'chat.deepseek.com' },
+  { name: 'Mistral', domain: 'chat.mistral.ai' },
+  { name: 'Discord', domain: 'discord.com' },
+  { name: 'Supabase', domain: 'supabase.com' },
+  { name: 'Replit', domain: 'replit.com' },
+  { name: 'v0', domain: 'v0.dev' },
+  { name: 'Canva', domain: 'canva.com' },
+  { name: 'Miro', domain: 'miro.com' },
+  { name: 'Google Docs', domain: 'docs.google.com' },
+  { name: 'Outlook', domain: 'outlook.live.com' },
+  { name: 'Twitter', domain: 'x.com' },
+  { name: 'LinkedIn', domain: 'linkedin.com' },
+  { name: 'Sentry', domain: 'sentry.io' },
+  { name: 'PostHog', domain: 'app.posthog.com' },
+  { name: 'AWS', domain: 'console.aws.amazon.com' },
+];
+
+const APPS_ROW3 = [
+  { name: 'Jira', domain: 'atlassian.net' },
+  { name: 'Confluence', domain: 'atlassian.net' },
+  { name: 'Asana', domain: 'asana.com' },
+  { name: 'Airtable', domain: 'airtable.com' },
+  { name: 'Dropbox', domain: 'dropbox.com' },
+  { name: 'Google Drive', domain: 'drive.google.com' },
+  { name: 'Loom', domain: 'loom.com' },
+  { name: 'Calendly', domain: 'calendly.com' },
+  { name: 'HubSpot', domain: 'hubspot.com' },
+  { name: 'Intercom', domain: 'intercom.com' },
+  { name: 'Datadog', domain: 'datadoghq.com' },
+  { name: 'Grafana', domain: 'grafana.com' },
+  { name: 'Shopify', domain: 'shopify.com' },
+  { name: 'Webflow', domain: 'webflow.com' },
+  { name: 'Trello', domain: 'trello.com' },
+  { name: 'Zapier', domain: 'zapier.com' },
+];
+
+function ScrollRow({ apps, direction }) {
+  const items = [...apps, ...apps];
+  return (
+    <div className="scroll-track-wrap">
+      <div className={`scroll-track ${direction}`}>
+        {items.map((app, i) => (
+          <div
+            key={`${app.domain}-${i}`}
+            className="scroll-app"
+            aria-label={app.name}
+          >
+            <img
+              src={`https://www.google.com/s2/favicons?domain=${app.domain}&sz=64`}
+              alt={app.name}
+              width={32}
+              height={32}
+              loading="lazy"
+            />
+            <span>{app.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Integrations() {
   return (
     <section className="integrations" id="integrations">
       <div className="container">
-        <h2 className="section-title">Works with every AI you already use</h2>
-        <div className="integration-logos">
-          {integrations.map((item, i) => (
-            <div key={i} className="integration-item reveal">
-              <div className="integration-icon">{item.icon}</div>
-              <span>{item.name}</span>
-            </div>
-          ))}
-        </div>
-        <p className="integration-note">
-          Each AI runs in its own panel inside the .Yo desktop app. Context flows between them automatically.
+        <h2 className="section-title reveal">Works with everything you already use</h2>
+        <p className="section-subtitle reveal">
+          Every app runs in its own panel. Your context flows between them.
+        </p>
+      </div>
+      <div className="scroll-rows reveal">
+        <ScrollRow apps={APPS_ROW1} direction="scroll-left" />
+        <ScrollRow apps={APPS_ROW2} direction="scroll-right" />
+        <ScrollRow apps={APPS_ROW3} direction="scroll-left-slow" />
+      </div>
+      <div className="container">
+        <p className="integration-note reveal">
+          Plus 80+ more apps — or add any URL.
         </p>
       </div>
     </section>

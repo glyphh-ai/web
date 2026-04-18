@@ -861,48 +861,79 @@ body {
 
 /* ── Integrations ──────────────────────────────────────── */
 .integrations {
-  padding: 8rem 0;
+  padding: 8rem 0 4rem;
   text-align: center;
 }
 
-.integration-logos {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
+.scroll-rows {
   margin: 3rem 0 2rem;
-  flex-wrap: wrap;
-}
-
-.integration-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  gap: 20px;
+  overflow: hidden;
+  width: 100%;
 }
 
-.integration-icon {
-  width: 64px;
-  height: 64px;
+.scroll-track-wrap {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.scroll-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
+}
+
+.scroll-track.scroll-left {
+  animation: scroll-left 40s linear infinite;
+}
+
+.scroll-track.scroll-right {
+  animation: scroll-right 34s linear infinite;
+}
+
+.scroll-track.scroll-left-slow {
+  animation: scroll-left 46s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.scroll-app {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  font-family: var(--font-mono);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--white);
+  border-radius: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: border-color 0.3s ease;
 }
 
-.integration-item:hover .integration-icon {
+.scroll-app:hover {
   border-color: var(--green);
 }
 
-.integration-item span {
-  font-size: 0.8125rem;
-  color: var(--text-3);
+.scroll-app img {
+  border-radius: 6px;
+}
+
+.scroll-app span {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-2);
 }
 
 .integration-note {
@@ -1587,14 +1618,11 @@ footer {
     border-radius: var(--radius);
   }
 
-  .integration-logos {
-    gap: 1.5rem;
+  .scroll-track.scroll-left {
+    animation-duration: 25s;
   }
-
-  .integration-icon {
-    width: 52px;
-    height: 52px;
-    font-size: 1rem;
+  .scroll-track.scroll-right {
+    animation-duration: 25s;
   }
 
   .grid-3 {

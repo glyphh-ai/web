@@ -57,10 +57,10 @@ export default function Home() {
       <Nav />
       <Hero />
       <AppPreview />
+      <Integrations />
       <Commands />
       <HowItWorks />
       <Features />
-      <Integrations />
       <Pricing />
       <Download />
       <FinalCTA />
