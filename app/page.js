@@ -11,6 +11,7 @@ import Features from './components/Features';
 import Integrations from './components/Integrations';
 import Pricing from './components/Pricing';
 import Download from './components/Download';
+import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import JumpingDot from './components/JumpingDot';
@@ -65,6 +66,7 @@ export default function Home() {
       <Features />
       <Pricing />
       <Download />
+      <FAQ />
       <FinalCTA />
       <Footer />
     </>
