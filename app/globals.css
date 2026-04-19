@@ -1185,6 +1185,23 @@ body {
   text-align: center;
 }
 
+.pricing-enterprise {
+  font-size: 0.875rem;
+  color: var(--text-3);
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.pricing-enterprise a {
+  color: var(--green);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.pricing-enterprise a:hover {
+  text-decoration: underline;
+}
+
 /* ── Checkout Success ──────────────────────────────────── */
 .success-page {
   min-height: 100vh;
