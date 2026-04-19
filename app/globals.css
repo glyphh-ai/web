@@ -251,6 +251,18 @@ body {
   background: var(--green-light);
 }
 
+.btn-secondary {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--gray);
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .btn-ghost {
   background: var(--bg);
   color: var(--white);
@@ -997,6 +1009,20 @@ body {
 .pricing-grid-single {
   grid-template-columns: 1fr;
   max-width: 420px;
+}
+
+.pricing-grid-two {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 740px;
+}
+
+.pricing-grid-three {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1060px;
+}
+
+.pricing-custom {
+  font-size: 2rem;
 }
 
 @media (max-width: 768px) {
