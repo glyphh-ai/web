@@ -169,13 +169,10 @@ function RegisterFlow() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1 className="auth-title">
-          <span className="auth-dot">.</span>Yo
-        </h1>
-
+        <a href="/" className="auth-title"><span className="auth-dot">.</span>Yo</a>
         {step === 'email' && (
           <>
-            <p className="auth-subtitle">Create your account</p>
+            <h2 className="auth-subtitle">Create your account</h2>
             <form onSubmit={handleEmailSubmit}>
               <label className="auth-label">Email</label>
               <input
@@ -195,6 +192,9 @@ function RegisterFlow() {
             </form>
             <p className="auth-footer-text">
               Already have an account? <a href="/auth/login" className="auth-link">Sign in</a>
+            </p>
+            <p className="auth-legal">
+              By creating an account, you agree to our <a href="/terms" className="auth-legal-link">Terms of Service</a>, <a href="/privacy" className="auth-legal-link">Privacy Policy</a>, and <a href="/refund" className="auth-legal-link">Refund Policy</a>.
             </p>
           </>
         )}
@@ -284,6 +284,7 @@ function RegisterFlow() {
           </>
         )}
       </div>
+      <p className="auth-copyright">&copy; {new Date().getFullYear()} Glyphh AI LLC. All rights reserved.</p>
     </div>
   );
 }

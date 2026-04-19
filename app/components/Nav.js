@@ -23,10 +23,8 @@ export default function Nav() {
             <a href="#pricing">Pricing</a>
           </div>
           <div className="nav-cta">
-            <a href="#download" className="btn btn-ghost btn-sm group">
-              <span className="btn-label">Download</span>
-              <span className="btn-fill"></span>
-            </a>
+            <a href="/auth/login" className="nav-auth-link">Log in</a>
+            <a href="/auth" className="btn btn-primary btn-sm">Sign up</a>
           </div>
           <button
             className={`nav-mobile-toggle ${menuOpen ? 'active' : ''}`}
@@ -41,7 +39,8 @@ export default function Nav() {
         <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
         <a href="#how-it-works" onClick={() => setMenuOpen(false)}>How It Works</a>
         <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
-        <a href="#download" className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Download</a>
+        <a href="/auth/login" onClick={() => setMenuOpen(false)}>Log in</a>
+        <a href="/auth" className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Sign up</a>
       </div>
     </>
   );

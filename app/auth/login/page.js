@@ -62,10 +62,8 @@ function LoginFlow() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1 className="auth-title">
-          <span className="auth-dot">.</span>Yo
-        </h1>
-        <p className="auth-subtitle">Sign in to your account</p>
+        <a href="/" className="auth-title"><span className="auth-dot">.</span>Yo</a>
+        <h2 className="auth-subtitle">Sign in to your account</h2>
 
         <form onSubmit={handleSubmit}>
           <label className="auth-label">Email</label>
@@ -100,6 +98,7 @@ function LoginFlow() {
           Don&apos;t have an account? <a href="/auth" className="auth-link">Create one</a>
         </p>
       </div>
+      <p className="auth-copyright">&copy; {new Date().getFullYear()} Glyphh AI LLC. All rights reserved.</p>
     </div>
   );
 }

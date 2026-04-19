@@ -61,7 +61,7 @@ export default function TermsPage() {
           <p>We may update these Terms from time to time. Continued use of the Service after changes constitutes acceptance of the revised Terms. Material changes will be communicated through the application or via email.</p>
 
           <h2>13. Contact</h2>
-          <p>For questions about these Terms, contact us at <a href="mailto:legal@glyphh.ai">legal@glyphh.ai</a>.</p>
+          <p>For questions about these Terms, contact us at <a href="mailto:support@yosup.dev">support@yosup.dev</a>.</p>
         </div>
       </div>
       <Footer />

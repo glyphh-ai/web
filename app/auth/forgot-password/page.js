@@ -27,19 +27,16 @@ export default function ForgotPasswordPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1 className="auth-title">
-          <span className="auth-dot">.</span>Yo
-        </h1>
-
+        <a href="/" className="auth-title"><span className="auth-dot">.</span>Yo</a>
         {sent ? (
           <>
-            <p className="auth-subtitle">Check your email</p>
+            <h2 className="auth-subtitle">Check your email</h2>
             <p className="auth-desc">If an account exists for <strong>{email}</strong>, we sent a password reset link.</p>
-            <a href="/auth/login" className="btn btn-ghost-green btn-lg auth-btn">Back to sign in</a>
+            <a href="/auth/login" className="btn btn-primary btn-lg auth-btn">Back to sign in</a>
           </>
         ) : (
           <>
-            <p className="auth-subtitle">Reset your password</p>
+            <h2 className="auth-subtitle">Reset your password</h2>
             <form onSubmit={handleSubmit}>
               <label className="auth-label">Email</label>
               <input
@@ -60,6 +57,7 @@ export default function ForgotPasswordPage() {
           </>
         )}
       </div>
+      <p className="auth-copyright">&copy; {new Date().getFullYear()} Glyphh AI LLC. All rights reserved.</p>
     </div>
   );
 }
