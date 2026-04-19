@@ -16,7 +16,8 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const loginHref = `${PLATFORM_URL}/login`;
+  const loginHref = `${PLATFORM_URL}/auth/login`;
+  const signupHref = `${PLATFORM_URL}/auth`;
   const dashHref = `${PLATFORM_URL}/dashboard`;
 
   return (
@@ -35,7 +36,7 @@ export default function Nav() {
             ) : (
               <>
                 <a href={loginHref} className="nav-auth-link">Log in</a>
-                <a href="/auth" className="btn btn-primary btn-sm">Sign up</a>
+                <a href={signupHref} className="btn btn-primary btn-sm">Sign up</a>
               </>
             )}
           </div>
@@ -57,7 +58,7 @@ export default function Nav() {
         ) : (
           <>
             <a href={loginHref} onClick={() => setMenuOpen(false)}>Log in</a>
-            <a href="/auth" className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Sign up</a>
+            <a href={signupHref} className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Sign up</a>
           </>
         )}
       </div>

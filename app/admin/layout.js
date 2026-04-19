@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { getUser, clearTokens } from '../lib/api';
 
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.yosup.dev';
+
 export default function AdminLayout({ children }) {
   const [ready, setReady] = useState(false);
 
@@ -28,7 +30,7 @@ export default function AdminLayout({ children }) {
           <a href="/dashboard" className="dash-nav-item">Back to Dashboard</a>
         </nav>
         <div className="dash-user">
-          <button onClick={() => { clearTokens(); window.location.href = '/auth/login'; }} className="dash-logout">Sign out</button>
+          <button onClick={() => { clearTokens(); window.location.href = `${PLATFORM_URL}/auth/login`; }} className="dash-logout">Sign out</button>
         </div>
       </aside>
       <main className="dash-main">

@@ -2,6 +2,8 @@ import dynamic from 'next/dynamic';
 
 const SupernovaCanvas = dynamic(() => import('./SupernovaCanvas'), { ssr: false });
 
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.yosup.dev';
+
 export default function Pricing() {
   return (
     <section className="pricing" id="pricing">
@@ -29,7 +31,7 @@ export default function Pricing() {
               <li><span className="check">&#10003;</span> All commands (.yo .dip .drip .sup)</li>
               <li><span className="check">&#10003;</span> Priority Discord support</li>
             </ul>
-            <a href="/auth" className="btn btn-primary btn-lg btn-full group">
+            <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
               <span className="btn-label">Start Free Trial</span>
               <span className="btn-fill"></span>
             </a>

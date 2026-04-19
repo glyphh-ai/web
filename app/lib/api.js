@@ -3,6 +3,7 @@
  */
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.yosup.dev';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.yosup.dev';
 
 /** Get stored auth tokens. */
 export function getTokens() {
@@ -66,7 +67,7 @@ async function request(path, opts = {}) {
     } else {
       clearTokens();
       if (typeof window !== 'undefined') {
-        window.location.href = '/auth/login';
+        window.location.href = `${PLATFORM_URL}/auth/login`;
       }
       throw new Error('Session expired');
     }
