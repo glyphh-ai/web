@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import { setTokens } from '../../lib/api';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.yosup.dev';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.yosup.dev';
 
 function LoginFlow() {
   const searchParams = useSearchParams();
@@ -51,7 +52,7 @@ function LoginFlow() {
         }
       }
 
-      window.location.href = '/dashboard';
+      window.location.href = `${PLATFORM_URL}/dashboard`;
     } catch {
       setError('Network error — please try again');
     } finally {

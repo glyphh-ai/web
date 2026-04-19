@@ -2,15 +2,22 @@
 
 import { useState, useEffect } from 'react';
 
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.yosup.dev';
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll);
+    setLoggedIn(document.cookie.includes('yo_logged_in=1'));
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  const loginHref = `${PLATFORM_URL}/login`;
+  const dashHref = `${PLATFORM_URL}/dashboard`;
 
   return (
     <>
@@ -23,8 +30,14 @@ export default function Nav() {
             <a href="#pricing">Pricing</a>
           </div>
           <div className="nav-cta">
-            <a href="/auth/login" className="nav-auth-link">Log in</a>
-            <a href="/auth" className="btn btn-primary btn-sm">Sign up</a>
+            {loggedIn ? (
+              <a href={dashHref} className="btn btn-primary btn-sm">Dashboard</a>
+            ) : (
+              <>
+                <a href={loginHref} className="nav-auth-link">Log in</a>
+                <a href="/auth" className="btn btn-primary btn-sm">Sign up</a>
+              </>
+            )}
           </div>
           <button
             className={`nav-mobile-toggle ${menuOpen ? 'active' : ''}`}
@@ -39,8 +52,14 @@ export default function Nav() {
         <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
         <a href="#how-it-works" onClick={() => setMenuOpen(false)}>How It Works</a>
         <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
-        <a href="/auth/login" onClick={() => setMenuOpen(false)}>Log in</a>
-        <a href="/auth" className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Sign up</a>
+        {loggedIn ? (
+          <a href={dashHref} className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Dashboard</a>
+        ) : (
+          <>
+            <a href={loginHref} onClick={() => setMenuOpen(false)}>Log in</a>
+            <a href="/auth" className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Sign up</a>
+          </>
+        )}
       </div>
     </>
   );

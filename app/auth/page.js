@@ -7,6 +7,7 @@ import CodeInput from '../components/CodeInput';
 import { api, setTokens } from '../lib/api';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.yosup.dev';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.yosup.dev';
 
 function RegisterFlow() {
   const searchParams = useSearchParams();
@@ -120,7 +121,7 @@ function RegisterFlow() {
       }
 
       // Normal web flow — redirect to dashboard
-      window.location.href = '/dashboard';
+      window.location.href = `${PLATFORM_URL}/dashboard`;
     } catch {
       setError('Network error — please try again');
     } finally {

@@ -17,12 +17,16 @@ export function getTokens() {
 export function setTokens(tokens) {
   if (typeof window === 'undefined') return;
   localStorage.setItem('yo_auth', JSON.stringify(tokens));
+  const domain = location.hostname === 'localhost' ? '' : '; domain=.yosup.dev';
+  document.cookie = `yo_logged_in=1; path=/${domain}; max-age=${60 * 60 * 24 * 30}; SameSite=Lax`;
 }
 
 /** Clear auth tokens. */
 export function clearTokens() {
   if (typeof window === 'undefined') return;
   localStorage.removeItem('yo_auth');
+  const domain = location.hostname === 'localhost' ? '' : '; domain=.yosup.dev';
+  document.cookie = `yo_logged_in=; path=/${domain}; max-age=0`;
 }
 
 /** Get current user from stored auth. */
