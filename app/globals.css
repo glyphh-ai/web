@@ -1151,9 +1151,15 @@ body {
   gap: 10px;
 }
 
-.pricing-features li.excluded {
+.pricing-features li.excluded,
+.pricing-features li.pricing-excluded {
   color: var(--text-3);
   opacity: 0.7;
+}
+
+.pricing-features .x {
+  color: var(--text-3);
+  font-size: 0.75rem;
 }
 
 .check {

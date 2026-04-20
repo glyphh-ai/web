@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: 'What does the 14-day trial include?',
-    a: 'Everything. Full access to all features, all commands, all apps. No credit card required to start. After the trial, the Pro plan is $18/seat/month.',
+    a: 'Everything. Full access to all features, all commands, all apps. No credit card required to start. After the trial, plans start at $8/seat/month for Basic or $24/seat/month for Advanced.',
   },
   {
     q: 'Does .Yo work on Windows?',

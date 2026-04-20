@@ -19,8 +19,8 @@ export default function RefundPage() {
           <h2>1. Free Tier</h2>
           <p>The free tier of .Yo is available at no cost and requires no payment. No refund applies.</p>
 
-          <h2>2. Paid Subscription (Pro)</h2>
-          <p>The Pro plan is billed on a monthly subscription basis. You may cancel your subscription at any time.</p>
+          <h2>2. Paid Subscriptions (Basic &amp; Advanced)</h2>
+          <p>Paid plans are billed on a monthly subscription basis. You may cancel your subscription at any time.</p>
 
           <h2>3. Refund Eligibility</h2>
           <p>We offer a full refund within 14 days of your first subscription payment (&ldquo;Refund Window&rdquo;) if you are not satisfied with the Service. To request a refund during this window, contact us at <a href="mailto:support@yosup.dev">support@yosup.dev</a> with your license key and the email associated with your account.</p>
