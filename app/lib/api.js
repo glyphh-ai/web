@@ -19,7 +19,8 @@ export function setTokens(tokens) {
   if (typeof window === 'undefined') return;
   localStorage.setItem('yo_auth', JSON.stringify(tokens));
   const domain = location.hostname === 'localhost' ? '' : '; domain=.yosup.dev';
-  document.cookie = `yo_logged_in=1; path=/${domain}; max-age=${60 * 60 * 24 * 30}; SameSite=Lax`;
+  const secure = location.protocol === 'https:' ? '; Secure' : '';
+  document.cookie = `yo_logged_in=1; path=/${domain}; max-age=${60 * 60 * 24 * 30}; SameSite=Lax${secure}`;
 }
 
 /** Clear auth tokens. */
