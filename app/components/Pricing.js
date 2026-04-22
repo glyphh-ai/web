@@ -21,16 +21,17 @@ export default function Pricing() {
                 <span className="pricing-dollar">$</span>
                 <span className="pricing-number">0</span>
               </div>
-              <span className="pricing-period">forever</span>
+              <span className="pricing-period">/month</span>
             </div>
-            <p className="pricing-desc">Get started with the essentials.</p>
+            <p className="pricing-desc">Get started with the basics.</p>
             <ul className="pricing-features">
               <li><span className="check">&#10003;</span> 5 skills</li>
               <li><span className="check">&#10003;</span> 5 layouts</li>
-              <li><span className="check">&#10003;</span> All commands (.yo .dip .drip .sup)</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> MCP servers</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> Connections</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> Vibes</li>
+              <li><span className="check">&#10003;</span> 10 apps</li>
+              <li><span className="check">&#10003;</span> All commands (.yo .sup .dip .drip)</li>
+              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers</li>
+              <li className="pricing-excluded"><span className="x">&#10007;</span> No cloud sync</li>
+              <li className="pricing-excluded"><span className="x">&#10007;</span> No custom drips</li>
             </ul>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-secondary btn-lg btn-full group">
               <span className="btn-label">Get Started</span>
@@ -48,15 +49,15 @@ export default function Pricing() {
               </div>
               <span className="pricing-period">/seat/month</span>
             </div>
-            <p className="pricing-desc">Unlimited for individuals and small teams.</p>
+            <p className="pricing-desc">Unlimited everything for individuals and small teams.</p>
             <ul className="pricing-features">
-              <li><span className="check">&#10003;</span> Unlimited skills &amp; layouts</li>
-              <li><span className="check">&#10003;</span> Unlimited vibes</li>
+              <li><span className="check">&#10003;</span> Unlimited skills / layouts</li>
+              <li><span className="check">&#10003;</span> Unlimited apps</li>
               <li><span className="check">&#10003;</span> Custom layouts</li>
-              <li><span className="check">&#10003;</span> Cloud sync</li>
+              <li><span className="check">&#10003;</span> Custom drips</li>
               <li><span className="check">&#10003;</span> Up to 5 seats</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> MCP servers</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> Connections</li>
+              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers</li>
+              <li className="pricing-excluded"><span className="x">&#10007;</span> No cloud sync</li>
             </ul>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
               <span className="btn-label">Start with Basic</span>
@@ -75,12 +76,12 @@ export default function Pricing() {
               </div>
               <span className="pricing-period">/seat/month</span>
             </div>
-            <p className="pricing-desc">Full power with MCP and connections.</p>
+            <p className="pricing-desc">Full power with MCP servers and connections.</p>
             <ul className="pricing-features">
               <li><span className="check">&#10003;</span> Everything in Basic</li>
               <li><span className="check">&#10003;</span> MCP servers</li>
-              <li><span className="check">&#10003;</span> Connections (OAuth apps)</li>
-              <li><span className="check">&#10003;</span> Voice (coming soon)</li>
+              <li><span className="check">&#10003;</span> Cloud sync</li>
+              <li><span className="check">&#10003;</span> Voice</li>
               <li><span className="check">&#10003;</span> Up to 10 seats</li>
               <li><span className="check">&#10003;</span> Priority support</li>
             </ul>
