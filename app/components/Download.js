@@ -5,7 +5,7 @@ export default function Download() {
     <section className="download" id="download">
       <div className="container">
         <h2 className="section-title reveal">Get <span className="dot">.</span>Yo</h2>
-        <p className="section-subtitle reveal">Free 14-day trial. No account required.</p>
+        <p className="section-subtitle reveal">Free forever. No credit card required.</p>
 
         <div className="download-buttons reveal">
           <a

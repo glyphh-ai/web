@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: 'What apps are supported?',
-    a: '.Yo ships with 14 pre-configured apps including ChatGPT, Claude, Gemini, Gmail, Slack, GitHub, Linear, Notion, and more. Each has mapped commands (grab, compose, search, etc.) that the agent and .waz can use. You can also add any web app.',
+    a: '.Yo ships with 10 pre-configured apps including ChatGPT, Claude, Gemini, Gmail, Slack, GitHub, and more. Each has mapped commands (grab, compose, search, etc.) that the agent and .waz can use. You can also add any web app.',
   },
   {
     q: 'What are skills, layouts, and vibes?',
@@ -28,8 +28,8 @@ const faqs = [
     a: 'Your captures, notes, and conversation history are stored locally on your machine. The .yo agent calls your LLM provider directly with your API key. We store account and billing info on our servers — nothing else.',
   },
   {
-    q: 'What does the 14-day trial include?',
-    a: 'Everything. Full access to all features, all commands, all apps. No credit card required to start. After the trial, plans start at $8/seat/month for Basic or $24/seat/month for Advanced.',
+    q: 'Is .Yo free?',
+    a: 'The Free plan gives you 10 apps, 5 skills, and 5 layouts with all commands — no credit card required. Upgrade to Basic ($8/seat/month) for unlimited everything, or Advanced ($24/seat/month) for MCP servers, cloud sync, and voice.',
   },
   {
     q: 'Does .Yo work on Windows?',
