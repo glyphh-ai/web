@@ -25,9 +25,9 @@ export default function Pricing() {
             </div>
             <p className="pricing-desc">Get started with the basics.</p>
             <ul className="pricing-features">
+              <li><span className="check">&#10003;</span> 10 apps</li>
               <li><span className="check">&#10003;</span> 5 skills</li>
               <li><span className="check">&#10003;</span> 5 layouts</li>
-              <li><span className="check">&#10003;</span> 10 apps</li>
               <li><span className="check">&#10003;</span> All commands (.yo .sup .dip .drip)</li>
               <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers</li>
               <li className="pricing-excluded"><span className="x">&#10007;</span> No cloud sync</li>
@@ -51,8 +51,8 @@ export default function Pricing() {
             </div>
             <p className="pricing-desc">Unlimited everything for individuals and small teams.</p>
             <ul className="pricing-features">
-              <li><span className="check">&#10003;</span> Unlimited skills / layouts</li>
               <li><span className="check">&#10003;</span> Unlimited apps</li>
+              <li><span className="check">&#10003;</span> Unlimited skills / layouts</li>
               <li><span className="check">&#10003;</span> Custom layouts</li>
               <li><span className="check">&#10003;</span> Custom drips</li>
               <li><span className="check">&#10003;</span> Up to 5 seats</li>
