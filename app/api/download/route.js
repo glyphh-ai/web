@@ -9,7 +9,7 @@
  * S3 download link that requires no auth.
  */
 
-const REPO = 'glyphh-ai/yo-client';
+const REPO = 'glyphh-ai/yo-releases';
 const ASSETS = { mac: 'Yo.dmg', win: 'Yo-Setup.exe' };
 
 export async function GET(request) {

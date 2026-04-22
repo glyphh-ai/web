@@ -4,7 +4,7 @@ export async function GET() {
   try {
     const headers = { Accept: 'application/vnd.github+json' };
     if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-    const res = await fetch('https://api.github.com/repos/glyphh-ai/yo-client/releases/latest', {
+    const res = await fetch('https://api.github.com/repos/glyphh-ai/yo-releases/releases/latest', {
       headers,
       next: { revalidate: 3600 },
     });
