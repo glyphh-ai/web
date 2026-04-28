@@ -18,17 +18,13 @@ export async function GET(request) {
   const assetName = ASSETS[platform] || ASSETS.mac;
 
   const token = process.env.GITHUB_TOKEN;
-  if (!token) {
-    return new Response('Download service not configured', { status: 503 });
-  }
 
   try {
     // 1. Get latest release metadata
+    const headers = { Accept: 'application/vnd.github+json' };
+    if (token) headers.Authorization = `Bearer ${token}`;
     const releaseRes = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/vnd.github+json',
-      },
+      headers,
     });
 
     if (!releaseRes.ok) {
@@ -44,11 +40,10 @@ export async function GET(request) {
 
     // 2. Request the asset with octet-stream accept — GitHub responds with
     //    a 302 redirect to a temporary S3 URL that works without auth.
+    const assetHeaders = { Accept: 'application/octet-stream' };
+    if (token) assetHeaders.Authorization = `Bearer ${token}`;
     const assetRes = await fetch(asset.url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/octet-stream',
-      },
+      headers: assetHeaders,
       redirect: 'manual',
     });
 
