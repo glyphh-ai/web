@@ -15,12 +15,16 @@ export default function Download() {
             <span className="btn-label">Download for Mac</span>
             <span className="btn-fill"></span>
           </a>
-          <span className="btn btn-ghost-green btn-lg disabled">
-            <span className="btn-label">Windows — Coming Soon</span>
-          </span>
+          <a
+            href="/api/download?platform=win"
+            className="btn btn-ghost-green btn-xl group"
+          >
+            <span className="btn-label">Download for Windows</span>
+            <span className="btn-fill"></span>
+          </a>
         </div>
 
-        <p className="download-note reveal">macOS 12+ (Apple Silicon &amp; Intel)</p>
+        <p className="download-note reveal">macOS 12+ (Apple Silicon &amp; Intel) &middot; Windows 10+</p>
       </div>
     </section>
   );

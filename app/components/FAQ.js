@@ -40,8 +40,8 @@ const faqs = [
     a: 'The Free plan gives you 10 apps, 5 skills, 5 layouts, a built-in terminal, and all commands — no credit card required. Basic ($8/seat/month) adds unlimited everything plus vibes. Advanced ($24/seat/month) adds MCP servers, MCP relay, Pipedream connectors, cloud sync, and voice.',
   },
   {
-    q: 'Does .Yo work on Windows?',
-    a: 'Not yet — macOS only for now (12+ on Apple Silicon and Intel). Windows support is coming soon.',
+    q: 'What platforms does .Yo support?',
+    a: 'Mac (macOS 12+ on Apple Silicon and Intel) and Windows (10+). Download links are on the homepage.',
   },
 ];
 
