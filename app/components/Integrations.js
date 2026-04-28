@@ -72,7 +72,9 @@ function ScrollRow({ apps, direction }) {
               width={32}
               height={32}
               loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling?.classList.add('visible'); }}
             />
+            <span className="scroll-app-fallback" aria-hidden="true">{app.name.charAt(0)}</span>
             <span>{app.name}</span>
           </div>
         ))}

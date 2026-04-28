@@ -801,6 +801,23 @@ body {
   border-radius: 6px;
 }
 
+.scroll-app-fallback {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-2);
+  font-size: 1rem;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-app-fallback.visible {
+  display: flex;
+}
+
 .scroll-app span {
   font-size: 0.875rem;
   font-weight: 500;
