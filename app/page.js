@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
 import Commands from './components/Commands';
-import HowItWorks from './components/HowItWorks';
 import Features from './components/Features';
 import Integrations from './components/Integrations';
 import Pricing from './components/Pricing';
@@ -60,7 +59,6 @@ export default function Home() {
       <HeroVideo />
       <Integrations />
       <Commands />
-      <HowItWorks />
       <Features />
       <Pricing />
       <Download />

@@ -27,7 +27,6 @@ export default function Nav() {
           <a href="/" className="nav-logo"><span className="dot">.</span>Yo</a>
           <div className="nav-links">
             <a href="#features">Features</a>
-            <a href="#how-it-works">How It Works</a>
             <a href="#pricing">Pricing</a>
           </div>
           <div className="nav-cta">
@@ -51,7 +50,6 @@ export default function Nav() {
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
-        <a href="#how-it-works" onClick={() => setMenuOpen(false)}>How It Works</a>
         <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         {loggedIn ? (
           <a href={dashHref} className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Dashboard</a>

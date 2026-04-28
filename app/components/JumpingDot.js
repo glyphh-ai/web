@@ -117,7 +117,7 @@ export default function JumpingDot() {
       // Interrupt any active doodle
       if (idleMode) stopIdle();
       // Find the "See How It Works" button
-      const btn = document.querySelector('a[href="#how-it-works"].btn');
+      const btn = document.querySelector('a[href="#features"].btn');
       if (!btn) return;
       const rect = btn.getBoundingClientRect();
       hideSeekMode = true;

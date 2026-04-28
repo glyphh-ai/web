@@ -32,7 +32,7 @@ export default function Hero() {
             <span className="btn-label">Download for Mac</span>
             <span className="btn-fill"></span>
           </a>
-          <a href="#how-it-works" className="btn btn-ghost btn-lg group">
+          <a href="#features" className="btn btn-ghost btn-lg group">
             <span className="btn-label">See How It Works</span>
             <span className="btn-fill"></span>
           </a>
