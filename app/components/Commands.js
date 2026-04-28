@@ -35,12 +35,6 @@ export default function Commands() {
               <span className="dot dot-hidden" data-dot-anchor id={cmd.id}>.</span>{cmd.word}
             </h2>
             <p className="command-hero-tagline reveal">{cmd.tagline}</p>
-            <div className="command-detail reveal">
-              <p className="command-desc">{cmd.desc}</p>
-              <div className="command-example">
-                <span className="example-prompt">&gt;</span> {cmd.example}
-              </div>
-            </div>
             {cmd.video && (
               <div className="command-video reveal">
                 <video
