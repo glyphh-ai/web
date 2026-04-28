@@ -29,9 +29,10 @@ export default function Pricing() {
               <li><span className="check">&#10003;</span> 5 skills</li>
               <li><span className="check">&#10003;</span> 5 layouts</li>
               <li><span className="check">&#10003;</span> All commands (.yo .sup .dip .drip)</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers</li>
+              <li><span className="check">&#10003;</span> Built-in terminal</li>
+              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers or relay</li>
               <li className="pricing-excluded"><span className="x">&#10007;</span> No cloud sync</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> No custom drips</li>
+              <li className="pricing-excluded"><span className="x">&#10007;</span> No vibes or custom drips</li>
             </ul>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-secondary btn-lg btn-full group">
               <span className="btn-label">Get Started</span>
@@ -54,9 +55,9 @@ export default function Pricing() {
               <li><span className="check">&#10003;</span> Unlimited apps</li>
               <li><span className="check">&#10003;</span> Unlimited skills / layouts</li>
               <li><span className="check">&#10003;</span> Custom layouts</li>
-              <li><span className="check">&#10003;</span> Custom drips</li>
+              <li><span className="check">&#10003;</span> Vibes and custom drips</li>
               <li><span className="check">&#10003;</span> Up to 5 seats</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers</li>
+              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers or relay</li>
               <li className="pricing-excluded"><span className="x">&#10007;</span> No cloud sync</li>
             </ul>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
@@ -76,10 +77,12 @@ export default function Pricing() {
               </div>
               <span className="pricing-period">/seat/month</span>
             </div>
-            <p className="pricing-desc">Full power with MCP servers and connections.</p>
+            <p className="pricing-desc">Full power with MCP servers, relay, and 3,500+ connected apps.</p>
             <ul className="pricing-features">
               <li><span className="check">&#10003;</span> Everything in Basic</li>
-              <li><span className="check">&#10003;</span> MCP servers</li>
+              <li><span className="check">&#10003;</span> Local MCP servers (stdio, SSE, HTTP)</li>
+              <li><span className="check">&#10003;</span> MCP relay for external clients</li>
+              <li><span className="check">&#10003;</span> Pipedream connectors (3,500+ apps)</li>
               <li><span className="check">&#10003;</span> Cloud sync</li>
               <li><span className="check">&#10003;</span> Voice</li>
               <li><span className="check">&#10003;</span> Up to 10 seats</li>

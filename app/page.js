@@ -13,6 +13,7 @@ import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import JumpingDot from './components/JumpingDot';
+import HeroVideo from './components/HeroVideo';
 
 export default function Home() {
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function Home() {
       <JumpingDot />
       <Nav />
       <Hero />
+      <HeroVideo />
       <Integrations />
       <Commands />
       <HowItWorks />

@@ -87,7 +87,7 @@ export default function Integrations() {
       <div className="container">
         <h2 className="section-title reveal">Works with everything you already use</h2>
         <p className="section-subtitle reveal">
-          Every app runs in its own panel. Your context flows between them.
+          Native web UI, branded or custom MCP Servers. Your context flows between all of them.
         </p>
       </div>
       <div className="scroll-rows reveal">
@@ -97,7 +97,7 @@ export default function Integrations() {
       </div>
       <div className="container">
         <p className="integration-note reveal">
-          Plus 80+ more apps — or add any URL.
+          3,500+ connected apps via MCP servers  — or add any URL.
         </p>
       </div>
     </section>

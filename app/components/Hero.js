@@ -25,7 +25,7 @@ export default function Hero() {
           <span className="dot dot-hidden" id="hero-dot">.</span>Yo <span className="dot">.</span>Sup <span className="dot">.</span>Dip
         </h1>
         <p className="hero-sub-big">
-          Work across every AI. Never lose the thread.
+          Work across every platform. Never lose the thread.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">

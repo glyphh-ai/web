@@ -460,6 +460,28 @@ body {
   flex-wrap: wrap;
 }
 
+/* ── Hero Video ───────────────────────────────────────── */
+.hero-video {
+  position: relative;
+  z-index: 1;
+  margin-top: -18rem;
+  padding: 0 clamp(1rem, 2vw, 2rem);
+  margin-bottom: 4rem;
+}
+.hero-video-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 80px rgba(37, 199, 94, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+.hero-video-player {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ── Commands ──────────────────────────────────────────── */
 .commands {
   padding: 4rem 0;
