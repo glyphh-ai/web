@@ -644,15 +644,15 @@ body {
 }
 
 .scroll-track.scroll-left {
-  animation: scroll-left 40s linear infinite;
+  animation: scroll-left 80s linear infinite;
 }
 
 .scroll-track.scroll-right {
-  animation: scroll-right 34s linear infinite;
+  animation: scroll-right 70s linear infinite;
 }
 
 .scroll-track.scroll-left-slow {
-  animation: scroll-left 46s linear infinite;
+  animation: scroll-left 90s linear infinite;
 }
 
 @keyframes scroll-left {
@@ -1470,10 +1470,10 @@ footer {
   }
 
   .scroll-track.scroll-left {
-    animation-duration: 25s;
+    animation-duration: 50s;
   }
   .scroll-track.scroll-right {
-    animation-duration: 25s;
+    animation-duration: 50s;
   }
 
   .grid-3 {
