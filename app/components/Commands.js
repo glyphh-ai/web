@@ -13,7 +13,7 @@ const commands = [
     tagline: 'The panel says hey back.',
     desc: "When an AI or app responds, that's the .sup — the panel checking in. Claude, Gemini, Slack, your code editor — each one a voice in the conversation. Their responses feed back into your context automatically.",
     example: '.yo just had a coding session — here is what we talked about',
-    video: '/yo-yousup.mp4',
+    video: '/sup-yousup.mp4',
   },
   {
     id: 'cmd-dip',
