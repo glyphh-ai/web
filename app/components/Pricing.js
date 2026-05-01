@@ -28,7 +28,7 @@ export default function Pricing() {
               <li><span className="check">&#10003;</span> 10 apps</li>
               <li><span className="check">&#10003;</span> 5 skills</li>
               <li><span className="check">&#10003;</span> 5 layouts</li>
-              <li><span className="check">&#10003;</span> All commands (.yo .sup .dip .drip)</li>
+              <li><span className="check">&#10003;</span> All commands</li>
               <li><span className="check">&#10003;</span> Built-in terminal</li>
               <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers or relay</li>
               <li className="pricing-excluded"><span className="x">&#10007;</span> No cloud sync</li>

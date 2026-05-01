@@ -1,3 +1,5 @@
+import { styledText } from './cmd-style';
+
 const features = [
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
@@ -14,6 +16,11 @@ const features = [
     title: 'Local MCP Server',
     desc: 'Connect any MCP server — local or remote — over stdio, SSE, or streamable HTTP. Your agent gets tools from every server you connect. MCP relay bridges your tools to other clients.',
     badge: 'Pro',
+  },
+  {
+    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
+    title: 'Dev Spaces',
+    desc: 'Launch a named multi-agent workspace with .code. Agents share a live event log and per-agent inboxes so teammates stay in sync — without you brokering every message. Spin up a full coordinated team in one command.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>,
@@ -60,8 +67,8 @@ export default function Features() {
           {features.map((f, i) => (
             <div key={i} className="feature reveal">
               <div className="feature-icon">{f.icon}</div>
-              <h3>{f.title}{f.badge && <span className="feature-badge">{f.badge}</span>}</h3>
-              <p>{f.desc}</p>
+              <h3>{styledText(f.title)}{f.badge && <span className="feature-badge">{f.badge}</span>}</h3>
+              <p>{styledText(f.desc)}</p>
             </div>
           ))}
         </div>

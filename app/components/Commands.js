@@ -1,3 +1,5 @@
+import { styledText } from './cmd-style';
+
 const commands = [
   {
     id: 'cmd-yo',
@@ -45,15 +47,32 @@ const composeExamples = [
   { tokens: [{ cmd: '.dip', arg: 'slack' }, { cmd: '.peace', arg: '3' }], gloss: 'switch to Slack, throw three peace signs' },
   { tokens: [{ cmd: '.dip', arg: 'notion' }, { cmd: '.drip', arg: '5 hearts' }], gloss: 'switch to Notion, drop five hearts' },
   { tokens: [{ cmd: '.dip', arg: 'linear' }, { cmd: '.drip', arg: 'fireworks' }, { cmd: '.peace', arg: '' }], gloss: 'ship it, celebrate, sign off' },
-  { tokens: [{ cmd: '.yo', arg: '.ws new yousup ~/dev/yousup' }, { cmd: '.yo', arg: '.code ui, server, web' }], gloss: 'spin up a workspace, launch three agents in it' },
+  { tokens: [{ cmd: '.code', arg: 'ui, server, web' }], gloss: 'pick a directory, scaffold three agents' },
 ];
 
 const devSpaceExamples = [
-  { line: '.yo .ws new yousup ~/dev/yousup', gloss: 'create a workspace bound to a directory' },
-  { line: '.yo .code create a dev space with 3 agents — ui, server, web', gloss: 'scaffold three named code-terminals running Claude Code' },
+  { line: '.code new', gloss: 'pick a project directory — workspace created instantly' },
+  { line: '.code ui, server, web', gloss: 'scaffold three named code-terminals running Claude Code' },
   { line: '.dip code ui frontend', gloss: 'open (or create) a single agent terminal' },
-  { line: '.dip code-yousup', gloss: 'recall the saved layout for this dev space' },
+  { line: '.code list', gloss: 'see all workspaces and saved dev-space layouts' },
 ];
+
+function renderExample(text) {
+  const tokens = [];
+  const re = /(\.\w+)(.*?)(?=\s\.\w|$)/g;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    tokens.push({ cmd: m[1], arg: m[2].trim() });
+  }
+  if (tokens.length === 0) return text;
+  return tokens.map((t, i) => (
+    <span key={i} className="compose-token">
+      <span className="compose-cmd">{t.cmd}</span>
+      {t.arg && <span className="compose-arg"> {t.arg}</span>}
+      {i < tokens.length - 1 && ' '}
+    </span>
+  ));
+}
 
 export default function Commands() {
   return (
@@ -79,10 +98,10 @@ export default function Commands() {
             )}
             {(cmd.desc || cmd.example) && (
               <div className="command-detail reveal">
-                {cmd.desc && <p className="command-desc">{cmd.desc}</p>}
+                {cmd.desc && <p className="command-desc">{styledText(cmd.desc)}</p>}
                 {cmd.example && (
                   <div className="command-example">
-                    <span className="example-prompt">$</span>{cmd.example}
+                    <span className="example-prompt">$</span>{renderExample(cmd.example)}
                   </div>
                 )}
               </div>
@@ -94,22 +113,22 @@ export default function Commands() {
       <div className="command-section" id="cmd-code">
         <div className="container">
           <h2 className="command-hero-title reveal">
-            <span className="dot dot-hidden" data-dot-anchor>.</span>yo<span className="dot">.</span>code
+            <span className="dot dot-hidden" data-dot-anchor id="cmd-yocode">.</span>Code
           </h2>
           <p className="command-hero-tagline reveal">Three agents, one prompt.</p>
           <div className="command-detail reveal">
             <p className="command-desc">
-              Bind a workspace to a directory, then scaffold a dev space — named code-terminals
+              Pick a directory, scaffold a dev space — named code-terminals
               running Claude Code, each with a role. They share an event log and per-agent
               inboxes, so they can coordinate without you brokering every message. Drop into
-              any of them with <code>.dip code &lt;name&gt;</code>, or recall the whole layout
-              with <code>.dip code-&lt;workspace&gt;</code>.
+              any of them with <span className="compose-cmd">.dip</span>{' '}code &lt;name&gt;, or recall the whole layout
+              with <span className="compose-cmd">.dip</span>{' '}code-&lt;workspace&gt;.
             </p>
             <div className="command-compose-list">
               {devSpaceExamples.map((ex, i) => (
                 <div key={i} className="command-compose-row">
                   <div className="command-example">
-                    <span className="example-prompt">$</span>{ex.line}
+                    <span className="example-prompt">$</span>{renderExample(ex.line)}
                   </div>
                   <p className="compose-gloss">{ex.gloss}</p>
                 </div>

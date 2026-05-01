@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { styledText } from './cmd-style';
 
 const faqs = [
   {
@@ -32,6 +33,10 @@ const faqs = [
     a: 'Vibes are interactive HTML apps that run inside Yo with full access to the platform. They can run skills, search your captures, read files, store data, and render charts. Build dashboards, data tools, custom UIs — anything you can build in HTML/JS, with the full Yo API behind it.',
   },
   {
+    q: 'What are Dev Spaces?',
+    a: 'Dev Spaces are multi-agent workspaces you launch with .code. Type .code ui, server, web to spin up three coordinated agents in one command. Each agent gets its own inbox and shares a live event log so teammates stay in sync — without you brokering every message. Use .dip code <name> to drop into any running workspace.',
+  },
+  {
     q: 'Is my data stored on your servers?',
     a: 'Your captures, notes, and conversation history are stored locally on your machine. Context is indexed with local ONNX embeddings — no API calls needed. The .yo agent calls your LLM provider directly with your API key. We store account and billing info only.',
   },
@@ -60,10 +65,10 @@ export default function FAQ() {
               onClick={() => setOpen(open === i ? null : i)}
             >
               <div className="faq-q">
-                <span>{item.q}</span>
+                <span>{styledText(item.q)}</span>
                 <span className="faq-icon">{open === i ? '−' : '+'}</span>
               </div>
-              {open === i && <div className="faq-a">{item.a}</div>}
+              {open === i && <div className="faq-a">{styledText(item.a)}</div>}
             </div>
           ))}
         </div>

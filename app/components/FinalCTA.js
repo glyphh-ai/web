@@ -24,7 +24,7 @@ export default function FinalCTA() {
       <div className="container">
         <div className="cta-card" ref={cardRef}>
           <h2>Your context. Every panel. Every conversation<span className="dot">.</span></h2>
-          <p>Download .Yo and start working across every AI today.</p>
+          <p>Download <span className="compose-cmd">.Yo</span> and start working across every AI today.</p>
           <div className="cta-buttons">
             <a href="#download" className="btn btn-white btn-lg group">
               <span className="btn-label">Download for Mac — Free</span>

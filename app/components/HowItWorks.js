@@ -29,17 +29,17 @@ export default function HowItWorks() {
           <div className="step step-reverse reveal">
             <div className="step-number">02</div>
             <div className="step-content">
-              <h3>.yo to speak</h3>
-              <p>Drop .yo anywhere. You&apos;re in the conversation. Background context from every open panel is right there —
-                ask, refine, direct. The AI that responds is the .sup.</p>
+              <h3><span className="compose-cmd">.yo</span> to speak</h3>
+              <p>Drop <span className="compose-cmd">.yo</span> anywhere. You&apos;re in the conversation. Background context from every open panel is right there —
+                ask, refine, direct. The AI that responds is the <span className="compose-cmd">.sup</span>.</p>
             </div>
             <div className="step-visual">
               <div className="step-capture">
                 <div className="step-cmd">
-                  <span className="step-prompt">&gt;</span> .yo what do you think of the code changes we just made?
+                  <span className="step-prompt">&gt;</span> <span className="compose-cmd">.yo</span> what do you think of the code changes we just made?
                 </div>
                 <div className="step-arrow">&#8595;</div>
-                <div className="step-result">gemini .sup — context loaded</div>
+                <div className="step-result">gemini <span className="compose-cmd">.sup</span> — context loaded</div>
               </div>
             </div>
           </div>
@@ -47,14 +47,14 @@ export default function HowItWorks() {
           <div className="step reveal">
             <div className="step-number">03</div>
             <div className="step-content">
-              <h3>.dip to move</h3>
-              <p>Head to a new panel with .dip. Drop .yo again and your context follows.
+              <h3><span className="compose-cmd">.dip</span> to move</h3>
+              <p>Head to a new panel with <span className="compose-cmd">.dip</span>. Drop <span className="compose-cmd">.yo</span> again and your context follows.
                 Crystallize the conversation into a summary, a spec, a message — wherever you land.</p>
             </div>
             <div className="step-visual">
               <div className="step-recall">
                 <div className="step-cmd">
-                  <span className="step-prompt">&gt;</span> .dip slack
+                  <span className="step-prompt">&gt;</span> <span className="compose-cmd">.dip</span> slack
                 </div>
                 <div className="step-arrow">&#8595;</div>
                 <div className="step-loaded">Context travels with you</div>

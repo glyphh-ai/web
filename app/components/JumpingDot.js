@@ -181,16 +181,15 @@ export default function JumpingDot() {
 
     let currentTargetId = 'hero-dot';
 
-    // Last known position of the final anchor (cmd-dip)
-    let lastAnchorPos = null;
+    // (anchor tracking handled inline in updateTarget)
 
-    function updateTarget() {
-      resetIdleTimer();
-
-      const ids = ['hero-dot', 'cmd-yo', 'cmd-sup', 'cmd-dip'];
+    function refreshTarget() {
+      const ids = ['hero-dot', 'cmd-yo', 'cmd-sup', 'cmd-dip', 'cmd-drip', 'cmd-peace', 'cmd-yocode'];
       let best = null;
       let bestId = null;
       let bestDist = Infinity;
+      let nearestAbove = null;
+      let nearestAboveDist = Infinity;
 
       for (const id of ids) {
         const el = document.getElementById(id);
@@ -198,28 +197,28 @@ export default function JumpingDot() {
         const rect = el.getBoundingClientRect();
         const pos = getDotPosition(el);
 
-        // Track the last anchor's position while it's in the viewport
-        if (id === 'cmd-dip' && rect.bottom > 0 && rect.top < window.innerHeight) {
-          lastAnchorPos = { x: pos.x, y: pos.y };
-        }
-
-        // Pick the element closest to being visible in the viewport
         const elCenter = rect.top + rect.height / 2;
         const viewCenter = window.innerHeight / 2;
         const dist = Math.abs(elCenter - viewCenter);
-        // Only consider elements at least partially in viewport
+
         if (rect.bottom > 0 && rect.top < window.innerHeight && dist < bestDist) {
           bestDist = dist;
           best = pos;
           bestId = id;
         }
+
+        if (rect.bottom <= 0) {
+          const aboveDist = Math.abs(rect.bottom);
+          if (aboveDist < nearestAboveDist) {
+            nearestAboveDist = aboveDist;
+            nearestAbove = pos;
+          }
+        }
       }
 
-      // If no anchor is in viewport, clamp to the last anchor's saved position
-      if (!best && lastAnchorPos) {
-        targetX = lastAnchorPos.x;
-        targetY = lastAnchorPos.y;
-        // Don't update currentTargetId — keep it as whatever it was
+      if (!best && nearestAbove) {
+        targetX = nearestAbove.x;
+        targetY = Math.max(DOT_RADIUS, nearestAbove.y);
         return;
       }
 
@@ -234,6 +233,11 @@ export default function JumpingDot() {
         dotY = targetY;
         initialized = true;
       }
+    }
+
+    function updateTarget() {
+      resetIdleTimer();
+      refreshTarget();
     }
 
     function spawnParticles(x, y, count) {
@@ -257,8 +261,8 @@ export default function JumpingDot() {
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      refreshTarget();
       if (!initialized) {
-        updateTarget();
         raf = requestAnimationFrame(draw);
         return;
       }
