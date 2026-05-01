@@ -558,6 +558,39 @@ body {
   border-radius: 12px;
 }
 
+/* ── Compose section ────────────────────────────────────── */
+.command-compose .command-hero-title .dot {
+  color: var(--green);
+}
+
+.command-compose-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.command-compose-row .command-example {
+  font-size: 1rem;
+  padding: 14px 18px;
+}
+
+.compose-cmd {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.compose-arg {
+  color: var(--white);
+}
+
+.compose-gloss {
+  color: var(--text-3);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
 /* ── Features Grid ─────────────────────────────────────── */
 .features-grid {
   padding: 8rem 0;

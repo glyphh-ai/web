@@ -23,6 +23,36 @@ const commands = [
     example: '.dip slack',
     video: '/dip-yousup.mp4',
   },
+  {
+    id: 'cmd-drip',
+    word: 'Drip',
+    tagline: 'Vibe ships with the work.',
+    desc: 'Particle effects on screen — fireworks, hearts, sparkles, whatever fits the moment. Stack a count, mix effects, save your own recipes. The win deserves a flourish; .drip puts it in the same surface as the work, not next to it.',
+    example: '.drip 3 fireworks, hearts, cat',
+    video: null,
+  },
+  {
+    id: 'cmd-peace',
+    word: 'Peace',
+    tagline: 'Sign off. Throw a gesture.',
+    desc: "A particle peace-sign — for closing a session, finishing a deploy, marking the win. Same engine as .drip, but it lands as a gesture, not a recipe. Drop it solo or chain it: .dip slack .peace and you're out.",
+    example: '.peace',
+    video: null,
+  },
+];
+
+const composeExamples = [
+  { tokens: [{ cmd: '.dip', arg: 'slack' }, { cmd: '.peace', arg: '3' }], gloss: 'switch to Slack, throw three peace signs' },
+  { tokens: [{ cmd: '.dip', arg: 'notion' }, { cmd: '.drip', arg: '5 hearts' }], gloss: 'switch to Notion, drop five hearts' },
+  { tokens: [{ cmd: '.dip', arg: 'linear' }, { cmd: '.drip', arg: 'fireworks' }, { cmd: '.peace', arg: '' }], gloss: 'ship it, celebrate, sign off' },
+  { tokens: [{ cmd: '.yo', arg: '.ws new yousup ~/dev/yousup' }, { cmd: '.yo', arg: '.code ui, server, web' }], gloss: 'spin up a workspace, launch three agents in it' },
+];
+
+const devSpaceExamples = [
+  { line: '.yo .ws new yousup ~/dev/yousup', gloss: 'create a workspace bound to a directory' },
+  { line: '.yo .code create a dev space with 3 agents — ui, server, web', gloss: 'scaffold three named code-terminals running Claude Code' },
+  { line: '.dip code ui frontend', gloss: 'open (or create) a single agent terminal' },
+  { line: '.dip code-yousup', gloss: 'recall the saved layout for this dev space' },
 ];
 
 export default function Commands() {
@@ -47,9 +77,80 @@ export default function Commands() {
                 />
               </div>
             )}
+            {(cmd.desc || cmd.example) && (
+              <div className="command-detail reveal">
+                {cmd.desc && <p className="command-desc">{cmd.desc}</p>}
+                {cmd.example && (
+                  <div className="command-example">
+                    <span className="example-prompt">$</span>{cmd.example}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       ))}
+
+      <div className="command-section" id="cmd-code">
+        <div className="container">
+          <h2 className="command-hero-title reveal">
+            <span className="dot dot-hidden" data-dot-anchor>.</span>yo<span className="dot">.</span>code
+          </h2>
+          <p className="command-hero-tagline reveal">Three agents, one prompt.</p>
+          <div className="command-detail reveal">
+            <p className="command-desc">
+              Bind a workspace to a directory, then scaffold a dev space — named code-terminals
+              running Claude Code, each with a role. They share an event log and per-agent
+              inboxes, so they can coordinate without you brokering every message. Drop into
+              any of them with <code>.dip code &lt;name&gt;</code>, or recall the whole layout
+              with <code>.dip code-&lt;workspace&gt;</code>.
+            </p>
+            <div className="command-compose-list">
+              {devSpaceExamples.map((ex, i) => (
+                <div key={i} className="command-compose-row">
+                  <div className="command-example">
+                    <span className="example-prompt">$</span>{ex.line}
+                  </div>
+                  <p className="compose-gloss">{ex.gloss}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="command-section command-compose" id="cmd-compose">
+        <div className="container">
+          <h2 className="command-hero-title reveal">
+            <span className="dot">.</span>yo<span className="dot">.</span>sup<span className="dot">.</span>dip
+          </h2>
+          <p className="command-hero-tagline reveal">Commands chain like sentences.</p>
+          <div className="command-detail reveal">
+            <p className="command-desc">
+              Every command is a word in a slang grammar. Stack them and they read like talk —
+              no flags, no menus, no hidden state. The grammar <em>is</em> the API,
+              and the API is the way you already speak.
+            </p>
+            <div className="command-compose-list">
+              {composeExamples.map((ex, i) => (
+                <div key={i} className="command-compose-row">
+                  <div className="command-example">
+                    <span className="example-prompt">$</span>
+                    {ex.tokens.map((t, j) => (
+                      <span key={j} className="compose-token">
+                        <span className="compose-cmd">{t.cmd}</span>
+                        {t.arg && <span className="compose-arg"> {t.arg}</span>}
+                        {j < ex.tokens.length - 1 && ' '}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="compose-gloss">{ex.gloss}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
