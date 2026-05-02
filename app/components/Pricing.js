@@ -16,51 +16,34 @@ export default function Pricing() {
           {/* Free */}
           <div className="pricing-card reveal">
             <div className="pricing-header">
-              <span className="pricing-plan-name">Free</span>
+              <span className="pricing-plan-name">YO FREE</span>
               <div className="pricing-amount">
                 <span className="pricing-dollar">$</span>
                 <span className="pricing-number">0</span>
               </div>
-              <span className="pricing-period">forever</span>
+              <span className="pricing-period">per month</span>
             </div>
-            <p className="pricing-desc">Try the full workspace with 1,000 yos on us.</p>
-            <ul className="pricing-features">
-              <li><span className="check">&#10003;</span> 1,000 yos (one-time)</li>
-              <li><span className="check">&#10003;</span> 10 apps</li>
-              <li><span className="check">&#10003;</span> 5 skills</li>
-              <li><span className="check">&#10003;</span> 5 layouts</li>
-              <li><span className="check">&#10003;</span> All commands</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> No cloud sync</li>
-            </ul>
+            <p className="pricing-desc">1,000 yos</p>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-secondary btn-lg btn-full group">
-              <span className="btn-label">Get Started</span>
+              <span className="btn-label">Download now</span>
               <span className="btn-fill"></span>
             </a>
           </div>
 
-          {/* Basic */}
+          {/* Starter */}
           <div className="pricing-card reveal">
             <div className="pricing-header">
-              <span className="pricing-plan-name">Basic</span>
+              <span className="pricing-plan-name">YO STARTER</span>
               <div className="pricing-amount">
                 <span className="pricing-dollar">$</span>
                 <span className="pricing-number">20</span>
               </div>
-              <span className="pricing-period">/month</span>
+              <span className="pricing-period">per month</span>
             </div>
-            <p className="pricing-desc">For individuals who use the agent daily.</p>
-            <ul className="pricing-features">
-              <li><span className="check">&#10003;</span> 2,000 yos/month</li>
-              <li><span className="check">&#10003;</span> Unlimited apps</li>
-              <li><span className="check">&#10003;</span> Unlimited skills / layouts</li>
-              <li><span className="check">&#10003;</span> Custom layouts &amp; drips</li>
-              <li><span className="check">&#10003;</span> Up to 5 seats</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> No cloud sync</li>
-            </ul>
+            <p className="pricing-desc">2,000 yos</p>
+            <p className="pricing-overage">Pay-per-use overage ($0.02/yo)</p>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
-              <span className="btn-label">Start with Basic</span>
+              <span className="btn-label">Get started</span>
               <span className="btn-fill"></span>
             </a>
           </div>
@@ -69,48 +52,35 @@ export default function Pricing() {
           <div className="pricing-card pricing-card-popular reveal">
             <div className="pricing-badge">Most Popular</div>
             <div className="pricing-header">
-              <span className="pricing-plan-name">Pro</span>
+              <span className="pricing-plan-name">YO PRO</span>
               <div className="pricing-amount">
                 <span className="pricing-dollar">$</span>
                 <span className="pricing-number">40</span>
               </div>
-              <span className="pricing-period">/month</span>
+              <span className="pricing-period">per month</span>
             </div>
-            <p className="pricing-desc">Full power with MCP, sync, and voice.</p>
-            <ul className="pricing-features">
-              <li><span className="check">&#10003;</span> 5,000 yos/month</li>
-              <li><span className="check">&#10003;</span> Everything in Basic</li>
-              <li><span className="check">&#10003;</span> MCP servers</li>
-              <li><span className="check">&#10003;</span> Cloud sync</li>
-              <li><span className="check">&#10003;</span> Voice</li>
-              <li><span className="check">&#10003;</span> Up to 10 seats</li>
-              <li><span className="check">&#10003;</span> Priority support</li>
-            </ul>
+            <p className="pricing-desc">5,000 yos</p>
+            <p className="pricing-overage">Pay-per-use overage ($0.02/yo)</p>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
-              <span className="btn-label">Start with Pro</span>
+              <span className="btn-label">Get started</span>
               <span className="btn-fill"></span>
             </a>
           </div>
 
-          {/* Advanced */}
+          {/* Power */}
           <div className="pricing-card reveal">
             <div className="pricing-header">
-              <span className="pricing-plan-name">Advanced</span>
+              <span className="pricing-plan-name">YO POWER</span>
               <div className="pricing-amount">
                 <span className="pricing-dollar">$</span>
                 <span className="pricing-number">100</span>
               </div>
-              <span className="pricing-period">/month</span>
+              <span className="pricing-period">per month</span>
             </div>
-            <p className="pricing-desc">Maximum capacity for power users and teams.</p>
-            <ul className="pricing-features">
-              <li><span className="check">&#10003;</span> 15,000 yos/month</li>
-              <li><span className="check">&#10003;</span> Everything in Pro</li>
-              <li><span className="check">&#10003;</span> Up to 25 seats</li>
-              <li><span className="check">&#10003;</span> Priority support</li>
-            </ul>
+            <p className="pricing-desc">15,000 yos</p>
+            <p className="pricing-overage">Pay-per-use overage ($0.02/yo)</p>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
-              <span className="btn-label">Start with Advanced</span>
+              <span className="btn-label">Get started</span>
               <span className="btn-fill"></span>
             </a>
           </div>
