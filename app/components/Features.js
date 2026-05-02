@@ -9,7 +9,7 @@ const features = [
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
     title: '.yo Agent',
-    desc: 'A multi-agent system with navigator, layout, and builder sub-agents. It navigates panels, clicks through apps, runs shell commands, reads files, and orchestrates multi-model councils.',
+    desc: 'A single capable agent that navigates panels, runs shell commands, reads and writes files, and orchestrates tasks across your entire workspace — powered by Claude with every MCP tool you have connected.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>,
@@ -44,8 +44,8 @@ const features = [
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
-    title: '6 LLM Providers',
-    desc: 'Bring your own key for Anthropic, OpenAI, Google, xAI, DeepSeek, or any OpenAI-compatible endpoint. Your keys, your usage, your cost. Switch models anytime.',
+    title: 'Pay As You Go',
+    desc: 'No API key required. yos credits power every agent call — buy a pack, enable auto top-up, and only pay for what you use.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>,

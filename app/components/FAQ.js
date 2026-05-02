@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: 'Do I need to bring my own API key?',
-    a: 'Yes — for the .yo agent and inline commands, you provide your own LLM API key. We support 6 providers: Anthropic, OpenAI, Google, xAI, DeepSeek, and any OpenAI-compatible endpoint. The web apps themselves (ChatGPT, Claude, etc.) use your existing accounts. Your keys stay local — never sent to our servers.',
+    a: 'No API key needed. The .yo agent runs on Claude via yos credits — buy a pack and your agent draws from your balance with each call. The web apps (ChatGPT, Claude, etc.) still use your existing accounts as usual.',
   },
   {
     q: 'What apps are supported?',
@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     q: 'Is my data stored on your servers?',
-    a: 'Your captures, notes, and conversation history are stored locally on your machine. Context is indexed with local ONNX embeddings — no API calls needed. The .yo agent calls your LLM provider directly with your API key. We store account and billing info only.',
+    a: 'Your captures, notes, and conversation history are stored locally on your machine. Context is indexed with local ONNX embeddings — no external indexing calls. Agent LLM calls are routed through the yosup platform to Claude; message content is not stored on our servers. We store account and billing info only.',
   },
   {
     q: 'Is .Yo free?',
