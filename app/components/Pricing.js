@@ -12,7 +12,7 @@ export default function Pricing() {
         <h2 className="section-title">Simple, transparent pricing</h2>
         <p className="section-subtitle">Start free, upgrade when you need more.</p>
 
-        <div className="pricing-grid pricing-grid-three">
+        <div className="pricing-grid pricing-grid-four">
           {/* Free */}
           <div className="pricing-card reveal">
             <div className="pricing-header">
@@ -21,18 +21,17 @@ export default function Pricing() {
                 <span className="pricing-dollar">$</span>
                 <span className="pricing-number">0</span>
               </div>
-              <span className="pricing-period">/month</span>
+              <span className="pricing-period">forever</span>
             </div>
-            <p className="pricing-desc">Get started with the basics.</p>
+            <p className="pricing-desc">Try the full workspace with 1,000 yos on us.</p>
             <ul className="pricing-features">
+              <li><span className="check">&#10003;</span> 1,000 yos (one-time)</li>
               <li><span className="check">&#10003;</span> 10 apps</li>
               <li><span className="check">&#10003;</span> 5 skills</li>
               <li><span className="check">&#10003;</span> 5 layouts</li>
               <li><span className="check">&#10003;</span> All commands</li>
-              <li><span className="check">&#10003;</span> Built-in terminal</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers or relay</li>
+              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers</li>
               <li className="pricing-excluded"><span className="x">&#10007;</span> No cloud sync</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> No vibes or custom drips</li>
             </ul>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-secondary btn-lg btn-full group">
               <span className="btn-label">Get Started</span>
@@ -46,18 +45,18 @@ export default function Pricing() {
               <span className="pricing-plan-name">Basic</span>
               <div className="pricing-amount">
                 <span className="pricing-dollar">$</span>
-                <span className="pricing-number">8</span>
+                <span className="pricing-number">20</span>
               </div>
-              <span className="pricing-period">/seat/month</span>
+              <span className="pricing-period">/month</span>
             </div>
-            <p className="pricing-desc">Unlimited everything for individuals and small teams.</p>
+            <p className="pricing-desc">For individuals who use the agent daily.</p>
             <ul className="pricing-features">
+              <li><span className="check">&#10003;</span> 2,000 yos/month</li>
               <li><span className="check">&#10003;</span> Unlimited apps</li>
               <li><span className="check">&#10003;</span> Unlimited skills / layouts</li>
-              <li><span className="check">&#10003;</span> Custom layouts</li>
-              <li><span className="check">&#10003;</span> Vibes and custom drips</li>
+              <li><span className="check">&#10003;</span> Custom layouts &amp; drips</li>
               <li><span className="check">&#10003;</span> Up to 5 seats</li>
-              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers or relay</li>
+              <li className="pricing-excluded"><span className="x">&#10007;</span> No MCP servers</li>
               <li className="pricing-excluded"><span className="x">&#10007;</span> No cloud sync</li>
             </ul>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
@@ -66,26 +65,48 @@ export default function Pricing() {
             </a>
           </div>
 
-          {/* Advanced */}
+          {/* Pro */}
           <div className="pricing-card pricing-card-popular reveal">
             <div className="pricing-badge">Most Popular</div>
+            <div className="pricing-header">
+              <span className="pricing-plan-name">Pro</span>
+              <div className="pricing-amount">
+                <span className="pricing-dollar">$</span>
+                <span className="pricing-number">40</span>
+              </div>
+              <span className="pricing-period">/month</span>
+            </div>
+            <p className="pricing-desc">Full power with MCP, sync, and voice.</p>
+            <ul className="pricing-features">
+              <li><span className="check">&#10003;</span> 5,000 yos/month</li>
+              <li><span className="check">&#10003;</span> Everything in Basic</li>
+              <li><span className="check">&#10003;</span> MCP servers</li>
+              <li><span className="check">&#10003;</span> Cloud sync</li>
+              <li><span className="check">&#10003;</span> Voice</li>
+              <li><span className="check">&#10003;</span> Up to 10 seats</li>
+              <li><span className="check">&#10003;</span> Priority support</li>
+            </ul>
+            <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
+              <span className="btn-label">Start with Pro</span>
+              <span className="btn-fill"></span>
+            </a>
+          </div>
+
+          {/* Advanced */}
+          <div className="pricing-card reveal">
             <div className="pricing-header">
               <span className="pricing-plan-name">Advanced</span>
               <div className="pricing-amount">
                 <span className="pricing-dollar">$</span>
-                <span className="pricing-number">24</span>
+                <span className="pricing-number">100</span>
               </div>
-              <span className="pricing-period">/seat/month</span>
+              <span className="pricing-period">/month</span>
             </div>
-            <p className="pricing-desc">Full power with MCP servers, relay, and 3,500+ connected apps.</p>
+            <p className="pricing-desc">Maximum capacity for power users and teams.</p>
             <ul className="pricing-features">
-              <li><span className="check">&#10003;</span> Everything in Basic</li>
-              <li><span className="check">&#10003;</span> Local MCP servers (stdio, SSE, HTTP)</li>
-              <li><span className="check">&#10003;</span> MCP relay for external clients</li>
-              <li><span className="check">&#10003;</span> Pipedream connectors (3,500+ apps)</li>
-              <li><span className="check">&#10003;</span> Cloud sync</li>
-              <li><span className="check">&#10003;</span> Voice</li>
-              <li><span className="check">&#10003;</span> Up to 10 seats</li>
+              <li><span className="check">&#10003;</span> 15,000 yos/month</li>
+              <li><span className="check">&#10003;</span> Everything in Pro</li>
+              <li><span className="check">&#10003;</span> Up to 25 seats</li>
               <li><span className="check">&#10003;</span> Priority support</li>
             </ul>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
