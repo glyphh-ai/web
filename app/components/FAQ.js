@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: 'What are Dev Spaces?',
-    a: 'Dev Spaces are multi-agent workspaces you launch with .code. Type .code ui, server, web to spin up three coordinated agents in one command. Each agent gets its own inbox and shares a live event log so teammates stay in sync — without you brokering every message. Use .dip code <name> to drop into any running workspace.',
+    a: 'Dev Spaces are multi-agent workspaces you set up from the in-app Workspaces page. Each workspace binds to a project directory and runs a roster of named agents — each with its own inbox and a shared live event log so teammates stay in sync without you brokering every message.',
   },
   {
     q: 'Is my data stored on your servers?',
@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: 'Is .Yo free?',
-    a: 'The Free plan gives you 10 apps, 5 skills, 5 layouts, a built-in terminal, and all commands — no credit card required. Basic ($8/seat/month) adds unlimited everything plus vibes. Advanced ($24/seat/month) adds MCP servers, MCP relay, Pipedream connectors, cloud sync, and voice.',
+    a: 'The Free plan includes 1,000 yos to get started — no credit card required. Starter ($20/month) gives you 2,000 yos/month. Pro ($40/month) gives you 5,000 yos/month plus MCP servers, cloud sync, and voice. Power ($100/month) gives you 15,000 yos/month for high-volume use. All plans include unlimited apps, skills, and layouts.',
   },
   {
     q: 'What platforms does .Yo support?',

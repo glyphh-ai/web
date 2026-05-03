@@ -20,7 +20,7 @@ const features = [
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
     title: 'Dev Spaces',
-    desc: 'Launch a named multi-agent workspace with .code. Agents share a live event log and per-agent inboxes so teammates stay in sync — without you brokering every message. Spin up a full coordinated team in one command.',
+    desc: 'Launch a named multi-agent workspace from the in-app Workspaces page. Agents share a live event log and per-agent inboxes so teammates stay in sync — without you brokering every message.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>,

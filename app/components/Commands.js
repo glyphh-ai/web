@@ -47,14 +47,6 @@ const composeExamples = [
   { tokens: [{ cmd: '.dip', arg: 'slack' }, { cmd: '.peace', arg: '3' }], gloss: 'switch to Slack, throw three peace signs' },
   { tokens: [{ cmd: '.dip', arg: 'notion' }, { cmd: '.drip', arg: '5 hearts' }], gloss: 'switch to Notion, drop five hearts' },
   { tokens: [{ cmd: '.dip', arg: 'linear' }, { cmd: '.drip', arg: 'fireworks' }, { cmd: '.peace', arg: '' }], gloss: 'ship it, celebrate, sign off' },
-  { tokens: [{ cmd: '.code', arg: 'ui, server, web' }], gloss: 'pick a directory, scaffold three agents' },
-];
-
-const devSpaceExamples = [
-  { line: '.code new', gloss: 'pick a project directory — workspace created instantly' },
-  { line: '.code ui, server, web', gloss: 'scaffold three named code-terminals running Claude Code' },
-  { line: '.dip code ui frontend', gloss: 'open (or create) a single agent terminal' },
-  { line: '.code list', gloss: 'see all workspaces and saved dev-space layouts' },
 ];
 
 function renderExample(text) {
@@ -109,34 +101,6 @@ export default function Commands() {
           </div>
         </div>
       ))}
-
-      <div className="command-section" id="cmd-code">
-        <div className="container">
-          <h2 className="command-hero-title reveal">
-            <span className="dot dot-hidden" data-dot-anchor id="cmd-yocode">.</span>Code
-          </h2>
-          <p className="command-hero-tagline reveal">Three agents, one prompt.</p>
-          <div className="command-detail reveal">
-            <p className="command-desc">
-              Pick a directory, scaffold a dev space — named code-terminals
-              running Claude Code, each with a role. They share an event log and per-agent
-              inboxes, so they can coordinate without you brokering every message. Drop into
-              any of them with <span className="compose-cmd">.dip</span>{' '}code &lt;name&gt;, or recall the whole layout
-              with <span className="compose-cmd">.dip</span>{' '}code-&lt;workspace&gt;.
-            </p>
-            <div className="command-compose-list">
-              {devSpaceExamples.map((ex, i) => (
-                <div key={i} className="command-compose-row">
-                  <div className="command-example">
-                    <span className="example-prompt">$</span>{renderExample(ex.line)}
-                  </div>
-                  <p className="compose-gloss">{ex.gloss}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div className="command-section command-compose" id="cmd-compose">
         <div className="container">
