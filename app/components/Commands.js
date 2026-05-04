@@ -31,22 +31,22 @@ const commands = [
     tagline: 'Vibe ships with the work.',
     desc: 'Particle effects on screen — fireworks, hearts, sparkles, whatever fits the moment. Stack a count, mix effects, save your own recipes. The win deserves a flourish; .drip puts it in the same surface as the work, not next to it.',
     example: '.drip 3 fireworks, hearts, cat',
-    video: null,
+    video: '/drip-yosup.mp4',
   },
   {
-    id: 'cmd-peace',
-    word: 'Peace',
-    tagline: 'Sign off. Throw a gesture.',
-    desc: "A particle peace-sign — for closing a session, finishing a deploy, marking the win. Same engine as .drip, but it lands as a gesture, not a recipe. Drop it solo or chain it: .dip slack .peace and you're out.",
-    example: '.peace',
-    video: null,
+    id: 'cmd-council',
+    word: 'Council',
+    tagline: 'Multi-model debate.',
+    desc: "Convene a council of LLMs to debate a topic. Name the models you want, then state the prompt. The .yo agent moderates rounds, and you get diverse perspectives from different providers.",
+    example: '.council grok claude gemini what came first the chicken or egg',
+    video: '/council-yousup.mp4',
   },
 ];
 
 const composeExamples = [
-  { tokens: [{ cmd: '.dip', arg: 'slack' }, { cmd: '.peace', arg: '3' }], gloss: 'switch to Slack, throw three peace signs' },
+  { tokens: [{ cmd: '.council', arg: 'grok claude gemini' }, { cmd: '', arg: 'what came first the chicken or egg' }], gloss: 'three models debate a question' },
   { tokens: [{ cmd: '.dip', arg: 'notion' }, { cmd: '.drip', arg: '5 hearts' }], gloss: 'switch to Notion, drop five hearts' },
-  { tokens: [{ cmd: '.dip', arg: 'linear' }, { cmd: '.drip', arg: 'fireworks' }, { cmd: '.peace', arg: '' }], gloss: 'ship it, celebrate, sign off' },
+  { tokens: [{ cmd: '.dip', arg: 'linear' }, { cmd: '.drip', arg: 'fireworks' }, { cmd: '.council', arg: 'claude gemini should we use Postgres' }], gloss: 'ship it, celebrate, get a second opinion' },
 ];
 
 function renderExample(text) {
