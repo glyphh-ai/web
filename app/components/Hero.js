@@ -29,7 +29,7 @@ export default function Hero() {
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
-            <span className="btn-label">Download for Mac</span>
+            <span className="btn-label">Download Now</span>
             <span className="btn-fill"></span>
           </a>
           <a href="#features" className="btn btn-ghost btn-lg group">
