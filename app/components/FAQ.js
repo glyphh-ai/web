@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: 'Do I need to bring my own API key?',
-    a: 'No API key needed. The .yo agent runs on Claude via yos credits — buy a pack and your agent draws from your balance with each call. The web apps (ChatGPT, Claude, etc.) still use your existing accounts as usual.',
+    a: 'Yes — yo never holds provider keys. Configure your own keys for Anthropic, OpenAI, Gemini, xAI, Perplexity in Settings → Providers. They live encrypted on your machine via the OS keychain. Inference goes straight from yo to the provider; we never see your prompts. The agent loop runs on your existing Claude Code subscription, so if you have one, that path is already covered.',
   },
   {
     q: 'What apps are supported?',
@@ -38,11 +38,11 @@ const faqs = [
   },
   {
     q: 'Is my data stored on your servers?',
-    a: 'Your captures, notes, and conversation history are stored locally on your machine. Context is indexed with local ONNX embeddings — no external indexing calls. Agent LLM calls are routed through the yosup platform to Claude; message content is not stored on our servers. We store account and billing info only.',
+    a: 'Your captures, notes, and conversation history are stored locally on your machine. Context is indexed with local ONNX embeddings — no external indexing calls. Agent LLM calls go directly from your machine to your provider (Anthropic, OpenAI, etc.) using your own API keys; yo never sees prompts or responses. We store account, subscription, and coordination metadata only.',
   },
   {
     q: 'Is .Yo free?',
-    a: 'The Free plan includes 1,000 yos to get started — no credit card required. Starter ($20/month) gives you 2,000 yos/month. Pro ($40/month) gives you 5,000 yos/month plus MCP servers, cloud sync, and voice. Power ($100/month) gives you 15,000 yos/month for high-volume use. All plans include unlimited apps, skills, and layouts.',
+    a: 'Free 14-day trial — no credit card required. After that, the Cypher plan is $20/month flat for the network, matchmaker, discovery, and reputation surface. Inference is the only other cost and it goes straight to your provider — yo takes no spread on tokens.',
   },
   {
     q: 'What platforms does .Yo support?',
