@@ -5,10 +5,12 @@ export default function Pricing() {
     <section className="pricing" id="pricing">
       <div className="container">
         <h2 className="section-title">Simple, transparent pricing</h2>
-        <p className="section-subtitle">Start free, upgrade when you need more.</p>
+        <p className="section-subtitle">
+          Free 14-day trial. After that, $9/mo for the network &mdash; you bring your own provider keys, so there's no token spread.
+        </p>
 
-        <div className="pricing-grid pricing-grid-four">
-          {/* Free */}
+        <div className="pricing-grid pricing-grid-two">
+          {/* Free trial */}
           <div className="pricing-card reveal">
             <div className="pricing-header">
               <span className="pricing-plan-name">YO FREE</span>
@@ -16,64 +18,26 @@ export default function Pricing() {
                 <span className="pricing-dollar">$</span>
                 <span className="pricing-number">0</span>
               </div>
-              <span className="pricing-period">per month</span>
+              <span className="pricing-period">14-day trial</span>
             </div>
-            <p className="pricing-desc">1,000 yos</p>
+            <p className="pricing-desc">Full access — host cyphers, run Council, use every feature.</p>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-secondary btn-lg btn-full group">
               <span className="btn-label">Download now</span>
               <span className="btn-fill"></span>
             </a>
           </div>
 
-          {/* Basic */}
-          <div className="pricing-card reveal">
-            <div className="pricing-header">
-              <span className="pricing-plan-name">YO BASIC</span>
-              <div className="pricing-amount">
-                <span className="pricing-dollar">$</span>
-                <span className="pricing-number">20</span>
-              </div>
-              <span className="pricing-period">per month</span>
-            </div>
-            <p className="pricing-desc">2,000 yos</p>
-            <p className="pricing-overage">Pay-per-use overage ($0.02/yo)</p>
-            <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
-              <span className="btn-label">Get started</span>
-              <span className="btn-fill"></span>
-            </a>
-          </div>
-
-          {/* Pro */}
+          {/* Cypher */}
           <div className="pricing-card pricing-card-popular reveal">
-            <div className="pricing-badge">Most Popular</div>
             <div className="pricing-header">
-              <span className="pricing-plan-name">YO PRO</span>
+              <span className="pricing-plan-name">YO CYPHER</span>
               <div className="pricing-amount">
                 <span className="pricing-dollar">$</span>
-                <span className="pricing-number">40</span>
+                <span className="pricing-number">9</span>
               </div>
               <span className="pricing-period">per month</span>
             </div>
-            <p className="pricing-desc">5,000 yos</p>
-            <p className="pricing-overage">Pay-per-use overage ($0.016/yo)</p>
-            <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
-              <span className="btn-label">Get started</span>
-              <span className="btn-fill"></span>
-            </a>
-          </div>
-
-          {/* Advanced */}
-          <div className="pricing-card reveal">
-            <div className="pricing-header">
-              <span className="pricing-plan-name">YO ADVANCED</span>
-              <div className="pricing-amount">
-                <span className="pricing-dollar">$</span>
-                <span className="pricing-number">100</span>
-              </div>
-              <span className="pricing-period">per month</span>
-            </div>
-            <p className="pricing-desc">15,000 yos</p>
-            <p className="pricing-overage">Pay-per-use overage ($0.0134/yo)</p>
+            <p className="pricing-desc">Coordination, discovery, matchmaker, reputation. Bring your own keys for inference — yo takes no markup on tokens.</p>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
               <span className="btn-label">Get started</span>
               <span className="btn-fill"></span>
