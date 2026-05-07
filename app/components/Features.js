@@ -44,8 +44,8 @@ const features = [
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
-    title: 'Pay As You Go',
-    desc: 'No API key required. yos credits power every agent call — buy a pack, enable auto top-up, and only pay for what you use.',
+    title: 'Bring your own keys',
+    desc: 'No token markup. Configure API keys for Anthropic, OpenAI, Gemini, xAI, Perplexity in Settings — they live encrypted on your machine and inference goes straight to the provider. Yo charges a flat $20/mo for the network.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>,
