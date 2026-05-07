@@ -1,8 +1,10 @@
 /**
  * Download proxy for private GitHub releases.
  *
- * GET /api/download?platform=mac  → redirects to temporary Yo.dmg URL
- * GET /api/download?platform=win  → redirects to temporary Yo-Setup.exe URL
+ *   GET /api/download?platform=mac              → Apple Silicon DMG (default)
+ *   GET /api/download?platform=mac&arch=arm64   → Apple Silicon DMG
+ *   GET /api/download?platform=mac&arch=x64     → Intel DMG
+ *   GET /api/download?platform=win              → Windows installer
  *
  * Uses GITHUB_TOKEN to authenticate with the GitHub API, fetches the
  * latest release asset URL, and 302-redirects the user to a temporary
@@ -10,12 +12,19 @@
  */
 
 const REPO = 'glyphh-ai/yo-releases';
-const ASSETS = { mac: 'Yo.dmg', win: 'Yo-Setup.exe' };
+
+function assetNameFor(platform, arch) {
+  if (platform === 'win') return 'Yo-Setup.exe';
+  // Mac is multi-arch as of v2.9.1 — default to Apple Silicon.
+  const a = arch === 'x64' ? 'x64' : 'arm64';
+  return `Yo-${a}.dmg`;
+}
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const platform = searchParams.get('platform') || 'mac';
-  const assetName = ASSETS[platform] || ASSETS.mac;
+  const arch = searchParams.get('arch') || 'arm64';
+  const assetName = assetNameFor(platform, arch);
 
   const token = process.env.GITHUB_TOKEN;
 
@@ -32,7 +41,14 @@ export async function GET(request) {
     }
 
     const release = await releaseRes.json();
-    const asset = release.assets?.find((a) => a.name === assetName);
+    let asset = release.assets?.find((a) => a.name === assetName);
+
+    // Backwards-compat: pre-v2.9.1 releases used the un-arched name `Yo.dmg`.
+    // If we asked for the arched name and didn't find it, fall back so old
+    // releases still resolve cleanly.
+    if (!asset && platform === 'mac') {
+      asset = release.assets?.find((a) => a.name === 'Yo.dmg');
+    }
 
     if (!asset) {
       return new Response(`Asset "${assetName}" not found in latest release`, { status: 404 });
