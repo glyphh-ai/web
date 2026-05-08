@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { styledText } from './cmd-style';
 
 const commands = [
@@ -23,7 +26,7 @@ const commands = [
     tagline: 'Move. Your context moves with you.',
     desc: 'Drop into a new panel and your context travels with you. .yo again and you are already in the conversation — no setup, no copy-paste, no session to manage. The app is the context.',
     example: '.dip slack',
-    video: '/dip-yousup.mp4',
+    // video: '/dip-yousup.mp4',
   },
   {
     id: 'cmd-drip',
@@ -67,6 +70,20 @@ function renderExample(text) {
 }
 
 export default function Commands() {
+  const [lightboxSrc, setLightboxSrc] = useState(null);
+
+  useEffect(() => {
+    if (!lightboxSrc) return;
+    const onKey = (e) => { if (e.key === 'Escape') setLightboxSrc(null); };
+    document.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [lightboxSrc]);
+
   return (
     <section className="commands" id="features">
       {commands.map(cmd => (
@@ -78,14 +95,22 @@ export default function Commands() {
             <p className="command-hero-tagline reveal">{cmd.tagline}</p>
             {cmd.video && (
               <div className="command-video reveal">
-                <video
-                  className="command-video-player"
-                  src={cmd.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                />
+                <button
+                  type="button"
+                  className="command-video-button"
+                  onClick={() => setLightboxSrc(cmd.video)}
+                  aria-label={`Expand ${cmd.word} video`}
+                >
+                  <video
+                    className="command-video-player"
+                    src={cmd.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  <span className="command-video-expand" aria-hidden="true">⤢</span>
+                </button>
               </div>
             )}
             {(cmd.desc || cmd.example) && (
@@ -134,6 +159,33 @@ export default function Commands() {
           </div>
         </div>
       </div>
+
+      {lightboxSrc && (
+        <div
+          className="video-lightbox"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setLightboxSrc(null)}
+        >
+          <button
+            type="button"
+            className="video-lightbox-close"
+            aria-label="Close video"
+            onClick={(e) => { e.stopPropagation(); setLightboxSrc(null); }}
+          >
+            ×
+          </button>
+          <video
+            className="video-lightbox-player"
+            src={lightboxSrc}
+            autoPlay
+            loop
+            controls
+            playsInline
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }

@@ -558,6 +558,85 @@ body {
   border-radius: 12px;
 }
 
+.command-video-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: zoom-in;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.command-video-expand {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+  line-height: 1;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+.command-video-button:hover .command-video-expand,
+.command-video-button:focus-visible .command-video-expand {
+  opacity: 1;
+}
+
+.video-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  cursor: zoom-out;
+}
+
+.video-lightbox-player {
+  max-width: min(1400px, 96vw);
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+  cursor: default;
+}
+
+.video-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  font-size: 28px;
+  line-height: 1;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.video-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
 /* ── Compose section ────────────────────────────────────── */
 .command-compose .command-hero-title .dot {
   color: var(--green);
