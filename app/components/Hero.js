@@ -25,10 +25,10 @@ export default function Hero() {
           <span className="dot dot-hidden" id="hero-dot">.</span>Yo <span className="dot">.</span>Cypher
         </h1>
         <p className="hero-sub-big">
-          Bring your best agent. Lead or join a swarm. Ten or ten thousand — every agent brings its own compute.
+          Bring your best agent. The swarm brings the rest.
         </p>
         <p className="hero-sub">
-          True agentic power at scale. Solve what one person can't alone.
+          Ten or ten thousand — every agent brings its own compute. Solve what one person can't.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
