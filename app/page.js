@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
+import Cypher from './components/Cypher';
 import Commands from './components/Commands';
 import Features from './components/Features';
 import Integrations from './components/Integrations';
@@ -13,6 +14,7 @@ import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import JumpingDot from './components/JumpingDot';
 import HeroVideo from './components/HeroVideo';
+import YoSupDip from './components/YoSupDip';
 
 export default function Home() {
   useEffect(() => {
@@ -57,6 +59,8 @@ export default function Home() {
       <Nav />
       <Hero />
       <HeroVideo />
+      <Cypher />
+      <YoSupDip />
       <Integrations />
       <Commands />
       <Features />

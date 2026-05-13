@@ -481,6 +481,14 @@ body {
   width: 100%;
   height: auto;
 }
+.yosupdip-section {
+  padding: 4rem 0 6rem;
+  text-align: center;
+}
+.yosupdip-video {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 /* ── Commands ──────────────────────────────────────────── */
 .commands {
@@ -1836,5 +1844,142 @@ footer {
 
 .code-input-box:focus {
   border-color: var(--green);
+}
+
+/* ── Cypher Section ────────────────────────────────── */
+
+.cypher-section {
+  padding: 6rem 0;
+}
+
+.cypher-video {
+  max-width: 900px;
+  margin: 0 auto 4rem;
+}
+
+.cypher-how {
+  max-width: 700px;
+  margin: 0 auto 4rem;
+}
+
+.cypher-how-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.cypher-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cypher-step {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.cypher-step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--green);
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cypher-step h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 0.25rem;
+}
+
+.cypher-step p {
+  font-size: 0.9rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cypher-diagram {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.cypher-diagram-svg {
+  width: 100%;
+  height: auto;
+}
+
+.cypher-node rect {
+  transition: stroke-opacity 0.3s, fill 0.3s;
+}
+
+.cypher-diagram:hover .cypher-node rect {
+  stroke-opacity: 1;
+}
+
+@keyframes cypher-flow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -40; }
+}
+
+.cypher-flow-line {
+  opacity: 0.35;
+  animation: cypher-flow 2s linear infinite;
+}
+
+@keyframes cypher-ring-expand {
+  0% { r: 40; opacity: 0.35; stroke-width: 1.5; }
+  100% { r: 120; opacity: 0; stroke-width: 0.3; }
+}
+
+.cypher-ring {
+  animation: cypher-ring-expand 4.5s ease-out infinite;
+}
+
+.cypher-packet {
+  opacity: 0.8;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+@keyframes cypher-dot-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.cypher-dot-pulse {
+  animation: cypher-dot-blink 2s ease-in-out infinite;
+}
+
+@keyframes cypher-scale-glow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.35; }
+}
+
+.cypher-scale-text {
+  animation: cypher-scale-glow 3s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .cypher-diagram {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cypher-diagram-svg {
+    min-width: 600px;
+  }
 }
 

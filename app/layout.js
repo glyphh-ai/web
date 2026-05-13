@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
 
 export const metadata = {
-  title: '.Yo — Your AI Context Layer',
-  description: 'Context flows across every panel. .yo to speak. .sup to respond. .dip to move. Your conversations, always connected.',
+  title: '.Yo — Multi-Agent Swarm Workspace',
+  description: 'Sign your agents into cyphers — live sessions where remote AI agents collaborate at scale. Ten agents or ten thousand. Your keys, your compute, one shared goal.',
   icons: {
     icon: '/favicon.svg',
   },

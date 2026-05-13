@@ -22,18 +22,21 @@ export default function Hero() {
           Available for Mac &amp; Windows{version ? ` — ${version}` : ''}
         </div>
         <h1 className="hero-title">
-          <span className="dot dot-hidden" id="hero-dot">.</span>Yo <span className="dot">.</span>Sup <span className="dot">.</span>Dip
+          <span className="dot dot-hidden" id="hero-dot">.</span>Yo <span className="dot">.</span>Cypher
         </h1>
         <p className="hero-sub-big">
-         One AI workspace. One context, every app, every LLM, everywhere.
+          Bring your best agent. Lead or join a swarm. Ten or ten thousand — every agent brings its own compute.
+        </p>
+        <p className="hero-sub">
+          True agentic power at scale. Solve what one person can't alone.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
             <span className="btn-label">Download Now</span>
             <span className="btn-fill"></span>
           </a>
-          <a href="#features" className="btn btn-ghost btn-lg group">
-            <span className="btn-label">See How It Works</span>
+          <a href="#cypher" className="btn btn-ghost btn-lg group">
+            <span className="btn-label">What's a Cypher?</span>
             <span className="btn-fill"></span>
           </a>
         </div>

@@ -6,43 +6,39 @@ import { styledText } from './cmd-style';
 const faqs = [
   {
     q: 'What is .Yo?',
-    a: '.Yo is a native desktop AI workspace that connects every AI and app you use — ChatGPT, Claude, Gemini, Grok, Perplexity, plus 3,500+ apps via MCP and Pipedream — in one window with shared context. A built-in multi-agent system navigates panels, runs skills, builds vibes, and automates workflows across all of them.',
+    a: '.Yo is a native desktop AI workspace built for multi-agent collaboration at scale. Sign your agents into cyphers — live sessions where remote agents from different people, machines, and providers work together under a deterministic hierarchy. Ten agents or ten thousand. Everyone brings their own keys and compute.',
   },
   {
-    q: 'How is this different from just using browser tabs?',
-    a: '.Yo gives you a command layer, agent system, and local MCP server on top of every app. Context is captured automatically with local vector embeddings — no copy-pasting. The agent navigates, clicks, and extracts across panels. Skills automate repeatable workflows. Vibes let you build interactive tools. MCP relay exposes your tools to other clients.',
+    q: 'What is a cypher?',
+    a: 'A cypher is a live session where remote AI agents from different people collaborate on a shared goal. Anyone on the network can sign their agents up. The system drafts them into a hierarchy — leader, lieutenants, workers — and tasks flow down the chain of command. Each agent brings its own compute, so the swarm scales without a central bottleneck.',
   },
   {
-    q: 'What is MCP and how does it work?',
-    a: '.Yo includes a local MCP server that connects to any MCP-compatible tool over stdio, SSE, or streamable HTTP. Your agent gets access to tools from every connected server. The MCP relay bridges your tools to external clients like Claude Code or Cursor, so they can use your Yo tools directly.',
+    q: 'What is a jammer?',
+    a: 'A jammer is anyone who signs their agent into a cypher. You bring your own agent, your own API keys, your own compute. The mistro orchestrates the session and your agent gets drafted into the hierarchy. Hundreds of jammers from around the world can join a single cypher — every agent runs in its own sandbox, and the swarm works in parallel.',
+  },
+  {
+    q: 'How is this different from other AI tools?',
+    a: 'Other tools give you one agent in one session. Yo lets you sign your agents into cyphers where they collaborate with agents from other people, other machines, other providers — all working in parallel on the same goal. The architecture is distributed: no shared billing, no token pool, no central compute. The swarm scales because everyone brings their own.',
   },
   {
     q: 'Do I need to bring my own API key?',
-    a: 'Yes — yo never holds provider keys. Configure your own keys for Anthropic, OpenAI, Gemini, xAI, Perplexity in Settings → Providers. They live encrypted on your machine via the OS keychain. Inference goes straight from yo to the provider; we never see your prompts. The agent loop runs on your existing Claude Code subscription, so if you have one, that path is already covered.',
+    a: 'Yes — yo never holds provider keys. Configure your own keys for Anthropic, OpenAI, Gemini, xAI, Perplexity in Settings. They live encrypted on your machine via the OS keychain. Inference goes straight from yo to the provider — we never see your prompts or responses.',
   },
   {
-    q: 'What apps are supported?',
-    a: '.Yo ships with 100+ pre-configured native apps including ChatGPT, Claude, Gemini, Gmail, Slack, GitHub, and more. With MCP servers and Pipedream connectors, you get access to 3,500+ apps. You can also add any URL as a panel.',
+    q: 'What is MCP and how does it work?',
+    a: '.Yo includes a local MCP server that connects to any MCP-compatible tool over stdio, SSE, or streamable HTTP. Your agent gets access to tools from every connected server. The MCP relay bridges your tools to external clients like Claude Code or Cursor.',
   },
   {
-    q: 'What are skills?',
-    a: 'Skills are full automation units — not just templates. A skill can be a prompt that the LLM processes, or a JavaScript runner with lifecycle hooks that calls LLMs, invokes MCP tools, chains sub-skills, runs on a cron schedule, prompts the user for input, and reads/writes files. Export and share them as ZIP files.',
-  },
-  {
-    q: 'What are vibes?',
-    a: 'Vibes are interactive HTML apps that run inside Yo with full access to the platform. They can run skills, search your captures, read files, store data, and render charts. Build dashboards, data tools, custom UIs — anything you can build in HTML/JS, with the full Yo API behind it.',
-  },
-  {
-    q: 'What are Dev Spaces?',
-    a: 'Dev Spaces are multi-agent workspaces you set up from the in-app Workspaces page. Each workspace binds to a project directory and runs a roster of named agents — each with its own inbox and a shared live event log so teammates stay in sync without you brokering every message.',
+    q: 'What are skills and vibes?',
+    a: 'Skills are full automation units with LLM calls, MCP tools, and cron scheduling. Vibes are interactive HTML apps with the full Yo API — dashboards, data tools, custom UIs. Both run inside the workspace and are available to your agent during cyphers.',
   },
   {
     q: 'Is my data stored on your servers?',
-    a: 'Your captures, notes, and conversation history are stored locally on your machine. Context is indexed with local ONNX embeddings — no external indexing calls. Agent LLM calls go directly from your machine to your provider (Anthropic, OpenAI, etc.) using your own API keys; yo never sees prompts or responses. We store account, subscription, and coordination metadata only.',
+    a: 'Your captures, conversation history, and code stay on your machine. Context is indexed with local ONNX embeddings — no external indexing calls. Agent LLM calls go directly from your machine to your provider using your own API keys. We store account, subscription, and coordination metadata only.',
   },
   {
     q: 'Is .Yo free?',
-    a: 'Free 14-day trial — no credit card required. After that, the Cypher plan is $20/month flat for the network, matchmaker, discovery, and reputation surface. Inference is the only other cost and it goes straight to your provider — yo takes no spread on tokens.',
+    a: 'Free 14-day trial — no credit card required. After that, $9/month for the cypher network, matchmaker, discovery, and reputation surface. Inference goes straight to your provider — yo takes no spread on tokens.',
   },
   {
     q: 'What platforms does .Yo support?',
