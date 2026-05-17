@@ -443,7 +443,7 @@ export default function JumpingDot() {
       if (!dotHidden) {
         // Dot glow
         const glowGrad = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, DOT_RADIUS * 3.5);
-        glowGrad.addColorStop(0, 'rgba(37, 199, 94, 0.18)');
+        glowGrad.addColorStop(0, 'rgba(37, 199, 94, 0.09)');
         glowGrad.addColorStop(1, 'rgba(37, 199, 94, 0)');
         ctx.beginPath();
         ctx.arc(dotX, dotY, DOT_RADIUS * 3.5, 0, Math.PI * 2);
