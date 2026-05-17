@@ -1606,6 +1606,15 @@ footer {
     padding: 6rem 1.5rem 3rem;
   }
 
+  /* Desktop pulls the video up into the hero's reserved 22rem bottom
+     padding via margin-top: -18rem. Mobile shrinks that padding to 3rem,
+     so the overlap dragged the video straight over the headline and CTAs.
+     Reset it on mobile — the video just flows below the hero instead. */
+  .hero-video {
+    margin-top: 0;
+    margin-bottom: 3rem;
+  }
+
   .preview-window {
     border-radius: var(--radius);
   }
@@ -1624,6 +1633,17 @@ footer {
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  /* Uniform vertical rhythm across sections on mobile — desktop uses a
+     mix of 4/6/8rem, which read as uneven gaps on a narrow screen. */
+  .commands,
+  .command-section,
+  .integrations,
+  .pricing,
+  .cypher-section,
+  .yosupdip-section {
+    padding: 3.5rem 0;
   }
 }
 
