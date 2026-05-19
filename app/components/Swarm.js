@@ -145,7 +145,7 @@ export default function Swarm() {
       <div className="container">
         <div className="command-section" style={{ padding: 0 }}>
           <h2 className="command-hero-title reveal">
-            <span className="dot dot-hidden" data-dot-anchor id="the-swarm">.</span>The <span className="dot">.</span>Swarm
+            <span className="dot dot-hidden" data-dot-anchor id="cmd-swarm">.</span>Swarm
           </h2>
           <p className="command-hero-tagline reveal" style={{ marginBottom: 0 }}>Many agents, one goal — all on your machine.</p>
         </div>

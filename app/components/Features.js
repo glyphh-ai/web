@@ -2,24 +2,14 @@ import { styledText } from './cmd-style';
 
 const features = [
   {
-    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>,
-    title: 'Swarms',
-    desc: 'Spin up a swarm of your own agents to work a goal together. A leader decomposes it and assigns tasks down a deterministic hierarchy; the rest execute and report back over an in-process bus. All local — no server, no shared billing.',
+    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
+    title: 'Always-On Context',
+    desc: 'Every panel you open collects context in the background with local vector embeddings. No manual capture. No lost conversations. It is just there when you .yo.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
     title: '.yo Agent',
-    desc: 'Your AI workspace agent. Navigates panels, runs shell commands, reads and writes files, and spins up swarms — powered by Claude with every MCP tool you have connected. The human layer for every swarm.',
-  },
-  {
-    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-    title: 'Agent Library',
-    desc: 'Build a roster of agents — each with its own role, model, tools, and guardrails. Run them read-only for a one-shot take or as a full agent loop with file and shell access. The swarm draws its team straight from your library.',
-  },
-  {
-    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
-    title: 'Always-On Context',
-    desc: 'Every panel you open collects context in the background with local vector embeddings. No manual capture. No lost conversations. It is just there when you .yo.',
+    desc: 'A single capable agent that navigates panels, runs shell commands, reads and writes files, and orchestrates tasks across your entire workspace — powered by Claude with every MCP tool you have connected.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>,
@@ -28,9 +18,19 @@ const features = [
     badge: 'Pro',
   },
   {
+    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+    title: 'Swarms',
+    desc: 'When one agent is not enough, the .yo agent spins up a swarm — a roster of your own agents that split a goal, work it in parallel, and report back. All local; their activity streams into your conversation.',
+  },
+  {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 3v18M3 12h18M5.63 5.63l12.74 12.74M18.37 5.63L5.63 18.37"/></svg>,
-    title: 'Skills & Vibes',
-    desc: 'Skills are full automation units with LLM calls, MCP tools, and cron scheduling. Vibes are interactive HTML apps with the full Yo API — dashboards, data tools, custom UIs.',
+    title: 'Skills',
+    desc: 'More than templates. Skills are full automation units — prompt-based or JavaScript runners with LLM calls, MCP tool invocation, cron scheduling, data stores, and sub-skill chaining.',
+  },
+  {
+    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>,
+    title: 'Vibes',
+    desc: 'Build interactive HTML apps inside Yo. Vibes get the full API — run skills, search captures, read files, store data, render charts. Dashboards, data tools, custom UIs.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h18"/></svg>,
@@ -47,6 +47,12 @@ const features = [
     title: 'Bring your own keys',
     desc: 'No token markup. Configure API keys for Anthropic, OpenAI, Gemini, xAI, Perplexity in Settings — they live encrypted on your machine and inference goes straight to the provider.',
   },
+  {
+    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>,
+    title: 'Cloud Sync',
+    desc: 'Sync your library and skills across devices. Everything stays up to date, everywhere you work.',
+    badge: 'Pro',
+  },
 ];
 
 export default function Features() {
@@ -56,7 +62,7 @@ export default function Features() {
         <div className="section-label">{'{'}
           <span className="accent">EVERYTHING YOU NEED</span>
           {'}'}</div>
-        <h2 className="section-title">Built for the agent swarm era</h2>
+        <h2 className="section-title">Built for anyone who uses AI daily</h2>
         <div className="grid-3">
           {features.map((f, i) => (
             <div key={i} className="feature reveal">

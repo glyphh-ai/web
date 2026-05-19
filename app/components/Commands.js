@@ -26,7 +26,7 @@ const commands = [
     tagline: 'Move. Your context moves with you.',
     desc: 'Drop into a new panel and your context travels with you. .yo again and you are already in the conversation — no setup, no copy-paste, no session to manage. The app is the context.',
     example: '.dip slack',
-    // video: '/dip-yousup.mp4',
+    video: '/dip-yousup.mp4',
   },
   {
     id: 'cmd-drip',

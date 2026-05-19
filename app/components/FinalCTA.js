@@ -23,8 +23,8 @@ export default function FinalCTA() {
     <section className="final-cta" id="get-started">
       <div className="container">
         <div className="cta-card" ref={cardRef}>
-          <h2>Put your agents to work<span className="dot">.</span> Spin up a swarm<span className="dot">.</span></h2>
-          <p>Download <span className="compose-cmd">.Yo</span> and put your agents to work in a swarm today.</p>
+          <h2>Your context<span className="dot">.</span> Every panel<span className="dot">.</span> Every conversation<span className="dot">.</span></h2>
+          <p>Download <span className="compose-cmd">.Yo</span> and start working across every AI today.</p>
           <div className="cta-buttons">
             <a href="#download" className="btn btn-white btn-lg group">
               <span className="btn-label">Download for Mac — Free</span>

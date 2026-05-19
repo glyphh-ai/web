@@ -6,39 +6,47 @@ import { styledText } from './cmd-style';
 const faqs = [
   {
     q: 'What is .Yo?',
-    a: '.Yo is a native desktop AI workspace built for multi-agent work. Tell the .yo agent a goal and it spins up a swarm — a roster of your own agents that decompose the work, divide it down a deterministic hierarchy, and execute in parallel. All local: your machine, your API keys, your sandbox.',
+    a: '.Yo is a native desktop AI workspace that connects every AI and app you use — ChatGPT, Claude, Gemini, Grok, Perplexity, plus 3,500+ apps via MCP and Pipedream — in one window with shared context. A built-in agent navigates panels, runs skills, builds vibes, and can spin up a swarm of agents to automate work across all of them.',
   },
   {
-    q: 'What is a swarm?',
-    a: 'A swarm is a team of your agents working one goal together. The first agent leads — it breaks the goal into tasks and assigns them to the rest over an in-process bus. Workers accept, execute, report status, and complete; deep work nests under sub-leaders. It all runs locally and streams inline into your .yo conversation.',
+    q: 'How is this different from just using browser tabs?',
+    a: '.Yo gives you a command layer, agent system, and local MCP server on top of every app. Context is captured automatically with local vector embeddings — no copy-pasting. The agent navigates, clicks, and extracts across panels. Skills automate repeatable workflows. Vibes let you build interactive tools. MCP relay exposes your tools to other clients.',
   },
   {
-    q: 'How do agents in a swarm run?',
-    a: 'Each agent runs from your local Agents library with its own role, model, tools, and guardrails. An agent can run read-only — a one-shot model turn for a take or a debate — or as a full agent loop with file and shell access. The swarm picks the right mix for the goal.',
-  },
-  {
-    q: 'How is this different from other AI tools?',
-    a: 'Other tools give you one agent in one session. Yo lets the .yo agent spin up a whole swarm — a leader plus workers that decompose a goal and execute it in parallel, coordinating over a local bus. No server round-trip, no shared token pool: every agent runs on your machine with your keys.',
-  },
-  {
-    q: 'Do I need to bring my own API key?',
-    a: 'Yes — yo never holds provider keys. Configure your own keys for Anthropic, OpenAI, Gemini, xAI, Perplexity in Settings. They live encrypted on your machine via the OS keychain. Inference goes straight from yo to the provider — we never see your prompts or responses.',
+    q: 'How does context follow me?',
+    a: 'Every panel you open is captured in the background and indexed with local vector embeddings. When you .yo, the agent already has the context from everything you have been doing — across apps, across panels. .dip to a new panel and it travels with you. No copy-paste, no re-explaining, no session to manage.',
   },
   {
     q: 'What is MCP and how does it work?',
-    a: '.Yo includes a local MCP server that connects to any MCP-compatible tool over stdio, SSE, or streamable HTTP. Your agent gets access to tools from every connected server. The MCP relay bridges your tools to external clients like Claude Code or Cursor.',
+    a: '.Yo includes a local MCP server that connects to any MCP-compatible tool over stdio, SSE, or streamable HTTP. Your agent gets access to tools from every connected server. The MCP relay bridges your tools to external clients like Claude Code or Cursor, so they can use your Yo tools directly.',
   },
   {
-    q: 'What are skills and vibes?',
-    a: 'Skills are full automation units with LLM calls, MCP tools, and cron scheduling. Vibes are interactive HTML apps with the full Yo API — dashboards, data tools, custom UIs. Both run inside the workspace and are available to your agents.',
+    q: 'Do I need to bring my own API key?',
+    a: 'Yes — yo never holds provider keys. Configure your own keys for Anthropic, OpenAI, Gemini, xAI, Perplexity in Settings → Providers. They live encrypted on your machine via the OS keychain. Inference goes straight from yo to the provider; we never see your prompts. The agent loop runs on your existing Claude Code subscription, so if you have one, that path is already covered.',
+  },
+  {
+    q: 'What apps are supported?',
+    a: '.Yo ships with 100+ pre-configured native apps including ChatGPT, Claude, Gemini, Gmail, Slack, GitHub, and more. With MCP servers and Pipedream connectors, you get access to 3,500+ apps. You can also add any URL as a panel.',
+  },
+  {
+    q: 'What are skills?',
+    a: 'Skills are full automation units — not just templates. A skill can be a prompt that the LLM processes, or a JavaScript runner with lifecycle hooks that calls LLMs, invokes MCP tools, chains sub-skills, runs on a cron schedule, prompts the user for input, and reads/writes files. Export and share them as ZIP files.',
+  },
+  {
+    q: 'What are vibes?',
+    a: 'Vibes are interactive HTML apps that run inside Yo with full access to the platform. They can run skills, search your captures, read files, store data, and render charts. Build dashboards, data tools, custom UIs — anything you can build in HTML/JS, with the full Yo API behind it.',
+  },
+  {
+    q: 'What is a swarm?',
+    a: 'When one agent is not enough, the .yo agent can spin up a swarm — a roster of your own agents that split a goal, work it in parallel, and report back. A leader decomposes the goal and assigns tasks over a local bus; the rest execute. It all runs on your machine and streams inline into your conversation.',
   },
   {
     q: 'Is my data stored on your servers?',
-    a: 'Your captures, conversation history, and code stay on your machine. Context is indexed with local ONNX embeddings — no external indexing calls. Agent LLM calls go directly from your machine to your provider using your own API keys. We store account, subscription, and coordination metadata only.',
+    a: 'Your captures, notes, and conversation history are stored locally on your machine. Context is indexed with local ONNX embeddings — no external indexing calls. Agent LLM calls go directly from your machine to your provider (Anthropic, OpenAI, etc.) using your own API keys; yo never sees prompts or responses. We store account and subscription metadata only.',
   },
   {
     q: 'Is .Yo free?',
-    a: 'Free 14-day trial — no credit card required. After that, $9/month for the full workspace — swarms, MCP, skills, and vibes. Inference goes straight to your provider — yo takes no spread on tokens.',
+    a: 'Free 14-day trial — no credit card required. After that, $9/month for the full workspace — agent, swarms, MCP, skills, and vibes. Inference is the only other cost and it goes straight to your provider — yo takes no spread on tokens.',
   },
   {
     q: 'What platforms does .Yo support?',
