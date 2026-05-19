@@ -7,7 +7,7 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 
 export const metadata = {
   title: '.Yo — Multi-Agent Swarm Workspace',
-  description: 'Sign your agents into cyphers — live sessions where remote AI agents collaborate at scale. Ten agents or ten thousand. Your keys, your compute, one shared goal.',
+  description: 'Tell the .yo agent a goal and it spins up a swarm — a team of your own agents that decompose the work and execute in parallel. All local: your machine, your keys, your sandbox.',
   icons: {
     icon: '/favicon.svg',
   },

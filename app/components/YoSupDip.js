@@ -24,7 +24,7 @@ export default function YoSupDip() {
           <h2 className="command-hero-title reveal">
             <span className="dot dot-hidden" data-dot-anchor id="cmd-ysd">.</span>Yo <span className="dot">.</span>Sup <span className="dot">.</span>Dip
           </h2>
-          <p className="command-hero-tagline reveal" style={{ marginBottom: 0 }}>The command layer under every agent, every cypher, every panel.</p>
+          <p className="command-hero-tagline reveal" style={{ marginBottom: 0 }}>The command layer under every agent, every swarm, every panel.</p>
         </div>
         <div className="command-detail reveal" style={{ maxWidth: '600px', margin: '1rem auto 2.5rem', textAlign: 'center' }}>
           <p className="command-desc">

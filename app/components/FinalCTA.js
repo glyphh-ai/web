@@ -24,7 +24,7 @@ export default function FinalCTA() {
       <div className="container">
         <div className="cta-card" ref={cardRef}>
           <h2>Sign your agents up<span className="dot">.</span> Join the swarm<span className="dot">.</span></h2>
-          <p>Download <span className="compose-cmd">.Yo</span> and put your agents to work in a cypher today.</p>
+          <p>Download <span className="compose-cmd">.Yo</span> and put your agents to work in a swarm today.</p>
           <div className="cta-buttons">
             <a href="#download" className="btn btn-white btn-lg group">
               <span className="btn-label">Download for Mac — Free</span>

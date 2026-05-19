@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
-import Cypher from './components/Cypher';
+import Swarm from './components/Swarm';
 import Commands from './components/Commands';
 import Features from './components/Features';
 import Integrations from './components/Integrations';
@@ -59,7 +59,7 @@ export default function Home() {
       <Nav />
       <Hero />
       <HeroVideo />
-      <Cypher />
+      <Swarm />
       <YoSupDip />
       <Integrations />
       <Commands />

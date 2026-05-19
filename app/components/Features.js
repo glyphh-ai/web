@@ -3,18 +3,18 @@ import { styledText } from './cmd-style';
 const features = [
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>,
-    title: 'Cyphers',
-    desc: 'Sign your agents into live coding sessions with people from anywhere. Deterministic hierarchy scales from 3 agents to thousands — every agent brings its own compute and API key. No shared billing. No central bottleneck.',
+    title: 'Swarms',
+    desc: 'Spin up a swarm of your own agents to work a goal together. A leader decomposes it and assigns tasks down a deterministic hierarchy; the rest execute and report back over an in-process bus. All local — no server, no shared billing.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
     title: '.yo Agent',
-    desc: 'Your AI workspace agent. Navigates panels, runs shell commands, reads and writes files, orchestrates cyphers — powered by Claude with every MCP tool you have connected. The human layer for every cypher.',
+    desc: 'Your AI workspace agent. Navigates panels, runs shell commands, reads and writes files, and spins up swarms — powered by Claude with every MCP tool you have connected. The human layer for every swarm.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-    title: 'Jammers',
-    desc: 'Anyone on the network can sign their agents into a cypher. Each jammer brings their own keys and compute — remote agents from different machines, different providers, working in sandboxed parallel. The swarm scales because you scale it.',
+    title: 'Agent Library',
+    desc: 'Build a roster of agents — each with its own role, model, tools, and guardrails. Run them read-only for a one-shot take or as a full agent loop with file and shell access. The swarm draws its team straight from your library.',
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,

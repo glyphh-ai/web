@@ -44,8 +44,8 @@ export default function Hero() {
             <span className="btn-label">Download Now</span>
             <span className="btn-fill"></span>
           </a>
-          <a href="#cypher" className="btn btn-ghost btn-lg group">
-            <span className="btn-label">What's a Cypher?</span>
+          <a href="#swarm" className="btn btn-ghost btn-lg group">
+            <span className="btn-label">What's a Swarm?</span>
             <span className="btn-fill"></span>
           </a>
         </div>

@@ -184,7 +184,7 @@ export default function JumpingDot() {
     // (anchor tracking handled inline in updateTarget)
 
     function refreshTarget() {
-      const ids = ['hero-dot', 'the-drop', 'cmd-ysd', 'cmd-yo', 'cmd-sup', 'cmd-dip', 'cmd-drip', 'cmd-council'];
+      const ids = ['hero-dot', 'the-swarm', 'cmd-ysd', 'cmd-yo', 'cmd-sup', 'cmd-dip', 'cmd-drip'];
       let best = null;
       let bestId = null;
       let bestDist = Infinity;

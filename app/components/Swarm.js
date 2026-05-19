@@ -1,7 +1,8 @@
 'use client';
 
-function CypherDiagram() {
-
+// Note: keeps the `cypher-*` class names — they're the section's internal
+// CSS hooks in globals.css. Only the copy and anchors changed.
+function SwarmDiagram() {
   return (
     <div className="cypher-diagram">
       <svg viewBox="0 0 800 680" fill="none" xmlns="http://www.w3.org/2000/svg" className="cypher-diagram-svg">
@@ -15,12 +16,6 @@ function CypherDiagram() {
           <filter id="glow-b" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="6" result="b" />
             <feFlood floodColor="#64b5f6" floodOpacity="0.3" result="c" />
-            <feComposite in="c" in2="b" operator="in" result="g" />
-            <feMerge><feMergeNode in="g" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-          <filter id="glow-p" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" result="b" />
-            <feFlood floodColor="#A855F7" floodOpacity="0.3" result="c" />
             <feComposite in="c" in2="b" operator="in" result="g" />
             <feMerge><feMergeNode in="g" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
@@ -50,7 +45,7 @@ function CypherDiagram() {
         <path d="M580,400 Q530,430 480,460" stroke="#4caf50" strokeWidth="1.5" strokeDasharray="6 10" className="cypher-flow-line" style={{ animationDelay: '1.3s' }} />
         <path d="M580,400 Q630,430 680,460" stroke="#4caf50" strokeWidth="1.5" strokeDasharray="6 10" className="cypher-flow-line" style={{ animationDelay: '1.5s' }} />
 
-        {/* Data packets traveling down hierarchy */}
+        {/* Data packets traveling down the hierarchy */}
         <circle r="3.5" fill="#25C75E" className="cypher-packet">
           <animateMotion dur="2s" repeatCount="indefinite" path="M400,90 L400,190" />
         </circle>
@@ -73,31 +68,20 @@ function CypherDiagram() {
           <animateMotion dur="2s" repeatCount="indefinite" begin="2.3s" path="M580,400 Q630,430 680,460" />
         </circle>
 
-        {/* Mistro pulsing rings */}
+        {/* .yo agent pulsing rings */}
         <circle cx="400" cy="60" r="40" fill="none" stroke="#25C75E" strokeWidth="1" className="cypher-ring" />
         <circle cx="400" cy="60" r="40" fill="none" stroke="#25C75E" strokeWidth="1" className="cypher-ring" style={{ animationDelay: '1.5s' }} />
         <circle cx="400" cy="60" r="40" fill="none" stroke="#25C75E" strokeWidth="1" className="cypher-ring" style={{ animationDelay: '3s' }} />
 
-        {/* Observer → mistro */}
-        <path d="M630,130 Q545,95 460,60" stroke="#A855F7" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
-        <circle r="2" fill="#A855F7" opacity="0.6">
-          <animateMotion dur="3s" repeatCount="indefinite" path="M630,130 Q545,95 460,60" />
-        </circle>
-
-        {/* .yo agent → mistro */}
-        <path d="M170,130 Q255,95 340,60" stroke="#25C75E" strokeWidth="1" strokeDasharray="4 4" opacity="0.3" />
-        <circle r="2" fill="#25C75E" opacity="0.6">
-          <animateMotion dur="3s" repeatCount="indefinite" begin="0.8s" path="M170,130 Q255,95 340,60" />
-        </circle>
-
         {/* ── Nodes ── */}
 
-        {/* Mistro */}
+        {/* .yo agent — spawns the swarm */}
         <g className="cypher-node" filter="url(#glow-g)">
-          <rect x="340" y="30" width="120" height="60" rx="14" fill="#0a0a0a" stroke="#25C75E" strokeWidth="2" />
-          <circle cx="370" cy="60" r="8" fill="#25C75E" opacity="0.12" />
-          <circle cx="370" cy="60" r="4" fill="#25C75E" className="cypher-dot-pulse" />
-          <text x="390" y="65" fill="#e8e8e8" fontSize="14" fontWeight="600" fontFamily="var(--font-mono)">mistro</text>
+          <rect x="332" y="30" width="136" height="60" rx="14" fill="#0a0a0a" stroke="#25C75E" strokeWidth="2" />
+          <circle cx="364" cy="60" r="8" fill="#25C75E" opacity="0.12" />
+          <circle cx="364" cy="60" r="4" fill="#25C75E" className="cypher-dot-pulse" />
+          <text x="382" y="58" fill="#e8e8e8" fontSize="13" fontWeight="600" fontFamily="var(--font-mono)">.yo agent</text>
+          <text x="382" y="73" fill="#555" fontSize="9" fontFamily="var(--font-mono)">spawns the swarm</text>
         </g>
 
         {/* Leader */}
@@ -108,20 +92,20 @@ function CypherDiagram() {
           <text x="345" y="242" fill="#555" fontSize="9" fontFamily="var(--font-mono)">decomposes goal</text>
         </g>
 
-        {/* Lieutenant Left */}
+        {/* Sub-leader Left */}
         <g className="cypher-node" filter="url(#glow-b)">
           <rect x="145" y="340" width="150" height="60" rx="14" fill="#0a0a0a" stroke="#64b5f6" strokeWidth="1.5" />
           <circle cx="175" cy="370" r="6" fill="#64b5f6" className="cypher-dot-pulse" style={{ animationDelay: '1s' }} />
-          <text x="190" y="375" fill="#e8e8e8" fontSize="13" fontWeight="500" fontFamily="var(--font-mono)">lieutenant</text>
-          <text x="160" y="392" fill="#555" fontSize="9" fontFamily="var(--font-mono)">coordinates team</text>
+          <text x="190" y="375" fill="#e8e8e8" fontSize="13" fontWeight="500" fontFamily="var(--font-mono)">sub-leader</text>
+          <text x="160" y="392" fill="#555" fontSize="9" fontFamily="var(--font-mono)">coordinates branch</text>
         </g>
 
-        {/* Lieutenant Right */}
+        {/* Sub-leader Right */}
         <g className="cypher-node" filter="url(#glow-b)">
           <rect x="505" y="340" width="150" height="60" rx="14" fill="#0a0a0a" stroke="#64b5f6" strokeWidth="1.5" />
           <circle cx="535" cy="370" r="6" fill="#64b5f6" className="cypher-dot-pulse" style={{ animationDelay: '1.2s' }} />
-          <text x="550" y="375" fill="#e8e8e8" fontSize="13" fontWeight="500" fontFamily="var(--font-mono)">lieutenant</text>
-          <text x="520" y="392" fill="#555" fontSize="9" fontFamily="var(--font-mono)">coordinates team</text>
+          <text x="550" y="375" fill="#e8e8e8" fontSize="13" fontWeight="500" fontFamily="var(--font-mono)">sub-leader</text>
+          <text x="520" y="392" fill="#555" fontSize="9" fontFamily="var(--font-mono)">coordinates branch</text>
         </g>
 
         {/* Workers */}
@@ -133,7 +117,7 @@ function CypherDiagram() {
           </g>
         ))}
 
-        {/* Fading worker rows suggesting scale */}
+        {/* Fading worker rows suggesting depth */}
         {[[100, 530, 80, 38, 0.5], [240, 530, 80, 38, 0.5], [380, 530, 80, 38, 0.5], [520, 530, 80, 38, 0.5], [660, 530, 80, 38, 0.5]].map(([x, y, w, h, op], i) => (
           <g key={`r1-${i}`} opacity={op}>
             <rect x={x} y={y} width={w} height={h} rx="8" fill="none" stroke="#1a1a1a" strokeWidth="1" />
@@ -147,48 +131,30 @@ function CypherDiagram() {
             <circle cx={x + 12} cy={y + h / 2} r="2" fill="#4caf50" className="cypher-dot-pulse" style={{ animationDelay: `${2.5 + i * 0.15}s` }} />
           </g>
         ))}
-        {[[200, 618, 40, 22, 0.12], [320, 618, 40, 22, 0.12], [440, 618, 40, 22, 0.12], [560, 618, 40, 22, 0.12]].map(([x, y, w, h, op], i) => (
-          <g key={`r3-${i}`} opacity={op}>
-            <rect x={x} y={y} width={w} height={h} rx="5" fill="none" stroke="#111" strokeWidth="1" />
-          </g>
-        ))}
         <text x="400" y="660" textAnchor="middle" fill="#25C75E" fontSize="12" fontWeight="500" fontFamily="var(--font-mono)" className="cypher-scale-text">
-          + thousands more — every agent brings its own compute
+          all local — your machine, your keys, your agents
         </text>
-
-        {/* Observer bubble */}
-        <g className="cypher-node" filter="url(#glow-p)">
-          <rect x="630" y="100" width="130" height="50" rx="10" fill="#0a0a0a" stroke="#A855F7" strokeWidth="1" strokeDasharray="4 3" />
-          <text x="652" y="122" fill="#A855F7" fontSize="10" fontFamily="var(--font-mono)">observers</text>
-          <text x="652" y="138" fill="#555" fontSize="9" fontFamily="var(--font-mono)">.chat .drip</text>
-        </g>
-
-        {/* .yo agent bubble */}
-        <g className="cypher-node" filter="url(#glow-g)">
-          <rect x="40" y="100" width="130" height="50" rx="10" fill="#0a0a0a" stroke="#25C75E" strokeWidth="1" strokeDasharray="4 3" />
-          <text x="58" y="122" fill="#25C75E" fontSize="10" fontFamily="var(--font-mono)">.yo agent</text>
-          <text x="58" y="138" fill="#555" fontSize="9" fontFamily="var(--font-mono)">orchestrator</text>
-        </g>
       </svg>
     </div>
   );
 }
 
-export default function Cypher() {
+export default function Swarm() {
   return (
-    <section className="cypher-section" id="cypher">
+    <section className="cypher-section" id="swarm">
       <div className="container">
         <div className="command-section" style={{ padding: 0 }}>
           <h2 className="command-hero-title reveal">
-            <span className="dot dot-hidden" data-dot-anchor id="the-drop">.</span>The <span className="dot">.</span>Drop
+            <span className="dot dot-hidden" data-dot-anchor id="the-swarm">.</span>The <span className="dot">.</span>Swarm
           </h2>
-          <p className="command-hero-tagline reveal" style={{ marginBottom: 0 }}>Remote agents, one cypher.</p>
+          <p className="command-hero-tagline reveal" style={{ marginBottom: 0 }}>Many agents, one goal — all on your machine.</p>
         </div>
-        <p className="section-subtitle reveal" style={{ maxWidth: '700px', margin: '1rem auto 3rem' }}>
-          People from anywhere sign their agents into a cypher — a live session where AI agents
-          collaborate under a deterministic hierarchy. One mistro leads. Agents draft into roles and
-          coordinate through a chain of command. Ten agents or ten thousand — the architecture scales
-          because every agent brings its own compute. Your keys. Your sandbox. One shared goal.
+        <p className="section-subtitle reveal" style={{ maxWidth: '720px', margin: '1rem auto 3rem' }}>
+          Tell the <span className="dot">.</span>yo agent what you want and it spins up a swarm — a roster
+          of your own agents working the goal together. A leader decomposes it and assigns tasks
+          over an in-process bus; the rest execute and report back. No server, no sign-ups, no shared
+          billing. Your agents, your API keys, your sandbox — and the whole thing streams inline as
+          it happens.
         </p>
 
         <div className="cypher-how reveal">
@@ -197,39 +163,40 @@ export default function Cypher() {
             <div className="cypher-step">
               <div className="cypher-step-num">1</div>
               <div>
-                <h4>Post a cypher</h4>
-                <p>Define the goal — build a feature, ship a project, fix a codebase.
-                Anyone on the network can sign their agents up to join.</p>
+                <h4>Set the goal</h4>
+                <p>Switch the <span className="dot">.</span>yo agent into swarm mode and state what you
+                want — research a topic, refactor a module, ship a feature. It picks the right agents
+                from your library.</p>
               </div>
             </div>
             <div className="cypher-step">
               <div className="cypher-step-num">2</div>
               <div>
-                <h4>Agents draft into roles</h4>
-                <p>Remote agents from different people, different machines, different providers
-                are assigned a hierarchy — leader, lieutenants, workers. Tasks flow down the chain.</p>
+                <h4>The leader decomposes</h4>
+                <p>The first agent leads — it breaks the goal into concrete tasks and assigns one to
+                each worker over the bus. Deep work nests under sub-leaders.</p>
               </div>
             </div>
             <div className="cypher-step">
               <div className="cypher-step-num">3</div>
               <div>
-                <h4>Swarm in parallel</h4>
-                <p>Every agent brings its own compute and API key. Hundreds or thousands of
-                agents working in sandboxed parallel — no shared billing, no central bottleneck.</p>
+                <h4>Agents work in parallel</h4>
+                <p>Each agent runs locally — read-only for a one-shot take, or a full agent loop with
+                tools and files. They coordinate, accept, report, and complete over the bus.</p>
               </div>
             </div>
             <div className="cypher-step">
               <div className="cypher-step-num">4</div>
               <div>
-                <h4>Ship together</h4>
-                <p>Code merges to a shared repo. The mistro watches progress in real-time.
-                Contributors chat, drip effects, and wrap the cypher when the goal is met.</p>
+                <h4>Watch it land</h4>
+                <p>Every assignment, message, and result streams inline into your <span className="dot">.</span>yo
+                conversation. The leader consolidates, and the work hits your files.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <CypherDiagram />
+        <SwarmDiagram />
       </div>
     </section>
   );

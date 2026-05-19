@@ -36,20 +36,12 @@ const commands = [
     example: '.drip 3 fireworks, hearts, cat',
     video: '/drip-yosup.mp4',
   },
-  {
-    id: 'cmd-council',
-    word: 'Council',
-    tagline: 'Multi-model debate.',
-    desc: "Convene a council of LLMs to debate a topic. Name the models you want, then state the prompt. The .yo agent moderates rounds, and you get diverse perspectives from different providers.",
-    example: '.council grok claude gemini what came first the chicken or egg',
-    video: '/council-yousup.mp4',
-  },
 ];
 
 const composeExamples = [
-  { tokens: [{ cmd: '.council', arg: 'grok claude gemini' }, { cmd: '', arg: 'what came first the chicken or egg' }], gloss: 'three models debate a question' },
+  { tokens: [{ cmd: '.dip', arg: 'slack' }, { cmd: '.yo', arg: 'summarize the thread' }], gloss: 'jump to Slack, pull the thread into context' },
   { tokens: [{ cmd: '.dip', arg: 'notion' }, { cmd: '.drip', arg: '5 hearts' }], gloss: 'switch to Notion, drop five hearts' },
-  { tokens: [{ cmd: '.dip', arg: 'linear' }, { cmd: '.drip', arg: 'fireworks' }, { cmd: '.council', arg: 'claude gemini should we use Postgres' }], gloss: 'ship it, celebrate, get a second opinion' },
+  { tokens: [{ cmd: '.dip', arg: 'linear' }, { cmd: '.drip', arg: 'fireworks' }], gloss: 'ship it, then celebrate' },
 ];
 
 function renderExample(text) {
