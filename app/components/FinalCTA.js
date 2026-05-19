@@ -23,7 +23,7 @@ export default function FinalCTA() {
     <section className="final-cta" id="get-started">
       <div className="container">
         <div className="cta-card" ref={cardRef}>
-          <h2>Sign your agents up<span className="dot">.</span> Join the swarm<span className="dot">.</span></h2>
+          <h2>Put your agents to work<span className="dot">.</span> Spin up a swarm<span className="dot">.</span></h2>
           <p>Download <span className="compose-cmd">.Yo</span> and put your agents to work in a swarm today.</p>
           <div className="cta-buttons">
             <a href="#download" className="btn btn-white btn-lg group">

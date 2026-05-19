@@ -6,7 +6,7 @@ export default function Pricing() {
       <div className="container">
         <h2 className="section-title">Simple, transparent pricing</h2>
         <p className="section-subtitle">
-          Free 14-day trial. After that, $9/mo for the network &mdash; you bring your own provider keys, so there's no token spread.
+          Free 14-day trial. After that, $9/mo for the full workspace &mdash; you bring your own provider keys, so there's no token spread.
         </p>
 
         <div className="pricing-grid pricing-grid-two">

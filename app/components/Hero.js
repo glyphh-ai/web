@@ -32,12 +32,13 @@ export default function Hero() {
           Yo <span className="dot">.</span>Sup <span className="dot">.</span>Dip
         </h1>
         <p className="hero-sub-big">
-          Bring your best agent. The swarm brings the rest.
+          One agent, or a swarm of them — all yours, all local.
         </p>
         <p className="hero-sub">
-          Solve what one person can't. Ten or ten thousand agents on one goal —
-          each bringing its own compute. Or work solo: one AI workspace, your
-          context everywhere.
+          Solve what one agent can't. Tell the .yo agent a goal and it spins up
+          a swarm — your own agents, split across the work and running in
+          parallel on your machine. Or work solo: one AI workspace, your context
+          everywhere.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
