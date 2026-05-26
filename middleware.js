@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.yosup.dev';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.dotyo.dev';
 
 export function middleware(request) {
   const { pathname } = request.nextUrl;

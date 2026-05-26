@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { getUser, clearTokens } from '../lib/api';
 
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.yosup.dev';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.dotyo.dev';
 
 export default function AdminLayout({ children }) {
   const [ready, setReady] = useState(false);

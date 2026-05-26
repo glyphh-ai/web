@@ -1,4 +1,4 @@
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.yosup.dev';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.dotyo.dev';
 
 export default function Pricing() {
   return (
@@ -47,7 +47,7 @@ export default function Pricing() {
 
         <p className="pricing-note">Cancel anytime.</p>
         <p className="pricing-tax">Prices are exclusive of applicable taxes and duties, including VAT and applicable sales tax.</p>
-        <p className="pricing-enterprise">Need unlimited seats or dedicated support? <a href="mailto:sales@yosup.dev">Contact sales</a></p>
+        <p className="pricing-enterprise">Need unlimited seats or dedicated support? <a href="mailto:sales@dotyo.dev">Contact sales</a></p>
       </div>
     </section>
   );
