@@ -437,7 +437,8 @@ body {
    backspaced. The cursor is a steady blink in brand green. */
 .hero-title-type {
   max-width: 28ch;
-  min-height: calc(1.05em * 3);
+  min-height: calc(1.05em * 2);
+  margin-bottom: 1rem;
 }
 .typewriter {
   display: inline;

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 const PREFIX = 'Productivity ';
-const SUFFIX = ' for technology professionals.';
+const SUFFIX = ' across every app you use.';
 const VERBS = ['created', 'amplified', 'rebuilt', 'automated', 're-imagined', 'supercharged'];
 
 function TypewriterLine() {
