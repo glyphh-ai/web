@@ -105,12 +105,17 @@ body {
 }
 
 .nav-logo {
-  font-family: var(--font-mono);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--white);
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: -0.02em;
+  /* Click target / focus ring lives on the anchor; the image inside is
+     sized for the chrome and stays crisp on retina via the source PNG's
+     own resolution. */
+}
+.nav-logo img {
+  height: 48px;
+  width: auto;
+  display: block;
 }
 
 .dot {

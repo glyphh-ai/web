@@ -24,7 +24,9 @@ export default function Nav() {
     <>
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
         <div className="nav-inner">
-          <a href="/" className="nav-logo"><span className="dot">.</span>Yo</a>
+          <a href="/" className="nav-logo" aria-label="Glyphh">
+            <img src="/glyphh-logo-white.png" alt="Glyphh" />
+          </a>
           <div className="nav-links">
             <a href="#features">Features</a>
             <a href="#pricing">Pricing</a>
