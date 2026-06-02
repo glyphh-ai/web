@@ -1,9 +1,76 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+
+const PREFIX = 'Productivity ';
+const SUFFIX = ' for technology professionals.';
+const VERBS = ['created', 'amplified', 'rebuilt', 'automated', 're-imagined', 'supercharged'];
+
+function TypewriterLine() {
+  const [text, setText] = useState('');
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    if (mounted.current) return;
+    mounted.current = true;
+
+    let cancelled = false;
+    let timer;
+    let current = '';
+    let verbIdx = 0;
+
+    const set = (s) => { current = s; setText(s); };
+    const wait = (ms) => new Promise((r) => { timer = setTimeout(r, ms); });
+
+    const type = (target) => new Promise((resolve) => {
+      const step = () => {
+        if (cancelled) return;
+        if (current.length >= target.length) { resolve(); return; }
+        set(target.slice(0, current.length + 1));
+        timer = setTimeout(step, 55 + Math.random() * 40);
+      };
+      step();
+    });
+
+    const backspaceTo = (target) => new Promise((resolve) => {
+      const step = () => {
+        if (cancelled) return;
+        if (current === target) { resolve(); return; }
+        set(current.slice(0, -1));
+        timer = setTimeout(step, 28 + Math.random() * 18);
+      };
+      step();
+    });
+
+    (async () => {
+      while (!cancelled) {
+        const full = PREFIX + VERBS[verbIdx] + SUFFIX;
+        await type(full);
+        await wait(2400);
+        if (cancelled) return;
+        await backspaceTo(PREFIX);
+        await wait(220);
+        verbIdx = (verbIdx + 1) % VERBS.length;
+      }
+    })();
+
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, []);
+
+  return (
+    <span className="typewriter">
+      <span className="typewriter-text">{text}</span>
+      <span className="typewriter-cursor" aria-hidden="true">|</span>
+    </span>
+  );
+}
+
 export default function Hero() {
   return (
     <section className="hero">
       <div className="hero-inner">
-        <h1 className="hero-title">
-          One workspace.<br/>Every tool.<br/>One assistant.
+        <h1 className="hero-title hero-title-type">
+          <TypewriterLine />
         </h1>
         <p className="hero-sub-big">
           Glyphh runs your editor, terminal, browser, chat, and inbox in

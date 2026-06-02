@@ -432,6 +432,31 @@ body {
 .hero-title .dot { color: var(--green); }
 .hero-title .dot-hidden { color: transparent; }
 
+/* Typewriter variant — wider container so the cycling line fits, and a
+   reserved min-height so the page doesn't reflow each time the verb is
+   backspaced. The cursor is a steady blink in brand green. */
+.hero-title-type {
+  max-width: 28ch;
+  min-height: calc(1.05em * 3);
+}
+.typewriter {
+  display: inline;
+}
+.typewriter-text {
+  white-space: pre-wrap;
+}
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 0.05em;
+  color: var(--green);
+  font-weight: 400;
+  transform: translateY(-0.02em);
+  animation: typewriter-blink 1s steps(2, start) infinite;
+}
+@keyframes typewriter-blink {
+  to { visibility: hidden; }
+}
+
 .hero-sub-big {
   font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
   color: var(--text-2);

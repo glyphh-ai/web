@@ -39,7 +39,10 @@ export default function Nav() {
               </a>
             ) : (
               <>
-                <a href={loginHref} className="nav-auth-link">Log in</a>
+                <a href={loginHref} className="btn btn-secondary btn-sm group">
+                  <span className="btn-label">Log in</span>
+                  <span className="btn-fill"></span>
+                </a>
                 <a href={signupHref} className="btn btn-primary btn-sm group">
                   <span className="btn-label">Sign up</span>
                   <span className="btn-fill"></span>
@@ -66,7 +69,10 @@ export default function Nav() {
           </a>
         ) : (
           <>
-            <a href={loginHref} onClick={() => setMenuOpen(false)}>Log in</a>
+            <a href={loginHref} className="btn btn-secondary btn-sm group" onClick={() => setMenuOpen(false)}>
+              <span className="btn-label">Log in</span>
+              <span className="btn-fill"></span>
+            </a>
             <a href={signupHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>
               <span className="btn-label">Sign up</span>
               <span className="btn-fill"></span>
