@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
 import AdaL from './components/AdaL';
-import Swarm from './components/Swarm';
 import Features from './components/Features';
 import Integrations from './components/Integrations';
 import Pricing from './components/Pricing';
@@ -59,7 +58,6 @@ export default function Home() {
       <Integrations />
       <AdaL />
       <Features />
-      <Swarm />
       <Pricing />
       <Download />
       <FAQ />
