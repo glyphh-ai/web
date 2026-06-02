@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="/" className="footer-logo" aria-label="Glyphh">
-              <img src="/glyphh-logo-white.png" alt="Glyphh" />
+              <img src="/glyphh-logo-black.png" alt="Glyphh" />
             </a>
             <p className="footer-tagline">One workspace. Every tool. One assistant.</p>
           </div>

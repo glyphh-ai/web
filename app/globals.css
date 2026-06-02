@@ -263,25 +263,30 @@ body {
 }
 
 .btn-secondary {
-  background: transparent;
-  color: var(--white);
-  border: 1px solid var(--border);
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.btn-secondary:hover {
-  border-color: var(--gray);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.btn-ghost {
-  background: var(--bg);
+  background: var(--surface);
   color: var(--white);
   border: 1px solid var(--border-2);
 }
+.btn-secondary .btn-fill {
+  background: var(--white);
+}
+.btn-secondary.group:hover .btn-label {
+  color: var(--black);
+}
 
+/* .btn-ghost is now an alias for .btn-secondary — same dark bg + lighter
+   outline + white wipe. Kept as a distinct class so existing call sites
+   render identically without sweeping every component. */
+.btn-ghost {
+  background: var(--surface);
+  color: var(--white);
+  border: 1px solid var(--border-2);
+}
 .btn-ghost .btn-fill {
-  background: var(--surface-2);
+  background: var(--white);
+}
+.btn-ghost.group:hover .btn-label {
+  color: var(--black);
 }
 
 .btn-ghost-green {

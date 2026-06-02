@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.dotyo.dev';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://app.glyphh.ai';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,7 +25,7 @@ export default function Nav() {
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
         <div className="nav-inner">
           <a href="/" className="nav-logo" aria-label="Glyphh">
-            <img src="/glyphh-logo-white.png" alt="Glyphh" />
+            <img src="/glyphh-logo-black.png" alt="Glyphh" />
           </a>
           <div className="nav-links">
             <a href="#features">Features</a>
@@ -33,11 +33,17 @@ export default function Nav() {
           </div>
           <div className="nav-cta">
             {loggedIn ? (
-              <a href={dashHref} className="btn btn-primary btn-sm">Dashboard</a>
+              <a href={dashHref} className="btn btn-primary btn-sm group">
+                <span className="btn-label">Dashboard</span>
+                <span className="btn-fill"></span>
+              </a>
             ) : (
               <>
                 <a href={loginHref} className="nav-auth-link">Log in</a>
-                <a href={signupHref} className="btn btn-primary btn-sm">Sign up</a>
+                <a href={signupHref} className="btn btn-primary btn-sm group">
+                  <span className="btn-label">Sign up</span>
+                  <span className="btn-fill"></span>
+                </a>
               </>
             )}
           </div>
@@ -54,11 +60,17 @@ export default function Nav() {
         <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
         <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         {loggedIn ? (
-          <a href={dashHref} className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Dashboard</a>
+          <a href={dashHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>
+            <span className="btn-label">Dashboard</span>
+            <span className="btn-fill"></span>
+          </a>
         ) : (
           <>
             <a href={loginHref} onClick={() => setMenuOpen(false)}>Log in</a>
-            <a href={signupHref} className="btn btn-primary btn-sm" onClick={() => setMenuOpen(false)}>Sign up</a>
+            <a href={signupHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>
+              <span className="btn-label">Sign up</span>
+              <span className="btn-fill"></span>
+            </a>
           </>
         )}
       </div>
