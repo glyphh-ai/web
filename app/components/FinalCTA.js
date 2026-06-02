@@ -35,7 +35,6 @@ export default function FinalCTA() {
               <span className="btn-fill"></span>
             </a>
           </div>
-          <p className="cta-version">Mac &amp; Windows</p>
         </div>
       </div>
     </section>
