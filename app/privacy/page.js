@@ -61,7 +61,7 @@ export default function PrivacyPage() {
             <li>Object to or restrict processing of your data</li>
             <li>Data portability</li>
           </ul>
-          <p>To exercise these rights, contact us at <a href="mailto:support@dotyo.dev">support@dotyo.dev</a>.</p>
+          <p>To exercise these rights, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
 
           <h2>9. Children&apos;s Privacy</h2>
           <p>The Service is not intended for children under 13. We do not knowingly collect personal information from children under 13. If we become aware that we have collected such information, we will take steps to delete it.</p>
@@ -73,7 +73,7 @@ export default function PrivacyPage() {
           <p>We may update this Privacy Policy from time to time. We will notify you of material changes through the application or via email. Continued use of the Service after changes constitutes acceptance.</p>
 
           <h2>12. Contact</h2>
-          <p>For privacy-related questions or requests, contact us at <a href="mailto:support@dotyo.dev">support@dotyo.dev</a>.</p>
+          <p>For privacy-related questions or requests, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>
       <Footer />

@@ -13,7 +13,7 @@ const features = [
   },
   {
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
-    title: 'Vibe-code in a full IDE',
+    title: 'Build in a full IDE',
     desc: 'A real Monaco editor, file tree, diff viewer, terminal, and Plan view — all panels, all drag-resizable. The agent has Read, Edit, Bash, and Grep on your actual project files. No browser tab — a native app with file-system access.',
   },
   {

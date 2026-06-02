@@ -77,7 +77,7 @@ export default function TermsPage() {
           <p>We may update these Terms from time to time. Continued use of the Service after changes constitutes acceptance of the revised Terms. Material changes will be communicated through the application or via email.</p>
 
           <h2>13. Contact</h2>
-          <p>For questions about these Terms, contact us at <a href="mailto:support@dotyo.dev">support@dotyo.dev</a>.</p>
+          <p>For questions about these Terms, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>
       <Footer />

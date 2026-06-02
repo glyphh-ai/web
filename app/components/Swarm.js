@@ -68,19 +68,19 @@ function SwarmDiagram() {
           <animateMotion dur="2s" repeatCount="indefinite" begin="2.3s" path="M580,400 Q630,430 680,460" />
         </circle>
 
-        {/* .yo agent pulsing rings */}
+        {/* Glyphh agent pulsing rings */}
         <circle cx="400" cy="60" r="40" fill="none" stroke="#25C75E" strokeWidth="1" className="cypher-ring" />
         <circle cx="400" cy="60" r="40" fill="none" stroke="#25C75E" strokeWidth="1" className="cypher-ring" style={{ animationDelay: '1.5s' }} />
         <circle cx="400" cy="60" r="40" fill="none" stroke="#25C75E" strokeWidth="1" className="cypher-ring" style={{ animationDelay: '3s' }} />
 
         {/* ── Nodes ── */}
 
-        {/* .yo agent — spawns the swarm */}
+        {/* Glyphh agent — spawns the swarm */}
         <g className="cypher-node" filter="url(#glow-g)">
           <rect x="332" y="30" width="136" height="60" rx="14" fill="#0a0a0a" stroke="#25C75E" strokeWidth="2" />
           <circle cx="364" cy="60" r="8" fill="#25C75E" opacity="0.12" />
           <circle cx="364" cy="60" r="4" fill="#25C75E" className="cypher-dot-pulse" />
-          <text x="382" y="58" fill="#e8e8e8" fontSize="13" fontWeight="600" fontFamily="var(--font-mono)">.yo agent</text>
+          <text x="382" y="58" fill="#e8e8e8" fontSize="13" fontWeight="600" fontFamily="var(--font-mono)">Glyphh agent</text>
           <text x="382" y="73" fill="#555" fontSize="9" fontFamily="var(--font-mono)">spawns the swarm</text>
         </g>
 
@@ -150,7 +150,7 @@ export default function Swarm() {
           <p className="command-hero-tagline reveal" style={{ marginBottom: 0 }}>Many agents, one goal — all on your machine.</p>
         </div>
         <p className="section-subtitle reveal" style={{ maxWidth: '720px', margin: '1rem auto 3rem' }}>
-          Tell the <span className="dot">.</span>yo agent what you want and it spins up a swarm — a roster
+          Tell the Glyphh agent what you want and it spins up a swarm — a roster
           of your own agents working the goal together. A leader decomposes it and assigns tasks
           over an in-process bus; the rest execute and report back. No server, no sign-ups, no shared
           billing. Your agents, your API keys, your sandbox — and the whole thing streams inline as
@@ -164,7 +164,7 @@ export default function Swarm() {
               <div className="cypher-step-num">1</div>
               <div>
                 <h4>Set the goal</h4>
-                <p>Switch the <span className="dot">.</span>yo agent into swarm mode and state what you
+                <p>Switch the Glyphh agent into swarm mode and state what you
                 want — research a topic, refactor a module, ship a feature. It picks the right agents
                 from your library.</p>
               </div>
@@ -189,7 +189,7 @@ export default function Swarm() {
               <div className="cypher-step-num">4</div>
               <div>
                 <h4>Watch it land</h4>
-                <p>Every assignment, message, and result streams inline into your <span className="dot">.</span>yo
+                <p>Every assignment, message, and result streams inline into your Glyphh
                 conversation. The leader consolidates, and the work hits your files.</p>
               </div>
             </div>

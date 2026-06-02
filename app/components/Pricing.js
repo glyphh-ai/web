@@ -20,7 +20,7 @@ export default function Pricing() {
               </div>
               <span className="pricing-period">14-day trial</span>
             </div>
-            <p className="pricing-desc">Full access — run swarms, MCP, skills, and vibes. Every feature.</p>
+            <p className="pricing-desc">Full access — run swarms, MCP, and skills. Every feature.</p>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-secondary btn-lg btn-full group">
               <span className="btn-label">Download now</span>
               <span className="btn-fill"></span>
@@ -37,7 +37,7 @@ export default function Pricing() {
               </div>
               <span className="pricing-period">per month</span>
             </div>
-            <p className="pricing-desc">The full workspace — swarms, MCP, skills, vibes. Bring your own keys for inference — yo takes no markup on tokens.</p>
+            <p className="pricing-desc">The full workspace — swarms, MCP, and skills. Bring your own keys for inference — Glyphh takes no markup on tokens.</p>
             <a href={`${PLATFORM_URL}/auth`} className="btn btn-primary btn-lg btn-full group">
               <span className="btn-label">Get started</span>
               <span className="btn-fill"></span>
