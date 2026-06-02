@@ -22,10 +22,11 @@ export default function Hero() {
           Available for Mac &amp; Windows{version ? ` — ${version}` : ''}
         </div>
         <h1 className="hero-title">
-          <span className="dot dot-hidden" id="hero-dot">.</span>Yo <span className="dot">.</span>Sup <span className="dot">.</span>Dip
+          The AI workspace for<br/>builders and operators.
         </h1>
         <p className="hero-sub-big">
-          One AI workspace. One context, every app, every LLM, everywhere.
+          Automate work, run RPA flows, and vibe-code in a full IDE.
+          Every tool you use speaks MCP. Every workflow starts with a dot.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">

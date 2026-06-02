@@ -686,6 +686,152 @@ body {
   font-style: italic;
 }
 
+/* ── AdaL — HDC memory section ─────────────────────────── */
+.adal {
+  padding: 8rem 0 6rem;
+  position: relative;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(60% 80% at 50% 0%, rgba(37, 199, 94, 0.06) 0%, transparent 70%),
+    linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+}
+.adal-mark {
+  font-family: var(--font-mono);
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.adal-mark .adal-dot {
+  color: var(--green);
+  font-size: 1em;
+  margin: 0 -0.05em;
+}
+.adal .section-title {
+  max-width: 780px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+.adal .section-title em {
+  font-style: italic;
+  color: var(--green);
+}
+.adal-lede {
+  max-width: 720px;
+  margin: 0 auto 4rem;
+  color: var(--text-2);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.adal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.adal-pillar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  position: relative;
+}
+.adal-pillar-bullet {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.5rem;
+  color: var(--green);
+  font-size: 2rem;
+  line-height: 1;
+  font-family: var(--font-mono);
+}
+.adal-pillar h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+  padding-left: 1.25rem;
+  color: var(--text);
+}
+.adal-pillar p {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+@media (max-width: 768px) {
+  .adal-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .adal-mark { font-size: 2.25rem; }
+}
+
+/* ── Control plane — dot CLI reference ─────────────────── */
+.control-plane {
+  padding: 7rem 0;
+  border-top: 1px solid var(--border);
+}
+.control-plane .section-title {
+  max-width: 680px;
+  margin: 0 auto 1rem;
+  text-align: center;
+}
+.control-plane-lede {
+  max-width: 640px;
+  margin: 0 auto 3.5rem;
+  color: var(--text-2);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.control-plane-list {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.control-plane-row {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.control-plane-row:hover {
+  border-color: var(--border-2);
+  background: var(--surface-2);
+}
+.control-plane-cmd {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+.control-plane-cmd .dot {
+  color: var(--green);
+}
+.control-plane-arg {
+  color: var(--text-3);
+  font-weight: 400;
+}
+.control-plane-desc {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+@media (max-width: 768px) {
+  .control-plane-row { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+
 /* ── Features Grid ─────────────────────────────────────── */
 .features-grid {
   padding: 8rem 0;
