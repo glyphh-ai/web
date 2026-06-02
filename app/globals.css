@@ -220,20 +220,21 @@ body {
 .btn-label {
   position: relative;
   z-index: 2;
+  transition: color 280ms ease;
 }
 
+/* Wipe layer used by the primary CTA — slides green in left→right on
+   hover, slides back out right→left on leave. Other variants override
+   below with their own pattern. */
 .btn-fill {
   position: absolute;
   inset: 0;
   z-index: 1;
-  border-radius: 50%;
-  transform: scale(0) translateY(50%);
-  transition: transform 350ms ease;
+  transform: translateX(-100%);
+  transition: transform 280ms ease;
 }
-
 .group:hover .btn-fill {
-  transform: scale(1.5, 2.2);
-  border-radius: 0;
+  transform: translateX(0);
 }
 
 .btn-sm {
@@ -251,12 +252,14 @@ body {
 }
 
 .btn-primary {
-  background: var(--green);
+  background: var(--white);
   color: var(--black);
 }
-
 .btn-primary .btn-fill {
-  background: var(--green-light);
+  background: var(--green);
+}
+.btn-primary.group:hover .btn-label {
+  color: var(--black);
 }
 
 .btn-secondary {
@@ -352,63 +355,39 @@ body {
 
 /* ── Hero ──────────────────────────────────────────────── */
 .hero {
-  min-height: 90vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8rem 2rem 22rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 7rem 2rem 4rem;
   position: relative;
-  overflow: visible;
 }
 
-.jumping-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.matrix-particles {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  clip-path: inset(0);
-}
-
-.supernova-canvas {
-  position: absolute;
-  top: -50%;
-  left: -25%;
-  width: 150%;
-  height: 200%;
-  pointer-events: none;
-  z-index: -1;
-}
+/* Backdrop / particles intentionally removed — pure black for a clean
+   dev-tool feel. Classes kept (.matrix-particles, .supernova-canvas,
+   .jumping-dot) as no-ops in case other surfaces still mount them. */
+.matrix-particles, .supernova-canvas, .jumping-dot { display: none; }
 
 .hero-inner {
-  max-width: 800px;
-  text-align: center;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
   position: relative;
-  z-index: 1;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
-  background: var(--surface);
+  padding: 5px 14px;
+  background: transparent;
   border: 1px solid var(--border);
   border-radius: 100px;
-  font-size: 0.8125rem;
-  color: var(--text-2);
-  margin-bottom: 2.5rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-3);
+  margin-bottom: 2rem;
+  letter-spacing: 0.01em;
 }
 
 .badge-dot {
@@ -425,68 +404,66 @@ body {
 }
 
 .hero-title {
-  font-family: var(--font-mono);
-  /* Title is now a full sentence on two lines, not three short chip words —
-     no longer needs (and overflows the page with) white-space: nowrap. */
-  font-size: clamp(2.25rem, 6vw, 4.75rem);
-  font-weight: 800;
+  font-family: var(--font-sans);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-weight: 700;
   color: var(--white);
-  line-height: 1.1;
-  letter-spacing: -0.035em;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
-  max-width: 18ch;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 16ch;
 }
 
-.hero-title .dot {
-  color: var(--green);
-}
-
-.hero-title .dot-hidden {
-  color: transparent;
-}
-
-
+.hero-title .dot { color: var(--green); }
+.hero-title .dot-hidden { color: transparent; }
 
 .hero-sub-big {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
   color: var(--text-2);
-  line-height: 1.6;
-  max-width: 720px;
-  margin: 0 auto 2.5rem;
+  line-height: 1.55;
+  max-width: 56ch;
+  margin: 0 0 2.5rem;
 }
 
 .hero-sub {
-  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
   color: var(--text-2);
-  line-height: 1.7;
-  max-width: 560px;
-  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  max-width: 52ch;
+  margin: 0 0 2.5rem;
 }
 
 .hero-ctas {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
+  gap: 0.75rem;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
-/* ── Hero Video ───────────────────────────────────────── */
+/* ── Hero Video — framed in a rounded square on a green wash ───────
+   Dev-tool aesthetic: tinted backdrop sets the video off the page
+   without competing with the content. Single border, no glow. */
 .hero-video {
   position: relative;
-  z-index: 1;
-  margin-top: -18rem;
-  padding: 0 clamp(1rem, 2vw, 2rem);
-  margin-bottom: 4rem;
+  padding: 2.5rem clamp(1rem, 4vw, 2.5rem) 4rem;
+}
+.hero-video-frame {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+  background:
+    linear-gradient(180deg,
+      rgba(37, 199, 94, 0.10) 0%,
+      rgba(37, 199, 94, 0.04) 50%,
+      rgba(37, 199, 94, 0.02) 100%);
+  border: 1px solid rgba(37, 199, 94, 0.18);
+  border-radius: 18px;
 }
 .hero-video-inner {
-  max-width: 1600px;
-  margin: 0 auto;
-  border-radius: var(--radius-lg);
+  border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 80px rgba(37, 199, 94, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  background: var(--surface);
 }
 .hero-video-player {
   display: block;
