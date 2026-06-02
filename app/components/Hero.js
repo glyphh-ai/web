@@ -25,12 +25,10 @@ export default function Hero() {
           The apps you use,<br/>all in one window.
         </h1>
         <p className="hero-sub-big">
-          Glyphh opens your email, your chat, your documents, your
-          spreadsheets, your favorite AI — anything you use online — side
-          by side in one app. A helper that watches over your shoulder
-          can answer questions about what you&apos;re looking at, write a
-          reply, fill in a form, or do small jobs for you while you keep
-          working.
+          Glyphh opens your email, chat, docs, spreadsheets, and favorite
+          AI side by side in one app. An AI assistant watches over your
+          shoulder — ask it questions, write a reply, fill a form, or
+          hand off small jobs while you keep working.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
