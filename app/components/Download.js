@@ -54,7 +54,7 @@ export default function Download() {
             <span className="btn-label">{primaryLabel}</span>
             <span className="btn-fill"></span>
           </a>
-          <a href={altPlatformHref} className="btn btn-ghost-green btn-xl group">
+          <a href={altPlatformHref} className="btn btn-secondary btn-xl group">
             <span className="btn-label">{altPlatformLabel}</span>
             <span className="btn-fill"></span>
           </a>
