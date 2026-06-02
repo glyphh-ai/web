@@ -1,8 +1,8 @@
 import Footer from '../components/Footer';
 
 export const metadata = {
-  title: 'Terms of Use — .Yo',
-  description: 'Terms of Use for the .Yo desktop application by Glyphh AI LLC.',
+  title: 'Terms of Use — Glyphh',
+  description: 'Terms of Use for the Glyphh desktop application by Glyphh AI LLC.',
 };
 
 export default function TermsPage() {
@@ -14,7 +14,7 @@ export default function TermsPage() {
           <h1 className="policy-title">Terms of Use</h1>
 
           <p><strong>Effective Date:</strong> January 1, 2026</p>
-          <p>These Terms of Use (&ldquo;Terms&rdquo;) govern your access to and use of .Yo, a desktop application and related services (&ldquo;Service&rdquo;) provided by Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). By installing, accessing, or using the Service, you agree to be bound by these Terms.</p>
+          <p>These Terms of Use (&ldquo;Terms&rdquo;) govern your access to and use of Glyphh, a desktop application and related services (&ldquo;Service&rdquo;) provided by Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). By installing, accessing, or using the Service, you agree to be bound by these Terms.</p>
 
           <h2>1. Eligibility</h2>
           <p>You must be at least 13 years old to use the Service. If you are under 18, you represent that your parent or legal guardian has reviewed and agreed to these Terms on your behalf.</p>
@@ -53,7 +53,7 @@ export default function TermsPage() {
           <p>The Service, including all software, designs, trademarks, and content, is the intellectual property of Glyphh AI LLC. Your license grants a limited, non-exclusive, non-transferable, revocable right to use the Service for personal or internal business purposes only.</p>
 
           <h2>5. Third-Party Services</h2>
-          <p>.Yo integrates with third-party AI services (e.g., Anthropic, OpenAI, Google AI). Your use of those services is governed by their respective terms and privacy policies. You are responsible for providing your own API keys and complying with third-party terms. Glyphh AI LLC is not responsible for the availability, accuracy, or conduct of third-party services.</p>
+          <p>Glyphh integrates with third-party AI services (e.g., Anthropic, OpenAI, Google AI). Your use of those services is governed by their respective terms and privacy policies. You are responsible for providing your own API keys and complying with third-party terms. Glyphh AI LLC is not responsible for the availability, accuracy, or conduct of third-party services.</p>
 
           <h2>6. User Content</h2>
           <p>You retain ownership of all content you create, capture, or process using the Service. We do not claim any ownership over your data. You are solely responsible for the content you process through the Service and for ensuring that your use complies with applicable laws and third-party rights.</p>

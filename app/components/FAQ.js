@@ -5,12 +5,12 @@ import { styledText } from './cmd-style';
 
 const faqs = [
   {
-    q: 'What is .Yo?',
-    a: '.Yo is a native desktop AI workspace that connects every AI and app you use — ChatGPT, Claude, Gemini, Grok, Perplexity, plus 3,500+ apps via MCP and Pipedream — in one window with shared context. A built-in agent navigates panels, runs skills, builds vibes, and can spin up a swarm of agents to automate work across all of them.',
+    q: 'What is Glyphh?',
+    a: 'Glyphh is a native desktop AI workspace that connects every AI and app you use — ChatGPT, Claude, Gemini, Grok, Perplexity, plus 3,500+ apps via MCP and Pipedream — in one window with shared context. A built-in agent navigates panels, runs skills, builds vibes, and can spin up a swarm of agents to automate work across all of them.',
   },
   {
     q: 'How is this different from just using browser tabs?',
-    a: '.Yo gives you a command layer, agent system, and local MCP server on top of every app. Context is captured automatically with local vector embeddings — no copy-pasting. The agent navigates, clicks, and extracts across panels. Skills automate repeatable workflows. Vibes let you build interactive tools. MCP relay exposes your tools to other clients.',
+    a: 'Glyphh gives you a command layer, agent system, and local MCP server on top of every app. Context is captured automatically with local vector embeddings — no copy-pasting. The agent navigates, clicks, and extracts across panels. Skills automate repeatable workflows. Vibes let you build interactive tools. MCP relay exposes your tools to other clients.',
   },
   {
     q: 'How does context follow me?',
@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: 'What is MCP and how does it work?',
-    a: '.Yo includes a local MCP server that connects to any MCP-compatible tool over stdio, SSE, or streamable HTTP. Your agent gets access to tools from every connected server. The MCP relay bridges your tools to external clients like Claude Code or Cursor, so they can use your Yo tools directly.',
+    a: 'Glyphh includes a local MCP server that connects to any MCP-compatible tool over stdio, SSE, or streamable HTTP. Your agent gets access to tools from every connected server. The MCP relay bridges your tools to external clients like Claude Code or Cursor, so they can use your Yo tools directly.',
   },
   {
     q: 'Do I need to bring my own API key?',
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'What apps are supported?',
-    a: '.Yo ships with 100+ pre-configured native apps including ChatGPT, Claude, Gemini, Gmail, Slack, GitHub, and more. With MCP servers and Pipedream connectors, you get access to 3,500+ apps. You can also add any URL as a panel.',
+    a: 'Glyphh ships with 100+ pre-configured native apps including ChatGPT, Claude, Gemini, Gmail, Slack, GitHub, and more. With MCP servers and Pipedream connectors, you get access to 3,500+ apps. You can also add any URL as a panel.',
   },
   {
     q: 'What are skills?',
@@ -45,11 +45,11 @@ const faqs = [
     a: 'Your captures, notes, and conversation history are stored locally on your machine. Context is indexed with local ONNX embeddings — no external indexing calls. Agent LLM calls go directly from your machine to your provider (Anthropic, OpenAI, etc.) using your own API keys; yo never sees prompts or responses. We store account and subscription metadata only.',
   },
   {
-    q: 'Is .Yo free?',
+    q: 'Is Glyphh free?',
     a: 'Free 14-day trial — no credit card required. After that, $9/month for the full workspace — agent, swarms, MCP, skills, and vibes. Inference is the only other cost and it goes straight to your provider — yo takes no spread on tokens.',
   },
   {
-    q: 'What platforms does .Yo support?',
+    q: 'What platforms does Glyphh support?',
     a: 'Mac (macOS 12+ on Apple Silicon and Intel) and Windows (10+). Download links are on the homepage.',
   },
 ];

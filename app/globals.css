@@ -1587,11 +1587,15 @@ footer {
 }
 
 .footer-logo {
-  font-family: var(--font-mono);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--white);
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
+  margin-bottom: 0.75rem;
+}
+.footer-logo img {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 .footer-tagline {

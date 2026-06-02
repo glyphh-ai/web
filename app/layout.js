@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
 
 export const metadata = {
-  title: '.Yo — Your AI Context Layer',
+  title: 'Glyphh — Your AI Context Layer',
   description: 'Context flows across every panel. .yo to speak. .sup to respond. .dip to move. Your conversations, always connected — one workspace for every AI and app.',
   icons: {
     icon: '/favicon.svg',

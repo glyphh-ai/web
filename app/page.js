@@ -56,9 +56,9 @@ export default function Home() {
       <Nav />
       <Hero />
       <HeroVideo />
+      <Integrations />
       <AdaL />
       <Features />
-      <Integrations />
       <Swarm />
       <Pricing />
       <Download />

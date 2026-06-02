@@ -1,8 +1,8 @@
 import Footer from '../components/Footer';
 
 export const metadata = {
-  title: 'Privacy Policy — .Yo',
-  description: 'Privacy Policy for the .Yo desktop application by Glyphh AI LLC.',
+  title: 'Privacy Policy — Glyphh',
+  description: 'Privacy Policy for the Glyphh desktop application by Glyphh AI LLC.',
 };
 
 export default function PrivacyPage() {
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
           <h1 className="policy-title">Privacy Policy</h1>
 
           <p><strong>Effective Date:</strong> January 1, 2026</p>
-          <p>This Privacy Policy describes how Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) collects, uses, and protects your information when you use .Yo (&ldquo;Service&rdquo;).</p>
+          <p>This Privacy Policy describes how Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) collects, uses, and protects your information when you use Glyphh (&ldquo;Service&rdquo;).</p>
 
           <h2>1. Information We Collect</h2>
           <p><strong>Account Information:</strong> When you register or purchase a license, we collect your email address, license key, and payment information (processed by Stripe). We do not store your full payment card details.</p>
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           </ul>
 
           <h2>3. Local-First Architecture</h2>
-          <p>.Yo is designed with a local-first architecture. Your data &mdash; including captured context, skills, layouts, preferences, and API keys &mdash; is stored exclusively on your local machine in the <code>~/yo/</code> directory. If you enable Cloud Sync (Basic or Advanced plan), your library data is encrypted and synced to our servers. You can disable Cloud Sync at any time, and request deletion of cloud-stored data.</p>
+          <p>Glyphh is designed with a local-first architecture. Your data &mdash; including captured context, skills, layouts, preferences, and API keys &mdash; is stored exclusively on your local machine in the <code>~/yo/</code> directory. If you enable Cloud Sync (Basic or Advanced plan), your library data is encrypted and synced to our servers. You can disable Cloud Sync at any time, and request deletion of cloud-stored data.</p>
 
           <h2>4. How We Use Information</h2>
           <ul>
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
           </ul>
 
           <h2>5. Third-Party Services</h2>
-          <p>When you use .Yo with third-party AI providers (Anthropic, OpenAI, Google AI, etc.), your prompts and data are sent directly from your machine to those providers using your own API keys. We do not proxy, intercept, or store this data. Please review the privacy policies of those providers.</p>
+          <p>When you use Glyphh with third-party AI providers (Anthropic, OpenAI, Google AI, etc.), your prompts and data are sent directly from your machine to those providers using your own API keys. We do not proxy, intercept, or store this data. Please review the privacy policies of those providers.</p>
           <p>We use Stripe for payment processing. Stripe&apos;s handling of your payment information is governed by <a href="https://stripe.com/privacy">Stripe&apos;s Privacy Policy</a>.</p>
 
           <h2>6. Data Security</h2>

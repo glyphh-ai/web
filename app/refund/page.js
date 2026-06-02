@@ -1,8 +1,8 @@
 import Footer from '../components/Footer';
 
 export const metadata = {
-  title: 'Refund Policy — .Yo',
-  description: 'Refund Policy for the .Yo desktop application by Glyphh AI LLC.',
+  title: 'Refund Policy — Glyphh',
+  description: 'Refund Policy for the Glyphh desktop application by Glyphh AI LLC.',
 };
 
 export default function RefundPage() {
@@ -14,10 +14,10 @@ export default function RefundPage() {
           <h1 className="policy-title">Refund Policy</h1>
 
           <p><strong>Effective Date:</strong> January 1, 2026</p>
-          <p>This Refund Policy applies to paid subscriptions for .Yo offered by Glyphh AI LLC.</p>
+          <p>This Refund Policy applies to paid subscriptions for Glyphh offered by Glyphh AI LLC.</p>
 
           <h2>1. Free Tier</h2>
-          <p>The free tier of .Yo is available at no cost and requires no payment. No refund applies.</p>
+          <p>The free tier of Glyphh is available at no cost and requires no payment. No refund applies.</p>
 
           <h2>2. Paid Subscriptions (Basic &amp; Advanced)</h2>
           <p>Paid plans are billed on a monthly subscription basis. You may cancel your subscription at any time.</p>
@@ -38,7 +38,7 @@ export default function RefundPage() {
           <p>If your license is revoked due to a violation of our Terms of Use, no refund will be issued.</p>
 
           <h2>8. How to Cancel</h2>
-          <p>You can cancel your subscription at any time through the Settings section of the .Yo application. Alternatively, contact <a href="mailto:support@dotyo.dev">support@dotyo.dev</a>. Cancellation takes effect at the end of your current billing period.</p>
+          <p>You can cancel your subscription at any time through the Settings section of the Glyphh application. Alternatively, contact <a href="mailto:support@dotyo.dev">support@dotyo.dev</a>. Cancellation takes effect at the end of your current billing period.</p>
 
           <h2>9. Contact</h2>
           <p>For billing or refund questions, contact us at <a href="mailto:support@dotyo.dev">support@dotyo.dev</a>.</p>
