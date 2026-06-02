@@ -12,7 +12,6 @@ import Download from './components/Download';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
-import JumpingDot from './components/JumpingDot';
 import HeroVideo from './components/HeroVideo';
 
 export default function Home() {
@@ -54,7 +53,6 @@ export default function Home() {
 
   return (
     <>
-      <JumpingDot />
       <Nav />
       <Hero />
       <HeroVideo />

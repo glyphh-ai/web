@@ -22,12 +22,15 @@ export default function Hero() {
           Available for Mac &amp; Windows{version ? ` — ${version}` : ''}
         </div>
         <h1 className="hero-title">
-          All your apps.<br/>One workspace.<br/>One shared context.
+          The apps you use,<br/>all in one window.
         </h1>
         <p className="hero-sub-big">
-          Glyphh puts every tool you use — your IDE, your chats, your dashboards,
-          your inbox — in one native workspace, with an AI agent that shares
-          context across all of them. Nothing has to be re-explained.
+          Glyphh opens your email, your chat, your documents, your
+          spreadsheets, your favorite AI — anything you use online — side
+          by side in one app. A helper that watches over your shoulder
+          can answer questions about what you&apos;re looking at, write a
+          reply, fill in a form, or do small jobs for you while you keep
+          working.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
