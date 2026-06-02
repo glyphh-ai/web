@@ -22,13 +22,14 @@ export default function Hero() {
           Available for Mac &amp; Windows{version ? ` — ${version}` : ''}
         </div>
         <h1 className="hero-title">
-          The apps you use,<br/>all in one window.
+          Less switching.<br/>More done.
         </h1>
         <p className="hero-sub-big">
-          Glyphh opens your email, chat, docs, spreadsheets, and favorite
-          AI side by side in one app. An AI assistant watches over your
-          shoulder — ask it questions, write a reply, fill a form, or
-          hand off small jobs while you keep working.
+          Glyphh puts your email, chat, docs, spreadsheets, code editor,
+          and favorite AI side by side in one app. An AI assistant
+          watches over your shoulder — answer questions, write a reply,
+          fix a bug, fill a form, or hand off small jobs while you keep
+          working.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
