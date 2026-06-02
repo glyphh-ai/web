@@ -22,11 +22,12 @@ export default function Hero() {
           Available for Mac &amp; Windows{version ? ` — ${version}` : ''}
         </div>
         <h1 className="hero-title">
-          The AI workspace for<br/>builders and operators.
+          All your apps.<br/>One workspace.<br/>One shared context.
         </h1>
         <p className="hero-sub-big">
-          Automate work, run RPA flows, and vibe-code in a full IDE.
-          Every tool you use speaks MCP. Every workflow starts with a dot.
+          Glyphh puts every tool you use — your IDE, your chats, your dashboards,
+          your inbox — in one native workspace, with an AI agent that shares
+          context across all of them. Nothing has to be re-explained.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
