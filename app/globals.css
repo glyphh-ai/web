@@ -224,17 +224,22 @@ body {
 }
 
 /* Wipe layer used by the primary CTA — slides green in left→right on
-   hover, slides back out right→left on leave. Other variants override
-   below with their own pattern. */
+   hover, slides back out right→left on leave. The slide-in transition
+   is 280ms so the colour bleeds in; the slide-out is 160ms so release
+   feels snappy. :active and :focus-visible pin the wipe at full so the
+   press itself never reads as "sliding back out". */
 .btn-fill {
   position: absolute;
   inset: 0;
   z-index: 1;
   transform: translateX(-100%);
-  transition: transform 280ms ease;
+  transition: transform 160ms ease;
 }
-.group:hover .btn-fill {
+.group:hover .btn-fill,
+.group:active .btn-fill,
+.group:focus-visible .btn-fill {
   transform: translateX(0);
+  transition: transform 280ms ease;
 }
 
 .btn-sm {
@@ -258,7 +263,9 @@ body {
 .btn-primary .btn-fill {
   background: var(--green);
 }
-.btn-primary.group:hover .btn-label {
+.btn-primary.group:hover .btn-label,
+.btn-primary.group:active .btn-label,
+.btn-primary.group:focus-visible .btn-label {
   color: var(--black);
 }
 
