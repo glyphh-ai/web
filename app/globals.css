@@ -233,7 +233,11 @@ body {
   inset: 0;
   z-index: 1;
   transform: translateX(-100%);
-  transition: transform 160ms ease;
+  /* No transition on the resting state: when the button loses hover/active
+     (e.g. during a page navigation), the wipe snaps off instantly so the
+     button never renders half-pressed mid-transition. The slide-IN gets
+     its own transition below, scoped to the engaged states. */
+  transition: none;
 }
 .group:hover .btn-fill,
 .group:active .btn-fill,
