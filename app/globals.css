@@ -497,7 +497,7 @@ body {
    without competing with the content. Single border, no glow. */
 .hero-video {
   position: relative;
-  padding: 2.5rem clamp(2rem, 5vw, 4rem) 4rem;
+  padding: 2.5rem clamp(3rem, 7vw, 6rem) 4rem;
 }
 .hero-video-frame {
   max-width: none;
