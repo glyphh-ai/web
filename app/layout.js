@@ -7,7 +7,7 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 
 export const metadata = {
   title: 'Glyphh — One workspace. Every tool. One assistant.',
-  description: 'Glyphh runs your editor, terminal, browser, chat, and inbox in one native app. An AI assistant works alongside you — answer questions, draft a reply, fix a bug, fill a form, or hand off a task while you keep working.',
+  description: 'Glyphh brings an AI assistant into every app you already work in — IDE, inbox, browser, chat, and beyond — in one native workspace. No more context switching: it answers questions, drafts replies, fixes bugs, and automates the busywork while you stay in flow.',
   icons: {
     icon: '/favicon.svg',
   },

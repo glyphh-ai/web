@@ -73,10 +73,11 @@ export default function Hero() {
           <TypewriterLine />
         </h1>
         <p className="hero-sub-big">
-          Glyphh runs your editor, terminal, browser, chat, and inbox
-          in one native app. An AI assistant works alongside you
-          — answer questions, draft a reply, fix a bug, fill a form, or
-          hand off a task while you keep working.
+          Glyphh brings an AI assistant into every app you already work in
+          — your IDE, inbox, browser, chat, and beyond — all in one native
+          workspace. No more jumping between tools: it answers questions,
+          drafts replies, fixes bugs, and automates the busywork right
+          alongside you, so you stay in flow.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
