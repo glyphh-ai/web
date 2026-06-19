@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { getUser, clearTokens } from '../lib/api';
 
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.dotyo.dev';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 
 export default function AdminLayout({ children }) {
   const [ready, setReady] = useState(false);

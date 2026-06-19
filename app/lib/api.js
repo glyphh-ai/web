@@ -2,8 +2,8 @@
  * API client for yo-server.
  */
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.dotyo.dev';
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.dotyo.dev';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 
 /** Get stored auth tokens. */
 export function getTokens() {
@@ -18,7 +18,7 @@ export function getTokens() {
 export function setTokens(tokens) {
   if (typeof window === 'undefined') return;
   localStorage.setItem('yo_auth', JSON.stringify(tokens));
-  const domain = location.hostname === 'localhost' ? '' : '; domain=.dotyo.dev';
+  const domain = location.hostname === 'localhost' ? '' : '; domain=.glyphh.ai';
   const secure = location.protocol === 'https:' ? '; Secure' : '';
   document.cookie = `yo_logged_in=1; path=/${domain}; max-age=${60 * 60 * 24 * 30}; SameSite=Lax${secure}`;
 }
@@ -27,7 +27,7 @@ export function setTokens(tokens) {
 export function clearTokens() {
   if (typeof window === 'undefined') return;
   localStorage.removeItem('yo_auth');
-  const domain = location.hostname === 'localhost' ? '' : '; domain=.dotyo.dev';
+  const domain = location.hostname === 'localhost' ? '' : '; domain=.glyphh.ai';
   document.cookie = `yo_logged_in=; path=/${domain}; max-age=0`;
 }
 
