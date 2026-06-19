@@ -1,9 +1,10 @@
-name: Deploy yo-web to Heroku
+name: Deploy glyphh-web to Heroku
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
