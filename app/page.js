@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import Capture from './components/Capture';
 import Mcp from './components/Mcp';
 import Rpa from './components/Rpa';
+import Screenshots from './components/Screenshots';
 import Features from './components/Features';
 import Integrations from './components/Integrations';
 import Pricing from './components/Pricing';
@@ -62,6 +63,7 @@ export default function Home() {
       <Mcp />
       <Rpa />
       <Features />
+      <Screenshots />
       <Pricing />
       <Download />
       <FAQ />
