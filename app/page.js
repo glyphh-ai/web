@@ -60,10 +60,10 @@ export default function Home() {
       <HeroVideo />
       <Integrations />
       <Capture />
+      <Screenshots />
       <Mcp />
       <Rpa />
       <Features />
-      <Screenshots />
       <Pricing />
       <Download />
       <FAQ />

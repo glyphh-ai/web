@@ -1,3 +1,7 @@
+'use client';
+
+import { useState } from 'react';
+
 const SHOTS = [
   {
     img: 'glyphh-ide.png',
@@ -32,6 +36,8 @@ const SHOTS = [
 ];
 
 export default function Screenshots() {
+  const [open, setOpen] = useState(null);
+
   return (
     <section className="shots" id="screenshots">
       <div className="container">
@@ -43,11 +49,12 @@ export default function Screenshots() {
         <div className="shots-list">
           {SHOTS.map((s, i) => (
             <div key={i} className={`shot-row${i % 2 ? ' shot-row-rev' : ''} reveal`}>
-              <div className="shot-frame">
-                <div className="shot-inner">
+              <button className="shot-frame" onClick={() => setOpen(i)} aria-label={`Expand ${s.title}`}>
+                <span className="shot-inner">
                   <img src={`/screen-shots/${s.img}`} alt={s.title} loading="lazy" />
-                </div>
-              </div>
+                </span>
+                <span className="shot-expand" aria-hidden="true">⤢</span>
+              </button>
               <div className="shot-copy">
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
@@ -56,6 +63,17 @@ export default function Screenshots() {
           ))}
         </div>
       </div>
+
+      {open !== null && (
+        <div className="shot-lightbox" onClick={() => setOpen(null)} role="dialog" aria-modal="true">
+          <button className="shot-lightbox-close" aria-label="Close" onClick={() => setOpen(null)}>×</button>
+          <img
+            src={`/screen-shots/${SHOTS[open].img}`}
+            alt={SHOTS[open].title}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }

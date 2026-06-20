@@ -540,14 +540,40 @@ body {
   flex-direction: row-reverse;
 }
 .shot-frame {
+  position: relative;
   flex: 1 1 58%;
   min-width: 0;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  cursor: pointer;
   padding: clamp(0.9rem, 2vw, 1.5rem);
-  background: var(--purple);
+  background: var(--green);
   border-radius: 18px;
-  box-shadow: 0 24px 60px -28px var(--purple-glow);
+  box-shadow: 0 24px 60px -28px var(--green-glow);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease;
+}
+/* Slick, static gloss — a diagonal sheen + a soft top-edge highlight laid over
+   the green frame. No keyframes; just a layered gradient that reads as glass. */
+.shot-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0) 42%),
+    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.22), transparent 60%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.shot-frame:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 36px 84px -26px var(--green-glow), 0 0 0 1px var(--green-dim);
 }
 .shot-inner {
+  position: relative;
+  display: block;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--border);
@@ -557,6 +583,66 @@ body {
   display: block;
   width: 100%;
   height: auto;
+}
+.shot-expand {
+  position: absolute;
+  top: clamp(0.9rem, 2vw, 1.5rem);
+  right: clamp(0.9rem, 2vw, 1.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 15px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.shot-frame:hover .shot-expand {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Lightbox — click a shot to blow it up */
+.shot-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 4vw;
+  background: rgba(0, 0, 0, 0.86);
+  backdrop-filter: blur(6px);
+  cursor: zoom-out;
+}
+.shot-lightbox img {
+  max-width: 92vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  border: 1px solid var(--border-2);
+  box-shadow: 0 40px 120px -20px rgba(0, 0, 0, 0.8);
+  cursor: default;
+}
+.shot-lightbox-close {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.shot-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.22);
 }
 .shot-copy {
   flex: 1 1 42%;
