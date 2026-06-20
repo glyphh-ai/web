@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: 'Is Glyphh free?',
-    a: 'Free 14-day trial — no credit card required. After that, $9/month for the full workspace — agent, swarms, MCP, and skills. Inference is the only other cost and it goes straight to your provider — Glyphh takes no spread on tokens.',
+    a: 'Yes — free forever with your own keys, no trial and no credit card. The full workspace is free: the agent, swarms, skills, Flows (RPA), and automatic app-level capture. You bring your own provider keys, so there is no token markup. Pro is $12/month and adds the MCP layer — connect external MCP servers and expose Glyphh itself as one — plus Pipedream’s 3,500+ app connectors and cloud sync across machines.',
   },
   {
     q: 'What platforms does Glyphh support?',

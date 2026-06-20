@@ -1208,6 +1208,11 @@ body {
   font-size: 0.75rem;
 }
 
+.pricing-features .check {
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
 .check {
   color: var(--green);
   font-weight: 700;

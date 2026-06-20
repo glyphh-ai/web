@@ -3,7 +3,9 @@
 import { useEffect, useRef } from 'react';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
-import AdaL from './components/AdaL';
+import Capture from './components/Capture';
+import Mcp from './components/Mcp';
+import Rpa from './components/Rpa';
 import Features from './components/Features';
 import Integrations from './components/Integrations';
 import Pricing from './components/Pricing';
@@ -56,7 +58,9 @@ export default function Home() {
       <Hero />
       <HeroVideo />
       <Integrations />
-      <AdaL />
+      <Capture />
+      <Mcp />
+      <Rpa />
       <Features />
       <Pricing />
       <Download />
