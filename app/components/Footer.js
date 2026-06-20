@@ -17,8 +17,8 @@ export default function Footer() {
           </div>
           <div className="footer-col">
             <h4>Resources</h4>
-            <a href="https://github.com/glyphh-ai/yo-releases/releases" target="_blank" rel="noopener noreferrer">Changelog</a>
-            <a href="https://github.com/glyphh-ai/yo-releases" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://github.com/glyphh-ai/glyphh-releases/releases" target="_blank" rel="noopener noreferrer">Changelog</a>
+            <a href="https://github.com/glyphh-ai/glyphh-releases" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
           <div className="footer-col">
             <h4>Legal</h4>

@@ -11,13 +11,13 @@
  * S3 download link that requires no auth.
  */
 
-const REPO = 'glyphh-ai/yo-releases';
+const REPO = process.env.RELEASES_REPO || 'glyphh-ai/glyphh-releases';
 
 function assetNameFor(platform, arch) {
-  if (platform === 'win') return 'Yo-Setup.exe';
-  // Mac is multi-arch as of v2.9.1 — default to Apple Silicon.
+  if (platform === 'win') return 'Glyphh-Setup.exe';
+  // Mac is multi-arch — default to Apple Silicon.
   const a = arch === 'x64' ? 'x64' : 'arm64';
-  return `Yo-${a}.dmg`;
+  return `Glyphh-${a}.dmg`;
 }
 
 export async function GET(request) {
@@ -41,14 +41,7 @@ export async function GET(request) {
     }
 
     const release = await releaseRes.json();
-    let asset = release.assets?.find((a) => a.name === assetName);
-
-    // Backwards-compat: pre-v2.9.1 releases used the un-arched name `Yo.dmg`.
-    // If we asked for the arched name and didn't find it, fall back so old
-    // releases still resolve cleanly.
-    if (!asset && platform === 'mac') {
-      asset = release.assets?.find((a) => a.name === 'Yo.dmg');
-    }
+    const asset = release.assets?.find((a) => a.name === assetName);
 
     if (!asset) {
       return new Response(`Asset "${assetName}" not found in latest release`, { status: 404 });
