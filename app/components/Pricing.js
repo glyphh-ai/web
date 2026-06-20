@@ -1,4 +1,4 @@
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://app.glyphh.ai';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 
 const FREE_FEATURES = [
   'The full native workspace — every app as a panel',

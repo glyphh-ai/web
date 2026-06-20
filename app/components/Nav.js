@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://app.glyphh.ai';
+const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
