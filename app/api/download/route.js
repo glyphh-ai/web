@@ -11,6 +11,10 @@
  * S3 download link that requires no auth.
  */
 
+// Always hit the live release — Next's default fetch cache otherwise pins a
+// stale "latest" (which 404s when its assets are the old Yo-* names).
+export const dynamic = 'force-dynamic';
+
 const REPO = process.env.RELEASES_REPO || 'glyphh-ai/glyphh-releases';
 
 function assetNameFor(platform, arch) {
@@ -34,6 +38,7 @@ export async function GET(request) {
     if (token) headers.Authorization = `Bearer ${token}`;
     const releaseRes = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, {
       headers,
+      cache: 'no-store',
     });
 
     if (!releaseRes.ok) {
@@ -54,6 +59,7 @@ export async function GET(request) {
     const assetRes = await fetch(asset.url, {
       headers: assetHeaders,
       redirect: 'manual',
+      cache: 'no-store',
     });
 
     const downloadUrl = assetRes.headers.get('location');
