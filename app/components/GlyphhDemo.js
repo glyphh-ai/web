@@ -49,35 +49,43 @@ function AppIcon({ name, domain, size = 18 }) {
 }
 
 function VibeScene() {
-  const lines = [
-    [{ t: 'export default function ', c: 'kw' }, { t: 'Pricing', c: 'fn' }, { t: '() {', c: '' }],
-    [{ t: '  return (', c: 'mut' }],
-    [{ t: '    <section ', c: 'tag' }, { t: 'className', c: 'attr' }, { t: '="pricing">', c: 'tag' }],
-    [{ t: '      <PlanCard ', c: 'tag' }, { t: 'tier', c: 'attr' }, { t: '="Pro" ', c: 'str' }, { t: '/>', c: 'tag' }],
-    [{ t: '    </section>', c: 'tag' }],
-    [{ t: '  )', c: 'mut' }, { t: ';', c: '' }],
-    [{ t: '}', c: '' }],
+  const tools = [
+    { name: 'Grep', arg: '"PlanCard"', meta: '3 matches', done: true },
+    { name: 'Read', arg: 'Pricing.jsx', meta: '142 lines', done: true },
+    { name: 'Edit', arg: 'Pricing.jsx', meta: '+6 −1', done: false },
+  ];
+  const diff = [
+    { sign: ' ', t: '  <div className="plans">', type: 'ctx' },
+    { sign: '−', t: '    <PlanCard tier="Free" />', type: 'del' },
+    { sign: '+', t: '    <PlanCard tier="Free" />', type: 'add' },
+    { sign: '+', t: '    <PlanCard tier="Pro" featured />', type: 'add' },
   ];
   return (
     <div className="gd-scene gd-vibe">
-      <div className="gd-filebar">
-        <span className="gd-dot gd-dot-mod" /> App.jsx
+      <div className="gd-vibe-prompt" style={{ animationDelay: '0s' }}>
+        <img className="gd-agent-glyphh" src="/glyphh-mascot.png" alt="" width={18} height={18} />
+        <span>Add a <b>Pro</b> tier to the pricing page</span>
       </div>
-      <pre className="gd-code">
-        {lines.map((ln, i) => (
-          <div className="gd-codeline" key={i}>
-            <span className="gd-gutter">{i + 1}</span>
-            <span className="gd-code-text">
-              {ln.map((tok, j) => (
-                <span key={j} className={`tok ${tok.c}`}>{tok.t}</span>
-              ))}
-              {i === 3 && <span className="gd-caret" />}
-            </span>
+      <div className="gd-tools">
+        {tools.map((t, i) => (
+          <div className="gd-tool" key={i} style={{ animationDelay: `${0.5 + i * 0.5}s` }}>
+            <span className="gd-tool-mark">{t.done ? '✓' : <span className="gd-spinner" />}</span>
+            <span className="gd-tool-name">{t.name}</span>
+            <span className="gd-tool-arg">{t.arg}</span>
+            <span className="gd-tool-meta">{t.meta}</span>
           </div>
         ))}
-      </pre>
-      <div className="gd-statusline">
-        <span className="gd-pulse" /> Agent is writing <b>PlanCard</b>…
+      </div>
+      <div className="gd-diff" style={{ animationDelay: '2.1s' }}>
+        <div className="gd-diff-head">
+          app/components/Pricing.jsx
+          <span className="gd-diff-stat"><b className="add">+6</b> <b className="del">−1</b></span>
+        </div>
+        {diff.map((d, i) => (
+          <div className={`gd-diffline ${d.type}`} key={i}>
+            <span className="gd-diff-sign">{d.sign}</span>{d.t}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -148,6 +156,91 @@ function AgentScene() {
 
 const SCENES = { vibe: VibeScene, flow: FlowScene, agent: AgentScene };
 
+/* Each rail app opens its own "page" as a panel view. */
+const APP_META = {
+  Claude: { url: 'claude.ai', kind: 'chat' },
+  GitHub: { url: 'github.com/glyphh-ai/glyphh-web', kind: 'github' },
+  Slack: { url: 'app.slack.com', kind: 'slack' },
+  Gmail: { url: 'mail.google.com', kind: 'mail' },
+  Figma: { url: 'figma.com/file/pricing', kind: 'figma' },
+  Linear: { url: 'linear.app', kind: 'linear' },
+};
+
+function AppBody({ kind }) {
+  switch (kind) {
+    case 'chat':
+      return (
+        <div className="gd-chat">
+          <div className="gd-bubble user">Summarize the pricing change for the team.</div>
+          <div className="gd-bubble bot">
+            Added a featured <b>Pro</b> tier at $12/mo; Free stays the default. Updated
+            the page and opened PR #412.
+          </div>
+        </div>
+      );
+    case 'github':
+      return (
+        <div className="gd-rows">
+          <div className="gd-row gd-row-head"><span className="gd-tag">PR #412</span> Add Pro pricing tier</div>
+          <div className="gd-row"><span className="gd-row-title">Pricing.jsx</span><span className="gd-row-meta"><b className="add">+6</b> <b className="del">−1</b></span></div>
+          <div className="gd-row"><span className="gd-row-title">Pricing.test.jsx</span><span className="gd-row-meta"><b className="add">+12</b></span></div>
+        </div>
+      );
+    case 'slack':
+      return (
+        <div className="gd-rows">
+          <div className="gd-row gd-row-head"># sales</div>
+          <div className="gd-row"><span className="gd-row-title">Glyphh</span><span className="gd-row-sub">Pro tier is live 🎉</span></div>
+          <div className="gd-row"><span className="gd-row-title">Dana</span><span className="gd-row-sub">nice — updating the deck</span></div>
+        </div>
+      );
+    case 'mail':
+      return (
+        <div className="gd-rows">
+          <div className="gd-row gd-row-head">Inbox · 3 new</div>
+          <div className="gd-row"><span className="gd-row-title">Stripe</span><span className="gd-row-sub">New subscription · Pro</span><span className="gd-row-meta">2m</span></div>
+          <div className="gd-row"><span className="gd-row-title">Vercel</span><span className="gd-row-sub">Deployment ready</span><span className="gd-row-meta">9m</span></div>
+        </div>
+      );
+    case 'figma':
+      return (
+        <div className="gd-figma">
+          <span className="gd-frame f1" />
+          <span className="gd-frame f2" />
+          <span className="gd-frame f3" />
+          <span className="gd-figma-cap">Pricing / Pro card</span>
+        </div>
+      );
+    case 'linear':
+      return (
+        <div className="gd-rows">
+          <div className="gd-row gd-row-head">In Progress</div>
+          <div className="gd-row"><span className="gd-sdot green" /><span className="gd-row-title">GLY-204</span><span className="gd-row-sub">Add Pro pricing tier</span></div>
+          <div className="gd-row"><span className="gd-sdot amber" /><span className="gd-row-title">GLY-205</span><span className="gd-row-sub">Update billing docs</span></div>
+        </div>
+      );
+    default:
+      return null;
+  }
+}
+
+function AppView({ name }) {
+  const app = RAIL.find((a) => a.name === name) || { name, domain: '' };
+  const meta = APP_META[name] || {};
+  return (
+    <div className="gd-appview">
+      <div className="gd-appview-bar">
+        <AppIcon name={app.name} domain={app.domain} size={15} />
+        <span className="gd-appview-name">{app.name}</span>
+        <span className="gd-appview-url">{meta.url}</span>
+      </div>
+      <div className="gd-appview-body">
+        <AppBody kind={meta.kind} />
+      </div>
+    </div>
+  );
+}
+
 export default function GlyphhDemo() {
   const [active, setActive] = useState('vibe');
   const [auto, setAuto] = useState(true);
@@ -165,6 +258,8 @@ export default function GlyphhDemo() {
     return () => clearInterval(t);
   }, [auto]);
 
+  const isApp = active.startsWith('app:');
+  const appName = isApp ? active.slice(4) : null;
   const Scene = SCENES[active];
 
   return (
@@ -181,14 +276,20 @@ export default function GlyphhDemo() {
         <span className="gd-live"><span className="gd-pulse" /> live</span>
       </div>
       <div className="gd-body">
-        <nav className="gd-rail" aria-hidden="true">
+        <nav className="gd-rail">
           <span className="gd-rail-glyphh">
             <img src="/glyphh-mascot.png" alt="" width={20} height={20} />
           </span>
-          {RAIL.map((a, i) => (
-            <span key={a.name} className={`gd-rail-icon${i === 0 ? ' is-active' : ''}`}>
+          {RAIL.map((a) => (
+            <button
+              key={a.name}
+              type="button"
+              title={`Open ${a.name}`}
+              className={`gd-rail-icon${active === `app:${a.name}` ? ' is-active' : ''}`}
+              onClick={() => { setActive(`app:${a.name}`); setAuto(false); }}
+            >
               <AppIcon name={a.name} domain={a.domain} />
-            </span>
+            </button>
           ))}
         </nav>
         <div className="gd-main">
@@ -206,7 +307,7 @@ export default function GlyphhDemo() {
             ))}
           </div>
           <div className="gd-stage" key={active}>
-            <Scene />
+            {isApp ? <AppView name={appName} /> : <Scene />}
           </div>
         </div>
       </div>
