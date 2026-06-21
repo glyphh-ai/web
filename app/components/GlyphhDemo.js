@@ -247,6 +247,11 @@ function AppView({ name }) {
   );
 }
 
+/* Auto-tour: cycle the scenes AND the app web panels so a visitor sees the
+   whole story — vibe-coding, automations, the agent, and live app views —
+   without having to click anything. */
+const ROTATION = ['vibe', 'app:GitHub', 'flow', 'app:Slack', 'agent', 'app:Claude', 'app:Figma'];
+
 export default function GlyphhDemo() {
   const [active, setActive] = useState('vibe');
   const [auto, setAuto] = useState(true);
@@ -257,10 +262,10 @@ export default function GlyphhDemo() {
     const t = setInterval(() => {
       if (paused.current) return;
       setActive((a) => {
-        const i = TABS.findIndex((x) => x.id === a);
-        return TABS[(i + 1) % TABS.length].id;
+        const i = ROTATION.indexOf(a);
+        return ROTATION[(i + 1) % ROTATION.length];
       });
-    }, 4200);
+    }, 3600);
     return () => clearInterval(t);
   }, [auto]);
 
