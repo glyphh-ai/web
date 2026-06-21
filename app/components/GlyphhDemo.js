@@ -156,20 +156,151 @@ function AgentScene() {
 
 const SCENES = { vibe: VibeScene, flow: FlowScene, agent: AgentScene };
 
-/* Each rail app opens as a panel showing the real app, the way the product
-   embeds live web apps as panels. */
+/* Each rail app opens as a panel showing the app in use — the way the
+   product embeds live web apps as panels. Mockups, in each app's own UI. */
 const APP_META = {
-  Claude: { url: 'claude.com', shot: '/app-shots/claude.png' },
-  GitHub: { url: 'github.com', shot: '/app-shots/github.png' },
-  Slack: { url: 'slack.com', shot: '/app-shots/slack.png' },
-  Gmail: { url: 'mail.google.com', shot: '/app-shots/gmail.png' },
-  Figma: { url: 'figma.com', shot: '/app-shots/figma.png' },
-  Linear: { url: 'linear.app', shot: '/app-shots/linear.png' },
+  Claude: { url: 'claude.ai', kind: 'claude' },
+  GitHub: { url: 'github.com/glyphh-ai/glyphh-web', kind: 'github' },
+  Slack: { url: 'app.slack.com/client', kind: 'slack' },
+  Gmail: { url: 'mail.google.com', kind: 'gmail' },
+  Figma: { url: 'figma.com/file/pricing', kind: 'figma' },
+  Linear: { url: 'linear.app', kind: 'linear' },
 };
+
+function GmailMock() {
+  const mails = [
+    { from: 'Stripe', subj: 'New subscription · Pro', snip: 'You have a new Pro subscriber —', time: '2m', unread: true },
+    { from: 'Vercel', subj: 'Deployment ready', snip: 'glyphh-web deployed to production', time: '14m', unread: true },
+    { from: 'Linear', subj: 'GLY-204 moved to Done', snip: 'Chris completed Add Pro pricing', time: '1h', unread: false },
+    { from: 'GitHub', subj: '[glyphh-web] PR #412 merged', snip: 'Add Pro pricing tier was merged', time: '3h', unread: false },
+  ];
+  return (
+    <div className="mk mk-gmail">
+      <div className="mk-gm-side">
+        <div className="mk-gm-compose">＋ Compose</div>
+        <div className="mk-gm-nav active">Inbox<span>24</span></div>
+        <div className="mk-gm-nav">Starred</div>
+        <div className="mk-gm-nav">Sent</div>
+        <div className="mk-gm-nav">Drafts</div>
+      </div>
+      <div className="mk-gm-list">
+        {mails.map((m, i) => (
+          <div key={i} className={`mk-gm-row${m.unread ? ' unread' : ''}`}>
+            <span className="mk-gm-star">☆</span>
+            <span className="mk-gm-from">{m.from}</span>
+            <span className="mk-gm-text"><b>{m.subj}</b> — {m.snip}</span>
+            <span className="mk-gm-time">{m.time}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SlackMock() {
+  return (
+    <div className="mk mk-slack">
+      <div className="mk-sl-side">
+        <div className="mk-sl-team">Glyphh HQ</div>
+        <div className="mk-sl-ch">＃ general</div>
+        <div className="mk-sl-ch">＃ sales</div>
+        <div className="mk-sl-sec">Direct messages</div>
+        <div className="mk-sl-dm active"><span className="mk-sl-dot" />Dana</div>
+        <div className="mk-sl-dm"><span className="mk-sl-dot off" />Sam</div>
+      </div>
+      <div className="mk-sl-main">
+        <div className="mk-sl-head">Dana</div>
+        <div className="mk-sl-msgs">
+          <div className="mk-sl-msg"><span className="mk-av av1">D</span><div><b>Dana</b> <i>9:41</i><p>Pro tier is live 🎉 nice work</p></div></div>
+          <div className="mk-sl-msg"><span className="mk-av av2">C</span><div><b>You</b> <i>9:42</i><p>Glyphh shipped it end-to-end</p></div></div>
+        </div>
+        <div className="mk-sl-input">Message Dana</div>
+      </div>
+    </div>
+  );
+}
+
+function GithubMock() {
+  return (
+    <div className="mk mk-gh">
+      <div className="mk-gh-head">
+        <span className="mk-gh-repo">glyphh-ai / glyphh-web</span>
+        <span className="mk-gh-pr">⌥ Pull requests</span>
+      </div>
+      <div className="mk-gh-prtitle">
+        <span className="mk-gh-badge">Open</span>
+        Add Pro pricing tier <span className="mk-gh-num">#412</span>
+      </div>
+      <div className="mk-gh-file">Pricing.jsx</div>
+      <div className="mk-gh-diff">
+        <div className="ctx">  &lt;div className="plans"&gt;</div>
+        <div className="del">- &lt;PlanCard tier="Free" /&gt;</div>
+        <div className="add">+ &lt;PlanCard tier="Free" /&gt;</div>
+        <div className="add">+ &lt;PlanCard tier="Pro" featured /&gt;</div>
+      </div>
+    </div>
+  );
+}
+
+function LinearMock() {
+  const rows = [
+    { id: 'GLY-204', t: 'Add Pro pricing tier', s: 'done', p: 'C' },
+    { id: 'GLY-205', t: 'Update billing docs', s: 'prog', p: 'D' },
+    { id: 'GLY-206', t: 'Annual plan toggle', s: 'todo', p: 'S' },
+    { id: 'GLY-207', t: 'Proration on upgrade', s: 'todo', p: 'C' },
+  ];
+  return (
+    <div className="mk mk-linear">
+      <div className="mk-ln-head">Cycle 14 · Active</div>
+      {rows.map((r, i) => (
+        <div key={i} className="mk-ln-row">
+          <span className={`mk-ln-st ${r.s}`} />
+          <span className="mk-ln-id">{r.id}</span>
+          <span className="mk-ln-title">{r.t}</span>
+          <span className="mk-ln-av">{r.p}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FigmaMock() {
+  return (
+    <div className="mk mk-figma">
+      <div className="mk-fg-side">
+        <div className="mk-fg-layer active">▤ Pricing</div>
+        <div className="mk-fg-layer">▢ Free card</div>
+        <div className="mk-fg-layer">▢ Pro card</div>
+        <div className="mk-fg-layer">T Heading</div>
+      </div>
+      <div className="mk-fg-canvas">
+        <span className="mk-fg-frame fa" />
+        <span className="mk-fg-frame fb" />
+        <span className="mk-fg-label">Pricing / Pro</span>
+      </div>
+    </div>
+  );
+}
+
+function ClaudeMock() {
+  return (
+    <div className="mk mk-claude">
+      <div className="mk-cl-msg user">Summarize the pricing change for the team.</div>
+      <div className="mk-cl-msg bot">
+        <span className="mk-cl-mark">✳</span>
+        <p>Added a featured <b>Pro</b> tier at $12/mo; Free stays the default. Shipped the page and merged PR #412.</p>
+      </div>
+      <div className="mk-cl-input">Reply to Claude…</div>
+    </div>
+  );
+}
+
+const APP_MOCKS = { gmail: GmailMock, slack: SlackMock, github: GithubMock, linear: LinearMock, figma: FigmaMock, claude: ClaudeMock };
 
 function AppView({ name }) {
   const app = RAIL.find((a) => a.name === name) || { name, domain: '' };
   const meta = APP_META[name] || {};
+  const Mock = APP_MOCKS[meta.kind];
   return (
     <div className="gd-appview">
       <div className="gd-browserbar">
@@ -181,7 +312,7 @@ function AppView({ name }) {
         <span className="gd-bb-live"><span className="gd-pulse" /> live</span>
       </div>
       <div className="gd-appshot">
-        <img src={meta.shot} alt={`${app.name} running in Glyphh`} loading="lazy" />
+        {Mock ? <Mock /> : null}
       </div>
     </div>
   );
