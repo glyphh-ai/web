@@ -14,7 +14,7 @@ import Download from './components/Download';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
-import HeroVideo from './components/HeroVideo';
+import Develop from './components/Develop';
 
 export default function Home() {
   useEffect(() => {
@@ -57,10 +57,10 @@ export default function Home() {
     <>
       <Nav />
       <Hero />
-      <HeroVideo />
       <Integrations />
       <Capture />
       <Screenshots />
+      <Develop />
       <Mcp />
       <Rpa />
       <Features />
