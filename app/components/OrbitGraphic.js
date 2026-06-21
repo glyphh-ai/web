@@ -17,6 +17,11 @@ const AI_NODES = [
   { name: 'Claude', domain: 'claude.ai' },
   { name: 'ChatGPT', domain: 'chatgpt.com' },
   { name: 'Gemini', domain: 'gemini.google.com' },
+  { name: 'Grok', domain: 'grok.com' },
+  { name: 'Perplexity', domain: 'perplexity.ai' },
+  { name: 'DeepSeek', domain: 'chat.deepseek.com' },
+  { name: 'Mistral', domain: 'mistral.ai' },
+  { name: 'Copilot', domain: 'copilot.microsoft.com' },
 ];
 
 const APP_NODES = [
@@ -28,6 +33,14 @@ const APP_NODES = [
   { name: 'Figma', domain: 'figma.com' },
   { name: 'Linear', domain: 'linear.app' },
   { name: 'Shopify', domain: 'shopify.com' },
+  { name: 'Jira', domain: 'atlassian.com' },
+  { name: 'Airtable', domain: 'airtable.com' },
+  { name: 'Asana', domain: 'asana.com' },
+  { name: 'Discord', domain: 'discord.com' },
+  { name: 'Supabase', domain: 'supabase.com' },
+  { name: 'Vercel', domain: 'vercel.com' },
+  { name: 'HubSpot', domain: 'hubspot.com' },
+  { name: 'Salesforce', domain: 'salesforce.com' },
 ];
 
 const favicon = (domain) => `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
