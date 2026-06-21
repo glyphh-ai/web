@@ -757,13 +757,91 @@ body {
   overflow: hidden;
   background: var(--surface-2);
 }
-.gd-appshot img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-}
+
+/* ── App mockups (each in its own product UI) ───────────────────── */
+.mk { height: 100%; width: 100%; display: flex; font-size: 0.62rem; line-height: 1.35; overflow: hidden; }
+.mk b { font-weight: 600; }
+
+/* Gmail — light */
+.mk-gmail { background: #fff; color: #202124; }
+.mk-gm-side { width: 86px; flex-shrink: 0; padding: 8px 6px; border-right: 1px solid #eaeaea; }
+.mk-gm-compose { background: #c2e7ff; color: #001d35; border-radius: 12px; padding: 5px 8px; font-weight: 600; margin-bottom: 8px; }
+.mk-gm-nav { display: flex; justify-content: space-between; padding: 4px 8px; border-radius: 0 12px 12px 0; color: #444746; }
+.mk-gm-nav.active { background: #d3e3fd; color: #041e49; font-weight: 700; }
+.mk-gm-nav span { color: #1a73e8; font-weight: 700; }
+.mk-gm-list { flex: 1; min-width: 0; }
+.mk-gm-row { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-bottom: 1px solid #f1f1f1; color: #5f6368; white-space: nowrap; }
+.mk-gm-row.unread { background: #fff; color: #202124; }
+.mk-gm-row.unread .mk-gm-from, .mk-gm-row.unread b { font-weight: 700; color: #202124; }
+.mk-gm-star { color: #dadce0; }
+.mk-gm-from { width: 58px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; }
+.mk-gm-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.mk-gm-time { flex-shrink: 0; font-size: 0.56rem; }
+
+/* Slack — aubergine + dark */
+.mk-slack { background: #1a1d21; color: #d1d2d3; }
+.mk-sl-side { width: 92px; flex-shrink: 0; background: #3f0e40; color: #cfc3cf; padding: 8px 7px; }
+.mk-sl-team { color: #fff; font-weight: 700; margin-bottom: 8px; }
+.mk-sl-ch, .mk-sl-dm { padding: 2px 4px; border-radius: 4px; display: flex; align-items: center; gap: 5px; }
+.mk-sl-sec { margin: 7px 0 3px; font-size: 0.56rem; color: #bda9bd; }
+.mk-sl-dm.active { background: #1164a3; color: #fff; }
+.mk-sl-dot { width: 6px; height: 6px; border-radius: 50%; background: #2bac76; }
+.mk-sl-dot.off { background: transparent; border: 1px solid #8c7b8c; }
+.mk-sl-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.mk-sl-head { font-weight: 700; color: #fff; padding: 7px 9px; border-bottom: 1px solid #2c2f33; }
+.mk-sl-msgs { flex: 1; padding: 8px 9px; display: flex; flex-direction: column; gap: 9px; }
+.mk-sl-msg { display: flex; gap: 7px; }
+.mk-sl-msg i { color: #9b9c9d; font-size: 0.54rem; font-style: normal; margin-left: 4px; }
+.mk-sl-msg p { color: #d1d2d3; margin-top: 1px; }
+.mk-av { width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.56rem; }
+.mk-av.av1 { background: #4a154b; } .mk-av.av2 { background: #2bac76; }
+.mk-sl-input { margin: 0 9px 9px; border: 1px solid #3a3d42; border-radius: 6px; padding: 5px 8px; color: #8d8f93; }
+
+/* GitHub — dark */
+.mk-gh { background: #0d1117; color: #c9d1d9; flex-direction: column; padding: 9px 11px; gap: 7px; }
+.mk-gh-head { display: flex; justify-content: space-between; color: #8b949e; }
+.mk-gh-repo { color: #58a6ff; }
+.mk-gh-prtitle { color: #e6edf3; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.mk-gh-num { color: #8b949e; font-weight: 400; }
+.mk-gh-badge { background: #238636; color: #fff; border-radius: 100px; padding: 1px 8px; font-size: 0.56rem; }
+.mk-gh-file { color: #8b949e; border: 1px solid #30363d; border-radius: 6px 6px 0 0; padding: 4px 8px; background: #161b22; }
+.mk-gh-diff { border: 1px solid #30363d; border-top: none; border-radius: 0 0 6px 6px; font-family: var(--font-mono); white-space: pre; overflow: hidden; }
+.mk-gh-diff div { padding: 1px 8px; }
+.mk-gh-diff .ctx { color: #8b949e; }
+.mk-gh-diff .add { background: rgba(46,160,67,0.18); color: #7ee787; }
+.mk-gh-diff .del { background: rgba(248,81,73,0.15); color: #ffa198; }
+
+/* Linear — dark */
+.mk-linear { background: #0d0e10; color: #b4b8c5; flex-direction: column; padding: 9px 11px; gap: 6px; }
+.mk-ln-head { color: #8a8f9c; font-weight: 600; margin-bottom: 2px; }
+.mk-ln-row { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.mk-ln-st { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; border: 2px solid #5e6ad2; }
+.mk-ln-st.done { background: #5e6ad2; border-color: #5e6ad2; }
+.mk-ln-st.prog { border-color: #f2c94c; background: linear-gradient(90deg, #f2c94c 50%, transparent 50%); }
+.mk-ln-st.todo { border-color: #6a6f7d; }
+.mk-ln-id { color: #6a6f7d; width: 48px; flex-shrink: 0; }
+.mk-ln-title { color: #e6e8ee; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.mk-ln-av { width: 16px; height: 16px; border-radius: 50%; background: #2a2c33; color: #b4b8c5; display: flex; align-items: center; justify-content: center; font-size: 0.54rem; flex-shrink: 0; }
+
+/* Figma — grey canvas */
+.mk-figma { background: #2c2c2c; color: #cfcfcf; }
+.mk-fg-side { width: 92px; flex-shrink: 0; background: #1e1e1e; padding: 8px 7px; display: flex; flex-direction: column; gap: 5px; }
+.mk-fg-layer { color: #b3b3b3; }
+.mk-fg-layer.active { color: #fff; }
+.mk-fg-canvas { flex: 1; position: relative; background: #e5e5e5; overflow: hidden; }
+.mk-fg-frame { position: absolute; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.mk-fg-frame.fa { left: 20px; top: 26px; width: 70px; height: 130px; background: #fff; border: 1px solid #d0d0d0; }
+.mk-fg-frame.fb { left: 104px; top: 26px; width: 70px; height: 130px; background: #18a0fb; }
+.mk-fg-label { position: absolute; left: 20px; top: 10px; font-size: 0.54rem; color: #18a0fb; }
+
+/* Claude — cream */
+.mk-claude { background: #f0eee6; color: #2b2a27; flex-direction: column; padding: 10px 11px; gap: 8px; }
+.mk-cl-msg { font-size: 0.64rem; line-height: 1.45; }
+.mk-cl-msg.user { align-self: flex-end; background: #fff; border: 1px solid #e3e0d6; border-radius: 11px; padding: 6px 10px; max-width: 82%; }
+.mk-cl-msg.bot { display: flex; gap: 7px; }
+.mk-cl-mark { color: #d97757; flex-shrink: 0; }
+.mk-cl-msg.bot b { color: #1f1e1c; }
+.mk-cl-input { margin-top: auto; border: 1px solid #d9d5c8; border-radius: 9px; padding: 6px 10px; color: #8a877c; background: #fff; }
 
 /* Flow scene */
 .gd-flow-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
