@@ -1,4 +1,4 @@
-import OrbitGraphic from './OrbitGraphic';
+import GlyphhDemo from './GlyphhDemo';
 
 export default function Hero() {
   return (
@@ -29,8 +29,8 @@ export default function Hero() {
             </a>
           </div>
         </div>
-        <div className="hero-orbit-col">
-          <OrbitGraphic />
+        <div className="hero-visual-col">
+          <GlyphhDemo />
         </div>
       </div>
     </section>
