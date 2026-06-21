@@ -156,73 +156,16 @@ function AgentScene() {
 
 const SCENES = { vibe: VibeScene, flow: FlowScene, agent: AgentScene };
 
-/* Each rail app opens its own "page" as a panel view. */
+/* Each rail app opens as a panel showing the real app, the way the product
+   embeds live web apps as panels. */
 const APP_META = {
-  Claude: { url: 'claude.ai', kind: 'chat' },
-  GitHub: { url: 'github.com/glyphh-ai/glyphh-web', kind: 'github' },
-  Slack: { url: 'app.slack.com', kind: 'slack' },
-  Gmail: { url: 'mail.google.com', kind: 'mail' },
-  Figma: { url: 'figma.com/file/pricing', kind: 'figma' },
-  Linear: { url: 'linear.app', kind: 'linear' },
+  Claude: { url: 'claude.com', shot: '/app-shots/claude.png' },
+  GitHub: { url: 'github.com', shot: '/app-shots/github.png' },
+  Slack: { url: 'slack.com', shot: '/app-shots/slack.png' },
+  Gmail: { url: 'mail.google.com', shot: '/app-shots/gmail.png' },
+  Figma: { url: 'figma.com', shot: '/app-shots/figma.png' },
+  Linear: { url: 'linear.app', shot: '/app-shots/linear.png' },
 };
-
-function AppBody({ kind }) {
-  switch (kind) {
-    case 'chat':
-      return (
-        <div className="gd-chat">
-          <div className="gd-bubble user">Summarize the pricing change for the team.</div>
-          <div className="gd-bubble bot">
-            Added a featured <b>Pro</b> tier at $12/mo; Free stays the default. Updated
-            the page and opened PR #412.
-          </div>
-        </div>
-      );
-    case 'github':
-      return (
-        <div className="gd-rows">
-          <div className="gd-row gd-row-head"><span className="gd-tag">PR #412</span> Add Pro pricing tier</div>
-          <div className="gd-row"><span className="gd-row-title">Pricing.jsx</span><span className="gd-row-meta"><b className="add">+6</b> <b className="del">−1</b></span></div>
-          <div className="gd-row"><span className="gd-row-title">Pricing.test.jsx</span><span className="gd-row-meta"><b className="add">+12</b></span></div>
-        </div>
-      );
-    case 'slack':
-      return (
-        <div className="gd-rows">
-          <div className="gd-row gd-row-head"># sales</div>
-          <div className="gd-row"><span className="gd-row-title">Glyphh</span><span className="gd-row-sub">Pro tier is live 🎉</span></div>
-          <div className="gd-row"><span className="gd-row-title">Dana</span><span className="gd-row-sub">nice — updating the deck</span></div>
-        </div>
-      );
-    case 'mail':
-      return (
-        <div className="gd-rows">
-          <div className="gd-row gd-row-head">Inbox · 3 new</div>
-          <div className="gd-row"><span className="gd-row-title">Stripe</span><span className="gd-row-sub">New subscription · Pro</span><span className="gd-row-meta">2m</span></div>
-          <div className="gd-row"><span className="gd-row-title">Vercel</span><span className="gd-row-sub">Deployment ready</span><span className="gd-row-meta">9m</span></div>
-        </div>
-      );
-    case 'figma':
-      return (
-        <div className="gd-figma">
-          <span className="gd-frame f1" />
-          <span className="gd-frame f2" />
-          <span className="gd-frame f3" />
-          <span className="gd-figma-cap">Pricing / Pro card</span>
-        </div>
-      );
-    case 'linear':
-      return (
-        <div className="gd-rows">
-          <div className="gd-row gd-row-head">In Progress</div>
-          <div className="gd-row"><span className="gd-sdot green" /><span className="gd-row-title">GLY-204</span><span className="gd-row-sub">Add Pro pricing tier</span></div>
-          <div className="gd-row"><span className="gd-sdot amber" /><span className="gd-row-title">GLY-205</span><span className="gd-row-sub">Update billing docs</span></div>
-        </div>
-      );
-    default:
-      return null;
-  }
-}
 
 function AppView({ name }) {
   const app = RAIL.find((a) => a.name === name) || { name, domain: '' };
@@ -237,11 +180,8 @@ function AppView({ name }) {
         </span>
         <span className="gd-bb-live"><span className="gd-pulse" /> live</span>
       </div>
-      <div className="gd-appview-body">
-        <AppBody kind={meta.kind} />
-      </div>
-      <div className="gd-capture">
-        <span className="gd-pulse" /> Captured · indexed locally
+      <div className="gd-appshot">
+        <img src={meta.shot} alt={`${app.name} running in Glyphh`} loading="lazy" />
       </div>
     </div>
   );
