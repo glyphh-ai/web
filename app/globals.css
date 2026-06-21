@@ -559,6 +559,22 @@ body {
   font-family: var(--font-mono);
   user-select: none;
 }
+
+/* Status bar — the three pillars, always on, in one workspace */
+.gd-statusbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 7px 12px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-2);
+  font-size: 0.64rem;
+  color: var(--text-3);
+}
+.gd-stat { display: inline-flex; align-items: center; gap: 6px; }
+.gd-stat-cap { color: var(--green); }
+.gd-stat-ico { color: var(--text-4); font-size: 0.72rem; }
+
 .gd-titlebar {
   display: flex;
   align-items: center;
@@ -717,16 +733,32 @@ body {
 .add { color: var(--green); }
 .del { color: #ff8b84; }
 
-/* App views — opened from the rail */
-.gd-appview { display: flex; flex-direction: column; gap: 10px; }
-.gd-appview-bar {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 0.68rem; padding: 5px 9px;
+/* App views — live web panels opened from the rail */
+.gd-appview { position: relative; display: flex; flex-direction: column; gap: 10px; }
+.gd-browserbar {
+  display: flex; align-items: center; gap: 9px;
+  padding: 5px 9px;
   border: 1px solid var(--border); border-radius: 7px; background: var(--surface-2);
 }
-.gd-appview-name { color: var(--text); font-weight: 600; }
-.gd-appview-url { color: var(--text-4); margin-left: 2px; }
+.gd-bb-dots { display: inline-flex; gap: 4px; flex-shrink: 0; }
+.gd-bb-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--border-2); }
+.gd-bb-url {
+  flex: 1; min-width: 0;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.64rem; color: var(--text-3);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 5px;
+  padding: 3px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.gd-bb-live { display: inline-flex; align-items: center; gap: 5px; font-size: 0.62rem; color: var(--green); flex-shrink: 0; }
 .gd-appview-body { display: flex; flex-direction: column; }
+.gd-capture {
+  position: absolute; right: 0; bottom: 0;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.62rem; color: var(--green);
+  background: rgba(37, 199, 94, 0.08); border: 1px solid var(--green-dim);
+  border-radius: 100px; padding: 4px 10px;
+  opacity: 0; animation: gd-stepin 0.5s ease 0.7s forwards;
+}
 
 .gd-rows { display: flex; flex-direction: column; gap: 7px; }
 .gd-row {
@@ -840,8 +872,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .gd-stage, .gd-flow-spark, .gd-pulse, .gd-spinner,
   .gd-agent-steps li, .gd-dots i,
-  .gd-vibe-prompt, .gd-tool, .gd-diff { animation: none !important; }
-  .gd-agent-steps li, .gd-vibe-prompt, .gd-tool, .gd-diff { opacity: 1; }
+  .gd-vibe-prompt, .gd-tool, .gd-diff, .gd-capture { animation: none !important; }
+  .gd-agent-steps li, .gd-vibe-prompt, .gd-tool, .gd-diff, .gd-capture { opacity: 1; }
 }
 
 /* ── Develop — relocated product demo with framing copy ───────────── */

@@ -229,13 +229,19 @@ function AppView({ name }) {
   const meta = APP_META[name] || {};
   return (
     <div className="gd-appview">
-      <div className="gd-appview-bar">
-        <AppIcon name={app.name} domain={app.domain} size={15} />
-        <span className="gd-appview-name">{app.name}</span>
-        <span className="gd-appview-url">{meta.url}</span>
+      <div className="gd-browserbar">
+        <span className="gd-bb-dots"><i /><i /><i /></span>
+        <span className="gd-bb-url">
+          <AppIcon name={app.name} domain={app.domain} size={13} />
+          {meta.url}
+        </span>
+        <span className="gd-bb-live"><span className="gd-pulse" /> live</span>
       </div>
       <div className="gd-appview-body">
         <AppBody kind={meta.kind} />
+      </div>
+      <div className="gd-capture">
+        <span className="gd-pulse" /> Captured · indexed locally
       </div>
     </div>
   );
@@ -310,6 +316,11 @@ export default function GlyphhDemo() {
             {isApp ? <AppView name={appName} /> : <Scene />}
           </div>
         </div>
+      </div>
+      <div className="gd-statusbar" aria-hidden="true">
+        <span className="gd-stat gd-stat-cap"><span className="gd-pulse" /> Capturing context</span>
+        <span className="gd-stat"><span className="gd-stat-ico">⚙</span> MCP · 14 tools</span>
+        <span className="gd-stat"><span className="gd-stat-ico">⟳</span> 2 flows running</span>
       </div>
     </div>
   );
