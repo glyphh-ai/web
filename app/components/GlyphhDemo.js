@@ -169,10 +169,10 @@ const APP_META = {
 
 function GmailMock() {
   const mails = [
-    { from: 'Stripe', av: '#635bff', subj: 'New subscription · Pro', snip: 'You have a new Pro subscriber', time: '2:14 PM', unread: true },
-    { from: 'Vercel', av: '#111111', subj: 'Deployment ready', snip: 'glyphh-web deployed to production', time: '1:58 PM', unread: true },
-    { from: 'Linear', av: '#5e6ad2', subj: 'GLY-204 moved to Done', snip: 'Chris completed Add Pro pricing', time: '11:30 AM', unread: false },
-    { from: 'GitHub', av: '#24292f', subj: 'PR #412 merged', snip: 'Add Pro pricing tier was merged into main', time: '9:07 AM', unread: false },
+    { from: 'Stripe', av: '#635bff', subj: 'New subscription · Pro', snip: 'You have a new Pro subscriber', time: '2:14 PM', unread: true, star: true, label: 'Finance' },
+    { from: 'Vercel', av: '#111111', subj: 'Deployment ready', snip: 'glyphh-web deployed to production', time: '1:58 PM', unread: true, star: false },
+    { from: 'Linear', av: '#5e6ad2', subj: 'GLY-204 moved to Done', snip: 'Chris completed Add Pro pricing', time: '11:30 AM', unread: false, star: true },
+    { from: 'GitHub', av: '#24292f', subj: 'PR #412 merged', snip: 'Add Pro pricing tier was merged into main', time: '9:07 AM', unread: false, star: false, attach: true },
   ];
   return (
     <div className="mk mk-gmail">
@@ -180,15 +180,17 @@ function GmailMock() {
         <span className="mk-gm-burger">☰</span>
         <span className="mk-gm-logo"><b style={{ color: '#4285f4' }}>G</b><b style={{ color: '#ea4335' }}>m</b><b style={{ color: '#fbbc04' }}>a</b><b style={{ color: '#4285f4' }}>i</b><b style={{ color: '#34a853' }}>l</b></span>
         <span className="mk-gm-search">🔍 Search mail</span>
+        <span className="mk-gm-apps">⊞</span>
+        <span className="mk-gm-me">C</span>
       </div>
       <div className="mk-gm-main">
         <div className="mk-gm-side">
           <div className="mk-gm-compose"><span>✎</span> Compose</div>
-          <div className="mk-gm-nav active">Inbox <b>24</b></div>
-          <div className="mk-gm-nav">Starred</div>
-          <div className="mk-gm-nav">Snoozed</div>
-          <div className="mk-gm-nav">Sent</div>
-          <div className="mk-gm-nav">Drafts</div>
+          <div className="mk-gm-nav active">📥 Inbox <b>24</b></div>
+          <div className="mk-gm-nav">★ Starred</div>
+          <div className="mk-gm-nav">🕘 Snoozed</div>
+          <div className="mk-gm-nav">➤ Sent</div>
+          <div className="mk-gm-nav">📄 Drafts</div>
         </div>
         <div className="mk-gm-listwrap">
           <div className="mk-gm-tabs">
@@ -196,13 +198,25 @@ function GmailMock() {
             <span>Promotions</span>
             <span>Social</span>
           </div>
+          <div className="mk-gm-toolbar">
+            <span className="mk-gm-cb" />
+            <span className="mk-gm-tbico">⌄</span>
+            <span className="mk-gm-tbico">⟳</span>
+            <span className="mk-gm-tbico">⋮</span>
+            <span className="mk-gm-count">1–24 of 312</span>
+          </div>
           <div className="mk-gm-list">
             {mails.map((m, i) => (
               <div key={i} className={`mk-gm-row${m.unread ? ' unread' : ''}`}>
                 <span className="mk-gm-cb" />
+                <span className={`mk-gm-star${m.star ? ' on' : ''}`}>{m.star ? '★' : '☆'}</span>
                 <span className="mk-gm-av" style={{ background: m.av }}>{m.from.charAt(0)}</span>
                 <span className="mk-gm-from">{m.from}</span>
-                <span className="mk-gm-text"><b>{m.subj}</b> — {m.snip}</span>
+                <span className="mk-gm-text">
+                  <b>{m.subj}</b>
+                  {m.label && <span className="mk-gm-chip">{m.label}</span>} — {m.snip}
+                </span>
+                {m.attach && <span className="mk-gm-clip">📎</span>}
                 <span className="mk-gm-time">{m.time}</span>
               </div>
             ))}
@@ -296,32 +310,43 @@ function VSCodeMock() {
       <div className="mk-vs-activity">
         <span className="ico active" />
         <span className="ico" />
+        <span className="ico badge" />
         <span className="ico" />
         <span className="ico" />
       </div>
       <div className="mk-vs-side">
-        <div className="mk-vs-explorer">EXPLORER</div>
+        <div className="mk-vs-explorer">EXPLORER<span>⋯</span></div>
         <div className="mk-vs-tree">
           <div className="mk-vs-folder">▾ glyphh-web</div>
           <div className="mk-vs-folder i1">▾ components</div>
-          <div className="mk-vs-file i2 active">Pricing.jsx</div>
+          <div className="mk-vs-file i2 active">Pricing.jsx<span className="mk-vs-git m">M</span></div>
           <div className="mk-vs-file i2">Hero.jsx</div>
+          <div className="mk-vs-file i2 untracked">GlyphhDemo.jsx<span className="mk-vs-git u">U</span></div>
           <div className="mk-vs-file i1">page.js</div>
         </div>
       </div>
       <div className="mk-vs-editor">
         <div className="mk-vs-tabs">
-          <span className="active">Pricing.jsx</span>
+          <span className="active">Pricing.jsx <i className="mk-vs-mod" /></span>
           <span>Hero.jsx</span>
         </div>
+        <div className="mk-vs-crumb">app › components › <b>Pricing.jsx</b></div>
         <pre className="mk-vs-code">
           {code.map((ln, i) => (
-            <div key={i} className="mk-vs-line">
+            <div key={i} className={`mk-vs-line${i === 4 ? ' cur' : ''}`}>
               <span className="mk-vs-gutter">{i + 1}</span>
               <span>{ln.map((tk, j) => <span key={j} className={`vt-${tk.c}`}>{tk.t}</span>)}</span>
             </div>
           ))}
         </pre>
+        <div className="mk-vs-status">
+          <span>⎇ main*</span>
+          <span>✕ 0 ⚠ 0</span>
+          <span className="mk-vs-spacer" />
+          <span>Ln 5, Col 24</span>
+          <span>Spaces: 2</span>
+          <span>JSX</span>
+        </div>
       </div>
     </div>
   );
