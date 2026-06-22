@@ -81,7 +81,7 @@ export default function Pricing() {
 
         <p className="pricing-note">Cancel anytime.</p>
         <p className="pricing-tax">Prices are exclusive of applicable taxes and duties, including VAT and applicable sales tax.</p>
-        <p className="pricing-enterprise">Need unlimited seats or dedicated support? <a href="mailto:sales@glyphh.ai">Contact sales</a></p>
+        <p className="pricing-enterprise">Need unlimited seats or dedicated support? <a href="mailto:support@glyphh.ai">Contact sales</a></p>
       </div>
     </section>
   );
