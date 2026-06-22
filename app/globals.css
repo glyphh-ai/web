@@ -762,21 +762,31 @@ body {
 .mk { height: 100%; width: 100%; display: flex; font-size: 0.62rem; line-height: 1.35; overflow: hidden; }
 .mk b { font-weight: 600; }
 
-/* Gmail — light */
-.mk-gmail { background: #fff; color: #202124; }
-.mk-gm-side { width: 86px; flex-shrink: 0; padding: 8px 6px; border-right: 1px solid #eaeaea; }
-.mk-gm-compose { background: #c2e7ff; color: #001d35; border-radius: 12px; padding: 5px 8px; font-weight: 600; margin-bottom: 8px; }
-.mk-gm-nav { display: flex; justify-content: space-between; padding: 4px 8px; border-radius: 0 12px 12px 0; color: #444746; }
+/* Gmail — light, full chrome */
+.mk-gmail { background: #f6f8fc; color: #202124; flex-direction: column; }
+.mk-gm-top { display: flex; align-items: center; gap: 9px; padding: 6px 10px; background: #f6f8fc; }
+.mk-gm-burger { color: #5f6368; }
+.mk-gm-logo { font-size: 0.74rem; letter-spacing: -0.02em; }
+.mk-gm-search { flex: 1; min-width: 0; background: #eaf1fb; border-radius: 8px; padding: 4px 10px; color: #5f6368; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mk-gm-main { flex: 1; display: flex; min-height: 0; }
+.mk-gm-side { width: 88px; flex-shrink: 0; padding: 4px 6px 8px; }
+.mk-gm-compose { display: inline-flex; align-items: center; gap: 5px; background: #c2e7ff; color: #001d35; border-radius: 14px; padding: 6px 12px; font-weight: 600; margin-bottom: 9px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+.mk-gm-nav { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 0 14px 14px 0; color: #444746; margin-right: 4px; }
 .mk-gm-nav.active { background: #d3e3fd; color: #041e49; font-weight: 700; }
-.mk-gm-nav span { color: #1a73e8; font-weight: 700; }
-.mk-gm-list { flex: 1; min-width: 0; }
-.mk-gm-row { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-bottom: 1px solid #f1f1f1; color: #5f6368; white-space: nowrap; }
+.mk-gm-nav b { margin-left: auto; color: #1967d2; }
+.mk-gm-listwrap { flex: 1; min-width: 0; background: #fff; border-radius: 14px 0 0 0; display: flex; flex-direction: column; }
+.mk-gm-tabs { display: flex; gap: 2px; padding: 4px 6px 0; border-bottom: 1px solid #f1f3f4; flex-shrink: 0; }
+.mk-gm-tabs span { padding: 5px 10px; color: #5f6368; border-bottom: 3px solid transparent; }
+.mk-gm-tabs .active { color: #d93025; border-bottom-color: #d93025; font-weight: 600; }
+.mk-gm-list { flex: 1; min-width: 0; overflow: hidden; }
+.mk-gm-row { display: flex; align-items: center; gap: 7px; padding: 6px 9px; border-bottom: 1px solid #f5f5f5; color: #5f6368; white-space: nowrap; }
 .mk-gm-row.unread { background: #fff; color: #202124; }
 .mk-gm-row.unread .mk-gm-from, .mk-gm-row.unread b { font-weight: 700; color: #202124; }
-.mk-gm-star { color: #dadce0; }
-.mk-gm-from { width: 58px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; }
+.mk-gm-cb { width: 11px; height: 11px; border: 1.5px solid #bdc1c6; border-radius: 2px; flex-shrink: 0; }
+.mk-gm-av { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; font-size: 0.56rem; }
+.mk-gm-from { width: 52px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; }
 .mk-gm-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-.mk-gm-time { flex-shrink: 0; font-size: 0.56rem; }
+.mk-gm-time { flex-shrink: 0; font-size: 0.54rem; }
 
 /* Slack — aubergine + dark */
 .mk-slack { background: #1a1d21; color: #d1d2d3; }
@@ -823,16 +833,31 @@ body {
 .mk-ln-title { color: #e6e8ee; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .mk-ln-av { width: 16px; height: 16px; border-radius: 50%; background: #2a2c33; color: #b4b8c5; display: flex; align-items: center; justify-content: center; font-size: 0.54rem; flex-shrink: 0; }
 
-/* Figma — grey canvas */
-.mk-figma { background: #2c2c2c; color: #cfcfcf; }
-.mk-fg-side { width: 92px; flex-shrink: 0; background: #1e1e1e; padding: 8px 7px; display: flex; flex-direction: column; gap: 5px; }
-.mk-fg-layer { color: #b3b3b3; }
-.mk-fg-layer.active { color: #fff; }
-.mk-fg-canvas { flex: 1; position: relative; background: #e5e5e5; overflow: hidden; }
-.mk-fg-frame { position: absolute; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
-.mk-fg-frame.fa { left: 20px; top: 26px; width: 70px; height: 130px; background: #fff; border: 1px solid #d0d0d0; }
-.mk-fg-frame.fb { left: 104px; top: 26px; width: 70px; height: 130px; background: #18a0fb; }
-.mk-fg-label { position: absolute; left: 20px; top: 10px; font-size: 0.54rem; color: #18a0fb; }
+/* VS Code — dark editor */
+.mk-vscode { background: #1e1e1e; color: #cccccc; font-family: var(--font-mono); }
+.mk-vs-activity { width: 26px; flex-shrink: 0; background: #333333; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 9px 0; }
+.mk-vs-activity .ico { width: 16px; height: 16px; border-radius: 3px; background: #6e6e6e; opacity: 0.55; }
+.mk-vs-activity .ico.active { opacity: 1; background: #cfcfcf; box-shadow: -9px 0 0 -7px #fff; }
+.mk-vs-side { width: 96px; flex-shrink: 0; background: #252526; padding-top: 6px; }
+.mk-vs-explorer { font-size: 0.54rem; letter-spacing: 0.05em; color: #bbbbbb; padding: 2px 9px 6px; }
+.mk-vs-tree > div { padding: 2px 8px; color: #cccccc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mk-vs-folder { color: #cccccc; }
+.mk-vs-file.active { background: #37373d; color: #fff; }
+.mk-vs-tree .i1 { padding-left: 16px; }
+.mk-vs-tree .i2 { padding-left: 26px; }
+.mk-vs-editor { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.mk-vs-tabs { display: flex; background: #252526; flex-shrink: 0; }
+.mk-vs-tabs span { padding: 5px 11px; color: #969696; background: #2d2d2d; border-right: 1px solid #1e1e1e; }
+.mk-vs-tabs .active { color: #fff; background: #1e1e1e; border-top: 1px solid #007acc; }
+.mk-vs-code { margin: 0; padding: 6px 0; font-size: 0.62rem; line-height: 1.5; overflow: hidden; flex: 1; }
+.mk-vs-line { display: flex; white-space: pre; }
+.mk-vs-gutter { width: 24px; flex-shrink: 0; text-align: right; margin-right: 10px; color: #6e7681; }
+.vt-kw { color: #569cd6; }
+.vt-fn { color: #dcdcaa; }
+.vt-tag { color: #4ec9b0; }
+.vt-attr { color: #9cdcfe; }
+.vt-str { color: #ce9178; }
+.vt-pl { color: #d4d4d4; }
 
 /* Claude — cream */
 .mk-claude { background: #f0eee6; color: #2b2a27; flex-direction: column; padding: 10px 11px; gap: 8px; }
