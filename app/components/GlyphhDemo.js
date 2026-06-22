@@ -17,7 +17,7 @@ const RAIL = [
   { name: 'GitHub', domain: 'github.com' },
   { name: 'Slack', domain: 'slack.com' },
   { name: 'Gmail', domain: 'mail.google.com' },
-  { name: 'Figma', domain: 'figma.com' },
+  { name: 'VS Code', domain: 'code.visualstudio.com' },
   { name: 'Linear', domain: 'linear.app' },
 ];
 
@@ -163,35 +163,51 @@ const APP_META = {
   GitHub: { url: 'github.com/glyphh-ai/glyphh-web', kind: 'github' },
   Slack: { url: 'app.slack.com/client', kind: 'slack' },
   Gmail: { url: 'mail.google.com', kind: 'gmail' },
-  Figma: { url: 'figma.com/file/pricing', kind: 'figma' },
+  'VS Code': { url: 'vscode.dev', kind: 'vscode' },
   Linear: { url: 'linear.app', kind: 'linear' },
 };
 
 function GmailMock() {
   const mails = [
-    { from: 'Stripe', subj: 'New subscription · Pro', snip: 'You have a new Pro subscriber —', time: '2m', unread: true },
-    { from: 'Vercel', subj: 'Deployment ready', snip: 'glyphh-web deployed to production', time: '14m', unread: true },
-    { from: 'Linear', subj: 'GLY-204 moved to Done', snip: 'Chris completed Add Pro pricing', time: '1h', unread: false },
-    { from: 'GitHub', subj: '[glyphh-web] PR #412 merged', snip: 'Add Pro pricing tier was merged', time: '3h', unread: false },
+    { from: 'Stripe', av: '#635bff', subj: 'New subscription · Pro', snip: 'You have a new Pro subscriber', time: '2:14 PM', unread: true },
+    { from: 'Vercel', av: '#111111', subj: 'Deployment ready', snip: 'glyphh-web deployed to production', time: '1:58 PM', unread: true },
+    { from: 'Linear', av: '#5e6ad2', subj: 'GLY-204 moved to Done', snip: 'Chris completed Add Pro pricing', time: '11:30 AM', unread: false },
+    { from: 'GitHub', av: '#24292f', subj: 'PR #412 merged', snip: 'Add Pro pricing tier was merged into main', time: '9:07 AM', unread: false },
   ];
   return (
     <div className="mk mk-gmail">
-      <div className="mk-gm-side">
-        <div className="mk-gm-compose">＋ Compose</div>
-        <div className="mk-gm-nav active">Inbox<span>24</span></div>
-        <div className="mk-gm-nav">Starred</div>
-        <div className="mk-gm-nav">Sent</div>
-        <div className="mk-gm-nav">Drafts</div>
+      <div className="mk-gm-top">
+        <span className="mk-gm-burger">☰</span>
+        <span className="mk-gm-logo"><b style={{ color: '#4285f4' }}>G</b><b style={{ color: '#ea4335' }}>m</b><b style={{ color: '#fbbc04' }}>a</b><b style={{ color: '#4285f4' }}>i</b><b style={{ color: '#34a853' }}>l</b></span>
+        <span className="mk-gm-search">🔍 Search mail</span>
       </div>
-      <div className="mk-gm-list">
-        {mails.map((m, i) => (
-          <div key={i} className={`mk-gm-row${m.unread ? ' unread' : ''}`}>
-            <span className="mk-gm-star">☆</span>
-            <span className="mk-gm-from">{m.from}</span>
-            <span className="mk-gm-text"><b>{m.subj}</b> — {m.snip}</span>
-            <span className="mk-gm-time">{m.time}</span>
+      <div className="mk-gm-main">
+        <div className="mk-gm-side">
+          <div className="mk-gm-compose"><span>✎</span> Compose</div>
+          <div className="mk-gm-nav active">Inbox <b>24</b></div>
+          <div className="mk-gm-nav">Starred</div>
+          <div className="mk-gm-nav">Snoozed</div>
+          <div className="mk-gm-nav">Sent</div>
+          <div className="mk-gm-nav">Drafts</div>
+        </div>
+        <div className="mk-gm-listwrap">
+          <div className="mk-gm-tabs">
+            <span className="active">Primary</span>
+            <span>Promotions</span>
+            <span>Social</span>
           </div>
-        ))}
+          <div className="mk-gm-list">
+            {mails.map((m, i) => (
+              <div key={i} className={`mk-gm-row${m.unread ? ' unread' : ''}`}>
+                <span className="mk-gm-cb" />
+                <span className="mk-gm-av" style={{ background: m.av }}>{m.from.charAt(0)}</span>
+                <span className="mk-gm-from">{m.from}</span>
+                <span className="mk-gm-text"><b>{m.subj}</b> — {m.snip}</span>
+                <span className="mk-gm-time">{m.time}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -264,19 +280,48 @@ function LinearMock() {
   );
 }
 
-function FigmaMock() {
+function VSCodeMock() {
+  const code = [
+    [{ t: 'export default function ', c: 'kw' }, { t: 'Pricing', c: 'fn' }, { t: '() {', c: 'pl' }],
+    [{ t: '  return ', c: 'kw' }, { t: '(', c: 'pl' }],
+    [{ t: '    <', c: 'pl' }, { t: 'section', c: 'tag' }, { t: ' className', c: 'attr' }, { t: '=', c: 'pl' }, { t: '"plans"', c: 'str' }, { t: '>', c: 'pl' }],
+    [{ t: '      <', c: 'pl' }, { t: 'PlanCard', c: 'tag' }, { t: ' tier', c: 'attr' }, { t: '=', c: 'pl' }, { t: '"Free"', c: 'str' }, { t: ' />', c: 'pl' }],
+    [{ t: '      <', c: 'pl' }, { t: 'PlanCard', c: 'tag' }, { t: ' tier', c: 'attr' }, { t: '=', c: 'pl' }, { t: '"Pro"', c: 'str' }, { t: ' featured', c: 'attr' }, { t: ' />', c: 'pl' }],
+    [{ t: '    </', c: 'pl' }, { t: 'section', c: 'tag' }, { t: '>', c: 'pl' }],
+    [{ t: '  )', c: 'pl' }],
+    [{ t: '}', c: 'pl' }],
+  ];
   return (
-    <div className="mk mk-figma">
-      <div className="mk-fg-side">
-        <div className="mk-fg-layer active">▤ Pricing</div>
-        <div className="mk-fg-layer">▢ Free card</div>
-        <div className="mk-fg-layer">▢ Pro card</div>
-        <div className="mk-fg-layer">T Heading</div>
+    <div className="mk mk-vscode">
+      <div className="mk-vs-activity">
+        <span className="ico active" />
+        <span className="ico" />
+        <span className="ico" />
+        <span className="ico" />
       </div>
-      <div className="mk-fg-canvas">
-        <span className="mk-fg-frame fa" />
-        <span className="mk-fg-frame fb" />
-        <span className="mk-fg-label">Pricing / Pro</span>
+      <div className="mk-vs-side">
+        <div className="mk-vs-explorer">EXPLORER</div>
+        <div className="mk-vs-tree">
+          <div className="mk-vs-folder">▾ glyphh-web</div>
+          <div className="mk-vs-folder i1">▾ components</div>
+          <div className="mk-vs-file i2 active">Pricing.jsx</div>
+          <div className="mk-vs-file i2">Hero.jsx</div>
+          <div className="mk-vs-file i1">page.js</div>
+        </div>
+      </div>
+      <div className="mk-vs-editor">
+        <div className="mk-vs-tabs">
+          <span className="active">Pricing.jsx</span>
+          <span>Hero.jsx</span>
+        </div>
+        <pre className="mk-vs-code">
+          {code.map((ln, i) => (
+            <div key={i} className="mk-vs-line">
+              <span className="mk-vs-gutter">{i + 1}</span>
+              <span>{ln.map((tk, j) => <span key={j} className={`vt-${tk.c}`}>{tk.t}</span>)}</span>
+            </div>
+          ))}
+        </pre>
       </div>
     </div>
   );
@@ -295,7 +340,7 @@ function ClaudeMock() {
   );
 }
 
-const APP_MOCKS = { gmail: GmailMock, slack: SlackMock, github: GithubMock, linear: LinearMock, figma: FigmaMock, claude: ClaudeMock };
+const APP_MOCKS = { gmail: GmailMock, slack: SlackMock, github: GithubMock, linear: LinearMock, vscode: VSCodeMock, claude: ClaudeMock };
 
 function AppView({ name }) {
   const app = RAIL.find((a) => a.name === name) || { name, domain: '' };
@@ -321,7 +366,7 @@ function AppView({ name }) {
 /* Auto-tour: cycle the scenes AND the app web panels so a visitor sees the
    whole story — vibe-coding, automations, the agent, and live app views —
    without having to click anything. */
-const ROTATION = ['vibe', 'app:GitHub', 'flow', 'app:Slack', 'agent', 'app:Claude', 'app:Figma'];
+const ROTATION = ['vibe', 'app:GitHub', 'flow', 'app:Slack', 'agent', 'app:Claude', 'app:VS Code'];
 
 export default function GlyphhDemo() {
   const [active, setActive] = useState('vibe');
