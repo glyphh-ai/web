@@ -33,12 +33,12 @@ export default function Capture() {
           <span className="accent">CONTEXT CAPTURE</span>
           {'}'}</div>
         <h2 className="section-title reveal">
-          Capture at the app level.<br/>Automatically.
+          It remembers everything<br/>you&rsquo;re working on.
         </h2>
         <p className="adal-lede reveal">
-          As you work in any app, Glyphh captures the context at the app
-          level and indexes it locally — then lets you connect every app
-          you use to MCP tools, so the agent acts on what it captured.
+          As you work in any app, Glyphh captures what you&rsquo;re doing and
+          indexes it on your machine — so the agent already knows the context,
+          across every app, with no copy-pasting and nothing to re-explain.
         </p>
         <div className="adal-grid">
           {pillars.map((p, i) => (

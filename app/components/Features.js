@@ -59,9 +59,9 @@ export default function Features() {
     <section className="features-grid" id="features">
       <div className="container">
         <div className="section-label">{'{'}
-          <span className="accent">WHAT GLYPHH GIVES YOU</span>
+          <span className="accent">WHAT YOU CAN DO</span>
           {'}'}</div>
-        <h2 className="section-title">An AI workspace, not another chat box</h2>
+        <h2 className="section-title">Everything you need to build software and automate work</h2>
         <div className="grid-3">
           {features.map((f, i) => (
             <div key={i} className="feature reveal">
