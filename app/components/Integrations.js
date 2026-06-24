@@ -87,9 +87,10 @@ export default function Integrations() {
   return (
     <section className="integrations" id="integrations">
       <div className="container">
-        <h2 className="section-title reveal">Works with everything you already use</h2>
+        <h2 className="section-title reveal">Works with every app you already use</h2>
         <p className="section-subtitle reveal">
-          Native web UI, branded or custom MCP Servers. Your context flows between all of them.
+          Run any app as a panel — your AI tools, GitHub, Slack, Gmail, and thousands more.
+          The agent works across all of them, with your context.
         </p>
       </div>
       <div className="scroll-rows reveal">

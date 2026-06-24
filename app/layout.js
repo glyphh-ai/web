@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
 
 export const metadata = {
-  title: 'Glyphh — One workspace. Every tool. One assistant.',
-  description: 'Glyphh brings an AI assistant into every app you already work in — IDE, inbox, browser, chat, and beyond — in one native workspace. No more context switching: it answers questions, drafts replies, fixes bugs, and automates the busywork while you stay in flow.',
+  title: 'Glyphh — A new way to build software and automate your work.',
+  description: 'Glyphh is a native desktop AI workspace. An agent builds software in a real IDE, runs every app you use as a live panel, and automates work across all of them — you describe the outcome and it codes, clicks, and ships.',
   icons: {
     icon: '/favicon.svg',
   },
