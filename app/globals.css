@@ -890,6 +890,106 @@ body {
 .mk-cl-msg.bot b { color: #1f1e1c; }
 .mk-cl-input { margin-top: auto; border: 1px solid #d9d5c8; border-radius: 9px; padding: 6px 10px; color: #8a877c; background: #fff; }
 
+/* ── Ad Studio (/studio) — hidden Slack → automation → Instagram demo ── */
+.studio {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: clamp(2rem, 5vw, 4rem) 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+.studio-inner { width: 100%; max-width: 1000px; }
+.studio-head { margin-bottom: 2rem; }
+.studio-kicker { font-family: var(--font-mono); font-size: 0.72rem; color: var(--green); letter-spacing: 0.04em; }
+.studio-head h1 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -0.03em; margin: 0.4rem 0 0.5rem; color: var(--white); }
+.studio-head p { color: var(--text-2); font-size: 1rem; }
+
+.studio-grid { display: grid; grid-template-columns: 300px 1fr; gap: 2.5rem; align-items: start; }
+.studio-controls { display: flex; flex-direction: column; gap: 1.1rem; }
+.studio-field { display: flex; flex-direction: column; gap: 7px; }
+.studio-field > span { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-3); }
+.studio-field textarea {
+  width: 100%; resize: vertical;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 12px; color: var(--text); font-family: var(--font-mono);
+  font-size: 0.8rem; line-height: 1.5;
+}
+.studio-field textarea:focus { outline: none; border-color: var(--green-dim); }
+.studio-run { width: fit-content; }
+.studio-run:disabled { opacity: 0.5; cursor: default; }
+.as-stepper { display: flex; flex-wrap: wrap; gap: 4px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-4); margin-top: 0.4rem; }
+.as-stepper-item.on { color: var(--green); }
+.as-stepper-item.cur { color: var(--white); }
+.as-stepper-arrow { margin: 0 6px; color: var(--text-4); }
+
+.studio-stage { min-width: 0; }
+.studio-stage .gd-window { max-width: 620px; margin: 0 auto; }
+.as-bar { margin: 12px 12px 0; }
+.as-viewport {
+  margin: 10px 12px 12px;
+  height: clamp(320px, 44vw, 384px);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+/* Slack composer (studio) */
+.as-composer { display: flex; align-items: center; gap: 8px; margin: 0 9px 9px; border: 1px solid #3a3d42; border-radius: 7px; padding: 7px 10px; background: #222529; }
+.as-composer-text { flex: 1; min-width: 0; color: #d1d2d3; white-space: nowrap; overflow: hidden; }
+.as-ph { color: #8d8f93; }
+.as-caret { display: inline-block; width: 2px; height: 0.95em; background: #2bac76; margin-left: 1px; transform: translateY(2px); animation: as-blink 1s steps(2, start) infinite; }
+@keyframes as-blink { to { visibility: hidden; } }
+.as-send { color: #2bac76; }
+.as-cmd { color: #d1d2d3; }
+.mk-av.asg { background: #3a0e3b; display: flex; align-items: center; justify-content: center; }
+
+/* Glyphh automation panel (studio) */
+.as-flow { background: #0b0b0d; color: var(--text-2); flex-direction: column; padding: 16px 18px; gap: 14px; font-size: 0.74rem; }
+.as-flow-head { display: flex; align-items: center; gap: 8px; color: var(--text-2); }
+.as-flow-head b { color: var(--text); }
+.as-flow-name { color: var(--text-3); }
+.as-badge { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 0.62rem; color: var(--green); padding: 3px 9px; border: 1px solid var(--green-dim); border-radius: 100px; background: rgba(37, 199, 94, 0.06); }
+.as-steps { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.as-steps li { display: flex; align-items: center; gap: 10px; color: var(--text-3); }
+.as-steps li.done { color: var(--text-2); }
+.as-steps li.active { color: var(--text); }
+.as-steps li.todo { opacity: 0.45; }
+.as-mark { width: 16px; display: inline-flex; align-items: center; justify-content: center; color: var(--green); }
+.as-steps li.todo .as-mark { color: var(--text-4); }
+
+/* Instagram (studio) */
+.ig { background: #000; color: #fff; flex-direction: column; font-family: var(--font-sans); }
+.ig-head { display: flex; align-items: center; gap: 9px; padding: 9px 11px; }
+.ig-av { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); display: flex; align-items: center; justify-content: center; padding: 2px; flex-shrink: 0; }
+.ig-av img { border-radius: 50%; background: #000; }
+.ig-meta { display: flex; flex-direction: column; line-height: 1.15; }
+.ig-meta b { font-size: 0.72rem; font-weight: 600; }
+.ig-meta span { font-size: 0.58rem; color: #a8a8a8; }
+.ig-more { margin-left: auto; color: #fff; letter-spacing: 1px; }
+.ig-creative { flex: 1; min-height: 0; display: flex; }
+.ig-ad {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 9px; text-align: center; padding: 16px;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(37, 199, 94, 0.4), transparent 58%),
+    linear-gradient(158deg, #0c3f22 0%, #06160d 58%, #000 100%);
+}
+.ig-ad-logo { width: 104px; height: auto; opacity: 0.96; }
+.ig-ad h3 { font-size: 1.3rem; font-weight: 800; line-height: 1.04; letter-spacing: -0.03em; white-space: pre-line; color: #fff; }
+.ig-ad p { font-size: 0.68rem; color: rgba(255, 255, 255, 0.72); }
+.ig-cta { margin-top: 5px; font-size: 0.64rem; font-weight: 700; color: #04120a; background: var(--green); padding: 6px 14px; border-radius: 100px; }
+.ig-actions { display: flex; gap: 13px; padding: 9px 11px 3px; font-size: 0.9rem; }
+.ig-save { margin-left: auto; }
+.ig-likes { padding: 0 11px; font-size: 0.66rem; font-weight: 600; }
+.ig-caption { padding: 3px 11px 11px; font-size: 0.64rem; color: #e9e9e9; line-height: 1.35; }
+.ig-caption b { font-weight: 600; }
+
+@media (max-width: 860px) {
+  .studio-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  .studio-stage .gd-window { max-width: 560px; }
+}
+
 /* Flow scene */
 .gd-flow-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .gd-badge {
