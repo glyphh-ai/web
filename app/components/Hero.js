@@ -13,10 +13,11 @@ export default function Hero() {
             A new way to <span className="hero-accent">build software</span> and <span className="hero-accent">automate your work</span>.
           </h1>
           <p className="hero-sub-big">
-            Glyphh is a native desktop workspace where an AI agent builds in a
-            real IDE, runs every app you use as a live panel, and automates the
-            work across them. Describe what you want — it writes the code, clicks
-            through your tools, and ships the result.
+            Glyphh is a native desktop workspace where you build in your IDE of
+            choice, with your own workflow. A helper agent automates anything you&rsquo;d
+            rather not do by hand — and Glyphh&rsquo;s MCP tools plug into any coding
+            agent, like Codex, Claude Code, or Cursor, so they work with your full
+            context.
           </p>
           <div className="hero-ctas">
             <a href="#download" className="btn btn-primary btn-lg group">
