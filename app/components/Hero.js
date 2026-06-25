@@ -10,11 +10,11 @@ export default function Hero() {
             Native desktop app · Mac &amp; Windows
           </div>
           <h1 className="hero-title">
-            A new way to <span className="hero-accent">build software</span> and <span className="hero-accent">automate your work</span>.
+            A new way to build software and automate your work.
           </h1>
           <p className="hero-sub-big">
-            Glyphh is a native desktop workspace that lets you build software and
-            automate tasks — with your full context at your fingertips.
+            Glyphh is your coding agent, automation assistant, and workspace
+            navigator for building world class everything!
           </p>
           <div className="hero-ctas">
             <a href="#download" className="btn btn-primary btn-lg group">
