@@ -1743,6 +1743,8 @@ body {
 .pricing > .container {
   position: relative;
   z-index: 1;
+  /* The 4-tier grid needs more room than the global 1200px container. */
+  max-width: 1440px;
 }
 
 .pricing-grid {
@@ -1770,7 +1772,7 @@ body {
 
 .pricing-grid-four {
   grid-template-columns: repeat(4, 1fr);
-  max-width: 1320px;
+  max-width: 1440px;
 }
 
 .pricing-custom {
