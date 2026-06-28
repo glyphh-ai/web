@@ -1770,7 +1770,7 @@ body {
 
 .pricing-grid-four {
   grid-template-columns: repeat(4, 1fr);
-  max-width: 1200px;
+  max-width: 1320px;
 }
 
 .pricing-custom {
