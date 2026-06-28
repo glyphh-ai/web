@@ -1888,6 +1888,12 @@ body {
   line-height: 1.5;
   font-weight: 500;
 }
+.pricing-credits {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent, #6d5efc);
+  margin: 0.25rem 0 0.75rem;
+}
 
 .pricing-overage {
   font-size: 0.8125rem;
