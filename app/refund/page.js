@@ -2,7 +2,7 @@ import Footer from '../components/Footer';
 
 export const metadata = {
   title: 'Refund Policy — Glyphh',
-  description: 'Refund Policy for the Glyphh desktop application by Glyphh AI LLC.',
+  description: 'Refund Policy for Glyphh plans and credits by Glyphh AI LLC.',
 };
 
 export default function RefundPage() {
@@ -13,34 +13,43 @@ export default function RefundPage() {
           <a href="/" className="policy-back">&larr; Back</a>
           <h1 className="policy-title">Refund Policy</h1>
 
-          <p><strong>Effective Date:</strong> January 1, 2026</p>
-          <p>This Refund Policy applies to paid subscriptions for Glyphh offered by Glyphh AI LLC.</p>
+          <p><strong>Effective Date:</strong> June 29, 2026</p>
+          <p>This Refund Policy applies to paid plans and credit purchases for Glyphh, offered by Glyphh AI LLC. Capitalized terms have the meaning given in our <a href="/terms">Terms of Use</a>.</p>
 
           <h2>1. Free Tier</h2>
-          <p>The free tier of Glyphh is available at no cost and requires no payment. No refund applies.</p>
+          <p>The free tier is available at no cost and requires no payment. No refund applies.</p>
 
-          <h2>2. Paid Subscriptions (Basic &amp; Advanced)</h2>
-          <p>Paid plans are billed on a monthly subscription basis. You may cancel your subscription at any time.</p>
+          <h2>2. How Billing Works</h2>
+          <p>Paid plans are billed on a recurring monthly basis and include a periodic allowance of credits. You may also purchase additional credits as one-time top-ups (including automatic top-ups you enable). Credits are a prepaid, consumable right to access the Service, as described in our Terms of Use.</p>
 
-          <h2>3. Refund Eligibility</h2>
-          <p>We offer a full refund within 14 days of your first subscription payment (&ldquo;Refund Window&rdquo;) if you are not satisfied with the Service. To request a refund during this window, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a> with your license key and the email associated with your account.</p>
+          <h2>3. 14-Day Money-Back on Your First Plan Payment</h2>
+          <p>If you are not satisfied with the Service, you may request a full refund within fourteen (14) days of your <strong>first</strong> paid-plan payment (the &ldquo;Refund Window&rdquo;), less the value of any credits already consumed during that period. This money-back guarantee applies once per customer and only to the first payment. To request it, contact <a href="mailto:support@glyphh.ai">support@glyphh.ai</a> from the email associated with your account.</p>
 
-          <h2>4. After the Refund Window</h2>
-          <p>After the 14-day Refund Window, subscription payments are non-refundable. When you cancel your subscription, you retain access to paid features through the end of your current billing period. No partial refunds are issued for unused time within a billing cycle.</p>
+          <h2>4. Renewals</h2>
+          <p>Subscription renewals are non-refundable. You may cancel at any time to stop future renewals; you retain access to your plan through the end of the current billing period. No partial refunds are issued for unused time within a billing period.</p>
 
-          <h2>5. Plan Changes</h2>
-          <p>If you cancel your Pro subscription, you retain access to Pro features through the end of your current billing period. No partial refunds are issued for unused time within a billing cycle.</p>
+          <h2>5. Prepaid Credits and Top-Ups Are Non-Refundable</h2>
+          <p>All credit purchases and top-ups are final and <strong>non-refundable</strong> once purchased. Unused credits are not refundable, redeemable for cash, or transferable, except where a refund is required by applicable law. Periodic plan-included credits do not roll over and expire at the end of the billing period in which they are granted.</p>
 
-          <h2>6. Service Disruption</h2>
-          <p>If the Service experiences a significant outage or disruption lasting more than 72 continuous hours, you may be eligible for a prorated credit at our discretion. Contact <a href="mailto:support@glyphh.ai">support@glyphh.ai</a> to report service disruptions.</p>
+          <h2>6. No Refunds for Third-Party or Upstream Availability</h2>
+          <p>The Service depends on third-party AI providers (including Anthropic) and other infrastructure that we do not control. We do <strong>not</strong> provide refunds or credits for any interruption, downtime, degraded performance, latency, rate limiting, capacity limits, model changes or deprecations, or content moderation, refusals, or output decisions that arise from or relate to a third-party provider or any cause outside our reasonable control. Such events do not constitute a failure of the Service for refund purposes.</p>
 
-          <h2>7. Revoked Licenses</h2>
-          <p>If your license is revoked due to a violation of our Terms of Use, no refund will be issued.</p>
+          <h2>7. Our Own Service Disruptions</h2>
+          <p>For prolonged outages caused solely by our own infrastructure (and not by a third-party provider or other cause outside our reasonable control), we may, at our sole discretion, issue a goodwill service credit. This is discretionary; nothing in this section creates an entitlement to a refund or credit. Report disruptions to <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
 
-          <h2>8. How to Cancel</h2>
-          <p>You can cancel your subscription at any time through the Settings section of the Glyphh application. Alternatively, contact <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>. Cancellation takes effect at the end of your current billing period.</p>
+          <h2>8. Plan Changes and Downgrades</h2>
+          <p>You can change or cancel your plan through the billing portal. Upgrades take effect immediately; downgrades and cancellations take effect at the end of the current billing period. No partial refunds are issued for plan changes within a billing period.</p>
 
-          <h2>9. Contact</h2>
+          <h2>9. Suspended or Revoked Accounts</h2>
+          <p>If your account is suspended or terminated for a violation of our Terms of Use, no refund will be issued and any unused credits are forfeited.</p>
+
+          <h2>10. How to Cancel</h2>
+          <p>You can cancel your subscription at any time through the billing portal in the Settings section of the application, or by contacting <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>. Cancellation takes effect at the end of your current billing period.</p>
+
+          <h2>11. Your Statutory Rights</h2>
+          <p>Nothing in this policy limits any non-waivable refund or cancellation rights you may have under the consumer-protection laws of your jurisdiction.</p>
+
+          <h2>12. Contact</h2>
           <p>For billing or refund questions, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>
