@@ -3,15 +3,17 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * GlyphhHero — the animated "control room" hero graphic (full-width, centred
- * under the hero copy so it has room to breathe).
+ * GlyphhHero — the animated "control room" hero graphic.
  *
- * Top row: a vertical-scrolling app list (which, once Glyphh finds the app,
- * flips to that app's tools in two columns) · the Glyphh agent chat · a stack
- * of three boxes (Connections / MCP Tools / Agent). A full-width Runtime row
- * sits below. Connecting lines are drawn in an SVG overlay whose endpoints are
- * MEASURED from the real DOM boxes (getBoundingClientRect) so they always meet
- * the box edges, and they highlight per step to show Glyphh driving the work.
+ * 8-step loop:
+ *  0 reset — user types the request (left static, no app selected)
+ *  1 agent accepts + fires a search tool call
+ *  2 search — lines to the apps (left) AND connections (top-right) at once;
+ *    the list fast-scrolls to Slack, Slack connects, its MCP tools fade in
+ *  3 agent shows the MCP tool call
+ *  4 execute — centre + right light up, the runtime spins
+ *  5 agent posts its final response
+ *  6-7 the centre becomes the drafted Gmail quote; hold, then loop
  */
 
 const APPS = [
@@ -29,7 +31,7 @@ const SLACK_TOOLS = [
 ];
 const favicon = (d) => `https://www.google.com/s2/favicons?domain=${d}&sz=64`;
 
-const STEPS = 7;
+const STEPS = 8;
 const BRAILLE = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
 
 const CONNECTIONS = [
@@ -39,10 +41,11 @@ const CONNECTIONS = [
 ];
 const MCP_TOOLS = [
   { app: 'slack.com', tool: 'find_dm' },
-  { app: 'slack.com', tool: 'read_panel' },
   { app: 'salesforce.com', tool: 'get_record' },
   { app: 'mail.google.com', tool: 'create_draft' },
 ];
+
+const ToolChip = ({ label }) => <span className="gh-tc"><i className="gh-tc-dot" />{label}</span>;
 
 export default function GlyphhHero() {
   const [step, setStep] = useState(0);
@@ -62,14 +65,32 @@ export default function GlyphhHero() {
   const slackRef = useRef(null);
 
   useEffect(() => {
-    const a = setInterval(() => setStep((s) => (s + 1) % STEPS), 1800);
+    const a = setInterval(() => setStep((s) => (s + 1) % STEPS), 1900);
     const b = setInterval(() => setSpin((s) => (s + 1) % BRAILLE.length), 110);
     return () => { clearInterval(a); clearInterval(b); };
   }, []);
 
+  // ── derived flow state ──────────────────────────────────────
+  const showChat = step < 6;
+  const gmailView = step >= 6;
+  const agentAccept = step >= 1 && showChat;
+  const searching = step === 2;
+  const slackFound = step >= 2;
+  const toolsView = step >= 2;
+  const slackConnected = step >= 2;
+  const agentMcp = step >= 3 && showChat;
+  const mcpActive = step >= 4;
+  const working = step >= 1 && step <= 4; // agent is waiting on tool calls
+  const agentReplied = step === 5;
+  const runL = step === 4;
+  const runR = step === 4;
+  const br = BRAILLE[spin];
+
+  const active = { L: step === 2, RT: step === 2, RM: step === 4, B: step === 4, RB: false, RBh: false };
+
   // Apps sit static, then fast-scroll to centre Slack once the search fires.
   useEffect(() => {
-    if (step >= 1 && gridRef.current && slackRef.current) {
+    if (slackFound && gridRef.current && slackRef.current) {
       const win = gridRef.current.clientHeight;
       const track = slackRef.current.parentElement;
       const target = slackRef.current.offsetTop + slackRef.current.offsetHeight / 2 - win / 2;
@@ -78,38 +99,25 @@ export default function GlyphhHero() {
     } else {
       setScrollY(0);
     }
-  }, [step]);
+  }, [step, slackFound]);
 
-  // ── Measure box positions → line endpoints (always meet the edges) ──
-  // useEffect (not useLayoutEffect) — runs client-only, so no SSR warning; the
-  // lines just appear one frame after paint, which is fine for decoration.
+  // ── measure box positions → line endpoints ──────────────────
   useEffect(() => {
     const measure = () => {
-      const wrap = wrapRef.current;
-      const center = centerRef.current;
+      const wrap = wrapRef.current; const center = centerRef.current;
       if (!wrap || !center) return;
       const c = wrap.getBoundingClientRect();
-      const rel = (el) => {
-        const r = el.getBoundingClientRect();
-        return { l: r.left - c.left, r: r.right - c.left, t: r.top - c.top, b: r.bottom - c.top, cx: (r.left + r.right) / 2 - c.left, cy: (r.top + r.bottom) / 2 - c.top };
-      };
+      const rel = (el) => { const r = el.getBoundingClientRect(); return { l: r.left - c.left, r: r.right - c.left, t: r.top - c.top, b: r.bottom - c.top, cx: (r.left + r.right) / 2 - c.left, cy: (r.top + r.bottom) / 2 - c.top }; };
       const C = rel(center);
       const out = [];
-      const horiz = (id, el, side) => {
-        if (!el) return;
-        const T = rel(el);
-        // from the centre's near edge (at the target's vertical centre) to the target edge
-        if (side === 'left') out.push({ id, x1: C.l, y1: T.cy, x2: T.r, y2: T.cy });
-        else out.push({ id, x1: C.r, y1: T.cy, x2: T.l, y2: T.cy });
-      };
+      const horiz = (id, el, side) => { if (!el) return; const T = rel(el); if (side === 'left') out.push({ id, x1: C.l, y1: T.cy, x2: T.r, y2: T.cy }); else out.push({ id, x1: C.r, y1: T.cy, x2: T.l, y2: T.cy }); };
       horiz('L', leftRef.current, 'left');
       horiz('RT', rtRef.current, 'right');
       horiz('RM', rmRef.current, 'right');
       horiz('RB', rbRef.current, 'right');
       if (runRef.current) {
         const R = rel(runRef.current);
-        out.push({ id: 'B', x1: C.cx, y1: C.b, x2: C.cx, y2: R.t });        // centre → runtime
-        if (rbRef.current) { const RB = rel(rbRef.current); out.push({ id: 'RBh', x1: RB.cx, y1: RB.b, x2: RB.cx, y2: R.t }); } // agent → runtime
+        out.push({ id: 'B', x1: C.cx, y1: C.b, x2: C.cx, y2: R.t });
       }
       setLines(out);
       setSize({ w: c.width, h: c.height });
@@ -118,30 +126,12 @@ export default function GlyphhHero() {
     const ro = new ResizeObserver(measure);
     if (wrapRef.current) ro.observe(wrapRef.current);
     window.addEventListener('resize', measure);
-    // content (app/tools flip, agent reply) changes box sizes — remeasure shortly after
     const t = setTimeout(measure, 60);
     return () => { ro.disconnect(); window.removeEventListener('resize', measure); clearTimeout(t); };
   }, [step]);
 
-  // derived state
-  const searching = step === 1;
-  const slackFound = step >= 1;
-  const toolsView = step >= 2;
-  const slackConnected = step >= 2;
-  const replied = step >= 4;
-  const mcpActive = step >= 5;
-  const agentActive = step >= 6;
-  const runL = step === 3;
-  const runR = step === 5 || step === 6;
-  const br = BRAILLE[spin];
-
-  const active = {
-    L: step === 1, RT: step === 1 || step === 2, RM: step === 5,
-    RB: step === 6, B: step === 3 || step === 5, RBh: step === 6,
-  };
-
   return (
-    <div className="gh" ref={wrapRef} role="img" aria-label="Glyphh agent orchestrating apps, connections, MCP tools and a runtime across one workspace">
+    <div className="gh" ref={wrapRef} role="img" aria-label="Glyphh agent finding a Slack message, pulling a Salesforce record and drafting a Gmail quote across one workspace">
       <svg className="gh-lines" width={size.w} height={size.h} aria-hidden="true">
         {lines.map((ln) => (
           <line key={ln.id} className={`gh-ln ${active[ln.id] ? 'on' : ''}`} x1={ln.x1} y1={ln.y1} x2={ln.x2} y2={ln.y2} />
@@ -149,14 +139,13 @@ export default function GlyphhHero() {
       </svg>
 
       <div className="gh-grid">
-        {/* ── Left: scrolling apps → app tools ─────────────── */}
+        {/* ── Left: scrolling app icon grid → MCP tools ────── */}
         <div className={`gh-card gh-apps ${searching ? 'on' : ''}`} ref={leftRef}>
           <div className="gh-card-label">GLYPHH_APPS <span className="gh-sb-meta">{APPS.length}</span></div>
           <div className={`gh-search ${searching ? 'on' : ''}`}>
             <svg viewBox="0 0 24 24" className="gh-search-ic"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
-            <span className="gh-search-q">{searching ? 'slack — tom · pricing' : 'search apps'}</span>
+            <span className="gh-search-q">{slackFound ? 'slack — tom · pricing' : 'search apps'}</span>
           </div>
-          {/* scrolling grid of app icons (no labels); fades at the bottom */}
           <div className={`gh-appgrid ${toolsView ? 'shrunk' : ''}`} ref={gridRef}>
             <div className="gh-appgrid-track" style={{ transform: `translateY(-${scrollY}px)` }}>
               {APPS.map((d, i) => (
@@ -166,41 +155,69 @@ export default function GlyphhHero() {
               ))}
             </div>
           </div>
-          {/* once the app is found, its MCP tools fade in at the bottom */}
           {toolsView && (
             <div className="gh-found">
               <div className="gh-found-label"><img src={favicon('slack.com')} alt="" width="13" height="13" /> SLACK · MCP TOOLS</div>
               <div className="gh-tools2">
-                {SLACK_TOOLS.map((t) => (
-                  <span className="gh-t2" key={t}><i /> {t}</span>
-                ))}
+                {SLACK_TOOLS.map((t) => <span className="gh-t2" key={t}><i /> {t}</span>)}
               </div>
             </div>
           )}
         </div>
 
-        {/* ── Centre: the Glyphh agent chat ────────────────── */}
-        <div className="gh-card gh-chat" ref={centerRef}>
+        {/* ── Centre: agent chat → Gmail draft ─────────────── */}
+        <div className={`gh-card gh-chat ${active.RM ? 'on' : ''}`} ref={centerRef}>
           <div className="gh-chat-head">
             <img src="/glyphh-logo-white.png" alt="Glyphh" className="gh-logo" />
-            <span className="gh-chat-title">Glyphh <b>Cowork</b></span>
           </div>
-          <div className="gh-msgs">
-            <div className="gh-msg gh-msg-user">
-              find my slack from yesterday from tom about pricing, pull the customer info from salesforce, then email them a quote
-            </div>
-            {replied && (
-              <div className="gh-msg gh-msg-agent">
-                <span className="gh-msg-dot" /> Found Tom’s thread, pulled the Salesforce record, and drafted the quote email — ready to send.
+
+          {!gmailView ? (
+            <>
+              <div className="gh-msgs">
+                <div className="gh-msg gh-msg-user">
+                  find my slack from yesterday from tom about pricing, pull the customer info from salesforce, then email them a quote
+                </div>
+                {agentAccept && (
+                  <div className="gh-msg gh-msg-agent">
+                    <span className="gh-msg-dot" /> On it — searching Slack for Tom’s pricing thread.
+                    <div className="gh-tcs"><ToolChip label="slack.search_messages" /></div>
+                  </div>
+                )}
+                {agentMcp && (
+                  <div className="gh-msg gh-msg-agent">
+                    <span className="gh-msg-dot" /> Pulling the customer record and drafting the quote.
+                    <div className="gh-tcs"><ToolChip label="salesforce.get_record" /><ToolChip label="gmail.create_draft" /></div>
+                  </div>
+                )}
+                {agentReplied && (
+                  <div className="gh-msg gh-msg-agent">
+                    <span className="gh-msg-dot" /> Done — the quote email to Acme is drafted and ready to send.
+                  </div>
+                )}
+                {working && (
+                  <div className="gh-working"><span className="gh-brl">{br}</span> running tools…</div>
+                )}
               </div>
-            )}
-          </div>
-          <div className="gh-reply">
-            <span className="gh-reply-plus">+</span>
-            <span className="gh-reply-ph">Reply…</span>
-            <span className="gh-reply-model">Haiku 4.5</span>
-            <span className="gh-send"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" /></svg></span>
-          </div>
+              <div className="gh-reply">
+                <span className="gh-reply-plus">+</span>
+                <span className="gh-reply-ph">Reply…</span>
+                <span className="gh-reply-model">Haiku 4.5</span>
+                <span className="gh-send"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" /></svg></span>
+              </div>
+            </>
+          ) : (
+            <div className="gh-gmail">
+              <div className="gh-gmail-head"><img src={favicon('mail.google.com')} alt="" width="14" height="14" /> New message</div>
+              <div className="gh-gmail-row"><span>To</span><b>jordan@acme.com</b></div>
+              <div className="gh-gmail-row"><span>Subject</span><b>Your Glyphh quote</b></div>
+              <div className="gh-gmail-body">
+                Hi Jordan,<br /><br />
+                Great chatting about pricing. Here’s your quote: <b>Pro — $4,800/yr</b> (15% partner discount applied).<br /><br />
+                Best,<br />Chris
+              </div>
+              <div className="gh-gmail-send"><span className="gh-gmail-btn">Send</span></div>
+            </div>
+          )}
         </div>
 
         {/* ── Right: connections / MCP / agent ─────────────── */}
@@ -223,15 +240,15 @@ export default function GlyphhHero() {
           <div className={`gh-card gh-mini ${active.RM ? 'on' : ''}`} ref={rmRef}>
             <div className="gh-card-label">MCP_TOOLS</div>
             {MCP_TOOLS.map((t, i) => (
-              <div className={`gh-tool ${mcpActive && i < 3 ? 'lit' : ''}`} key={t.app + t.tool}>
+              <div className={`gh-tool ${mcpActive ? 'lit' : ''}`} key={t.app + t.tool}>
                 <img src={favicon(t.app)} alt="" width="13" height="13" />
-                <span className="gh-tool-name">{t.tool}</span>
-                {mcpActive && i < 3 && <span className="gh-tool-tick">✓</span>}
+                <span className="gh-tool-name">{t.app.split('.')[0]}.{t.tool}</span>
+                {mcpActive && <span className="gh-tool-tick">✓</span>}
               </div>
             ))}
           </div>
 
-          <div className={`gh-card gh-mini ${agentActive ? 'on' : ''}`} ref={rbRef}>
+          <div className="gh-card gh-mini" ref={rbRef}>
             <div className="gh-card-label">AGENT</div>
             <div className="gh-kv"><span>AGENT</span><b>Coding Agent</b></div>
             <div className="gh-kv"><span>PROVIDER</span><b>Anthropic</b></div>
@@ -243,12 +260,12 @@ export default function GlyphhHero() {
         <div className="gh-card gh-runtime" ref={runRef}>
           <div className="gh-card-label">GLYPHH_RUNTIME <span className="gh-sb-meta">sandbox · 2 instances</span></div>
           <div className="gh-rt-row">
-            <div className={`gh-rt-cell ${runL ? 'run' : step > 3 ? 'done' : ''}`}>
-              <span className="gh-rt-h"><i className="gh-spin">{runL ? br : '✓'}</i> INSTANCE-0 · slack</span>
+            <div className={`gh-rt-cell ${runL ? 'run' : step > 4 ? 'done' : ''}`}>
+              <span className="gh-rt-h"><i className="gh-spin">{runL ? br : step > 4 ? '✓' : '·'}</i> INSTANCE-0 · slack</span>
               <pre>{`msgs = slack.find_dm(\n  from='tom', topic='pricing'\n)`}</pre>
             </div>
-            <div className={`gh-rt-cell ${runR ? 'run' : ''}`}>
-              <span className="gh-rt-h"><i className="gh-spin">{runR ? br : '·'}</i> INSTANCE-1 · salesforce → gmail</span>
+            <div className={`gh-rt-cell ${runR ? 'run' : step > 4 ? 'done' : ''}`}>
+              <span className="gh-rt-h"><i className="gh-spin">{runR ? br : step > 4 ? '✓' : '·'}</i> INSTANCE-1 · salesforce → gmail</span>
               <pre>{`rec = salesforce.get_record(msgs)\ngmail.create_draft(rec, quote)`}</pre>
             </div>
           </div>

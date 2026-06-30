@@ -629,7 +629,7 @@ body {
 .gh-logo { height: 26px; width: auto; }
 .gh-chat-title { font-size: 12.5px; color: var(--text); font-weight: 500; }
 .gh-chat-title b { color: var(--text-2); font-weight: 500; }
-.gh-msgs { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 13px 2px; }
+.gh-msgs { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; padding: 13px 2px; }
 .gh-msg { padding: 10px 12px; border-radius: 12px; font-size: 11.5px; line-height: 1.5; }
 .gh-msg-user { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
 .gh-msg-agent { background: rgba(168,85,247,.10); border: 1px solid var(--border-2); color: var(--text-2); align-self: flex-start; animation: gh-pop .4s ease; }
@@ -641,6 +641,27 @@ body {
 .gh-reply-model { font-size: 9.5px; color: var(--text-2); }
 .gh-send { width: 21px; height: 21px; border-radius: 50%; background: var(--grad-accent); display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
 .gh-send svg { width: 11px; height: 11px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* agent tool-call chips */
+.gh-tcs { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.gh-tc { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; border-radius: 6px; background: rgba(168,85,247,.12); border: 1px solid var(--border-2); font-family: var(--font-mono); font-size: 9px; color: var(--accent-light); }
+.gh-tc-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent); flex: 0 0 auto; }
+
+/* Glyphh-style braille spinner while the agent waits on tool calls */
+.gh-working { display: flex; align-items: center; gap: 8px; padding: 3px 6px; font-size: 11px; color: var(--text-3); }
+.gh-brl { font-family: var(--font-mono); font-size: 15px; line-height: 1; color: var(--accent); text-shadow: 0 0 9px var(--accent-glow); }
+
+/* centre → Gmail draft mockup (loop finale) */
+.gh-gmail { flex: 1; display: flex; flex-direction: column; margin-top: 13px; border: 1px solid var(--border-2); border-radius: 12px; overflow: hidden; background: var(--surface); animation: gh-pop .45s ease; }
+.gh-gmail-head { display: flex; align-items: center; gap: 7px; padding: 9px 12px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 11px; color: var(--text); font-weight: 600; }
+.gh-gmail-head img { border-radius: 3px; }
+.gh-gmail-row { display: flex; gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 11px; }
+.gh-gmail-row span { color: var(--text-3); width: 48px; flex: 0 0 auto; }
+.gh-gmail-row b { color: var(--text); font-weight: 500; }
+.gh-gmail-body { flex: 1; padding: 12px; font-size: 11.5px; line-height: 1.55; color: var(--text-2); }
+.gh-gmail-body b { color: var(--accent-light); }
+.gh-gmail-send { padding: 10px 12px; border-top: 1px solid var(--border); }
+.gh-gmail-btn { display: inline-block; padding: 7px 18px; border-radius: 8px; background: var(--grad-accent); color: #fff; font-size: 12px; font-weight: 600; }
 
 /* right: connections */
 .gh-conn { display: flex; align-items: center; gap: 6px; margin-top: 9px; font-size: 10px; }
