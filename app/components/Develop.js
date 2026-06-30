@@ -1,8 +1,11 @@
 /**
  * Develop — the product demo, relocated out of the hero into a section with
- * context. The headline frames the video so people know what they're watching:
- * building real software inside Glyphh, with the agent and every app side by side.
+ * context. The headline frames the interactive app mock (GlyphhDemo, moved down
+ * from the hero) so people know what they're seeing: building real software
+ * inside Glyphh, with the agent and every app side by side.
  */
+import GlyphhDemo from './GlyphhDemo';
+
 export default function Develop() {
   return (
     <section className="develop" id="develop">
@@ -16,19 +19,8 @@ export default function Develop() {
           all side by side. Watch context follow you from panel to panel as you ship.
         </p>
       </div>
-      <div className="develop-video reveal">
-        <div className="hero-video-frame">
-          <div className="hero-video-inner">
-            <video
-              className="hero-video-player"
-              src="/hero-v1-yosup.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-        </div>
+      <div className="develop-demo reveal">
+        <GlyphhDemo />
       </div>
     </section>
   );
