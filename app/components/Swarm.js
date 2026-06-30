@@ -9,7 +9,7 @@ function SwarmDiagram() {
         <defs>
           <filter id="glow-g" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="8" result="b" />
-            <feFlood floodColor="#25C75E" floodOpacity="0.35" result="c" />
+            <feFlood floodColor="#a855f7" floodOpacity="0.35" result="c" />
             <feComposite in="c" in2="b" operator="in" result="g" />
             <feMerge><feMergeNode in="g" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
@@ -37,22 +37,22 @@ function SwarmDiagram() {
         <path d="M580,400 Q630,430 680,460" stroke="#151515" strokeWidth="1.5" />
 
         {/* Animated flowing dashes */}
-        <path d="M400,90 L400,190" stroke="#25C75E" strokeWidth="2" strokeDasharray="8 12" className="cypher-flow-line" />
-        <path d="M400,250 Q310,290 220,340" stroke="#25C75E" strokeWidth="2" strokeDasharray="8 12" className="cypher-flow-line" style={{ animationDelay: '0.3s' }} />
-        <path d="M400,250 Q490,290 580,340" stroke="#25C75E" strokeWidth="2" strokeDasharray="8 12" className="cypher-flow-line" style={{ animationDelay: '0.6s' }} />
+        <path d="M400,90 L400,190" stroke="#a855f7" strokeWidth="2" strokeDasharray="8 12" className="cypher-flow-line" />
+        <path d="M400,250 Q310,290 220,340" stroke="#a855f7" strokeWidth="2" strokeDasharray="8 12" className="cypher-flow-line" style={{ animationDelay: '0.3s' }} />
+        <path d="M400,250 Q490,290 580,340" stroke="#a855f7" strokeWidth="2" strokeDasharray="8 12" className="cypher-flow-line" style={{ animationDelay: '0.6s' }} />
         <path d="M220,400 Q170,430 120,460" stroke="#4caf50" strokeWidth="1.5" strokeDasharray="6 10" className="cypher-flow-line" style={{ animationDelay: '0.9s' }} />
         <path d="M220,400 Q270,430 320,460" stroke="#4caf50" strokeWidth="1.5" strokeDasharray="6 10" className="cypher-flow-line" style={{ animationDelay: '1.1s' }} />
         <path d="M580,400 Q530,430 480,460" stroke="#4caf50" strokeWidth="1.5" strokeDasharray="6 10" className="cypher-flow-line" style={{ animationDelay: '1.3s' }} />
         <path d="M580,400 Q630,430 680,460" stroke="#4caf50" strokeWidth="1.5" strokeDasharray="6 10" className="cypher-flow-line" style={{ animationDelay: '1.5s' }} />
 
         {/* Data packets traveling down the hierarchy */}
-        <circle r="3.5" fill="#25C75E" className="cypher-packet">
+        <circle r="3.5" fill="#a855f7" className="cypher-packet">
           <animateMotion dur="2s" repeatCount="indefinite" path="M400,90 L400,190" />
         </circle>
-        <circle r="3" fill="#25C75E" className="cypher-packet">
+        <circle r="3" fill="#a855f7" className="cypher-packet">
           <animateMotion dur="2.5s" repeatCount="indefinite" begin="0.5s" path="M400,250 Q310,290 220,340" />
         </circle>
-        <circle r="3" fill="#25C75E" className="cypher-packet">
+        <circle r="3" fill="#a855f7" className="cypher-packet">
           <animateMotion dur="2.5s" repeatCount="indefinite" begin="1s" path="M400,250 Q490,290 580,340" />
         </circle>
         <circle r="2.5" fill="#4caf50" className="cypher-packet">
@@ -69,17 +69,17 @@ function SwarmDiagram() {
         </circle>
 
         {/* Glyphh agent pulsing rings */}
-        <circle cx="400" cy="60" r="40" fill="none" stroke="#25C75E" strokeWidth="1" className="cypher-ring" />
-        <circle cx="400" cy="60" r="40" fill="none" stroke="#25C75E" strokeWidth="1" className="cypher-ring" style={{ animationDelay: '1.5s' }} />
-        <circle cx="400" cy="60" r="40" fill="none" stroke="#25C75E" strokeWidth="1" className="cypher-ring" style={{ animationDelay: '3s' }} />
+        <circle cx="400" cy="60" r="40" fill="none" stroke="#a855f7" strokeWidth="1" className="cypher-ring" />
+        <circle cx="400" cy="60" r="40" fill="none" stroke="#a855f7" strokeWidth="1" className="cypher-ring" style={{ animationDelay: '1.5s' }} />
+        <circle cx="400" cy="60" r="40" fill="none" stroke="#a855f7" strokeWidth="1" className="cypher-ring" style={{ animationDelay: '3s' }} />
 
         {/* ── Nodes ── */}
 
         {/* Glyphh agent — spawns the swarm */}
         <g className="cypher-node" filter="url(#glow-g)">
-          <rect x="332" y="30" width="136" height="60" rx="14" fill="#0a0a0a" stroke="#25C75E" strokeWidth="2" />
-          <circle cx="364" cy="60" r="8" fill="#25C75E" opacity="0.12" />
-          <circle cx="364" cy="60" r="4" fill="#25C75E" className="cypher-dot-pulse" />
+          <rect x="332" y="30" width="136" height="60" rx="14" fill="#0a0a0a" stroke="#a855f7" strokeWidth="2" />
+          <circle cx="364" cy="60" r="8" fill="#a855f7" opacity="0.12" />
+          <circle cx="364" cy="60" r="4" fill="#a855f7" className="cypher-dot-pulse" />
           <text x="382" y="58" fill="#e8e8e8" fontSize="13" fontWeight="600" fontFamily="var(--font-mono)">Glyphh agent</text>
           <text x="382" y="73" fill="#555" fontSize="9" fontFamily="var(--font-mono)">spawns the swarm</text>
         </g>
@@ -131,7 +131,7 @@ function SwarmDiagram() {
             <circle cx={x + 12} cy={y + h / 2} r="2" fill="#4caf50" className="cypher-dot-pulse" style={{ animationDelay: `${2.5 + i * 0.15}s` }} />
           </g>
         ))}
-        <text x="400" y="660" textAnchor="middle" fill="#25C75E" fontSize="12" fontWeight="500" fontFamily="var(--font-mono)" className="cypher-scale-text">
+        <text x="400" y="660" textAnchor="middle" fill="#a855f7" fontSize="12" fontWeight="500" fontFamily="var(--font-mono)" className="cypher-scale-text">
           all local — your machine, your keys, your agents
         </text>
       </svg>

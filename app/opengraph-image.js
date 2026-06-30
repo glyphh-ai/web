@@ -29,7 +29,7 @@ export default async function Image() {
         <div style={{ display: 'flex', fontSize: '66px', fontWeight: 800, color: '#ffffff', letterSpacing: '-2px', lineHeight: 1.05 }}>
           A new way to build software
         </div>
-        <div style={{ display: 'flex', fontSize: '66px', fontWeight: 800, color: '#25C75E', letterSpacing: '-2px', lineHeight: 1.05 }}>
+        <div style={{ display: 'flex', fontSize: '66px', fontWeight: 800, color: '#a855f7', letterSpacing: '-2px', lineHeight: 1.05 }}>
           and automate your work.
         </div>
         <div style={{ display: 'flex', fontSize: '30px', color: '#b6b6b6', marginTop: '40px' }}>

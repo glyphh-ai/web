@@ -72,10 +72,10 @@ export default function SupernovaCanvas() {
       const coreGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, coreRadius);
       coreGrad.addColorStop(0, 'rgba(255, 255, 255, 0.5)');
       coreGrad.addColorStop(0.04, 'rgba(200, 255, 220, 0.34)');
-      coreGrad.addColorStop(0.12, 'rgba(37, 199, 94, 0.22)');
-      coreGrad.addColorStop(0.3, 'rgba(37, 199, 94, 0.09)');
-      coreGrad.addColorStop(0.55, 'rgba(37, 199, 94, 0.03)');
-      coreGrad.addColorStop(1, 'rgba(37, 199, 94, 0)');
+      coreGrad.addColorStop(0.12, 'rgba(168, 85, 247, 0.22)');
+      coreGrad.addColorStop(0.3, 'rgba(168, 85, 247, 0.09)');
+      coreGrad.addColorStop(0.55, 'rgba(168, 85, 247, 0.03)');
+      coreGrad.addColorStop(1, 'rgba(168, 85, 247, 0)');
       ctx.fillStyle = coreGrad;
       ctx.fillRect(0, 0, w, h);
 

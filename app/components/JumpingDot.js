@@ -428,7 +428,7 @@ export default function JumpingDot() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(37, 199, 94, ${p.life * 0.5})`;
+        ctx.fillStyle = `rgba(168, 85, 247, ${p.life * 0.5})`;
         ctx.fill();
       }
 
@@ -443,8 +443,8 @@ export default function JumpingDot() {
       if (!dotHidden) {
         // Dot glow
         const glowGrad = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, DOT_RADIUS * 3.5);
-        glowGrad.addColorStop(0, 'rgba(37, 199, 94, 0.09)');
-        glowGrad.addColorStop(1, 'rgba(37, 199, 94, 0)');
+        glowGrad.addColorStop(0, 'rgba(168, 85, 247, 0.09)');
+        glowGrad.addColorStop(1, 'rgba(168, 85, 247, 0)');
         ctx.beginPath();
         ctx.arc(dotX, dotY, DOT_RADIUS * 3.5, 0, Math.PI * 2);
         ctx.fillStyle = glowGrad;
@@ -453,7 +453,7 @@ export default function JumpingDot() {
         // Main dot
         ctx.beginPath();
         ctx.arc(dotX, dotY, DOT_RADIUS, 0, Math.PI * 2);
-        ctx.fillStyle = '#25C75E';
+        ctx.fillStyle = '#a855f7';
         ctx.fill();
       }
 
