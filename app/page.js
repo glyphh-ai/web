@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
-import Capture from './components/Capture';
 import Mcp from './components/Mcp';
 import Rpa from './components/Rpa';
 import Screenshots from './components/Screenshots';
@@ -14,7 +13,6 @@ import Download from './components/Download';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
-import Develop from './components/Develop';
 
 export default function Home() {
   useEffect(() => {
@@ -58,10 +56,8 @@ export default function Home() {
       <Nav />
       <Hero />
       <Integrations />
-      <Capture />
-      <Screenshots />
-      <Develop />
       <Mcp />
+      <Screenshots />
       <Rpa />
       <Features />
       <Pricing />

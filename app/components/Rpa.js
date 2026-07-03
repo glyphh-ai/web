@@ -1,27 +1,25 @@
 /**
- * RPA — agent-driven robotic process automation across your apps.
- *
- * A huge, previously-unspoken feature: Glyphh automates the real work
- * across apps as durable Flows, driven by an agent that already has your
- * context — not a brittle click-recorder.
+ * Automation — the work your AI does through Glyphh: driving real apps,
+ * running deterministic skills, and moving data across services. RPA where
+ * the "robot" is the AI you already trust.
  */
 
 const pillars = [
   {
     title: 'Automate across every app',
-    desc: 'The agent navigates panels, fills forms, extracts data, and moves it between apps — the same point-and-click work you’d otherwise do by hand, done for you.',
+    desc: 'Your AI navigates windows, fills forms, extracts data, and moves it between apps — the same point-and-click work you’d otherwise do by hand, done for you while you watch.',
   },
   {
-    title: 'Durable Flows, not recordings',
-    desc: 'Cron-scheduled or event-driven runbooks that chain skills, MCP tools, and agent turns into one process — auditable, retried, and observable on disk.',
+    title: 'Skills — deterministic, repeatable',
+    desc: 'Capture a workflow once as a skill and any connected AI can run it on demand. Skills execute exactly the same way every time — auditable and shareable, not improvised.',
   },
   {
     title: 'Resilient by design',
-    desc: 'Because an agent with context drives it — not pixel coordinates — Flows adapt when a button moves or a layout changes, instead of shattering like legacy RPA.',
+    desc: 'An AI with judgment drives the work — not pixel coordinates. When a button moves or a layout changes, it adapts instead of shattering like legacy RPA scripts.',
   },
   {
     title: 'Hand off and walk away',
-    desc: 'Kick off a task and keep working. Glyphh runs the process in the background across your apps and reports back when it’s done.',
+    desc: 'Ask from your phone, your laptop, or a chat window: the relay reaches your workspace wherever you left it running and reports back when the job is done.',
   },
 ];
 
@@ -30,16 +28,16 @@ export default function Rpa() {
     <section className="adal" id="rpa">
       <div className="container">
         <div className="section-label reveal">{'{'}
-          <span className="accent">RPA / AUTOMATION</span>
+          <span className="accent">AUTOMATION</span>
           {'}'}</div>
         <h2 className="section-title reveal">
           RPA without<br/>the brittle scripts.
         </h2>
         <p className="adal-lede reveal">
           Glyphh automates the actual work across your apps — clicking,
-          filling, extracting, moving data — as durable Flows. Robotic
-          process automation driven by an agent that already has your
-          context, not a recorder that breaks the moment a button moves.
+          filling, extracting, moving data — driven by the AI you already
+          use, through tools it can see and you can audit. Not a click
+          recorder that breaks the moment a button moves.
         </p>
         <div className="adal-grid">
           {pillars.map((p, i) => (

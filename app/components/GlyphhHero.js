@@ -165,10 +165,11 @@ export default function GlyphhHero() {
           )}
         </div>
 
-        {/* ── Centre: agent chat → Gmail draft ─────────────── */}
+        {/* ── Centre: your AI's chat, driving Glyphh → Gmail draft ── */}
         <div className={`gh-card gh-chat ${active.RM ? 'on' : ''}`} ref={centerRef}>
           <div className="gh-chat-head">
             <img src="/glyphh-logo-white.png" alt="Glyphh" className="gh-logo" />
+            <span className="gh-sb-meta">your AI · connected over the relay</span>
           </div>
 
           {!gmailView ? (
@@ -201,7 +202,7 @@ export default function GlyphhHero() {
               <div className="gh-reply">
                 <span className="gh-reply-plus">+</span>
                 <span className="gh-reply-ph">Reply…</span>
-                <span className="gh-reply-model">Haiku 4.5</span>
+                <span className="gh-reply-model">Claude</span>
                 <span className="gh-send"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" /></svg></span>
               </div>
             </>
@@ -249,10 +250,10 @@ export default function GlyphhHero() {
           </div>
 
           <div className="gh-card gh-mini" ref={rbRef}>
-            <div className="gh-card-label">AGENT</div>
-            <div className="gh-kv"><span>AGENT</span><b>Coding Agent</b></div>
-            <div className="gh-kv"><span>PROVIDER</span><b>Anthropic</b></div>
-            <div className="gh-kv"><span>MODEL</span><b>Haiku 4.5</b></div>
+            <div className="gh-card-label">CLIENT</div>
+            <div className="gh-kv"><span>CLIENT</span><b>Claude Desktop</b></div>
+            <div className="gh-kv"><span>LINK</span><b>MCP relay</b></div>
+            <div className="gh-kv"><span>STATUS</span><b>Connected</b></div>
           </div>
         </div>
 

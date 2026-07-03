@@ -1,28 +1,25 @@
 /**
- * MCP — the whole app is an MCP server, in both directions.
- *
- * A headline capability that wasn't surfaced anywhere: Glyphh speaks MCP
- * natively. It connects any MCP server in, and exposes itself as an MCP
- * server out, so other clients can use everything you've wired up.
+ * MCP — the lead story: one secure relay connects the AI you already use to
+ * your real desktop. No new chatbot to learn, no tokens resold — your LLM,
+ * our workspace.
  */
 
 const pillars = [
   {
-    title: 'Glyphh is an MCP server',
-    desc: 'Every app, skill, and tool you connect is exposed through Glyphh’s own MCP server. Point Claude Code, Cursor, or any MCP client at it and they get your entire toolkit — with your context.',
+    title: 'Bring the AI you already pay for',
+    desc: 'Claude, ChatGPT, Gemini, Cursor — any MCP client connects to your Glyphh endpoint with one approval. No copied tokens, no config files: sign in, connect, done.',
   },
   {
-    title: 'Connect any server in',
-    desc: 'stdio, SSE, or streamable-HTTP — local CLIs, remote APIs, your own servers. Plug them in and the agent picks the tools up automatically across every panel.',
+    title: 'Real control of a real desktop',
+    desc: 'Your AI opens apps, tiles OS windows into saved layouts, clicks, types, reads, and screenshots — native window control on Mac and Windows, not a browser sandbox.',
   },
   {
-    title: 'One relay for everything',
-    desc: 'Your apps, captures, and connectors become a single MCP surface. Shared tools and shared context across every client you point at it — no per-app glue.',
+    title: 'Every tool, one surface',
+    desc: 'Connected services (Gmail, Slack, Notion, GitHub — 3,500+), installed Glyphh apps, your skills, and your local MCP servers all appear as tools your AI can discover and call.',
   },
   {
-    title: '3,500+ apps via Pipedream',
-    desc: 'On Pro, connect Pipedream and reach 3,500+ apps through the same MCP layer — Gmail, Slack, Notion, GitHub and thousands more, all available to the agent.',
-    badge: 'Pro',
+    title: 'Guarded by default',
+    desc: 'An injection firewall screens every request before it reaches your machine, tool calls are scoped per user, and there’s a local-only server mode when you want no cloud at all.',
   },
 ];
 
@@ -31,16 +28,16 @@ export default function Mcp() {
     <section className="adal" id="mcp">
       <div className="container">
         <div className="section-label reveal">{'{'}
-          <span className="accent">MODEL CONTEXT PROTOCOL</span>
+          <span className="accent">THE RELAY</span>
           {'}'}</div>
         <h2 className="section-title reveal">
-          The entire app<br/>is an MCP server.
+          Your AI on one side.<br/>Your computer on the other.
         </h2>
         <p className="adal-lede reveal">
-          Glyphh speaks MCP natively, both directions. Connect any MCP
-          server into the workspace, and expose Glyphh itself as a server
-          so tools like Claude Code and Cursor can use everything you have
-          wired up — your apps, your skills, your context.
+          Glyphh is a secure MCP relay between the AI you already use and the
+          desktop you already work on. Connect Claude or ChatGPT once and it
+          can drive your workspace from anywhere — open apps, run layouts,
+          work your tools — while you watch it happen on screen.
         </p>
         <div className="adal-grid">
           {pillars.map((p, i) => (
