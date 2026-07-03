@@ -13,7 +13,7 @@ export default function TermsPage() {
           <a href="/" className="policy-back">&larr; Back</a>
           <h1 className="policy-title">Terms of Use</h1>
 
-          <p><strong>Effective Date:</strong> June 29, 2026</p>
+          <p><strong>Effective Date:</strong> July 3, 2026</p>
           <p>These Terms of Use (&ldquo;Terms&rdquo;) govern your access to and use of Glyphh, including the desktop application, the hosted platform, and the Glyphh relay that connects your own AI tools to your workspace (collectively, the &ldquo;Service&rdquo;), provided by Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). By installing, accessing, or using the Service, you agree to be bound by these Terms.</p>
 
           <h2>1. Eligibility</h2>
@@ -82,7 +82,7 @@ export default function TermsPage() {
           <p>You retain ownership of all content you create, capture, submit, or process using the Service. We do not claim ownership over your data. You are solely responsible for the content you submit and for ensuring that your use, and any output you rely on, complies with applicable laws and third-party rights. AI outputs may be inaccurate, incomplete, or otherwise unsuitable; you are responsible for reviewing and verifying outputs before relying on them.</p>
 
           <h2>8. Service Availability</h2>
-          <p>We strive to maintain continuous availability but do not guarantee uninterrupted access. The Service may be temporarily unavailable for maintenance, updates, or due to circumstances beyond our control, including outages or changes at our third-party providers (such as Anthropic). We reserve the right to modify, suspend, or discontinue any part of the Service at any time with reasonable notice. Unavailability, including unavailability caused by a third-party provider, does not entitle you to a refund or credit except as expressly stated in our <a href="/refund">Refund Policy</a>.</p>
+          <p>We strive to maintain continuous availability but do not guarantee uninterrupted access. The Service may be temporarily unavailable for maintenance, updates, or due to circumstances beyond our control, including outages or changes at the AI clients you connect or at third-party integrations and connected services. We reserve the right to modify, suspend, or discontinue any part of the Service at any time with reasonable notice. Unavailability, including unavailability caused by a third party, does not entitle you to a refund or credit except as expressly stated in our <a href="/refund">Refund Policy</a>.</p>
 
           <h2>9. Limitation of Liability</h2>
           <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, GLYPHH AI LLC SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF DATA, PROFITS, OR REVENUE, ARISING OUT OF OR RELATED TO YOUR USE OF THE SERVICE OR THE ACTS OR OMISSIONS OF ANY THIRD-PARTY PROVIDER. OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.</p>
