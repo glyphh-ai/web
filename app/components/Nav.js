@@ -8,13 +8,8 @@ const GITHUB_URL = 'https://github.com/glyphh-ai';
 const PRODUCTS = [
   {
     href: '/products/apps',
-    name: 'Glyphh Apps',
+    name: 'Glyphh Desktop',
     desc: 'The workspace your AI drives',
-  },
-  {
-    href: '/products/code',
-    name: 'Glyphh Code',
-    desc: 'Agentic coding on the Glyphh runtime',
   },
   {
     href: '/pricing',
