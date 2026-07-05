@@ -23,8 +23,8 @@ export default function FinalCTA() {
     <section className="final-cta" id="get-started">
       <div className="container">
         <div className="cta-card" ref={cardRef}>
-          <h2>Build software<span className="dot">.</span> Automate the rest<span className="dot">.</span> One workspace<span className="dot">.</span></h2>
-          <p>Download <span className="compose-cmd">Glyphh</span> free and start building and automating across every app today.</p>
+          <h2>Connect your AI<span className="dot">.</span> Automate the rest<span className="dot">.</span> One workspace<span className="dot">.</span></h2>
+          <p>Download <span className="compose-cmd">Glyphh</span> free and start automating across every app today.</p>
           <div className="cta-buttons">
             <a href="#download" className="btn btn-white btn-lg group">
               <span className="btn-label">Download for Mac — Free</span>

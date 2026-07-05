@@ -2,7 +2,6 @@ import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Hero from '../../components/Hero';
 import Mcp from '../../components/Mcp';
-import Rpa from '../../components/Rpa';
 import Screenshots from '../../components/Screenshots';
 import Features from '../../components/Features';
 import Integrations from '../../components/Integrations';
@@ -26,7 +25,6 @@ export default function GlyphhAppsPage() {
       <Integrations />
       <Mcp />
       <Screenshots />
-      <Rpa />
       <Features />
       <Pricing />
       <Download />
