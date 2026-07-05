@@ -1,24 +1,24 @@
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 
-// Proxy-billing model: frontier models are built in and metered as prepaid
-// credits — no API key needed to start. Each tier bundles a monthly credit
-// allowance + the integration moat (MCP + Pipedream). BYOK stays available,
-// unbilled, for power users.
+// Compute-credit billing: you bring your own AI (never marked up), and each
+// tier bundles a monthly allowance of compute credits — 1 credit = 30 seconds
+// of tool compute (ceiling, 1-credit minimum per call). Browsing and listing
+// are always free. Prepaid; never billed in arrears.
 const TIERS = [
   {
     name: 'Free',
     price: '0',
     period: 'forever',
-    credits: '50 credits / month',
+    credits: '15 credits / month',
     popular: false,
-    desc: 'The full workspace with frontier models built in — no key, no card.',
+    desc: 'The full workspace, driven by the AI you already have — no card.',
     features: [
-      'The full native workspace — every app as a panel',
-      'Frontier models built in (Haiku) — no API key',
-      'Agent + multi-agent swarms, Skills + Flows',
-      'Bring your own key for any model — unbilled',
+      'The full native workspace — apps, layouts, command palette',
+      'Connect your own AI over the MCP relay',
+      'Native window control on Mac + Windows',
+      'Bring your own LLM — no token markup, ever',
     ],
-    excluded: ['MCP + Pipedream integrations'],
+    excluded: ['Connected services (3,500+ apps)'],
     cta: 'Download now',
     btn: 'btn-secondary',
   },
@@ -28,12 +28,11 @@ const TIERS = [
     period: 'per month',
     credits: '1,000 credits / month',
     popular: true,
-    desc: 'All frontier models on credits, plus the MCP + Pipedream integration layer.',
+    desc: 'Real automation across your connected services, every month.',
     features: [
       'Everything in Free, plus:',
-      'All frontier models on credits (Sonnet, Opus)',
-      'MCP — connect & expose servers',
-      'Pipedream — 3,500+ app connectors',
+      '1,000 compute credits every month',
+      'Connected services — 3,500+ apps via the relay',
       'Cloud sync across machines',
     ],
     excluded: [],
@@ -44,10 +43,10 @@ const TIERS = [
     name: 'Pro',
     price: '50',
     period: 'per month',
-    credits: '3,500 credits / month',
+    credits: '2,000 credits / month',
     popular: false,
-    desc: 'For heavier agentic use — 3.5× the monthly credits and higher limits.',
-    features: ['Everything in Basic, plus:', '3.5× the monthly credits', 'Higher rate limits'],
+    desc: 'For daily drivers — double the credits and higher limits.',
+    features: ['Everything in Basic, plus:', '2,000 monthly compute credits', 'Higher rate limits'],
     excluded: [],
     cta: 'Get started',
     btn: 'btn-secondary',
@@ -56,10 +55,10 @@ const TIERS = [
     name: 'Advanced',
     price: '200',
     period: 'per month',
-    credits: '16,000 credits / month',
+    credits: '10,000 credits / month',
     popular: false,
     desc: 'Maximum allowance and caps for power users and teams.',
-    features: ['Everything in Pro, plus:', '16,000 monthly credits', 'Highest caps + priority'],
+    features: ['Everything in Pro, plus:', '10,000 monthly compute credits', 'Highest caps + priority support'],
     excluded: [],
     cta: 'Get started',
     btn: 'btn-secondary',
@@ -72,7 +71,10 @@ export default function Pricing() {
       <div className="container">
         <h2 className="section-title">Simple, transparent pricing</h2>
         <p className="section-subtitle">
-          Frontier models are built in and metered as prepaid credits — start free, no API key. Every plan includes the integration layer. Prefer your own key? Run it unbilled.
+          One credit system across every Glyphh product — 1 credit = 30 seconds
+          of compute, and each product just spends credits differently. Bring
+          your own AI: Glyphh never resells tokens, and browsing or listing
+          your tools is always free.
         </p>
 
         <div className="pricing-grid pricing-grid-four">
@@ -104,7 +106,7 @@ export default function Pricing() {
           ))}
         </div>
 
-        <p className="pricing-note">Cancel anytime. Out of credits? Buy more — never billed in arrears.</p>
+        <p className="pricing-note">Cancel anytime. Out of credits? Top up — prepaid, never billed in arrears. Every charge is itemized per tool call in your usage feed.</p>
         <p className="pricing-tax">Prices are exclusive of applicable taxes and duties, including VAT and applicable sales tax.</p>
         <p className="pricing-enterprise">Need unlimited seats or dedicated support? <a href="mailto:support@glyphh.ai">Contact sales</a></p>
       </div>

@@ -1,3 +1,5 @@
+'use client';
+
 const APPS_ROW1 = [
   { name: 'Claude', domain: 'claude.ai' },
   { name: 'ChatGPT', domain: 'chatgpt.com' },
@@ -89,8 +91,8 @@ export default function Integrations() {
       <div className="container">
         <h2 className="section-title reveal">Works with every app you already use</h2>
         <p className="section-subtitle reveal">
-          Run any app as a panel — your AI tools, GitHub, Slack, Gmail, and thousands more.
-          The agent works across all of them, with your context.
+          Run any app in a native window — GitHub, Slack, Gmail, and thousands more.
+          Your AI works across all of them, through one relay.
         </p>
       </div>
       <div className="scroll-rows reveal">

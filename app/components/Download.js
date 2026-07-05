@@ -68,7 +68,7 @@ export default function Download() {
                 <a
                   href="/api/download?platform=mac&arch=x64"
                   onClick={(e) => { e.preventDefault(); setArchOverride('x64'); }}
-                  style={{ color: 'var(--accent)', textDecoration: 'underline', cursor: 'pointer' }}
+                  style={{ color: 'var(--text)', textDecoration: 'underline', fontWeight: 700, cursor: 'pointer' }}
                 >
                   Get the Intel build
                 </a>
@@ -79,7 +79,7 @@ export default function Download() {
                 <a
                   href="/api/download?platform=mac&arch=arm64"
                   onClick={(e) => { e.preventDefault(); setArchOverride('arm64'); }}
-                  style={{ color: 'var(--accent)', textDecoration: 'underline', cursor: 'pointer' }}
+                  style={{ color: 'var(--text)', textDecoration: 'underline', fontWeight: 700, cursor: 'pointer' }}
                 >
                   Get the Apple Silicon build
                 </a>

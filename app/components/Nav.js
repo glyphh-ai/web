@@ -1,13 +1,48 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
+const GITHUB_URL = 'https://github.com/glyphh-ai';
+
+const PRODUCTS = [
+  {
+    href: '/products/apps',
+    name: 'Glyphh Apps',
+    desc: 'The workspace your AI drives',
+  },
+  {
+    href: '/products/code',
+    name: 'Glyphh Code',
+    desc: 'Agentic coding on the Glyphh runtime',
+  },
+  {
+    href: '/pricing',
+    name: 'Pricing',
+    desc: 'One credit system, every product',
+  },
+];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [ddOpen, setDdOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const ddRef = useRef(null);
+  const ddCloseTimer = useRef(null);
+
+  // Hover open/close with a grace period: closing instantly on mouseleave
+  // makes the panel vanish while the pointer travels from the trigger to a
+  // menu item, so the links are unclickable. The delay absorbs that.
+  const ddEnter = () => {
+    clearTimeout(ddCloseTimer.current);
+    setDdOpen(true);
+  };
+  const ddLeave = () => {
+    clearTimeout(ddCloseTimer.current);
+    ddCloseTimer.current = setTimeout(() => setDdOpen(false), 260);
+  };
+  useEffect(() => () => clearTimeout(ddCloseTimer.current), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -15,6 +50,21 @@ export default function Nav() {
     setLoggedIn(document.cookie.includes('yo_logged_in=1'));
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Close the dropdown on outside click / Escape
+  useEffect(() => {
+    if (!ddOpen) return;
+    const onDown = (e) => {
+      if (ddRef.current && !ddRef.current.contains(e.target)) setDdOpen(false);
+    };
+    const onKey = (e) => { if (e.key === 'Escape') setDdOpen(false); };
+    document.addEventListener('pointerdown', onDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('pointerdown', onDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [ddOpen]);
 
   const loginHref = `${PLATFORM_URL}/auth/login`;
   const signupHref = `${PLATFORM_URL}/auth`;
@@ -28,8 +78,32 @@ export default function Nav() {
             <img src="/glyphh-logo-black.png" alt="Glyphh" />
           </a>
           <div className="nav-links">
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
+            <a href="/research">Research</a>
+            <div
+              className={`nav-dd ${ddOpen ? 'open' : ''}`}
+              ref={ddRef}
+              onMouseEnter={ddEnter}
+              onMouseLeave={ddLeave}
+            >
+              <button
+                className="nav-dd-trigger"
+                aria-expanded={ddOpen}
+                aria-haspopup="true"
+                onClick={() => setDdOpen(!ddOpen)}
+              >
+                Products
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div className="nav-dd-panel" role="menu">
+                {PRODUCTS.map((p) => (
+                  <a key={p.href} href={p.href} className="nav-dd-item" role="menuitem">
+                    <span className="nav-dd-name">{p.name}</span>
+                    <span className="nav-dd-desc">{p.desc}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
           <div className="nav-cta">
             {loggedIn ? (
@@ -60,8 +134,14 @@ export default function Nav() {
         </div>
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
-        <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
+        <a href="/research" onClick={() => setMenuOpen(false)}>Research</a>
+        <span className="mobile-menu-group">Products</span>
+        {PRODUCTS.map((p) => (
+          <a key={p.href} href={p.href} className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>
+            {p.name}
+          </a>
+        ))}
+        <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>GitHub</a>
         {loggedIn ? (
           <a href={dashHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>
             <span className="btn-label">Dashboard</span>

@@ -6,43 +6,39 @@ import { styledText } from './cmd-style';
 const faqs = [
   {
     q: 'What is Glyphh?',
-    a: 'Glyphh is a native desktop AI workspace that connects every AI and app you use — ChatGPT, Claude, Gemini, Grok, Perplexity, plus 3,500+ apps via MCP and Pipedream — in one window with shared context. A built-in agent navigates panels, runs skills, and can spin up a swarm of agents to automate work across all of them.',
+    a: 'Glyphh is a native desktop workspace that the AI you already use can drive. Connect Claude, ChatGPT, Gemini, or any MCP client to your Glyphh endpoint and it can open your apps, tile your windows into layouts, work across 3,500+ connected services, and run your skills — on your real desktop, while you watch.',
   },
   {
-    q: 'How is this different from just using browser tabs?',
-    a: 'Glyphh sits over every app with a built-in agent and a local MCP server. Context is captured automatically with local vector embeddings — no copy-pasting. The agent navigates, clicks, and extracts across panels. Skills automate repeatable workflows. The MCP relay exposes your tools to other clients.',
+    q: 'Which AI can drive it?',
+    a: 'Any MCP-compatible client: Claude (Desktop, Code, claude.ai), ChatGPT, Gemini, Cursor, Windsurf, and more. You connect them to your Glyphh endpoint with a one-time approval — OAuth for clients that support it, or a revocable access token for the rest.',
   },
   {
-    q: 'How does context follow me?',
-    a: 'Every panel you open is captured in the background and indexed with local vector embeddings. When you open the Glyphh agent, it already has the context from everything you have been doing — across apps, across panels. Switch to a new panel and it travels with you. No copy-paste, no re-explaining, no session to manage.',
+    q: 'Do you resell AI models or mark up tokens?',
+    a: 'No — never. You bring the AI subscription you already pay for, and your prompts go straight to your provider. Glyphh meters only the compute it does on your behalf: opening apps, driving windows, calling tools.',
   },
   {
-    q: 'What is MCP and how does it work?',
-    a: 'Glyphh includes a local MCP server that connects to any MCP-compatible tool over stdio, SSE, or streamable HTTP. Your agent gets access to tools from every connected server. The MCP relay bridges your tools to external clients like Claude Code or Cursor, so they can use your Glyphh tools directly.',
+    q: 'What is a credit?',
+    a: '1 credit = 30 seconds of tool compute, rounded up, with a 1-credit minimum per call — the same way our infrastructure costs are metered. Browsing and listing your apps and tools is always free. Every charge is itemized per tool call in your usage feed, with the exact operation and duration.',
   },
   {
-    q: 'Do I need to bring my own API key?',
-    a: 'Yes — Glyphh never holds provider keys. Configure your own keys for Anthropic, OpenAI, Gemini, xAI, Perplexity in Settings → Providers. They live encrypted on your machine via the OS keychain. Inference goes straight from Glyphh to the provider; we never see your prompts.',
+    q: 'What can it actually do on my desktop?',
+    a: 'Open apps and web apps in native windows, tile every window on screen into saved layouts (real OS window control on Mac and Windows), click, type, read, and screenshot inside app panels, run installed Glyphh apps’ tools, and execute your skills. You can do all of the same from the built-in command palette.',
   },
   {
-    q: 'What apps are supported?',
-    a: 'Glyphh ships with 100+ pre-configured native apps including ChatGPT, Claude, Gemini, Gmail, Slack, GitHub, and more. With MCP servers and Pipedream connectors, you get access to 3,500+ apps. You can also add any URL as a panel.',
+    q: 'What are connected services?',
+    a: 'OAuth connections to 3,500+ apps — Gmail, Slack, Notion, GitHub, Salesforce and more. Connect an account once and it becomes a set of tools your AI can call: send the message, file the ticket, update the record. Available on paid plans.',
   },
   {
     q: 'What are skills?',
-    a: 'Skills are full automation units — not just templates. A skill can be a prompt that the LLM processes, or a JavaScript runner with lifecycle hooks that calls LLMs, invokes MCP tools, chains sub-skills, runs on a cron schedule, prompts the user for input, and reads/writes files. Export and share them as ZIP files.',
+    a: 'Repeatable workflows saved as code in your org’s library. Your AI (or you, from the palette) runs them on demand and they execute deterministically — the same way every time. Exportable, shareable, and versioned.',
   },
   {
-    q: 'What is a swarm?',
-    a: 'When one agent is not enough, the Glyphh agent can spin up a swarm — a roster of your own agents that split a goal, work it in parallel, and report back. A leader decomposes the goal and assigns tasks over a local bus; the rest execute. It all runs on your machine and streams inline into your conversation.',
-  },
-  {
-    q: 'Is my data stored on your servers?',
-    a: 'Your captures, notes, and conversation history are stored locally on your machine. Context is indexed with local ONNX embeddings — no external indexing calls. Agent LLM calls go directly from your machine to your provider (Anthropic, OpenAI, etc.) using your own API keys; Glyphh never sees prompts or responses. We store account and subscription metadata only.',
+    q: 'Is my data safe?',
+    a: 'Your AI conversations never pass through Glyphh — they stay between you and your provider. Relayed tool requests are screened by an injection firewall before they reach your machine, access tokens are revocable per client, and there’s a local-only server mode if you want no cloud in the loop at all. Provider keys you store with us are encrypted at rest.',
   },
   {
     q: 'Is Glyphh free?',
-    a: 'Yes — free forever with your own keys, no trial and no credit card. The full workspace is free: the agent, swarms, skills, Flows (RPA), and automatic app-level capture. You bring your own provider keys, so there is no token markup. Pro is $12/month and adds the MCP layer — connect external MCP servers and expose Glyphh itself as one — plus Pipedream’s 3,500+ app connectors and cloud sync across machines.',
+    a: 'Yes — free forever, no card. The full workspace, the command palette, layouts, native window control, and your own AI connected over the relay, with 15 compute credits a month included. Paid plans ($20/$50/$200) add monthly credit allowances of 1,000/2,000/10,000 plus connected services and cloud sync.',
   },
   {
     q: 'What platforms does Glyphh support?',

@@ -13,7 +13,7 @@ export default function RefundPage() {
           <a href="/" className="policy-back">&larr; Back</a>
           <h1 className="policy-title">Refund Policy</h1>
 
-          <p><strong>Effective Date:</strong> June 29, 2026</p>
+          <p><strong>Effective Date:</strong> July 3, 2026</p>
           <p>This Refund Policy applies to paid plans and credit purchases for Glyphh, offered by Glyphh AI LLC. Capitalized terms have the meaning given in our <a href="/terms">Terms of Use</a>.</p>
 
           <h2>1. Free Tier</h2>
@@ -32,7 +32,7 @@ export default function RefundPage() {
           <p>All credit purchases and top-ups are final and <strong>non-refundable</strong> once purchased. Unused credits are not refundable, redeemable for cash, or transferable, except where a refund is required by applicable law. Periodic plan-included credits do not roll over and expire at the end of the billing period in which they are granted.</p>
 
           <h2>6. No Refunds for Third-Party or Upstream Availability</h2>
-          <p>The Service depends on third-party AI providers (including Anthropic) and other infrastructure that we do not control. We do <strong>not</strong> provide refunds or credits for any interruption, downtime, degraded performance, latency, rate limiting, capacity limits, model changes or deprecations, or content moderation, refusals, or output decisions that arise from or relate to a third-party provider or any cause outside our reasonable control. Such events do not constitute a failure of the Service for refund purposes.</p>
+          <p>The Service depends on the AI clients you connect, third-party integrations and connected services (for example, through our integration partner), and other infrastructure that we do not control. We do <strong>not</strong> provide refunds or credits for any interruption, downtime, degraded performance, latency, rate limiting, capacity limits, changes or deprecations, or content moderation, refusals, or output decisions that arise from or relate to a third party or any cause outside our reasonable control. Such events do not constitute a failure of the Service for refund purposes.</p>
 
           <h2>7. Our Own Service Disruptions</h2>
           <p>For prolonged outages caused solely by our own infrastructure (and not by a third-party provider or other cause outside our reasonable control), we may, at our sole discretion, issue a goodwill service credit. This is discretionary; nothing in this section creates an entitlement to a refund or credit. Report disruptions to <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>

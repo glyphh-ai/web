@@ -7,14 +7,14 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 
 export const metadata = {
   metadataBase: new URL('https://glyphh.ai'),
-  title: 'Glyphh — A new way to build software and automate your work.',
-  description: 'Glyphh is a native desktop AI workspace. An agent builds software in a real IDE, runs every app you use as a live panel, and automates work across all of them — you describe the outcome and it codes, clicks, and ships.',
+  title: 'Glyphh — AI Research & Development',
+  description: 'Glyphh is an AI research and development company working on vector-symbolic architectures, hyperdimensional computing, memory systems, and agentic runtimes. Everything we build is open source.',
   icons: {
     icon: '/favicon.svg',
   },
   openGraph: {
-    title: 'Glyphh — A new way to build software and automate your work.',
-    description: 'A native desktop AI workspace. Build in your IDE of choice, automate across every app, and expose Glyphh’s MCP tools to any coding agent.',
+    title: 'Glyphh — AI Research & Development',
+    description: 'Research at the frontier: vector-symbolic architectures, hyperdimensional computing, memory systems, and agentic runtimes — all open source at github.com/glyphh-ai.',
     url: 'https://glyphh.ai',
     siteName: 'Glyphh',
     type: 'website',
@@ -22,8 +22,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Glyphh — A new way to build software and automate your work.',
-    description: 'A native desktop AI workspace. Build in your IDE of choice, automate across every app, and expose Glyphh’s MCP tools to any coding agent.',
+    title: 'Glyphh — AI Research & Development',
+    description: 'Research at the frontier: vector-symbolic architectures, hyperdimensional computing, memory systems, and agentic runtimes — all open source at github.com/glyphh-ai.',
   },
 };
 
