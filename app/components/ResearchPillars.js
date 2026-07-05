@@ -30,10 +30,11 @@ export default function ResearchPillars() {
     <section className="pillars" id="frontier">
       <div className="container">
         <div className="section-label">{'{'} <span className="accent">THE FRONTIER</span> {'}'}</div>
-        <h2 className="section-title">Four bets on how intelligence gets built</h2>
+        <h2 className="section-title">A search for a cognitive primitive</h2>
         <p className="section-sub">
-          Deep learning got us here. We think the next layer — memory,
-          structure, and the machinery agents run on — looks different.
+          Deep learning got us here. We believe the next layer is memory,
+          structure, and the machinery agents run on. The frontier is a
+          mathematical primitive models can leverage as a cognitive substrate.
         </p>
         <div className="pillars-grid">
           {PILLARS.map((p) => (
