@@ -3898,3 +3898,48 @@ footer {
     padding-bottom: 0.5rem;
   }
 }
+
+/* ── GlyphhHero on small screens ───────────────────────────────────
+   Grid items default to min-width:auto, so intrinsic content (the Gmail
+   draft mock, tool-call chips) can force the columns wider than the
+   viewport once the demo advances — mobile browsers then rescale and
+   the section runs off screen. Let every cell shrink and clip inside
+   its card, and go single-column on phones. */
+.gh-grid > *,
+.gh-right .gh-mini {
+  min-width: 0;
+}
+
+.gh-card {
+  overflow: hidden;
+}
+
+.gh-msg,
+.gh-gmail-body,
+.gh-gmail-row b {
+  overflow-wrap: anywhere;
+}
+
+.gh-gmail-row b {
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .gh-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "chat" "apps" "right" "runtime";
+    gap: 18px;
+  }
+
+  .gh-right {
+    gap: 18px;
+  }
+
+  .gh-rt-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stage {
+    margin-top: 2rem;
+  }
+}
