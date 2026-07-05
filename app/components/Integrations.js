@@ -1,3 +1,5 @@
+'use client';
+
 const APPS_ROW1 = [
   { name: 'Claude', domain: 'claude.ai' },
   { name: 'ChatGPT', domain: 'chatgpt.com' },

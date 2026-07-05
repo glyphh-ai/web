@@ -3088,3 +3088,675 @@ footer {
   }
 }
 
+
+/* ════════════════════════════════════════════════════════════════════
+   Research-company redesign — nav dropdown, motion hero, home sections,
+   research page, product pages, pricing page.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Nav: Products dropdown ────────────────────────────── */
+.nav-dd {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-dd-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-2);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.nav-dd-trigger svg {
+  transition: transform 0.2s ease;
+}
+
+.nav-dd:hover .nav-dd-trigger,
+.nav-dd.open .nav-dd-trigger {
+  color: var(--white);
+}
+
+.nav-dd.open .nav-dd-trigger svg {
+  transform: rotate(180deg);
+}
+
+.nav-dd-panel {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  min-width: 280px;
+  padding: 8px;
+  /* Bridge the hover gap between trigger and panel */
+  margin-top: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  z-index: 60;
+}
+
+.nav-dd-panel::before {
+  /* Invisible hover bridge over the margin gap */
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+
+.nav-dd.open .nav-dd-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dd-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.nav-dd-item:hover {
+  background: var(--surface-2);
+}
+
+.nav-dd-name {
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.nav-dd-desc {
+  color: var(--text-3);
+  font-size: 0.78rem;
+}
+
+.mobile-menu-group {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-4);
+  padding-top: 0.5rem;
+}
+
+.mobile-menu-sub {
+  padding-left: 1rem !important;
+}
+
+/* ── Research hero — full-bleed motion canvas ──────────── */
+.rhero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 7rem 0 4rem;
+}
+
+.rhero-canvas-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.rhero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.rhero-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 45%, transparent 0%, transparent 40%, var(--bg) 100%),
+    linear-gradient(to bottom, rgba(26, 26, 28, 0.55) 0%, transparent 30%, transparent 62%, var(--bg) 100%);
+  pointer-events: none;
+}
+
+.rhero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 5rem);
+  text-align: center;
+}
+
+.rhero-inner .hero-badge {
+  margin-left: auto;
+  margin-right: auto;
+  text-transform: uppercase;
+  background: rgba(26, 26, 28, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.rhero-title {
+  font-size: clamp(2.75rem, 6vw, 5rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  max-width: 22ch;
+  margin: 0 auto 1.5rem;
+  text-shadow: 0 2px 40px rgba(26, 26, 28, 0.9);
+}
+
+.rhero-sub {
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  color: var(--text-2);
+  line-height: 1.6;
+  max-width: 62ch;
+  margin: 0 auto 2.5rem;
+  text-shadow: 0 1px 24px rgba(26, 26, 28, 0.95);
+}
+
+.rhero-ctas {
+  justify-content: center;
+}
+
+.rhero-ticker {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(0.75rem, 3vw, 2.5rem);
+  margin-top: 3.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+}
+
+.rhero-ticker span {
+  animation: ticker-pulse 4s ease infinite;
+}
+
+.rhero-ticker span:nth-child(2) { animation-delay: 1s; }
+.rhero-ticker span:nth-child(3) { animation-delay: 2s; }
+.rhero-ticker span:nth-child(4) { animation-delay: 3s; }
+
+@keyframes ticker-pulse {
+  0%, 100% { color: var(--text-3); }
+  12% { color: var(--accent-light); text-shadow: 0 0 18px var(--accent-glow); }
+  30% { color: var(--text-3); }
+}
+
+/* ── Research pillars (home + code features) ───────────── */
+.pillars, .code-features {
+  padding: 7rem 0;
+}
+
+.code-features {
+  padding-top: 2rem;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.pillar-card {
+  position: relative;
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.pillar-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 100% 0%, var(--accent-glow), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.pillar-card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-3px);
+}
+
+.pillar-card:hover::after {
+  opacity: 1;
+}
+
+.pillar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.pillar-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-4);
+}
+
+.pillar-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--accent-light);
+  border: 1px solid var(--accent-dim);
+  border-radius: 100px;
+  padding: 2px 10px;
+  background: rgba(140, 59, 242, 0.08);
+}
+
+.pillar-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+
+.pillar-card p {
+  font-size: 0.95rem;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+
+/* ── Open source section ───────────────────────────────── */
+.oss {
+  padding: 7rem 0;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(140, 59, 242, 0.07), transparent 70%);
+}
+
+.oss-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.oss-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.oss-card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-3px);
+}
+
+.oss-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-3);
+}
+
+.oss-name {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.oss-meta {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-4);
+  white-space: nowrap;
+}
+
+.oss-card p {
+  font-size: 0.9rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.oss-link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-light);
+}
+
+.oss-ctas {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ── Products section (home) ───────────────────────────── */
+.prods {
+  padding: 7rem 0;
+}
+
+.prods-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.prod-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 2.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.prod-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 0% 100%, rgba(236, 72, 153, 0.07), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.prod-card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-3px);
+}
+
+.prod-card:hover::after {
+  opacity: 1;
+}
+
+.prod-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.prod-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+.prod-status {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  border: 1px solid var(--border-2);
+  border-radius: 100px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.prod-status.live {
+  color: var(--accent-light);
+  border-color: var(--accent-dim);
+  background: rgba(140, 59, 242, 0.08);
+}
+
+.prod-card p {
+  font-size: 0.95rem;
+  color: var(--text-2);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.prod-cta {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-light);
+}
+
+.prods-pricing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 2.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.prods-pricing-copy h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 0.35rem;
+}
+
+.prods-pricing-copy p {
+  font-size: 0.92rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+.prods-pricing-copy b {
+  color: var(--text);
+}
+
+.prods-pricing .btn {
+  flex-shrink: 0;
+}
+
+/* ── Inner-page hero (research / products / pricing) ───── */
+.page-hero {
+  padding: 10rem 0 4rem;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% -10%, rgba(140, 59, 242, 0.12), transparent 70%);
+}
+
+.page-hero-tight {
+  padding-bottom: 1rem;
+}
+
+.page-hero .hero-badge {
+  text-transform: uppercase;
+}
+
+.page-hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  max-width: 24ch;
+  margin: 0 auto 1.25rem;
+}
+
+.page-hero-sub {
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  color: var(--text-2);
+  line-height: 1.65;
+  max-width: 64ch;
+  margin: 0 auto;
+}
+
+.page-hero .hero-ctas {
+  justify-content: center;
+  margin-top: 2.25rem;
+}
+
+/* ── Research page: project cards ──────────────────────── */
+.projects {
+  padding: 3rem 0 6rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-3px);
+}
+
+.project-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-name {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.project-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.project-meta {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-4);
+  white-space: nowrap;
+}
+
+.project-card p {
+  font-size: 0.92rem;
+  color: var(--text-2);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.project-card-org {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-style: dashed;
+  border-color: var(--border-2);
+  color: var(--text-3);
+}
+
+.project-card-org p {
+  flex: 0;
+  max-width: 40ch;
+}
+
+/* ── Pricing page: credit rules ────────────────────────── */
+.credit-rules {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  max-width: 980px;
+  margin: 3rem auto 0;
+  text-align: left;
+}
+
+.credit-rule {
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.credit-rule h3 {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  margin-bottom: 0.45rem;
+}
+
+.credit-rule p {
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .oss-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .credit-rules {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .pillars-grid,
+  .prods-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prods-pricing {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rhero {
+    min-height: 80vh;
+  }
+
+  .nav-dd-panel {
+    display: none;
+  }
+}

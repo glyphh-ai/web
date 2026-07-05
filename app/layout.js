@@ -7,14 +7,14 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 
 export const metadata = {
   metadataBase: new URL('https://glyphh.ai'),
-  title: 'Glyphh — Give your AI hands.',
-  description: 'Glyphh is the workspace your AI drives. Connect Claude, ChatGPT, or any MCP client to your real desktop — open apps, tile layouts, work across 3,500+ connected services, run skills. Bring your own AI; no token markup.',
+  title: 'Glyphh — AI Research & Development',
+  description: 'Glyphh is an AI research and development company working on vector-symbolic architectures, hyperdimensional computing, memory systems, and agentic runtimes. Everything we build is open source.',
   icons: {
     icon: '/favicon.svg',
   },
   openGraph: {
-    title: 'Glyphh — Give your AI hands.',
-    description: 'The workspace your AI drives. One secure MCP relay connects the AI you already use to your apps, windows, layouts, and tools — on Mac and Windows.',
+    title: 'Glyphh — AI Research & Development',
+    description: 'Research at the frontier: vector-symbolic architectures, hyperdimensional computing, memory systems, and agentic runtimes — all open source at github.com/glyphh-ai.',
     url: 'https://glyphh.ai',
     siteName: 'Glyphh',
     type: 'website',
@@ -22,8 +22,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Glyphh — Give your AI hands.',
-    description: 'The workspace your AI drives. One secure MCP relay connects the AI you already use to your apps, windows, layouts, and tools — on Mac and Windows.',
+    title: 'Glyphh — AI Research & Development',
+    description: 'Research at the frontier: vector-symbolic architectures, hyperdimensional computing, memory systems, and agentic runtimes — all open source at github.com/glyphh-ai.',
   },
 };
 

@@ -7,18 +7,20 @@ export default function Footer() {
             <a href="/" className="footer-logo" aria-label="Glyphh">
               <img src="/glyphh-logo-black.png" alt="Glyphh" />
             </a>
-            <p className="footer-tagline">One workspace. Every tool. One assistant.</p>
+            <p className="footer-tagline">AI research &amp; development. Open source, all the way down.</p>
           </div>
           <div className="footer-col">
-            <h4>Product</h4>
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#download">Download</a>
-          </div>
-          <div className="footer-col">
-            <h4>Resources</h4>
+            <h4>Research</h4>
+            <a href="/research">Projects</a>
+            <a href="https://github.com/glyphh-ai" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="https://github.com/glyphh-ai/glyphh-releases/releases" target="_blank" rel="noopener noreferrer">Changelog</a>
-            <a href="https://github.com/glyphh-ai/glyphh-releases" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+          <div className="footer-col">
+            <h4>Products</h4>
+            <a href="/products/apps">Glyphh Apps</a>
+            <a href="/products/code">Glyphh Code</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/products/apps#download">Download</a>
           </div>
           <div className="footer-col">
             <h4>Legal</h4>

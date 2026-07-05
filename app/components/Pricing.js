@@ -71,9 +71,10 @@ export default function Pricing() {
       <div className="container">
         <h2 className="section-title">Simple, transparent pricing</h2>
         <p className="section-subtitle">
-          Bring your own AI — Glyphh never resells tokens. Plans meter only the
-          compute Glyphh does for you: 1 credit = 30 seconds of tool work, and
-          browsing or listing your tools is always free.
+          One credit system across every Glyphh product — 1 credit = 30 seconds
+          of compute, and each product just spends credits differently. Bring
+          your own AI: Glyphh never resells tokens, and browsing or listing
+          your tools is always free.
         </p>
 
         <div className="pricing-grid pricing-grid-four">
