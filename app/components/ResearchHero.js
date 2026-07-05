@@ -17,20 +17,7 @@ const MORPH_MS = 2400;
 function makeShapes() {
   const shapes = [];
 
-  // 1 — hypervector shell (fibonacci sphere)
-  {
-    const pts = [];
-    const ga = Math.PI * (3 - Math.sqrt(5));
-    for (let i = 0; i < N; i++) {
-      const y = 1 - (i / (N - 1)) * 2;
-      const r = Math.sqrt(1 - y * y);
-      const th = ga * i;
-      pts.push([Math.cos(th) * r, y, Math.sin(th) * r]);
-    }
-    shapes.push(pts);
-  }
-
-  // 2 — layered lattice: 7 stacked planes (Ada's 7-layer schema)
+  // 1 — layered lattice cube: 7 stacked planes (Ada's 7-layer schema)
   {
     const pts = [];
     const layers = 7;
@@ -47,7 +34,7 @@ function makeShapes() {
     shapes.push(pts);
   }
 
-  // 3 — binding torus
+  // 2 — binding torus
   {
     const pts = [];
     const R = 0.72, r = 0.34;
@@ -63,7 +50,7 @@ function makeShapes() {
     shapes.push(pts);
   }
 
-  // 4 — two hypervectors mid-bind: interlocked rings
+  // 3 — two hypervectors mid-bind: interlocked rings
   {
     const pts = [];
     for (let i = 0; i < N; i++) {

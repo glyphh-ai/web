@@ -29,6 +29,20 @@ export default function Nav() {
   const [ddOpen, setDdOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const ddRef = useRef(null);
+  const ddCloseTimer = useRef(null);
+
+  // Hover open/close with a grace period: closing instantly on mouseleave
+  // makes the panel vanish while the pointer travels from the trigger to a
+  // menu item, so the links are unclickable. The delay absorbs that.
+  const ddEnter = () => {
+    clearTimeout(ddCloseTimer.current);
+    setDdOpen(true);
+  };
+  const ddLeave = () => {
+    clearTimeout(ddCloseTimer.current);
+    ddCloseTimer.current = setTimeout(() => setDdOpen(false), 260);
+  };
+  useEffect(() => () => clearTimeout(ddCloseTimer.current), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -68,8 +82,8 @@ export default function Nav() {
             <div
               className={`nav-dd ${ddOpen ? 'open' : ''}`}
               ref={ddRef}
-              onMouseEnter={() => setDdOpen(true)}
-              onMouseLeave={() => setDdOpen(false)}
+              onMouseEnter={ddEnter}
+              onMouseLeave={ddLeave}
             >
               <button
                 className="nav-dd-trigger"
