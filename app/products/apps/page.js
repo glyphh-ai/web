@@ -13,8 +13,8 @@ import FinalCTA from '../../components/FinalCTA';
 import Footer from '../../components/Footer';
 
 export const metadata = {
-  title: 'Glyphh Desktop — Give your AI hands.',
-  description: 'Glyphh Desktop is the workspace your AI drives. Connect Claude, ChatGPT, or any MCP client to your real desktop — open apps, tile layouts, work across 3,500+ connected services, run skills. Bring your own AI; no token markup.',
+  title: 'Glyphh Desktop — Connect once. Put any AI to work.',
+  description: 'Glyphh is the connective tissue between every LLM you use and everything you build. Connect 3,500+ services once, build automations, agents, and apps, and share them — no hosting, no token markup.',
 };
 
 export default function GlyphhAppsPage() {

@@ -6,10 +6,10 @@ import { styledText } from './cmd-style';
 const faqs = [
   {
     q: 'What is Glyphh?',
-    a: 'Glyphh is a native desktop workspace that the AI you already use can drive. Connect Claude, ChatGPT, Gemini, or any MCP client to your Glyphh endpoint and it can open your apps, tile your windows into layouts, work across 3,500+ connected services, and run your skills — on your real desktop, while you watch.',
+    a: 'Glyphh is the connective tissue between the LLMs you use and everything you work with. Connect your services once, then build automations, integrations, agents, and apps on top — and every MCP client (Claude, ChatGPT, Gemini, Cursor) can use them through one secure relay. Share what you build as installable apps or endpoints others can call.',
   },
   {
-    q: 'Which AI can drive it?',
+    q: 'Which AI can connect?',
     a: 'Any MCP-compatible client: Claude (Desktop, Code, claude.ai), ChatGPT, Gemini, Cursor, Windsurf, and more. You connect them to your Glyphh endpoint with a one-time approval — OAuth for clients that support it, or a revocable access token for the rest.',
   },
   {
@@ -21,8 +21,8 @@ const faqs = [
     a: '1 credit = 30 seconds of tool compute, rounded up, with a 1-credit minimum per call — the same way our infrastructure costs are metered. Browsing and listing your apps and tools is always free. Every charge is itemized per tool call in your usage feed, with the exact operation and duration.',
   },
   {
-    q: 'What can it actually do on my desktop?',
-    a: 'Open apps and web apps in native windows, tile every window on screen into saved layouts (real OS window control on Mac and Windows), click, type, read, and screenshot inside app panels, run installed Glyphh apps’ tools, and execute your skills. You can do all of the same from the built-in command palette.',
+    q: 'What can I build with it?',
+    a: 'Automations that span your connected services, agents with scoped tools, and installable Glyphh apps — a manifest, an HTML UI, and an optional headless worker with SQLite, vector search, a knowledge graph, and cron built in. Publish any of it at your-app.glyphh.app or as an MCP endpoint, no hosting required. There are desktop conveniences too: a command palette, saved layouts, native windows.',
   },
   {
     q: 'What are connected services?',
@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     q: 'Is Glyphh free?',
-    a: 'Yes — free forever, no card. The full workspace, the command palette, layouts, native window control, and your own AI connected over the relay, with 15 compute credits a month included. Paid plans ($20/$50/$200) add monthly credit allowances of 1,000/2,000/10,000 plus connected services and cloud sync.',
+    a: 'Yes — free forever, no card. The full app, your own AI connected over the relay, building and publishing included, with 15 compute credits a month. Paid plans ($20/$50/$200) add monthly credit allowances of 1,000/2,000/10,000 plus connected services and cloud sync.',
   },
   {
     q: 'What platforms does Glyphh support?',

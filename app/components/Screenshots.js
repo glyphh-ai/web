@@ -4,24 +4,24 @@ import { useState } from 'react';
 
 const SHOTS = [
   {
-    img: 'glyphh-command-palette.png',
-    title: 'The command palette',
-    text: 'One hotkey overlays your screen — every app, layout, and window a keystroke away. Type an app to open it full-screen, a layout to snap your desktop into shape, or a command to run a skill.',
-  },
-  {
-    img: 'glyphh-layouts.png',
-    title: 'A workspace that fits the work',
-    text: 'Save a layout per project and switch with one command — real OS windows tiled across your screen, apps launched into their cells, on Mac and Windows.',
-  },
-  {
     img: 'glyphh-custom-apps.png',
-    title: 'Bring your apps — or build new ones',
-    text: 'Add ChatGPT, Gmail, Slack, GitHub or any internal tool to your library — or point any agent at what you need and it builds a brand-new Glyphh app and publishes it to your org.',
+    title: 'Build apps with any agent',
+    text: 'Point any agent at what you need and it builds a Glyphh app — UI, tools, storage — and publishes it to your org, where anyone can install it or call it over the relay.',
   },
   {
     img: 'glyphh-workflow.png',
-    title: 'Connect 3,500+ apps',
-    text: 'One-click OAuth to Gmail, Slack, Notion, Salesforce, GitHub and 3,500+ more. Every connected account becomes tools your AI can call — send the message, file the ticket, update the record.',
+    title: 'Connect 3,500+ apps once',
+    text: 'One-click OAuth to Gmail, Slack, Notion, Salesforce, GitHub and 3,500+ more. Every connected account becomes tools every LLM you use can call — send the message, file the ticket, update the record.',
+  },
+  {
+    img: 'glyphh-command-palette.png',
+    title: 'The command palette',
+    text: 'Everything you’ve connected and built, a hotkey away — open an app, run a skill, or snap a layout without leaving the keyboard.',
+  },
+  {
+    img: 'glyphh-layouts.png',
+    title: 'Layouts, when you want them',
+    text: 'Save a layout per project and switch with one command — real OS windows tiled across your screen, on Mac and Windows.',
   },
 ];
 
@@ -34,7 +34,7 @@ export default function Screenshots() {
         <div className="section-label reveal">{'{'}
           <span className="accent">SEE IT IN ACTION</span>
           {'}'}</div>
-        <h2 className="section-title reveal">One workspace, every way you work</h2>
+        <h2 className="section-title reveal">One connection, every way you build</h2>
 
         <div className="shots-list">
           {SHOTS.map((s, i) => (

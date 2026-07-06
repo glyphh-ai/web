@@ -1,7 +1,7 @@
 /**
- * MCP — the lead story: one secure relay connects the AI you already use to
- * your real desktop. No new chatbot to learn, no tokens resold — your LLM,
- * our workspace.
+ * MCP — the lead story: Glyphh is the connective tissue between every LLM a
+ * developer uses and everything they've connected and built. Wire it up once;
+ * every client gets it.
  */
 
 const pillars = [
@@ -10,12 +10,12 @@ const pillars = [
     desc: 'Claude, ChatGPT, Gemini, Cursor — any MCP client connects to your Glyphh endpoint with one approval. No copied tokens, no config files: sign in, connect, done.',
   },
   {
-    title: 'Real control of a real desktop',
-    desc: 'Your AI opens apps, tiles OS windows into saved layouts, clicks, types, reads, and screenshots — native window control on Mac and Windows, not a browser sandbox.',
+    title: 'Build once, call from every LLM',
+    desc: 'Automations, integrations, agents, apps — whatever you build becomes MCP tools. Every connected client can call them instantly; no per-model plugins, no rebuilds when you switch LLMs.',
   },
   {
     title: 'Every tool, one surface',
-    desc: 'Connected services (Gmail, Slack, Notion, GitHub — 3,500+), installed Glyphh apps, your skills, and your local MCP servers all appear as tools your AI can discover and call.',
+    desc: 'Connected services (Gmail, Slack, Notion, GitHub — 3,500+), your Glyphh apps, your skills, and your local MCP servers all appear as tools any client can discover and call.',
   },
   {
     title: 'Guarded by default',
@@ -31,13 +31,13 @@ export default function Mcp() {
           <span className="accent">THE RELAY</span>
           {'}'}</div>
         <h2 className="section-title reveal">
-          Your AI on one side.<br/>Your computer on the other.
+          Every LLM on one side.<br/>Everything you build on the other.
         </h2>
         <p className="adal-lede reveal">
-          Glyphh is a secure MCP relay between the AI you already use and the
-          desktop you already work on. Connect Claude or ChatGPT once and it
-          can drive your workspace from anywhere — open apps, run layouts,
-          work your tools — while you watch it happen on screen.
+          Glyphh is the connective tissue between the LLMs you use and your
+          stack. Connect your services once, build automations, agents, and
+          apps on top — and every client you point at your Glyphh endpoint
+          can use all of it, through one secure relay.
         </p>
         <div className="adal-grid">
           {pillars.map((p, i) => (

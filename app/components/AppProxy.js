@@ -27,14 +27,13 @@ export default function AppProxy() {
           <span className="accent">PUBLISH</span>
           {'}'}</div>
         <h2 className="section-title reveal">
-          Give any app its own public URL.
+          Share what you build — no hosting required.
         </h2>
         <p className="adal-lede reveal">
-          Every app in your library can go live at <b>your-app.glyphh.app</b> —
-          served straight from your machine over the relay. Expose a local HTTP
-          server, or lend your own model over MCP so Claude, ChatGPT, or any
-          client can call it. No deploy, no open ports, and your keys never
-          leave home.
+          Anything you build goes live at <b>your-app.glyphh.app</b>, served
+          over the relay. Hand it to others as an installable Glyphh app, a
+          public URL, or an MCP endpoint their own AI can call. No deploy, no
+          open ports, no infra to run — and your keys never leave home.
         </p>
         <div className="adal-grid">
           {pillars.map((p, i) => (

@@ -592,24 +592,84 @@ body {
 /* connecting lines overlay — endpoints measured from the real boxes */
 .gh-lines { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 4; overflow: visible; }
 .gh-ln { stroke: #34243f; stroke-width: 2.5; }
-.gh-ln.on { stroke: #ffffff; stroke-dasharray: 5 6; animation: gh-dash .55s linear infinite; filter: drop-shadow(0 0 5px rgba(155,60,246,.95)); }
+.gh-ln.on { stroke: #ffffff; stroke-dasharray: 5 6; animation: gh-dash .55s linear infinite; filter: drop-shadow(0 0 5px rgba(255,255,255,.9)); }
 @keyframes gh-dash { to { stroke-dashoffset: -22; } }
 
 /* cards */
 .gh-card { position: relative; z-index: 1; background: rgba(13,8,18,.82); border: 1px solid var(--border); border-radius: 14px; padding: 13px; backdrop-filter: blur(6px); transition: border-color .3s, box-shadow .3s; }
-.gh-card.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 0 22px var(--accent-glow); }
+.gh-card.on { border-color: rgba(255,255,255,.85); box-shadow: 0 0 0 1px rgba(255,255,255,.6), 0 0 22px rgba(255,255,255,.22); }
 .gh-card-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: .08em; color: var(--text-3); display: flex; justify-content: space-between; }
 .gh-sb-meta { color: var(--text-4); }
 
 .gh-apps { grid-area: apps; display: flex; flex-direction: column; }
-.gh-chat { grid-area: chat; display: flex; flex-direction: column; }
+/* Fixed height so the centre panel never changes size as its content swaps
+   (chat ↔ gmail ↔ phone) or messages accumulate — the graphic (and the page,
+   incl. mobile) stays put instead of jumping. Inner regions flex/clip to fit. */
+.gh-chat { grid-area: chat; display: flex; flex-direction: column; height: 400px; }
+/* Claude window — the centre agent panel mirrors Claude Desktop's dark theme:
+   a warm charcoal window (not the cool-purple, glassy Glyphh cards) with light
+   text and sparing coral accents. */
+/* The whole Claude window is themed by per-model vars set inline each cycle
+   (--m accent, --m-bg, --m-fg text, --m-fg2 muted, --m-line borders, --m-surf
+   inner surfaces). Defaults below = Claude dark; ChatGPT = white, Gemini = blue. */
+.gh-chat {
+  --m: #d97757; --m-bg: #262420; --m-fg: #ece9e2; --m-fg2: #a8a49a; --m-line: #3a372f; --m-surf: #2f2c26;
+  background: var(--m-bg); border-color: var(--m-line); backdrop-filter: none;
+  transition: background .45s ease, border-color .45s ease;
+}
+.gh-chat.on { border-color: color-mix(in srgb, var(--m) 55%, var(--m-line)); box-shadow: 0 0 0 1px color-mix(in srgb, var(--m) 45%, transparent), 0 0 24px color-mix(in srgb, var(--m) 26%, transparent); }
+/* Phone finale — drop the panel chrome so the device stands on its own. */
+.gh-chat.gh-chat-bare { background: transparent; border-color: transparent; box-shadow: none; }
+.gh-chat.gh-chat-bare .gh-chat-head { display: none; }
+.gh-chat .gh-claude { color: var(--m-fg); }
+.gh-chat .gh-chat-head { border-bottom-color: var(--m-line); }
+.gh-chat .gh-sb-meta { color: var(--m-fg2); }
+.gh-chat .gh-msg-user { background: var(--m-surf); border: 1px solid var(--m-line); color: var(--m-fg); }
+.gh-chat .gh-msg-agent { background: transparent; border-color: transparent; color: var(--m-fg); }
+.gh-chat .gh-msg-dot { background: var(--m); box-shadow: none; }
+.gh-chat .gh-tc { background: color-mix(in srgb, var(--m) 14%, transparent); border-color: color-mix(in srgb, var(--m) 30%, transparent); color: var(--m-fg); }
+.gh-chat .gh-tc-dot { background: var(--m); box-shadow: none; }
+.gh-chat .gh-working { color: var(--m-fg2); }
+.gh-chat .gh-brl { color: var(--m-fg); text-shadow: none; }
+.gh-chat .gh-reply { background: var(--m-surf); border: 1px solid var(--m-line); color: var(--m-fg2); }
+.gh-chat .gh-reply-model { color: var(--m-fg2); }
+.gh-chat .gh-send { background: var(--m); }
+/* Gmail draft finale inherits the model's theme; Send sits on the right */
+.gh-chat .gh-gmail { background: var(--m-surf); border-color: var(--m-line); }
+.gh-chat .gh-gmail-head { background: color-mix(in srgb, var(--m-fg) 6%, var(--m-surf)); border-bottom-color: var(--m-line); color: var(--m-fg); }
+.gh-chat .gh-gmail-row { border-bottom-color: var(--m-line); }
+.gh-chat .gh-gmail-row span { color: var(--m-fg2); }
+.gh-chat .gh-gmail-row b { color: var(--m-fg); }
+.gh-chat .gh-gmail-body { color: var(--m-fg); }
+.gh-chat .gh-gmail-body b { color: var(--m-fg); }
+.gh-chat .gh-gmail-send { border-top-color: var(--m-line); text-align: right; }
+.gh-chat .gh-gmail-btn { background: var(--m); }
+
+/* Act 2 finale — the built app on a real phone. Styled as its own standalone
+   app (a white, iOS-style UI), independent of the model theme; only the caption
+   below picks up the panel colour. */
+.gh-phone { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 11px; margin-top: 2px; animation: gh-pop .5s ease; }
+.gh-phone-frame { position: relative; width: 186px; background: #0c0c0f; border: 1px solid #2c2c31; border-radius: 33px; padding: 8px; box-shadow: 0 18px 48px rgba(0,0,0,.55); }
+.gh-phone-notch { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 56px; height: 7px; background: #0c0c0f; border-radius: 4px; z-index: 2; }
+.gh-phone-screen { background: #ffffff; border-radius: 26px; overflow: hidden; padding: 18px 15px 14px; }
+.gh-phone-status { display: flex; justify-content: space-between; align-items: center; font-size: 9px; font-weight: 700; color: #111; margin-bottom: 12px; padding: 0 3px; }
+.gh-phone-batt { width: 18px; height: 8px; border-radius: 2px; background: #111; }
+.gh-phone-url { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 8.5px; color: #8a8a8e; background: #f1f1f4; border-radius: 8px; padding: 5px 8px; margin-bottom: 14px; font-family: var(--font-mono); }
+.gh-phone-appbar { font-size: 15px; font-weight: 700; color: #111; text-align: center; margin-bottom: 14px; letter-spacing: -0.01em; }
+.gh-phone-body { display: flex; flex-direction: column; gap: 8px; }
+.gh-phone-field { display: flex; justify-content: space-between; gap: 8px; font-size: 10.5px; padding: 10px 12px; border-radius: 11px; background: #f4f4f6; }
+.gh-phone-field span { color: #8a8a8e; }
+.gh-phone-field b { color: #111; font-weight: 600; }
+.gh-phone-cta { margin-top: 6px; text-align: center; font-size: 12.5px; font-weight: 600; color: #fff; background: #2563eb; border-radius: 12px; padding: 11px; }
+.gh-phone-home { display: block; width: 54px; height: 4px; background: #d6d6da; border-radius: 3px; margin: 13px auto 1px; }
+.gh-phone-cap { display: flex; align-items: center; gap: 6px; font-size: 9.5px; color: var(--text-3); font-family: var(--font-mono); }
 .gh-right { grid-area: right; display: flex; flex-direction: column; gap: 38px; }
 .gh-right .gh-mini { flex: 1; display: flex; flex-direction: column; }
 .gh-runtime { grid-area: runtime; }
 
 /* left: search + scrolling app ICON grid (no labels) */
 .gh-search { display: flex; align-items: center; gap: 6px; margin: 9px 0 8px; padding: 6px 8px; border: 1px solid var(--border-2); border-radius: 8px; background: rgba(0,0,0,.3); font-size: 10px; color: var(--text-3); transition: all .3s; }
-.gh-search.on { border-color: var(--accent); color: var(--text); box-shadow: 0 0 0 3px var(--accent-glow); }
+.gh-search.on { border-color: rgba(255,255,255,.75); color: var(--text); box-shadow: 0 0 0 3px rgba(255,255,255,.14); }
 .gh-search-ic { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; flex: 0 0 auto; }
 .gh-search-q { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gh-appgrid { flex: 1; min-height: 0; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 80%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 80%, transparent); }
@@ -617,7 +677,7 @@ body {
 .gh-appgrid-track { position: absolute; top: 0; left: 0; right: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; transition: transform .6s cubic-bezier(.65, 0, .3, 1); }
 .gh-appcell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: rgba(255,255,255,.03); border: 1px solid var(--border); transition: all .3s; }
 .gh-appcell img { border-radius: 4px; opacity: .9; }
-.gh-appcell.hot { border-color: var(--accent); background: rgba(155,60,246,.16); box-shadow: 0 0 14px var(--accent-glow); transform: scale(1.08); }
+.gh-appcell.hot { border-color: rgba(255,255,255,.8); background: rgba(255,255,255,.12); box-shadow: 0 0 14px rgba(255,255,255,.25); transform: scale(1.08); }
 .gh-appcell.hot img { opacity: 1; }
 
 /* left (found): the app's MCP tools fade in at the bottom of the panel */
@@ -630,14 +690,15 @@ body {
 
 /* centre chat */
 .gh-chat-head { display: flex; align-items: center; gap: 7px; justify-content: center; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-.gh-logo { height: 26px; width: auto; }
+.gh-claude { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13px; letter-spacing: -0.01em; color: var(--text); }
+.gh-claude-mark { flex-shrink: 0; }
 .gh-chat-title { font-size: 12.5px; color: var(--text); font-weight: 500; }
 .gh-chat-title b { color: var(--text-2); font-weight: 500; }
 .gh-msgs { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; padding: 13px 2px; }
 .gh-msg { padding: 10px 12px; border-radius: 12px; font-size: 11.5px; line-height: 1.5; }
 .gh-msg-user { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
-.gh-msg-agent { background: rgba(155,60,246,.10); border: 1px solid var(--border-2); color: var(--text-2); align-self: flex-start; animation: gh-pop .4s ease; }
-.gh-msg-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); margin-right: 6px; }
+.gh-msg-agent { background: rgba(217,119,87,.10); border: 1px solid rgba(217,119,87,.32); color: var(--text-2); align-self: flex-start; animation: gh-pop .4s ease; }
+.gh-msg-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #d97757; box-shadow: 0 0 8px rgba(217,119,87,.65); margin-right: 6px; }
 @keyframes gh-pop { from { opacity: 0; transform: translateY(6px); } }
 .gh-reply { display: flex; align-items: center; gap: 9px; margin-top: auto; padding: 9px 11px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; font-size: 11px; color: var(--text-3); }
 .gh-reply-plus { font-size: 15px; }
@@ -693,7 +754,7 @@ body {
 /* bottom: runtime */
 .gh-rt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
 .gh-rt-cell { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; background: rgba(0,0,0,.28); transition: border-color .3s, box-shadow .3s; }
-.gh-rt-cell.run { border-color: var(--accent); box-shadow: 0 0 16px var(--accent-glow); }
+.gh-rt-cell.run { border-color: rgba(255,255,255,.72); box-shadow: 0 0 16px rgba(255,255,255,.2); }
 .gh-rt-cell.done { border-color: var(--accent-dim); }
 .gh-rt-h { font-family: var(--font-mono); font-size: 9px; color: var(--text-2); display: flex; align-items: center; gap: 6px; }
 .gh-spin { font-style: normal; color: var(--text); width: 10px; display: inline-block; }

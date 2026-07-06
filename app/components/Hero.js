@@ -9,13 +9,11 @@ export default function Hero() {
           Native desktop app · Mac &amp; Windows
         </div>
         <h1 className="hero-title">
-          Give your AI hands.
+          Connect once. Put any AI to work.
         </h1>
         <p className="hero-sub-big">
-          Glyphh is the workspace your AI drives. Claude, ChatGPT, Gemini —
-          the AI you already pay for opens your apps, tiles your windows,
-          works across 3,500+ connected services, and runs your skills.
-          One secure relay. No token markup, ever.
+          One orchestrator across every LLM. Build apps or expose your agent&apos;s
+          tools to any AI — no hosting, no token markup.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">

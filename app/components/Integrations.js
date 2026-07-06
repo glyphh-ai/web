@@ -91,8 +91,8 @@ export default function Integrations() {
       <div className="container">
         <h2 className="section-title reveal">Works with every app you already use</h2>
         <p className="section-subtitle reveal">
-          Run any app in a native window — GitHub, Slack, Gmail, and thousands more.
-          Your AI works across all of them, through one relay.
+          Connect GitHub, Slack, Gmail and thousands more once — every LLM you
+          use gets them as tools, through one relay.
         </p>
       </div>
       <div className="scroll-rows reveal">

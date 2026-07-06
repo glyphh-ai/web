@@ -31,7 +31,7 @@ const SLACK_TOOLS = [
 ];
 const favicon = (d) => `https://www.google.com/s2/favicons?domain=${d}&sz=64`;
 
-const STEPS = 8;
+const STEPS = 11;
 const BRAILLE = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
 
 const CONNECTIONS = [
@@ -47,8 +47,63 @@ const MCP_TOOLS = [
 
 const ToolChip = ({ label }) => <span className="gh-tc"><i className="gh-tc-dot" />{label}</span>;
 
+// Claude sunburst mark (coral). Approximation — swap for the official Claude
+// SVG asset when available.
+const ClaudeMark = () => (
+  <svg className="gh-claude-mark" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+    <g fill="#d97757">
+      {Array.from({ length: 12 }).map((_, i) => (
+        <rect key={i} x="11.1" y="2.6" width="1.8" height="6.6" rx="0.9" transform={`rotate(${i * 30} 12 12)`} />
+      ))}
+    </g>
+  </svg>
+);
+
+// OpenAI "blossom" mark (ChatGPT green) — approximation; swap for the official
+// OpenAI SVG when available.
+const OpenAIMark = () => (
+  <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+    <g fill="none" stroke="#10a37f" strokeWidth="1.5">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <ellipse key={i} cx="12" cy="8.4" rx="3" ry="5" transform={`rotate(${i * 60} 12 12)`} />
+      ))}
+    </g>
+  </svg>
+);
+
+// Gemini 4-point sparkle (Google gradient) — approximation; swap for the
+// official Gemini SVG when available.
+const GeminiMark = () => (
+  <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+    <defs>
+      <linearGradient id="gh-gem" x1="2" y1="3" x2="22" y2="21" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="#4285f4" />
+        <stop offset="0.5" stopColor="#9b72cb" />
+        <stop offset="1" stopColor="#d96570" />
+      </linearGradient>
+    </defs>
+    <path d="M12 2c0 5.2 1.7 8.3 10 10-8.3 1.7-10 4.8-10 10 0-5.2-1.7-8.3-10-10 8.3-1.7 10-4.8 10-10z" fill="url(#gh-gem)" />
+  </svg>
+);
+
+// The demo runs the SAME flow under each connected AI, re-branding the desktop
+// window per cycle — proof that any MCP client drives one Glyphh workspace.
+// Each model themes the WHOLE window (bg / text / borders / surfaces + accent),
+// so switching models is unmistakable: Claude dark, ChatGPT white, Gemini blue.
+const MODELS = [
+  { key: 'claude', name: 'Claude', client: 'Claude Desktop', Mark: ClaudeMark,
+    accent: '#d97757', bg: '#262420', fg: '#ece9e2', fg2: '#a8a49a', line: '#3a372f', surf: '#2f2c26' },
+  { key: 'openai', name: 'ChatGPT', client: 'ChatGPT', Mark: OpenAIMark,
+    accent: '#10a37f', bg: '#ffffff', fg: '#2d2d2d', fg2: '#8e8ea0', line: '#e6e6e8', surf: '#f7f7f8' },
+  { key: 'gemini', name: 'Gemini', client: 'Gemini', Mark: GeminiMark,
+    accent: '#4285f4', bg: '#e9f0fd', fg: '#1f1f24', fg2: '#5f6368', line: '#cfdcf5', surf: '#dde8fb' },
+];
+
 export default function GlyphhHero() {
-  const [step, setStep] = useState(0);
+  const [tick, setTick] = useState(0);
+  const step = tick % STEPS;
+  const model = MODELS[Math.floor(tick / STEPS) % MODELS.length];
+  const Mark = model.Mark;
   const [spin, setSpin] = useState(0);
   const [lines, setLines] = useState([]);
   const [size, setSize] = useState({ w: 0, h: 0 });
@@ -65,25 +120,35 @@ export default function GlyphhHero() {
   const slackRef = useRef(null);
 
   useEffect(() => {
-    const a = setInterval(() => setStep((s) => (s + 1) % STEPS), 1900);
+    const a = setInterval(() => setTick((t) => (t + 1) % (STEPS * MODELS.length)), 1900);
     const b = setInterval(() => setSpin((s) => (s + 1) % BRAILLE.length), 110);
     return () => { clearInterval(a); clearInterval(b); };
   }, []);
 
   // ── derived flow state ──────────────────────────────────────
-  const showChat = step < 6;
-  const gmailView = step >= 6;
-  const agentAccept = step >= 1 && showChat;
+  // Act 1 (0-6): find Slack → pull Salesforce → draft Gmail.
+  // Act 2 (7-8): "make it an app for my phone" → build + publish.
+  // Finale (9-10): the app live on a phone, held a beat longer.
+  const gmailView = step === 6;               // the drafted quote email
+  const appChat = step === 7 || step === 8;   // the app follow-up
+  const phoneView = step >= 9;                // the built app on a phone
   const searching = step === 2;
   const slackFound = step >= 2;
   const toolsView = step >= 2;
   const slackConnected = step >= 2;
-  const agentMcp = step >= 3 && showChat;
   const mcpActive = step >= 4;
-  const working = step >= 1 && step <= 4; // agent is waiting on tool calls
-  const agentReplied = step === 5;
+  // Chat messages persist once reached, so the act-1 history stays visible
+  // (scrolled up) under the act-2 conversation.
+  const agentAccept = step >= 1;
+  const agentMcp = step >= 3;
+  const agentReplied = step >= 5;
+  const working = step >= 1 && step <= 4;     // act-1 tool spinner
+  const appBuilding = step === 7;             // packaging the app
+  const appLive = step >= 8;
   const runL = step === 4;
   const runR = step === 4;
+  const runApp = step === 7;                  // runtime builds + publishes the app
+  const chatOn = step === 4 || appChat;       // centre-panel glow while it works
   const br = BRAILLE[spin];
 
   const active = { L: step === 2, RT: step === 2, RM: step === 4, B: step === 4, RB: false, RBh: false };
@@ -131,7 +196,7 @@ export default function GlyphhHero() {
   }, [step]);
 
   return (
-    <div className="gh" ref={wrapRef} role="img" aria-label="Glyphh agent finding a Slack message, pulling a Salesforce record and drafting a Gmail quote across one workspace">
+    <div className="gh" ref={wrapRef} role="img" aria-label="Claude, ChatGPT and Gemini each driving the same Glyphh workspace — finding a Slack message, pulling a Salesforce record, drafting a Gmail quote, then building and hosting an app you can run from your phone">
       <svg className="gh-lines" width={size.w} height={size.h} aria-hidden="true">
         {lines.map((ln) => (
           <line key={ln.id} className={`gh-ln ${active[ln.id] ? 'on' : ''}`} x1={ln.x1} y1={ln.y1} x2={ln.x2} y2={ln.y2} />
@@ -166,13 +231,47 @@ export default function GlyphhHero() {
         </div>
 
         {/* ── Centre: your AI's chat, driving Glyphh → Gmail draft ── */}
-        <div className={`gh-card gh-chat ${active.RM ? 'on' : ''}`} ref={centerRef}>
+        <div className={`gh-card gh-chat ${chatOn ? 'on' : ''} ${phoneView ? 'gh-chat-bare' : ''}`} ref={centerRef} style={{ '--m': model.accent, '--m-bg': model.bg, '--m-fg': model.fg, '--m-fg2': model.fg2, '--m-line': model.line, '--m-surf': model.surf }}>
           <div className="gh-chat-head">
-            <img src="/glyphh-logo-white.png" alt="Glyphh" className="gh-logo" />
-            <span className="gh-sb-meta">your AI · connected over the relay</span>
+            <span className="gh-claude"><Mark /> {model.name}</span>
+            <span className="gh-sb-meta">connected over the relay</span>
           </div>
 
-          {!gmailView ? (
+          {phoneView ? (
+            <div className="gh-phone">
+              <div className="gh-phone-frame">
+                <span className="gh-phone-notch" />
+                <div className="gh-phone-screen">
+                  <div className="gh-phone-status"><span>9:41</span><span className="gh-phone-batt" /></div>
+                  <div className="gh-phone-url">
+                    <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
+                    quote-tool.glyphh.app
+                  </div>
+                  <div className="gh-phone-appbar">Quote Tool</div>
+                  <div className="gh-phone-body">
+                    <div className="gh-phone-field"><span>Customer</span><b>Acme</b></div>
+                    <div className="gh-phone-field"><span>Plan</span><b>Pro — $4,800/yr</b></div>
+                    <div className="gh-phone-field"><span>Discount</span><b>15% partner</b></div>
+                    <div className="gh-phone-cta">Send quote</div>
+                  </div>
+                  <span className="gh-phone-home" />
+                </div>
+              </div>
+              <div className="gh-phone-cap"><span className="gh-msg-dot" /> Live · hosted on your machine</div>
+            </div>
+          ) : gmailView ? (
+            <div className="gh-gmail">
+              <div className="gh-gmail-head"><img src={favicon('mail.google.com')} alt="" width="14" height="14" /> New message</div>
+              <div className="gh-gmail-row"><span>To</span><b>jordan@acme.com</b></div>
+              <div className="gh-gmail-row"><span>Subject</span><b>Your Glyphh quote</b></div>
+              <div className="gh-gmail-body">
+                Hi Jordan,<br /><br />
+                Great chatting about pricing. Here’s your quote: <b>Pro — $4,800/yr</b> (15% partner discount applied).<br /><br />
+                Best,<br />Chris
+              </div>
+              <div className="gh-gmail-send"><span className="gh-gmail-btn">Send</span></div>
+            </div>
+          ) : (
             <>
               <div className="gh-msgs">
                 <div className="gh-msg gh-msg-user">
@@ -195,29 +294,36 @@ export default function GlyphhHero() {
                     <span className="gh-msg-dot" /> Done — the quote email to Acme is drafted and ready to send.
                   </div>
                 )}
+                {appChat && (
+                  <div className="gh-msg gh-msg-user">
+                    Oh and can you create an app I can run from my phone for this?
+                  </div>
+                )}
+                {appChat && (
+                  <div className="gh-msg gh-msg-agent">
+                    <span className="gh-msg-dot" /> On it — packaging a Glyphh app and publishing it.
+                    <div className="gh-tcs"><ToolChip label="glyphh.build_app" /><ToolChip label="glyphh.publish" /></div>
+                  </div>
+                )}
+                {appLive && (
+                  <div className="gh-msg gh-msg-agent">
+                    <span className="gh-msg-dot" /> Done — live at <b>quote-tool.glyphh.app</b>, ready on your phone.
+                  </div>
+                )}
                 {working && (
                   <div className="gh-working"><span className="gh-brl">{br}</span> running tools…</div>
+                )}
+                {appBuilding && (
+                  <div className="gh-working"><span className="gh-brl">{br}</span> building app…</div>
                 )}
               </div>
               <div className="gh-reply">
                 <span className="gh-reply-plus">+</span>
                 <span className="gh-reply-ph">Reply…</span>
-                <span className="gh-reply-model">Claude</span>
+                <span className="gh-reply-model">{model.name}</span>
                 <span className="gh-send"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" /></svg></span>
               </div>
             </>
-          ) : (
-            <div className="gh-gmail">
-              <div className="gh-gmail-head"><img src={favicon('mail.google.com')} alt="" width="14" height="14" /> New message</div>
-              <div className="gh-gmail-row"><span>To</span><b>jordan@acme.com</b></div>
-              <div className="gh-gmail-row"><span>Subject</span><b>Your Glyphh quote</b></div>
-              <div className="gh-gmail-body">
-                Hi Jordan,<br /><br />
-                Great chatting about pricing. Here’s your quote: <b>Pro — $4,800/yr</b> (15% partner discount applied).<br /><br />
-                Best,<br />Chris
-              </div>
-              <div className="gh-gmail-send"><span className="gh-gmail-btn">Send</span></div>
-            </div>
           )}
         </div>
 
@@ -251,7 +357,7 @@ export default function GlyphhHero() {
 
           <div className="gh-card gh-mini" ref={rbRef}>
             <div className="gh-card-label">CLIENT</div>
-            <div className="gh-kv"><span>CLIENT</span><b>Claude Desktop</b></div>
+            <div className="gh-kv"><span>CLIENT</span><b>{model.client}</b></div>
             <div className="gh-kv"><span>LINK</span><b>MCP relay</b></div>
             <div className="gh-kv"><span>STATUS</span><b>Connected</b></div>
           </div>
@@ -265,9 +371,18 @@ export default function GlyphhHero() {
               <span className="gh-rt-h"><i className="gh-spin">{runL ? br : step > 4 ? '✓' : '·'}</i> INSTANCE-0 · slack</span>
               <pre>{`msgs = slack.find_dm(\n  from='tom', topic='pricing'\n)`}</pre>
             </div>
-            <div className={`gh-rt-cell ${runR ? 'run' : step > 4 ? 'done' : ''}`}>
-              <span className="gh-rt-h"><i className="gh-spin">{runR ? br : step > 4 ? '✓' : '·'}</i> INSTANCE-1 · salesforce → gmail</span>
-              <pre>{`rec = salesforce.get_record(msgs)\ngmail.create_draft(rec, quote)`}</pre>
+            <div className={`gh-rt-cell ${runR || runApp ? 'run' : step > 4 ? 'done' : ''}`}>
+              {step >= 7 ? (
+                <>
+                  <span className="gh-rt-h"><i className="gh-spin">{runApp ? br : '✓'}</i> INSTANCE-1 · publish app</span>
+                  <pre>{`app = glyphh.build_app('quote-tool')\napp.publish()  # quote-tool.glyphh.app`}</pre>
+                </>
+              ) : (
+                <>
+                  <span className="gh-rt-h"><i className="gh-spin">{runR ? br : step > 4 ? '✓' : '·'}</i> INSTANCE-1 · salesforce → gmail</span>
+                  <pre>{`rec = salesforce.get_record(msgs)\ngmail.create_draft(rec, quote)`}</pre>
+                </>
+              )}
             </div>
           </div>
         </div>
