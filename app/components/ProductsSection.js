@@ -1,6 +1,6 @@
 const PRODUCTS = [
   {
-    href: '/products/apps',
+    href: '/products/desktop',
     name: 'Glyphh Desktop',
     status: 'available now',
     desc: 'The workspace your AI drives. A native desktop app for Mac and Windows — your apps, windows, layouts, and 3,500+ connected services behind one secure MCP relay.',

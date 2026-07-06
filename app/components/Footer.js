@@ -17,9 +17,9 @@ export default function Footer() {
           </div>
           <div className="footer-col">
             <h4>Products</h4>
-            <a href="/products/apps">Glyphh Desktop</a>
+            <a href="/products/desktop">Glyphh Desktop</a>
             <a href="/pricing">Pricing</a>
-            <a href="/products/apps#download">Download</a>
+            <a href="/products/desktop#download">Download</a>
           </div>
           <div className="footer-col">
             <h4>Legal</h4>

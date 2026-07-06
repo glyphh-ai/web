@@ -1,8 +1,10 @@
 import GlyphhHero from './GlyphhHero';
+import HeroParticles from './HeroParticles';
 
 export default function Hero() {
   return (
     <section className="hero hero-stacked">
+      <HeroParticles />
       <div className="hero-copy hero-copy-center">
         <div className="hero-badge">
           <span className="badge-dot" aria-hidden="true"></span>

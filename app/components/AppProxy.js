@@ -35,7 +35,45 @@ export default function AppProxy() {
           public URL, or an MCP endpoint their own AI can call. No deploy, no
           open ports, no infra to run — and your keys never leave home.
         </p>
-        <div className="adal-grid">
+
+        {/* Marketecture: you build → the relay (mascot hub, ringed by the LLMs
+            that can connect) → anyone uses. Pure-CSS motion; mirrors the
+            homepage's pg-stage visual language. Favicons via the same Google
+            s2 service used across the site. */}
+        <div className="apx-stage reveal" aria-hidden="true">
+          <div className="apx-col">
+            <div className="apx-col-label">you build</div>
+            <div className="apx-node">app</div>
+            <div className="apx-node">agent</div>
+            <div className="apx-node">automation</div>
+          </div>
+          <div className="apx-flow"><i /><i /><i /></div>
+          <div className="apx-hub">
+            <div className="apx-glow" />
+            <div className="apx-orbit" />
+            {[
+              ['claude.ai', 337.5], ['chatgpt.com', 22.5], ['gemini.google.com', 67.5],
+              ['grok.com', 112.5], ['copilot.microsoft.com', 157.5], ['chat.mistral.ai', 202.5],
+              ['chat.qwen.ai', 247.5], ['ollama.com', 292.5],
+            ].map(([domain, angle], i) => (
+              <span key={domain} className="apx-oi" style={{ '--a': `${angle}deg`, '--d': `${i * 0.55}s` }}>
+                <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`} alt="" width="20" height="20" loading="lazy" />
+              </span>
+            ))}
+            <img src="/glyphh-mascot-square-black.png" alt="" className="apx-mascot" width="88" height="88" />
+            <span className="apx-hub-label">Glyphh</span>
+          </div>
+          <div className="apx-flow"><i /><i /><i /></div>
+          <div className="apx-col">
+            <div className="apx-col-label">anyone uses</div>
+            <div className="apx-node">my-app<span className="apx-dim">.glyphh.app</span></div>
+            <div className="apx-node">HTTP API</div>
+            <div className="apx-node">MCP endpoint</div>
+          </div>
+        </div>
+        <p className="apx-cap reveal">any LLM — frontier or local — connects over one relay</p>
+
+        <div className="adal-grid adal-grid-three">
           {pillars.map((p, i) => (
             <div key={i} className="adal-pillar reveal">
               <div className="adal-pillar-bullet" aria-hidden="true">·</div>

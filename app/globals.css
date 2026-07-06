@@ -663,6 +663,255 @@ body {
 .gh-phone-cta { margin-top: 6px; text-align: center; font-size: 12.5px; font-weight: 600; color: #fff; background: #2563eb; border-radius: 12px; padding: 11px; }
 .gh-phone-home { display: block; width: 54px; height: 4px; background: #d6d6da; border-radius: 3px; margin: 13px auto 1px; }
 .gh-phone-cap { display: flex; align-items: center; gap: 6px; font-size: 9.5px; color: var(--text-3); font-family: var(--font-mono); }
+
+/* ── Hero particles — deliberately faint (see HeroParticles.js) ─────────── */
+.hero-particles { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hero-copy, .hero-stage { position: relative; z-index: 1; }
+
+/* ── PUBLISH marketecture — you build → the relay → anyone uses ─────────── */
+.apx-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 3.2rem auto 3.6rem;
+  max-width: 880px;
+}
+.apx-col { display: flex; flex-direction: column; gap: 10px; min-width: 168px; }
+.apx-col-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 2px;
+  text-align: center;
+}
+.apx-node {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+  text-align: center;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(13, 8, 18, 0.82);
+  animation: apx-breathe 5.2s ease-in-out infinite;
+}
+.apx-node:nth-child(3) { animation-delay: 1.7s; }
+.apx-node:nth-child(4) { animation-delay: 3.4s; }
+.apx-dim { color: var(--text-3); }
+@keyframes apx-breathe {
+  0%, 100% { border-color: var(--border); }
+  50% { border-color: rgba(255, 255, 255, 0.38); }
+}
+
+/* flow tracks — pulses run left → right, into and out of the hub */
+.apx-flow {
+  position: relative;
+  flex: 1;
+  max-width: 130px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+}
+.apx-flow i {
+  position: absolute;
+  top: -2px;
+  left: -6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+  animation: apx-run 3.3s linear infinite;
+}
+.apx-flow i:nth-child(2) { animation-delay: 1.1s; }
+.apx-flow i:nth-child(3) { animation-delay: 2.2s; }
+@keyframes apx-run {
+  0% { left: -6px; opacity: 0; }
+  12% { opacity: 1; }
+  86% { opacity: 1; }
+  100% { left: calc(100% + 2px); opacity: 0; }
+}
+
+/* hub — the mascot as the relay, ringed by the LLMs that can connect */
+.apx-hub {
+  --apx-r: 104px; /* icon-ring radius; the dashed orbit matches at 2r */
+  position: relative;
+  width: 252px;
+  height: 252px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+}
+.apx-glow {
+  position: absolute;
+  width: 176px;
+  height: 176px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(140, 59, 242, 0.32), transparent 62%);
+}
+.apx-orbit {
+  position: absolute;
+  width: calc(var(--apx-r) * 2);
+  height: calc(var(--apx-r) * 2);
+  border: 1px dashed var(--accent-dim);
+  border-radius: 50%;
+  animation: pg-spin 22s linear infinite;
+}
+/* LLM icons riding the ring — placed by --a, kept upright, gentle bob */
+.apx-oi {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px;
+  transform: rotate(var(--a)) translateX(var(--apx-r)) rotate(calc(-1 * var(--a)));
+  display: grid;
+  place-items: center;
+  background: rgba(13, 8, 18, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+.apx-oi img { border-radius: 4px; animation: apx-bob 4.2s ease-in-out infinite; animation-delay: var(--d); }
+@keyframes apx-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.85; }
+  50% { transform: translateY(-2px); opacity: 1; }
+}
+.apx-mascot { position: relative; border-radius: 20px; }
+.apx-hub-label {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.apx-cap {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+  margin: -1.6rem 0 3.2rem;
+}
+/* ── RELAY marketecture — every LLM ⇄ one relay ⇄ everything you build ──
+   Shares apx-* pieces; mcx-* differentiates: an icon BANK on the left (vs
+   the PUBLISH ring), two-way pulses (call out, result back), dual orbits. */
+.mcx-stage { margin-top: 5.2rem; margin-bottom: 3.6rem; }
+
+/* connections strip — the hero panel's app rail, marquee-looped above the hub */
+.mcx-apps {
+  position: absolute;
+  top: -58px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+.mcx-apps-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.mcx-apps-track {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  animation: mcx-scroll 38s linear infinite;
+}
+.mcx-apps { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); }
+.mcx-app {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  background: rgba(13, 8, 18, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.mcx-app img { border-radius: 3px; opacity: 0.9; }
+@keyframes mcx-scroll { to { transform: translateX(-50%); } }
+.mcx-llms {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+  justify-items: center;
+}
+.mcx-llm {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: rgba(13, 8, 18, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+.mcx-llm img { border-radius: 4px; animation: apx-bob 4.2s ease-in-out infinite; animation-delay: var(--d); }
+/* two stacked tracks: white pulses out (call), accent pulses back (result) */
+.mcx-flows { flex: 1; max-width: 130px; display: flex; flex-direction: column; gap: 12px; }
+.mcx-flows .apx-flow { flex: none; width: 100%; max-width: none; }
+.mcx-flow-back i {
+  background: var(--accent-light);
+  box-shadow: 0 0 8px var(--accent);
+  animation-name: apx-run-back;
+  animation-duration: 3.8s;
+}
+.mcx-flow-back i:nth-child(2) { animation-delay: 1.9s; }
+@keyframes apx-run-back {
+  0% { left: calc(100% + 2px); opacity: 0; }
+  12% { opacity: 1; }
+  86% { opacity: 1; }
+  100% { left: -6px; opacity: 0; }
+}
+/* hub without the icon ring — tighter, with a counter-spinning inner orbit */
+.mcx-hub { --apx-r: 76px; width: 212px; height: 212px; }
+.mcx-orbit-b {
+  position: absolute;
+  width: 112px;
+  height: 112px;
+  border: 1px solid rgba(140, 59, 242, 0.18);
+  border-radius: 50%;
+  animation: pg-spin 15s linear infinite reverse;
+}
+
+/* three pillars (PUBLISH) — the default 2-col grid orphans the third card.
+   Double-class selector: the base .adal-grid rule is defined LATER in this
+   file, so equal specificity would lose the override. */
+.adal-grid.adal-grid-three { grid-template-columns: repeat(3, 1fr); max-width: 1080px; }
+
+@media (max-width: 900px) {
+  .adal-grid.adal-grid-three { grid-template-columns: 1fr; gap: 1.25rem; }
+}
+@media (max-width: 720px) {
+  .apx-stage { flex-direction: column; gap: 4px; }
+  .apx-col { flex-direction: row; flex-wrap: wrap; justify-content: center; min-width: 0; }
+  .apx-col-label { width: 100%; }
+  .apx-flow { transform: rotate(90deg); width: 56px; max-width: 56px; flex: 0 0 auto; margin: 26px 0; }
+  .apx-hub { --apx-r: 82px; width: 208px; height: 208px; }
+  .apx-oi { width: 26px; height: 26px; margin: -13px; }
+  .apx-oi img { width: 16px; height: 16px; }
+  /* mcx: the two tracks sit side by side, both rotated vertical */
+  .mcx-llms { grid-template-columns: repeat(4, 1fr); }
+  .mcx-flows { flex-direction: row; justify-content: center; gap: 34px; max-width: none; margin: 22px 0; }
+  .mcx-flows .apx-flow { width: 56px; margin: 0; }
+  .mcx-hub { --apx-r: 68px; width: 184px; height: 184px; }
+  .mcx-apps { top: -54px; width: 250px; }
+  .mcx-app { width: 22px; height: 22px; }
+  .mcx-app img { width: 14px; height: 14px; }
+}
 .gh-right { grid-area: right; display: flex; flex-direction: column; gap: 38px; }
 .gh-right .gh-mini { flex: 1; display: flex; flex-direction: column; }
 .gh-runtime { grid-area: runtime; }
