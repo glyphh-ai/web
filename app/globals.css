@@ -803,12 +803,12 @@ body {
 /* ── RELAY marketecture — every LLM ⇄ one relay ⇄ everything you build ──
    Shares apx-* pieces; mcx-* differentiates: an icon BANK on the left (vs
    the PUBLISH ring), two-way pulses (call out, result back), dual orbits. */
-.mcx-stage { margin-top: 5.2rem; margin-bottom: 3.6rem; }
+.mcx-stage { margin-top: 5.8rem; margin-bottom: 3.6rem; }
 
 /* connections strip — the hero panel's app rail, marquee-looped above the hub */
 .mcx-apps {
   position: absolute;
-  top: -58px;
+  top: -70px;
   left: 50%;
   transform: translateX(-50%);
   width: 340px;
@@ -843,11 +843,60 @@ body {
 }
 .mcx-app img { border-radius: 3px; opacity: 0.9; }
 @keyframes mcx-scroll { to { transform: translateX(-50%); } }
+
+/* vertical tracks between the connections strip and the hub — same language
+   as the side flows: white pulses down (in), accent pulses back up (out) */
+.mcx-vflows {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  height: 54px;
+}
+.mcx-vflow {
+  position: relative;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--accent-dim), transparent);
+}
+.mcx-vflow i {
+  position: absolute;
+  left: -2px;
+  top: -6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+  animation: mcx-run-down 2.6s linear infinite;
+}
+.mcx-vflow i:nth-child(2) { animation-delay: 1.3s; }
+@keyframes mcx-run-down {
+  0% { top: -6px; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: calc(100% + 2px); opacity: 0; }
+}
+.mcx-vflow-up i {
+  background: var(--accent-light);
+  box-shadow: 0 0 8px var(--accent);
+  animation-name: mcx-run-up;
+  animation-duration: 3s;
+}
+.mcx-vflow-up i:nth-child(2) { animation-delay: 1.5s; }
+@keyframes mcx-run-up {
+  0% { top: calc(100% + 2px); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: -6px; opacity: 0; }
+}
 .mcx-llms {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 34px); /* size to the tiles so the pair sits tight */
   gap: 9px;
-  justify-items: center;
+  justify-content: center;
 }
 .mcx-llm {
   width: 34px;
@@ -904,13 +953,14 @@ body {
   .apx-oi { width: 26px; height: 26px; margin: -13px; }
   .apx-oi img { width: 16px; height: 16px; }
   /* mcx: the two tracks sit side by side, both rotated vertical */
-  .mcx-llms { grid-template-columns: repeat(4, 1fr); }
+  .mcx-llms { grid-template-columns: repeat(4, 34px); }
   .mcx-flows { flex-direction: row; justify-content: center; gap: 34px; max-width: none; margin: 22px 0; }
   .mcx-flows .apx-flow { width: 56px; margin: 0; }
   .mcx-hub { --apx-r: 68px; width: 184px; height: 184px; }
-  .mcx-apps { top: -54px; width: 250px; }
+  .mcx-apps { top: -64px; width: 250px; }
   .mcx-app { width: 22px; height: 22px; }
   .mcx-app img { width: 14px; height: 14px; }
+  .mcx-vflows { top: -22px; height: 46px; }
 }
 .gh-right { grid-area: right; display: flex; flex-direction: column; gap: 38px; }
 .gh-right .gh-mini { flex: 1; display: flex; flex-direction: column; }

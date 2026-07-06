@@ -83,6 +83,11 @@ export default function Mcp() {
                 ))}
               </div>
             </div>
+            {/* vertical pulses: connections stream down into Glyphh, results back up */}
+            <div className="mcx-vflows">
+              <div className="mcx-vflow"><i /><i /></div>
+              <div className="mcx-vflow mcx-vflow-up"><i /><i /></div>
+            </div>
             <div className="apx-glow" />
             <div className="apx-orbit" />
             <div className="mcx-orbit-b" />
