@@ -197,11 +197,15 @@ export default function GlyphhHero() {
 
   return (
     <div className="gh" ref={wrapRef} role="img" aria-label="Claude, ChatGPT and Gemini each driving the same Glyphh workspace — finding a Slack message, pulling a Salesforce record, drafting a Gmail quote, then building and hosting an app you can run from your phone">
-      <svg className="gh-lines" width={size.w} height={size.h} aria-hidden="true">
-        {lines.map((ln) => (
-          <line key={ln.id} className={`gh-ln ${active[ln.id] ? 'on' : ''}`} x1={ln.x1} y1={ln.y1} x2={ln.x2} y2={ln.y2} />
-        ))}
-      </svg>
+      {/* Connector lines hide during the phone finale — the centre panel goes
+          bare there, so lines pointing at it render oddly. */}
+      {!phoneView && (
+        <svg className="gh-lines" width={size.w} height={size.h} aria-hidden="true">
+          {lines.map((ln) => (
+            <line key={ln.id} className={`gh-ln ${active[ln.id] ? 'on' : ''}`} x1={ln.x1} y1={ln.y1} x2={ln.x2} y2={ln.y2} />
+          ))}
+        </svg>
+      )}
 
       <div className="gh-grid">
         {/* ── Left: scrolling app icon grid → MCP tools ────── */}

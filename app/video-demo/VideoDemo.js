@@ -23,6 +23,7 @@ import HeroParticles from '../components/HeroParticles';
  */
 
 const TIMELINE = [
+  { id: 'ghost', dur: 2800 },
   { id: 'hero', dur: 20600 },
   { id: 'slide-relay', dur: 3500 },
   { id: 'relay', dur: 9000 },
@@ -102,7 +103,10 @@ function PublishScene() {
         <div className="apx-node">agent</div>
         <div className="apx-node">automation</div>
       </div>
-      <div className="apx-flow"><i /><i /><i /></div>
+      <div className="mcx-flows">
+        <div className="apx-flow"><i /><i /><i /></div>
+        <div className="apx-flow mcx-flow-back"><i /><i /></div>
+      </div>
       <div className="apx-hub">
         <div className="apx-glow" />
         <div className="apx-orbit" />
@@ -118,7 +122,10 @@ function PublishScene() {
         <img src="/glyphh-mascot-square-black.png" alt="" className="apx-mascot" width="88" height="88" />
         <span className="apx-hub-label">Glyphh</span>
       </div>
-      <div className="apx-flow"><i /><i /><i /></div>
+      <div className="mcx-flows">
+        <div className="apx-flow"><i /><i /><i /></div>
+        <div className="apx-flow mcx-flow-back"><i /><i /></div>
+      </div>
       <div className="apx-col">
         <div className="apx-col-label">anyone uses</div>
         <div className="apx-node">my-app<span className="apx-dim">.glyphh.app</span></div>
@@ -187,6 +194,14 @@ export default function VideoDemo() {
         .vd-scene { position: absolute; inset: 0; display: grid; place-items: center; animation: vd-in 0.7s ease both; }
         @keyframes vd-in { from { opacity: 0; } to { opacity: 1; } }
         .vd-hint { font-family: var(--font-mono); font-size: 12px; color: #333; letter-spacing: 0.1em; }
+        /* opening beat — the mascot huge but ghosted into the black */
+        .vd-ghost { height: 660px; width: auto; animation: vd-ghost 2.9s ease both; }
+        @keyframes vd-ghost {
+          0% { opacity: 0; transform: scale(0.97); }
+          35% { opacity: 0.12; }
+          80% { opacity: 0.12; transform: scale(1.045); }
+          100% { opacity: 0; transform: scale(1.06); }
+        }
         .vd-hero-wrap { width: 1080px; }
         .vd-scale { transform: scale(1.4); }
         /* Give the marketecture stages real width in the video — shrink-to-fit
@@ -224,6 +239,9 @@ export default function VideoDemo() {
 
       {!started && <span className="vd-hint">CLICK TO START</span>}
 
+      {scene === 'ghost' && (
+        <div className="vd-scene"><img src="/glyphh-mascot.png" alt="" className="vd-ghost" /></div>
+      )}
       {scene === 'hero' && (
         <div className="vd-scene"><div className="vd-hero-wrap"><GlyphhHero /></div></div>
       )}

@@ -47,7 +47,10 @@ export default function AppProxy() {
             <div className="apx-node">agent</div>
             <div className="apx-node">automation</div>
           </div>
-          <div className="apx-flow"><i /><i /><i /></div>
+          <div className="mcx-flows">
+            <div className="apx-flow"><i /><i /><i /></div>
+            <div className="apx-flow mcx-flow-back"><i /><i /></div>
+          </div>
           <div className="apx-hub">
             <div className="apx-glow" />
             <div className="apx-orbit" />
@@ -63,7 +66,10 @@ export default function AppProxy() {
             <img src="/glyphh-mascot-square-black.png" alt="" className="apx-mascot" width="88" height="88" />
             <span className="apx-hub-label">Glyphh</span>
           </div>
-          <div className="apx-flow"><i /><i /><i /></div>
+          <div className="mcx-flows">
+            <div className="apx-flow"><i /><i /><i /></div>
+            <div className="apx-flow mcx-flow-back"><i /><i /></div>
+          </div>
           <div className="apx-col">
             <div className="apx-col-label">anyone uses</div>
             <div className="apx-node">my-app<span className="apx-dim">.glyphh.app</span></div>

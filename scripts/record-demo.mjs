@@ -14,7 +14,7 @@ import { join } from 'path';
 
 const BASE = process.argv[2] || 'http://localhost:3000';
 const OUT_DIR = process.argv[3] || '.video-out';
-const TOTAL_MS = 52_000;
+const TOTAL_MS = 55_000;
 
 mkdirSync(OUT_DIR, { recursive: true });
 
