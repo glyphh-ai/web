@@ -4,6 +4,11 @@ import { useState } from 'react';
 
 const SHOTS = [
   {
+    img: 'glyphh-command-palette.png',
+    title: 'The command palette',
+    text: 'One hotkey overlays your screen — every app, layout, and window a keystroke away. Type an app to open it full-screen, a layout to snap your desktop into shape, or a command to run a skill.',
+  },
+  {
     img: 'glyphh-layouts.png',
     title: 'A workspace that fits the work',
     text: 'Save a layout per project and switch with one command — real OS windows tiled across your screen, apps launched into their cells, on Mac and Windows.',
