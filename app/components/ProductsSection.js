@@ -29,6 +29,24 @@ export default function ProductsSection() {
               <span className="prod-cta">{p.cta}</span>
             </a>
           ))}
+
+          {/* Right: a theme-aligned graphic — the mascot as the hub of an
+              orbiting relay, tying the "runnable research" story together. */}
+          <div className="prod-graphic reveal">
+            <div className="pg-head"><span className="pg-dot" aria-hidden="true" /> {'{'} open source {'}'}</div>
+            <div className="pg-stage" aria-hidden="true">
+              <div className="pg-orbit pg-orbit-a">
+                <span className="pg-node" style={{ top: '-5px', left: '50%' }} />
+                <span className="pg-node" style={{ bottom: '12%', right: '-5px' }} />
+                <span className="pg-node" style={{ bottom: '12%', left: '-5px' }} />
+              </div>
+              <div className="pg-orbit pg-orbit-b" />
+              <div className="pg-glow" />
+              <img src="/glyphh-mascot-square-black.png" alt="" className="pg-mascot" width="112" height="112" />
+            </div>
+            <p className="pg-cap">Every product is built on the research — and open source, all the way down.</p>
+            <a href="https://github.com/glyphh-ai" target="_blank" rel="noopener noreferrer" className="pg-link">github.com/glyphh-ai →</a>
+          </div>
         </div>
         <div className="prods-pricing reveal">
           <div className="prods-pricing-copy">

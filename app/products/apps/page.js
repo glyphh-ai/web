@@ -3,6 +3,7 @@ import Reveal from '../../components/Reveal';
 import Hero from '../../components/Hero';
 import Mcp from '../../components/Mcp';
 import Screenshots from '../../components/Screenshots';
+import AppProxy from '../../components/AppProxy';
 import Features from '../../components/Features';
 import Integrations from '../../components/Integrations';
 import Pricing from '../../components/Pricing';
@@ -25,6 +26,7 @@ export default function GlyphhAppsPage() {
       <Integrations />
       <Mcp />
       <Screenshots />
+      <AppProxy />
       <Features />
       <Pricing />
       <Download />

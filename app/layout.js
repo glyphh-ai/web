@@ -10,7 +10,9 @@ export const metadata = {
   title: 'Glyphh — AI Research & Development',
   description: 'Glyphh is an AI research and development company working on vector-symbolic architectures, hyperdimensional computing, memory systems, and agentic runtimes. Everything we build is open source.',
   icons: {
-    icon: '/favicon.svg',
+    icon: [{ url: '/glyphh-mascot-square-black.png', type: 'image/png' }],
+    shortcut: '/glyphh-mascot-square-black.png',
+    apple: '/glyphh-mascot-square-black.png',
   },
   openGraph: {
     title: 'Glyphh — AI Research & Development',

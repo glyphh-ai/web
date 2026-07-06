@@ -10,13 +10,13 @@ const SHOTS = [
   },
   {
     img: 'glyphh-custom-apps.png',
-    title: 'Bring every app you use',
-    text: 'ChatGPT, Gmail, Slack, GitHub, your internal tools — add any app to your library and open it as a native window, from the palette or from your AI.',
+    title: 'Bring your apps — or build new ones',
+    text: 'Add ChatGPT, Gmail, Slack, GitHub or any internal tool to your library — or point any agent at what you need and it builds a brand-new Glyphh app and publishes it to your org.',
   },
   {
     img: 'glyphh-workflow.png',
-    title: 'Skills as visual workflows',
-    text: 'Every skill is a workflow: trigger → inputs → tools → outputs. Your AI runs them on demand — deterministic, auditable, and shareable across your org.',
+    title: 'Connect 3,500+ apps',
+    text: 'One-click OAuth to Gmail, Slack, Notion, Salesforce, GitHub and 3,500+ more. Every connected account becomes tools your AI can call — send the message, file the ticket, update the record.',
   },
 ];
 
