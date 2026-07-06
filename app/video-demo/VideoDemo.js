@@ -145,12 +145,7 @@ function EndCard() {
   return (
     <div className="vd-slide vd-end">
       <HeroParticles />
-      <div className="vd-end-hub">
-        <div className="apx-glow" />
-        <div className="apx-orbit" />
-        <img src="/glyphh-mascot-square-black.png" alt="" width="104" height="104" style={{ position: 'relative', borderRadius: 24 }} />
-      </div>
-      <img src="/glyphh-logo-white.png" alt="Glyphh" className="vd-end-logo" />
+      <img src="/glyphh-logo-black.png" alt="Glyphh" className="vd-end-logo" />
       <span className="vd-end-url">glyphh.ai<span className="vd-accent">/desktop</span><i className="vd-caret" /></span>
     </div>
   );
@@ -194,6 +189,11 @@ export default function VideoDemo() {
         .vd-hint { font-family: var(--font-mono); font-size: 12px; color: #333; letter-spacing: 0.1em; }
         .vd-hero-wrap { width: 1080px; }
         .vd-scale { transform: scale(1.4); }
+        /* Give the marketecture stages real width in the video — shrink-to-fit
+           collapsed the flex flow tracks, hiding the in/out pulse movement. */
+        .vd-scale .apx-stage { width: 1240px; }
+        .vd-scale .apx-flow { max-width: 230px; }
+        .vd-scale .mcx-flows { max-width: 230px; }
 
         .vd-slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; }
         .vd-label { font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.14em; color: var(--text-3); animation: vd-in 0.6s ease both; }
@@ -214,10 +214,9 @@ export default function VideoDemo() {
         }
         @keyframes vd-draw { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
 
-        .vd-end { gap: 26px; }
-        .vd-end-hub { position: relative; width: 220px; height: 220px; display: grid; place-items: center; animation: vd-pop 0.9s cubic-bezier(.2,.8,.2,1) both; }
-        @keyframes vd-pop { from { opacity: 0; transform: scale(0.82); } to { opacity: 1; transform: scale(1); } }
-        .vd-end-logo { height: 54px; width: auto; animation: vd-in 0.7s ease 0.35s both; }
+        .vd-end { gap: 34px; }
+        .vd-end-logo { height: 128px; width: auto; animation: vd-pop 0.9s cubic-bezier(.2,.8,.2,1) both; }
+        @keyframes vd-pop { from { opacity: 0; transform: scale(0.86); } to { opacity: 1; transform: scale(1); } }
         .vd-end-url { font-family: var(--font-mono); font-size: 21px; color: var(--text); animation: vd-in 0.7s ease 0.6s both; display: inline-flex; align-items: center; }
         .vd-caret { width: 10px; height: 22px; margin-left: 7px; background: var(--accent-light, #b975f9); animation: vd-blink 1.05s steps(1) infinite; }
         @keyframes vd-blink { 50% { opacity: 0; } }
