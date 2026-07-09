@@ -5,6 +5,7 @@ import Mcp from '../../components/Mcp';
 import Screenshots from '../../components/Screenshots';
 import AppProxy from '../../components/AppProxy';
 import Features from '../../components/Features';
+import Models from '../../components/Models';
 import Integrations from '../../components/Integrations';
 import Pricing from '../../components/Pricing';
 import Download from '../../components/Download';
@@ -28,6 +29,7 @@ export default function GlyphhAppsPage() {
       <Screenshots />
       <AppProxy />
       <Features />
+      <Models />
       <Pricing />
       <Download />
       <FAQ />

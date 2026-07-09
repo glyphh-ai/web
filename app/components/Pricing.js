@@ -10,6 +10,7 @@ const TIERS = [
     price: '0',
     period: 'forever',
     credits: '15 credits / month',
+    seats: '1 seat',
     popular: false,
     desc: 'The full workspace, driven by the AI you already have — no card.',
     features: [
@@ -18,7 +19,7 @@ const TIERS = [
       'Native window control on Mac + Windows',
       'Bring your own LLM — no token markup, ever',
     ],
-    excluded: ['Connected services (3,500+ apps)'],
+    excluded: ['Connected services (3,500+ apps)', 'Team members — Free is single-seat'],
     cta: 'Download now',
     btn: 'btn-secondary',
   },
@@ -27,11 +28,13 @@ const TIERS = [
     price: '20',
     period: 'per month',
     credits: '1,000 credits / month',
+    seats: 'Up to 5 seats',
     popular: true,
     desc: 'Real automation across your connected services, every month.',
     features: [
       'Everything in Free, plus:',
       '1,000 compute credits every month',
+      'Invite your team — up to 5 seats',
       'Connected services — 3,500+ apps via the relay',
       'Cloud sync across machines',
     ],
@@ -44,9 +47,10 @@ const TIERS = [
     price: '50',
     period: 'per month',
     credits: '2,000 credits / month',
+    seats: 'Up to 10 seats',
     popular: false,
     desc: 'For daily drivers — double the credits and higher limits.',
-    features: ['Everything in Basic, plus:', '2,000 monthly compute credits', 'Higher rate limits'],
+    features: ['Everything in Basic, plus:', '2,000 monthly compute credits', 'Up to 10 seats', 'Higher rate limits'],
     excluded: [],
     cta: 'Get started',
     btn: 'btn-secondary',
@@ -56,9 +60,10 @@ const TIERS = [
     price: '200',
     period: 'per month',
     credits: '10,000 credits / month',
+    seats: 'Up to 25 seats',
     popular: false,
     desc: 'Maximum allowance and caps for power users and teams.',
-    features: ['Everything in Pro, plus:', '10,000 monthly compute credits', 'Highest caps + priority support'],
+    features: ['Everything in Pro, plus:', '10,000 monthly compute credits', 'Up to 25 seats', 'Highest caps + priority support'],
     excluded: [],
     cta: 'Get started',
     btn: 'btn-secondary',
@@ -89,6 +94,7 @@ export default function Pricing() {
                 <span className="pricing-period">{t.period}</span>
               </div>
               <p className="pricing-credits">{t.credits}</p>
+              <p className="pricing-seats">{t.seats}</p>
               <p className="pricing-desc">{t.desc}</p>
               <ul className="pricing-features">
                 {t.features.map((f, i) => (
