@@ -56,19 +56,22 @@ const TIERS = [
     btn: 'btn-secondary',
   },
   {
-    name: 'Advanced',
-    price: '200',
-    period: 'per month',
-    credits: '10,000 credits / month',
-    seats: 'Up to 25 seats',
+    name: 'Enterprise',
+    contactSales: true,
+    priceLabel: 'Custom',
+    period: 'contact sales',
+    credits: 'Volume credits',
+    seats: '25+ seats',
     popular: false,
-    desc: 'Maximum allowance and caps for power users and teams.',
-    features: ['Everything in Pro, plus:', '10,000 monthly compute credits', 'Up to 25 seats', 'Highest caps + priority support'],
+    desc: 'SSO, SCIM, and a shared workspace for your whole company.',
+    features: ['Everything in Pro, plus:', 'SSO & SCIM through your IdP (Okta, Entra, …)', 'One shared org for your whole team', 'Volume credits + priority support'],
     excluded: [],
-    cta: 'Get started',
+    cta: 'Contact sales',
     btn: 'btn-secondary',
   },
 ];
+
+const SALES_EMAIL = 'sales@glyphh.ai';
 
 export default function Pricing() {
   return (
@@ -88,8 +91,14 @@ export default function Pricing() {
               <div className="pricing-header">
                 <span className="pricing-plan-name">{t.name}</span>
                 <div className="pricing-amount">
-                  <span className="pricing-dollar">$</span>
-                  <span className="pricing-number">{t.price}</span>
+                  {t.contactSales ? (
+                    <span className="pricing-number">{t.priceLabel}</span>
+                  ) : (
+                    <>
+                      <span className="pricing-dollar">$</span>
+                      <span className="pricing-number">{t.price}</span>
+                    </>
+                  )}
                 </div>
                 <span className="pricing-period">{t.period}</span>
               </div>
@@ -104,7 +113,10 @@ export default function Pricing() {
                   <li key={`x${i}`} className="pricing-excluded"><span className="x">✗</span> {f}</li>
                 ))}
               </ul>
-              <a href={`${PLATFORM_URL}/auth`} className={`btn ${t.btn} btn-lg btn-full group`}>
+              <a
+                href={t.contactSales ? `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Glyphh Enterprise')}` : `${PLATFORM_URL}/auth`}
+                className={`btn ${t.btn} btn-lg btn-full group`}
+              >
                 <span className="btn-label">{t.cta}</span>
                 <span className="btn-fill"></span>
               </a>
