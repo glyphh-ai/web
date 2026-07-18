@@ -1,18 +1,29 @@
 name: Deploy glyphh-web to Heroku
 
+# The build runs HERE before the push, so a broken build fails with readable logs
+# instead of inside Heroku's remote build, where the output is buried in `remote:`
+# lines and expires with the run.
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
 
       - name: Deploy to Heroku via git push
         env:
