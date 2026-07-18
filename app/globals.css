@@ -284,10 +284,12 @@ body {
 .btn-primary .btn-fill {
   background: var(--grad-accent);
 }
+/* Once the gradient fill has wiped in, the label sits on purple→pink — black is too
+   dark to read there, so the text flips to white. */
 .btn-primary.group:hover .btn-label,
 .btn-primary.group:active .btn-label,
 .btn-primary.group:focus-visible .btn-label {
-  color: var(--black);
+  color: var(--white);
 }
 
 .btn-secondary {
