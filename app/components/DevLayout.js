@@ -97,7 +97,7 @@ export default function DevLayout() {
               <div className="dv-drop-head">Your keys</div>
               <div className="dv-drop-item">
                 <span className="dv-drop-name">Your provider</span>
-                <span className="dv-drop-sub">any OpenAI-compatible API · your key · 0 cr</span>
+                <span className="dv-drop-sub">any OpenAI-compatible API · your key · compute only</span>
               </div>
             </div>
           </div>
