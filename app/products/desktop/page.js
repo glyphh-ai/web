@@ -3,11 +3,9 @@ import Reveal from '../../components/Reveal';
 import CoworkHero from '../../components/CoworkHero';
 import Integrations from '../../components/Integrations';
 import LoopStrip from '../../components/LoopStrip';
-import OpenWeights from '../../components/OpenWeights';
 import DevLayout from '../../components/DevLayout';
 import Cowork from '../../components/Cowork';
 import Controls from '../../components/Controls';
-import Memory from '../../components/Memory';
 import Screenshots from '../../components/Screenshots';
 import Pricing from '../../components/Pricing';
 import Download from '../../components/Download';
@@ -28,11 +26,9 @@ export default function GlyphhDesktopPage() {
       <CoworkHero />
       <Integrations />
       <LoopStrip />
-      <OpenWeights />
       <DevLayout />
       <Cowork />
       <Controls />
-      <Memory />
       <Screenshots />
       <Pricing />
       <Download />

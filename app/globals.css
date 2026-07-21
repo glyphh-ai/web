@@ -58,12 +58,18 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
   line-height: 1.6;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .container {
@@ -4667,102 +4673,192 @@ footer {
 }
 
 /* ── Section rhythm ── */
-.loopstrip, .openweights, .cowork, .controls, .memory { padding: 6.5rem 0; }
+.loopstrip, .cowork, .controls { padding: 6.5rem 0; }
 
-/* ── Open-weight picker ── */
-.ow-picker {
-  max-width: 460px; margin: 0 auto;
-  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
-  overflow: hidden; box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+/* ── Cowork: the desktop mid-sequence (overlay → click → workspace) ── */
+.cw-canvas { min-height: 560px; }
+.cw-frame {
+  position: absolute; inset: 7% 5%;
+  background: rgba(20, 15, 30, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  box-shadow: 0 30px 90px rgba(16, 4, 40, 0.5);
+  display: flex; gap: 10px; padding: 12px;
+  overflow: hidden;
 }
-.ow-group { padding: 0.9rem 1.1rem; }
-.ow-group + .ow-group { border-top: 1px solid var(--border); }
-.ow-group-open { background: rgba(52, 211, 153, 0.04); }
-.ow-group-label {
-  font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase;
-  letter-spacing: 0.07em; color: var(--text-3); margin-bottom: 0.55rem;
+.cw-agent {
+  width: 24%; flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(179, 107, 251, 0.28);
+  border-radius: 10px; padding: 10px 11px;
 }
-.ow-row { display: flex; align-items: center; gap: 10px; padding: 0.42rem 0.25rem; }
-.ow-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
-.ow-by { font-size: 0.75rem; color: var(--text-3); }
-.ow-cr {
-  margin-left: auto; font-family: var(--font-mono); font-size: 0.7rem;
-  color: #34d399; background: rgba(52, 211, 153, 0.09);
-  border-radius: 999px; padding: 2px 9px;
+.cw-agent-head {
+  font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--accent-light);
+  padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 10px;
 }
-.ow-more { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); padding: 0.55rem 0.25rem 0.1rem; }
+.cw-lines { display: flex; flex-direction: column; gap: 7px; }
+.cw-line { display: inline-block; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.12); }
+.cw-bubble { background: rgba(255, 255, 255, 0.06); border-radius: 9px; padding: 8px 9px; margin-bottom: 8px; }
+.cw-bubble-user { background: rgba(140, 59, 242, 0.22); margin-left: 1rem; }
+.cw-stage { flex: 1; display: flex; gap: 10px; min-width: 0; }
+.cw-stage .cw-app { animation: cw-in 380ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes cw-in { from { opacity: 0; transform: translateY(10px) scale(0.985); } }
 
-/* ── Cowork desk ── */
-.cw-desk { display: flex; gap: 12px; max-width: 780px; margin: 0 auto; align-items: stretch; }
-.cw-panel {
-  flex: 1; background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 0.8rem 0.9rem; min-height: 190px;
+/* Loaded apps are webviews — light panels with the app's favicon header. */
+.cw-app {
+  flex: 1; min-width: 0;
+  background: #f8f6fc; border-radius: 10px; padding: 10px 12px;
+  color: #241d31;
 }
-.cw-agent { border-color: rgba(140, 59, 242, 0.35); box-shadow: 0 0 40px rgba(140, 59, 242, 0.07); }
-.cw-panel-head {
+.cw-app-head {
   display: flex; align-items: center; gap: 7px;
-  font-size: 0.75rem; font-weight: 600; color: var(--text-2);
-  padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); margin-bottom: 0.7rem;
+  font-size: 0.72rem; font-weight: 600; color: #4a4358;
+  padding-bottom: 8px; border-bottom: 1px solid #e9e2f4; margin-bottom: 10px;
 }
-.cw-panel-head img { width: 14px; height: 14px; border-radius: 3px; }
-.cw-glyph { color: var(--accent-light); font-size: 0.8rem; }
-.cw-lines { display: flex; flex-direction: column; gap: 8px; }
-.cw-line { display: block; height: 7px; border-radius: 4px; background: var(--surface-2); }
-.cw-bubble { background: var(--surface-2); border-radius: 10px; padding: 0.55rem 0.6rem; margin-bottom: 0.55rem; }
-.cw-bubble .cw-line { background: var(--border); }
-.cw-bubble-user { background: rgba(140, 59, 242, 0.12); margin-left: 1.4rem; }
-.cw-minibar { height: 26px; border: 1px solid var(--border); border-radius: 8px; margin-top: 0.7rem; }
-.cw-canvas { display: flex; flex-direction: column; gap: 8px; }
-.cw-block { display: block; height: 34px; border-radius: 6px; background: var(--surface-2); }
-.cw-block-lg { height: 56px; background: rgba(140, 59, 242, 0.10); }
+.cw-app-head img { width: 14px; height: 14px; border-radius: 3px; }
+.cw-app .cw-line { background: #e9e2f4; }
+.cw-avatar { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; opacity: 0.75; }
+.cw-slack { display: flex; gap: 10px; }
+.cw-slack-side { width: 30%; border-right: 1px solid #e9e2f4; padding-right: 8px; }
+.cw-slack-main { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.cw-msg { display: flex; gap: 8px; align-items: flex-start; }
+.cw-mailrow { display: flex; gap: 8px; align-items: center; padding: 7px 0; border-bottom: 1px solid #efe9f6; }
+.cw-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.cw-cal-cell { height: 22px; border-radius: 4px; background: #fff; border: 1px solid #ece5f6; }
+.cw-cal-ev { background: rgba(140, 59, 242, 0.25); border-color: transparent; }
+.cw-cal-ev2 { background: rgba(236, 72, 153, 0.22); border-color: transparent; }
+.cw-asana { display: flex; gap: 8px; }
+.cw-asana-col { flex: 1; }
+.cw-asana-card {
+  background: #fff; border: 1px solid #ece5f6; border-radius: 7px;
+  padding: 8px; margin-bottom: 7px; box-shadow: 0 3px 8px rgba(40, 16, 80, 0.05);
+}
 
-/* ── Controls ── */
-.ct-stage { display: flex; gap: 18px; justify-content: center; align-items: stretch; flex-wrap: wrap; }
-.ct-card {
-  width: 270px; background: var(--surface); border: 1px solid var(--border);
-  border-radius: 14px; padding: 1rem 1.1rem;
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+/* The command overlay — the app's launcher (cc-*), mid-click. */
+.cw-cc {
+  position: absolute; inset: 0;
+  background: rgba(10, 6, 18, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  animation: cw-cc-in 260ms ease;
 }
-.ct-card-tag {
-  font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase;
-  letter-spacing: 0.07em; color: var(--accent-light); margin-bottom: 0.5rem;
+@keyframes cw-cc-in { from { opacity: 0; } }
+.cw-cc-panel {
+  width: min(430px, 82%);
+  background: rgba(24, 18, 36, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px; padding: 14px 16px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
 }
-.ct-card-title { font-size: 0.95rem; font-weight: 700; color: var(--text); }
-.ct-card-sub { font-size: 0.75rem; color: var(--text-3); margin-top: 3px; }
-.ct-card-actions { display: flex; gap: 8px; margin-top: 0.9rem; }
-.ct-btn {
-  font-size: 0.75rem; font-weight: 600; color: var(--text-2);
-  border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px;
+.cw-cc-search { height: 26px; border-radius: 8px; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 14px; }
+.cw-cc-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.cw-cc-tile { display: flex; flex-direction: column; align-items: center; gap: 5px; position: relative; }
+.cw-cc-shot {
+  width: 100%; aspect-ratio: 16 / 11; border-radius: 9px;
+  background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex; align-items: center; justify-content: center;
 }
-.ct-btn-ok { background: var(--accent); border-color: var(--accent); color: #fff; }
-.ct-rules { display: flex; flex-direction: column; gap: 10px; justify-content: center; }
-.ct-rule {
-  display: flex; align-items: center; gap: 26px; width: 300px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; padding: 0.65rem 0.9rem;
+.cw-cc-shot > img { width: 45%; height: auto; border-radius: 4px; }
+.cw-cc-name { font-size: 0.58rem; color: var(--text-3); }
+.cw-cc-lay-label {
+  font-family: var(--font-mono); font-size: 0.56rem; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--text-3); margin: 12px 0 8px;
 }
-.ct-rule-name { font-size: 0.82rem; color: var(--text-2); flex: 1; }
-.ct-pill { width: 30px; height: 17px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border-2); position: relative; flex-shrink: 0; }
-.ct-pill::after { content: ''; position: absolute; top: 1.5px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--text-3); }
-.ct-pill-on { background: var(--accent); border-color: var(--accent); }
-.ct-pill-on::after { left: auto; right: 2px; background: #fff; }
+.cw-cc-lays { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.cw-cc-mini { gap: 3px; padding: 4px; }
+.cw-cc-mini i {
+  flex: 1; height: 100%; border-radius: 4px;
+  background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.09);
+  display: flex; align-items: center; justify-content: center;
+}
+.cw-cc-mini img { width: 55%; border-radius: 3px; }
+/* The pick: ring, then the click pulse — timed inside the overlay beat. */
+.cw-cc-hot .cw-cc-shot {
+  border-color: var(--accent-light);
+  box-shadow: 0 0 0 1px var(--accent-light), 0 0 24px rgba(140, 59, 242, 0.5);
+  animation: cw-click 2.6s ease;
+}
+.cw-cc-hot .cw-cc-name { color: var(--text); }
+@keyframes cw-click {
+  0%, 55% { transform: scale(1); }
+  68% { transform: scale(0.94); }
+  78%, 100% { transform: scale(1); }
+}
 
-/* ── Memory ── */
-.mm-stage { max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
-.mm-q {
-  align-self: flex-end; background: rgba(140, 59, 242, 0.14);
-  border-radius: 14px 14px 4px 14px; padding: 0.7rem 1rem;
-  font-size: 0.92rem; color: var(--text);
+/* ── Security and governance: the admin's levers on the canvas ── */
+.gv-canvas { min-height: 520px; }
+.gv-frame {
+  position: absolute; inset: 8% 5%;
+  background: rgba(20, 15, 30, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  box-shadow: 0 30px 90px rgba(16, 4, 40, 0.5);
+  display: flex; gap: 12px; padding: 14px;
 }
-.mm-a {
-  align-self: flex-start; background: var(--surface); border: 1px solid var(--border);
-  border-radius: 14px 14px 14px 4px; padding: 0.8rem 1rem; max-width: 88%;
+.gv-pane {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px; padding: 12px 13px; min-width: 0;
 }
-.mm-a p { margin: 0 0 6px; font-size: 0.92rem; color: var(--text); line-height: 1.5; }
-.mm-src { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-light); }
+.gv-pane-head {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-3);
+  padding-bottom: 9px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 10px;
+}
+.gv-pane-head img { width: 13px; height: 13px; border-radius: 3px; }
+.gv-conns { width: 30%; flex-shrink: 0; }
+.gv-conn { display: flex; align-items: center; gap: 8px; padding: 8px 9px; border-radius: 8px; margin-bottom: 4px; }
+.gv-conn-sel { background: rgba(140, 59, 242, 0.18); box-shadow: 0 0 0 1px rgba(179, 107, 251, 0.45); }
+.gv-conn img { width: 15px; height: 15px; border-radius: 4px; }
+.gv-conn-name { flex: 1; font-size: 0.78rem; font-weight: 600; color: var(--text); }
+.gv-switch {
+  width: 28px; height: 16px; border-radius: 9px; position: relative; flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.gv-switch::after {
+  content: ''; position: absolute; top: 1.5px; left: 2px; width: 11px; height: 11px;
+  border-radius: 50%; background: var(--text-3);
+}
+.gv-switch.on { background: var(--accent); border-color: var(--accent); }
+.gv-switch.on::after { left: auto; right: 2px; background: #fff; }
+.gv-tools { flex: 1; }
+.gv-tool { display: flex; align-items: center; gap: 9px; padding: 6px 4px; }
+.gv-check {
+  width: 15px; height: 15px; border-radius: 5px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; color: #fff;
+  background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16);
+}
+.gv-check.on { background: var(--accent); border-color: var(--accent); }
+.gv-tool-name { font-size: 0.8rem; color: var(--text); }
+.gv-tool-name.off { color: var(--text-3); text-decoration: line-through; text-decoration-color: rgba(255, 255, 255, 0.25); }
+.gv-tools-note { font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-light); margin-top: 8px; }
+.gv-usage { width: 30%; flex-shrink: 0; display: flex; flex-direction: column; }
+.gv-chart {
+  position: relative; flex: 1; min-height: 130px;
+  display: flex; align-items: flex-end; gap: 6px; padding-top: 14px;
+}
+.gv-chart i {
+  flex: 1; border-radius: 3px 3px 0 0;
+  background: linear-gradient(180deg, var(--accent-2), var(--accent));
+  opacity: 0.9;
+}
+.gv-budget {
+  position: absolute; left: 0; right: 0; top: 26%;
+  border-top: 2px dashed rgba(255, 255, 255, 0.4);
+}
+.gv-budget em {
+  position: absolute; left: 0; top: -16px;
+  font-style: normal; font-family: var(--font-mono); font-size: 0.56rem;
+  text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-2);
+}
+.gv-usage-note { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-3); margin-top: 8px; }
 
 @media (max-width: 720px) {
-  .cw-desk { flex-direction: column; }
+  .gv-frame { flex-wrap: wrap; }
+  .gv-conns, .gv-usage { width: 100%; }
 }
 
 /* ── DevLayout: the builder's workspace + the expanded picker ── */
