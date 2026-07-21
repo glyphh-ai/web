@@ -1,9 +1,8 @@
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 
-// Compute-credit billing: you bring your own AI (never marked up), and each
-// tier bundles a monthly allowance of compute credits — 1 credit = 30 seconds
-// of tool compute (ceiling, 1-credit minimum per call). Browsing and listing
-// are always free. Prepaid; never billed in arrears.
+// Credit billing: one currency for everything Glyphh does — model calls,
+// tools, compute. Each tier bundles a monthly allowance; open-weight models
+// cost a fraction of frontier ones. Prepaid; never billed in arrears.
 const TIERS = [
   {
     name: 'Free',
@@ -12,12 +11,12 @@ const TIERS = [
     credits: '15 credits / month',
     seats: '1 seat',
     popular: false,
-    desc: 'The full workspace, driven by the AI you already have — no card.',
+    desc: 'The full workspace and the agent, on the house — no card.',
     features: [
-      'The full native workspace — apps, layouts, command palette',
-      'Connect your own AI over the MCP relay',
-      'Native window control on Mac + Windows',
-      'Bring your own LLM — no token markup, ever',
+      'The full workspace — the agent, your apps, saved layouts',
+      'Frontier and open-weight models in one picker',
+      'Loops built in — plan, work, check',
+      '15 credits to spend on any model',
     ],
     excluded: ['Connected services (3,500+ apps)', 'Team members — Free is single-seat'],
     cta: 'Download now',
@@ -35,7 +34,7 @@ const TIERS = [
       'Everything in Free, plus:',
       '1,000 compute credits every month',
       'Invite your team — up to 5 seats',
-      'Connected services — 3,500+ apps via the relay',
+      'Connected services — 3,500+ apps',
       'Cloud sync across machines',
     ],
     excluded: [],
@@ -79,10 +78,9 @@ export default function Pricing() {
       <div className="container">
         <h2 className="section-title">Simple, transparent pricing</h2>
         <p className="section-subtitle">
-          One credit system across every Glyphh product — 1 credit = 30 seconds
-          of compute, and each product just spends credits differently. Bring
-          your own AI: Glyphh never resells tokens, and browsing or listing
-          your tools is always free.
+          One credit system for everything — model calls, tools, and compute.
+          Open-weight models cost a fraction of frontier ones, and every
+          charge is itemized in your usage feed.
         </p>
 
         <div className="pricing-grid pricing-grid-four">

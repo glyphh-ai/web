@@ -21,7 +21,6 @@ const APPS_ROW1 = [
 
 const APPS_ROW2 = [
   { name: 'Copilot', domain: 'copilot.microsoft.com' },
-  { name: 'DeepSeek', domain: 'chat.deepseek.com' },
   { name: 'Mistral', domain: 'chat.mistral.ai' },
   { name: 'Discord', domain: 'discord.com' },
   { name: 'Supabase', domain: 'supabase.com' },
@@ -91,8 +90,8 @@ export default function Integrations() {
       <div className="container">
         <h2 className="section-title reveal">Works with every app you already use</h2>
         <p className="section-subtitle reveal">
-          Connect GitHub, Slack, Gmail and thousands more once — every LLM you
-          use gets them as tools, through one relay.
+          Connect Gmail, Slack, Drive and thousands more once — then just ask.
+          The agent works across all of them.
         </p>
       </div>
       <div className="scroll-rows reveal">
@@ -102,7 +101,7 @@ export default function Integrations() {
       </div>
       <div className="container">
         <p className="integration-note reveal">
-          3,500+ connected apps via MCP servers  — or add any URL.
+          3,500+ connected services. Shared with your team, governed by your admins.
         </p>
       </div>
     </section>

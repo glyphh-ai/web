@@ -4,24 +4,24 @@ import { useState } from 'react';
 
 const SHOTS = [
   {
-    img: 'glyphh-custom-apps.png',
-    title: 'Build apps with any agent',
-    text: 'Point any agent at what you need and it builds a Glyphh app — UI, tools, storage — and publishes it to your org, where anyone can install it or call it over the relay.',
-  },
-  {
     img: 'glyphh-workflow.png',
-    title: 'Connect 3,500+ apps once',
-    text: 'One-click OAuth to Gmail, Slack, Notion, Salesforce, GitHub and 3,500+ more. Every connected account becomes tools every LLM you use can call — send the message, file the ticket, update the record.',
-  },
-  {
-    img: 'glyphh-command-palette.png',
-    title: 'The command palette',
-    text: 'Everything you’ve connected and built, a hotkey away — open an app, run a skill, or snap a layout without leaving the keyboard.',
+    title: 'Ask, and it works',
+    text: 'One request in plain words — the agent plans it, works across your connected tools, and hands back the finished thing.',
   },
   {
     img: 'glyphh-layouts.png',
-    title: 'Layouts, when you want them',
-    text: 'Save a layout per project and switch with one command — real OS windows tiled across your screen, on Mac and Windows.',
+    title: 'Your workspace, saved',
+    text: 'Apps open beside the agent, arranged how you left them — one workspace per project, recalled in a word.',
+  },
+  {
+    img: 'glyphh-custom-apps.png',
+    title: 'It builds, too',
+    text: 'Ask for a little app or a repeatable skill and it appears in your library — shareable with your whole team.',
+  },
+  {
+    img: 'glyphh-command-palette.png',
+    title: 'Everything a keystroke away',
+    text: 'Open a tool, run a skill, switch a workspace — without leaving the keyboard.',
   },
 ];
 
@@ -34,7 +34,7 @@ export default function Screenshots() {
         <div className="section-label reveal">{'{'}
           <span className="accent">SEE IT IN ACTION</span>
           {'}'}</div>
-        <h2 className="section-title reveal">One connection, every way you build</h2>
+        <h2 className="section-title reveal">A quick look around</h2>
 
         <div className="shots-list">
           {SHOTS.map((s, i) => (

@@ -23,8 +23,8 @@ export default function FinalCTA() {
     <section className="final-cta" id="get-started">
       <div className="container">
         <div className="cta-card" ref={cardRef}>
-          <h2>Connect once<span className="dot">.</span> Build anything<span className="dot">.</span> Share it anywhere<span className="dot">.</span></h2>
-          <p>Download <span className="compose-cmd">Glyphh</span> free — one connection between your LLMs and everything you build.</p>
+          <h2>Ask for the work<span className="dot">.</span> Set the rules<span className="dot">.</span> Get it done<span className="dot">.</span></h2>
+          <p>Download <span className="compose-cmd">Glyphh Desktop</span> free — the team agent that works where you work.</p>
           <div className="cta-buttons">
             <a href="#download" className="btn btn-white btn-lg group">
               <span className="btn-label">Download for Mac — Free</span>

@@ -5,44 +5,40 @@ import { styledText } from './cmd-style';
 
 const faqs = [
   {
-    q: 'What is Glyphh?',
-    a: 'Glyphh is the connective tissue between the LLMs you use and everything you work with. Connect your services once, then build automations, integrations, agents, and apps on top — and every MCP client (Claude, ChatGPT, Gemini, Cursor) can use them through one secure relay. Share what you build as installable apps or endpoints others can call.',
+    q: 'What is Glyphh Desktop?',
+    a: 'A team collaboration agent that lives on your desktop. Ask for real work — a deck, a brief, a batch of replies — and it plans the job, does it across your connected tools, and delivers the result. You decide which models think, what it can touch, and what needs your approval.',
   },
   {
-    q: 'Which AI can connect?',
-    a: 'Any MCP-compatible client: Claude (Desktop, Code, claude.ai), ChatGPT, Gemini, Cursor, Windsurf, and more. You connect them to your Glyphh endpoint with a one-time approval — OAuth for clients that support it, or a revocable access token for the rest.',
+    q: 'What can it actually do?',
+    a: 'Anything that spans the tools you already use: read a Drive folder and build slides, digest your inbox and Slack every morning, update a sheet from Stripe, draft replies for your approval. One-off or on a schedule.',
   },
   {
-    q: 'Do you resell AI models or mark up tokens?',
-    a: 'No — never. You bring the AI subscription you already pay for, and your prompts go straight to your provider. Glyphh meters only the compute it does on your behalf: opening apps, driving windows, calling tools.',
+    q: 'What are loops?',
+    a: 'How Glyphh runs your work. A frontier model plans the job, open-weight models do the heavy lifting, and the result comes back checked. Loops come built in — you can see exactly who did what.',
+  },
+  {
+    q: 'Which models can I use?',
+    a: 'Frontier models like Fable, GPT, and Gemini — and a growing index of open-weight models like Llama, DeepSeek, Qwen, and Mistral. All in one picker, all on one subscription. No per-model accounts, no lock-in to one lab.',
   },
   {
     q: 'What is a credit?',
-    a: '1 credit = 30 seconds of tool compute, rounded up, with a 1-credit minimum per call — the same way our infrastructure costs are metered. Browsing and listing your apps and tools is always free. Every charge is itemized per tool call in your usage feed, with the exact operation and duration.',
-  },
-  {
-    q: 'What can I build with it?',
-    a: 'Automations that span your connected services, agents with scoped tools, and installable Glyphh apps — a manifest, an HTML UI, and an optional headless worker with SQLite, vector search, a knowledge graph, and cron built in. Publish any of it at your-app.glyphh.app or as an MCP endpoint, no hosting required. There are desktop conveniences too: a command palette, saved layouts, native windows.',
+    a: 'The one currency for everything Glyphh does — model calls, tools, compute. Every plan includes a monthly allowance, open-weight models cost a fraction of frontier ones, and every charge is itemized in your usage feed.',
   },
   {
     q: 'What are connected services?',
-    a: 'OAuth connections to 3,500+ apps — Gmail, Slack, Notion, GitHub, Salesforce and more. Connect an account once and it becomes a set of tools your AI can call: send the message, file the ticket, update the record. Available on paid plans.',
+    a: 'Your tools, linked once: Gmail, Slack, Drive, Notion, Salesforce — 3,500+ services. Connect an account and the agent can act on it: send the message, file the ticket, build the doc. Teams share org connections; members can add their own.',
   },
   {
-    q: 'What are skills?',
-    a: 'Repeatable workflows saved as code in your org’s library. Your AI (or you, from the palette) runs them on demand and they execute deterministically — the same way every time. Exportable, shareable, and versioned.',
+    q: 'Is my data safe? Who approves what?',
+    a: 'Anything risky — sending, deleting, spending — stops on an approval card until you say go. Org admins set the rules once at the gateway: which models are allowed, which tools each team can touch, and budgets that stop at the line.',
   },
   {
-    q: 'Is my data safe?',
-    a: 'Your AI conversations never pass through Glyphh — they stay between you and your provider. Relayed tool requests are screened by an injection firewall before they reach your machine, access tokens are revocable per client, and there’s a local-only server mode if you want no cloud in the loop at all. Provider keys you store with us are encrypted at rest.',
+    q: 'Does it work for teams?',
+    a: 'Yes — that is the point. Share connections, skills, and agents across your org, govern them by role, and see usage per member and per model. Enterprise plans add SSO and provisioned pricing.',
   },
   {
-    q: 'Is Glyphh free?',
-    a: 'Yes — free forever, no card. The full app, your own AI connected over the relay, building and publishing included, with 15 compute credits a month. Paid plans ($20/$50/$200) add monthly credit allowances of 1,000/2,000/10,000 plus connected services and cloud sync.',
-  },
-  {
-    q: 'What platforms does Glyphh support?',
-    a: 'Mac (macOS 12+ on Apple Silicon and Intel) and Windows (10+). Download links are on the homepage.',
+    q: 'What platforms does it support?',
+    a: 'Mac (macOS 12+, Apple Silicon and Intel) and Windows (10+). Free to download — no card required.',
   },
 ];
 

@@ -1,0 +1,77 @@
+/**
+ * LoopStrip — "Loops, built in." Same treatment as the hero: the gradient
+ * canvas, the OUTPUT (an abstract project board, plan already built), and the
+ * loop floating over it — model logos doing each step.
+ */
+
+const favicon = (d) => `https://www.google.com/s2/favicons?domain=${d}&sz=64`;
+
+const FLOW = [
+  { kind: 'Plan', who: 'Fable 5', d: 'anthropic.com' },
+  { kind: 'Work', who: 'Llama 4', d: 'meta.com' },
+  { kind: 'Work', who: 'Qwen 3', d: 'qwen.ai' },
+  { kind: 'Check', who: 'Fable 5', d: 'anthropic.com' },
+];
+
+const COLUMNS = [
+  { title: 'To do', cards: 2 },
+  { title: 'In progress', cards: 3 },
+  { title: 'Done', cards: 2 },
+];
+
+export default function LoopStrip() {
+  return (
+    <section className="loopstrip" id="loops">
+      <div className="container">
+        <div className="section-label reveal">{'{'} <span className="accent">LOOPS</span> {'}'}</div>
+        <h2 className="section-title reveal">Loops, built in.</h2>
+        <p className="ls-sub reveal">
+          Every ask runs a loop: a frontier model plans, open models do the heavy
+          lifting, and the work comes back checked.
+        </p>
+
+        <div className="hs-canvas ls-canvas reveal" aria-hidden="true">
+          {/* The OUTPUT: an abstract project plan, already laid out. */}
+          <div className="ls-board">
+            <div className="ls-board-head">Launch plan</div>
+            <div className="ls-cols">
+              {COLUMNS.map((col, ci) => (
+                <div className="ls-col" key={col.title}>
+                  <div className="ls-col-title">{col.title}</div>
+                  {Array.from({ length: col.cards }).map((_, i) => (
+                    <div className="ls-card" key={i}>
+                      <span className="ls-card-line" style={{ width: `${62 + ((i + ci * 2) * 29) % 32}%` }} />
+                      <span className="ls-card-meta">
+                        <i className="ls-card-dot" />
+                        <span className="ls-card-chip" />
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* The LOOP, floating over the output — model logos doing the steps. */}
+          <div className="ls-flow">
+            {FLOW.map((s, i) => (
+              <div style={{ display: 'contents' }} key={i}>
+                {i > 0 && <span className="ls-flow-link" />}
+                <div className="ls-flow-node">
+                  <img src={favicon(s.d)} alt="" />
+                  <span className="ls-flow-kind">{s.kind}</span>
+                  <span className="ls-flow-who">{s.who}</span>
+                </div>
+              </div>
+            ))}
+            <span className="ls-flow-link" />
+            <div className="ls-flow-node ls-flow-done">
+              <span className="ls-flow-kind">✓</span>
+              <span className="ls-flow-who">Delivered</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

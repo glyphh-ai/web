@@ -47,7 +47,7 @@ export default function Download() {
     <section className="download" id="download">
       <div className="container">
         <h2 className="section-title reveal">Get Glyphh</h2>
-        <p className="section-subtitle reveal">Free forever with your own keys. No trial, no credit card.</p>
+        <p className="section-subtitle reveal">Free forever. No trial, no credit card.</p>
 
         <div className="download-buttons reveal">
           <a href={primaryHref} className="btn btn-primary btn-xl group">
