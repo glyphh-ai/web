@@ -51,9 +51,9 @@ export default function CoworkHero() {
         </div>
         <h1 className="hero-title">The AI that follows you everywhere you work.</h1>
         <p className="hero-sub-big">
-          Build the deck, clear the inbox, update the sheet, run the Monday
-          report — Glyphh Desktop works across the apps you already use, on
-          demand or on a schedule, and asks before anything risky.
+          Build a slide deck, clear your inbox, update a sheet, organize your
+          desktop, run the Monday report — all while you&apos;re on your daily
+          standup, getting a coffee, or on your way to the office.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">

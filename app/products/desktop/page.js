@@ -15,7 +15,7 @@ import Footer from '../../components/Footer';
 
 export const metadata = {
   title: 'Glyphh Desktop — The AI that follows you everywhere you work.',
-  description: 'Delegate real work to an AI coworker: it builds decks, clears inboxes, updates sheets, and runs your recurring work on schedule — across the apps you already use, asking first when it matters.',
+  description: 'Build a slide deck, clear your inbox, update a sheet, run the Monday report — all while you are on your standup, getting a coffee, or on your way in. Glyphh Desktop works across the apps you already use, and asks before anything risky.',
 };
 
 export default function GlyphhDesktopPage() {
