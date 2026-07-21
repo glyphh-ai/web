@@ -17,7 +17,7 @@ export default function ProductSpotlight() {
     <section className="spotlight" id="desktop">
       <div className="container">
         <div className="section-label reveal">{'{'} <span className="accent">GLYPHH DESKTOP</span> {'}'}</div>
-        <h2 className="section-title reveal">The team agent for real work.</h2>
+        <h2 className="section-title reveal">The AI that follows you everywhere you work.</h2>
         <p className="sp-sub reveal">
           Ask in plain words. It plans, does, and delivers — across the tools
           you already use.

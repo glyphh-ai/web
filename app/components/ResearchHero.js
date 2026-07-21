@@ -259,9 +259,9 @@ export default function ResearchHero() {
           Agents that do real work. <span className="hero-accent">Science</span> that makes them trustworthy.
         </h1>
         <p className="rhero-sub">
-          Glyphh builds the team agent for real work — and the research it
-          stands on: memory systems, vector-symbolic architectures, and the
-          runtimes agents run on. Everything ships in the open.
+          Glyphh builds the AI that follows you everywhere you work — and the
+          research it stands on: memory systems, vector-symbolic architectures,
+          and the runtimes agents run on. Everything ships in the open.
         </p>
         <div className="hero-ctas rhero-ctas">
           <a href="/products/desktop" className="btn btn-primary btn-lg group">

@@ -6,7 +6,7 @@ import { styledText } from './cmd-style';
 const faqs = [
   {
     q: 'What is Glyphh Desktop?',
-    a: 'A team collaboration agent that lives on your desktop. Ask for real work — a deck, a brief, a batch of replies — and it plans the job, does it across your connected tools, and delivers the result. You decide which models think, what it can touch, and what needs your approval.',
+    a: 'An AI co-worker that lives on your desktop and follows you everywhere you work. Ask for real work — a deck, a brief, a batch of replies — and it plans the job, does it across your connected tools, and delivers the result. You decide which models think, what it can touch, and what needs your approval.',
   },
   {
     q: 'What can it actually do?',
