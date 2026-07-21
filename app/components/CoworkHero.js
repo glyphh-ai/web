@@ -47,9 +47,9 @@ export default function CoworkHero() {
       <div className="hero-copy hero-copy-center">
         <div className="hero-badge">
           <span className="badge-dot" aria-hidden="true"></span>
-          Native desktop app · Mac &amp; Windows
+          Introducing Glyphh Desktop · Mac &amp; Windows
         </div>
-        <h1 className="hero-title">Your AI coworker. It actually does the work.</h1>
+        <h1 className="hero-title">The AI that follows you everywhere you work.</h1>
         <p className="hero-sub-big">
           Build the deck, clear the inbox, update the sheet, run the Monday
           report — Glyphh Desktop works across the apps you already use, on
