@@ -20,6 +20,8 @@ const APPS_ROW1 = [
 ];
 
 const APPS_ROW2 = [
+  { name: 'Boomi', domain: 'boomi.com' },
+  { name: 'n8n', domain: 'n8n.io' },
   { name: 'Copilot', domain: 'copilot.microsoft.com' },
   { name: 'Mistral', domain: 'chat.mistral.ai' },
   { name: 'Discord', domain: 'discord.com' },
@@ -38,6 +40,8 @@ const APPS_ROW2 = [
 ];
 
 const APPS_ROW3 = [
+  { name: 'Make', domain: 'make.com' },
+  { name: 'Workato', domain: 'workato.com' },
   { name: 'Jira', domain: 'atlassian.net' },
   { name: 'Confluence', domain: 'atlassian.net' },
   { name: 'Asana', domain: 'asana.com' },
@@ -101,7 +105,9 @@ export default function Integrations() {
       </div>
       <div className="container">
         <p className="integration-note reveal">
-          3,500+ connected services. Shared with your team, governed by your admins.
+          3,500+ connected services — and your integration platforms, from
+          Zapier and Make to n8n, Boomi, and Workato, over MCP. Shared with
+          your team, governed by your admins.
         </p>
       </div>
     </section>
