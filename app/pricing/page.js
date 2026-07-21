@@ -39,9 +39,9 @@ export default function PricingPage() {
             <span className="hero-accent">Every product.</span>
           </h1>
           <p className="page-hero-sub">
-            Glyphh Desktop, Glyphh Code, and whatever we ship next all draw from
-            the same pool of compute credits. Each product spends them
-            differently — the meter never changes.
+            Glyphh Desktop — and everything we ship next — draws from the same
+            pool of credits. Each product spends them differently; the meter
+            never changes.
           </p>
           <div className="credit-rules">
             {RULES.map((r) => (

@@ -51,16 +51,6 @@ const PROJECTS = [
     link: 'Follow the org →',
     external: true,
   },
-  {
-    name: 'glyphh-code',
-    tags: ['runtime', 'memory'],
-    status: { label: 'early access', kind: '' },
-    meta: 'research → product',
-    desc: 'Agentic coding on the Glyphh runtime — an agent with real memory via Ada and HDC-fast intent routing, working in your repo. Also ships as a product.',
-    href: '/products/code',
-    link: 'See the product →',
-    external: false,
-  },
 ];
 
 export default function ResearchPage() {
