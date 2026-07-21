@@ -99,7 +99,13 @@ const SALES_EMAIL = 'sales@glyphh.ai';
  *  Null on any failure: the static fallbacks above render instead. */
 async function fetchCatalog() {
   try {
-    const res = await fetch(`${API_URL}/api/public/pricing`, { next: { revalidate: 300 } });
+    // Hard 1.5s budget: a marketing page must NEVER hang on the API — a
+    // stalled server (mid-restart, unreachable) renders the fallbacks
+    // instead of spinning the whole SSR response.
+    const res = await fetch(`${API_URL}/api/public/pricing`, {
+      next: { revalidate: 300 },
+      signal: AbortSignal.timeout(1500),
+    });
     if (!res.ok) return null;
     const body = await res.json();
     return Array.isArray(body.plans) && body.plans.length ? body.plans : null;
