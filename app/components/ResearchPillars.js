@@ -3,25 +3,25 @@ const PILLARS = [
     num: '01',
     tag: 'vsa',
     title: 'Vector-Symbolic Architectures',
-    desc: 'Structure you can compute with. We represent knowledge as compositional high-dimensional vectors — binding, bundling, and permuting symbols algebraically instead of approximating them.',
+    desc: 'Knowledge as structure you can compute with — symbols bound and composed algebraically, not approximated.',
   },
   {
     num: '02',
     tag: 'hdc',
     title: 'Hyperdimensional Computing',
-    desc: 'Inference in microseconds, not GPUs. Pure-HDC encoders classify, parse, and route language with character-level precision — no LLM in the loop.',
+    desc: 'Classification and routing in microseconds, no GPU in the loop.',
   },
   {
     num: '03',
     tag: 'memory',
     title: 'Memory Systems',
-    desc: 'Memory that never confabulates. Ada writes every fact into a universal schema at write time, so recall is a deterministic scan — exact, versioned, auditable.',
+    desc: 'Recall that never confabulates — exact, versioned, auditable. This is why the agent remembers.',
   },
   {
     num: '04',
     tag: 'runtime',
     title: 'Agentic Runtimes',
-    desc: 'The machinery agents run on. Runtimes that give models tools, state, and compute — from the desktop to the cloud — over open protocols like MCP.',
+    desc: 'The machinery under every loop: tools, state, and compute, desktop to cloud.',
   },
 ];
 
@@ -30,11 +30,11 @@ export default function ResearchPillars() {
     <section className="pillars" id="frontier">
       <div className="container">
         <div className="section-label">{'{'} <span className="accent">THE FRONTIER</span> {'}'}</div>
-        <h2 className="section-title">A search for a cognitive primitive</h2>
+        <h2 className="section-title">The science underneath</h2>
         <p className="section-sub">
-          Deep learning got us here. We believe the next layer is memory,
-          structure, and the machinery agents run on. The frontier is a
-          mathematical primitive models can leverage as a cognitive substrate.
+          The products earn trust because of what is under them: memory,
+          structure, and the machinery agents run on.
+          <a href="/research" className="pillars-link"> The full research →</a>
         </p>
         <div className="pillars-grid">
           {PILLARS.map((p) => (

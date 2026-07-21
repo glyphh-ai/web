@@ -24,7 +24,8 @@ export default function DevLayout() {
         <h2 className="section-title reveal">Built for builders, too.</h2>
         <p className="dv-sub reveal">
           A full dev workspace — files, code, terminal, agent — with the loop
-          picker one click away.
+          picker one click away. Bring your own keys, too: any provider that
+          speaks the OpenAI API plugs straight in, never marked up.
         </p>
 
         <div className="hs-canvas dv-canvas reveal" aria-hidden="true">
@@ -92,6 +93,11 @@ export default function DevLayout() {
               <div className="dv-drop-item">
                 <span className="dv-drop-name">Qwen 3</span>
                 <span className="dv-drop-sub">128k context · open weights · 1 cr / M</span>
+              </div>
+              <div className="dv-drop-head">Your keys</div>
+              <div className="dv-drop-item">
+                <span className="dv-drop-name">Your provider</span>
+                <span className="dv-drop-sub">any OpenAI-compatible API · your key · 0 cr</span>
               </div>
             </div>
           </div>

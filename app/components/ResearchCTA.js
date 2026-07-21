@@ -23,18 +23,18 @@ export default function ResearchCTA() {
     <section className="final-cta">
       <div className="container">
         <div className="cta-card" ref={cardRef}>
-          <h2>Follow the work<span className="dot">.</span></h2>
+          <h2>Run the work<span className="dot">.</span> Follow the science<span className="dot">.</span></h2>
           <p>
-            New projects, models, and releases land on GitHub first.
-            Star the org, read the research, or run the products.
+            Glyphh Desktop is free to download — and everything under it
+            lands on GitHub first.
           </p>
           <div className="cta-buttons">
-            <a href="https://github.com/glyphh-ai" target="_blank" rel="noopener noreferrer" className="btn btn-white btn-lg group">
-              <span className="btn-label">github.com/glyphh-ai</span>
+            <a href="/products/desktop" className="btn btn-white btn-lg group">
+              <span className="btn-label">Get Glyphh Desktop</span>
               <span className="btn-fill btn-fill-dark"></span>
             </a>
-            <a href="/research" className="btn btn-ghost-white btn-lg group">
-              <span className="btn-label">The research</span>
+            <a href="https://github.com/glyphh-ai" target="_blank" rel="noopener noreferrer" className="btn btn-ghost-white btn-lg group">
+              <span className="btn-label">github.com/glyphh-ai</span>
               <span className="btn-fill"></span>
             </a>
           </div>

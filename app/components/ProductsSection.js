@@ -6,6 +6,21 @@ const PRODUCTS = [
     desc: 'The team collaboration agent for real work. Ask for the deck, the brief, the batch of replies — it plans, does, and delivers across 3,500+ connected services, with you deciding how far it goes.',
     cta: 'Explore Glyphh Desktop →',
   },
+  {
+    name: 'Glyphh CLI',
+    status: 'coming soon',
+    desc: 'The same agent, loops, and governance — in the terminal, for people who live there.',
+  },
+  {
+    name: 'Glyphh Mobile',
+    status: 'coming soon',
+    desc: 'Your agent in your pocket: the morning brief, the approvals, the ask that cannot wait.',
+  },
+  {
+    name: 'Marketplace',
+    status: 'future',
+    desc: 'Apps, skills, and loops — built by teams, shared with everyone. The library goes public.',
+  },
 ];
 
 export default function ProductsSection() {
@@ -15,20 +30,23 @@ export default function ProductsSection() {
         <div className="section-label">{'{'} <span className="accent">PRODUCTS</span> {'}'}</div>
         <h2 className="section-title">Research you can run</h2>
         <p className="section-sub">
-          We&apos;re a software company too. Our products are built directly on
-          the research — and stay open source, all the way down.
+          Every product is built directly on the research — and stays open
+          source, all the way down.
         </p>
         <div className="prods-grid">
-          {PRODUCTS.map((p) => (
-            <a key={p.href} href={p.href} className="prod-card reveal">
+          {PRODUCTS.map((p) => {
+            const Tag = p.href ? 'a' : 'div';
+            return (
+            <Tag key={p.name} {...(p.href ? { href: p.href } : {})} className={`prod-card reveal${p.href ? '' : ' prod-card-soon'}`}>
               <div className="prod-head">
                 <h3>{p.name}</h3>
                 <span className={`prod-status ${p.status === 'available now' ? 'live' : ''}`}>{p.status}</span>
               </div>
               <p>{p.desc}</p>
-              <span className="prod-cta">{p.cta}</span>
-            </a>
-          ))}
+              {p.cta && <span className="prod-cta">{p.cta}</span>}
+            </Tag>
+            );
+          })}
 
           {/* Right: a theme-aligned graphic — the mascot as the hub of an
               orbiting relay, tying the "runnable research" story together. */}

@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: 'Which models can I use?',
-    a: 'Frontier models like Fable, GPT, and Gemini — and a growing index of open-weight models like Llama, DeepSeek, Qwen, and Mistral. All in one picker, all on one subscription. No per-model accounts, no lock-in to one lab.',
+    a: 'Frontier models like Fable, GPT, and Gemini — and a growing index of open-weight models like Llama, Qwen, and Mistral. All in one picker, all on one subscription. And you can bring your own keys: any provider that speaks the OpenAI API plugs in, billed by your provider, never marked up — we only ever charge for compute on our infrastructure.',
   },
   {
     q: 'What is a credit?',

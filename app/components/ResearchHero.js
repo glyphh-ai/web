@@ -256,21 +256,20 @@ export default function ResearchHero() {
           AI research &amp; development — everything open source
         </div>
         <h1 className="rhero-title">
-          Building the <span className="hero-accent">substrate</span> of machine intelligence.
+          Agents that do real work. <span className="hero-accent">Science</span> that makes them trustworthy.
         </h1>
         <p className="rhero-sub">
-          Glyphh is an AI research and development company. We work at the
-          frontier of vector-symbolic architectures, hyperdimensional
-          computing, memory systems, and agentic runtimes — and everything
-          we build ships in the open.
+          Glyphh builds the team agent for real work — and the research it
+          stands on: memory systems, vector-symbolic architectures, and the
+          runtimes agents run on. Everything ships in the open.
         </p>
         <div className="hero-ctas rhero-ctas">
-          <a href="/research" className="btn btn-primary btn-lg group">
-            <span className="btn-label">Explore the research</span>
+          <a href="/products/desktop" className="btn btn-primary btn-lg group">
+            <span className="btn-label">Get Glyphh Desktop</span>
             <span className="btn-fill"></span>
           </a>
-          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-lg group">
-            <span className="btn-label">github.com/glyphh-ai ↗</span>
+          <a href="/research" className="btn btn-ghost btn-lg group">
+            <span className="btn-label">Explore the research</span>
             <span className="btn-fill"></span>
           </a>
         </div>

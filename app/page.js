@@ -1,6 +1,7 @@
 import Nav from './components/Nav';
 import Reveal from './components/Reveal';
 import ResearchHero from './components/ResearchHero';
+import ProductSpotlight from './components/ProductSpotlight';
 import ResearchPillars from './components/ResearchPillars';
 import OpenSourceSection from './components/OpenSourceSection';
 import ProductsSection from './components/ProductsSection';
@@ -14,9 +15,10 @@ export default function Home() {
       <Reveal />
       <Nav />
       <ResearchHero />
+      <ProductSpotlight />
+      <ProductsSection />
       <ResearchPillars />
       <OpenSourceSection />
-      <ProductsSection />
       <AdaSection />
       <ResearchCTA />
       <Footer />
