@@ -4534,7 +4534,6 @@ footer {
   border-radius: 14px;
   box-shadow: 0 30px 90px rgba(16, 4, 40, 0.5);
   display: flex; gap: 18px; padding: 20px;
-  transform: rotate(1.4deg);
 }
 .hs-rail { width: 76px; display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
 .hs-thumb { display: flex; gap: 6px; align-items: flex-start; }
@@ -4625,7 +4624,6 @@ footer {
   border-radius: 14px;
   box-shadow: 0 30px 90px rgba(16, 4, 40, 0.5);
   padding: 20px 24px;
-  transform: rotate(1.2deg);
 }
 .ls-board-head { font-size: 1rem; font-weight: 700; color: #241d31; margin-bottom: 14px; }
 .ls-cols { display: flex; gap: 14px; }
@@ -4654,13 +4652,12 @@ footer {
   border-radius: 16px; padding: 0.8rem 1.1rem;
   box-shadow: 0 30px 80px rgba(10, 2, 30, 0.6), 0 0 50px rgba(140, 59, 242, 0.25);
   white-space: nowrap;
-  transform: rotate(-1.2deg);
 }
 .ls-flow-node { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 72px; }
 .ls-flow-node img { width: 20px; height: 20px; border-radius: 5px; }
 .ls-flow-kind { font-size: 0.78rem; font-weight: 700; color: #fff; margin-top: 2px; }
 .ls-flow-who { font-family: var(--font-mono); font-size: 0.62rem; color: var(--accent-light); }
-.ls-flow-done .ls-flow-kind { color: #7ce3ab; font-size: 1rem; margin-top: 0; }
+.ls-flow-done .ls-flow-kind { color: #34d399; }
 .ls-flow-link { width: 24px; height: 2px; background: linear-gradient(90deg, rgba(140, 59, 242, 0.6), rgba(236, 72, 153, 0.6)); flex-shrink: 0; }
 
 @media (max-width: 720px) {
@@ -4669,7 +4666,7 @@ footer {
   .hs-rail { display: none; }
   .hs-ask { width: 90%; }
   .ls-board { left: 8%; }
-  .ls-flow { transform: rotate(-1.2deg) scale(0.8); transform-origin: left bottom; }
+  .ls-flow { transform: scale(0.8); transform-origin: left bottom; }
 }
 
 /* ── Section rhythm ── */
@@ -4863,7 +4860,7 @@ footer {
 
 /* ── DevLayout: the builder's workspace + the expanded picker ── */
 .devlayout { padding: 6.5rem 0; }
-.dv-sub {
+.dv-sub, .ls-sub, .cw-sub, .ct-sub {
   max-width: 560px; margin: 0 auto 2.75rem; text-align: center;
   color: var(--text-2); font-size: 1rem; line-height: 1.6;
 }

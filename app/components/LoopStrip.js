@@ -9,8 +9,8 @@ const favicon = (d) => `https://www.google.com/s2/favicons?domain=${d}&sz=64`;
 
 const FLOW = [
   { kind: 'Plan', who: 'Fable 5', d: 'anthropic.com' },
-  { kind: 'Work', who: 'Llama 4', d: 'meta.com' },
-  { kind: 'Work', who: 'Qwen 3', d: 'qwen.ai' },
+  { kind: 'Build', who: 'Llama 4', d: 'meta.com' },
+  { kind: 'Iterate', who: 'Qwen 3', d: 'qwen.ai' },
   { kind: 'Check', who: 'Fable 5', d: 'anthropic.com' },
 ];
 
@@ -55,17 +55,7 @@ export default function LoopStrip() {
             </div>
           </div>
 
-          {/* The loop RAIL: the job picks its loop; the active one is ringed. */}
-          <div className="ls-rail">
-            {['Plan & Build', 'Morning Digest', 'Deep Research'].map((name, i) => (
-              <span className={`hs-pill hs-pill-loop${i === 0 ? ' ls-rail-hot' : ''}`} key={name}>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round"><path d="M21 12a9 9 0 1 1-2.6-6.3" /><polyline points="21 3 21 9 15 9" /></svg>
-                {name}
-              </span>
-            ))}
-          </div>
-
-          {/* The ACTIVE loop, floating over the output — model logos doing the steps. */}
+          {/* The loop, floating over the output — model logos doing the steps. */}
           <div className="ls-flow">
             {FLOW.map((s, i) => (
               <div style={{ display: 'contents' }} key={i}>
@@ -79,8 +69,7 @@ export default function LoopStrip() {
             ))}
             <span className="ls-flow-link" />
             <div className="ls-flow-node ls-flow-done">
-              <span className="ls-flow-kind">✓</span>
-              <span className="ls-flow-who">Delivered</span>
+              <span className="ls-flow-kind">✓ Published</span>
             </div>
           </div>
         </div>
