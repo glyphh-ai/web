@@ -14,8 +14,8 @@ import FinalCTA from '../../components/FinalCTA';
 import Footer from '../../components/Footer';
 
 export const metadata = {
-  title: 'Glyphh Desktop — The team agent for real work.',
-  description: 'Glyphh Desktop is the team collaboration agent that gets real work done — across the tools you already use, with frontier and open-weight models in one subscription, and you deciding how far it goes.',
+  title: 'Glyphh Desktop — Your AI coworker. It actually does the work.',
+  description: 'Delegate real work to an AI coworker: it builds decks, clears inboxes, updates sheets, and runs your recurring work on schedule — across the apps you already use, asking first when it matters.',
 };
 
 export default function GlyphhDesktopPage() {
