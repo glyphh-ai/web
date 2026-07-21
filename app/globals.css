@@ -2913,7 +2913,11 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--green);
+  /* The mockup canvases' brand ramp (hs-canvas) — one surface language. */
+  background:
+    radial-gradient(90% 80% at 100% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 55%),
+    radial-gradient(100% 90% at 0% 100%, rgba(124, 58, 237, 0.5) 0%, rgba(124, 58, 237, 0) 62%),
+    linear-gradient(35deg, #a78bfa 0%, #c4a9f8 44%, #f5c1e0 100%);
   border-radius: var(--radius-xl);
   z-index: 0;
   transition: inset 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2924,28 +2928,28 @@ body {
   border-radius: var(--radius-lg);
 }
 
-/* White text on the accent CTA card — every page that uses this card. */
+/* Ink text on the light brand-gradient card — every page that uses this card. */
 .cta-card h2 {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
-  color: #fff;
+  color: #2c2735;
   letter-spacing: -0.03em;
   line-height: 1.15;
   margin-bottom: 1rem;
 }
 
 .cta-card h2 .dot {
-  color: #fff;
+  color: #7c3aed;
 }
 
 .cta-card p {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(44, 39, 53, 0.82);
   margin-bottom: 2.5rem;
 }
 
 .cta-card .compose-cmd {
-  color: #fff;
+  color: #2c2735;
   font-weight: 700;
 }
 

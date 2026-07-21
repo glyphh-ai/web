@@ -1,39 +1,50 @@
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
+
+const fmt = (n) => Number(n).toLocaleString('en-US');
 
 // Credit billing: one currency for everything Glyphh does — model calls,
 // tools, compute. Each tier bundles a monthly allowance; open-weight models
 // cost a fraction of frontier ones. Prepaid; never billed in arrears.
+//
+// NUMBERS (price, credits, seats) are fed from the server's super-admin plan
+// catalog via GET /api/public/pricing; the values below are the offline
+// fallback so the page never breaks when the API is unreachable. The
+// marketing bullets are template functions over those numbers, so copy stays
+// here and figures stay server-truth.
 const TIERS = [
   {
+    tier: 'free',
     name: 'Free',
-    price: '0',
+    priceUsd: 0,
+    credits: 25,
+    seats: 1,
     period: 'forever',
-    credits: '15 credits / month',
-    seats: '1 seat',
     popular: false,
     desc: 'The full workspace and the agent, on the house — no card.',
-    features: [
+    features: (c) => [
       'The full workspace — the agent, your apps, saved layouts',
       'Frontier and open-weight models in one picker',
       'Loops built in — plan, work, check',
-      '15 credits to spend on any model',
+      `${fmt(c)} credits to spend on any model`,
     ],
     excluded: ['Connected services (3,500+ apps)', 'Team members — Free is single-seat'],
     cta: 'Download now',
     btn: 'btn-secondary',
   },
   {
+    tier: 'basic',
     name: 'Basic',
-    price: '20',
+    priceUsd: 40,
+    credits: 2000,
+    seats: 10,
     period: 'per month',
-    credits: '1,000 credits / month',
-    seats: 'Up to 5 seats',
     popular: true,
     desc: 'Real automation across your connected services, every month.',
-    features: [
+    features: (c, s) => [
       'Everything in Free, plus:',
-      '1,000 compute credits every month',
-      'Invite your team — up to 5 seats',
+      `${fmt(c)} compute credits every month`,
+      `Invite your team — up to ${s} seats`,
       'Connected services — 3,500+ apps',
       'Cloud sync across machines',
     ],
@@ -42,28 +53,40 @@ const TIERS = [
     btn: 'btn-primary',
   },
   {
+    tier: 'pro',
     name: 'Pro',
-    price: '50',
+    priceUsd: 150,
+    credits: 10000,
+    seats: 25,
     period: 'per month',
-    credits: '2,000 credits / month',
-    seats: 'Up to 10 seats',
     popular: false,
-    desc: 'For daily drivers — double the credits and higher limits.',
-    features: ['Everything in Basic, plus:', '2,000 monthly compute credits', 'Up to 10 seats', 'Higher rate limits'],
+    desc: 'For daily drivers — more credits and higher limits.',
+    features: (c, s) => [
+      'Everything in Basic, plus:',
+      `${fmt(c)} monthly compute credits`,
+      `Up to ${s} seats`,
+      'Higher rate limits',
+    ],
     excluded: [],
     cta: 'Get started',
     btn: 'btn-secondary',
   },
   {
+    tier: 'enterprise',
     name: 'Enterprise',
     contactSales: true,
     priceLabel: 'Custom',
     period: 'contact sales',
-    credits: 'Volume credits',
-    seats: '25+ seats',
+    creditsLine: 'Volume credits',
+    seats: 25,
     popular: false,
     desc: 'SSO, SCIM, and a shared workspace for your whole company.',
-    features: ['Everything in Pro, plus:', 'SSO & SCIM through your IdP (Okta, Entra, …)', 'One shared org for your whole team', 'Volume credits + priority support'],
+    features: () => [
+      'Everything in Pro, plus:',
+      'SSO & SCIM through your IdP (Okta, Entra, …)',
+      'One shared org for your whole team',
+      'Volume credits + priority support',
+    ],
     excluded: [],
     cta: 'Contact sales',
     btn: 'btn-secondary',
@@ -72,7 +95,37 @@ const TIERS = [
 
 const SALES_EMAIL = 'sales@glyphh.ai';
 
-export default function Pricing() {
+/** The server's public plan catalog — numbers curated by the super admin.
+ *  Null on any failure: the static fallbacks above render instead. */
+async function fetchCatalog() {
+  try {
+    const res = await fetch(`${API_URL}/api/public/pricing`, { next: { revalidate: 300 } });
+    if (!res.ok) return null;
+    const body = await res.json();
+    return Array.isArray(body.plans) && body.plans.length ? body.plans : null;
+  } catch {
+    return null;
+  }
+}
+
+export default async function Pricing() {
+  const catalog = await fetchCatalog();
+
+  const tiers = TIERS.map((t) => {
+    const p = catalog?.find((x) => x.tier === t.tier);
+    const credits = p?.monthlyCredits ?? t.credits;
+    const seats = p?.maxSeats ?? t.seats;
+    return {
+      ...t,
+      price: String(Math.round(p ? p.monthlyUsdCents / 100 : t.priceUsd)),
+      creditsLine: t.creditsLine ?? `${fmt(credits)} credits / month`,
+      seatsLine: t.contactSales
+        ? `${seats}+ seats`
+        : seats <= 1 ? '1 seat' : `Up to ${seats} seats`,
+      featureList: t.features(credits, seats),
+    };
+  });
+
   return (
     <section className="pricing" id="pricing">
       <div className="container">
@@ -84,8 +137,8 @@ export default function Pricing() {
         </p>
 
         <div className="pricing-grid pricing-grid-four">
-          {TIERS.map((t) => (
-            <div key={t.name} className={`pricing-card reveal${t.popular ? ' pricing-card-popular' : ''}`}>
+          {tiers.map((t) => (
+            <div key={t.tier} className={`pricing-card reveal${t.popular ? ' pricing-card-popular' : ''}`}>
               <div className="pricing-header">
                 <span className="pricing-plan-name">{t.name}</span>
                 <div className="pricing-amount">
@@ -100,11 +153,11 @@ export default function Pricing() {
                 </div>
                 <span className="pricing-period">{t.period}</span>
               </div>
-              <p className="pricing-credits">{t.credits}</p>
-              <p className="pricing-seats">{t.seats}</p>
+              <p className="pricing-credits">{t.creditsLine}</p>
+              <p className="pricing-seats">{t.seatsLine}</p>
               <p className="pricing-desc">{t.desc}</p>
               <ul className="pricing-features">
-                {t.features.map((f, i) => (
+                {t.featureList.map((f, i) => (
                   <li key={i}><span className="check">✓</span> {f}</li>
                 ))}
                 {t.excluded.map((f, i) => (
