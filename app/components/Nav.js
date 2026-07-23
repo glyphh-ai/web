@@ -12,6 +12,11 @@ const PRODUCTS = [
     desc: 'The workspace your AI drives',
   },
   {
+    href: '/products/cli',
+    name: 'Glyphh CLI',
+    desc: 'The whole agent, in your terminal',
+  },
+  {
     href: '/pricing',
     name: 'Pricing',
     desc: 'One credit system, every product',
