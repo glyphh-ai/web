@@ -5130,8 +5130,9 @@ footer {
 /* ── Closing CTA — recolored to the CLI gradient ───────────────────── */
 .cta-card-cli {
   background:
-    radial-gradient(80% 120% at 0% 100%, rgba(45, 212, 191, 0.5) 0%, rgba(45, 212, 191, 0) 55%),
-    linear-gradient(35deg, #0f766e 0%, #0369a1 48%, #4338ca 100%);
+    radial-gradient(90% 80% at 100% 0%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 55%),
+    radial-gradient(100% 90% at 0% 100%, rgba(45, 212, 191, 0.55) 0%, rgba(45, 212, 191, 0) 60%),
+    linear-gradient(35deg, #2dd4bf 0%, #38bdf8 46%, #6366f1 100%);
 }
 .cta-card-cli .cli-install { background: rgba(0, 0, 0, 0.28); border-color: rgba(255, 255, 255, 0.18); }
 .cta-card-cli .cli-install-cmd { color: #fff; }
