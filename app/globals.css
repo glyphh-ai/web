@@ -3999,8 +3999,13 @@ footer {
    product-card frame, with the mascot as the hub of an orbiting accent relay. */
 .prod-graphic {
   position: relative;
+  /* Span the full grid width and center its content, so the open-source card
+     sits centered under the products (not stranded in a half-width cell). */
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 1rem;
   padding: 2.25rem;
   background: var(--surface);
@@ -5184,7 +5189,10 @@ footer {
 .xpimg-lb-close:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
 
 /* ── Closing CTA — recolored to the CLI gradient ───────────────────── */
-.cta-card-cli {
+/* The visible gradient is the ::before overlay (the element sits behind it), so
+   the CLI recolor MUST target ::before — not the element — or the violet base
+   brand ramp shows through. Matches .cli-canvas corner-anchored teal→indigo. */
+.cta-card-cli::before {
   background:
     radial-gradient(70% 80% at 100% 0%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 55%),
     radial-gradient(80% 85% at 0% 100%, rgba(45, 212, 191, 0.55) 0%, rgba(45, 212, 191, 0) 60%),
