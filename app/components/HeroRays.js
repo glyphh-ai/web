@@ -4,12 +4,12 @@ import { useEffect, useRef } from 'react';
 
 /**
  * HeroRays — corner particle rays for the home hero. Dotted halftone sprays fan
- * from the top corners with a soft ember bokeh and scattered white sparks. This
+ * from the top corners with a soft purple bokeh and scattered white sparks. This
  * layer keeps its motion (slow outward flow + twinkle + pointer parallax); the
  * grid behind it stays still. Pure 2D canvas, no deps, aria-hidden.
  */
 
-const COLORS = ['251, 191, 36', '251, 146, 60', '251, 113, 133']; // amber / orange / rose
+const COLORS = ['179, 107, 251', '140, 59, 242', '236, 72, 153']; // light-purple / purple / pink
 const WHITE = '255, 255, 255';
 
 const CORNERS = [

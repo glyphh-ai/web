@@ -6,11 +6,11 @@ import { useEffect, useRef } from 'react';
  * HeroFlow — the home hero backdrop. Flowing data streams: lines bundled at the
  * left fan out to the right and dissolve into scattered particles (a
  * generative-AI look). The strokes are animated dashes so the streams flow;
- * bright pulses ride a few of them; end clusters twinkle. Ember palette, additive
+ * bright pulses ride a few of them; end clusters twinkle. Purple palette, additive
  * glow. Pure 2D canvas, no deps, aria-hidden. Corner rays sit on top.
  */
 
-const COLORS = ['251, 191, 36', '251, 146, 60', '251, 113, 133']; // amber / orange / rose
+const COLORS = ['179, 107, 251', '140, 59, 242', '236, 72, 153']; // light-purple / purple / pink
 const WHITE = '255, 255, 255';
 const N = 28; // number of streams
 
