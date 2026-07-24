@@ -36,8 +36,8 @@ export default function ResearchPillars() {
           structure, and the machinery agents run on.
           <a href="/research" className="pillars-link"> The full research →</a>
         </p>
-        {/* The same offset-timeline flare as the research page — in our purple. */}
-        <div className="rp-track rp-purple">
+        {/* The same offset-timeline flare as the research page — one palette now. */}
+        <div className="rp-track">
           <div className="rp-spine" aria-hidden="true" />
           {PILLARS.map((p, i) => (
             <div key={p.tag} className={`rp-stage reveal ${i % 2 ? 'rp-stage-right' : 'rp-stage-left'}`}>

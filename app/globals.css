@@ -20,16 +20,17 @@
   --text-2: #b6b6b6;
   --text-3: #868686;
   --text-4: #545454;
-  /* ── Neon Orchid — violet → fuchsia → pink accent ramp ───── */
-  --accent: #8c3bf2;
-  --accent-light: #b36bfb;
-  --accent-dim: #7e22ce;
-  --accent-2: #ec4899;
-  --accent-glow: rgba(140, 59, 242, 0.20);
+  /* ── Ember — amber → orange → rose accent ramp (the research palette,
+     now the brand primary) ───── */
+  --accent: #f59e0b;
+  --accent-light: #fbbf24;
+  --accent-dim: #b45309;
+  --accent-2: #fb7185;
+  --accent-glow: rgba(251, 146, 60, 0.22);
   /* Signature gradients — flow bottom-left → top-right */
-  --grad-accent: linear-gradient(to top right, #9333ea, #ec4899);
-  --grad-hero: linear-gradient(to top right, #160a24 0%, #4a1d6e 34%, #9333ea 70%, #ec4899 100%);
-  --grad-text: linear-gradient(to top right, #c084fc, #f0abfc);
+  --grad-accent: linear-gradient(to top right, #f59e0b, #fb7185);
+  --grad-hero: linear-gradient(to top right, #2a1408 0%, #7c3a10 34%, #f59e0b 70%, #fb7185 100%);
+  --grad-text: linear-gradient(to top right, #fbbf24, #fda4af);
   /* Legacy green tokens now resolve to the purple ramp, so existing
      var(--green*) references recolor without per-call edits. */
   --green: var(--accent);
@@ -335,7 +336,7 @@ body {
 }
 
 .btn-ghost-green .btn-fill {
-  background: rgba(140, 59, 242, 0.1);
+  background: rgba(251, 146, 60, 0.1);
 }
 
 .btn.disabled {
@@ -757,7 +758,7 @@ body {
   width: 176px;
   height: 176px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(140, 59, 242, 0.32), transparent 62%);
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.32), transparent 62%);
 }
 .apx-orbit {
   position: absolute;
@@ -939,7 +940,7 @@ body {
   position: absolute;
   width: 112px;
   height: 112px;
-  border: 1px solid rgba(140, 59, 242, 0.18);
+  border: 1px solid rgba(251, 146, 60, 0.18);
   border-radius: 50%;
   animation: pg-spin 15s linear infinite reverse;
 }
@@ -1083,7 +1084,7 @@ body {
   border-radius: 14px;
   background: var(--surface);
   overflow: hidden;
-  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(140, 59, 242, 0.06);
+  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(251, 146, 60, 0.06);
   font-family: var(--font-mono);
   user-select: none;
 }
@@ -1220,9 +1221,9 @@ body {
   animation: gd-pulse 1.8s ease infinite;
 }
 @keyframes gd-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(140, 59, 242,0.5); }
-  70% { box-shadow: 0 0 0 6px rgba(140, 59, 242,0); }
-  100% { box-shadow: 0 0 0 0 rgba(140, 59, 242,0); }
+  0% { box-shadow: 0 0 0 0 rgba(251, 146, 60,0.5); }
+  70% { box-shadow: 0 0 0 6px rgba(251, 146, 60,0); }
+  100% { box-shadow: 0 0 0 0 rgba(251, 146, 60,0); }
 }
 .gd-check { color: var(--text); }
 
@@ -1256,7 +1257,7 @@ body {
   white-space: pre; color: var(--text-3);
 }
 .gd-diff-sign { display: inline-block; width: 1ch; margin-right: 7px; opacity: 0.8; }
-.gd-diffline.add { background: rgba(140, 59, 242, 0.10); color: var(--text); }
+.gd-diffline.add { background: rgba(251, 146, 60, 0.10); color: var(--text); }
 .gd-diffline.del { background: rgba(255, 95, 87, 0.10); color: #ff8b84; }
 .add { color: var(--text); }
 .del { color: #ff8b84; }
@@ -1477,7 +1478,7 @@ body {
 .as-flow-head { display: flex; align-items: center; gap: 8px; color: var(--text-2); }
 .as-flow-head b { color: var(--text); }
 .as-flow-name { color: var(--text-3); }
-.as-badge { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 0.62rem; color: var(--text); padding: 3px 9px; border: 1px solid var(--green-dim); border-radius: 100px; background: rgba(140, 59, 242, 0.06); }
+.as-badge { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 0.62rem; color: var(--text); padding: 3px 9px; border: 1px solid var(--green-dim); border-radius: 100px; background: rgba(251, 146, 60, 0.06); }
 .as-steps { list-style: none; display: flex; flex-direction: column; gap: 11px; }
 .as-steps li { display: flex; align-items: center; gap: 10px; color: var(--text-3); }
 .as-steps li.done { color: var(--text-2); }
@@ -1500,7 +1501,7 @@ body {
   flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 9px; text-align: center; padding: 16px;
   background:
-    radial-gradient(circle at 28% 18%, rgba(140, 59, 242, 0.4), transparent 58%),
+    radial-gradient(circle at 28% 18%, rgba(251, 146, 60, 0.4), transparent 58%),
     linear-gradient(158deg, #0c3f22 0%, #06160d 58%, #000 100%);
 }
 .ig-ad-logo { width: 104px; height: auto; opacity: 0.96; }
@@ -1524,7 +1525,7 @@ body {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 0.66rem; color: var(--text);
   padding: 3px 9px; border-radius: 100px;
-  border: 1px solid var(--green-dim); background: rgba(140, 59, 242,0.06);
+  border: 1px solid var(--green-dim); background: rgba(251, 146, 60,0.06);
 }
 .gd-flow-name { font-size: 0.7rem; color: var(--text-3); }
 .gd-flow-track { display: flex; flex-direction: column; gap: 0; }
@@ -1964,7 +1965,7 @@ body {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background:
-    radial-gradient(60% 80% at 50% 0%, rgba(140, 59, 242, 0.06) 0%, transparent 70%),
+    radial-gradient(60% 80% at 50% 0%, rgba(251, 146, 60, 0.06) 0%, transparent 70%),
     linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
 }
 .adal-mark {
@@ -2149,7 +2150,7 @@ body {
   letter-spacing: 0.05em;
   padding: 2px 8px;
   border-radius: 999px;
-  background: rgba(140, 59, 242, 0.15);
+  background: rgba(251, 146, 60, 0.15);
   color: var(--text);
   white-space: nowrap;
 }
@@ -2695,7 +2696,7 @@ body {
 }
 
 .success-key-box:hover {
-  background: rgba(140, 59, 242, 0.05);
+  background: rgba(251, 146, 60, 0.05);
 }
 
 .success-key {
@@ -2768,7 +2769,7 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(140, 59, 242, 0.12);
+  background: rgba(251, 146, 60, 0.12);
   color: var(--text);
   font-size: 0.8125rem;
   font-weight: 700;
@@ -2916,8 +2917,8 @@ body {
   /* The mockup canvases' brand ramp (hs-canvas) — one surface language. */
   background:
     radial-gradient(90% 80% at 100% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 55%),
-    radial-gradient(100% 90% at 0% 100%, rgba(124, 58, 237, 0.5) 0%, rgba(124, 58, 237, 0) 62%),
-    linear-gradient(35deg, #a78bfa 0%, #c4a9f8 44%, #f5c1e0 100%);
+    radial-gradient(100% 90% at 0% 100%, rgba(245, 158, 11, 0.5) 0%, rgba(245, 158, 11, 0) 62%),
+    linear-gradient(35deg, #fcd34d 0%, #fdba74 44%, #fecaca 100%);
   border-radius: var(--radius-xl);
   z-index: 0;
   transition: inset 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -3836,7 +3837,7 @@ footer {
 .oss {
   padding: 7rem 0;
   background:
-    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(140, 59, 242, 0.07), transparent 70%);
+    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(251, 146, 60, 0.07), transparent 70%);
 }
 
 .oss-grid {
@@ -3935,7 +3936,7 @@ footer {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 0% 100%, rgba(236, 72, 153, 0.07), transparent 70%);
+  background: radial-gradient(ellipse 70% 60% at 0% 100%, rgba(251, 113, 133, 0.07), transparent 70%);
   opacity: 0;
   transition: opacity 0.35s ease;
   pointer-events: none;
@@ -4016,7 +4017,7 @@ footer {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 85% 70% at 100% 0%, rgba(140, 59, 242, 0.12), transparent 70%);
+  background: radial-gradient(ellipse 85% 70% at 100% 0%, rgba(251, 146, 60, 0.12), transparent 70%);
   pointer-events: none;
 }
 .pg-head {
@@ -4051,7 +4052,7 @@ footer {
   width: 190px;
   height: 190px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(140, 59, 242, 0.30), transparent 62%);
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.30), transparent 62%);
 }
 .pg-orbit {
   position: absolute;
@@ -4067,7 +4068,7 @@ footer {
   width: 130px;
   height: 130px;
   border-style: solid;
-  border-color: rgba(140, 59, 242, 0.18);
+  border-color: rgba(251, 146, 60, 0.18);
   animation: pg-spin 16s linear infinite reverse;
 }
 .pg-node {
@@ -4117,8 +4118,8 @@ footer {
   padding: 2.25rem 2.5rem;
   /* More flare: a lit surface with a soft glow, a brighter edge, and lift. */
   background:
-    radial-gradient(120% 160% at 0% 0%, rgba(140, 59, 242, 0.10), transparent 52%),
-    radial-gradient(120% 160% at 100% 100%, rgba(236, 72, 153, 0.07), transparent 55%),
+    radial-gradient(120% 160% at 0% 0%, rgba(251, 146, 60, 0.10), transparent 52%),
+    radial-gradient(120% 160% at 100% 100%, rgba(251, 113, 133, 0.07), transparent 55%),
     linear-gradient(180deg, var(--surface-2), var(--surface));
   border: 1px solid var(--border-2);
   border-radius: var(--radius-lg);
@@ -4164,7 +4165,7 @@ footer {
   padding: 10rem 0 4rem;
   text-align: center;
   background:
-    radial-gradient(ellipse 70% 55% at 50% -10%, rgba(140, 59, 242, 0.12), transparent 70%);
+    radial-gradient(ellipse 70% 55% at 50% -10%, rgba(251, 146, 60, 0.12), transparent 70%);
 }
 
 .page-hero-tight {
@@ -4342,7 +4343,7 @@ footer {
 .ada {
   padding: 7rem 0;
   background:
-    radial-gradient(ellipse 65% 50% at 50% 100%, rgba(140, 59, 242, 0.08), transparent 70%);
+    radial-gradient(ellipse 65% 50% at 50% 100%, rgba(251, 146, 60, 0.08), transparent 70%);
 }
 
 .ada-card {
@@ -4538,8 +4539,8 @@ footer {
   overflow: hidden;
   background:
     radial-gradient(90% 80% at 100% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 55%),
-    radial-gradient(100% 90% at 0% 100%, rgba(124, 58, 237, 0.5) 0%, rgba(124, 58, 237, 0) 62%),
-    linear-gradient(35deg, #a78bfa 0%, #c4a9f8 44%, #f5c1e0 100%);
+    radial-gradient(100% 90% at 0% 100%, rgba(245, 158, 11, 0.5) 0%, rgba(245, 158, 11, 0) 62%),
+    linear-gradient(35deg, #fcd34d 0%, #fdba74 44%, #fecaca 100%);
   box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.35) inset;
 }
 /* Braille-dot texture — the Glyphh mark, whispered. */
@@ -4581,7 +4582,7 @@ footer {
 }
 .hs-slide-art-glyph {
   position: absolute; right: 14px; bottom: 6px;
-  font-size: 26px; color: rgba(140, 59, 242, 0.28); line-height: 1;
+  font-size: 26px; color: rgba(251, 146, 60, 0.28); line-height: 1;
 }
 .hs-slide-title { font-size: 1.3rem; font-weight: 700; color: #241d31; margin-top: 14px; }
 .hs-slide-sub { width: 42%; height: 8px; border-radius: 5px; background: #ece5f6; margin-top: 9px; }
@@ -4599,7 +4600,7 @@ footer {
   border: 1px solid rgba(179, 107, 251, 0.4);
   border-radius: 18px;
   padding: 1.1rem 1.3rem 0.85rem;
-  box-shadow: 0 30px 80px rgba(10, 2, 30, 0.6), 0 0 50px rgba(140, 59, 242, 0.25);
+  box-shadow: 0 30px 80px rgba(10, 2, 30, 0.6), 0 0 50px rgba(251, 146, 60, 0.25);
   text-align: left;
 }
 .hs-ask-text {
@@ -4665,7 +4666,7 @@ footer {
 }
 .ls-card-line { display: block; height: 7px; border-radius: 4px; background: #ece5f6; }
 .ls-card-meta { display: flex; align-items: center; gap: 6px; margin-top: 9px; }
-.ls-card-dot { width: 13px; height: 13px; border-radius: 50%; background: linear-gradient(35deg, #8c3bf2, #ec4899); }
+.ls-card-dot { width: 13px; height: 13px; border-radius: 50%; background: linear-gradient(35deg, #f59e0b, #fb7185); }
 .ls-card-chip { width: 34px; height: 7px; border-radius: 4px; background: #f2ecf9; }
 
 /* The loop — the same dark glass as the composer, riding the diagonal. */
@@ -4676,7 +4677,7 @@ footer {
   backdrop-filter: blur(14px);
   border: 1px solid rgba(179, 107, 251, 0.4);
   border-radius: 16px; padding: 0.8rem 1.1rem;
-  box-shadow: 0 30px 80px rgba(10, 2, 30, 0.6), 0 0 50px rgba(140, 59, 242, 0.25);
+  box-shadow: 0 30px 80px rgba(10, 2, 30, 0.6), 0 0 50px rgba(251, 146, 60, 0.25);
   white-space: nowrap;
 }
 .ls-flow-node { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 72px; }
@@ -4684,7 +4685,7 @@ footer {
 .ls-flow-kind { font-size: 0.78rem; font-weight: 700; color: #fff; margin-top: 2px; }
 .ls-flow-who { font-family: var(--font-mono); font-size: 0.62rem; color: var(--accent-light); }
 .ls-flow-done .ls-flow-kind { color: #34d399; }
-.ls-flow-link { width: 24px; height: 2px; background: linear-gradient(90deg, rgba(140, 59, 242, 0.6), rgba(236, 72, 153, 0.6)); flex-shrink: 0; }
+.ls-flow-link { width: 24px; height: 2px; background: linear-gradient(90deg, rgba(251, 146, 60, 0.6), rgba(251, 113, 133, 0.6)); flex-shrink: 0; }
 
 @media (max-width: 720px) {
   .hs-canvas { min-height: 460px; }
@@ -4723,7 +4724,7 @@ footer {
 .cw-lines { display: flex; flex-direction: column; gap: 7px; }
 .cw-line { display: inline-block; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.12); }
 .cw-bubble { background: rgba(255, 255, 255, 0.06); border-radius: 9px; padding: 8px 9px; margin-bottom: 8px; }
-.cw-bubble-user { background: rgba(140, 59, 242, 0.22); margin-left: 1rem; }
+.cw-bubble-user { background: rgba(251, 146, 60, 0.22); margin-left: 1rem; }
 .cw-stage { flex: 1; display: flex; gap: 10px; min-width: 0; }
 .cw-stage .cw-app { animation: cw-in 380ms cubic-bezier(0.2, 0.8, 0.2, 1); }
 @keyframes cw-in { from { opacity: 0; transform: translateY(10px) scale(0.985); } }
@@ -4749,8 +4750,8 @@ footer {
 .cw-mailrow { display: flex; gap: 8px; align-items: center; padding: 7px 0; border-bottom: 1px solid #efe9f6; }
 .cw-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
 .cw-cal-cell { height: 22px; border-radius: 4px; background: #fff; border: 1px solid #ece5f6; }
-.cw-cal-ev { background: rgba(140, 59, 242, 0.25); border-color: transparent; }
-.cw-cal-ev2 { background: rgba(236, 72, 153, 0.22); border-color: transparent; }
+.cw-cal-ev { background: rgba(251, 146, 60, 0.25); border-color: transparent; }
+.cw-cal-ev2 { background: rgba(251, 113, 133, 0.22); border-color: transparent; }
 .cw-asana { display: flex; gap: 8px; }
 .cw-asana-col { flex: 1; }
 .cw-asana-card {
@@ -4799,7 +4800,7 @@ footer {
 /* The pick: ring, then the click pulse — timed inside the overlay beat. */
 .cw-cc-hot .cw-cc-shot {
   border-color: var(--accent-light);
-  box-shadow: 0 0 0 1px var(--accent-light), 0 0 24px rgba(140, 59, 242, 0.5);
+  box-shadow: 0 0 0 1px var(--accent-light), 0 0 24px rgba(251, 146, 60, 0.5);
   animation: cw-click 2.6s ease;
 }
 .cw-cc-hot .cw-cc-name { color: var(--text); }
@@ -4833,7 +4834,7 @@ footer {
 .gv-pane-head img { width: 13px; height: 13px; border-radius: 3px; }
 .gv-conns { width: 30%; flex-shrink: 0; }
 .gv-conn { display: flex; align-items: center; gap: 8px; padding: 8px 9px; border-radius: 8px; margin-bottom: 4px; }
-.gv-conn-sel { background: rgba(140, 59, 242, 0.18); box-shadow: 0 0 0 1px rgba(179, 107, 251, 0.45); }
+.gv-conn-sel { background: rgba(251, 146, 60, 0.18); box-shadow: 0 0 0 1px rgba(179, 107, 251, 0.45); }
 .gv-conn img { width: 15px; height: 15px; border-radius: 4px; }
 .gv-conn-name { flex: 1; font-size: 0.78rem; font-weight: 600; color: var(--text); }
 .gv-switch {
@@ -4922,7 +4923,7 @@ footer {
 .dv-prompt { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-light); }
 .dv-caret { width: 7px; height: 12px; background: var(--accent-light); animation: hs-blink 1.05s steps(1) infinite; }
 .dv-bubble { background: rgba(255, 255, 255, 0.06); border-radius: 9px; padding: 8px 9px; margin-bottom: 8px; }
-.dv-bubble-user { background: rgba(140, 59, 242, 0.22); margin-left: 1.1rem; }
+.dv-bubble-user { background: rgba(251, 146, 60, 0.22); margin-left: 1.1rem; }
 
 /* The expanded picker — the app's dropdown, floating over the desk. */
 .dv-pick { position: absolute; left: 7%; bottom: 7%; display: flex; flex-direction: column; gap: 8px; }
@@ -4938,7 +4939,7 @@ footer {
   border: 1px solid rgba(179, 107, 251, 0.4);
   border-radius: 14px;
   padding: 8px;
-  box-shadow: 0 30px 80px rgba(10, 2, 30, 0.6), 0 0 50px rgba(140, 59, 242, 0.25);
+  box-shadow: 0 30px 80px rgba(10, 2, 30, 0.6), 0 0 50px rgba(251, 146, 60, 0.25);
 }
 .dv-drop-head {
   font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase;
@@ -4946,7 +4947,7 @@ footer {
   padding: 7px 10px 4px;
 }
 .dv-drop-item { display: flex; flex-direction: column; gap: 2px; padding: 7px 10px; border-radius: 8px; }
-.dv-drop-item.selected { background: rgba(140, 59, 242, 0.16); }
+.dv-drop-item.selected { background: rgba(251, 146, 60, 0.16); }
 .dv-drop-name {
   display: flex; align-items: center; justify-content: space-between;
   font-size: 0.8rem; font-weight: 600; color: var(--text);
@@ -5121,7 +5122,7 @@ footer {
 .ct-pill-mode { color: #2dd4bf; font-weight: 700; }
 .ct-mode-dot { width: 6px; height: 6px; border-radius: 50%; background: #2dd4bf; box-shadow: 0 0 8px rgba(45, 212, 191, 0.8); }
 .ct-dot { width: 6px; height: 6px; border-radius: 50%; }
-.ct-dot-frontier { background: #a78bfa; }
+.ct-dot-frontier { background: #fcd34d; }
 .ct-dot-open { background: #34d399; }
 .ct-pill-loop { color: #7dd3fc; }
 .ct-tok { color: var(--text-4); font-variant-numeric: tabular-nums; }
@@ -5417,30 +5418,17 @@ footer {
    HOME — the same research-page flare (timeline spine, offset, glows), in
    OUR purple (a touch lighter). Reuses the .rp-* structure via .rp-purple.
    ══════════════════════════════════════════════════════════════════════ */
-.rp-purple .rp-spine {
-  background: linear-gradient(180deg, transparent, #a855f7 8%, #e879f9 92%, transparent);
-}
-.rp-purple .rp-dot {
-  border-color: rgba(192, 132, 252, 0.55);
-  box-shadow: 0 0 0 5px var(--bg), 0 0 26px rgba(168, 85, 247, 0.45);
-}
-.rp-purple .rp-dot em { color: #c084fc; }
-.rp-purple .rp-card:hover {
-  border-color: rgba(192, 132, 252, 0.5);
-  box-shadow: 0 24px 60px -30px rgba(168, 85, 247, 0.55);
-}
-.rp-purple .rp-card-link { color: #c084fc; }
 /* Pillar cards aren't links — no hover lift/pointer. */
 .rp-card-static { cursor: default; }
 .rp-card-static:hover { transform: none; box-shadow: none; border-color: var(--border); }
 .pillars .rp-track { margin-top: 3.25rem; }
 
-/* Purple footer glow — bookends the home page like the hero (mirrors research). */
+/* Footer glow — bookends the home page like the hero (matches research/ember). */
 .home-page footer { position: relative; }
 .home-page footer::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 60% 80% at 20% 120%, rgba(168, 85, 247, 0.12), transparent 60%),
-    radial-gradient(ellipse 55% 75% at 92% 120%, rgba(192, 132, 252, 0.09), transparent 58%);
+    radial-gradient(ellipse 60% 80% at 20% 120%, rgba(251, 191, 36, 0.12), transparent 60%),
+    radial-gradient(ellipse 55% 75% at 92% 120%, rgba(251, 113, 133, 0.09), transparent 58%);
 }
 .home-page footer > .container { position: relative; z-index: 1; }
