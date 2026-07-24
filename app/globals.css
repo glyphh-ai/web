@@ -5230,3 +5230,166 @@ footer {
   .cli-grid { grid-template-columns: 1fr; }
   .cli-power { padding: 64px 0; }
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESEARCH PAGE — its own warm identity (amber → rose), distinct from the
+   desktop (violet→pink) and CLI (teal→indigo). A hero flow graphic, an
+   offset timeline down a glowing spine, and a matching header/footer glow.
+   ══════════════════════════════════════════════════════════════════════ */
+.research-page {
+  --rp-a: #fbbf24;   /* amber */
+  --rp-b: #fb923c;   /* orange */
+  --rp-c: #fb7185;   /* rose */
+  --rp-grad: linear-gradient(115deg, var(--rp-a), var(--rp-b) 48%, var(--rp-c));
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.rp-hero { position: relative; overflow: hidden; padding: 9rem 0 5rem; }
+.rp-hero-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 55% at 22% 4%, rgba(251, 191, 36, 0.16), transparent 62%),
+    radial-gradient(ellipse 55% 50% at 90% 40%, rgba(251, 113, 133, 0.12), transparent 60%);
+}
+.rp-hero-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 3rem; align-items: center;
+}
+.rp-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px; border-radius: 100px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.06);
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em;
+  color: var(--rp-a); margin-bottom: 1.75rem;
+}
+.rp-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rp-a); box-shadow: 0 0 10px rgba(251, 191, 36, 0.9); animation: pulse-dot 2s ease infinite; }
+.rp-title { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; color: var(--white); margin: 0 0 1.25rem; }
+.rp-accent { background: var(--rp-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.rp-sub { font-size: 1.05rem; color: var(--text-2); line-height: 1.6; max-width: 46ch; margin: 0 0 2rem; }
+.rp-hero-ctas { display: flex; flex-wrap: wrap; gap: 0.85rem; }
+/* Recolor the primary CTA fill to the research gradient on this page. */
+.research-page .btn-primary .btn-fill { background: var(--rp-grad); }
+
+/* ── Hero flow: research → glyphh → product ───────────────────────────── */
+.rp-flow {
+  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 2rem 1rem;
+  border: 1px solid var(--border); border-radius: 20px;
+  background:
+    radial-gradient(70% 90% at 50% 50%, rgba(251, 146, 60, 0.06), transparent 70%),
+    var(--surface);
+}
+.rpf-col { display: flex; flex-direction: column; gap: 0.6rem; align-items: stretch; }
+.rpf-col-product { align-items: stretch; }
+.rpf-col-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); text-align: center; margin-bottom: 0.15rem; }
+.rpf-chip {
+  font-family: var(--font-mono); font-size: 0.72rem; text-align: center;
+  padding: 7px 12px; border-radius: 9px;
+  border: 1px solid var(--border-2); background: var(--surface-2); color: var(--text-2);
+}
+.rpf-chip-live { color: var(--white); border-color: rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.08); }
+.rpf-wires { width: 46px; align-self: stretch; display: flex; }
+.rpf-wires svg { width: 100%; height: 100%; }
+.rpf-wires path { fill: none; stroke: url(#rpwire); stroke-width: 1.4; opacity: 0.5; }
+.rpf-wires path { stroke: rgba(251, 146, 60, 0.55); }
+.rpf-core { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 0 0.4rem; }
+.rpf-core-ring {
+  position: absolute; top: -8px; width: 104px; height: 104px; border-radius: 50%;
+  border: 1px dashed rgba(251, 191, 36, 0.5);
+  box-shadow: 0 0 40px rgba(251, 146, 60, 0.25);
+  animation: rp-spin 14s linear infinite;
+}
+@keyframes rp-spin { to { transform: rotate(360deg); } }
+.rpf-logo { position: relative; z-index: 1; width: 88px; height: 88px; }
+.rpf-core-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--rp-a); }
+
+/* ── Offset timeline ──────────────────────────────────────────────────── */
+.rp-timeline { padding: 5rem 0 7rem; }
+.rp-timeline-head { text-align: center; margin-bottom: 3.5rem; }
+.rp-eyebrow { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; color: var(--rp-a); }
+.rp-timeline-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 700; letter-spacing: -0.03em; color: var(--white); margin-top: 0.6rem; }
+
+.rp-track { position: relative; max-width: 940px; margin: 0 auto; }
+/* The glowing spine down the center — the "sick" bit: a gradient line with a
+   travelling highlight. */
+.rp-spine {
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, var(--rp-a) 8%, var(--rp-c) 92%, transparent);
+  border-radius: 2px; overflow: hidden;
+}
+.rp-spine::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 22%;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  animation: rp-flow 4.5s ease-in-out infinite;
+}
+@keyframes rp-flow { 0% { top: -22%; } 100% { top: 100%; } }
+
+.rp-stage { position: relative; width: 50%; box-sizing: border-box; margin-bottom: 2.75rem; }
+.rp-stage-left { padding-right: 3.25rem; }
+.rp-stage-right { margin-left: 50%; padding-left: 3.25rem; }
+
+.rp-dot {
+  position: absolute; top: 1.4rem; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--bg); border: 1px solid rgba(251, 191, 36, 0.55);
+  box-shadow: 0 0 0 5px var(--bg), 0 0 26px rgba(251, 146, 60, 0.4);
+}
+.rp-dot em { font-family: var(--font-mono); font-style: normal; font-size: 0.72rem; font-weight: 700; color: var(--rp-a); }
+.rp-stage-left .rp-dot { right: -21px; }
+.rp-stage-right .rp-dot { left: -21px; }
+
+.rp-card {
+  display: block; padding: 1.75rem; border-radius: var(--radius-lg);
+  background: var(--surface); border: 1px solid var(--border);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.rp-card:hover { border-color: rgba(251, 191, 36, 0.45); transform: translateY(-3px); box-shadow: 0 24px 60px -30px rgba(251, 146, 60, 0.5); }
+.rp-card-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.7rem; }
+.rp-card-name { font-family: var(--font-mono); font-weight: 700; color: var(--white); }
+.rp-soon { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); border: 1px solid var(--border-2); border-radius: 100px; padding: 2px 9px; }
+.rp-card h3 { font-size: 1.18rem; font-weight: 650; letter-spacing: -0.02em; color: var(--white); margin: 0 0 0.5rem; }
+.rp-card p { font-size: 0.92rem; color: var(--text-3); line-height: 1.6; margin: 0 0 0.9rem; }
+.rp-card-link { font-family: var(--font-mono); font-size: 0.8rem; color: var(--rp-a); }
+
+/* Destination node — where the stack becomes product. */
+.rp-stage-end { width: 100%; margin-left: 0; padding: 0; display: flex; justify-content: center; margin-top: 0.5rem; }
+.rp-dot-end { position: static; width: 48px; height: 48px; margin-bottom: 1rem; }
+.rp-dot-end em { font-size: 1rem; color: var(--rp-c); }
+.rp-dest { text-align: center; }
+.rp-dest-label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--rp-a); }
+.rp-dest h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; color: var(--white); margin: 0.4rem 0 1.1rem; }
+.rp-dest-links { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+.rp-dest-pill {
+  font-family: var(--font-mono); font-size: 0.85rem; padding: 0.6rem 1.15rem; border-radius: 100px;
+  color: var(--white); border: 1px solid rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.07);
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+.rp-dest-pill:hover { background: rgba(251, 191, 36, 0.14); border-color: rgba(251, 191, 36, 0.65); }
+
+/* ── Matching footer glow (mirrors the hero) ──────────────────────────── */
+.research-page footer { position: relative; }
+.research-page footer::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 120%, rgba(251, 191, 36, 0.12), transparent 60%),
+    radial-gradient(ellipse 55% 75% at 92% 120%, rgba(251, 113, 133, 0.10), transparent 58%);
+}
+.research-page footer > .container { position: relative; z-index: 1; }
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .rp-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .rp-flow { order: 2; }
+  /* Single-rail timeline: spine on the left, every card to its right. */
+  .rp-spine { left: 20px; }
+  .rp-stage, .rp-stage-left, .rp-stage-right { width: 100%; margin-left: 0; padding-left: 3.75rem; padding-right: 0; }
+  .rp-stage-left .rp-dot, .rp-stage-right .rp-dot { left: 0; right: auto; }
+  .rp-stage-end { padding-left: 0; }
+  .rp-dot-end { margin-left: 20px; }
+}
+@media (max-width: 560px) {
+  .rp-flow { flex-wrap: wrap; }
+  .rpf-wires { display: none; }
+}
