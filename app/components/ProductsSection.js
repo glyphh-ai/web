@@ -7,9 +7,11 @@ const PRODUCTS = [
     cta: 'Explore Glyphh Desktop →',
   },
   {
+    href: '/products/cli',
     name: 'Glyphh CLI',
-    status: 'coming soon',
-    desc: 'The same agent, loops, and governance — in the terminal, for people who live there.',
+    status: 'available now',
+    desc: 'The same agent, loops, and governance — in the terminal, for people who live there. A full-screen TUI, or headless in your pipe.',
+    cta: 'Explore Glyphh CLI →',
   },
   {
     name: 'Glyphh Mobile',

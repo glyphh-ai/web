@@ -2,22 +2,34 @@ const GITHUB_URL = 'https://github.com/glyphh-ai';
 
 const REPOS = [
   {
-    name: 'glyphh-adaL',
-    meta: 'Apache-2.0 · Python',
-    href: `${GITHUB_URL}/glyphh-adaL`,
-    desc: 'Ada — schema-on-write memory for LLMs. Exact, versioned recall with no LLM in the read path.',
+    name: 'adaL',
+    meta: 'Python',
+    href: `${GITHUB_URL}/adaL`,
+    desc: 'AdaL — schema-on-write memory for LLMs. Exact, versioned recall with no model in the read path.',
   },
   {
-    name: 'glyphh-models',
-    meta: 'MIT · Python',
-    href: `${GITHUB_URL}/glyphh-models`,
-    desc: 'The open catalog of pure-HDC models for the Glyphh runtime — classification, parsing, routing.',
+    name: 'ada',
+    meta: 'Python',
+    href: `${GITHUB_URL}/ada`,
+    desc: 'The Ada engine — ingest, query, and stream. Websocket listeners, glyph storage, and runtime analytics.',
   },
   {
-    name: 'glyphh-runtime',
+    name: 'models',
+    meta: 'Python',
+    href: `${GITHUB_URL}/models`,
+    desc: 'Glyphh’s open catalog of pure-HDC models — classification, parsing, and routing for the runtime.',
+  },
+  {
+    name: 'rrotor',
+    meta: 'TypeScript',
+    href: `${GITHUB_URL}/rrotor`,
+    desc: 'OpenRotor — the open runtime for RotorSpec, the standard for deterministic AI agent loops.',
+  },
+  {
+    name: 'code',
     meta: 'opening soon',
-    href: '/research',
-    desc: 'The agentic runtime that hosts HDC models and MCP tools next to your agents.',
+    href: GITHUB_URL,
+    desc: 'Glyphh Code — the coding agent, in the open. The same loop the desktop and CLI run.',
   },
 ];
 

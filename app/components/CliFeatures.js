@@ -1,7 +1,12 @@
+import ExpandableImage from './ExpandableImage';
+
+const SHOTS = '/screen-shots/cli';
+
 const FEATURES = [
   {
     k: 'Full local toolset',
     d: 'Bash, Read/Write/Edit, Glob/Grep, WebFetch — the real Claude Code tools, running in your working directory. It makes files, runs commands, and reads the web. No "paste this into your terminal."',
+    img: `${SHOTS}/tools.png`,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" /></svg>
     ),
@@ -9,6 +14,7 @@ const FEATURES = [
   {
     k: 'Permission modes',
     d: 'ask · auto · plan · read-only. Reads run free; every shell command, write, and edit prompts — approve once, allow for the session, or let it rip in auto. Shift-tab cycles it live.',
+    img: `${SHOTS}/permissions.png`,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
     ),
@@ -16,6 +22,7 @@ const FEATURES = [
   {
     k: 'Your loops & models',
     d: 'The same governed loops and per-role models as Desktop — a frontier planner, an open-weight worker, whatever your org allows. Switch models with /use, loops with /loop, mid-session.',
+    img: `${SHOTS}/loops.png`,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.3" /><polyline points="21 3 21 9 15 9" /></svg>
     ),
@@ -23,6 +30,7 @@ const FEATURES = [
   {
     k: 'Machine-reach',
     d: 'The CLI attaches as a machine host, so Desktop (or an agent anywhere) can list and launch apps, open URLs, and drive this box. Install it on a headless server and reach in.',
+    img: `${SHOTS}/machine-reach.png`,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></svg>
     ),
@@ -30,6 +38,7 @@ const FEATURES = [
   {
     k: 'Metered — no keys',
     d: 'Every model call rides the gateway with your bearer. Proxy or BYOK, org-governed and credit-attributed per model. Nothing to leak into your dotfiles or CI secrets.',
+    img: `${SHOTS}/metered.png`,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v6" /><path d="M12 22v-4" /><circle cx="12" cy="13" r="4" /><path d="M5 5l2 2M17 5l-2 2" /></svg>
     ),
@@ -37,6 +46,7 @@ const FEATURES = [
   {
     k: 'Built for the pipe',
     d: 'Full-screen TUI when you want it; headless and scriptable when you do not. Drop it in CI, a cron job, or a Makefile — the agent loop is the same one Desktop runs.',
+    img: `${SHOTS}/pipe.png`,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 17l6-6-6-6" /><line x1="12" y1="19" x2="20" y2="19" /></svg>
     ),
@@ -59,12 +69,23 @@ export default function CliFeatures() {
           </p>
         </div>
 
+        {/* Showcase screenshot — a big, expandable look at the CLI, right above
+            the feature grid. Click to open full-screen. */}
+        <ExpandableImage
+          className="cli-showcase reveal"
+          src={`${SHOTS}/overview.png`}
+          alt="Glyphh CLI — the full-screen TUI"
+          caption="The Glyphh CLI: a typed prompt, a streamed answer, collapsible tool receipts, and the status strip — permission mode, the loop's models, and the live token readout."
+          ratio="16 / 9"
+        />
+
         <div className="cli-grid">
           {FEATURES.map((f) => (
             <div className="cli-card" key={f.k}>
               <span className="cli-card-icon">{f.icon}</span>
               <h3 className="cli-card-k">{f.k}</h3>
               <p className="cli-card-d">{f.d}</p>
+              <ExpandableImage className="cli-card-img" src={f.img} alt={f.k} ratio="16 / 10" />
             </div>
           ))}
         </div>
