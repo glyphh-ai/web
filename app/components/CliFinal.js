@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-const INSTALL = 'npm i -g @glyphh/cli';
+const INSTALL = 'npm i -g @glyphh-ai/cli';
 
 export default function CliFinal() {
   const cardRef = useRef(null);

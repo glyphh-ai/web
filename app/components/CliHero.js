@@ -12,7 +12,7 @@ import HeroDemo from './HeroDemo';
  * The two-phase mockup itself lives in <HeroDemo />.
  */
 
-const INSTALL = 'npm i -g @glyphh/cli';
+const INSTALL = 'npm i -g @glyphh-ai/cli';
 
 export default function CliHero() {
   const [copied, setCopied] = useState(false);
