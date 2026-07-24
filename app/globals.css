@@ -3746,7 +3746,7 @@ footer {
 
 @keyframes ticker-pulse {
   0%, 100% { color: var(--text-3); }
-  12% { color: var(--accent-light); text-shadow: 0 0 18px var(--accent-glow); }
+  12% { color: var(--white); text-shadow: 0 0 18px rgba(255, 255, 255, 0.3); }
   30% { color: var(--text-3); }
 }
 
@@ -3811,11 +3811,11 @@ footer {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.06em;
-  color: var(--accent-light);
-  border: 1px solid var(--accent-dim);
+  color: var(--text-2);
+  border: 1px solid var(--border-2);
   border-radius: 100px;
   padding: 2px 10px;
-  background: rgba(140, 59, 242, 0.08);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .pillar-card h3 {
@@ -3977,9 +3977,9 @@ footer {
 }
 
 .prod-status.live {
-  color: var(--accent-light);
-  border-color: var(--accent-dim);
-  background: rgba(140, 59, 242, 0.08);
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .prod-card p {
@@ -3999,8 +3999,8 @@ footer {
    product-card frame, with the mascot as the hub of an orbiting accent relay. */
 .prod-graphic {
   position: relative;
-  /* A centered banner closing the section (moved out of the product grid). */
-  margin-top: 1.25rem;
+  /* A centered banner leading the section, above the product cards. */
+  margin-bottom: 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -4108,14 +4108,31 @@ footer {
 }
 
 .prods-pricing {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  padding: 2rem 2.25rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  padding: 2.25rem 2.5rem;
+  /* More flare: a lit surface with a soft glow, a brighter edge, and lift. */
+  background:
+    radial-gradient(120% 160% at 0% 0%, rgba(140, 59, 242, 0.10), transparent 52%),
+    radial-gradient(120% 160% at 100% 100%, rgba(236, 72, 153, 0.07), transparent 55%),
+    linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border-2);
   border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px -30px rgba(0, 0, 0, 0.8);
+}
+/* One deliberate brand accent — the sparing purple — as a left edge bar. */
+.prods-pricing::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--grad-accent);
 }
 
 .prods-pricing-copy h3 {
@@ -4134,7 +4151,8 @@ footer {
 }
 
 .prods-pricing-copy b {
-  color: var(--text);
+  color: var(--white);
+  white-space: nowrap;
 }
 
 .prods-pricing .btn {

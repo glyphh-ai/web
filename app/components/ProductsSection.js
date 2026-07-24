@@ -25,42 +25,7 @@ export default function ProductsSection() {
           Every product is built directly on the research — and stays open
           source, all the way down.
         </p>
-        <div className="prods-grid">
-          {PRODUCTS.map((p) => {
-            const Tag = p.href ? 'a' : 'div';
-            return (
-            <Tag key={p.name} {...(p.href ? { href: p.href } : {})} className={`prod-card reveal${p.href ? '' : ' prod-card-soon'}`}>
-              <div className="prod-head">
-                <h3>{p.name}</h3>
-                <span className={`prod-status ${p.status === 'available now' ? 'live' : ''}`}>{p.status}</span>
-              </div>
-              <p>{p.desc}</p>
-              {p.cta && <span className="prod-cta">{p.cta}</span>}
-            </Tag>
-            );
-          })}
-
-        </div>
-
-        {/* Pricing moved UP — right under the products, not buried at the end. */}
-        <div className="prods-pricing reveal">
-          <div className="prods-pricing-copy">
-            <h3>One pricing model. Every product.</h3>
-            <p>
-              All Glyphh products share the same credit system:{' '}
-              <b>1 credit = 30 seconds of compute</b>. Each product draws
-              credits differently, but the meter never changes — and your AI
-              is always your own, never marked up.
-            </p>
-          </div>
-          <a href="/pricing" className="btn btn-secondary btn-lg group">
-            <span className="btn-label">See pricing</span>
-            <span className="btn-fill"></span>
-          </a>
-        </div>
-
-        {/* The open-source nod — one centered banner, closing the section. The
-            full repo list lives on /research now. */}
+        {/* The open-source banner leads the section, above the products. */}
         <div className="prod-graphic reveal">
           <div className="pg-head"><span className="pg-dot" aria-hidden="true" /> {'{'} open source {'}'}</div>
           <div className="pg-stage" aria-hidden="true">
@@ -75,6 +40,39 @@ export default function ProductsSection() {
           </div>
           <p className="pg-cap">Every product is built on the research — and open source, all the way down.</p>
           <a href="/research" className="pg-link">See the research →</a>
+        </div>
+
+        <div className="prods-grid">
+          {PRODUCTS.map((p) => {
+            const Tag = p.href ? 'a' : 'div';
+            return (
+            <Tag key={p.name} {...(p.href ? { href: p.href } : {})} className={`prod-card reveal${p.href ? '' : ' prod-card-soon'}`}>
+              <div className="prod-head">
+                <h3>{p.name}</h3>
+                <span className={`prod-status ${p.status === 'available now' ? 'live' : ''}`}>{p.status}</span>
+              </div>
+              <p>{p.desc}</p>
+              {p.cta && <span className="prod-cta">{p.cta}</span>}
+            </Tag>
+            );
+          })}
+        </div>
+
+        {/* Pricing — right under the products. */}
+        <div className="prods-pricing reveal">
+          <div className="prods-pricing-copy">
+            <h3>One pricing model. Every product.</h3>
+            <p>
+              All Glyphh products share the same credit system:{' '}
+              <b>1 credit = 30 seconds of compute</b>. Each product draws
+              credits differently, but the meter never changes — and your AI
+              is always your own, never marked up.
+            </p>
+          </div>
+          <a href="/pricing" className="btn btn-secondary btn-lg group">
+            <span className="btn-label">See pricing</span>
+            <span className="btn-fill"></span>
+          </a>
         </div>
       </div>
     </section>
