@@ -147,18 +147,17 @@ export default function ResearchPage() {
                 </a>
               </div>
             ))}
+          </div>
 
-            {/* the destination — where the stack becomes product */}
-            <div className="rp-stage rp-stage-end reveal">
-              <span className="rp-dot rp-dot-end" aria-hidden="true"><em>◆</em></span>
-              <div className="rp-dest">
-                <span className="rp-dest-label">the path arrives</span>
-                <h3>Products you can run</h3>
-                <div className="rp-dest-links">
-                  <a href="/products/desktop" className="rp-dest-pill">Glyphh Desktop →</a>
-                  <a href="/products/cli" className="rp-dest-pill">Glyphh CLI →</a>
-                </div>
-              </div>
+          {/* the destination — the line continues down and lands on the circle,
+              with the products centered beneath it. */}
+          <div className="rp-dest reveal">
+            <span className="rp-dot-end" aria-hidden="true"><em>◆</em></span>
+            <span className="rp-dest-label">the path arrives</span>
+            <h3>Products you can run</h3>
+            <div className="rp-dest-links">
+              <a href="/products/desktop" className="rp-dest-pill">Glyphh Desktop →</a>
+              <a href="/products/cli" className="rp-dest-pill">Glyphh CLI →</a>
             </div>
           </div>
         </div>

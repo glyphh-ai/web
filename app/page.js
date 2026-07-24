@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 
 export default function Home() {
   return (
-    <>
+    <div className="home-page">
       <Reveal />
       <Nav />
       <ResearchHero />
@@ -24,6 +24,6 @@ export default function Home() {
       <ResearchPillars />
       <ResearchCTA />
       <Footer />
-    </>
+    </div>
   );
 }

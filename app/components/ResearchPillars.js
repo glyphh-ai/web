@@ -36,15 +36,19 @@ export default function ResearchPillars() {
           structure, and the machinery agents run on.
           <a href="/research" className="pillars-link"> The full research →</a>
         </p>
-        <div className="pillars-grid">
-          {PILLARS.map((p) => (
-            <div key={p.tag} className="pillar-card reveal">
-              <div className="pillar-head">
-                <span className="pillar-num">{p.num}</span>
-                <span className="pillar-tag">{p.tag}</span>
+        {/* The same offset-timeline flare as the research page — in our purple. */}
+        <div className="rp-track rp-purple">
+          <div className="rp-spine" aria-hidden="true" />
+          {PILLARS.map((p, i) => (
+            <div key={p.tag} className={`rp-stage reveal ${i % 2 ? 'rp-stage-right' : 'rp-stage-left'}`}>
+              <span className="rp-dot" aria-hidden="true"><em>{p.num}</em></span>
+              <div className="rp-card rp-card-static">
+                <div className="rp-card-head">
+                  <span className="pillar-tag">{p.tag}</span>
+                </div>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
               </div>
-              <h3>{p.title}</h3>
-              <p>{p.desc}</p>
             </div>
           ))}
         </div>

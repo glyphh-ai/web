@@ -5343,8 +5343,10 @@ footer {
 .rp-card {
   display: block; padding: 1.75rem; border-radius: var(--radius-lg);
   background: var(--surface); border: 1px solid var(--border);
+  text-decoration: none;
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
+.rp-card, .rp-card:hover, .rp-card h3, .rp-card p, .rp-card-link, .rp-dest-pill { text-decoration: none; }
 .rp-card:hover { border-color: rgba(251, 191, 36, 0.45); transform: translateY(-3px); box-shadow: 0 24px 60px -30px rgba(251, 146, 60, 0.5); }
 .rp-card-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.7rem; }
 .rp-card-name { font-family: var(--font-mono); font-weight: 700; color: var(--white); }
@@ -5353,11 +5355,28 @@ footer {
 .rp-card p { font-size: 0.92rem; color: var(--text-3); line-height: 1.6; margin: 0 0 0.9rem; }
 .rp-card-link { font-family: var(--font-mono); font-size: 0.8rem; color: var(--rp-a); }
 
-/* Destination node — where the stack becomes product. */
-.rp-stage-end { width: 100%; margin-left: 0; padding: 0; display: flex; justify-content: center; margin-top: 0.5rem; }
-.rp-dot-end { position: static; width: 48px; height: 48px; margin-bottom: 1rem; }
-.rp-dot-end em { font-size: 1rem; color: var(--rp-c); }
-.rp-dest { text-align: center; }
+/* Destination — the spine ends at the last card; a connector continues the line
+   down to a centered circle, with the products beneath it. */
+.rp-track > .rp-stage:last-child { margin-bottom: 0; }
+.rp-dest {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding-top: 3.25rem;
+}
+.rp-dest::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 2px; height: 3.25rem;
+  background: linear-gradient(180deg, var(--rp-c), rgba(251, 113, 133, 0.12));
+}
+.rp-dot-end {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  width: 50px; height: 50px; border-radius: 50%;
+  background: var(--bg); border: 1px solid rgba(251, 191, 36, 0.6);
+  box-shadow: 0 0 0 6px var(--bg), 0 0 30px rgba(251, 146, 60, 0.45);
+  margin-bottom: 1.5rem;
+}
+.rp-dot-end em { font-family: var(--font-mono); font-style: normal; font-size: 1.05rem; color: var(--rp-c); }
 .rp-dest-label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--rp-a); }
 .rp-dest h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; color: var(--white); margin: 0.4rem 0 1.1rem; }
 .rp-dest-links { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
@@ -5393,3 +5412,35 @@ footer {
   .rp-flow { flex-wrap: wrap; }
   .rpf-wires { display: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   HOME — the same research-page flare (timeline spine, offset, glows), in
+   OUR purple (a touch lighter). Reuses the .rp-* structure via .rp-purple.
+   ══════════════════════════════════════════════════════════════════════ */
+.rp-purple .rp-spine {
+  background: linear-gradient(180deg, transparent, #a855f7 8%, #e879f9 92%, transparent);
+}
+.rp-purple .rp-dot {
+  border-color: rgba(192, 132, 252, 0.55);
+  box-shadow: 0 0 0 5px var(--bg), 0 0 26px rgba(168, 85, 247, 0.45);
+}
+.rp-purple .rp-dot em { color: #c084fc; }
+.rp-purple .rp-card:hover {
+  border-color: rgba(192, 132, 252, 0.5);
+  box-shadow: 0 24px 60px -30px rgba(168, 85, 247, 0.55);
+}
+.rp-purple .rp-card-link { color: #c084fc; }
+/* Pillar cards aren't links — no hover lift/pointer. */
+.rp-card-static { cursor: default; }
+.rp-card-static:hover { transform: none; box-shadow: none; border-color: var(--border); }
+.pillars .rp-track { margin-top: 3.25rem; }
+
+/* Purple footer glow — bookends the home page like the hero (mirrors research). */
+.home-page footer { position: relative; }
+.home-page footer::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 120%, rgba(168, 85, 247, 0.12), transparent 60%),
+    radial-gradient(ellipse 55% 75% at 92% 120%, rgba(192, 132, 252, 0.09), transparent 58%);
+}
+.home-page footer > .container { position: relative; z-index: 1; }

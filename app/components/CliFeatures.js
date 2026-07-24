@@ -6,7 +6,7 @@ const FEATURES = [
   {
     k: 'Full local toolset',
     d: 'Bash, Read/Write/Edit, Glob/Grep, WebFetch — the real Claude Code tools, running in your working directory. It makes files, runs commands, and reads the web. No "paste this into your terminal."',
-    img: `${SHOTS}/tools.png`,
+    img: `${SHOTS}/cli-main.png`,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" /></svg>
     ),
@@ -73,7 +73,7 @@ export default function CliFeatures() {
             the feature grid. Click to open full-screen. */}
         <ExpandableImage
           className="cli-showcase reveal"
-          src={`${SHOTS}/overview.png`}
+          src={`${SHOTS}/cli-main.png`}
           alt="Glyphh CLI — the full-screen TUI"
           caption="The Glyphh CLI: a typed prompt, a streamed answer, collapsible tool receipts, and the status strip — permission mode, the loop's models, and the live token readout."
           ratio="16 / 9"
