@@ -3668,12 +3668,24 @@ footer > .container { position: relative; z-index: 1; }
   overflow: hidden;
 }
 .rhero-tunnelfull {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 8.5rem 0 5rem;
   border-bottom: 1px solid var(--border);
+  overflow: hidden;
 }
 .rhero-glow { display: none; }
+/* Home hero backdrop — flowing data streams with corner rays layered on top. */
+.hero-flow,
+.hero-rays {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-flow-canvas,
+.hero-rays-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .rhero-inner {
   position: relative;
   z-index: 1;
@@ -5128,10 +5140,19 @@ footer > .container { position: relative; z-index: 1; }
 .ct-pill-loop { color: #fbbf24; }
 .ct-tok { color: var(--text-4); font-variant-numeric: tabular-nums; }
 
-/* ── Home hero mockup: device sign-in → boot → chat ─────────────────── */
+/* ── CLI hero mockup: device sign-in → boot → streamed chat ─────────── */
+/* the terminal, with an abstract "opened app" window that slides in behind it */
+.hd-wrap { position: relative; width: 100%; max-width: 720px; margin: 0 auto; }
+.hd-term { position: relative; z-index: 1; width: 100%; }
 .hd-body { display: flex; flex-direction: column; }
-/* keep the body height stable across phases so the frame doesn't jump */
-.hd-term .cterm-body { min-height: 340px; }
+/* fixed height — the terminal SCROLLS as it streams, it doesn't grow */
+.hd-term .cterm-body {
+  height: 360px; min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.hd-term .cterm-body::-webkit-scrollbar { display: none; }
 
 .hd-signin {
   flex: 1;
@@ -5167,6 +5188,50 @@ footer > .container { position: relative; z-index: 1; }
 
 .hd-boot { flex: 1; display: flex; flex-direction: column; justify-content: center; animation: ctFade 0.4s ease both; }
 .hd-boot-ok .ct-glyph { color: #34d399; }
+
+/* welcome panel + each streamed line eases in one at a time */
+.hd-welcome {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px; padding: 10px 12px; margin-bottom: 12px;
+  color: var(--text-2); font-size: 0.78rem; line-height: 1.7;
+}
+.hd-welcome div:first-child { color: var(--text); }
+.hd-in { animation: hd-in 0.32s ease both; }
+@keyframes hd-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* the abstract landing page the agent built — a large browser window that opens
+   BEHIND the terminal, bigger than it so it peeks out on every side */
+.hd-app {
+  position: absolute; top: -50px; left: -42px; right: -42px; bottom: -22px;
+  z-index: 0;
+  border-radius: 12px; overflow: hidden; background: #f6f7fb;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 34px 84px rgba(0, 0, 0, 0.6);
+  opacity: 0; transform: translateY(20px) scale(0.97);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.hd-app.open { opacity: 1; transform: none; }
+.hd-app-bar { display: flex; align-items: center; gap: 8px; padding: 7px 10px; background: #e6e8ef; border-bottom: 1px solid #d6d9e3; }
+.hd-app-dots { display: inline-flex; gap: 4px; }
+.hd-app-dots i { width: 7px; height: 7px; border-radius: 50%; background: #c2c6d2; }
+.hd-app-url { font-size: 0.58rem; color: #6b7280; background: #fff; padding: 2px 10px; border-radius: 20px; border: 1px solid #d6d9e3; font-family: var(--font-mono); }
+.hd-app-body { padding: 12px; display: flex; flex-direction: column; gap: 11px; }
+.hd-app-nav { display: flex; align-items: center; gap: 8px; }
+.hd-app-logo { width: 20px; height: 20px; border-radius: 6px; background: linear-gradient(135deg, #f59e0b, #fb7185); }
+.hd-app-navlinks { display: inline-flex; gap: 8px; flex: 1; }
+.hd-app-navlinks i { width: 26px; height: 6px; border-radius: 3px; background: #cbd0dc; }
+.hd-app-cta { width: 44px; height: 16px; border-radius: 5px; background: linear-gradient(135deg, #f59e0b, #fb7185); }
+.hd-app-hero { display: flex; gap: 12px; }
+.hd-app-hcopy { flex: 1; display: flex; flex-direction: column; gap: 7px; }
+.hd-app-h1 { height: 12px; border-radius: 4px; background: #3a3f4b; }
+.hd-app-h1.short { width: 58%; }
+.hd-app-sub { height: 7px; border-radius: 4px; background: #cbd0dc; }
+.hd-app-sub.short { width: 72%; }
+.hd-app-btn { margin-top: 4px; width: 84px; height: 20px; border-radius: 6px; background: linear-gradient(135deg, #f59e0b, #fb7185); }
+.hd-app-art { width: 42%; min-height: 82px; border-radius: 8px; background: linear-gradient(160deg, rgba(245, 158, 11, 0.92), rgba(251, 113, 133, 0.85)); }
+.hd-app-cards { display: flex; gap: 8px; }
+.hd-app-cards span { flex: 1; height: 32px; border-radius: 7px; background: #eceef4; border: 1px solid #dfe2ea; }
 
 /* ── Power-user feature grid ───────────────────────────────────────── */
 .cli-power { padding: 96px 0; }

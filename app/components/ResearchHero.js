@@ -1,9 +1,12 @@
-// Home hero — centered copy on the page background. The particle background
-// effect is built separately, after this ships.
+// Home hero — centered copy over flowing data streams (bundled left, fanning
+// right into scattered particles).
+
+import HeroFlow from './HeroFlow';
 
 export default function ResearchHero() {
   return (
     <section className="rhero rhero-tunnelfull">
+      <HeroFlow />
       <div className="rhero-inner container">
         <div className="rhero-copy">
           <img
