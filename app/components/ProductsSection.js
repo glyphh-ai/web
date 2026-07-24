@@ -13,16 +13,6 @@ const PRODUCTS = [
     desc: 'The same agent, loops, and governance — in the terminal, for people who live there. A full-screen TUI, or headless in your pipe.',
     cta: 'Explore Glyphh CLI →',
   },
-  {
-    name: 'Glyphh Mobile',
-    status: 'coming soon',
-    desc: 'Your agent in your pocket: the morning brief, the approvals, the ask that cannot wait.',
-  },
-  {
-    name: 'Marketplace',
-    status: 'future',
-    desc: 'Apps, skills, and loops — built by teams, shared with everyone. The library goes public.',
-  },
 ];
 
 export default function ProductsSection() {
@@ -50,24 +40,9 @@ export default function ProductsSection() {
             );
           })}
 
-          {/* Right: a theme-aligned graphic — the mascot as the hub of an
-              orbiting relay, tying the "runnable research" story together. */}
-          <div className="prod-graphic reveal">
-            <div className="pg-head"><span className="pg-dot" aria-hidden="true" /> {'{'} open source {'}'}</div>
-            <div className="pg-stage" aria-hidden="true">
-              <div className="pg-orbit pg-orbit-a">
-                <span className="pg-node" style={{ top: '-5px', left: '50%' }} />
-                <span className="pg-node" style={{ bottom: '12%', right: '-5px' }} />
-                <span className="pg-node" style={{ bottom: '12%', left: '-5px' }} />
-              </div>
-              <div className="pg-orbit pg-orbit-b" />
-              <div className="pg-glow" />
-              <img src="/glyphh-mascot-square-black.png" alt="" className="pg-mascot" width="112" height="112" />
-            </div>
-            <p className="pg-cap">Every product is built on the research — and open source, all the way down.</p>
-            <a href="https://github.com/glyphh-ai" target="_blank" rel="noopener noreferrer" className="pg-link">github.com/glyphh-ai →</a>
-          </div>
         </div>
+
+        {/* Pricing moved UP — right under the products, not buried at the end. */}
         <div className="prods-pricing reveal">
           <div className="prods-pricing-copy">
             <h3>One pricing model. Every product.</h3>
@@ -82,6 +57,24 @@ export default function ProductsSection() {
             <span className="btn-label">See pricing</span>
             <span className="btn-fill"></span>
           </a>
+        </div>
+
+        {/* The open-source nod — one centered banner, closing the section. The
+            full repo list lives on /research now. */}
+        <div className="prod-graphic reveal">
+          <div className="pg-head"><span className="pg-dot" aria-hidden="true" /> {'{'} open source {'}'}</div>
+          <div className="pg-stage" aria-hidden="true">
+            <div className="pg-orbit pg-orbit-a">
+              <span className="pg-node" style={{ top: '-5px', left: '50%' }} />
+              <span className="pg-node" style={{ bottom: '12%', right: '-5px' }} />
+              <span className="pg-node" style={{ bottom: '12%', left: '-5px' }} />
+            </div>
+            <div className="pg-orbit pg-orbit-b" />
+            <div className="pg-glow" />
+            <img src="/glyphh-mascot-square-black.png" alt="" className="pg-mascot" width="112" height="112" />
+          </div>
+          <p className="pg-cap">Every product is built on the research — and open source, all the way down.</p>
+          <a href="/research" className="pg-link">See the research →</a>
         </div>
       </div>
     </section>

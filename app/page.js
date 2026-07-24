@@ -3,7 +3,6 @@ import Reveal from './components/Reveal';
 import ResearchHero from './components/ResearchHero';
 import ProductSpotlight from './components/ProductSpotlight';
 import ResearchPillars from './components/ResearchPillars';
-import OpenSourceSection from './components/OpenSourceSection';
 import ProductsSection from './components/ProductsSection';
 import AdaSection from './components/AdaSection';
 import ResearchCTA from './components/ResearchCTA';
@@ -15,11 +14,14 @@ export default function Home() {
       <Reveal />
       <Nav />
       <ResearchHero />
-      <ProductSpotlight />
+      {/* Products lead — what you can use today, pricing right under it. */}
       <ProductsSection />
-      <ResearchPillars />
-      <OpenSourceSection />
+      {/* The desktop, up close. */}
+      <ProductSpotlight />
+      {/* The technology, one story each (not repeated three ways). The open-
+          source repos live on /research now, not a redundant home section. */}
       <AdaSection />
+      <ResearchPillars />
       <ResearchCTA />
       <Footer />
     </>

@@ -3999,9 +3999,8 @@ footer {
    product-card frame, with the mascot as the hub of an orbiting accent relay. */
 .prod-graphic {
   position: relative;
-  /* Span the full grid width and center its content, so the open-source card
-     sits centered under the products (not stranded in a half-width cell). */
-  grid-column: 1 / -1;
+  /* A centered banner closing the section (moved out of the product grid). */
+  margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
