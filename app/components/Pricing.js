@@ -71,26 +71,6 @@ const TIERS = [
     cta: 'Get started',
     btn: 'btn-secondary',
   },
-  {
-    tier: 'enterprise',
-    name: 'Enterprise',
-    contactSales: true,
-    priceLabel: 'Custom',
-    period: 'contact sales',
-    creditsLine: 'Volume credits',
-    seats: 25,
-    popular: false,
-    desc: 'SSO, SCIM, and a shared workspace for your whole company.',
-    features: () => [
-      'Everything in Pro, plus:',
-      'SSO & SCIM through your IdP (Okta, Entra, …)',
-      'One shared org for your whole team',
-      'Volume credits + priority support',
-    ],
-    excluded: [],
-    cta: 'Contact sales',
-    btn: 'btn-secondary',
-  },
 ];
 
 const SALES_EMAIL = 'sales@glyphh.ai';
@@ -142,7 +122,7 @@ export default async function Pricing() {
           charge is itemized in your usage feed.
         </p>
 
-        <div className="pricing-grid pricing-grid-four">
+        <div className="pricing-grid">
           {tiers.map((t) => (
             <div key={t.tier} className={`pricing-card reveal${t.popular ? ' pricing-card-popular' : ''}`}>
               <div className="pricing-header">
@@ -181,9 +161,28 @@ export default async function Pricing() {
           ))}
         </div>
 
+        {/* Enterprise / custom — a compact band under the tiers instead of a
+            fourth "Custom" card (mirrors the home page's one-pricing band). */}
+        <div className="prods-pricing reveal pricing-enterprise-band">
+          <div className="prods-pricing-copy">
+            <h3>Need SSO, SCIM, or volume credits?</h3>
+            <p>
+              Enterprise adds single sign-on and SCIM through your IdP (Okta,
+              Entra, …), one shared org for your whole company, volume credits,
+              and priority support. Custom pricing — talk to us.
+            </p>
+          </div>
+          <a
+            href={`mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Glyphh Enterprise')}`}
+            className="btn btn-secondary btn-lg group"
+          >
+            <span className="btn-label">Contact sales</span>
+            <span className="btn-fill"></span>
+          </a>
+        </div>
+
         <p className="pricing-note">Cancel anytime. Out of credits? Top up — prepaid, never billed in arrears. Every charge is itemized per tool call in your usage feed.</p>
         <p className="pricing-tax">Prices are exclusive of applicable taxes and duties, including VAT and applicable sales tax.</p>
-        <p className="pricing-enterprise">Need unlimited seats or dedicated support? <a href="mailto:support@glyphh.ai">Contact sales</a></p>
       </div>
     </section>
   );

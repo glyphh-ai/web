@@ -25,9 +25,9 @@ export default function GlyphhDesktopPage() {
       <CoworkHero />
       <Integrations />
       <LoopStrip />
-      <DevLayout />
       <Cowork />
       <Controls />
+      <DevLayout />
       <Pricing />
       <Download />
       <FAQ />
