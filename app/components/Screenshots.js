@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const SHOTS = [
   {
@@ -27,6 +27,13 @@ const SHOTS = [
 
 export default function Screenshots() {
   const [open, setOpen] = useState(null);
+
+  useEffect(() => {
+    if (open === null) return;
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
 
   return (
     <section className="shots" id="screenshots">

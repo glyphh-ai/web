@@ -1721,21 +1721,29 @@ body {
   cursor: default;
 }
 .shot-lightbox-close {
+  /* Unmissable on the dark backdrop: a solid light disc, fixed to the same
+     viewport corner in EVERY lightbox (hero, builders, screenshot rows). */
   position: fixed;
-  top: 18px;
+  top: 20px;
   right: 24px;
-  width: 40px;
-  height: 40px;
-  border: none;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  font-size: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #111;
+  font-size: 22px;
   line-height: 1;
   cursor: pointer;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 .shot-lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: #fff;
+  transform: scale(1.08);
 }
 .shot-copy {
   flex: 1 1 42%;
