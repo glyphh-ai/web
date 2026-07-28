@@ -6,6 +6,7 @@ import LoopStrip from '../../components/LoopStrip';
 import DevLayout from '../../components/DevLayout';
 import Cowork from '../../components/Cowork';
 import Controls from '../../components/Controls';
+import Screenshots from '../../components/Screenshots';
 import Pricing from '../../components/Pricing';
 import Download from '../../components/Download';
 import FAQ from '../../components/FAQ';
@@ -27,6 +28,7 @@ export default function GlyphhDesktopPage() {
       <LoopStrip />
       <Cowork />
       <Controls />
+      <Screenshots />
       <DevLayout />
       <Pricing />
       <Download />
