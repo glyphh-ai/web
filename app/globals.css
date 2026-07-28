@@ -5400,17 +5400,15 @@ footer > .container { position: relative; z-index: 1; }
 .pillars .rp-track { margin-top: 3.25rem; }
 
 
-/* Built for builders — one 16:9 product shot in the hairline frame. */
+/* Built for builders — one borderless 16:9 product shot. */
 .dv-shot {
   margin-top: clamp(1.6rem, 3vw, 2.6rem);
-  padding: 2px;
-  background: var(--white);
   border-radius: 12px;
   box-shadow: 0 24px 60px -28px rgba(255, 255, 255, 0.25);
 }
 .dv-shot-inner {
   display: block;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--border);
   aspect-ratio: 16 / 9;
