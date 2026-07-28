@@ -21,12 +21,14 @@ export default function ResearchHero() {
             AI research &amp; development — everything open source
           </div>
           <h1 className="rhero-title">
-            AI that does <span className="rhero-accent">real work</span>.
+            We put the <span className="rhero-accent">human</span> back in
+            intelligence.
           </h1>
           <p className="rhero-sub">
-            Glyphh builds the AI that&rsquo;s grounded in research: memory
-            systems, vector-symbolic architectures, and the runtimes agents
-            perform well on.
+            AI&rsquo;s amazing &mdash; until you leave it alone. Glyphh builds
+            human-directed agents grounded in real research: memory systems,
+            vector-symbolic architectures, and runtimes with a person in the
+            loop by design.
           </p>
           <div className="hero-ctas rhero-ctas">
             <a href="/products/desktop" className="btn btn-primary btn-lg group">
