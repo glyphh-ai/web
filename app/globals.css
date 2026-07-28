@@ -4581,18 +4581,8 @@ footer > .container { position: relative; z-index: 1; }
   box-shadow: 0 30px 90px rgba(16, 4, 40, 0.5);
   display: flex; gap: 18px; padding: 20px;
 }
-.hs-rail { width: 76px; display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
-.hs-thumb { display: flex; gap: 6px; align-items: flex-start; }
-.hs-thumb-n { font-family: var(--font-mono); font-size: 9px; color: #a49bb8; line-height: 1; padding-top: 2px; }
-.hs-thumb-body {
-  flex: 1; height: 36px; border-radius: 5px; background: #fff; border: 1px solid #e6dff2;
-  display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 0 6px;
-}
-.hs-thumb-line { display: block; height: 3px; border-radius: 2px; background: #e9e2f4; }
-.hs-thumb-line-2 { width: 34%; background: #f1ecf8; }
 /* Slide one carries its OWN gradient — indigo → aurora teal, distinct from
    the canvas ramp so the deck reads as designed work, not wallpaper. */
-.hs-thumb-hero { background: linear-gradient(35deg, #e6defa 0%, #f9f7fd 55%, #fdeef6 100%); border-color: #e6dff2; }
 .hs-slide { flex: 1; background: #fff; border-radius: 10px; border: 1px solid #e9e2f4; padding: 22px 24px; display: flex; flex-direction: column; }
 .hs-slide-art {
   height: 36%; border-radius: 10px; position: relative; overflow: hidden;
@@ -4605,11 +4595,6 @@ footer > .container { position: relative; z-index: 1; }
 }
 .hs-slide-title { font-size: 1.3rem; font-weight: 700; color: #241d31; margin-top: 14px; }
 .hs-slide-sub { width: 42%; height: 8px; border-radius: 5px; background: #ece5f6; margin-top: 9px; }
-.hs-slide-row { display: flex; gap: 18px; align-items: flex-end; margin-top: 14px; }
-.hs-slide-chart { display: flex; align-items: flex-end; gap: 6px; height: 46px; }
-.hs-slide-chart i { display: block; width: 14px; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, #b36bfb, #e3a7d8); }
-.hs-slide-notes { flex: 1; display: flex; flex-direction: column; gap: 7px; padding-bottom: 4px; }
-.hs-slide-notes i { display: block; height: 7px; border-radius: 4px; background: #f0ebf7; }
 
 /* The ASK: our actual composer — dark glass, purple ring — at the origin. */
 .hs-ask {
@@ -4631,11 +4616,6 @@ footer > .container { position: relative; z-index: 1; }
   font-weight: 600; white-space: nowrap;
 }
 .hs-chip img { width: 15px; height: 15px; border-radius: 4px; vertical-align: -2px; }
-.hs-caret {
-  display: inline-block; width: 2px; height: 1.05em; margin-left: 2px;
-  background: var(--accent-light); vertical-align: text-bottom;
-  animation: hs-blink 1.05s steps(1) infinite;
-}
 @keyframes hs-blink { 50% { opacity: 0; } }
 .hs-bar {
   display: flex; align-items: center; gap: 7px;
@@ -4709,7 +4689,6 @@ footer > .container { position: relative; z-index: 1; }
 @media (max-width: 720px) {
   .hs-canvas { min-height: 460px; }
   .hs-slides { width: 78%; right: 3%; }
-  .hs-rail { display: none; }
   .hs-ask { width: 90%; }
   .ls-board { left: 8%; }
   .ls-flow { transform: scale(0.8); transform-origin: left bottom; }
