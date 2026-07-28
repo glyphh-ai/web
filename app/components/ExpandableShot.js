@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 /**
  * ExpandableShot — a borderless 16:9 product shot that blows up into the
@@ -25,11 +26,16 @@ export default function ExpandableShot({ src, alt, eager = false }) {
         </span>
         <span className="shot-expand" aria-hidden="true">⤢</span>
       </button>
-      {open && (
+      {open && createPortal(
+        // PORTALED to <body>: the hero/builders sections sit inside .reveal
+        // wrappers whose transform makes them the containing block for
+        // position:fixed — rendered in place, the lightbox (and its close
+        // disc) anchored to the SECTION, not the viewport.
         <div className="shot-lightbox" onClick={() => setOpen(false)} role="dialog" aria-modal="true">
           <button className="shot-lightbox-close" aria-label="Close" onClick={() => setOpen(false)}>×</button>
           <img src={src} alt={alt} onClick={(e) => e.stopPropagation()} />
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );

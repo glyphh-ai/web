@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 const SHOTS = [
   {
@@ -61,7 +62,9 @@ export default function Screenshots() {
         </div>
       </div>
 
-      {open !== null && (
+      {open !== null && createPortal(
+        // Portaled like ExpandableShot's — no ancestor transform can ever trap
+        // the fixed lightbox, so the close disc is ALWAYS at the viewport corner.
         <div className="shot-lightbox" onClick={() => setOpen(null)} role="dialog" aria-modal="true">
           <button className="shot-lightbox-close" aria-label="Close" onClick={() => setOpen(null)}>×</button>
           <img
@@ -69,7 +72,8 @@ export default function Screenshots() {
             alt={SHOTS[open].title}
             onClick={(e) => e.stopPropagation()}
           />
-        </div>
+        </div>,
+        document.body,
       )}
     </section>
   );
