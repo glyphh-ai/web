@@ -4,6 +4,8 @@
  * refresh). The old abstract files/editor/terminal/picker mock is gone.
  */
 
+import ExpandableShot from './ExpandableShot';
+
 export default function DevLayout() {
   return (
     <section className="devlayout" id="builders">
@@ -11,10 +13,8 @@ export default function DevLayout() {
         <div className="section-label reveal">{'{'} <span className="accent">BUILD</span> {'}'}</div>
         <h2 className="section-title reveal">Built for builders, too.</h2>
 
-        <div className="dv-shot reveal">
-          <span className="dv-shot-inner">
-            <img src="/screen-shots/glyphh-builders.png" alt="The Glyphh dev workspace — files, editor, terminal, and the coding agent side by side" loading="lazy" />
-          </span>
+        <div className="reveal">
+          <ExpandableShot src="/screen-shots/glyphh-builders.png" alt="The Glyphh dev workspace — files, editor, terminal, and the coding agent side by side" />
         </div>
       </div>
     </section>

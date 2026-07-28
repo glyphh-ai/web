@@ -1,4 +1,5 @@
 import HeroParticles from './HeroParticles';
+import ExpandableShot from './ExpandableShot';
 
 /**
  * CoworkHero — the Glyphh Desktop hero: the copy block over one real 16:9
@@ -34,11 +35,7 @@ export default function CoworkHero() {
       </div>
 
       <div className="hero-stage">
-        <div className="dv-shot">
-          <span className="dv-shot-inner">
-            <img src="/screen-shots/glyphh-hero.png" alt="The Glyphh Desktop workspace — your apps open beside the agent" fetchPriority="high" />
-          </span>
-        </div>
+        <ExpandableShot src="/screen-shots/glyphh-hero.png" alt="The Glyphh Desktop workspace — your apps open beside the agent" eager />
       </div>
     </section>
   );

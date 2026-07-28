@@ -1,0 +1,29 @@
+'use client';
+
+import { useState } from 'react';
+
+/**
+ * ExpandableShot — a borderless 16:9 product shot that blows up into the
+ * same lightbox the screenshots section uses. Shared by the hero and the
+ * builders section.
+ */
+export default function ExpandableShot({ src, alt, eager = false }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button className="dv-shot" onClick={() => setOpen(true)} aria-label={`Expand: ${alt}`}>
+        <span className="dv-shot-inner">
+          <img src={src} alt={alt} {...(eager ? { fetchPriority: 'high' } : { loading: 'lazy' })} />
+        </span>
+        <span className="shot-expand" aria-hidden="true">⤢</span>
+      </button>
+      {open && (
+        <div className="shot-lightbox" onClick={() => setOpen(false)} role="dialog" aria-modal="true">
+          <button className="shot-lightbox-close" aria-label="Close" onClick={() => setOpen(false)}>×</button>
+          <img src={src} alt={alt} onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
+    </>
+  );
+}
