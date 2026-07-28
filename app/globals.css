@@ -1640,9 +1640,10 @@ body {
   text-align: left;
   border: none;
   cursor: pointer;
-  padding: clamp(0.25rem, 0.6vw, 0.45rem);
+  /* Hairline frame — the white ring reads as a border, so keep it whisper-thin. */
+  padding: 2px;
   background: var(--white);
-  border-radius: 14px;
+  border-radius: 12px;
   box-shadow: 0 24px 60px -28px rgba(255, 255, 255, 0.25);
   transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease;
 }
@@ -1652,7 +1653,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 14px;
+  border-radius: 12px;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0) 42%),
     radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.22), transparent 60%);
