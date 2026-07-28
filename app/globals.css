@@ -4906,78 +4906,10 @@ footer > .container { position: relative; z-index: 1; }
 
 /* ── DevLayout: the builder's workspace + the expanded picker ── */
 .devlayout { padding: 6.5rem 0; }
-.dv-sub, .ls-sub, .cw-sub, .ct-sub {
-  max-width: 560px; margin: 0 auto 2.75rem; text-align: center;
-  color: var(--text-2); font-size: 1rem; line-height: 1.6;
-}
-.dv-canvas { min-height: 540px; }
-.dv-desk {
-  position: absolute; inset: 7% 5% 0 5%;
-  display: flex; gap: 12px;
-}
-.dv-pane {
-  background: rgba(22, 17, 34, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 12px 12px 0 0;
-  padding: 12px 14px;
-  box-shadow: 0 24px 70px rgba(16, 4, 40, 0.35);
-}
-.dv-pane-head {
-  font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase;
-  letter-spacing: 0.06em; color: var(--text-3);
-  padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 10px;
-}
-.dv-files { width: 17%; flex-shrink: 0; }
-.dv-center { flex: 1; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-.dv-code { flex: 1.5; }
-.dv-term { flex: 1; border-radius: 12px; background: rgba(12, 9, 20, 0.95); }
-.dv-agent { width: 26%; flex-shrink: 0; }
-.dv-agent-head { color: var(--accent-light); }
-.dv-lines { display: flex; flex-direction: column; gap: 7px; }
-.dv-line { display: inline-block; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.12); }
-.dv-line-dim { background: rgba(255, 255, 255, 0.07); }
-.dv-codelines { display: flex; flex-direction: column; gap: 7px; }
-.dv-codeline { display: block; height: 6px; border-radius: 3px; opacity: 0.65; }
-.dv-term-line { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-.dv-prompt { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-light); }
-.dv-caret { width: 7px; height: 12px; background: var(--accent-light); animation: hs-blink 1.05s steps(1) infinite; }
-.dv-bubble { background: rgba(255, 255, 255, 0.06); border-radius: 9px; padding: 8px 9px; margin-bottom: 8px; }
-.dv-bubble-user { background: rgba(140, 59, 242, 0.22); margin-left: 1.1rem; }
 
 /* The expanded picker — the app's dropdown, floating over the desk. */
-.dv-pick { position: absolute; left: 7%; bottom: 7%; display: flex; flex-direction: column; gap: 8px; }
-.dv-chips { display: flex; gap: 7px; }
-.dv-chips .hs-pill {
-  background: rgba(20, 14, 32, 0.88); backdrop-filter: blur(10px);
-  box-shadow: 0 12px 40px rgba(10, 2, 30, 0.5);
-}
-.dv-drop {
-  width: 300px;
-  background: rgba(20, 14, 32, 0.94);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(179, 107, 251, 0.4);
-  border-radius: 14px;
-  padding: 8px;
-  box-shadow: 0 30px 80px rgba(10, 2, 30, 0.6), 0 0 50px rgba(140, 59, 242, 0.25);
-}
-.dv-drop-head {
-  font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase;
-  letter-spacing: 0.07em; color: var(--text-3);
-  padding: 7px 10px 4px;
-}
-.dv-drop-item { display: flex; flex-direction: column; gap: 2px; padding: 7px 10px; border-radius: 8px; }
-.dv-drop-item.selected { background: rgba(140, 59, 242, 0.16); }
-.dv-drop-name {
-  display: flex; align-items: center; justify-content: space-between;
-  font-size: 0.8rem; font-weight: 600; color: var(--text);
-}
-.dv-check { font-style: normal; color: var(--accent-light); font-size: 0.75rem; }
-.dv-drop-sub { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-3); }
 
 @media (max-width: 720px) {
-  .dv-files { display: none; }
-  .dv-agent { width: 34%; }
-  .dv-drop { width: 260px; }
 }
 
 /* ── Home: product spotlight (the Desktop scene, compressed) ── */
@@ -5467,3 +5399,25 @@ footer > .container { position: relative; z-index: 1; }
 .rp-card-static:hover { transform: none; box-shadow: none; border-color: var(--border); }
 .pillars .rp-track { margin-top: 3.25rem; }
 
+
+/* Built for builders — one 16:9 product shot in the hairline frame. */
+.dv-shot {
+  margin-top: clamp(1.6rem, 3vw, 2.6rem);
+  padding: 2px;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px -28px rgba(255, 255, 255, 0.25);
+}
+.dv-shot-inner {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  aspect-ratio: 16 / 9;
+}
+.dv-shot-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
