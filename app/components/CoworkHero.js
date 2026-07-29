@@ -3,7 +3,8 @@ import ExpandableShot from './ExpandableShot';
 
 /**
  * CoworkHero — the Glyphh Desktop hero: the copy block over one real 16:9
- * product shot (/screen-shots/glyphh-hero.png; swap the file to refresh).
+ * product VIDEO (/screen-shots/glyphh-hero.mp4; swap the file to refresh —
+ * same resolution as the old still, which stays on as the poster frame).
  * The old animated mock (gradient canvas, abstract deck, typing ask) is gone.
  */
 
@@ -35,7 +36,7 @@ export default function CoworkHero() {
       </div>
 
       <div className="hero-stage">
-        <ExpandableShot src="/screen-shots/glyphh-hero.png" alt="The Glyphh Desktop workspace — your apps open beside the agent" eager />
+        <ExpandableShot src="/screen-shots/glyphh-hero.mp4" poster="/screen-shots/glyphh-hero.png" alt="The Glyphh Desktop workspace — your apps open beside the agent" eager />
       </div>
     </section>
   );

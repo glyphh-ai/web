@@ -6,10 +6,13 @@ import { createPortal } from 'react-dom';
 /**
  * ExpandableShot — a borderless 16:9 product shot that blows up into the
  * same lightbox the screenshots section uses. Shared by the hero and the
- * builders section.
+ * builders section. An .mp4/.webm src renders as an autoplaying, muted,
+ * looping video (poster = the old still, so the frame paints instantly);
+ * the lightbox copy gets controls.
  */
-export default function ExpandableShot({ src, alt, eager = false }) {
+export default function ExpandableShot({ src, alt, eager = false, poster }) {
   const [open, setOpen] = useState(false);
+  const isVideo = /\.(mp4|webm)$/i.test(src);
 
   useEffect(() => {
     if (!open) return;
@@ -22,7 +25,11 @@ export default function ExpandableShot({ src, alt, eager = false }) {
     <>
       <button className="dv-shot" onClick={() => setOpen(true)} aria-label={`Expand: ${alt}`}>
         <span className="dv-shot-inner">
-          <img src={src} alt={alt} {...(eager ? { fetchPriority: 'high' } : { loading: 'lazy' })} />
+          {isVideo ? (
+            <video src={src} poster={poster} autoPlay muted loop playsInline aria-label={alt} />
+          ) : (
+            <img src={src} alt={alt} {...(eager ? { fetchPriority: 'high' } : { loading: 'lazy' })} />
+          )}
         </span>
         <span className="shot-expand" aria-hidden="true">⤢</span>
       </button>
@@ -33,7 +40,11 @@ export default function ExpandableShot({ src, alt, eager = false }) {
         // disc) anchored to the SECTION, not the viewport.
         <div className="shot-lightbox" onClick={() => setOpen(false)} role="dialog" aria-modal="true">
           <button className="shot-lightbox-close" aria-label="Close" onClick={() => setOpen(false)}>×</button>
-          <img src={src} alt={alt} onClick={(e) => e.stopPropagation()} />
+          {isVideo ? (
+            <video src={src} poster={poster} controls autoPlay loop playsInline aria-label={alt} onClick={(e) => e.stopPropagation()} />
+          ) : (
+            <img src={src} alt={alt} onClick={(e) => e.stopPropagation()} />
+          )}
         </div>,
         document.body,
       )}

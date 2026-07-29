@@ -1712,7 +1712,8 @@ body {
   backdrop-filter: blur(6px);
   cursor: zoom-out;
 }
-.shot-lightbox img {
+.shot-lightbox img,
+.shot-lightbox video {
   max-width: 92vw;
   max-height: 90vh;
   border-radius: 12px;
@@ -5400,7 +5401,8 @@ footer > .container { position: relative; z-index: 1; }
   border: 1px solid var(--border);
   aspect-ratio: 16 / 9;
 }
-.dv-shot-inner img {
+.dv-shot-inner img,
+.dv-shot-inner video {
   display: block;
   width: 100%;
   height: 100%;
