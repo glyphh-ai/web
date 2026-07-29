@@ -3,6 +3,8 @@ import Reveal from '../../components/Reveal';
 import CoworkHero from '../../components/CoworkHero';
 import Integrations from '../../components/Integrations';
 import LoopStrip from '../../components/LoopStrip';
+import SwitchStrip from '../../components/SwitchStrip';
+import GhostMode from '../../components/GhostMode';
 import DevLayout from '../../components/DevLayout';
 import Cowork from '../../components/Cowork';
 import Controls from '../../components/Controls';
@@ -23,11 +25,16 @@ export default function GlyphhDesktopPage() {
       <Reveal />
       <Nav />
       <CoworkHero />
-      <Integrations />
+      {/* The story builds: Layouts (what) → Switch (how) → Workspace (where)
+          → Reach (with what) → Ghost mode (anywhere) → Ship (how far)
+          → Governance (who decides). */}
       <LoopStrip />
+      <SwitchStrip />
       <Cowork />
-      <Controls />
+      <Integrations />
+      <GhostMode />
       <DevLayout />
+      <Controls />
       <Pricing />
       <Download />
       <FAQ />

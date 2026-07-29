@@ -94,8 +94,8 @@ export default function Integrations() {
       <div className="container">
         <h2 className="section-title reveal">Works with every app you already use</h2>
         <p className="section-subtitle reveal">
-          Connect Gmail, Slack, Drive and thousands more once — then just ask.
-          The agent works across all of them.
+          Connect Gmail, Slack, Drive and thousands more once — then any
+          Layout can reach them. You decide which.
         </p>
       </div>
       <div className="scroll-rows reveal">

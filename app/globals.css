@@ -4612,7 +4612,18 @@ footer > .container { position: relative; z-index: 1; }
 }
 
 /* ── Section rhythm ── */
-.loopstrip, .cowork, .controls { padding: 6.5rem 0; }
+.loopstrip, .cowork, .controls, .switchstrip, .ghostmode { padding: 6.5rem 0; }
+
+/* ── Ghost mode: the ⌘⇧G keycaps are the section's visual ── */
+.ghost-keys { display: flex; gap: 0.6rem; justify-content: center; margin: 2rem 0 1.25rem; }
+.ghost-key {
+  font-size: 1.5rem; font-weight: 700; line-height: 1;
+  color: var(--white);
+  padding: 1rem 1.2rem; min-width: 3.5rem; text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.18); border-bottom-width: 3px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
 
 /* ── Cowork: the desktop mid-sequence (overlay → click → workspace) ── */
 .cw-canvas { min-height: 560px; }

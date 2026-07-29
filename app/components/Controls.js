@@ -11,10 +11,11 @@ export default function Controls() {
     <section className="controls" id="governance">
       <div className="container">
         <div className="section-label reveal">{'{'} <span className="accent">SECURITY</span> {'}'}</div>
-        <h2 className="section-title reveal">Security and governance.</h2>
-        <p className="ct-sub reveal">
-          Decide who can reach what — connections shared by the org, tools
-          narrowed per team, budgets enforced at the gateway.
+        <h2 className="section-title reveal">You decide how far it goes.</h2>
+        <p className="section-subtitle reveal">
+          Anything risky stops on an approval card. Connections shared by the
+          org, tools narrowed per team, budgets enforced at the gateway —
+          agents this capable need rules, and you set them.
         </p>
 
         <div className="reveal">

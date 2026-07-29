@@ -29,7 +29,7 @@ export default function CoworkHero() {
             <span className="btn-label">Download Now</span>
             <span className="btn-fill"></span>
           </a>
-          <a href="#loops" className="btn btn-ghost btn-lg group">
+          <a href="#layouts" className="btn btn-ghost btn-lg group">
             <span className="btn-label">Watch It Switch</span>
             <span className="btn-fill"></span>
           </a>

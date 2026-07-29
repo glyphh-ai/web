@@ -1,26 +1,32 @@
 import ExpandableShot from './ExpandableShot';
 
 /**
- * LoopStrip — "The right loop for every job." One real 16:9 product shot
- * (/screen-shots/glyphh-custom-apps.png; swap the file to refresh). The old
- * abstract mock (gradient canvas, project board, floating model flow) is gone.
+ * LoopStrip — the Layouts section: one Layout sets the whole job. Real shot
+ * of the Layout editor (/screen-shots/glyphh-layouts.png; swap the file to
+ * refresh) — apps on a grid plus the loop & model binding.
  */
 
 export default function LoopStrip() {
   return (
-    <section className="loopstrip" id="loops">
+    <section className="loopstrip" id="layouts">
       <div className="container">
-        <div className="section-label reveal">{'{'} <span className="accent">LOOPS</span> {'}'}</div>
-        <h2 className="section-title reveal">The right loop for every job.</h2>
-        <p className="ls-sub reveal">
-          Not one loop for all work. Every job picks its loop — and the whole
-          app reorients around it: the models that think, the tools it may
-          touch, the workspace it opens. Your best way of working, saved and
-          repeatable.
+        <div className="section-label reveal">{'{'} <span className="accent">LAYOUTS</span> {'}'}</div>
+        <h2 className="section-title reveal">One Layout sets the whole job.</h2>
+        <p className="section-subtitle reveal">
+          The apps on screen and how they&apos;re arranged. The agent workflow
+          that loads. Which models fill each slot — frontier or open-weight —
+          and which connections your agents can use. Saved together, named
+          after the job.
+        </p>
+        <p className="section-subtitle reveal">
+          Your Dev Layout: files, editor, terminal — Plan &amp; Build, Fable
+          planning, Mistral building. Your Marketing Layout: the same
+          workflow, restaffed — Fable and Gemini — with your inbox and
+          analytics up instead.
         </p>
 
         <div className="reveal">
-          <ExpandableShot src="/screen-shots/glyphh-custom-apps.png" alt="A loop reorienting the Glyphh workspace — models, tools, and layout per job" />
+          <ExpandableShot src="/screen-shots/glyphh-layouts.png" alt="The Layout editor — apps arranged on a grid, and the loop and models the Layout loads" />
         </div>
       </div>
     </section>
