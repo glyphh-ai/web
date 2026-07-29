@@ -1,6 +1,9 @@
+import ExpandableShot from './ExpandableShot';
+
 /**
  * ReleaseStrip — "{ RELEASE }" — the payoff of the heart: work ships as a
- * live app. Text-only section; the published URL is the visual.
+ * live app. One looping 16:9 product video (/screen-shots/glyphh-release.mp4;
+ * swap the file to refresh) under the published URL.
  */
 
 export default function ReleaseStrip() {
@@ -17,6 +20,10 @@ export default function ReleaseStrip() {
           published — on your phone, shareable with your team. Work that used
           to end as a file ends as a product.
         </p>
+
+        <div className="reveal">
+          <ExpandableShot src="/screen-shots/glyphh-release.mp4" alt="An app built in Glyphh, released live at its own URL" />
+        </div>
       </div>
     </section>
   );
