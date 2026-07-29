@@ -3,7 +3,7 @@ const PRODUCTS = [
     href: '/products/desktop',
     name: 'Glyphh Desktop',
     status: 'available now',
-    desc: 'The AI that follows you everywhere you work. Ask for the deck, the brief, the batch of replies — it plans, does, and delivers across 3,500+ connected services, with you deciding how far it goes.',
+    desc: 'A new class of desktop agent. Every task needs the right Agents, Workflow and Apps — Glyphh Desktop combines all three into Layouts you switch instantly, working across 3,500+ connected services with you deciding how far it goes.',
     cta: 'Explore Glyphh Desktop →',
   },
   {

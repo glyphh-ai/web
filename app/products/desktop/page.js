@@ -13,8 +13,8 @@ import FinalCTA from '../../components/FinalCTA';
 import Footer from '../../components/Footer';
 
 export const metadata = {
-  title: 'Glyphh Desktop — The AI that follows you everywhere you work.',
-  description: 'Build a slide deck, clear your inbox, update a sheet, run the Monday report — all while you are on your standup, getting a coffee, or on your way in. Glyphh Desktop works across the apps you already use, and asks before anything risky.',
+  title: 'Glyphh Desktop — A new class of desktop agent for Mac & Windows',
+  description: 'Every task you do needs the right Agents, Workflow and Apps. Glyphh Desktop combines all three into Layouts you switch instantly — code this hour, a PowerPoint and email the next, a live app by lunch.',
 };
 
 export default function GlyphhDesktopPage() {

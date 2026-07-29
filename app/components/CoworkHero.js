@@ -15,13 +15,14 @@ export default function CoworkHero() {
       <div className="hero-copy hero-copy-center">
         <div className="hero-badge">
           <span className="badge-dot" aria-hidden="true"></span>
-          Introducing Glyphh Desktop · Mac &amp; Windows
+          A new class of desktop agent · Mac &amp; Windows
         </div>
-        <h1 className="hero-title">The AI that follows you everywhere you work.</h1>
+        <h1 className="hero-title">Every task you do needs the right Agents, Workflow and Apps.</h1>
         <p className="hero-sub-big">
-          Build a slide deck, clear your inbox, update a sheet, organize your
-          desktop, run the Monday report — all while you&apos;re on your daily
-          standup, getting a coffee, or on your way to the office.
+          Glyphh Desktop combines all three into Layouts you switch instantly
+          — each one sets what&apos;s on your screen, which agents run on which
+          models, and what they can reach. Code this hour, a PowerPoint and
+          email the next, a live app by lunch.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
@@ -29,7 +30,7 @@ export default function CoworkHero() {
             <span className="btn-fill"></span>
           </a>
           <a href="#loops" className="btn btn-ghost btn-lg group">
-            <span className="btn-label">See How It Works</span>
+            <span className="btn-label">Watch It Switch</span>
             <span className="btn-fill"></span>
           </a>
         </div>

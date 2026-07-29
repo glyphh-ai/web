@@ -7,7 +7,7 @@ import ExpandableShot from './ExpandableShot';
  */
 
 const POINTS = [
-  { title: 'The right loop for every job', desc: 'The whole app reorients around the loop the work calls for.' },
+  { title: 'Layouts you switch instantly', desc: 'Each one sets the apps on screen, the agent workflow, and the models that staff it.' },
   { title: 'Every model, one subscription', desc: 'Frontier when it matters, open weights when it doesn’t.' },
   { title: 'Governed by you', desc: 'Approvals, tool limits, and budgets — enforced at the gateway.' },
 ];
@@ -17,10 +17,10 @@ export default function ProductSpotlight() {
     <section className="spotlight" id="desktop">
       <div className="container">
         <div className="section-label reveal">{'{'} <span className="accent">GLYPHH DESKTOP</span> {'}'}</div>
-        <h2 className="section-title reveal">The AI that follows you everywhere you work.</h2>
+        <h2 className="section-title reveal">Every task needs the right Agents, Workflow and Apps.</h2>
         <p className="sp-sub reveal">
-          Ask in plain words. It plans, does, and delivers — across the tools
-          you already use.
+          Glyphh Desktop combines all three into Layouts you switch instantly.
+          Code this hour, a PowerPoint and email the next, a live app by lunch.
         </p>
 
         <div className="reveal">
