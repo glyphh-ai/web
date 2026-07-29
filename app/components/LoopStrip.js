@@ -1,32 +1,27 @@
 import ExpandableShot from './ExpandableShot';
 
 /**
- * LoopStrip — the Layouts section: one Layout sets the whole job. Real shot
- * of the Layout editor (/screen-shots/glyphh-layouts.png; swap the file to
- * refresh) — apps on a grid plus the loop & model binding.
+ * LoopStrip — the Loops section, the heart of the story: how agents run a
+ * job. Real shot of the loop editor (/screen-shots/glyphh-custom-apps.png;
+ * swap the file to refresh) — the Rotor loop's roles, model slots, and graph.
  */
 
 export default function LoopStrip() {
   return (
-    <section className="loopstrip" id="layouts">
+    <section className="loopstrip" id="loops">
       <div className="container">
-        <div className="section-label reveal">{'{'} <span className="accent">LAYOUTS</span> {'}'}</div>
-        <h2 className="section-title reveal">One Layout sets the whole job.</h2>
+        <div className="section-label reveal">{'{'} <span className="accent">LOOPS</span> {'}'}</div>
+        <h2 className="section-title reveal">It starts with a loop.</h2>
         <p className="section-subtitle reveal">
-          The apps on screen and how they&apos;re arranged. The agent workflow
-          that loads. Which models fill each slot — frontier or open-weight —
-          and which connections your agents can use. Saved together, named
-          after the job.
-        </p>
-        <p className="section-subtitle reveal">
-          Your Dev Layout: files, editor, terminal — Plan &amp; Build, Fable
-          planning, Mistral building. Your Marketing Layout: the same
-          workflow, restaffed — Fable and Gemini — with your inbox and
-          analytics up instead.
+          A loop is how your agents run a job: roles in a circuit, each role a
+          model slot you fill. A planner writes the plan, an architect splits
+          it into work packets, workers execute in parallel — Fable plans,
+          GPT architects, Mistral builds. Swap any slot. See exactly who did
+          what.
         </p>
 
         <div className="reveal">
-          <ExpandableShot src="/screen-shots/glyphh-layouts.png" alt="The Layout editor — apps arranged on a grid, and the loop and models the Layout loads" />
+          <ExpandableShot src="/screen-shots/glyphh-custom-apps.png" alt="The loop editor — the Rotor loop's planner, architect, and worker slots, with the models that fill them" />
         </div>
       </div>
     </section>

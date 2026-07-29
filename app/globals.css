@@ -4612,7 +4612,20 @@ footer > .container { position: relative; z-index: 1; }
 }
 
 /* ── Section rhythm ── */
-.loopstrip, .cowork, .controls, .switchstrip, .ghostmode { padding: 6.5rem 0; }
+.loopstrip, .cowork, .controls, .switchstrip, .ghostmode, .layouts, .release { padding: 6.5rem 0; }
+
+/* ── Release: the published URL is the section's visual ── */
+.release-url {
+  display: flex; align-items: center; gap: 0.6rem; justify-content: center;
+  width: fit-content; margin: 2rem auto 1.25rem;
+  font-family: var(--font-mono, monospace); font-size: 1.25rem; font-weight: 700;
+  color: var(--white);
+  padding: 0.9rem 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.release-lock { font-size: 1rem; opacity: 0.7; }
 
 /* ── Ghost mode: the ⌘⇧G keycaps are the section's visual ── */
 .ghost-keys { display: flex; gap: 0.6rem; justify-content: center; margin: 2rem 0 1.25rem; }

@@ -9,16 +9,16 @@ const faqs = [
     a: 'A new class of desktop agent for Mac and Windows. Every task needs the right agents, workflow, and apps — Glyphh Desktop combines all three into Layouts you switch instantly. Your agents do real work — a deck, a brief, a batch of replies, shipped code — in the apps open beside them, on models you choose.',
   },
   {
+    q: 'What are loops?',
+    a: 'How your agents run a job: roles in a circuit — a planner, an architect, workers — each role a model slot you fill with a frontier or open-weight model. Loops come built in, you can create your own, and you can see exactly who did what.',
+  },
+  {
     q: 'What is a Layout?',
-    a: 'A job’s whole setup, saved: which apps are on screen and how they’re arranged, which agent workflow loads, which models fill each slot — frontier or open-weight — and which connections your agents can use. Switch Layouts and all of it switches at once.',
+    a: 'A job’s whole setup, saved: which apps are on screen and how they’re arranged, which loop loads, which models fill its slots, and which connections your agents can use. Switch Layouts and all of it switches at once.',
   },
   {
     q: 'What can it actually do?',
-    a: 'Anything that spans the tools you already use: read a Drive folder and build slides, digest your inbox and Slack every morning, update a sheet from Stripe, draft replies for your approval. One-off or on a schedule.',
-  },
-  {
-    q: 'What are loops?',
-    a: 'The agent workflow inside a Layout. A frontier model plans the job, open-weight models do the heavy lifting, and the result comes back checked. Loops come built in — you can see exactly who did what.',
+    a: 'Anything that spans the tools you already use: read a Drive folder and build slides, digest your inbox and Slack every morning, update a sheet from Stripe, draft replies for your approval, build and publish a live app. One-off or on a schedule.',
   },
   {
     q: 'What is ghost mode?',
