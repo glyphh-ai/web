@@ -1613,70 +1613,6 @@ body {
   }
 }
 
-/* ── Screenshots — alternating rows, hero-style frame on a purple wash ── */
-.shots {
-  padding: 6rem 0;
-}
-.shots-list {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(3rem, 7vw, 6rem);
-  margin-top: 3.5rem;
-}
-.shot-row {
-  display: flex;
-  align-items: center;
-  gap: clamp(2rem, 5vw, 5rem);
-}
-.shot-row-rev {
-  flex-direction: row-reverse;
-}
-.shot-frame {
-  position: relative;
-  flex: 1 1 58%;
-  min-width: 0;
-  display: block;
-  width: 100%;
-  text-align: left;
-  border: none;
-  cursor: pointer;
-  /* Hairline frame — the white ring reads as a border, so keep it whisper-thin. */
-  padding: 2px;
-  background: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 24px 60px -28px rgba(255, 255, 255, 0.25);
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease;
-}
-/* Slick, static gloss — a diagonal sheen + a soft top-edge highlight laid over
-   the green frame. No keyframes; just a layered gradient that reads as glass. */
-.shot-frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0) 42%),
-    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.22), transparent 60%);
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-.shot-frame:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 36px 84px -26px rgba(255, 255, 255, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.65);
-}
-.shot-inner {
-  position: relative;
-  display: block;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--surface);
-}
-.shot-inner img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
 .shot-expand {
   position: absolute;
   top: clamp(0.6rem, 1.1vw, 0.85rem);
@@ -1693,10 +1629,6 @@ body {
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 0.2s ease, transform 0.2s ease;
-}
-.shot-frame:hover .shot-expand {
-  opacity: 1;
-  transform: scale(1);
 }
 
 /* Lightbox — click a shot to blow it up */
@@ -1745,30 +1677,6 @@ body {
 .shot-lightbox-close:hover {
   background: #fff;
   transform: scale(1.08);
-}
-.shot-copy {
-  flex: 1 1 42%;
-  min-width: 0;
-}
-.shot-copy h3 {
-  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
-  line-height: 1.15;
-  margin: 0 0 0.75rem;
-}
-.shot-copy p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text-2);
-  margin: 0;
-}
-@media (max-width: 860px) {
-  .shot-row,
-  .shot-row-rev {
-    flex-direction: column;
-  }
-  .shot-copy {
-    flex-basis: auto;
-  }
 }
 .yosupdip-section {
   padding: 4rem 0 6rem;
