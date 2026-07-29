@@ -13,9 +13,14 @@ import { createPortal } from 'react-dom';
 export default function ExpandableShot({ src, alt, eager = false, poster }) {
   const [open, setOpen] = useState(false);
   const isVideo = /\.(mp4|webm)(\?|$)/i.test(src);
-  // Native `loop` covers the normal path; if playback ever stalls or ends
-  // instead (cached-stub errors, servers without range support), restart.
+  // Native `loop` covers the normal path, but Safari won't wrap (or even end)
+  // when the file host lacks byte-range support — so a timeupdate watchdog
+  // wraps to the start just before the final frame, in every browser.
   const restart = (e) => { const el = e.currentTarget; el.currentTime = 0; el.play().catch(() => {}); };
+  const wrap = (e) => {
+    const el = e.currentTarget;
+    if (el.duration && el.currentTime > el.duration - 0.35) restart(e);
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -29,7 +34,7 @@ export default function ExpandableShot({ src, alt, eager = false, poster }) {
       <button className="dv-shot" onClick={() => setOpen(true)} aria-label={`Expand: ${alt}`}>
         <span className="dv-shot-inner">
           {isVideo ? (
-            <video src={src} poster={poster} autoPlay muted loop playsInline aria-label={alt} onEnded={restart} />
+            <video src={src} poster={poster} autoPlay muted loop playsInline aria-label={alt} onEnded={restart} onTimeUpdate={wrap} />
           ) : (
             <img src={src} alt={alt} {...(eager ? { fetchPriority: 'high' } : { loading: 'lazy' })} />
           )}
