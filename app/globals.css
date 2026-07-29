@@ -4612,7 +4612,7 @@ footer > .container { position: relative; z-index: 1; }
 }
 
 /* ── Section rhythm ── */
-.loopstrip, .cowork, .controls, .switchstrip, .ghostmode, .layouts, .release { padding: 6.5rem 0; }
+.loopstrip, .cowork, .controls, .switchstrip, .ghostmode, .layouts, .release, .research-band { padding: 6.5rem 0; }
 
 /* ── Release: the published URL is the section's visual ── */
 .release-url {

@@ -7,16 +7,16 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 
 export const metadata = {
   metadataBase: new URL('https://glyphh.ai'),
-  title: 'Glyphh — AI Research & Development',
-  description: 'Glyphh is an AI research and development company working on vector-symbolic architectures, hyperdimensional computing, memory systems, and agentic runtimes. Everything we build is open source.',
+  title: 'Glyphh — A new class of desktop agent',
+  description: 'Every task needs the right Agents, Workflow and Apps. Glyphh Desktop combines all three into Layouts you switch instantly — built on open research, all of it open source.',
   icons: {
     icon: [{ url: '/glyphh-mascot-square-black.png', type: 'image/png' }],
     shortcut: '/glyphh-mascot-square-black.png',
     apple: '/glyphh-mascot-square-black.png',
   },
   openGraph: {
-    title: 'Glyphh — AI Research & Development',
-    description: 'Research at the frontier: vector-symbolic architectures, hyperdimensional computing, memory systems, and agentic runtimes — all open source at github.com/glyphh-ai.',
+    title: 'Glyphh — A new class of desktop agent',
+    description: 'Every task needs the right Agents, Workflow and Apps. Glyphh Desktop combines all three into Layouts you switch instantly — built on open research at github.com/glyphh-ai.',
     url: 'https://glyphh.ai',
     siteName: 'Glyphh',
     type: 'website',
@@ -24,8 +24,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Glyphh — AI Research & Development',
-    description: 'Research at the frontier: vector-symbolic architectures, hyperdimensional computing, memory systems, and agentic runtimes — all open source at github.com/glyphh-ai.',
+    title: 'Glyphh — A new class of desktop agent',
+    description: 'Every task needs the right Agents, Workflow and Apps. Glyphh Desktop combines all three into Layouts you switch instantly — built on open research at github.com/glyphh-ai.',
   },
 };
 

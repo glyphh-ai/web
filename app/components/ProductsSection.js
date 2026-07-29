@@ -20,27 +20,11 @@ export default function ProductsSection() {
     <section className="prods" id="products">
       <div className="container">
         <div className="section-label">{'{'} <span className="accent">PRODUCTS</span> {'}'}</div>
-        <h2 className="section-title">Research you can run</h2>
+        <h2 className="section-title">Two ways to run it</h2>
         <p className="section-sub">
-          Every product is built directly on the research — and stays open
-          source, all the way down.
+          The same agents, Layouts, and governance — in a desktop workspace,
+          or in the terminal for people who live there.
         </p>
-        {/* The open-source banner leads the section, above the products. */}
-        <div className="prod-graphic reveal">
-          <div className="pg-head"><span className="pg-dot" aria-hidden="true" /> {'{'} open source {'}'}</div>
-          <div className="pg-stage" aria-hidden="true">
-            <div className="pg-orbit pg-orbit-a">
-              <span className="pg-node" style={{ top: '-5px', left: '50%' }} />
-              <span className="pg-node" style={{ bottom: '12%', right: '-5px' }} />
-              <span className="pg-node" style={{ bottom: '12%', left: '-5px' }} />
-            </div>
-            <div className="pg-orbit pg-orbit-b" />
-            <div className="pg-glow" />
-            <img src="/glyphh-mascot-square-black.png" alt="" className="pg-mascot" width="112" height="112" />
-          </div>
-          <p className="pg-cap">Every product is built on the research — and open source, all the way down.</p>
-          <a href="/research" className="pg-link">See the research →</a>
-        </div>
 
         <div className="prods-grid">
           {PRODUCTS.map((p) => {
@@ -73,6 +57,24 @@ export default function ProductsSection() {
             <span className="btn-label">See pricing</span>
             <span className="btn-fill"></span>
           </a>
+        </div>
+
+        {/* The open-source banner closes the section as credibility, after
+            the products — the research band below picks the thread up. */}
+        <div className="prod-graphic reveal">
+          <div className="pg-head"><span className="pg-dot" aria-hidden="true" /> {'{'} open source {'}'}</div>
+          <div className="pg-stage" aria-hidden="true">
+            <div className="pg-orbit pg-orbit-a">
+              <span className="pg-node" style={{ top: '-5px', left: '50%' }} />
+              <span className="pg-node" style={{ bottom: '12%', right: '-5px' }} />
+              <span className="pg-node" style={{ bottom: '12%', left: '-5px' }} />
+            </div>
+            <div className="pg-orbit pg-orbit-b" />
+            <div className="pg-glow" />
+            <img src="/glyphh-mascot-square-black.png" alt="" className="pg-mascot" width="112" height="112" />
+          </div>
+          <p className="pg-cap">Every product is built on the research — and open source, all the way down.</p>
+          <a href="/research" className="pg-link">See the research →</a>
         </div>
       </div>
     </section>
