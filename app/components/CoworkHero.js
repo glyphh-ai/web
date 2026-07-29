@@ -36,7 +36,7 @@ export default function CoworkHero() {
       </div>
 
       <div className="hero-stage">
-        <ExpandableShot src="/screen-shots/glyphh-hero.mp4" poster="/screen-shots/glyphh-hero.png" alt="The Glyphh Desktop workspace — your apps open beside the agent" eager />
+        <ExpandableShot src="/screen-shots/glyphh-hero.mp4?v=2" poster="/screen-shots/glyphh-hero.png" alt="The Glyphh Desktop workspace — your apps open beside the agent" eager />
       </div>
     </section>
   );

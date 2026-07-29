@@ -12,7 +12,10 @@ import { createPortal } from 'react-dom';
  */
 export default function ExpandableShot({ src, alt, eager = false, poster }) {
   const [open, setOpen] = useState(false);
-  const isVideo = /\.(mp4|webm)$/i.test(src);
+  const isVideo = /\.(mp4|webm)(\?|$)/i.test(src);
+  // Native `loop` covers the normal path; if playback ever stalls or ends
+  // instead (cached-stub errors, servers without range support), restart.
+  const restart = (e) => { const el = e.currentTarget; el.currentTime = 0; el.play().catch(() => {}); };
 
   useEffect(() => {
     if (!open) return;
@@ -26,7 +29,7 @@ export default function ExpandableShot({ src, alt, eager = false, poster }) {
       <button className="dv-shot" onClick={() => setOpen(true)} aria-label={`Expand: ${alt}`}>
         <span className="dv-shot-inner">
           {isVideo ? (
-            <video src={src} poster={poster} autoPlay muted loop playsInline aria-label={alt} />
+            <video src={src} poster={poster} autoPlay muted loop playsInline aria-label={alt} onEnded={restart} />
           ) : (
             <img src={src} alt={alt} {...(eager ? { fetchPriority: 'high' } : { loading: 'lazy' })} />
           )}

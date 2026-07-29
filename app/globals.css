@@ -5301,6 +5301,10 @@ footer > .container { position: relative; z-index: 1; }
   margin-top: clamp(1.6rem, 3vw, 2.6rem);
   border-radius: 12px;
   box-shadow: 0 24px 60px -28px rgba(255, 255, 255, 0.25);
+  /* 15% wider than the column, centered, never past the viewport edge. */
+  width: min(115%, calc(100vw - 2.5rem));
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 .dv-shot-inner {
   display: block;
