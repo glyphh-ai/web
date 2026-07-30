@@ -6,15 +6,23 @@ import { styledText } from './cmd-style';
 const faqs = [
   {
     q: 'What is Glyphh Desktop?',
-    a: 'An AI co-worker that lives on your desktop and follows you everywhere you work. Ask for real work — a deck, a brief, a batch of replies — and it plans the job, does it across your connected tools, and delivers the result. You decide which models think, what it can touch, and what needs your approval.',
-  },
-  {
-    q: 'What can it actually do?',
-    a: 'Anything that spans the tools you already use: read a Drive folder and build slides, digest your inbox and Slack every morning, update a sheet from Stripe, draft replies for your approval. One-off or on a schedule.',
+    a: 'A new class of desktop agent for Mac and Windows. Every task needs the right agents, workflow, and apps — Glyphh Desktop combines all three into Layouts you switch instantly. Your agents do real work — a deck, a brief, a batch of replies, shipped code — in the apps open beside them, on models you choose.',
   },
   {
     q: 'What are loops?',
-    a: 'How Glyphh runs your work. A frontier model plans the job, open-weight models do the heavy lifting, and the result comes back checked. Loops come built in — you can see exactly who did what.',
+    a: 'How your agents run a job: roles in a circuit — a planner, an architect, workers — each role a model slot you fill with a frontier or open-weight model. Loops come built in, you can create your own, and you can see exactly who did what.',
+  },
+  {
+    q: 'What is a Layout?',
+    a: 'A job’s whole setup, saved: which apps are on screen and how they’re arranged, which loop loads, which models fill its slots, and which connections your agents can use. Switch Layouts and all of it switches at once.',
+  },
+  {
+    q: 'What can it actually do?',
+    a: 'Anything that spans the tools you already use: read a Drive folder and build slides, digest your inbox and Slack every morning, update a sheet from Stripe, draft replies for your approval, build and publish a live app. One-off or on a schedule.',
+  },
+  {
+    q: 'What is ghost mode?',
+    a: 'Hit ⌘⇧G in any app — a Meet, Slack, your browser — and your agent overlays it with full context and your work ready to pull up. Esc puts you right back where you were.',
   },
   {
     q: 'Which models can I use?',

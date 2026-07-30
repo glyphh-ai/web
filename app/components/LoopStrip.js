@@ -1,9 +1,9 @@
 import ExpandableShot from './ExpandableShot';
 
 /**
- * LoopStrip — "The right loop for every job." One real 16:9 product shot
- * (/screen-shots/glyphh-custom-apps.png; swap the file to refresh). The old
- * abstract mock (gradient canvas, project board, floating model flow) is gone.
+ * LoopStrip — the Loops section, the heart of the story: how agents run a
+ * job. Real shot of the loop editor (/screen-shots/glyphh-custom-apps.png;
+ * swap the file to refresh) — the Rotor loop's roles, model slots, and graph.
  */
 
 export default function LoopStrip() {
@@ -11,16 +11,17 @@ export default function LoopStrip() {
     <section className="loopstrip" id="loops">
       <div className="container">
         <div className="section-label reveal">{'{'} <span className="accent">LOOPS</span> {'}'}</div>
-        <h2 className="section-title reveal">The right loop for every job.</h2>
-        <p className="ls-sub reveal">
-          Not one loop for all work. Every job picks its loop — and the whole
-          app reorients around it: the models that think, the tools it may
-          touch, the workspace it opens. Your best way of working, saved and
-          repeatable.
+        <h2 className="section-title reveal">It starts with a loop.</h2>
+        <p className="section-subtitle reveal">
+          A loop is how your agents run a job: roles in a circuit, each role a
+          model slot you fill. A planner writes the plan, an architect splits
+          it into work packets, workers execute in parallel — Fable plans,
+          GPT architects, Mistral builds. Swap any slot. See exactly who did
+          what.
         </p>
 
         <div className="reveal">
-          <ExpandableShot src="/screen-shots/glyphh-custom-apps.png" alt="A loop reorienting the Glyphh workspace — models, tools, and layout per job" />
+          <ExpandableShot src="/screen-shots/glyphh-custom-apps.png" alt="The loop editor — the Rotor loop's planner, architect, and worker slots, with the models that fill them" />
         </div>
       </div>
     </section>

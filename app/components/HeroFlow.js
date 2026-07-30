@@ -3,14 +3,23 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * HeroFlow — the home hero backdrop. Flowing data streams: lines bundled at the
- * left fan out to the right and dissolve into scattered particles (a
- * generative-AI look). The strokes are animated dashes so the streams flow;
- * bright pulses ride a few of them; end clusters twinkle. Purple palette, additive
- * glow. Pure 2D canvas, no deps, aria-hidden. Corner rays sit on top.
+ * HeroFlow — the flowing-data-streams hero backdrop. Animated dashed strokes
+ * with bright pulses riding a few of them and twinkling scatter clusters at
+ * the ends. Pure 2D canvas, no deps, aria-hidden.
+ *
+ * One effect, three orientations — each surface tells the same visual story
+ * in its own pattern:
+ *   mode="fan"      (default, home) — bundled at the left, fanning right.
+ *   mode="converge" (Desktop)       — streams from BOTH edges converging on
+ *                                     the center: many sources, one workspace.
+ *   mode="fall"     (CLI)           — bundled at the top, cascading down like
+ *                                     terminal output.
+ * `colors` tints the strokes/scatter (rgb triplet strings), `pulseRGB` the
+ * riding highlight; defaults are the home purple set, so existing call sites
+ * render exactly as before.
  */
 
-const COLORS = ['179, 107, 251', '140, 59, 242', '236, 72, 153']; // light-purple / purple / pink
+const DEFAULT_COLORS = ['179, 107, 251', '140, 59, 242', '236, 72, 153']; // light-purple / purple / pink
 const WHITE = '255, 255, 255';
 const N = 28; // number of streams
 
@@ -23,7 +32,12 @@ function mulberry(seed) {
   };
 }
 
-export default function HeroFlow() {
+export default function HeroFlow({
+  mode = 'fan',
+  colors = DEFAULT_COLORS,
+  pulseRGB = '255, 236, 180',
+  seed = 1337,
+} = {}) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -32,14 +46,20 @@ export default function HeroFlow() {
     const ctx = canvas.getContext('2d');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // stream params, width-independent (fractions), built once
-    const rand = mulberry(1337);
-    const streams = Array.from({ length: N }, () => {
-      const y0 = 0.5 + (rand() - 0.5) * 0.14;         // bundled near center-left
-      const endX = 0.42 + rand() * 0.56;
-      const y1 = 0.5 + (rand() - 0.5) * 0.95;          // fanned out on the right
+    // stream params, size-independent (fractions), built once. The rand()
+    // call ORDER is identical across modes so a given seed produces the same
+    // family of streams whatever the orientation.
+    const rand = mulberry(seed);
+    const streams = Array.from({ length: N }, (_, i) => {
+      const y0 = 0.5 + (rand() - 0.5) * 0.14;          // bundled near the origin edge
+      const endRaw = rand();
+      // fan/fall run most of the way across; converge stops mid-canvas so the
+      // two sides' endpoints cluster around the center.
+      const endX = mode === 'converge' ? 0.34 + endRaw * 0.28 : 0.42 + endRaw * 0.56;
+      const y1 = 0.5 + (rand() - 0.5) * 0.95;          // fanned out at the far end
       return {
         y0, endX, y1,
+        mirror: mode === 'converge' && i % 2 === 1,     // converge: odd streams enter from the far edge
         alpha: 0.12 + rand() * 0.24,
         tint: rand() < 0.72 ? 0 : rand() < 0.6 ? 1 : 2,
         dashSpeed: 0.02 + rand() * 0.05,
@@ -69,16 +89,29 @@ export default function HeroFlow() {
     }
     resize();
 
-    // cubic bezier point for a stream at parameter t (0..1)
-    function pointAt(S, t) {
-      const ex = S.endX * w;
-      const p0x = 0, p0y = S.y0 * h;
-      const p1x = ex * 0.42, p1y = S.y0 * h;
-      const p2x = ex * 0.72, p2y = S.y1 * h;
-      const p3x = ex, p3y = S.y1 * h;
+    // Map a unit-space point (run ∈ 0..1 along the flow axis, fan ∈ 0..1
+    // across it) to canvas pixels for the current orientation.
+    function mapPt(S, run, fan) {
+      if (mode === 'fall') return [fan * w, run * h];
+      const x = S.mirror ? (1 - run) * w : run * w;
+      return [x, fan * h];
+    }
+
+    /** The stream's 4 cubic control points in canvas space. */
+    function ctrl(S) {
+      return [
+        mapPt(S, 0, S.y0),
+        mapPt(S, S.endX * 0.42, S.y0),
+        mapPt(S, S.endX * 0.72, S.y1),
+        mapPt(S, S.endX, S.y1),
+      ];
+    }
+
+    // cubic bezier point at parameter t (0..1)
+    function pointAt(P, t) {
       const u = 1 - t;
-      const x = u * u * u * p0x + 3 * u * u * t * p1x + 3 * u * t * t * p2x + t * t * t * p3x;
-      const y = u * u * u * p0y + 3 * u * u * t * p1y + 3 * u * t * t * p2y + t * t * t * p3y;
+      const x = u * u * u * P[0][0] + 3 * u * u * t * P[1][0] + 3 * u * t * t * P[2][0] + t * t * t * P[3][0];
+      const y = u * u * u * P[0][1] + 3 * u * u * t * P[1][1] + 3 * u * t * t * P[2][1] + t * t * t * P[3][1];
       return [x, y];
     }
 
@@ -94,13 +127,13 @@ export default function HeroFlow() {
       ctx.lineCap = 'round';
       for (let i = 0; i < streams.length; i++) {
         const S = streams[i];
-        const ex = S.endX * w;
+        const P = ctrl(S);
         ctx.setLineDash([2, 5]);
         ctx.lineDashOffset = reduced ? 0 : -(now * S.dashSpeed) - S.dashPhase;
-        ctx.strokeStyle = `rgba(${COLORS[S.tint]}, ${S.alpha})`;
+        ctx.strokeStyle = `rgba(${colors[S.tint]}, ${S.alpha})`;
         ctx.beginPath();
-        ctx.moveTo(0, S.y0 * h);
-        ctx.bezierCurveTo(ex * 0.42, S.y0 * h, ex * 0.72, S.y1 * h, ex, S.y1 * h);
+        ctx.moveTo(P[0][0], P[0][1]);
+        ctx.bezierCurveTo(P[1][0], P[1][1], P[2][0], P[2][1], P[3][0], P[3][1]);
         ctx.stroke();
       }
       ctx.setLineDash([]);
@@ -109,23 +142,28 @@ export default function HeroFlow() {
       ctx.globalCompositeOperation = 'lighter';
       for (let i = 0; i < streams.length; i++) {
         const S = streams[i];
-        const ex = S.endX * w, ey = S.y1 * h;
+        const P = ctrl(S);
+        const ex = P[3][0], ey = P[3][1];
 
         for (const d of S.scatter) {
           const tw = reduced ? 0.8 : 0.45 + 0.55 * Math.sin(now * 0.0018 * d.tr + d.tw);
-          const col = d.tint === 3 ? WHITE : COLORS[d.tint];
+          const col = d.tint === 3 ? WHITE : colors[d.tint];
+          // Scatter trails the flow direction: past the end for fan, back
+          // toward the entering edge for converge, downward for fall.
+          const sx = mode === 'fall' ? d.dy : (S.mirror ? -d.dx : d.dx);
+          const sy = mode === 'fall' ? d.dx : d.dy;
           ctx.fillStyle = `rgba(${col}, ${d.a * tw})`;
           ctx.beginPath();
-          ctx.arc(ex + d.dx, ey + d.dy, d.s / 2, 0, Math.PI * 2);
+          ctx.arc(ex + sx, ey + sy, d.s / 2, 0, Math.PI * 2);
           ctx.fill();
         }
 
         if (S.pulse && !reduced) {
           const t = (now * S.pSpeed + S.pPhase) % 1;
-          const [x, y] = pointAt(S, t);
+          const [x, y] = pointAt(P, t);
           const g = Math.sin(t * Math.PI); // fade in/out along the run
-          ctx.fillStyle = `rgba(255, 236, 180, ${0.9 * g})`;
-          ctx.shadowColor = `rgba(${COLORS[S.tint]}, 0.9)`;
+          ctx.fillStyle = `rgba(${pulseRGB}, ${0.9 * g})`;
+          ctx.shadowColor = `rgba(${colors[S.tint]}, 0.9)`;
           ctx.shadowBlur = 10;
           ctx.beginPath();
           ctx.arc(x, y, 1.7, 0, Math.PI * 2);
@@ -160,7 +198,7 @@ export default function HeroFlow() {
       window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', onVis);
     };
-  }, []);
+  }, [mode, colors, pulseRGB, seed]);
 
   return (
     <div className="hero-flow" aria-hidden="true">

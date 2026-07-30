@@ -3600,6 +3600,18 @@ footer > .container { position: relative; z-index: 1; }
   overflow: hidden;
 }
 .rhero-glow { display: none; }
+/* Product-page heroes share the home hero's STYLING (mascot, badge, title
+   scale + accent, sub, ticker) with their own visual effect behind them
+   (particles + product video on Desktop, the terminal demo on CLI). */
+.rhero-product {
+  display: flex;
+  flex-direction: column;
+  padding: 8.5rem 0 4.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.rhero-product .rhero-ticker { margin-top: 2.6rem; }
+.rhero-product .hero-stage { margin-top: 3.2rem; }
 /* Home hero backdrop — flowing data streams with corner rays layered on top. */
 .hero-flow,
 .hero-rays {
@@ -4612,7 +4624,31 @@ footer > .container { position: relative; z-index: 1; }
 }
 
 /* ── Section rhythm ── */
-.loopstrip, .cowork, .controls { padding: 6.5rem 0; }
+.loopstrip, .cowork, .controls, .switchstrip, .ghostmode, .layouts, .release, .research-band { padding: 6.5rem 0; }
+
+/* ── Release: the published URL is the section's visual ── */
+.release-url {
+  display: flex; align-items: center; gap: 0.6rem; justify-content: center;
+  width: fit-content; margin: 2rem auto 1.25rem;
+  font-family: var(--font-mono, monospace); font-size: 1.25rem; font-weight: 700;
+  color: var(--white);
+  padding: 0.9rem 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.release-lock { font-size: 1rem; opacity: 0.7; }
+
+/* ── Ghost mode: the ⌘⇧G keycaps are the section's visual ── */
+.ghost-keys { display: flex; gap: 0.6rem; justify-content: center; margin: 2rem 0 1.25rem; }
+.ghost-key {
+  font-size: 1.5rem; font-weight: 700; line-height: 1;
+  color: var(--white);
+  padding: 1rem 1.2rem; min-width: 3.5rem; text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.18); border-bottom-width: 3px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
 
 /* ── Cowork: the desktop mid-sequence (overlay → click → workspace) ── */
 .cw-canvas { min-height: 560px; }

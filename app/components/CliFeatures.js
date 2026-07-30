@@ -7,17 +7,17 @@ const FEATURES = [
     ),
   },
   {
-    k: 'Permission modes',
-    d: 'ask · auto · plan · read-only. Reads run free; every shell command, write, and edit prompts — approve once, allow for the session, or let it rip in auto. Shift-tab cycles it live.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-    ),
-  },
-  {
     k: 'Your loops & models',
     d: 'The same governed loops and per-role models as Desktop — a frontier planner, an open-weight worker, whatever your org allows. Switch models with /use, loops with /loop, mid-session.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.3" /><polyline points="21 3 21 9 15 9" /></svg>
+    ),
+  },
+  {
+    k: 'Permission modes',
+    d: 'ask · auto · plan · read-only. Reads run free; every shell command, write, and edit prompts — approve once, allow for the session, or let it rip in auto. Shift-tab cycles it live.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
     ),
   },
   {
@@ -54,8 +54,8 @@ export default function CliFeatures() {
           </div>
           <h2 className="section-title">Everything Desktop can do<span className="dot">.</span> Without leaving the shell<span className="dot">.</span></h2>
           <p className="section-sub">
-            One binary. The agent, your governance, and reach into the machine —
-            all where developers already live.
+            One binary: the agent, your loops, your governance — where
+            developers already live.
           </p>
         </div>
 

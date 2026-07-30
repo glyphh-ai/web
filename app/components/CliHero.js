@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import HeroDemo from './HeroDemo';
+import HeroFlow from './HeroFlow';
 
 /**
  * CliHero — the Glyphh CLI hero.
@@ -10,9 +11,15 @@ import HeroDemo from './HeroDemo';
  * running Glyphh TUI — a typed prompt, streamed answer, tool receipts, and the
  * status strip (permission mode, the loop's models, the live token readout).
  * The two-phase mockup itself lives in <HeroDemo />.
+ *
+ * Backdrop: the home hero's stream effect in its CLI orientation — streams
+ * CASCADING top-down like terminal output, tinted teal/emerald with a thread
+ * of the brand purple.
  */
 
 const INSTALL = 'npm i -g @glyphh-ai/cli';
+
+const CLI_FLOW = ['94, 234, 212', '52, 211, 153', '179, 107, 251']; // teal / emerald / brand purple
 
 export default function CliHero() {
   const [copied, setCopied] = useState(false);
@@ -26,18 +33,26 @@ export default function CliHero() {
   };
 
   return (
-    <section className="hero hero-stacked">
-      <div className="hero-copy hero-copy-center">
+    <section className="rhero rhero-product">
+      <HeroFlow mode="fall" colors={CLI_FLOW} pulseRGB="190, 242, 255" seed={4242} />
+      <div className="rhero-inner container">
+        <div className="rhero-copy">
+        <img
+          src="/glyphh-mascot-square.png"
+          alt=""
+          className="rhero-mascot"
+          width="88"
+          height="88"
+        />
         <div className="hero-badge hero-badge-cli">
           <span className="badge-dot" aria-hidden="true"></span>
           Introducing Glyphh CLI · the agent in your terminal
         </div>
-        <h1 className="hero-title">The whole agent<span className="dot">.</span> In your terminal<span className="dot">.</span></h1>
-        <p className="hero-sub-big">
-          The same engine that drives Glyphh Desktop — now a full-screen TUI in
-          your shell. Real local tools, your loops and models, permission modes,
-          and machine-reach. Scriptable, headless, metered through the gateway.
-          No API keys to wrangle.
+        <h1 className="rhero-title">The whole agent<span className="dot">.</span> <span className="rhero-accent">In your terminal<span className="dot">.</span></span></h1>
+        <p className="rhero-sub">
+          The same engine as Glyphh Desktop, full-screen in your shell. Real
+          tools, your loops and models, your governance — scriptable, headless,
+          and no API keys to wrangle.
         </p>
 
         <button className={`cli-install ${copied ? 'copied' : ''}`} onClick={copy} type="button" aria-label="Copy install command">
@@ -52,7 +67,7 @@ export default function CliHero() {
           </span>
         </button>
 
-        <div className="hero-ctas">
+        <div className="hero-ctas rhero-ctas">
           <a href="#power" className="btn btn-primary btn-lg group">
             <span className="btn-label">See what it does</span>
             <span className="btn-fill"></span>
@@ -61,6 +76,7 @@ export default function CliHero() {
             <span className="btn-label">View on GitHub</span>
             <span className="btn-fill"></span>
           </a>
+        </div>
         </div>
       </div>
 

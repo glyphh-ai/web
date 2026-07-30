@@ -1,9 +1,8 @@
 import ExpandableShot from './ExpandableShot';
 
 /**
- * Cowork — "Where you work." One real 16:9 product shot
- * (/screen-shots/glyphh-workspace.png; swap the file to refresh). The old
- * animated mock (command overlay, Slack/Gmail/Calendar/Asana scenes) is gone.
+ * Cowork — "Watch the work happen." One real 16:9 product shot
+ * (/screen-shots/glyphh-workspace.png; swap the file to refresh).
  */
 
 export default function Cowork() {
@@ -11,13 +10,16 @@ export default function Cowork() {
     <section className="cowork" id="workspace">
       <div className="container">
         <div className="section-label reveal">{'{'} <span className="accent">WORKSPACE</span> {'}'}</div>
-        <h2 className="section-title reveal">Where you work.</h2>
-        <p className="cw-sub reveal">
-          One click builds the workspace — the agent always at your side.
+        <h2 className="section-title reveal">Your apps open beside the agent.</h2>
+        <p className="section-subtitle reveal">
+          Gmail, Slack, dashboards — anything with a page — opens as a panel
+          next to Glyphh. You navigate your day in the same window the agent
+          works in: watching it read the sheet and draft the email, steerable
+          at any moment, no alt-tabbing around it.
         </p>
 
         <div className="reveal">
-          <ExpandableShot src="/screen-shots/glyphh-workspace.png" alt="A Glyphh workspace — apps arranged beside the agent" />
+          <ExpandableShot src="/screen-shots/glyphh-workspace.png" alt="A Glyphh workspace — the agent working in Gmail and Calendar, open beside the chat" />
         </div>
       </div>
     </section>

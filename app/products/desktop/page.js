@@ -3,6 +3,10 @@ import Reveal from '../../components/Reveal';
 import CoworkHero from '../../components/CoworkHero';
 import Integrations from '../../components/Integrations';
 import LoopStrip from '../../components/LoopStrip';
+import Layouts from '../../components/Layouts';
+import SwitchStrip from '../../components/SwitchStrip';
+import ReleaseStrip from '../../components/ReleaseStrip';
+import GhostMode from '../../components/GhostMode';
 import DevLayout from '../../components/DevLayout';
 import Cowork from '../../components/Cowork';
 import Controls from '../../components/Controls';
@@ -13,8 +17,8 @@ import FinalCTA from '../../components/FinalCTA';
 import Footer from '../../components/Footer';
 
 export const metadata = {
-  title: 'Glyphh Desktop — The AI that follows you everywhere you work.',
-  description: 'Build a slide deck, clear your inbox, update a sheet, run the Monday report — all while you are on your standup, getting a coffee, or on your way in. Glyphh Desktop works across the apps you already use, and asks before anything risky.',
+  title: 'Glyphh Desktop — A new class of desktop agent for Mac & Windows',
+  description: 'Agents. Models. Apps. One workspace. Glyphh Desktop combines all three into Layouts you switch with one keystroke — code this hour, a PowerPoint and email the next, a live app by lunch.',
 };
 
 export default function GlyphhDesktopPage() {
@@ -23,11 +27,20 @@ export default function GlyphhDesktopPage() {
       <Reveal />
       <Nav />
       <CoworkHero />
+      {/* The story in the app's own order (mirrors the first-run tour):
+          1 Connections (real work behind the scenes) → 2 Apps (navigate
+          beside the agent) → 3 Loops (how work gets done) → 4 Layouts
+          (orient the workspace per job) → 5 Command center (one keystroke
+          to anywhere). Then Build → Release, Ghost mode, Governance. */}
       <Integrations />
-      <LoopStrip />
       <Cowork />
-      <Controls />
+      <LoopStrip />
+      <Layouts />
+      <SwitchStrip />
       <DevLayout />
+      <ReleaseStrip />
+      <GhostMode />
+      <Controls />
       <Pricing />
       <Download />
       <FAQ />
