@@ -17,12 +17,11 @@ export default function CoworkHero() {
           <span className="badge-dot" aria-hidden="true"></span>
           A new class of desktop agent · Mac &amp; Windows
         </div>
-        <h1 className="hero-title">Every task you do needs the right Agents, Workflow and Apps.</h1>
+        <h1 className="hero-title">One workspace where AI does real work.</h1>
         <p className="hero-sub-big">
-          Glyphh Desktop combines all three into Layouts you switch instantly
-          — each one sets what&apos;s on your screen, which agents run on which
-          models, and what they can reach. Code this hour, a PowerPoint and
-          email the next, a live app by lunch.
+          Your apps, your accounts, and an agent that acts in them — arranged
+          into Layouts you switch with one keystroke. Code this hour, a
+          PowerPoint and email the next, a live app by lunch.
         </p>
         <div className="hero-ctas">
           <a href="#download" className="btn btn-primary btn-lg group">
