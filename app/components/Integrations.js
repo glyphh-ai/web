@@ -92,10 +92,11 @@ export default function Integrations() {
   return (
     <section className="integrations" id="integrations">
       <div className="container">
-        <h2 className="section-title reveal">Works with every app you already use</h2>
+        <h2 className="section-title reveal">Connect your systems once. Glyphh does real work in them.</h2>
         <p className="section-subtitle reveal">
-          Connect Gmail, Slack, Drive and thousands more once — then any
-          Layout can reach them. You decide which.
+          Link Gmail, Slack, Drive and 3,500+ services — then just ask. The
+          agent acts in your actual accounts, behind the scenes, and asks
+          first when something&apos;s risky. You decide what it can reach.
         </p>
       </div>
       <div className="scroll-rows reveal">

@@ -27,17 +27,18 @@ export default function GlyphhDesktopPage() {
       <Reveal />
       <Nav />
       <CoworkHero />
-      {/* The heart of the story, in build order: Loops (the engine) →
-          Layouts (the container) → Switch (the motion) → Build → Release.
-          Then the supporting features: Workspace, Reach, Ghost mode,
-          Governance. */}
+      {/* The story in the app's own order (mirrors the first-run tour):
+          1 Connections (real work behind the scenes) → 2 Apps (navigate
+          beside the agent) → 3 Loops (how work gets done) → 4 Layouts
+          (orient the workspace per job) → 5 Command center (one keystroke
+          to anywhere). Then Build → Release, Ghost mode, Governance. */}
+      <Integrations />
+      <Cowork />
       <LoopStrip />
       <Layouts />
       <SwitchStrip />
       <DevLayout />
       <ReleaseStrip />
-      <Cowork />
-      <Integrations />
       <GhostMode />
       <Controls />
       <Pricing />
