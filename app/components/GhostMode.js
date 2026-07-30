@@ -1,6 +1,9 @@
+import ExpandableShot from './ExpandableShot';
+
 /**
- * GhostMode — the agent, summoned over any app. Text-only section (no
- * product shot yet): the ⌘⇧G keys are the visual.
+ * GhostMode — the agent, summoned over any app. One looping 16:9 product
+ * video (/screen-shots/glyphh-ghost.mp4; swap the file to refresh) under
+ * the ⌘⇧G keys, same treatment as the hero and release videos.
  */
 
 export default function GhostMode() {
@@ -19,6 +22,10 @@ export default function GhostMode() {
           context, your work ready to pull up. Esc, and you&apos;re back where
           you were.
         </p>
+
+        <div className="reveal">
+          <ExpandableShot src="/screen-shots/glyphh-ghost.mp4" alt="Ghost mode — the agent summoned as a translucent overlay over another app" />
+        </div>
       </div>
     </section>
   );
