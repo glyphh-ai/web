@@ -22,8 +22,8 @@ export default function ResearchHero() {
             A new class of desktop agent · Mac &amp; Windows
           </div>
           <h1 className="rhero-title">
-            Every task needs the right{' '}
-            <span className="rhero-accent">Agents, Workflow and Apps</span>.
+            Agents. Models. Apps.{' '}
+            <span className="rhero-accent">One workspace.</span>
           </h1>
           <p className="rhero-sub">
             Glyphh Desktop combines all three into Layouts you switch

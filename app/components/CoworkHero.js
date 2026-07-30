@@ -25,7 +25,7 @@ export default function CoworkHero() {
             <span className="badge-dot" aria-hidden="true"></span>
             A new class of desktop agent · Mac &amp; Windows
           </div>
-          <h1 className="rhero-title">Agents. Workflows. Apps. <span className="rhero-accent">One workspace.</span></h1>
+          <h1 className="rhero-title">Agents. Models. Apps. <span className="rhero-accent">One workspace.</span></h1>
           <p className="rhero-sub">
             Glyphh Desktop combines all three into Layouts you switch with one
             keystroke. Code this hour, a PowerPoint and email the next, a live

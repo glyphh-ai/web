@@ -18,7 +18,7 @@ import Footer from '../../components/Footer';
 
 export const metadata = {
   title: 'Glyphh Desktop — A new class of desktop agent for Mac & Windows',
-  description: 'Every task you do needs the right Agents, Workflow and Apps. Glyphh Desktop combines all three into Layouts you switch instantly — code this hour, a PowerPoint and email the next, a live app by lunch.',
+  description: 'Agents. Models. Apps. One workspace. Glyphh Desktop combines all three into Layouts you switch with one keystroke — code this hour, a PowerPoint and email the next, a live app by lunch.',
 };
 
 export default function GlyphhDesktopPage() {
