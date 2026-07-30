@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import HeroDemo from './HeroDemo';
+import HeroFlow from './HeroFlow';
 
 /**
  * CliHero — the Glyphh CLI hero.
@@ -10,9 +11,15 @@ import HeroDemo from './HeroDemo';
  * running Glyphh TUI — a typed prompt, streamed answer, tool receipts, and the
  * status strip (permission mode, the loop's models, the live token readout).
  * The two-phase mockup itself lives in <HeroDemo />.
+ *
+ * Backdrop: the home hero's stream effect in its CLI orientation — streams
+ * CASCADING top-down like terminal output, tinted teal/emerald with a thread
+ * of the brand purple.
  */
 
 const INSTALL = 'npm i -g @glyphh-ai/cli';
+
+const CLI_FLOW = ['94, 234, 212', '52, 211, 153', '179, 107, 251']; // teal / emerald / brand purple
 
 export default function CliHero() {
   const [copied, setCopied] = useState(false);
@@ -27,6 +34,7 @@ export default function CliHero() {
 
   return (
     <section className="rhero rhero-product">
+      <HeroFlow mode="fall" colors={CLI_FLOW} pulseRGB="190, 242, 255" seed={4242} />
       <div className="rhero-inner container">
         <div className="rhero-copy">
         <img

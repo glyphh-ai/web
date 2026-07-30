@@ -1,4 +1,4 @@
-import HeroParticles from './HeroParticles';
+import HeroFlow from './HeroFlow';
 import ExpandableShot from './ExpandableShot';
 
 /**
@@ -6,12 +6,18 @@ import ExpandableShot from './ExpandableShot';
  * product VIDEO (/screen-shots/glyphh-hero.mp4; swap the file to refresh —
  * same resolution as the old still, which stays on as the poster frame).
  * The old animated mock (gradient canvas, abstract deck, typing ask) is gone.
+ *
+ * Backdrop: the home hero's stream effect in its Desktop orientation —
+ * streams from both edges CONVERGING on the center (many sources, one
+ * workspace), tinted warmer than home (purple → pink → amber).
  */
+
+const DESKTOP_FLOW = ['179, 107, 251', '245, 158, 11', '236, 72, 153']; // purple / amber / pink
 
 export default function CoworkHero() {
   return (
     <section className="rhero rhero-product">
-      <HeroParticles />
+      <HeroFlow mode="converge" colors={DESKTOP_FLOW} seed={2025} />
       <div className="rhero-inner container">
         <div className="rhero-copy">
           <img
