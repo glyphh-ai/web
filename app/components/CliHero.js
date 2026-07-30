@@ -34,10 +34,9 @@ export default function CliHero() {
         </div>
         <h1 className="hero-title">The whole agent<span className="dot">.</span> In your terminal<span className="dot">.</span></h1>
         <p className="hero-sub-big">
-          The same engine that drives Glyphh Desktop — now a full-screen TUI in
-          your shell. Real local tools, your loops and models, permission modes,
-          and machine-reach. Scriptable, headless, metered through the gateway.
-          No API keys to wrangle.
+          The same engine as Glyphh Desktop, full-screen in your shell. Real
+          tools, your loops and models, your governance — scriptable, headless,
+          and no API keys to wrangle.
         </p>
 
         <button className={`cli-install ${copied ? 'copied' : ''}`} onClick={copy} type="button" aria-label="Copy install command">
