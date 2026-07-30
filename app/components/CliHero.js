@@ -26,14 +26,22 @@ export default function CliHero() {
   };
 
   return (
-    <section className="hero hero-stacked">
-      <div className="hero-copy hero-copy-center">
+    <section className="rhero rhero-product">
+      <div className="rhero-inner container">
+        <div className="rhero-copy">
+        <img
+          src="/glyphh-mascot-square.png"
+          alt=""
+          className="rhero-mascot"
+          width="88"
+          height="88"
+        />
         <div className="hero-badge hero-badge-cli">
           <span className="badge-dot" aria-hidden="true"></span>
           Introducing Glyphh CLI · the agent in your terminal
         </div>
-        <h1 className="hero-title">The whole agent<span className="dot">.</span> In your terminal<span className="dot">.</span></h1>
-        <p className="hero-sub-big">
+        <h1 className="rhero-title">The whole agent<span className="dot">.</span> <span className="rhero-accent">In your terminal<span className="dot">.</span></span></h1>
+        <p className="rhero-sub">
           The same engine as Glyphh Desktop, full-screen in your shell. Real
           tools, your loops and models, your governance — scriptable, headless,
           and no API keys to wrangle.
@@ -51,7 +59,7 @@ export default function CliHero() {
           </span>
         </button>
 
-        <div className="hero-ctas">
+        <div className="hero-ctas rhero-ctas">
           <a href="#power" className="btn btn-primary btn-lg group">
             <span className="btn-label">See what it does</span>
             <span className="btn-fill"></span>
@@ -60,6 +68,7 @@ export default function CliHero() {
             <span className="btn-label">View on GitHub</span>
             <span className="btn-fill"></span>
           </a>
+        </div>
         </div>
       </div>
 

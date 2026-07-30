@@ -3600,6 +3600,18 @@ footer > .container { position: relative; z-index: 1; }
   overflow: hidden;
 }
 .rhero-glow { display: none; }
+/* Product-page heroes share the home hero's STYLING (mascot, badge, title
+   scale + accent, sub, ticker) with their own visual effect behind them
+   (particles + product video on Desktop, the terminal demo on CLI). */
+.rhero-product {
+  display: flex;
+  flex-direction: column;
+  padding: 8.5rem 0 4.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.rhero-product .rhero-ticker { margin-top: 2.6rem; }
+.rhero-product .hero-stage { margin-top: 3.2rem; }
 /* Home hero backdrop — flowing data streams with corner rays layered on top. */
 .hero-flow,
 .hero-rays {

@@ -10,28 +10,44 @@ import ExpandableShot from './ExpandableShot';
 
 export default function CoworkHero() {
   return (
-    <section className="hero hero-stacked">
+    <section className="rhero rhero-product">
       <HeroParticles />
-      <div className="hero-copy hero-copy-center">
-        <div className="hero-badge">
-          <span className="badge-dot" aria-hidden="true"></span>
-          A new class of desktop agent · Mac &amp; Windows
-        </div>
-        <h1 className="hero-title">Agents. Workflows. Apps. One workspace.</h1>
-        <p className="hero-sub-big">
-          Glyphh Desktop combines all three into Layouts you switch with one
-          keystroke. Code this hour, a PowerPoint and email the next, a live
-          app by lunch.
-        </p>
-        <div className="hero-ctas">
-          <a href="#download" className="btn btn-primary btn-lg group">
-            <span className="btn-label">Download Now</span>
-            <span className="btn-fill"></span>
-          </a>
-          <a href="#layouts" className="btn btn-ghost btn-lg group">
-            <span className="btn-label">Watch It Switch</span>
-            <span className="btn-fill"></span>
-          </a>
+      <div className="rhero-inner container">
+        <div className="rhero-copy">
+          <img
+            src="/glyphh-mascot-square.png"
+            alt=""
+            className="rhero-mascot"
+            width="88"
+            height="88"
+          />
+          <div className="hero-badge">
+            <span className="badge-dot" aria-hidden="true"></span>
+            A new class of desktop agent · Mac &amp; Windows
+          </div>
+          <h1 className="rhero-title">Agents. Workflows. Apps. <span className="rhero-accent">One workspace.</span></h1>
+          <p className="rhero-sub">
+            Glyphh Desktop combines all three into Layouts you switch with one
+            keystroke. Code this hour, a PowerPoint and email the next, a live
+            app by lunch.
+          </p>
+          <div className="hero-ctas rhero-ctas">
+            <a href="#download" className="btn btn-primary btn-lg group">
+              <span className="btn-label">Download Now</span>
+              <span className="btn-fill"></span>
+            </a>
+            <a href="#layouts" className="btn btn-ghost btn-lg group">
+              <span className="btn-label">Watch It Switch</span>
+              <span className="btn-fill"></span>
+            </a>
+          </div>
+          <div className="rhero-ticker" aria-hidden="true">
+            <span>[ connections ]</span>
+            <span>[ apps ]</span>
+            <span>[ loops ]</span>
+            <span>[ layouts ]</span>
+            <span>[ command center ]</span>
+          </div>
         </div>
       </div>
 
