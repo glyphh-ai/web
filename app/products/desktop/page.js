@@ -6,7 +6,6 @@ import LoopStrip from '../../components/LoopStrip';
 import Layouts from '../../components/Layouts';
 import SwitchStrip from '../../components/SwitchStrip';
 import ReleaseStrip from '../../components/ReleaseStrip';
-import GhostMode from '../../components/GhostMode';
 import DevLayout from '../../components/DevLayout';
 import Cowork from '../../components/Cowork';
 import Controls from '../../components/Controls';
@@ -16,9 +15,17 @@ import FAQ from '../../components/FAQ';
 import FinalCTA from '../../components/FinalCTA';
 import Footer from '../../components/Footer';
 
+// title = og:title = twitter:title — the page's own H1. Deliberately NOT the
+// homepage pitch: the home page owns that line, this page owns the depth.
+const TITLE = 'Glyphh Desktop — Every task needs the right Agents, Workflow and Apps.';
+const DESCRIPTION =
+  'Glyphh Desktop combines all three into Layouts you switch with one keystroke — each one sets what’s on your screen, which agents run on which models, and what they can reach. Mac & Windows.';
+
 export const metadata = {
-  title: 'Glyphh Desktop — A new class of desktop agent for Mac & Windows',
-  description: 'Agents. Models. Apps. One workspace. Glyphh Desktop combines all three into Layouts you switch with one keystroke — code this hour, a PowerPoint and email the next, a live app by lunch.',
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: { title: TITLE, description: DESCRIPTION },
+  twitter: { title: TITLE, description: DESCRIPTION },
 };
 
 export default function GlyphhDesktopPage() {
@@ -31,7 +38,7 @@ export default function GlyphhDesktopPage() {
           1 Connections (real work behind the scenes) → 2 Apps (navigate
           beside the agent) → 3 Loops (how work gets done) → 4 Layouts
           (orient the workspace per job) → 5 Command center (one keystroke
-          to anywhere). Then Build → Release, Ghost mode, Governance. */}
+          to anywhere). Then Build → Release, Governance. */}
       <Integrations />
       <Cowork />
       <LoopStrip />
@@ -39,7 +46,6 @@ export default function GlyphhDesktopPage() {
       <SwitchStrip />
       <DevLayout />
       <ReleaseStrip />
-      <GhostMode />
       <Controls />
       <Pricing />
       <Download />

@@ -5,18 +5,24 @@ import Script from 'next/script';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
 
+// Homepage metadata — title carries the pitch; the description is the full
+// hero subline, verbatim.
+const HOME_TITLE = 'Glyphh — This isn’t three products. It’s one workspace.';
+const HOME_DESCRIPTION =
+  'It connects to the 3,500+ apps you use every day — Gmail, Slack, Salesforce. And where every other AI is isolated, here Claude, ChatGPT, and open models all work from the same thread. You pick who does what: PowerPoints from Claude, images from GPT, grunt work from Mistral. You never start over.';
+
 export const metadata = {
   metadataBase: new URL('https://glyphh.ai'),
-  title: 'Glyphh — A new class of desktop agent',
-  description: 'Every task needs the right Agents, Workflow and Apps. Glyphh Desktop combines all three into Layouts you switch instantly — built on open research, all of it open source.',
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
   icons: {
     icon: [{ url: '/glyphh-mascot-square-black.png', type: 'image/png' }],
     shortcut: '/glyphh-mascot-square-black.png',
     apple: '/glyphh-mascot-square-black.png',
   },
   openGraph: {
-    title: 'Glyphh — A new class of desktop agent',
-    description: 'Every task needs the right Agents, Workflow and Apps. Glyphh Desktop combines all three into Layouts you switch instantly — built on open research at github.com/glyphh-ai.',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     url: 'https://glyphh.ai',
     siteName: 'Glyphh',
     type: 'website',
@@ -24,8 +30,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Glyphh — A new class of desktop agent',
-    description: 'Every task needs the right Agents, Workflow and Apps. Glyphh Desktop combines all three into Layouts you switch instantly — built on open research at github.com/glyphh-ai.',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
   },
 };
 

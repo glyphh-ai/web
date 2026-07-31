@@ -1,6 +1,6 @@
 /**
- * ResearchBand — the credibility layer: opens the research half of the home
- * page with the line that used to lead the hero. Ada and the pillars follow.
+ * ResearchBand — the line that used to lead the home hero, now opening the
+ * Ada narrative on /research (moved off the homepage with it).
  */
 
 export default function ResearchBand() {
@@ -14,7 +14,6 @@ export default function ResearchBand() {
           under Glyphh is grounded in real research &mdash; memory systems,
           vector-symbolic architectures, and runtimes with a person in the
           loop by design &mdash; and all of it lands on GitHub first.
-          <a href="/research" className="pillars-link"> Explore the research →</a>
         </p>
       </div>
     </section>

@@ -23,7 +23,9 @@ export default function FinalCTA() {
     <section className="final-cta" id="get-started">
       <div className="container">
         <div className="cta-card" ref={cardRef}>
-          <h2>Ask for the work<span className="dot">.</span> Set the rules<span className="dot">.</span> Get it done<span className="dot">.</span></h2>
+          {/* The home page owns "Ask for the work. Set the rules. Get it
+              done." — this close is about the install decision instead. */}
+          <h2>Pick a Layout<span className="dot">.</span> Fill the slots<span className="dot">.</span> Let it run<span className="dot">.</span></h2>
           <p>Download <span className="compose-cmd">Glyphh Desktop</span> free — the right Agents, Workflow and Apps for every task, one keystroke away.</p>
           <div className="cta-buttons">
             <a href="#download" className="btn btn-white btn-lg group">

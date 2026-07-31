@@ -31,11 +31,18 @@ export default function CoworkHero() {
             <span className="badge-dot" aria-hidden="true"></span>
             A new class of desktop agent · Mac &amp; Windows
           </div>
-          <h1 className="rhero-title">Agents. Models. Apps. <span className="rhero-accent">One workspace.</span></h1>
+          {/* NOT the homepage's five-line pitch — the home page owns that.
+              This page is the depth a convinced visitor came for, so it
+              leads on what the workspace is made of. */}
+          <h1 className="rhero-title">
+            Every task needs the right Agents, Workflow and Apps.{' '}
+            <span className="rhero-accent">One workspace.</span>
+          </h1>
           <p className="rhero-sub">
             Glyphh Desktop combines all three into Layouts you switch with one
-            keystroke. Code this hour, a PowerPoint and email the next, a live
-            app by lunch.
+            keystroke &mdash; each one sets what&rsquo;s on your screen, which
+            agents run on which models, and what they can reach. Code this
+            hour, a PowerPoint and email the next, a live app by lunch.
           </p>
           <div className="hero-ctas rhero-ctas">
             <a href="#download" className="btn btn-primary btn-lg group">

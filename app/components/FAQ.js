@@ -21,10 +21,6 @@ const faqs = [
     a: 'Anything that spans the tools you already use: read a Drive folder and build slides, digest your inbox and Slack every morning, update a sheet from Stripe, draft replies for your approval, build and publish a live app. One-off or on a schedule.',
   },
   {
-    q: 'What is ghost mode?',
-    a: 'Hit ⌘⇧G in any app — a Meet, Slack, your browser — and your agent overlays it with full context and your work ready to pull up. Esc puts you right back where you were.',
-  },
-  {
     q: 'Which models can I use?',
     a: 'Frontier models like Fable, GPT, and Gemini — and a growing index of open-weight models like Llama, Qwen, and Mistral. All in one picker, all on one subscription. And you can bring your own keys: any provider that speaks the OpenAI API plugs in, billed by your provider, never marked up — we only ever charge for compute on our infrastructure.',
   },

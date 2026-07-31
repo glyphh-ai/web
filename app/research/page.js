@@ -1,5 +1,7 @@
 import Nav from '../components/Nav';
 import Reveal from '../components/Reveal';
+import ResearchBand from '../components/ResearchBand';
+import AdaSection from '../components/AdaSection';
 import Footer from '../components/Footer';
 
 const GITHUB_URL = 'https://github.com/glyphh-ai';
@@ -162,6 +164,10 @@ export default function ResearchPage() {
           </div>
         </div>
       </section>
+
+      {/* The Ada Lovelace narrative — relocated here from the homepage. */}
+      <ResearchBand />
+      <AdaSection />
 
       <Footer />
     </div>
