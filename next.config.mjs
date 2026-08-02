@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Dev-only: Next blocks cross-origin requests to the dev server (HMR socket,
+  // internal dev assets) unless the origin is allowlisted. Reaching the server
+  // from a phone/iPad over the LAN is cross-origin, so without this the page
+  // loads but never hydrates — every button goes dead. localhost is exempt,
+  // which is why it only breaks over the network. Add your LAN host/subnet.
+  allowedDevOrigins: ['192.168.1.41', '192.168.1.*'],
   async redirects() {
     return [
       // The Glyphh Desktop page moved from /products/apps.

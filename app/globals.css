@@ -5005,6 +5005,180 @@ button.dv-shot {
 
 /* ══ Home 2.0 — the single-story page ═══════════════════════════════ */
 
+/* Home runs on black rather than the site's --bg. The var is rebound too so
+   any descendant painting with var(--bg) matches instead of banding, and body
+   is set as well because the wrapper cannot paint the overscroll area. */
+.home-page { --bg: #000; background: #000; min-height: 100dvh; }
+body:has(.home-page) { background: #000; }
+/* Scoped to home: the headline is one short line here, so it goes far bigger
+   than .rhero-title's shared scale. The desktop and CLI heroes are untouched. */
+.home-page .rhero-title { font-size: clamp(2.8rem, 7.5vw, 6.5rem); }
+
+/* ── Hero tabs — Chat / Work / Code, one shot each, plus Dream (a reel) ── */
+.htabs { width: 100%; margin-top: clamp(2.4rem, 4vw, 3.4rem); }
+.htabs-bar {
+  display: flex; justify-content: center; flex-wrap: wrap;
+  gap: 0.4rem; margin-bottom: clamp(1.4rem, 2.5vw, 2rem);
+}
+.htab {
+  padding: 0.6rem 1.5rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-2);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  /* Touch: fire the tap immediately (no double-tap-zoom delay), drop the flash. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+.htab:hover { color: var(--white); border-color: var(--border-2); }
+.htab.is-active {
+  color: var(--white);
+  border-color: var(--accent-light);
+  background: rgba(179, 107, 251, 0.10);
+}
+.htab:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 2px; }
+/* Wider than the 62rem text column above it — the shot is the point. */
+.htabs-panel { width: 100%; max-width: 1400px; margin-left: auto; margin-right: auto; padding: 0 1.5rem; }
+/* .dv-shot is a <button>, so it is inline-block by default and was only
+   centered by .rhero-copy's text-align while it lived in there. Out here it
+   centers on its own box: block + auto margins, not inherited alignment.
+   The top margin it carries is for a shot stacked under copy — the tab bar
+   already provides that spacing. */
+.htabs-panel .dv-shot {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+/* Replace in place: the panels are stacked, not in a row — only the active
+   one is visible, and the command-center flash covers the swap. The radius
+   matches .dv-shot-inner so corners stay round. */
+.htabs-viewport { overflow: hidden; border-radius: 12px; }
+/* The track keeps the viewport's height: the first slide is in flow, the rest
+   are layered on top of it. Without an in-flow slide the stack would collapse
+   and the viewport would have no height of its own. */
+.htabs-track { position: relative; }
+.htabs-slide {
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+.htabs-slide:not(:first-child) { position: absolute; inset: 0; }
+.htabs-slide.is-active { opacity: 1; }
+
+/* The command center, played as the TRANSITION rather than as a tab — it is
+   the surface you hit to switch layouts in the product, so switching tabs
+   flashes it over the stage and the track moves behind it. */
+.htabs-viewport { position: relative; }
+.htabs-switcher {
+  position: absolute; inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.03);
+  transition: opacity 280ms ease, transform 280ms ease, visibility 0s linear 280ms;
+  pointer-events: none;
+}
+.htabs-switcher img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.htabs-switcher.is-on {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  /* Snappier in than out: the switcher should feel summoned, then linger a
+     beat as the new view resolves under it. */
+  transition: opacity 170ms ease, transform 170ms ease, visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .htabs-track, .htabs-slide, .htabs-switcher { transition: none; }
+}
+
+/* ── Dream tab — the fourth job. Cloned marketplace apps flip past inside the
+   same viewport the stills use, then the reel rests on the blank "What will you
+   build?" invite. Full-frame crossfade, self-advancing rather than clicked. ── */
+.dream-reel { position: absolute; inset: 0; }
+.dream-app, .dream-cta {
+  position: absolute; inset: 0;
+  opacity: 0; transition: opacity 420ms ease;
+  border-radius: 12px; overflow: hidden;
+}
+.dream-app.is-on, .dream-cta.is-on { opacity: 1; }
+/* The purple wash shows through until a real screenshot is dropped at src, so a
+   missing asset reads as an intentional placeholder, not a broken image. */
+.dream-app {
+  background-color: #0b0b0f;
+  background-image: radial-gradient(130% 120% at 25% 0%, rgba(179, 107, 251, 0.20), transparent 60%);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+.dream-app-tag {
+  position: absolute; left: 18px; bottom: 18px;
+  display: inline-flex; flex-direction: column; gap: 2px;
+  padding: 8px 14px; border-radius: 10px;
+  background: rgba(8, 8, 11, 0.62);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+}
+.dream-app-name { color: var(--white); font-weight: 600; font-size: 1.02rem; }
+.dream-app-kind { color: var(--text-2); font-size: 0.8rem; }
+.dream-cta {
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: clamp(1.5rem, 4vw, 3rem);
+  background-color: #08080b;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+/* Scrim so the copy stays legible over whatever the app shell looks like —
+   dark wash from the bottom plus the brand glow, layered under the text. */
+.dream-cta::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 75% 65% at 50% 42%, rgba(179, 107, 251, 0.16), transparent 62%),
+    linear-gradient(to top, rgba(6, 6, 9, 0.86) 8%, rgba(6, 6, 9, 0.42) 42%, rgba(6, 6, 9, 0.20) 100%);
+}
+.dream-cta-copy {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+  max-width: 40rem;
+}
+.dream-cta-kick {
+  text-transform: uppercase; letter-spacing: 0.32em;
+  font-size: 0.78rem; font-weight: 600; color: var(--accent-light);
+}
+.dream-cta-lead {
+  font-size: clamp(2.4rem, 6vw, 4.6rem); font-weight: 700;
+  letter-spacing: -0.03em; line-height: 0.98;
+  background: linear-gradient(104deg, #ffffff 0%, #e9d8ff 34%, #b36bfb 66%, #ec4899 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.dream-cta-sub { font-size: clamp(1rem, 1.9vw, 1.3rem); color: var(--text-1, #e7e7ea); }
+/* Staggered rise on reveal — the frame fades in (opacity on .dream-cta), the
+   copy lifts a beat behind it. */
+.dream-cta-kick, .dream-cta-lead, .dream-cta-sub {
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.dream-cta.is-on .dream-cta-kick { opacity: 1; transform: none; transition-delay: 0.10s; }
+.dream-cta.is-on .dream-cta-lead { opacity: 1; transform: none; transition-delay: 0.18s; }
+.dream-cta.is-on .dream-cta-sub  { opacity: 1; transform: none; transition-delay: 0.28s; }
+@media (prefers-reduced-motion: reduce) {
+  .dream-app, .dream-cta { transition: none; }
+  .dream-cta-kick, .dream-cta-lead, .dream-cta-sub { transition: none; transform: none; opacity: 1; }
+}
+
+/* The research page's backdrop (.rp-hero-glow): purple wash off the top-left,
+   rose off the right. */
+.hh-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 55% at 22% 4%, rgba(179, 107, 251, 0.16), transparent 62%),
+    radial-gradient(ellipse 55% 50% at 90% 40%, rgba(236, 72, 153, 0.12), transparent 60%);
+}
+
 /* ── S1 Hero — text-only, left-aligned; the marquee peeks above the
    fold on ~900px viewports to bait the scroll. ── */
 .hh {
