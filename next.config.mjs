@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Fly runs the Docker standalone server (see Dockerfile); Heroku's `next start`
+  // path is unaffected — standalone is additional build output, not a mode switch.
+  output: 'standalone',
   // Dev-only: Next blocks cross-origin requests to the dev server (HMR socket,
   // internal dev assets) unless the origin is allowlisted. Reaching the server
   // from a phone/iPad over the LAN is cross-origin, so without this the page

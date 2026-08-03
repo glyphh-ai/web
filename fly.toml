@@ -1,0 +1,36 @@
+# glyphh-web on Fly — marketing site (glyphh.ai), sits behind Cloudflare.
+#
+# Deploys go through GitHub Actions (.github/workflows/deploy.yml) — never a
+# local `fly deploy` push once the pipeline is live. NEXT_PUBLIC_* build args are
+# public URLs baked into the client bundle (same values Heroku's buildpack bakes
+# from its config vars).
+
+app = "glyphh-web"
+primary_region = "iad"
+
+[build]
+  [build.args]
+    NEXT_PUBLIC_DOWNLOAD_BASE_URL = "https://github.com/glyphh-ai/glyphh-releases/releases/latest/download"
+    NEXT_PUBLIC_PLATFORM_URL = "https://platform.glyphh.ai"
+    NEXT_PUBLIC_SERVER_URL = "https://api.glyphh.ai"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  # Marketing front door: keep one machine warm — no cold starts on first paint.
+  min_machines_running = 1
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
+
+[checks]
+  [checks.http]
+    type = "http"
+    port = 3000
+    path = "/"
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "20s"
