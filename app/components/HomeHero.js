@@ -17,12 +17,20 @@ export default function HomeHero() {
             <span className="rhero-accent">Every AI, one app.</span>
           </h1>
           <div className="hero-ctas rhero-ctas">
-            <a href="/products/desktop#download" className="btn btn-primary btn-lg group">
-              <span className="btn-label">Download Now</span>
+            {/* Primary funnel: straight into the app — which opens on the login
+                screen (login-first, no anonymous access). Dev points at the local
+                app-web serve; prod at the hosted app. */}
+            <a
+              href={process.env.NEXT_PUBLIC_APP_URL || 'https://app.glyphh.ai'}
+              className="btn btn-primary btn-lg group"
+            >
+              <span className="btn-label">Try it Now</span>
               <span className="btn-fill"></span>
             </a>
+            {/* Explainer video CTA — points at the switch video until the real
+                demo explainer is uploaded, then this href moves to it. */}
             <a href="/products/desktop#layouts" className="btn btn-ghost btn-lg group">
-              <span className="btn-label">Watch It Switch</span>
+              <span className="btn-label">Watch the demo</span>
               <span className="btn-fill"></span>
             </a>
           </div>
