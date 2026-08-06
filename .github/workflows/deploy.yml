@@ -1,12 +1,8 @@
 name: Deploy glyphh-web
 
 # The build runs HERE before any deploy, so a broken build fails with readable
-# logs instead of inside a remote build.
-#
-# PARALLEL-DEPLOY PERIOD (Heroku → Fly migration): every push deploys to BOTH
-# Heroku (current prod behind glyphh.ai) and Fly (glyphh-web.fly.dev, the
-# incoming origin behind Cloudflare), keeping them in lockstep until the DNS
-# cutover — after cutover + a week of rollback margin, delete the Heroku job.
+# logs instead of inside a remote build. Deploys to Fly (glyphh-web.fly.dev, the
+# origin behind Cloudflare). Heroku is retired; DNS cutover to Fly is pending.
 
 on:
   push:
@@ -26,26 +22,6 @@ jobs:
 
       - run: npm ci
       - run: npm run build
-
-  deploy-heroku:
-    needs: check
-    # Heroku is CURRENT PROD (glyphh.ai) — only ever deploys from main. The Fly
-    # job may run from a work branch during the parallel stand-up: it serves
-    # glyphh-web.fly.dev only, no live traffic until the DNS cutover.
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Deploy to Heroku via git push
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-        run: |
-          git remote add heroku https://heroku:${HEROKU_API_KEY}@git.heroku.com/${HEROKU_APP_NAME}.git
-          git push heroku main --force
 
   deploy-fly:
     needs: check
