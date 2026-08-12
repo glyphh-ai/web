@@ -1,40 +1,38 @@
 import HeroTabs from './HeroTabs';
 
 /**
- * Hero — the fresh-start home hero (2026-08 rebuild).
- * The new keynote type up top; below it, the original hero screen — the
- * Chat/Work/Code tab stage with the command-center switch beat.
+ * Hero — the home thesis, set in the desktop product page's own type
+ * (.rhero-* verbatim, so home and product can never drift): big white title,
+ * the brand gradient on the reveal, the product page's gray for the lede.
+ * One CTA, then the Chat/Work/Code tab stage.
  */
 export default function Hero() {
   return (
-    <section className="fh">
-      <div className="container">
-        {/* The thesis up top; the product line supports it. */}
-        <h1 className="fh-title">One app for every job you do.</h1>
-        <p className="fh-sub">
-          Chat, work &amp; code with every AI, in one app, from anywhere.
-        </p>
-        <p className="fh-lede">
-          Clear your inbox with Mistral. Build slides with Claude &amp; Gemini.
-          Plan features with GPT. Build apps with all four.{' '}
-          <strong>
-            Glyphh carries your flow from task to task — the right models for
-            every job, powered by you.
-          </strong>
-        </p>
-        <div className="fh-ctas">
-          {/* ONE funnel: straight into the platform (login-first). */}
-          <a
-            href={process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai'}
-            className="btn btn-primary btn-lg group"
-          >
-            <span className="btn-label">Try it Now</span>
-            <span className="btn-fill"></span>
-          </a>
+    <section className="rhero rhero-product">
+      <div className="hh-glow" aria-hidden="true" />
+      <div className="rhero-inner container">
+        <div className="rhero-copy">
+          <h1 className="rhero-title">
+            Every Task, Every AI, <span className="rhero-accent">One&nbsp;App.</span>
+          </h1>
+          <p className="rhero-sub">
+            Glyphh consolidates the number of applications you touch into one
+            AI&nbsp;driven operating system.
+          </p>
+          <div className="hero-ctas rhero-ctas">
+            {/* ONE funnel: straight into the platform (login-first). */}
+            <a
+              href={process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai'}
+              className="btn btn-primary btn-lg group"
+            >
+              <span className="btn-label">Try it Now</span>
+              <span className="btn-fill"></span>
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* The pre-rebuild hero screen: tab stage + command-center switch. */}
+      {/* Outside .rhero-inner on purpose — the stage runs wider than the copy. */}
       <HeroTabs />
     </section>
   );
