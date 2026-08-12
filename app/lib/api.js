@@ -68,7 +68,7 @@ async function request(path, opts = {}) {
     } else {
       clearTokens();
       if (typeof window !== 'undefined') {
-        window.location.href = `${PLATFORM_URL}/auth/login`;
+        window.location.href = PLATFORM_URL;
       }
       throw new Error('Session expired');
     }

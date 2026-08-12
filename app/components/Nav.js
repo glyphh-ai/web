@@ -66,8 +66,9 @@ export default function Nav() {
     };
   }, [ddOpen]);
 
-  const loginHref = `${PLATFORM_URL}/auth/login`;
-  const signupHref = `${PLATFORM_URL}/auth`;
+  // The platform (app-web) serves its login AT THE ROOT — no /auth path.
+  const loginHref = PLATFORM_URL;
+  const signupHref = PLATFORM_URL;
   const dashHref = `${PLATFORM_URL}/dashboard`;
 
   return (
