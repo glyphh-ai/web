@@ -151,7 +151,7 @@ export default async function Pricing() {
                 ))}
               </ul>
               <a
-                href={t.contactSales ? `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Glyphh Enterprise')}` : `${PLATFORM_URL}/auth`}
+                href={t.contactSales ? `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Glyphh Enterprise')}` : PLATFORM_URL}
                 className={`btn ${t.btn} btn-lg btn-full group`}
               >
                 <span className="btn-label">{t.cta}</span>
