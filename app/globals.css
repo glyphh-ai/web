@@ -5536,3 +5536,66 @@ body:has(.home-page) { background: #000; }
 }
 .cli-install-copy { align-items: center; gap: 7px; }
 .cli-install-copied { font-size: 0.8rem; font-weight: 600; letter-spacing: -0.01em; }
+
+/* ── Fresh hero (2026-08 home rebuild) ──────────────────────────────────────
+   Gemini-mac air on the site's purple: one centered claim, a friendly lede,
+   two CTAs, then a single product shot seated on a gradient panel. The panel
+   gradient is anchored corner-to-corner (the --grad-accent convention) so it
+   maps the same at any aspect ratio. */
+.fh { padding: 8.5rem 0 5.5rem; text-align: center; }
+.fh-title {
+  font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  color: var(--text);
+}
+.fh-accent {
+  /* Inline on purpose: the headline is ONE sentence — the gradient half
+     continues the line, wrapping naturally, not stacked as a second claim. */
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.fh-lede {
+  max-width: 42rem;
+  margin: 1.75rem auto 2.75rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+.fh-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.fh-stage {
+  width: min(72rem, calc(100% - 2.5rem));
+  margin: 5rem auto 0;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border-radius: 28px;
+  background:
+    radial-gradient(120% 90% at 15% 110%, rgba(236, 72, 153, 0.28), transparent 55%),
+    radial-gradient(130% 100% at 90% -10%, rgba(147, 51, 234, 0.38), transparent 60%),
+    linear-gradient(to top right, #160a24, #2d1152);
+}
+.fh-shot {
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+}
+@media (max-width: 640px) {
+  .fh { padding-top: 6.5rem; }
+  .fh-stage { margin-top: 3rem; border-radius: 18px; }
+}
+
+/* The keynote eyebrow — the quiet setup line above the reveal. */
+.fh-eyebrow {
+  margin-bottom: 1.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* The lede's punch — the reveal after the concrete examples. */
+.fh-lede strong { color: var(--text); font-weight: 600; }

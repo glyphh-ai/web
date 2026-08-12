@@ -1,16 +1,18 @@
 import Nav from './components/Nav';
 import Reveal from './components/Reveal';
-import HomeHero from './components/HomeHero';
+import Hero from './components/Hero';
 import Footer from './components/Footer';
 
-// Down to the frame: nav, hero, footer. Nothing between them.
+// The 2026-08 rebuild, section by section. Hero first; the old HomeHero
+// (tabs + dream reel) stays in the tree until the switching story lands in
+// its own band, then gets deleted or absorbed.
 
 export default function Home() {
   return (
     <div className="home-page">
       <Reveal />
       <Nav />
-      <HomeHero />
+      <Hero />
       <Footer />
     </div>
   );
