@@ -1,5 +1,4 @@
 import HeroTabs from './HeroTabs';
-import TypedTitle from './TypedTitle';
 
 /**
  * Hero — the fresh-start home hero (2026-08 rebuild).
@@ -10,13 +9,13 @@ export default function Hero() {
   return (
     <section className="fh">
       <div className="container">
-        {/* The thesis up top, typed live: working. → thinking… → doing… */}
-        <TypedTitle />
+        {/* The thesis up top; the product line supports it. */}
+        <h1 className="fh-title">One app for every job you do.</h1>
         <p className="fh-sub">
           Chat, work &amp; code with every AI, in one app, from anywhere.
         </p>
         <p className="fh-lede">
-          Send emails with Mistral. Build slides with Claude &amp; Gemini.
+          Clear your inbox with Mistral. Build slides with Claude &amp; Gemini.
           Plan features with GPT. Build apps with all four.{' '}
           <strong>
             Glyphh carries your flow from task to task — the right models for
