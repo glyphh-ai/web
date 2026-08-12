@@ -23,17 +23,12 @@ export default function Hero() {
           </strong>
         </p>
         <div className="fh-ctas">
-          {/* Primary funnel: straight into the app (login-first). Dev points at
-              the local app-web serve; prod at the hosted app. */}
+          {/* ONE funnel: straight into the platform (login-first). */}
           <a
-            href={process.env.NEXT_PUBLIC_APP_URL || 'https://app.glyphh.ai'}
+            href={process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai'}
             className="btn btn-primary btn-lg group"
           >
             <span className="btn-label">Try it Now</span>
-            <span className="btn-fill"></span>
-          </a>
-          <a href="/products/desktop#layouts" className="btn btn-ghost btn-lg group">
-            <span className="btn-label">Watch the demo</span>
             <span className="btn-fill"></span>
           </a>
         </div>
