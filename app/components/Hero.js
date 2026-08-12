@@ -1,4 +1,5 @@
 import HeroTabs from './HeroTabs';
+import TypedTitle from './TypedTitle';
 
 /**
  * Hero — the fresh-start home hero (2026-08 rebuild).
@@ -9,17 +10,17 @@ export default function Hero() {
   return (
     <section className="fh">
       <div className="container">
-        {/* The original hero text, set in the new keynote type. */}
-        <h1 className="fh-title">
-          Chat, work &amp; code{' '}
-          <span className="fh-accent">with every AI, in one app, from anywhere.</span>
-        </h1>
+        {/* The thesis up top, typed live: working. → thinking… → doing… */}
+        <TypedTitle />
+        <p className="fh-sub">
+          Chat, work &amp; code with every AI, in one app, from anywhere.
+        </p>
         <p className="fh-lede">
-          Emails with Mistral. Slides with Claude &amp; Gemini. Plans with
-          GPT. Apps with all four.{' '}
+          Send emails with Mistral. Build slides with Claude &amp; Gemini.
+          Plan features with GPT. Build apps with all four.{' '}
           <strong>
             Glyphh carries your flow from task to task — the right models for
-            every job.
+            every job, powered by you.
           </strong>
         </p>
         <div className="fh-ctas">

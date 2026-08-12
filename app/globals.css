@@ -5544,7 +5544,9 @@ body:has(.home-page) { background: #000; }
    maps the same at any aspect ratio. */
 .fh { padding: 8.5rem 0 5.5rem; text-align: center; }
 .fh-title {
-  font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+  /* The vw term is sized so the one-line headline never wraps; the box is
+     nowrap and the clamp floor/ceiling bound it on phones/desktops. */
+  font-size: clamp(1.9rem, 8vw, 4.6rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.06;
@@ -5599,3 +5601,35 @@ body:has(.home-page) { background: #000; }
 
 /* The lede's punch — the reveal after the concrete examples. */
 .fh-lede strong { color: var(--text); font-weight: 600; }
+
+/* The support line under the thesis — the product sentence, gradient-set. */
+.fh-sub {
+  margin-top: 1.25rem;
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Typed hero title ──────────────────────────────────────────────────────
+   The ghost (longest frame) reserves the box; the live text sits on top, so
+   typing never shifts the layout below. */
+.fh-typed { position: relative; }
+.fh-box { position: relative; display: inline-block; white-space: nowrap; }
+.fh-ghost { visibility: hidden; }
+.fh-live { position: absolute; inset: 0; text-align: left; }
+.fh-caret {
+  display: inline-block;
+  width: 0.05em;
+  height: 0.9em;
+  margin-left: 0.06em;
+  vertical-align: baseline;
+  transform: translateY(0.12em);
+  background: var(--accent-light);
+  animation: fh-blink 1.06s steps(1) infinite;
+}
+@keyframes fh-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .fh-caret { display: none; } }
