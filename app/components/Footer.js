@@ -16,10 +16,10 @@ export default function Footer() {
             <a href="https://github.com/glyphh-ai/glyphh-releases/releases" target="_blank" rel="noopener noreferrer">Changelog</a>
           </div>
           <div className="footer-col">
-            <h4>Products</h4>
-            <a href="/products/desktop">Glyphh Desktop</a>
+            <h4>Product</h4>
+            <a href="/#inside">Inside the app</a>
             <a href="/pricing">Pricing</a>
-            <a href="/products/desktop#download">Download</a>
+            <a href="/#download">Download</a>
           </div>
           <div className="footer-col">
             <h4>Legal</h4>

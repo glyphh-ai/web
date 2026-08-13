@@ -5012,8 +5012,22 @@ button.dv-shot {
 body:has(.home-page) { background: #000; }
 /* Scoped to home: the headline is one short line here, so it goes far bigger
    than .rhero-title's shared scale. The desktop and CLI heroes are untouched. */
-.home-page .rhero-title { font-size: clamp(2.8rem, 7.5vw, 6.5rem); }
-.home-page .rhero-sub { margin-left: auto; margin-right: auto; text-align: center; }
+.home-page .rhero-sub { margin-left: auto; margin-right: auto; text-align: center; max-width: 72ch; }
+
+/* The lede's triad — white words that light up with the brand gradient and
+   aim the tab stage below on hover. */
+.hero-triad-word {
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+}
+.hero-triad-word:hover {
+  background: linear-gradient(115deg, #b36bfb, #9333ea 48%, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
 
 /* ── Hero tabs — Chat / Work / Code, one shot each, plus Dream (a reel) ── */
 .htabs { width: 100%; margin-top: clamp(2.4rem, 4vw, 3.4rem); }
@@ -5541,3 +5555,114 @@ body:has(.home-page) { background: #000; }
 
 
 
+
+/* ── Hero tab caption — the kicker types itself, the body fades in under ── */
+.htabs-caption {
+  /* Reserved height — typing must never bounce the stage below. */
+  min-height: 6.2rem;
+  margin-bottom: clamp(0.9rem, 1.6vw, 1.4rem);
+  text-align: center;
+}
+.htabs-caption-kicker {
+  margin: 0 0 0.55rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--white);
+  min-height: 1.6em;
+}
+.htabs-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 3px;
+  vertical-align: -0.12em;
+  background: var(--accent-light);
+  animation: htabs-blink 1.06s steps(1) infinite;
+}
+@keyframes htabs-blink { 50% { opacity: 0; } }
+.htabs-caption-body {
+  margin: 0 auto;
+  max-width: 64ch;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-2);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 420ms ease, transform 420ms ease;
+}
+.htabs-caption-body.is-on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .htabs-caret { display: none; }
+  .htabs-caption-body { transition: none; transform: none; }
+}
+
+/* The hero stage's section label sits between the tab bar and the caption. */
+.htabs-label { text-align: center; margin-bottom: 0.9rem; }
+
+
+/* ── Hero tab stage: side caption, a TAD wider than the container ────────── */
+.rhero-tabs-wrap {
+  width: min(1300px, calc(100% - 3rem));
+  margin: 0 auto;
+}
+.htabs-panel {
+  display: grid;
+  grid-template-columns: minmax(250px, 320px) 1fr;
+  gap: clamp(1.6rem, 3vw, 3rem);
+  align-items: center;
+}
+.htabs-side { text-align: left; }
+.htabs-side .section-label { margin-bottom: 0.9rem; }
+.htabs-side .htabs-caption { text-align: left; min-height: 0; margin-bottom: 0; }
+.htabs-side .htabs-caption-body { margin: 0; max-width: none; }
+@media (max-width: 860px) {
+  .htabs-panel { grid-template-columns: 1fr; }
+  .htabs-side { text-align: center; }
+  .htabs-side .htabs-caption { text-align: center; }
+}
+
+/* ── Feature grid — zoomed detail crops, full shot in the lightbox ───────── */
+.fgrid { padding: 6.5rem 0; }
+.fgrid-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.6rem);
+  margin-top: 2.4rem;
+}
+.fgrid-card {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  padding: 0.85rem 0.85rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.025);
+  text-align: left; cursor: zoom-in;
+  transition: transform 260ms ease, border-color 260ms ease, background 260ms ease;
+}
+.fgrid-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(179, 107, 251, 0.45);
+  background: rgba(255, 255, 255, 0.04);
+}
+.fgrid-crop {
+  position: relative; display: block; overflow: hidden;
+  aspect-ratio: 16 / 10; border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.fgrid-crop img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.5);
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fgrid-card:hover .fgrid-crop img { transform: scale(1.42); }
+.fgrid-crop .shot-expand { position: absolute; right: 10px; bottom: 10px; }
+.fgrid-title { font-size: 1.05rem; font-weight: 600; color: var(--white); margin-top: 0.4rem; }
+.fgrid-line { font-size: 0.875rem; line-height: 1.6; color: var(--text-2); }
+@media (max-width: 1020px) { .fgrid-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .fgrid-grid { grid-template-columns: 1fr; } }
+
+/* ── Connections, HOME-compact: one river, tighter band (the product page
+     keeps the full two-river section). ── */
+.home-page .integrations { padding: 4rem 0 3.5rem; }
+.home-page .integrations .section-title { font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+.home-page .integrations .section-subtitle { font-size: 0.95rem; max-width: 58ch; }
+.home-page .integrations .scroll-track-wrap + .scroll-track-wrap { display: none; }

@@ -92,6 +92,7 @@ export default function Integrations() {
   return (
     <section className="integrations" id="integrations">
       <div className="container">
+        <div className="section-label reveal">{'{'} <span className="accent">CONNECTIONS</span> {'}'}</div>
         <h2 className="section-title reveal">Connect your systems once. Glyphh does real work in them.</h2>
         <p className="section-subtitle reveal">
           Link Gmail, Slack, Drive and 3,500+ services — then just ask. The

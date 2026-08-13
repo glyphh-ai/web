@@ -5,24 +5,6 @@ import { useState, useEffect, useRef } from 'react';
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 const GITHUB_URL = 'https://github.com/glyphh-ai';
 
-const PRODUCTS = [
-  {
-    href: '/products/desktop',
-    name: 'Glyphh Desktop',
-    desc: 'The workspace your AI drives',
-  },
-  {
-    href: '/products/cli',
-    name: 'Glyphh CLI',
-    desc: 'The whole agent, in your terminal',
-  },
-  {
-    href: '/pricing',
-    name: 'Pricing',
-    desc: 'One credit system, every product',
-  },
-];
-
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -86,23 +68,7 @@ export default function Nav() {
               onMouseEnter={ddEnter}
               onMouseLeave={ddLeave}
             >
-              <button
-                className="nav-dd-trigger"
-                aria-expanded={ddOpen}
-                aria-haspopup="true"
-                onClick={() => setDdOpen(!ddOpen)}
-              >
-                Products
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div className="nav-dd-panel" role="menu">
-                {PRODUCTS.map((p) => (
-                  <a key={p.href} href={p.href} className="nav-dd-item" role="menuitem">
-                    <span className="nav-dd-name">{p.name}</span>
-                    <span className="nav-dd-desc">{p.desc}</span>
-                  </a>
-                ))}
-              </div>
+              <a href="/pricing" className="nav-dd-trigger">Pricing</a>
             </div>
             <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
@@ -136,12 +102,7 @@ export default function Nav() {
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <a href="/research" onClick={() => setMenuOpen(false)}>Research</a>
-        <span className="mobile-menu-group">Products</span>
-        {PRODUCTS.map((p) => (
-          <a key={p.href} href={p.href} className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>
-            {p.name}
-          </a>
-        ))}
+        <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>GitHub</a>
         {loggedIn ? (
           <a href={dashHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>

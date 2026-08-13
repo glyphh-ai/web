@@ -16,9 +16,9 @@ export default function ReleaseStrip() {
           <span className="release-lock">🔒</span> your-app.glyphh.app
         </div>
         <p className="section-subtitle reveal">
-          Ask for an app and the loop goes all the way: built, hosted, and
-          published — on your phone, shareable with your team. Work that used
-          to end as a file ends as a product.
+          Ask for an app and Glyphh goes all the way — built, hosted, and
+          published at its own URL, on your phone, shareable with your team.
+          Work that used to end as a file ends as a product.
         </p>
 
         <div className="reveal">

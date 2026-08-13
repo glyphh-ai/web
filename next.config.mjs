@@ -11,11 +11,8 @@ const nextConfig = {
   allowedDevOrigins: ['192.168.1.41', '192.168.1.*'],
   async redirects() {
     return [
-      // The Glyphh Desktop page moved from /products/apps.
-      { source: '/products/apps', destination: '/products/desktop', permanent: true },
-      // Glyphh Code was retired; its page lands on the flagship.
-      { source: '/products/code', destination: '/products/desktop', permanent: false },
-      { source: '/products/apps/:path*', destination: '/products/desktop/:path*', permanent: true },
+      // ONE-PAGE SITE (2026-08-12): the product pages are absorbed into home.
+      { source: '/products/:path*', destination: '/', permanent: false },
     ];
   },
 };
