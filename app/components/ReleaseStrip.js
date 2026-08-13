@@ -10,8 +10,7 @@ export default function ReleaseStrip() {
   return (
     <section className="release" id="release">
       <div className="container">
-        <div className="section-label reveal">{'{'} <span className="accent">RELEASE</span> {'}'}</div>
-        <h2 className="section-title reveal">And release it as a live app.</h2>
+        <h2 className="section-title reveal">Build it. Ship it. Share it.</h2>
         <div className="release-url reveal" aria-hidden="true">
           <span className="release-lock">🔒</span> your-app.glyphh.app
         </div>

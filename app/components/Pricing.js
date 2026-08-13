@@ -115,7 +115,6 @@ export default async function Pricing() {
   return (
     <section className="pricing" id="pricing">
       <div className="container">
-        <div className="section-label reveal">{'{'} <span className="accent">PRICING</span> {'}'}</div>
         <h2 className="section-title">Simple, transparent pricing</h2>
         <p className="section-subtitle">
           One credit system for everything — model calls, tools, and compute.

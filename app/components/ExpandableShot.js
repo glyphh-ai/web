@@ -9,8 +9,11 @@ import { createPortal } from 'react-dom';
  * builders section. An .mp4/.webm src renders as an autoplaying, muted,
  * looping video (poster = the old still, so the frame paints instantly);
  * the lightbox copy gets controls.
+ *
+ * `crop` ({ pos, zoom }) zooms the INLINE image into that region of the
+ * shot (CSS object-position + scale) — the lightbox always shows it full.
  */
-export default function ExpandableShot({ src, alt, eager = false, poster }) {
+export default function ExpandableShot({ src, alt, eager = false, poster, crop }) {
   const [open, setOpen] = useState(false);
   const isVideo = /\.(mp4|webm)(\?|$)/i.test(src);
   // Native `loop` covers the normal path, but Safari won't wrap (or even end)
@@ -36,7 +39,12 @@ export default function ExpandableShot({ src, alt, eager = false, poster }) {
           {isVideo ? (
             <video src={src} poster={poster} autoPlay muted loop playsInline aria-label={alt} onEnded={restart} onTimeUpdate={wrap} />
           ) : (
-            <img src={src} alt={alt} {...(eager ? { fetchPriority: 'high' } : { loading: 'lazy' })} />
+            <img
+              src={src}
+              alt={alt}
+              style={crop ? { objectPosition: crop.pos, transform: `scale(${crop.zoom})`, transformOrigin: crop.pos } : undefined}
+              {...(eager ? { fetchPriority: 'high' } : { loading: 'lazy' })}
+            />
           )}
         </span>
         <span className="shot-expand" aria-hidden="true">⤢</span>

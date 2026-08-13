@@ -4789,7 +4789,12 @@ footer > .container { position: relative; z-index: 1; }
   --rp-b: #9333ea;   /* orange */
   --rp-c: #ec4899;   /* rose */
   --rp-grad: linear-gradient(115deg, var(--rp-a), var(--rp-b) 48%, var(--rp-c));
+  /* Same pure-black canvas as home. */
+  --bg: #000;
+  background: #000;
+  min-height: 100dvh;
 }
+body:has(.research-page) { background: #000; }
 
 /* ── Hero ─────────────────────────────────────────────────────────────── */
 .rp-hero { position: relative; overflow: hidden; padding: 9rem 0 5rem; }
@@ -5660,9 +5665,51 @@ body:has(.home-page) { background: #000; }
 @media (max-width: 1020px) { .fgrid-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .fgrid-grid { grid-template-columns: 1fr; } }
 
-/* ── Connections, HOME-compact: one river, tighter band (the product page
-     keeps the full two-river section). ── */
-.home-page .integrations { padding: 4rem 0 3.5rem; }
-.home-page .integrations .section-title { font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
-.home-page .integrations .section-subtitle { font-size: 0.95rem; max-width: 58ch; }
-.home-page .integrations .scroll-track-wrap + .scroll-track-wrap { display: none; }
+/* ── Connections river inside its StoryHeads band: the classic TWO rows of
+     icons (the third stays defined in the component, hidden here). ── */
+#story-connections .scroll-rows { margin: 2.5rem 0 1.5rem; }
+#story-connections .scroll-track-wrap:nth-child(n+3) { display: none; }
+
+/* ── StoryHeads — the new-messaging header bands, stacked top-down while
+     each section's body gets built underneath. ── */
+.story-head { padding: 4.5rem 0 3.5rem; }
+/* No divider between the hero and the first band either. */
+.home-page .rhero-product { border-bottom: 0; }
+.story-head .section-subtitle { max-width: 62ch; }
+.story-head .section-subtitle + .section-subtitle { margin-top: 1rem; }
+/* The .dip / .glyphh pair under COMMAND — set in mono, centered. */
+.story-cmds {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  color: var(--text-2);
+  text-align: center;
+  margin: 1.4rem 0 0.25rem;
+}
+.story-cmds p { margin: 0.35rem 0; }
+.story-cmds .compose-cmd { color: var(--white); font-weight: 700; }
+/* Closing tag line — the section's kicker, brighter than the lede. */
+.story-tag {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--text);
+}
+/* Shot bands split two-up: copy LEFT, the shot RIGHT (crop-zoomed inline,
+   full-screen in the lightbox). Stacks under 900px. */
+.story-split {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: center;
+}
+.story-split .section-label,
+.story-split .section-title,
+.story-split .section-subtitle,
+.story-split .story-tag { text-align: left; }
+.story-split .section-subtitle { margin-left: 0; margin-right: 0; }
+.story-split .section-title { font-size: clamp(1.8rem, 3vw, 2.5rem); }
+.story-split button.dv-shot { width: 100%; margin: 0; }
+@media (max-width: 900px) {
+  .story-split { grid-template-columns: 1fr; }
+  .story-split button.dv-shot { margin-top: 0.5rem; }
+}

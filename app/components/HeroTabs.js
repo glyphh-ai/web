@@ -133,27 +133,33 @@ function DreamReel({ active }) {
   );
 }
 
-// The slide-in description panel per tab: a KICKER (what it's for, one line)
-// and a BODY (the concrete things you'd do there). Chat's copy is canon —
-// the others follow its shape.
+// The slide-in description panel per tab: a LABEL (the { … } eyebrow — the
+// tab's name, except Home, which reads as the workspace itself), a KICKER
+// (what it's for, one line) and a BODY (the concrete things you'd do there).
+// Chat's copy is canon — the others follow its shape.
 const TAB_INFO = {
   home: {
+    label: 'THE WORKSPACE',
     kicker: 'For getting anywhere in one keystroke.',
     body: 'The command center is home — your apps, layouts, and sessions on one wall. Open something, switch jobs, or start fresh, from anywhere in the app.',
   },
   chat: {
+    label: 'CHAT',
     kicker: 'For questions, learning, and everyday help.',
     body: 'Ask anything — the right model answers, with your browser, files, and apps working beside it. Explain concepts, draft messaging, search the web, generate images, compare options, or think through a decision.',
   },
   work: {
+    label: 'WORK',
     kicker: 'For the tasks that fill your day.',
     body: 'A 24/7 assistant working beside you — consolidating your inbox, prepping you for calls, generating slides and docs. Email, calendar, and comms side by side on one page, the agent triaging, drafting, and acting while you steer.',
   },
   code: {
+    label: 'CODE',
     kicker: 'For building real software.',
     body: 'Build and ship live beside the conversation — plan features, edit code, run terminals, review diffs, and ship from your repo. Live at <your-app>.glyphh.app in one click.',
   },
   dream: {
+    label: 'DREAM',
     kicker: 'For building how you want to work.',
     body: 'Build user interfaces for the way you work, natively integrated into the workspace — wired to any AI model, your memory, and your connections.',
   },
@@ -280,7 +286,6 @@ export default function HeroTabs() {
 
       <div className="htabs-panel">
         <div className="htabs-side">
-          <div className="section-label reveal">{'{'} <span className="accent">THE APP</span> {'}'}</div>
           <TabCaption tab={TABS[index].id} switching={switching} />
         </div>
         <div className="htabs-viewport">

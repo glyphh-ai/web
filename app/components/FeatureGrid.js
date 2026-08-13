@@ -5,30 +5,32 @@ import { useState } from 'react';
 /**
  * FeatureGrid — the middle of the story compressed into detail cards:
  * zoomed-in crops that open the FULL shot in the shared lightbox on click.
- * Replaces the full-width Workspace / Loops / Build sections on home (those
- * components still serve the product page until it dies).
+ *
+ * 2026-08 messaging pass: the EXECUTION / COMMAND / RROT / APPS story beats
+ * live here as cards (their shots are PLACEHOLDERS — swap `src` when the
+ * real images land), alongside the kept terminal / agents / skills squares.
  */
 const CARDS = [
   {
-    id: 'workspace',
-    title: 'Your apps, beside the agent',
-    line: 'Gmail, Slack, dashboards — anything with a page opens as a panel next to Glyphh.',
-    src: '/screen-shots/glyphh-workspace.png',
-    pos: '20% 12%',
-  },
-  {
-    id: 'loops',
-    title: 'The right models, every task',
-    line: 'A small team of AIs in a circuit — swap any seat, see exactly who did what.',
-    src: '/screen-shots/glyphh-custom-apps.png',
-    pos: '70% 30%',
-  },
-  {
-    id: 'build',
-    title: 'A full dev workspace',
-    line: 'Files, editor, diff, terminal, and a coding agent — one keystroke away.',
+    id: 'execution',
+    title: "Don't just ask AI. Put it to work.",
+    line: 'Glyphh connects AI to your files, folders, terminal, browser, web apps, local machine, and cloud environments. Agents can reason, build, execute, inspect, and iterate—while you stay in control.',
     src: '/screen-shots/glyphh-builders.png',
     pos: '50% 20%',
+  },
+  {
+    id: 'command',
+    title: 'Control everything from anywhere.',
+    line: '.dip changes where you work. .glyphh tells AI what to do. One command can change your entire working environment or put an agent to work right where you are.',
+    src: '/screen-shots/glyphh-command-palette.png',
+    pos: '50% 40%',
+  },
+  {
+    id: 'apps',
+    title: 'Build the tools you wish existed.',
+    line: 'Turn connected apps, agents, models, data, and knowledge into powerful custom tools inside Glyphh. Research, automate, build, and operate without leaving your workspace.',
+    src: '/screen-shots/glyphh-custom-apps.png',
+    pos: '70% 30%',
   },
   {
     id: 'cli',
@@ -58,7 +60,6 @@ export default function FeatureGrid() {
   return (
     <section className="fgrid" id="inside">
       <div className="container">
-        <div className="section-label reveal">{'{'} <span className="accent">INSIDE</span> {'}'}</div>
         <h2 className="section-title reveal">One app, every surface of your work.</h2>
         <div className="fgrid-grid reveal">
           {CARDS.map((c) => (
