@@ -1,10 +1,9 @@
 import Nav from './components/Nav';
 import Reveal from './components/Reveal';
 import Hero from './components/Hero';
-import Integrations from './components/Integrations';
+import StoryHeads from './components/StoryHeads';
 import FeatureGrid from './components/FeatureGrid';
 import ReleaseStrip from './components/ReleaseStrip';
-import Controls from './components/Controls';
 import Pricing from './components/Pricing';
 import Download from './components/Download';
 import FAQ from './components/FAQ';
@@ -21,13 +20,15 @@ export default function Home() {
       <Reveal />
       <Nav />
       <Hero />
-      {/* The story: the detail grid → it reaches everything (Connections) →
-          shipped (Release) — the switch story lives in the hero's Home tab. */}
-      <Integrations />
+      {/* The new messaging pass, top-down: header bands for every section of
+          the story. Bodies land under them next; nothing below is removed
+          until each band absorbs or replaces its old section. */}
+      <StoryHeads />
+      {/* The story: the detail grid → shipped (Release) — Connections moved
+          up into its StoryHeads band (icon river + note live there now). */}
       <FeatureGrid />
       <ReleaseStrip />
-      {/* The close: governance → pricing → download → FAQ → the final CTA. */}
-      <Controls />
+      {/* The close: pricing → download → FAQ → the final CTA. */}
       <Pricing />
       <Download />
       <FAQ />

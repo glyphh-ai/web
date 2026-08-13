@@ -88,18 +88,15 @@ function ScrollRow({ apps, direction }) {
   );
 }
 
-export default function Integrations() {
+/**
+ * ConnectionsRiver — the scrolling icon wall plus its note, on its own so the
+ * CONNECTIONS story band (StoryHeads) can host it. The old standalone
+ * Integrations section below kept its header copy for reference until the
+ * messaging pass settles.
+ */
+export function ConnectionsRiver() {
   return (
-    <section className="integrations" id="integrations">
-      <div className="container">
-        <div className="section-label reveal">{'{'} <span className="accent">CONNECTIONS</span> {'}'}</div>
-        <h2 className="section-title reveal">Connect your systems once. Glyphh does real work in them.</h2>
-        <p className="section-subtitle reveal">
-          Link Gmail, Slack, Drive and 3,500+ services — then just ask. The
-          agent acts in your actual accounts, behind the scenes, and asks
-          first when something&apos;s risky. You decide what it can reach.
-        </p>
-      </div>
+    <>
       <div className="scroll-rows reveal">
         <ScrollRow apps={APPS_ROW1} direction="scroll-left" />
         <ScrollRow apps={APPS_ROW2} direction="scroll-right" />
@@ -112,6 +109,23 @@ export default function Integrations() {
           your team, governed by your admins.
         </p>
       </div>
+    </>
+  );
+}
+
+export default function Integrations() {
+  return (
+    <section className="integrations" id="integrations">
+      <div className="container">
+        <div className="section-label reveal">{'{'} <span className="accent">CONNECTIONS</span> {'}'}</div>
+        <h2 className="section-title reveal">Connect your systems once. Glyphh does real work in them.</h2>
+        <p className="section-subtitle reveal">
+          Link Gmail, Slack, Drive and 3,500+ services — then just ask. The
+          agent acts in your actual accounts, behind the scenes, and asks
+          first when something&apos;s risky. You decide what it can reach.
+        </p>
+      </div>
+      <ConnectionsRiver />
     </section>
   );
 }

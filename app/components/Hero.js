@@ -1,11 +1,10 @@
 import HeroTabs from './HeroTabs';
-import HeroTriad from './HeroTriad';
 
 /**
  * Hero — the home thesis, set in the desktop product page's own type
  * (.rhero-* verbatim, so home and product can never drift): big white title,
  * the brand gradient on the reveal, the product page's gray for the lede.
- * One CTA, then the Chat/Work/Code tab stage.
+ * One CTA, then the Chat/Work/Code/Dream tab stage.
  */
 export default function Hero() {
   return (
@@ -14,14 +13,14 @@ export default function Hero() {
       <div className="rhero-inner container">
         <div className="rhero-copy">
           <h1 className="rhero-title">
-            Every Task. Every AI. <span className="rhero-accent">One&nbsp;App.</span>
+            Chat, work &amp; code <br />
+            in one place, your way, with <span className="rhero-accent">all your AI&nbsp;models.</span>
           </h1>
           <p className="rhero-sub">
-            Glyphh pairs every task with the right AI models and runs
-            autonomously until the work is finished&mdash;working across your
-            files and apps, always under your direction. Powered by lifelong
-            memory, it unifies <HeroTriad /> into one
-            instant-switching workspace, on web or desktop.
+            Glyphh connects your AI models, apps, files, and computer in one
+            workspace. Switch instantly between research, work, code, and
+            anything you build&mdash;with persistent context and agents that
+            keep working even when your computer is off.
           </p>
           <div className="hero-ctas rhero-ctas">
             {/* ONE funnel: straight into the platform (login-first). */}
@@ -29,7 +28,7 @@ export default function Hero() {
               href={process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai'}
               className="btn btn-primary btn-lg group"
             >
-              <span className="btn-label">Try Glyphh Now</span>
+              <span className="btn-label">Launch Glyphh</span>
               <span className="btn-fill"></span>
             </a>
           </div>
