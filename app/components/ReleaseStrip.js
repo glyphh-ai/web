@@ -1,9 +1,11 @@
 import ExpandableShot from './ExpandableShot';
 
 /**
- * ReleaseStrip — "{ RELEASE }" — the payoff of the heart: work ships as a
- * live app. One looping 16:9 product video (/screen-shots/glyphh-release.mp4;
- * swap the file to refresh) under the published URL.
+ * ReleaseStrip — the Build close: work ships as a live app. Plays the same
+ * footage as the platform's web auth screen (/videos/login-hero.mp4, pulled
+ * from https://platform.glyphh.ai/brand/videos/login-hero.mp4 — the LIVE
+ * asset, not the stale copy in platform/public/videos — re-download to
+ * refresh) under the published URL.
  */
 
 export default function ReleaseStrip() {
@@ -21,7 +23,7 @@ export default function ReleaseStrip() {
         </p>
 
         <div className="reveal">
-          <ExpandableShot src="/screen-shots/glyphh-release.mp4" alt="An app built in Glyphh, released live at its own URL" />
+          <ExpandableShot src="/videos/login-hero.mp4" alt="The Glyphh build montage — the same film that plays on the app's sign-in screen" />
         </div>
       </div>
     </section>

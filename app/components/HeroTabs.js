@@ -1,17 +1,17 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ExpandableShot from './ExpandableShot';
 
 /**
- * HeroTabs — the three jobs from the headline, and the command center that
- * moves between them.
+ * HeroTabs — the STAGE under the hero: one slide per job, plus the
+ * command-center switcher flash between them.
  *
- * Command center is not a fourth tab; in the product it is the surface you
- * hit to switch layouts and apps. So it plays as the TRANSITION: click a tab
- * and the switcher flashes over the stage, the view is replaced in place
- * underneath it, and the new one is revealed as it dismisses — the same beat
- * as the real app.
+ * The tab BAR lives in Hero.js now, ABOVE the headline — the same selection
+ * drives the hero message (app/heroes.js) and this stage, so this component
+ * is controlled: pass `activeId` and it plays the switch. The old Home tab
+ * is gone; its command-center still IS the switcher overlay, so the beat
+ * survives as the transition between any two tabs.
  *
  * Static stills for now. Each tab is a slot for the gif/video that replaces
  * it; ExpandableShot renders video off the file extension, so swapping `src`
@@ -21,15 +21,9 @@ import ExpandableShot from './ExpandableShot';
 const SWITCHER = '/screen-shots/hero/command-center.png';
 
 // The re-cut payoff frames, all captured at one window geometry so the
-// command-center flash lands registered on top of them. The hero/<tab>/step-*
-// sequences are the same states in progress, kept for the animated version.
-const TABS = [
-  {
-    id: 'home',
-    label: 'Home',
-    src: '/screen-shots/hero/command-center.png',
-    alt: 'Home — the command center: every app, layout, and session on one wall',
-  },
+// command-center flash lands registered on top of them. Exported so Hero.js
+// renders the bar from the same list.
+export const TABS = [
   {
     id: 'chat',
     label: 'Chat',
@@ -51,8 +45,12 @@ const TABS = [
   {
     id: 'dream',
     label: 'Dream',
-    kind: 'dream',
-    alt: 'Dream — marketplace apps like HeyGen and Lovable, cloned into Glyphh and running on the AI subscription you already pay for',
+    // The home-page dream film (marketing/Glyphh-3.0/home-dream.mp4 —
+    // recopy to refresh). The DreamReel (below) is benched: its
+    // /screen-shots/hero/dream/* stills were never shot, so the reel
+    // flipped through blank frames — restore `kind: 'dream'` when they land.
+    src: '/videos/home-dream.mp4',
+    alt: 'Dream — the Glyphh dream film: ideas becoming running apps inside the workspace',
   },
 ];
 
@@ -133,33 +131,23 @@ function DreamReel({ active }) {
   );
 }
 
-// The slide-in description panel per tab: a LABEL (the { … } eyebrow — the
-// tab's name, except Home, which reads as the workspace itself), a KICKER
-// (what it's for, one line) and a BODY (the concrete things you'd do there).
-// Chat's copy is canon — the others follow its shape.
+// The slide-in description panel per tab: a KICKER (what it's for, one line)
+// and a BODY (the concrete things you'd do there). Chat's copy is canon —
+// the others follow its shape.
 const TAB_INFO = {
-  home: {
-    label: 'THE WORKSPACE',
-    kicker: 'For getting anywhere in one keystroke.',
-    body: 'The command center is home — your apps, layouts, and sessions on one wall. Open something, switch jobs, or start fresh, from anywhere in the app.',
-  },
   chat: {
-    label: 'CHAT',
     kicker: 'For questions, learning, and everyday help.',
     body: 'Ask anything — the right model answers, with your browser, files, and apps working beside it. Explain concepts, draft messaging, search the web, generate images, compare options, or think through a decision.',
   },
   work: {
-    label: 'WORK',
     kicker: 'For the tasks that fill your day.',
     body: 'A 24/7 assistant working beside you — consolidating your inbox, prepping you for calls, generating slides and docs. Email, calendar, and comms side by side on one page, the agent triaging, drafting, and acting while you steer.',
   },
   code: {
-    label: 'CODE',
     kicker: 'For building real software.',
     body: 'Build and ship live beside the conversation — plan features, edit code, run terminals, review diffs, and ship from your repo. Live at <your-app>.glyphh.app in one click.',
   },
   dream: {
-    label: 'DREAM',
     kicker: 'For building how you want to work.',
     body: 'Build user interfaces for the way you work, natively integrated into the workspace — wired to any AI model, your memory, and your connections.',
   },
@@ -207,10 +195,12 @@ function TabCaption({ tab, switching }) {
   );
 }
 
-export default function HeroTabs() {
-  const [index, setIndex] = useState(0);
+export default function HeroTabs({ activeId = 'work' }) {
+  // `shown` trails `activeId` by the switcher flash: the swap happens while
+  // the command-center covers the stage, so the change is never seen
+  // mid-flight — the reveal is the payoff.
+  const [shown, setShown] = useState(activeId);
   const [switching, setSwitching] = useState(false);
-  const btnRefs = useRef([]);
   const timers = useRef([]);
 
   const clearTimers = () => {
@@ -219,82 +209,38 @@ export default function HeroTabs() {
   };
   useEffect(() => clearTimers, []);
 
-  const goTo = useCallback((next) => {
-    if (next === index) return;
-    // A second click mid-switch restarts the sequence rather than stacking
+  useEffect(() => {
+    if (activeId === shown) return;
+    // A re-select mid-switch restarts the sequence rather than stacking
     // timers and leaving the switcher stuck on.
     clearTimers();
-
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // HOME IS the command center — leaving it (or landing on it) needs no
-    // command-center flash; the beat only plays between two non-home tabs.
-    const touchesHome = TABS[index].id === 'home' || TABS[next].id === 'home';
-    if (reduced || touchesHome) { setIndex(next); setSwitching(false); return; }
-
+    // Dream cuts straight to the film — no command-center flash on the way in.
+    if (reduced || activeId === 'dream') { setShown(activeId); setSwitching(false); return; }
     setSwitching(true);
-    // The swap happens while the switcher covers the stage, so the change is
-    // never seen mid-flight — the reveal is the payoff.
-    timers.current.push(setTimeout(() => setIndex(next), IN + HOLD));
+    timers.current.push(setTimeout(() => setShown(activeId), IN + HOLD));
     timers.current.push(setTimeout(() => setSwitching(false), IN + HOLD + 20));
-  }, [index]);
+  }, [activeId, shown]);
 
-  // The hero lede's "Chat, Work & Code" words aim the stage: hovering one
-  // switches to its tab through the same goTo beat as a click.
+  // A video slide can arrive PAUSED — autoplay fired while its panel was
+  // still inert — so nudge playback whenever the shown slide holds one.
   useEffect(() => {
-    const onAim = (e) => {
-      const i = TABS.findIndex((t) => t.id === e.detail);
-      if (i >= 0) goTo(i);
-    };
-    window.addEventListener('glyphh:hero-triad', onAim);
-    return () => window.removeEventListener('glyphh:hero-triad', onAim);
-  }, [goTo]);
-
-  // A role="tablist" is expected to move with the arrow keys, and only the
-  // selected tab stays in the tab order (roving tabindex, below).
-  const onKeyDown = (e) => {
-    const next =
-      e.key === 'ArrowRight' ? (index + 1) % TABS.length :
-      e.key === 'ArrowLeft' ? (index - 1 + TABS.length) % TABS.length :
-      e.key === 'Home' ? 0 :
-      e.key === 'End' ? TABS.length - 1 : -1;
-    if (next === -1) return;
-    e.preventDefault();
-    goTo(next);
-    btnRefs.current[next]?.focus();
-  };
+    const v = document.querySelector(`#htabpanel-${shown} video`);
+    if (v && v.paused) v.play().catch(() => {});
+  }, [shown]);
 
   return (
     <div className="htabs">
-      <div className="htabs-bar" role="tablist" aria-label="What Glyphh does" onKeyDown={onKeyDown}>
-        {TABS.map((t, i) => (
-          <button
-            key={t.id}
-            ref={(el) => { btnRefs.current[i] = el; }}
-            type="button"
-            role="tab"
-            id={`htab-${t.id}`}
-            aria-selected={index === i}
-            aria-controls={`htabpanel-${t.id}`}
-            tabIndex={index === i ? 0 : -1}
-            className={`htab${index === i ? ' is-active' : ''}`}
-            onClick={() => goTo(i)}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="htabs-panel">
-        <div className="htabs-side">
-          <TabCaption tab={TABS[index].id} switching={switching} />
-        </div>
+      {/* The side caption (TabCaption) is HIDDEN for now — the stage rides
+          full-width. The component stays; it likely moves to its own section. */}
+      <div className="htabs-panel htabs-panel-full">
         <div className="htabs-viewport">
 
           <div className="htabs-track">
-            {TABS.map((t, i) => (
+            {TABS.map((t) => (
               <div
                 key={t.id}
-                className={`htabs-slide${index === i ? ' is-active' : ''}`}
+                className={`htabs-slide${shown === t.id ? ' is-active' : ''}`}
                 role="tabpanel"
                 id={`htabpanel-${t.id}`}
                 aria-labelledby={`htab-${t.id}`}
@@ -302,18 +248,19 @@ export default function HeroTabs() {
                 // they are taken out of the a11y tree and focus order
                 // explicitly — otherwise their expand buttons are still
                 // tabbable behind the visible one.
-                aria-hidden={index !== i}
-                inert={index !== i}
+                aria-hidden={shown !== t.id}
+                inert={shown !== t.id}
               >
                 {t.kind === 'dream'
-                  ? <DreamReel active={index === i && !switching} />
-                  : <ExpandableShot src={t.src} alt={t.alt} eager={i === 0} />}
+                  ? <DreamReel active={shown === t.id && !switching} />
+                  : <ExpandableShot src={t.src} alt={t.alt} eager={t.id === 'work'} />}
               </div>
             ))}
           </div>
 
-          {/* The switcher, over the stage. Decorative — the tab bar above is
-              the real control, and this is only the animation between states. */}
+          {/* The switcher, over the stage. Decorative — the tab bar in the
+              hero is the real control, and this is only the animation
+              between states. */}
           <div className={`htabs-switcher${switching ? ' is-on' : ''}`} aria-hidden="true">
             <img src={SWITCHER} alt="" />
           </div>
