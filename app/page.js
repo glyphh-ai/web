@@ -1,3 +1,4 @@
+import { headers } from 'next/headers';
 import Nav from './components/Nav';
 import Reveal from './components/Reveal';
 import Hero from './components/Hero';
@@ -14,12 +15,22 @@ import Footer from './components/Footer';
 // (tabs + dream reel) stays in the tree until the switching story lands in
 // its own band, then gets deleted or absorbed.
 
-export default function Home() {
+// glyphh.ai/code and glyphh.ai/work are internally rewritten to this page with
+// a different hero (see ../middleware.js). Canonicalize every variant to the
+// root so search engines treat them as one page — no SEO fragmentation.
+export const metadata = {
+  alternates: { canonical: '/' },
+};
+
+export default async function Home() {
+  // The middleware tags campaign paths with a hero variant; bare glyphh.ai has
+  // no header and falls back to `default`.
+  const variant = (await headers()).get('x-hero-variant') || 'default';
   return (
     <div className="home-page">
       <Reveal />
       <Nav />
-      <Hero />
+      <Hero variant={variant} />
       {/* The new messaging pass, top-down: header bands for every section of
           the story. Bodies land under them next; nothing below is removed
           until each band absorbs or replaces its old section. */}

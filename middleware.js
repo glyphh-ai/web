@@ -2,6 +2,17 @@ import { NextResponse } from 'next/server';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.dotyo.dev';
 
+// Hero message variants: campaign paths render the SAME home page with a
+// different hero. The path selects the message; page.js canonicalizes back to
+// glyphh.ai so nothing fragments. Add a path here (and a matching entry in
+// app/heroes.js) to launch a new test — no other change needed.
+const HERO_VARIANTS = {
+  '/chat': 'chat',
+  '/code': 'code',
+  '/work': 'work',
+  '/dream': 'dream',
+};
+
 export function middleware(request) {
   const { pathname } = request.nextUrl;
 
@@ -13,7 +24,19 @@ export function middleware(request) {
     }
   }
 
-  const response = NextResponse.next();
+  let response;
+  const heroVariant = HERO_VARIANTS[pathname];
+  if (heroVariant) {
+    // Rewrite to the home route (URL bar keeps /code or /work) and pass the
+    // chosen variant along as a request header for page.js to read.
+    const url = request.nextUrl.clone();
+    url.pathname = '/';
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set('x-hero-variant', heroVariant);
+    response = NextResponse.rewrite(url, { request: { headers: requestHeaders } });
+  } else {
+    response = NextResponse.next();
+  }
 
   // Security headers
   response.headers.set('X-Content-Type-Options', 'nosniff');

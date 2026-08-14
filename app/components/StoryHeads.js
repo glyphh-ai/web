@@ -59,8 +59,8 @@ const HEADS = [
     label: 'MODELS',
     title: 'Your workflow. Any intelligence.',
     ledes: [
-      'Use frontier, open-weight, self-hosted, local, or cloud models. Give every Loop the models it needs, then swap them instantly without losing state.',
-      'Or build your own deterministic Loops—repeatable reasoning circuits that run the models, tools, and steps you define, in the order you define them. Shape each one to your workflow, your Workspace, and your apps, and get the same dependable process every run.',
+      'The AI editor that runs Claude, GPT, Gemini, Kimi K3, and more side by side—frontier, open-weight, self-hosted, local, or cloud. Switch models mid-thought, loop agents on the hard problems, and only pay for what you run.',
+      'Or build your own deterministic Loops that interchange them—repeatable reasoning circuits running the models, tools, and steps you define, in the order you define them. Shape each one to your workflow, your Workspace, and your apps, and get the same dependable process every run.',
     ],
     // "The right models, every task" shot, promoted from the detail grid.
     shot: {
