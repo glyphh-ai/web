@@ -171,9 +171,9 @@ export default function OfficePage() {
               The office suite that <span className="hero-accent">writes itself</span><span className="dot">.</span>
             </h1>
             <p className="page-hero-sub">
-              Slides, Docs, Sheets and Drive — built for the age of agents. You describe, your agent
-              authors, you review and present. Every document lives in your org, on every surface,
-              and shares one memory with your conversations.
+              Slides, Docs, Sheets and Drive — except you don&rsquo;t write them. Say what you
+              want, get real documents back, approve what ships. Everything lives in your org, on
+              every surface, and shares one memory with your conversations.
             </p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
