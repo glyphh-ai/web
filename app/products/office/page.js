@@ -161,36 +161,38 @@ export default function OfficePage() {
 
       {/* ── HERO ── */}
       <header className="page-hero page-hero-tight op-hero">
-        <div className="container">
-          <div className="hero-badge">
-            <span className="badge-dot" aria-hidden="true"></span>
-            GLYPHH OFFICE
-          </div>
-          <h1 className="page-hero-title">
-            The office suite that <span className="hero-accent">writes itself</span><span className="dot">.</span>
-          </h1>
-          <p className="page-hero-sub">
-            Slides, Docs, Sheets and Drive — built for the age of agents. You describe, your agent
-            authors, you review and present. Every document lives in your org, on every surface,
-            and shares one memory with your conversations.
-          </p>
-          <div className="hero-ctas">
-            <a href="/#download" className="btn btn-primary btn-lg group">
-              <span className="btn-label">Get Glyphh Desktop — Free</span>
-              <span className="btn-fill"></span>
-            </a>
-            <a href="#memory" className="btn btn-ghost btn-lg group">
-              <span className="btn-label">See the memory</span>
-              <span className="btn-fill"></span>
-            </a>
+        <div className="container op-hero-inner">
+          <div className="op-hero-copy">
+            <div className="hero-badge">
+              <span className="badge-dot" aria-hidden="true"></span>
+              GLYPHH OFFICE
+            </div>
+            <h1 className="page-hero-title">
+              The office suite that <span className="hero-accent">writes itself</span><span className="dot">.</span>
+            </h1>
+            <p className="page-hero-sub">
+              Slides, Docs, Sheets and Drive — built for the age of agents. You describe, your agent
+              authors, you review and present. Every document lives in your org, on every surface,
+              and shares one memory with your conversations.
+            </p>
+            <div className="hero-ctas">
+              <a href="/#download" className="btn btn-primary btn-lg group">
+                <span className="btn-label">Get Glyphh Desktop — Free</span>
+                <span className="btn-fill"></span>
+              </a>
+              <a href="#memory" className="btn btn-ghost btn-lg group">
+                <span className="btn-label">See the memory</span>
+                <span className="btn-fill"></span>
+              </a>
+            </div>
           </div>
 
-          {/* The collage — all four apps, fanned. */}
+          {/* The suite — the four marks, clean. */}
           <div className="op-collage reveal" aria-hidden="true">
-            <div className="op-collage-item op-c1"><SlidesMock /></div>
-            <div className="op-collage-item op-c2"><DocsMock /></div>
-            <div className="op-collage-item op-c3"><SheetsMock /></div>
-            <div className="op-collage-item op-c4"><DriveMock /></div>
+            <div className="op-icon-tile op-it-slides">{ICONS.slides}<span>Slides</span></div>
+            <div className="op-icon-tile op-it-docs">{ICONS.docs}<span>Docs</span></div>
+            <div className="op-icon-tile op-it-sheets">{ICONS.sheets}<span>Sheets</span></div>
+            <div className="op-icon-tile op-it-drive">{ICONS.drive}<span>Drive</span></div>
           </div>
         </div>
       </header>

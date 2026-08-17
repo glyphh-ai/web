@@ -6154,14 +6154,14 @@ body:has(.home-page) { background: #000; }
   background: #0d0d0d;
 }
 
-/* ── The footer opens with the same tape the hero closed on. ── */
+/* ── A thin, faint rule where the footer begins. ── */
 .home-page footer { position: relative; }
 .home-page footer::after {
   content: '';
   position: absolute;
   left: 0; right: 0; top: 0;
-  height: 6px;
-  background: repeating-linear-gradient(-45deg, var(--accent) 0 14px, #000 14px 28px);
+  height: 1px;
+  background: rgba(140, 59, 242, 0.18);
 }
 
 /* ── Edge alignment, cross-page: the same hard 4px corners home carries,
@@ -6184,21 +6184,36 @@ body:has(.home-page) { background: #000; }
 
 /* ════ GLYPHH OFFICE product page (/products/office) ════ */
 
-.op-hero { padding-bottom: 0; }
-
-/* — the collage: four mockups fanned like a hand of cards — */
-.op-collage {
-  position: relative;
-  height: clamp(300px, 42vw, 480px);
-  margin: 4rem auto 0;
-  max-width: 1080px;
+/* — hero: copy left, the four marks right (research-page shape) — */
+.op-hero-inner {
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 3rem; align-items: center;
+  text-align: left;
 }
-.op-collage-item { position: absolute; transition: transform 300ms ease; }
-.op-collage-item:hover { transform: translateY(-10px) rotate(0deg) scale(1.02); z-index: 5; }
-.op-c1 { left: 4%; top: 6%; width: 40%; transform: rotate(-4deg); z-index: 3; }
-.op-c2 { left: 30%; top: 0; width: 30%; transform: rotate(1.5deg); z-index: 4; }
-.op-c3 { right: 4%; top: 8%; width: 38%; transform: rotate(3.5deg); z-index: 2; }
-.op-c4 { left: 40%; top: 52%; width: 26%; transform: rotate(-2deg); z-index: 4; }
+.op-hero-inner .page-hero-sub { margin-left: 0; }
+.op-hero-inner .hero-ctas { justify-content: flex-start; }
+
+.op-collage {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem;
+  max-width: 400px; margin: 0 auto;
+}
+.op-icon-tile {
+  display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+  padding: 2rem 1rem 1.6rem;
+  border: 1px solid var(--border); border-radius: 18px;
+  background: var(--surface);
+  font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-2);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.op-icon-tile svg { width: 58px; height: 58px; }
+.op-icon-tile:hover { transform: translateY(-5px); }
+/* A whisper of each product's color under its tile. */
+.op-it-slides:hover { border-color: rgba(140, 59, 242, 0.5); box-shadow: 0 18px 44px -18px rgba(140, 59, 242, 0.5); }
+.op-it-docs:hover { border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 18px 44px -18px rgba(59, 130, 246, 0.5); }
+.op-it-sheets:hover { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 18px 44px -18px rgba(16, 185, 129, 0.5); }
+.op-it-drive:hover { border-color: rgba(45, 212, 191, 0.5); box-shadow: 0 18px 44px -18px rgba(45, 212, 191, 0.5); }
+/* The gentle stagger: the right column floats a touch lower. */
+.op-icon-tile:nth-child(even) { transform: translateY(14px); }
+.op-icon-tile:nth-child(even):hover { transform: translateY(9px); }
 
 /* — mockups: the products drawn in CSS — */
 .op-mock {
@@ -6295,7 +6310,9 @@ body:has(.home-page) { background: #000; }
   .op-prod { grid-template-columns: 1fr; }
   .op-prod-flip .op-prod-copy { order: 1; }
   .op-prod-flip .op-prod-mock { order: 2; }
-  .op-collage { display: none; }
+  .op-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+  .op-hero-inner .hero-ctas { justify-content: center; }
+  .op-hero-inner .page-hero-sub { margin-left: auto; margin-right: auto; }
 }
 
 /* — memory band — */
