@@ -11,8 +11,9 @@ const nextConfig = {
   allowedDevOrigins: ['192.168.1.41', '192.168.1.*'],
   async redirects() {
     return [
-      // ONE-PAGE SITE (2026-08-12): the product pages are absorbed into home.
-      { source: '/products/:path*', destination: '/', permanent: false },
+      // Products is a real section again (2026-08-16, Glyphh Office). The bare
+      // index lands on the suite page; retired product URLs fall through to 404.
+      { source: '/products', destination: '/products/office', permanent: false },
     ];
   },
 };
