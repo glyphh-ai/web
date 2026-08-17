@@ -180,19 +180,29 @@ export default function OfficePage() {
                 <span className="btn-label">Get Glyphh Desktop — Free</span>
                 <span className="btn-fill"></span>
               </a>
-              <a href="#memory" className="btn btn-ghost btn-lg group">
-                <span className="btn-label">See the memory</span>
-                <span className="btn-fill"></span>
-              </a>
             </div>
           </div>
 
-          {/* The suite — the four marks, clean. */}
+          {/* The suite — the four marks around the glyphh core and its memory. */}
           <div className="op-collage reveal" aria-hidden="true">
             <div className="op-icon-tile op-it-slides">{ICONS.slides}<span>Slides</span></div>
             <div className="op-icon-tile op-it-docs">{ICONS.docs}<span>Docs</span></div>
             <div className="op-icon-tile op-it-sheets">{ICONS.sheets}<span>Sheets</span></div>
             <div className="op-icon-tile op-it-drive">{ICONS.drive}<span>Drive</span></div>
+            <div className="op-hub">
+              <span className="op-hub-ring" />
+              <img src="/glyphh-mascot-square.png" alt="" width="72" height="72" />
+              <span className="op-hub-mem">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="2.4" fill="currentColor" />
+                  <circle cx="5" cy="6.5" r="1.6" fill="currentColor" opacity="0.7" />
+                  <circle cx="19" cy="6.5" r="1.6" fill="currentColor" opacity="0.7" />
+                  <circle cx="12" cy="20" r="1.6" fill="currentColor" opacity="0.7" />
+                  <path d="M6.3 7.4 10.4 11M17.7 7.4 13.6 11M12 14.6V18" stroke="currentColor" strokeWidth="1.2" opacity="0.55" />
+                </svg>
+                memory
+              </span>
+            </div>
           </div>
         </div>
       </header>

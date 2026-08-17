@@ -6193,8 +6193,9 @@ body:has(.home-page) { background: #000; }
 .op-hero-inner .hero-ctas { justify-content: flex-start; }
 
 .op-collage {
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem;
-  max-width: 400px; margin: 0 auto;
+  position: relative;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem;
+  max-width: 420px; margin: 0 auto;
 }
 .op-icon-tile {
   display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
@@ -6211,9 +6212,38 @@ body:has(.home-page) { background: #000; }
 .op-it-docs:hover { border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 18px 44px -18px rgba(59, 130, 246, 0.5); }
 .op-it-sheets:hover { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 18px 44px -18px rgba(16, 185, 129, 0.5); }
 .op-it-drive:hover { border-color: rgba(45, 212, 191, 0.5); box-shadow: 0 18px 44px -18px rgba(45, 212, 191, 0.5); }
-/* The gentle stagger: the right column floats a touch lower. */
-.op-icon-tile:nth-child(even) { transform: translateY(14px); }
-.op-icon-tile:nth-child(even):hover { transform: translateY(9px); }
+
+/* — the glyphh core: the mascot glowing at the center of the suite,
+     with its memory hanging off it (the about-deck home-slide look) — */
+.op-hub {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.55rem;
+  pointer-events: none;
+}
+.op-hub img {
+  position: relative; z-index: 1;
+  width: 72px; height: 72px; border-radius: 18px;
+  background: #000; border: 1px solid rgba(140, 59, 242, 0.45);
+  box-shadow:
+    0 0 0 7px var(--bg),
+    0 0 46px rgba(140, 59, 242, 0.55);
+}
+.op-hub-ring {
+  position: absolute; top: -8px; width: 88px; height: 88px; border-radius: 50%;
+  border: 1px dashed rgba(179, 107, 251, 0.5);
+  animation: rp-spin 14s linear infinite;
+}
+.op-hub-mem {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em;
+  color: var(--accent-light);
+  padding: 3px 10px; border-radius: 100px;
+  border: 1px solid rgba(140, 59, 242, 0.45);
+  background: rgba(10, 6, 16, 0.9);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+.op-hub-mem svg { width: 13px; height: 13px; }
 
 /* — mockups: the products drawn in CSS — */
 .op-mock {
