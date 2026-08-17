@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 export const metadata = {
   title: 'Glyphh Office — the office suite that writes itself',
   description:
-    'Slides, Docs, Sheets and Drive, built for the age of agents: you describe, your agent authors, you review and present. Every document lives in your org, runs on any model you choose, and shares one memory with your conversations.',
+    'Slides, Docs, Sheets and Drive — except you don\u2019t write them. Say what you want, get real documents back, approve what ships. Everything lives in your org, runs on any model you choose, and shares one memory with your conversations.',
 };
 
 /* The suite's filled marks — the same SVGs the desktop ships. */

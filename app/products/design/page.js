@@ -3,9 +3,9 @@ import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
 
 export const metadata = {
-  title: 'Glyphh Design — brand guidelines your agent actually follows',
+  title: 'Glyphh Design — a design system for everything you ship',
   description:
-    'One design system per org — colors, fonts, type and styles — extracted by your agent from a site, an image, or a sentence. Stored in memory, consumed as a live CSS contract by the apps you build, your slide decks, and your documents.',
+    'Spin up a real design system for anything — a marketing site, a web app, a client build. Ripped from a site, read off a logo, or conjured from one sentence; compiled to CSS; remembered by your org so everything built on it stays on-system.',
 };
 
 /* The suite's filled marks — Design leads, the Office consumers follow. */
@@ -110,39 +110,39 @@ function ContractMock() {
 const EXTRACT = [
   {
     tag: 'from a site',
-    title: 'Point it at your homepage.',
-    desc: 'The agent fetches the page and its stylesheets and counts what they actually use — every color by frequency, every font family, every radius. Evidence first: it picks your true brand colors out of the noise, not every gray it found.',
+    title: 'Point it at any site you love.',
+    desc: 'Glyphh pulls the page and its stylesheets and counts what they actually use — every color by frequency, every font family, every radius. Evidence, not vibes: it picks the real system out of the noise instead of worshipping every gray it found.',
   },
   {
     tag: 'from an image',
-    title: 'Hand it your logo.',
-    desc: 'The agent looks at the image and cross-checks its eye against a deterministic palette read — the dominant colors, quantized, with their share of the frame. A logo beats a screenshot; it will ask for one if the brand matters.',
+    title: 'Throw it a logo.',
+    desc: 'It reads the image and cross-checks itself against a cold, deterministic palette read — dominant colors, quantized, with their share of the frame. A logo beats a screenshot, and it will say so.',
   },
   {
     tag: 'from a sentence',
-    title: 'Or just describe it.',
-    desc: '“Warm, editorial, serif.” That’s enough. The agent authors a coherent system — a primary, an accent, neutrals that hold up, named palette roles — and records why it chose what it chose. Provenance travels with the system.',
+    title: 'Or just say it.',
+    desc: '“Warm, editorial, serif.” Done. You get a coherent system — a primary, an accent, neutrals that hold up, named palette roles — with a note on why every choice was made. Provenance travels with the system.',
   },
 ];
 
 const CONSUMERS = [
   {
     icon: ICONS.apps,
-    name: 'Apps',
-    title: 'Every app your org builds ships on brand.',
-    desc: 'This is the point. When your agent builds an app — an internal dashboard or a product your team ships to customers — it checks for the org’s design system first and styles with it by default. The system arrives as a live CSS contract: one :root block of --design-* variables the app maps its own styles onto. Change the system, and the next build follows.',
+    name: 'Web & app dev',
+    title: 'Start every project past the boring part.',
+    desc: 'This is the point. Build a web app, a dashboard, a product for customers — and it starts already styled, because the system arrives as a live CSS contract: one :root block of --design-* variables any stack maps its own styles onto. No default Bootstrap, no re-picking the same purple in the fourth codebase. Change the system once and the next build follows.',
+  },
+  {
+    icon: ICONS.design,
+    name: 'Client work',
+    title: 'One system per client. Zero brand bleed.',
+    desc: 'You build for other people. Keep a shelf of systems — one per client, per product, per experiment — and every project recalls its own. Switch from the fintech client to the record label and the whole toolchain switches brains with you: right palette, right type, right tone, no leftovers.',
   },
   {
     icon: ICONS.slides,
-    name: 'Slides',
-    title: 'Decks that look like they came from your company.',
-    desc: 'When the agent authors a deck, the system’s palette, fonts and tone are already in its hands — recalled from memory, not pasted in. Your quarterly review and your customer pitch stop looking like two different companies.',
-  },
-  {
-    icon: ICONS.docs,
-    name: 'Docs & everything else',
-    title: 'Brand guidelines the agent actually follows.',
-    desc: 'A traditional brand-guidelines PDF is a promise nobody keeps. A Glyphh design system is enforced by the author itself: documents, proposals, whatever the agent writes next — the tone words steer the voice, the type rules shape the page.',
+    name: 'Marketing & Office',
+    title: 'The launch page matches the product. So does the deck.',
+    desc: 'The same system that styles the app styles the landing page, the pitch deck, and the proposal doc — Slides and Docs pull it from memory instead of guessing. Your own company brand? That’s just one more system on the shelf, not the product.',
   },
 ];
 
@@ -161,12 +161,12 @@ export default function DesignPage() {
               GLYPHH DESIGN
             </div>
             <h1 className="page-hero-title">
-              Your brand, <span className="hero-accent">extracted</span><span className="dot">.</span>
+              Every build gets a <span className="hero-accent">design system</span><span className="dot">.</span>
             </h1>
             <p className="page-hero-sub">
-              One design system per org — colors, fonts, type and styles — pulled by your agent
-              from your site, your logo, or a sentence. Stored in your org&rsquo;s memory and
-              consumed by everything it builds: apps first, then slides, docs, and whatever comes next.
+              The marketing site, the web app, the client gig, the weekend hack — each one gets its
+              own real system: colors, fonts, type, styles, compiled to one CSS contract. Show it a
+              site you love, a logo, or a sentence. Everything built on it ships on-system.
             </p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
@@ -203,11 +203,11 @@ export default function DesignPage() {
             <div className="op-prod-mark">{ICONS.design} Glyphh Design</div>
             <h3>A brand kit that compiles.</h3>
             <p>
-              A design system here isn&rsquo;t a mood board — it&rsquo;s a document with a wire
-              format. Every system renders as one CSS block of <code>--design-*</code> variables:
-              colors, font stacks, type scale, radius, shadow, gradient. Apps hot-link it,
-              agents read it, and the studio edits it live — change the primary once and
-              everything downstream follows.
+              A design system here isn&rsquo;t a mood board or a 60-page PDF nobody opens —
+              it&rsquo;s a document with a wire format. Every system renders as one CSS block of
+              <code> --design-*</code> variables: colors, font stacks, type scale, radius, shadow,
+              gradient. Sites hot-link it, codebases map onto it, the studio edits it live —
+              change the primary once and everything downstream follows.
             </p>
           </div>
           <div className="op-prod-mock reveal"><ContractMock /></div>
@@ -240,13 +240,13 @@ export default function DesignPage() {
       <section className="op-memory" id="memory">
         <div className="container">
           <span className="rp-eyebrow">{'{'} one memory {'}'}</span>
-          <h2 className="section-title">Guidelines that are impossible to forget.</h2>
+          <h2 className="section-title">A style guide that talks back.</h2>
           <p className="op-memory-sub">
-            Every design system is embedded into your org&rsquo;s <em>one memory plane</em> the
-            moment it&rsquo;s saved — beside your decks, documents, workbooks and conversations.
-            Ask &ldquo;what&rsquo;s our brand font?&rdquo; in any session and the answer comes back
-            like a memory, because it is one. Build anything, anywhere in Glyphh, and the brand
-            is already in the room.
+            Every system is embedded into your org&rsquo;s <em>one memory plane</em> the moment
+            it&rsquo;s saved — beside your decks, documents, workbooks and conversations. Start
+            building anything, anywhere in Glyphh, and the right system is already in the room.
+            Ask &ldquo;what font does the fintech project use?&rdquo; and the answer comes back
+            like a memory, because it is one.
           </p>
           <div className="op-memory-diagram reveal" aria-hidden="true">
             <div className="op-mem-center"><span className="op-mem-core" /> one memory</div>
@@ -268,8 +268,8 @@ export default function DesignPage() {
               <p>Every system remembers where it came from — the site it was extracted from, the logo it was read off, the words that described it — so the next edit starts from evidence.</p>
             </div>
             <div className="op-memory-point">
-              <h4>One source, org-wide</h4>
-              <p>The system lives in your org, not on someone&rsquo;s laptop. Update it in the studio and every member&rsquo;s agent builds with the new brand from the next turn on.</p>
+              <h4>A shelf, not a file</h4>
+              <p>Hundreds of systems per org if you want them — per client, per product, per mood. They live in your org, not on someone&rsquo;s laptop, and every member builds from the same shelf.</p>
             </div>
           </div>
         </div>
@@ -279,8 +279,8 @@ export default function DesignPage() {
       <section className="final-cta">
         <div className="container">
           <div className="cta-card reveal">
-            <h2>Set the brand once. Build forever.</h2>
-            <p>Glyphh Design ships with Glyphh Desktop — extract your first system in one sentence.</p>
+            <h2>Build the system. Then build everything else.</h2>
+            <p>Glyphh Design ships with Glyphh Desktop — rip your first system from a site in one sentence.</p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
                 <span className="btn-label">Download Glyphh</span>
