@@ -6182,10 +6182,34 @@ body:has(.home-page) { background: #000; }
 .pillar-tag,
 .rp-soon { border-radius: 3px; }
 
-/* ════ GLYPHH OFFICE product page (/products/office) ════ */
+/* ════ GLYPHH OFFICE + GLYPHH DESIGN product pages ════ */
+
+/* Same identity treatment as the research page: pure-black canvas + a hero
+   glow. Office leans violet→pink; the Design page flips the lean to pink. */
+.office-page {
+  --bg: #000;
+  background: #000;
+  min-height: 100dvh;
+}
+body:has(.office-page) { background: #000; }
+
+.op-hero { position: relative; overflow: hidden; }
+.op-hero::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 55% at 22% 4%, rgba(140, 59, 242, 0.16), transparent 62%),
+    radial-gradient(ellipse 55% 50% at 90% 40%, rgba(236, 72, 153, 0.11), transparent 60%);
+}
+.design-page .op-hero::before {
+  background:
+    radial-gradient(ellipse 60% 55% at 22% 4%, rgba(236, 72, 153, 0.15), transparent 62%),
+    radial-gradient(ellipse 55% 50% at 90% 40%, rgba(140, 59, 242, 0.13), transparent 60%);
+}
 
 /* — hero: copy left, the four marks right (research-page shape) — */
 .op-hero-inner {
+  position: relative; z-index: 1;
   display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 3rem; align-items: center;
   text-align: left;
 }

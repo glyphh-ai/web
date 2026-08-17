@@ -148,7 +148,7 @@ const CONSUMERS = [
 
 export default function DesignPage() {
   return (
-    <div className="office-page">
+    <div className="office-page design-page">
       <Reveal />
       <Nav />
 
