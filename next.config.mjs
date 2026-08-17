@@ -11,9 +11,9 @@ const nextConfig = {
   allowedDevOrigins: ['192.168.1.41', '192.168.1.*'],
   async redirects() {
     return [
-      // Products is a real section again (2026-08-16, Glyphh Office). The bare
-      // index lands on the suite page; retired product URLs fall through to 404.
-      { source: '/products', destination: '/products/office', permanent: false },
+      // Products is a real section again (2026-08-16). The bare index lands on
+      // the lead product (Design); retired product URLs fall through to 404.
+      { source: '/products', destination: '/products/design', permanent: false },
     ];
   },
 };

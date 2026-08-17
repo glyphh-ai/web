@@ -9,9 +9,12 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [ddOpen, setDdOpen] = useState(false);
+  const [prodOpen, setProdOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const ddRef = useRef(null);
   const ddCloseTimer = useRef(null);
+  const prodRef = useRef(null);
+  const prodCloseTimer = useRef(null);
 
   // Hover open/close with a grace period: closing instantly on mouseleave
   // makes the panel vanish while the pointer travels from the trigger to a
@@ -25,6 +28,16 @@ export default function Nav() {
     ddCloseTimer.current = setTimeout(() => setDdOpen(false), 260);
   };
   useEffect(() => () => clearTimeout(ddCloseTimer.current), []);
+
+  const prodEnter = () => {
+    clearTimeout(prodCloseTimer.current);
+    setProdOpen(true);
+  };
+  const prodLeave = () => {
+    clearTimeout(prodCloseTimer.current);
+    prodCloseTimer.current = setTimeout(() => setProdOpen(false), 260);
+  };
+  useEffect(() => () => clearTimeout(prodCloseTimer.current), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -61,7 +74,27 @@ export default function Nav() {
             <img src="/glyphh-logo-black.png" alt="Glyphh" />
           </a>
           <div className="nav-links">
-            <a href="/products/office">Products</a>
+            <div
+              className={`nav-dd ${prodOpen ? 'open' : ''}`}
+              ref={prodRef}
+              onMouseEnter={prodEnter}
+              onMouseLeave={prodLeave}
+            >
+              <a href="/products/design" className="nav-dd-trigger">
+                Products
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </a>
+              <div className="nav-dd-panel">
+                <a href="/products/design" className="nav-dd-item">
+                  <span className="nav-dd-name">Glyphh Design</span>
+                  <span className="nav-dd-desc">Your org&rsquo;s design system — extracted, remembered, enforced.</span>
+                </a>
+                <a href="/products/office" className="nav-dd-item">
+                  <span className="nav-dd-name">Glyphh Office</span>
+                  <span className="nav-dd-desc">Slides, Docs, Sheets and Drive — the suite that writes itself.</span>
+                </a>
+              </div>
+            </div>
             <a href="/research">Research</a>
             <div
               className={`nav-dd ${ddOpen ? 'open' : ''}`}
@@ -102,7 +135,9 @@ export default function Nav() {
         </div>
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <a href="/products/office" onClick={() => setMenuOpen(false)}>Products</a>
+        <span className="mobile-menu-group">Products</span>
+        <a href="/products/design" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Design</a>
+        <a href="/products/office" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Office</a>
         <a href="/research" onClick={() => setMenuOpen(false)}>Research</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>GitHub</a>
