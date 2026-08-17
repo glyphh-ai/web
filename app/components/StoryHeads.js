@@ -21,7 +21,6 @@ const HEADS = [
     ledes: [
       'Connect Glyphh to the software, services, data, and systems you already use through thousands of MCP connections. Then let RPA reach beyond APIs and interact with the applications on your screen.',
     ],
-    tag: 'Connect almost anything. Automate almost everything. Work Seamlessly!',
   },
   {
     id: 'loops',

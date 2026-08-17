@@ -61,6 +61,7 @@ export default function Nav() {
             <img src="/glyphh-logo-black.png" alt="Glyphh" />
           </a>
           <div className="nav-links">
+            <a href="/products/office">Products</a>
             <a href="/research">Research</a>
             <div
               className={`nav-dd ${ddOpen ? 'open' : ''}`}
@@ -101,6 +102,7 @@ export default function Nav() {
         </div>
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+        <a href="/products/office" onClick={() => setMenuOpen(false)}>Products</a>
         <a href="/research" onClick={() => setMenuOpen(false)}>Research</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>GitHub</a>

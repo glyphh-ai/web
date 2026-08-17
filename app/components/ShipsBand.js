@@ -29,7 +29,7 @@ export default function ShipsBand() {
           call. No deploy, no open ports, no infra to run.
         </p>
         <div className="reveal">
-          <ExpandableShot src="/screen-shots/glyphh-release.mp4" alt="An app built in Glyphh, released live at its own URL" />
+          <ExpandableShot src="/videos/desktop-release.mp4" alt="An app built in Glyphh, released live at its own URL" />
         </div>
       </div>
     </section>
