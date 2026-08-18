@@ -14,14 +14,14 @@ export default function MarketplaceTermsPage() {
           <h1 className="policy-title">Marketplace Terms</h1>
 
           <p><strong>Effective Date:</strong> August 17, 2026</p>
-          <p><strong>Last Updated:</strong> August 17, 2026</p>
+          <p><strong>Last Updated:</strong> August 18, 2026</p>
           <p>These Marketplace Terms govern your installation and use of apps from the Glyphh Marketplace, operated by Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). They supplement our <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>. Ratings, reviews, and comments are governed by our <a href="/code-of-conduct">Code of Conduct</a>; developers who publish apps are bound by the <a href="/developer-agreement">Developer Agreement</a>.</p>
 
           <h2>1. What the Marketplace Is</h2>
-          <p>The Marketplace lists apps published by third-party developers: hosted web apps (&ldquo;Glyphh apps&rdquo;) and work panel apps that install locally on your desktop. Every release is reviewed and approved by us before it is available to install, but approval is a screening step only — it is not a warranty, endorsement, or guarantee of any app.</p>
+          <p>The Marketplace lists apps published by third-party developers: hosted web apps (&ldquo;Glyphh apps&rdquo;) and work panel apps that install locally on your desktop. Glyphh apps run on our hosting infrastructure, but they are built and operated by their developers — we host them; the developer runs them. Every release is reviewed and approved by us before it is available to install, but approval is a screening step only — it is not a warranty, endorsement, or guarantee of any app.</p>
 
           <h2>2. Installing Apps</h2>
-          <p>You choose which apps to install; installing an app is your decision and at your own risk. Installs are tied to your account or organization. Work panel apps run locally on your machine; Glyphh apps are hosted. You can uninstall any app at any time.</p>
+          <p>You choose which apps to install; installing an app is your decision and at your own risk. Installs are tied to your account or organization. Work panel apps run locally on your machine; Glyphh apps run on our infrastructure and are operated by their developers. Glyphh apps are always-on, subject to the developer&apos;s hosting standing with us: if a developer&apos;s hosting lapses, their app may become temporarily unavailable until it is restored — the app&apos;s data is retained in the meantime. You can uninstall any app at any time.</p>
 
           <h2>3. The Developer Is the Vendor of Record for Support</h2>
           <p>The developer of an app — not Glyphh — is responsible for supporting it: answering questions, fixing defects, and maintaining it. Each listing shows the developer&apos;s support contact, and the &ldquo;Support&rdquo; link on a listing points to the developer. We do not provide support for third-party apps.</p>
@@ -32,6 +32,7 @@ export default function MarketplaceTermsPage() {
             <li><strong>Renewal and lapse.</strong> The subscription renews monthly from your credit balance. If the charge cannot be met, your entitlement to the app ends and access lapses until the subscription is restored.</li>
             <li><strong>Discounts.</strong> Discounts and promotional pricing are honored as stated on the listing at the time you subscribe, for the period the listing states.</li>
             <li><strong>Refunds.</strong> Credits spent on Marketplace apps are non-refundable except as set out in our <a href="/refund">Refund Policy</a> or required by law.</li>
+            <li><strong>In-app purchases are the developer&apos;s.</strong> An app may offer its own purchases or subscriptions inside the app. Those are between you and the developer, on the developer&apos;s terms — we are not the merchant of record, and our <a href="/refund">Refund Policy</a> does not cover them.</li>
           </ul>
 
           <h2>5. Ratings, Reviews, and Comments</h2>
