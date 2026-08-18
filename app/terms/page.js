@@ -14,7 +14,8 @@ export default function TermsPage() {
           <h1 className="policy-title">Terms of Use</h1>
 
           <p><strong>Effective Date:</strong> July 3, 2026</p>
-          <p>These Terms of Use (&ldquo;Terms&rdquo;) govern your access to and use of Glyphh, including the desktop application, the hosted platform, and the Glyphh relay that connects your own AI tools to your workspace (collectively, the &ldquo;Service&rdquo;), provided by Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). By installing, accessing, or using the Service, you agree to be bound by these Terms.</p>
+          <p><strong>Last Updated:</strong> August 17, 2026</p>
+          <p>These Terms of Use (&ldquo;Terms&rdquo;) govern your access to and use of Glyphh, including the desktop application, the hosted platform, the Glyphh relay that connects your own AI tools to your workspace, and the Glyphh Marketplace (collectively, the &ldquo;Service&rdquo;), provided by Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). By installing, accessing, or using the Service, you agree to be bound by these Terms. Use of the Marketplace is additionally governed by our <a href="/marketplace-terms">Marketplace Terms</a> and <a href="/code-of-conduct">Code of Conduct</a>; developers who publish apps also agree to the <a href="/developer-agreement">Developer Agreement</a>. Data handling is described in our <a href="/privacy">Privacy Policy</a>.</p>
 
           <h2>1. Eligibility</h2>
           <p>You must be at least 13 years old to use the Service. If you are under 18, you represent that your parent or legal guardian has reviewed and agreed to these Terms on your behalf.</p>
@@ -75,31 +76,42 @@ export default function TermsPage() {
             <li><strong>Payments and taxes.</strong> Payments are processed by Stripe. You authorize us and Stripe to charge your selected payment method for your plan and for any top-ups or automatic top-ups you enable. Stated prices exclude taxes, which you are responsible for where applicable.</li>
           </ul>
 
-          <h2>6. Intellectual Property</h2>
+          <h2>6. Marketplace</h2>
+          <p>The Glyphh Marketplace lets you browse and install apps published by third-party developers, including web apps (&ldquo;Glyphh apps&rdquo;) that run inside your organization&apos;s Glyphh environment and desktop work panel apps that install locally on your machine. Your use of the Marketplace is additionally governed by our <a href="/marketplace-terms">Marketplace Terms</a>; this section summarizes the core rules.</p>
+          <ul>
+            <li><strong>Access and installs.</strong> You choose which apps to install. Installs are tied to your account or organization, and continued access to a paid app depends on maintaining its credit subscription.</li>
+            <li><strong>Credits-only pricing.</strong> Marketplace apps are priced exclusively in credits. As stated in Section 5, credits are a prepaid, limited license to use the Service — not money, currency, or stored value. Purchased and granted credits are never redeemable for cash, we never pay dollars for credits, and credits spent on Marketplace apps are non-refundable except as set out in our <a href="/refund">Refund Policy</a>. Revenue that Marketplace developers earn from app subscriptions is payable solely under the payout program in the <a href="/developer-agreement">Developer Agreement</a>; that program is the only means by which Marketplace activity results in a payment, and it does not make any credit redeemable for cash.</li>
+            <li><strong>Approval is not a warranty.</strong> Every app and every release is reviewed and approved by us before it appears on the Marketplace. Approval is a screening step, not a warranty, endorsement, or guarantee of any app&apos;s quality, safety, accuracy, or fitness for any purpose. Third-party apps are provided by their developers, not by us.</li>
+            <li><strong>Support is the developer&apos;s responsibility.</strong> The developer of a Marketplace app — not Glyphh — is responsible for supporting, maintaining, and fixing that app. Each listing identifies the developer&apos;s support contact. We do not provide support for third-party apps.</li>
+            <li><strong>Removal and suspension.</strong> We may remove, suspend, or delist any app, release, listing, or developer from the Marketplace at any time, with or without notice, including in response to reports of malicious or non-compliant apps.</li>
+            <li><strong>Reviews and comments.</strong> You may post ratings, reviews, and comments on apps and developers. You grant us a worldwide, non-exclusive, royalty-free license to host, display, reproduce, and moderate that content in connection with operating the Marketplace. All such content must comply with our <a href="/code-of-conduct">Code of Conduct</a>; we may remove content that does not.</li>
+          </ul>
+
+          <h2>7. Intellectual Property</h2>
           <p>The Service, including all software, designs, trademarks, and content, is the intellectual property of Glyphh AI LLC. Your access grants a limited, non-exclusive, non-transferable, revocable right to use the Service for personal or internal business purposes only. As between you and us, outputs you generate through the Service are yours to use, subject to these Terms and to the terms of the applicable model provider.</p>
 
-          <h2>7. User Content and Outputs</h2>
+          <h2>8. User Content and Outputs</h2>
           <p>You retain ownership of all content you create, capture, submit, or process using the Service. We do not claim ownership over your data. You are solely responsible for the content you submit and for ensuring that your use, and any output you rely on, complies with applicable laws and third-party rights. AI outputs may be inaccurate, incomplete, or otherwise unsuitable; you are responsible for reviewing and verifying outputs before relying on them.</p>
 
-          <h2>8. Service Availability</h2>
+          <h2>9. Service Availability</h2>
           <p>We strive to maintain continuous availability but do not guarantee uninterrupted access. The Service may be temporarily unavailable for maintenance, updates, or due to circumstances beyond our control, including outages or changes at the AI clients you connect or at third-party integrations and connected services. We reserve the right to modify, suspend, or discontinue any part of the Service at any time with reasonable notice. Unavailability, including unavailability caused by a third party, does not entitle you to a refund or credit except as expressly stated in our <a href="/refund">Refund Policy</a>.</p>
 
-          <h2>9. Limitation of Liability</h2>
+          <h2>10. Limitation of Liability</h2>
           <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, GLYPHH AI LLC SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF DATA, PROFITS, OR REVENUE, ARISING OUT OF OR RELATED TO YOUR USE OF THE SERVICE OR THE ACTS OR OMISSIONS OF ANY THIRD-PARTY PROVIDER. OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.</p>
 
-          <h2>10. Disclaimer of Warranties</h2>
+          <h2>11. Disclaimer of Warranties</h2>
           <p>THE SERVICE AND ALL AI OUTPUTS ARE PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DISCLAIM ALL WARRANTIES INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT, AND WE MAKE NO WARRANTY REGARDING THE AVAILABILITY, ACCURACY, OR CONTINUITY OF ANY AI MODEL OR THIRD-PARTY PROVIDER.</p>
 
-          <h2>11. Termination</h2>
-          <p>We may terminate or suspend your access to the Service at any time for violation of these Terms, including for prohibited use under Sections 3 and 4. Upon termination, your right to use the Service is revoked, and any unused credits are forfeited where termination results from your breach. Sections 3.1, 4, 5, 6, 7, 9, 10, and 12 survive termination.</p>
+          <h2>12. Termination</h2>
+          <p>We may terminate or suspend your access to the Service at any time for violation of these Terms, including for prohibited use under Sections 3 and 4. Upon termination, your right to use the Service is revoked, and any unused credits are forfeited where termination results from your breach. Sections 3.1, 4, 5, 6, 7, 8, 10, 11, and 13 survive termination.</p>
 
-          <h2>12. Governing Law</h2>
+          <h2>13. Governing Law</h2>
           <p>These Terms are governed by the laws of the State of Delaware, without regard to conflict of law principles. Any disputes shall be resolved in the state or federal courts located in Delaware.</p>
 
-          <h2>13. Changes to Terms</h2>
+          <h2>14. Changes to Terms</h2>
           <p>We may update these Terms from time to time. Continued use of the Service after changes constitutes acceptance of the revised Terms. Material changes will be communicated through the application or via email.</p>
 
-          <h2>14. Contact</h2>
+          <h2>15. Contact</h2>
           <p>For questions about these Terms, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>
