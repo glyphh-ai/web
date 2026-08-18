@@ -26,6 +26,9 @@ export default function Footer() {
             <a href="/terms">Terms of Use</a>
             <a href="/privacy">Privacy Policy</a>
             <a href="/refund">Refund Policy</a>
+            <a href="/marketplace-terms">Marketplace Terms</a>
+            <a href="/developer-agreement">Developer Agreement</a>
+            <a href="/code-of-conduct">Code of Conduct</a>
           </div>
         </div>
         <div className="footer-bottom">
