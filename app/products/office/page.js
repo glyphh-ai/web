@@ -12,7 +12,7 @@ export const metadata = {
 const ICONS = {
   slides: (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="2" y="3.5" width="20" height="13" rx="2.5" fill="#8c3bf2" />
+      <rect x="2" y="3.5" width="20" height="13" rx="2.5" fill="#af5fff" />
       <path d="M11 16.5h2v2.2h3.2a.9.9 0 1 1 0 1.8H7.8a.9.9 0 1 1 0-1.8H11z" fill="#6d28d9" />
       <path d="M10 7.2 15.4 10 10 12.8z" fill="#ffffff" />
     </svg>
@@ -115,7 +115,7 @@ const PRODUCTS = [
     key: 'slides',
     icon: ICONS.slides,
     name: 'Slides',
-    color: '#8c3bf2',
+    color: '#af5fff',
     title: 'Presentations you direct, not design.',
     body:
       'Say what the deck should argue and your agent authors it — real slides on a fixed 16:9 stage with build steps, keyboard navigation, and a presenter mode that floods the whole app until you hit Esc. Hide slides for one audience, export the deck as a page-per-slide PDF, pop it out into its own window for the second screen.',

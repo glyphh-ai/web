@@ -21,7 +21,7 @@ const ICONS = {
   ),
   slides: (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="2" y="3.5" width="20" height="13" rx="2.5" fill="#8c3bf2" />
+      <rect x="2" y="3.5" width="20" height="13" rx="2.5" fill="#af5fff" />
       <path d="M11 16.5h2v2.2h3.2a.9.9 0 1 1 0 1.8H7.8a.9.9 0 1 1 0-1.8H11z" fill="#6d28d9" />
       <path d="M10 7.2 15.4 10 10 12.8z" fill="#ffffff" />
     </svg>
@@ -37,10 +37,10 @@ const ICONS = {
   ),
   apps: (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="2.5" y="2.5" width="8.6" height="8.6" rx="2" fill="#8c3bf2" />
+      <rect x="2.5" y="2.5" width="8.6" height="8.6" rx="2" fill="#af5fff" />
       <rect x="12.9" y="2.5" width="8.6" height="8.6" rx="2" fill="#a78bfa" />
       <rect x="2.5" y="12.9" width="8.6" height="8.6" rx="2" fill="#a78bfa" />
-      <rect x="12.9" y="12.9" width="8.6" height="8.6" rx="2" fill="#8c3bf2" />
+      <rect x="12.9" y="12.9" width="8.6" height="8.6" rx="2" fill="#af5fff" />
     </svg>
   ),
 };
@@ -70,7 +70,7 @@ function StudioMock() {
         </div>
         <div className="od-rail">
           <div className="od-rail-sec">COLORS</div>
-          <div className="od-rail-row"><span>Primary</span><i style={{ background: '#8c3bf2' }} /><em>#8c3bf2</em></div>
+          <div className="od-rail-row"><span>Primary</span><i style={{ background: '#af5fff' }} /><em>#af5fff</em></div>
           <div className="od-rail-row"><span>Accent</span><i style={{ background: '#ec4899' }} /><em>#ec4899</em></div>
           <div className="od-rail-row"><span>Surface</span><i style={{ background: '#17171d' }} /><em>#17171d</em></div>
           <div className="od-rail-sec">TYPOGRAPHY</div>
@@ -92,7 +92,7 @@ function ContractMock() {
       <div className="od-contract-tab">design css acme-brand</div>
       <pre className="od-contract-code">{`/* Glyphh Design — Acme */
 :root {
-  --design-primary: #8c3bf2;
+  --design-primary: #af5fff;
   --design-accent: #ec4899;
   --design-background: #0e0e12;
   --design-surface: #17171d;
@@ -101,7 +101,7 @@ function ContractMock() {
   --design-radius: 14px;
   --design-shadow: 0 8px 28px rgba(0,0,0,.18);
   --design-gradient: linear-gradient(135deg,
-      #8c3bf2, #ec4899);
+      #af5fff, #ec4899);
 }`}</pre>
     </div>
   );
