@@ -222,11 +222,21 @@ export default function HeroTabs({ activeId = 'work' }) {
     timers.current.push(setTimeout(() => setSwitching(false), IN + HOLD + 20));
   }, [activeId, shown]);
 
-  // A video slide can arrive PAUSED — autoplay fired while its panel was
-  // still inert — so nudge playback whenever the shown slide holds one.
+  // A video slide ALWAYS starts from the top (his rule, 2026-08-27): panels
+  // stay mounted while hidden, so the dream film kept rolling backstage and a
+  // return landed mid-scene. Entering a video slide rewinds and plays; every
+  // other slide's video pauses and resets, so leaving IS the reset.
   useEffect(() => {
-    const v = document.querySelector(`#htabpanel-${shown} video`);
-    if (v && v.paused) v.play().catch(() => {});
+    document.querySelectorAll('.htabs-slide video').forEach((v) => {
+      const mine = v.closest(`#htabpanel-${shown}`);
+      if (mine) {
+        try { v.currentTime = 0; } catch { /* not yet seekable — plays from 0 anyway */ }
+        v.play().catch(() => {});
+      } else if (!v.paused || v.currentTime > 0) {
+        v.pause();
+        try { v.currentTime = 0; } catch { /* noop */ }
+      }
+    });
   }, [shown]);
 
   return (
