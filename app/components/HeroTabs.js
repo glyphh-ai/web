@@ -53,6 +53,8 @@ export const TABS = [
   {
     id: 'dream',
     label: 'Dream',
+    cmd: '/screen-shots/hero/command-design.png',
+    lead: '/screen-shots/hero/design.png',
     // The home-page dream film (marketing/Glyphh-3.0/home-dream.mp4 —
     // recopy to refresh). The DreamReel (below) is benched: its
     // /screen-shots/hero/dream/* stills were never shot, so the reel
@@ -203,6 +205,37 @@ function TabCaption({ tab, switching }) {
   );
 }
 
+/**
+ * DreamLead — the Dream tab's staged entrance (his spec, 2026-08-27):
+ * command-design flashes on the way in (the switcher, same as every tab),
+ * the DESIGN still holds the stage for a beat, then it crossfades into the
+ * film — which starts from the top exactly at the hand-off.
+ */
+function DreamLead({ active, videoSrc, leadSrc, alt }) {
+  const wrapRef = useRef(null);
+  const [leadOn, setLeadOn] = useState(true);
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return undefined;
+    const video = wrap.querySelector('video');
+    if (!active) {
+      setLeadOn(true);
+      if (video) { video.pause(); try { video.currentTime = 0; } catch { /* noop */ } }
+      return undefined;
+    }
+    setLeadOn(true);
+    const t1 = setTimeout(() => setLeadOn(false), 1200);          // the still's beat
+    const t2 = setTimeout(() => { video?.play().catch(() => {}); }, 1500); // start as the fade lands
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [active]);
+  return (
+    <div ref={wrapRef} className="htabs-dreamlead" data-lead-active={leadOn ? '1' : '0'}>
+      <ExpandableShot src={videoSrc} alt={alt} />
+      <img className={`htabs-dreamlead-still${leadOn ? ' is-on' : ''}`} src={leadSrc} alt="" aria-hidden="true" />
+    </div>
+  );
+}
+
 export default function HeroTabs({ activeId = 'work' }) {
   // `shown` trails `activeId` by the switcher flash: the swap happens while
   // the command-center covers the stage, so the change is never seen
@@ -223,8 +256,7 @@ export default function HeroTabs({ activeId = 'work' }) {
     // timers and leaving the switcher stuck on.
     clearTimers();
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Dream cuts straight to the film — no command-center flash on the way in.
-    if (reduced || activeId === 'dream') { setShown(activeId); setSwitching(false); return; }
+    if (reduced) { setShown(activeId); setSwitching(false); return; }
     setSwitching(true);
     timers.current.push(setTimeout(() => setShown(activeId), IN + HOLD));
     timers.current.push(setTimeout(() => setSwitching(false), IN + HOLD + 20));
@@ -239,7 +271,7 @@ export default function HeroTabs({ activeId = 'work' }) {
       const mine = v.closest(`#htabpanel-${shown}`);
       if (mine) {
         try { v.currentTime = 0; } catch { /* not yet seekable — plays from 0 anyway */ }
-        v.play().catch(() => {});
+        if (!v.closest('[data-lead-active="1"]')) v.play().catch(() => {});
       } else if (!v.paused || v.currentTime > 0) {
         v.pause();
         try { v.currentTime = 0; } catch { /* noop */ }
@@ -269,8 +301,8 @@ export default function HeroTabs({ activeId = 'work' }) {
                 aria-hidden={shown !== t.id}
                 inert={shown !== t.id}
               >
-                {t.kind === 'dream'
-                  ? <DreamReel active={shown === t.id && !switching} />
+                {t.id === 'dream'
+                  ? <DreamLead active={shown === t.id && !switching} videoSrc={t.src} leadSrc={t.lead} alt={t.alt} />
                   : <ExpandableShot src={t.src} alt={t.alt} eager={t.id === 'work'} />}
               </div>
             ))}
