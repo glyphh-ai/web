@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
-const GITHUB_URL = 'https://github.com/glyphh-ai';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -95,7 +94,6 @@ export default function Nav() {
                 </a>
               </div>
             </div>
-            <a href="/research">Research</a>
             <div
               className={`nav-dd ${ddOpen ? 'open' : ''}`}
               ref={ddRef}
@@ -104,7 +102,6 @@ export default function Nav() {
             >
               <a href="/pricing" className="nav-dd-trigger">Pricing</a>
             </div>
-            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
           <div className="nav-cta">
             {loggedIn ? (
@@ -138,9 +135,7 @@ export default function Nav() {
         <span className="mobile-menu-group">Products</span>
         <a href="/products/design" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Design</a>
         <a href="/products/office" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Office</a>
-        <a href="/research" onClick={() => setMenuOpen(false)}>Research</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
-        <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>GitHub</a>
         {loggedIn ? (
           <a href={dashHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>
             <span className="btn-label">Dashboard</span>
