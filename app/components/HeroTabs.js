@@ -18,7 +18,12 @@ import ExpandableShot from './ExpandableShot';
  * to an .mp4 is the whole edit.
  */
 
-const SWITCHER = '/screen-shots/hero/command-center.png';
+// The switch animation runs THROUGH a command page — per tab now (his spec,
+// 2026-08-27): each mode flashes ITS OWN command screen on the way in
+// (chat → command-research, code → command-code, work → command-work; Dream
+// cuts straight to the film). Until a tab's capture lands, the shared
+// command-center frame stands in via the <img> onError fallback.
+const SWITCHER_FALLBACK = '/screen-shots/hero/command-center.png';
 
 // The re-cut payoff frames, all captured at one window geometry so the
 // command-center flash lands registered on top of them. Exported so Hero.js
@@ -27,18 +32,21 @@ export const TABS = [
   {
     id: 'chat',
     label: 'Chat',
+    cmd: '/screen-shots/hero/command-research.png',
     src: '/screen-shots/hero/chat.png',
     alt: 'Chat — the agent comparing vector databases and opening all five vendor sites in the browser panel beside its recommendation',
   },
   {
     id: 'work',
     label: 'Work',
+    cmd: '/screen-shots/hero/command-work.png',
     src: '/screen-shots/hero/work.png',
     alt: 'Work — the agent pulling a resume from Drive and emailing it, with Gmail and the interview call open alongside',
   },
   {
     id: 'code',
     label: 'Code',
+    cmd: '/screen-shots/hero/command-code.png',
     src: '/screen-shots/hero/code.png',
     alt: 'Code — an app built by the agent, running live beside the conversation that built it',
   },
@@ -272,7 +280,11 @@ export default function HeroTabs({ activeId = 'work' }) {
               hero is the real control, and this is only the animation
               between states. */}
           <div className={`htabs-switcher${switching ? ' is-on' : ''}`} aria-hidden="true">
-            <img src={SWITCHER} alt="" />
+            <img
+              src={TABS.find((t) => t.id === activeId)?.cmd ?? SWITCHER_FALLBACK}
+              alt=""
+              onError={(e) => { if (e.currentTarget.src !== new URL(SWITCHER_FALLBACK, window.location.href).href) e.currentTarget.src = SWITCHER_FALLBACK; }}
+            />
           </div>
         </div>
       </div>
