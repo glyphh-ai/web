@@ -30,8 +30,8 @@ export const heroes = {
       accent: 'is constant.',
     },
     sub:
-      'Glyphh arranges your apps, agents, and workspaces so moving between ' +
-      'them is efficient and aligned to how you work.',
+      'Glyphh aligns your apps, agents, and workspaces so moving between ' +
+      'them is efficient and shaped to how you work.',
     cta: { label: 'Get started free', href: PLATFORM_URL },
   },
 
