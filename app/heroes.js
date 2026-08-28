@@ -31,7 +31,7 @@ export const heroes = {
     },
     sub:
       'Set up your space, connect and arrange your apps, choose which ' +
-      'agents do what and when.',
+      'agents do what and when. Bounce between spaces and tasks effortlessly.',
     cta: { label: 'Get started free', href: PLATFORM_URL },
   },
 
