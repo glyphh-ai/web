@@ -26,13 +26,12 @@ export const heroes = {
   default: {
     pill: KIMI_PILL,
     title: {
-      lead: 'Workspace ',
-      accent: 'for your way of working',
+      lead: 'Context switching with AI ',
+      accent: 'is constant.',
     },
     sub:
-      'Set up your spaces, connect and arrange your apps, choose which ' +
-      'agents do what and when. Bounce from job to job on your desktop, web, ' +
-      'or mobile with a 24/7 assistant by your side.',
+      'Glyphh arranges your apps, agents, and workspaces so moving between ' +
+      'them is efficient and aligned to how you work.',
     cta: { label: 'Get started free', href: PLATFORM_URL },
   },
 
