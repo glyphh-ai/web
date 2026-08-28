@@ -31,8 +31,8 @@ export const heroes = {
     },
     sub:
       'Set up your space, connect and arrange your apps, choose which ' +
-      'agents do what and when. Bounce from job to job with a 24/7 assistant ' +
-      'by your side.',
+      'agents do what and when. Bounce from job to job on your desktop, web, ' +
+      'or mobile with a 24/7 assistant by your side.',
     cta: { label: 'Get started free', href: PLATFORM_URL },
   },
 
