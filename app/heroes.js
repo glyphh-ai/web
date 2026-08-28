@@ -30,8 +30,8 @@ export const heroes = {
       accent: 'every kind of work you do',
     },
     sub:
-      'Set up your workflow, pick your agents, arrange your apps. ' +
-      'Every kind of work you do, aligned to the way you do it.',
+      'Set up your space, connect and arrange your apps, choose which ' +
+      'agents do what and when.',
     cta: { label: 'Get started free', href: PLATFORM_URL },
   },
 
