@@ -20,16 +20,18 @@ const KIMI_PILL = {
 };
 
 export const heroes = {
-  // Bare glyphh.ai — the broad, work-led message (the neutral default).
-  // NOTE: with the hero TAB BAR live (Hero.js), the page lands on the Work
-  // tab, so bare glyphh.ai shows `work`; this entry stays as the fallback.
+  // Bare glyphh.ai — the configurable-workspace thesis (his copy,
+  // 2026-08-28). The hero tab bar is gone, so this entry is what the home
+  // page actually shows; the campaign paths below still swap it.
   default: {
     pill: KIMI_PILL,
-    title: { lead: 'Every AI model. Your whole workday. ', accent: 'One place.' },
+    title: {
+      lead: 'Glyphh is a configurable workspace ',
+      accent: 'for the different types of work you do',
+    },
     sub:
-      'Research, draft, analyze, and automate across every model at once — ' +
-      'one shared memory that carries between tasks, and agents that keep ' +
-      'working when your laptop’s closed.',
+      'Configure your workflow, pick the agents that you want, and orient ' +
+      'your apps to streamline how you work.',
     cta: { label: 'Get started free', href: PLATFORM_URL },
   },
 
