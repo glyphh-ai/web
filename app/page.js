@@ -3,8 +3,6 @@ import Nav from './components/Nav';
 import Reveal from './components/Reveal';
 import Hero from './components/Hero';
 import StoryHeads from './components/StoryHeads';
-import FeatureGrid from './components/FeatureGrid';
-import ReleaseStrip from './components/ReleaseStrip';
 import Pricing from './components/Pricing';
 import Download from './components/Download';
 import FAQ from './components/FAQ';
@@ -35,10 +33,10 @@ export default async function Home() {
           the story. Bodies land under them next; nothing below is removed
           until each band absorbs or replaces its old section. */}
       <StoryHeads />
-      {/* The story: the detail grid → shipped (Release) — Connections moved
-          up into its StoryHeads band (icon river + note live there now). */}
-      <FeatureGrid />
-      <ReleaseStrip />
+      {/* FeatureGrid ("One app, every surface of your work.") and
+          ReleaseStrip ("Build it. Ship it. Share it.") are OFF the page (his
+          call, 2026-08-28: they add nothing). The components stay in the
+          tree — hidden, not deleted — so either can be remounted here. */}
       {/* The close: pricing → download → FAQ → the final CTA. */}
       <Pricing />
       <Download />
