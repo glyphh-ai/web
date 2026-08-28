@@ -14,9 +14,9 @@ export const metadata = {
 /** The handoff: the same session, on the machine and then in the cloud. */
 function HandoffMock() {
   return (
-    <div className="oc-mock oc-handoff" aria-hidden="true">
-      <div className="oc-win">
-        <div className="oc-win-bar">
+    <div className="od-studio oc-handoff" aria-hidden="true">
+      <div className="od-studio oc-win">
+        <div className="od-studio-bar oc-win-bar">
           <span className="oc-dot" /><span className="oc-dot" /><span className="oc-dot" />
           <span className="oc-win-name">This machine</span>
           <span className="oc-chip oc-chip-local">local</span>
@@ -35,8 +35,8 @@ function HandoffMock() {
         <span className="oc-hand-track"><i className="oc-hand-dot" /></span>
       </div>
 
-      <div className="oc-win oc-win-cloud">
-        <div className="oc-win-bar">
+      <div className="od-studio oc-win oc-win-cloud">
+        <div className="od-studio-bar oc-win-bar">
           <span className="oc-dot" /><span className="oc-dot" /><span className="oc-dot" />
           <span className="oc-win-name">Cloud</span>
           <span className="oc-chip oc-chip-cloud">running</span>
@@ -62,8 +62,8 @@ function ScheduleMock() {
     { name: 'Weekly rollup', when: 'Fri 17:00', state: 'queued' },
   ];
   return (
-    <div className="oc-mock oc-sched" aria-hidden="true">
-      <div className="oc-win-bar">
+    <div className="od-studio oc-sched" aria-hidden="true">
+      <div className="od-studio-bar oc-win-bar">
         <span className="oc-dot" /><span className="oc-dot" /><span className="oc-dot" />
         <span className="oc-win-name">Scheduled tasks</span>
         <span className="oc-chip oc-chip-off">desktop offline</span>
@@ -106,7 +106,7 @@ const WHERE = [
 
 export default function CloudPage() {
   return (
-    <div className="cloud-page">
+    <div className="office-page design-page cloud-page">
       <Reveal />
       <Nav />
 
@@ -133,19 +133,19 @@ export default function CloudPage() {
               </a>
             </div>
           </div>
-          <div className="oc-hero-mock reveal"><HandoffMock /></div>
+          <div className="od-hero-mock reveal"><HandoffMock /></div>
         </div>
       </header>
 
       {/* ── WHERE IT RUNS ── */}
-      <section className="oc-where">
+      <section className="od-extract">
         <div className="container">
           <span className="rp-eyebrow">{'{'} where it runs {'}'}</span>
           <h2 className="section-title">Local or remote, never both by accident.</h2>
-          <div className="oc-where-grid">
+          <div className="od-extract-grid">
             {WHERE.map((w) => (
-              <div className="oc-where-card reveal" key={w.tag}>
-                <span className="oc-where-tag">{w.tag}</span>
+              <div className="od-extract-card reveal" key={w.tag}>
+                <span className="od-extract-tag">{w.tag}</span>
                 <h3>{w.title}</h3>
                 <p>{w.desc}</p>
               </div>
@@ -155,7 +155,7 @@ export default function CloudPage() {
       </section>
 
       {/* ── 24/7 ── */}
-      <section className="oc-night" id="agents">
+      <section className="od-contract-band" id="agents">
         <div className="container oc-night-split">
           <div className="oc-night-copy">
             <span className="rp-eyebrow">{'{'} 24/7 agents {'}'}</span>
@@ -175,7 +175,7 @@ export default function CloudPage() {
       </section>
 
       {/* ── FOLLOW IT ANYWHERE ── */}
-      <section className="oc-follow">
+      <section className="od-extract">
         <div className="container">
           <span className="rp-eyebrow">{'{'} every surface {'}'}</span>
           <h2 className="section-title">Watch it from wherever you are.</h2>
