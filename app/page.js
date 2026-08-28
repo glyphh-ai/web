@@ -3,7 +3,6 @@ import Nav from './components/Nav';
 import Reveal from './components/Reveal';
 import Hero from './components/Hero';
 import StoryHeads from './components/StoryHeads';
-import AnywhereBand from './components/AnywhereBand';
 import Pricing from './components/Pricing';
 import Download from './components/Download';
 import FAQ from './components/FAQ';
@@ -34,9 +33,6 @@ export default async function Home() {
           the story. Bodies land under them next; nothing below is removed
           until each band absorbs or replaces its old section. */}
       <StoryHeads />
-      {/* Where the work RUNS: local → remote, and the agents that keep
-          going once the machine is closed. */}
-      <AnywhereBand />
       {/* FeatureGrid ("One app, every surface of your work.") and
           ReleaseStrip ("Build it. Ship it. Share it.") are OFF the page (his
           call, 2026-08-28: they add nothing). The components stay in the

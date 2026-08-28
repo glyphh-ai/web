@@ -6545,39 +6545,146 @@ body:has(.office-page) { background: #000; }
 }
 .htabs-dreamlead-still.is-on { opacity: 1; }
 
+
 /* ============================================================
-   LOCAL → REMOTE / 24/7 AGENTS (AnywhereBand.js)
-   Two story bands whose "shot" is a drawn scene rather than a
-   screenshot — the mascot handing a session to the cloud, and the
-   agent still working while the machine sleeps.
+   GLYPHH CLOUD (app/products/cloud) — local → remote + 24/7 agents.
+   Drawn in the same CSS-mock language as the Design and Office pages,
+   so the product pages read as one family.
    ============================================================ */
-.ab-art {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.cloud-page .op-hero::before {
+  background:
+    radial-gradient(ellipse 60% 55% at 22% 4%, rgba(56, 189, 248, 0.13), transparent 62%),
+    radial-gradient(ellipse 55% 50% at 90% 40%, rgba(175, 95, 255, 0.14), transparent 60%);
 }
-.ab-scene {
-  width: 100%;
-  max-width: 560px;
-  height: auto;
-  overflow: visible;
+
+/* — the shared window chrome both mocks wear — */
+.oc-mock {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
 }
-.ab-scene .ab-cap {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  fill: var(--text-3);
-  letter-spacing: 0.04em;
+.oc-win-bar {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3);
 }
-/* The three ticks under the working agent — the run, carrying on. */
-.ab-pulse circle { animation: ab-tick 1.4s ease-in-out infinite; }
-.ab-pulse circle:nth-child(2) { animation-delay: 0.18s; }
-.ab-pulse circle:nth-child(3) { animation-delay: 0.36s; }
-@keyframes ab-tick {
-  0%, 100% { opacity: 0.25; }
-  50% { opacity: 1; }
+.oc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-2); }
+.oc-win-name { margin-left: 0.5rem; color: var(--text-2); white-space: nowrap; }
+.oc-chip {
+  margin-left: auto; padding: 0.1rem 0.5rem; border-radius: 999px;
+  border: 1px solid var(--border-2); font-size: 0.66rem; letter-spacing: 0.04em;
 }
-/* Motion is decoration here — never at the cost of a comfortable read. */
+.oc-chip-local { color: var(--text-2); }
+.oc-chip-cloud { color: #7dd3fc; border-color: rgba(125, 211, 252, 0.4); background: rgba(125, 211, 252, 0.08); }
+.oc-chip-off { color: var(--text-3); }
+
+/* — the handoff: two windows, the session travelling between them — */
+.oc-handoff {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch;
+  gap: 0.5rem; border: 0; background: none; box-shadow: none; overflow: visible;
+}
+.oc-win {
+  border: 1px solid var(--border); border-radius: 14px;
+  background: var(--surface); overflow: hidden;
+  box-shadow: 0 20px 50px -30px rgba(0, 0, 0, 0.9);
+}
+.oc-win-cloud { border-color: rgba(125, 211, 252, 0.28); }
+.oc-win { display: flex; flex-direction: column; }
+.oc-win-body { padding: 0.8rem; display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
+.oc-row { display: flex; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.7rem; }
+.oc-key { color: var(--text-4); min-width: 62px; flex-shrink: 0; }
+.oc-val { color: var(--text-2); }
+.oc-line { height: 6px; border-radius: 3px; background: var(--surface-2); }
+.oc-line.short { width: 62%; }
+.oc-tools {
+  display: flex; align-items: center; gap: 0.3rem; margin-top: 0.2rem;
+  font-family: var(--font-mono); font-size: 0.64rem; color: var(--text-4);
+}
+.oc-tools i { width: 10px; height: 10px; border-radius: 3px; background: var(--accent-dim); }
+.oc-tools span { margin-left: 0.35rem; }
+.oc-hand { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem; padding: 0 0.2rem; }
+.oc-hand-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-4); white-space: nowrap; }
+.oc-hand-track {
+  position: relative; display: block; width: 46px; height: 2px; border-radius: 2px;
+  background: repeating-linear-gradient(90deg, var(--border-2) 0 5px, transparent 5px 10px);
+}
+.oc-hand-dot {
+  position: absolute; top: -3px; left: 0; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent-light); box-shadow: 0 0 10px var(--accent-glow);
+  animation: oc-travel 2.4s ease-in-out infinite;
+}
+@keyframes oc-travel {
+  0% { left: 0; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: 38px; opacity: 0; }
+}
+@media (max-width: 900px) {
+  .oc-handoff { grid-template-columns: 1fr; }
+  .oc-hand { flex-direction: row; gap: 0.6rem; }
+  .oc-hand-track { width: 90px; }
+}
+
+/* — where it runs: three cards — */
+.oc-where { padding: 4.5rem 0 1rem; }
+.oc-where-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.1rem; margin-top: 2rem;
+}
+.oc-where-card {
+  padding: 1.4rem 1.3rem; border: 1px solid var(--border);
+  border-radius: 16px; background: var(--surface);
+}
+.oc-where-tag {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em;
+  color: var(--accent-light);
+}
+.oc-where-card h3 { margin: 0.6rem 0 0.4rem; font-size: 1.05rem; color: var(--text); }
+.oc-where-card p { margin: 0; color: var(--text-2); font-size: 0.95rem; line-height: 1.6; }
+
+/* — 24/7: copy left, the schedule right — */
+.oc-night { padding: 4rem 0 1rem; }
+.oc-night-split {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center;
+}
+.oc-night-split .section-title,
+.oc-night-split .section-subtitle { text-align: left; margin-left: 0; margin-right: 0; }
+.oc-sched-body { padding: 0.6rem; }
+.oc-task {
+  display: grid; grid-template-columns: 10px 1fr auto auto; align-items: center;
+  gap: 0.6rem; padding: 0.55rem 0.6rem; border-radius: 10px;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-2);
+}
+.oc-task + .oc-task { margin-top: 0.2rem; }
+.oc-task-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-2); }
+.oc-task-when { color: var(--text-4); }
+.oc-task-state { color: var(--text-4); font-size: 0.66rem; }
+.oc-task-running { background: rgba(175, 95, 255, 0.08); color: var(--text); }
+.oc-task-running .oc-task-dot { background: var(--accent); animation: oc-blink 1.3s ease-in-out infinite; }
+.oc-task-running .oc-task-state { color: var(--accent-light); }
+.oc-task-done .oc-task-dot { background: var(--text-4); }
+@keyframes oc-blink { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+.oc-sched-foot {
+  display: flex; align-items: center; gap: 0.55rem;
+  margin-top: 0.5rem; padding: 0.6rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-3);
+}
+.oc-sched-foot img { border-radius: 7px; background: #000; border: 1px solid rgba(175, 95, 255, 0.4); }
+@media (max-width: 900px) {
+  .oc-night-split { grid-template-columns: 1fr; }
+}
+
+/* — the closing note — */
+.oc-follow { padding: 3.5rem 0 1rem; }
+.oc-sec-note { color: var(--text-3); font-size: 0.95rem; }
+
 @media (prefers-reduced-motion: reduce) {
-  .ab-pulse circle { animation: none; opacity: 0.8; }
-  .ab-flow circle { display: none; }
+  .oc-hand-dot, .oc-task-running .oc-task-dot { animation: none; }
+  .oc-hand-dot { left: 19px; opacity: 1; }
 }
