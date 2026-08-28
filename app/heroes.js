@@ -26,7 +26,7 @@ export const heroes = {
   default: {
     pill: KIMI_PILL,
     title: {
-      lead: 'Glyphh is a workspace ',
+      lead: 'Workspace ',
       accent: 'for your way of working',
     },
     sub:
