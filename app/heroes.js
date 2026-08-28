@@ -26,8 +26,8 @@ export const heroes = {
   default: {
     pill: KIMI_PILL,
     title: {
-      lead: 'Glyphh is a configurable workspace for ',
-      accent: 'every kind of work you do',
+      lead: 'Glyphh is a workspace you configure ',
+      accent: 'for the way you like to work',
     },
     sub:
       'Set up your space, connect and arrange your apps, choose which ' +
