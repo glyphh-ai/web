@@ -27,7 +27,7 @@ export const heroes = {
     pill: KIMI_PILL,
     title: {
       lead: 'Glyphh is a workspace you configure ',
-      accent: 'for the way you like to work',
+      accent: 'for your way of working',
     },
     sub:
       'Set up your space, connect and arrange your apps, choose which ' +
