@@ -194,12 +194,16 @@ export default function CloudPage() {
       {/* ── CTA ── */}
       <section className="final-cta">
         <div className="container">
-          <div className="final-cta-inner">
+          <div className="cta-card reveal">
             <h2>Start it here. Finish it anywhere.</h2>
-            <p>Free to start — the desktop, the web app, and the phone all run the same sessions.</p>
+            <p>Glyphh Cloud ships with Glyphh Desktop — the desktop, the web app, and your phone all run the same sessions.</p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
-                <span className="btn-label">Get Glyphh Desktop — Free</span>
+                <span className="btn-label">Download Glyphh</span>
+                <span className="btn-fill"></span>
+              </a>
+              <a href="/products/office" className="btn btn-ghost btn-lg group">
+                <span className="btn-label">See Glyphh Office</span>
                 <span className="btn-fill"></span>
               </a>
             </div>
