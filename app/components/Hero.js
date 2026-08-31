@@ -20,7 +20,7 @@ import ExpandableShot from './ExpandableShot';
    — eight product moments, ~25s, muted and looping. It opens AND closes on the
    command center, so the loop point is invisible. The poster is its first
    frame, so nothing flashes while the file loads. */
-const HERO_SHOT = '/videos/pitch-master-v2.0.0.mp4';
+const HERO_SHOT = '/videos/pitch-master-v1.0.0.mp4';
 const HERO_POSTER = '/videos/home-hero-poster.jpg';
 const HERO_ALT =
   'Glyphh in use — the command center, an agent beside code, design boards, music, and media panels';
