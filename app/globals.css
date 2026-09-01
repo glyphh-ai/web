@@ -6642,3 +6642,14 @@ body:has(.office-page) { background: #000; }
   .oc-hand-dot, .oc-task-running .oc-task-dot { animation: none; }
   .oc-hand-dot { left: 19px; opacity: 1; }
 }
+
+/* Pricing footnote — the free-tier disclosure line under the grid. */
+.pricing-footnote {
+  margin: 18px auto 0;
+  max-width: 720px;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-muted, #8a8a93);
+}
+.pricing-footnote a { color: inherit; text-decoration: underline; }

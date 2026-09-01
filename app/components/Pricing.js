@@ -24,9 +24,9 @@ const TIERS = [
     desc: 'The full workspace and the agent, on the house — no card.',
     features: (c) => [
       'The full workspace — the agent, your apps, saved layouts',
-      'Frontier and open-weight models in one picker',
+      'Fast open-weight models — frontier models unlock on paid plans',
       'Loops built in — plan, work, check',
-      `${fmt(c)} credits to spend on any model`,
+      `${fmt(c)} credits to try it for real\u00A0*`,
     ],
     excluded: ['Connected services (3,500+ apps)', 'Team members — Free is single-seat'],
     cta: 'Download now',
@@ -160,6 +160,17 @@ export default async function Pricing() {
             </div>
           ))}
         </div>
+
+        {/* Disclosures the free tier's abuse gates require (2026-09-01):
+            reduced grant for unverified sign-ins + the model allow-list. */}
+        <p className="pricing-footnote reveal">
+          * The full Free allowance requires a verified sign-in (Google or
+          Apple). Accounts created with email alone start with a reduced
+          allowance until an identity is verified. Free credits spend on the
+          Free tier&apos;s included models; frontier models are available on
+          paid plans. Allowances, included models, and limits may change —
+          see our <a href="/terms">Terms of Use</a>.
+        </p>
 
         {/* Enterprise / custom — a compact band under the tiers instead of a
             fourth "Custom" card (mirrors the home page's one-pricing band). */}
