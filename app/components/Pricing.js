@@ -17,7 +17,7 @@ const TIERS = [
     tier: 'free',
     name: 'Free',
     priceUsd: 0,
-    credits: 100,
+    credits: 50,
     seats: 1,
     period: 'forever',
     popular: false,
