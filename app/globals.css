@@ -680,6 +680,8 @@ body {
    same pieces, tighter columns, no top strip overhang clipping. */
 .gwx-hero-stage { transform: scale(0.8); transform-origin: center; margin: 2rem 0 0; }
 .gwx-hero-stage .apx-col { min-width: 128px; }
+.gwx-hero-stage .apx-mascot { width: 64px; height: 64px; }
+.gwx-hero-stage .apx-hub { padding: 20px 26px; }
 @media (max-width: 980px) { .gwx-hero-stage { transform: none; margin: 2.6rem auto 0; } }
 
 .apx-stage {
