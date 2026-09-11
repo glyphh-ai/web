@@ -99,9 +99,18 @@ export default function ModelsTable({ providers, newIds = [] }) {
     return next;
   });
   const query = q.trim().toLowerCase();
-  const shown = providers
+  // 15 everywhere — the one pagination size: providers page at 15, and an
+  // open provider's models page at 15 inside it.
+  const PAGE = 15;
+  const [page, setPage] = useState(0);
+  const [modelPages, setModelPages] = useState({});
+  const all = providers
     .map(([provider, list]) => [provider, query ? list.filter((m) => m.name.toLowerCase().includes(query)) : list])
     .filter(([, list]) => list.length > 0);
+  const totalPages = Math.max(1, Math.ceil(all.length / PAGE));
+  const pageClamped = Math.min(page, totalPages - 1);
+  const shown = all.slice(pageClamped * PAGE, (pageClamped + 1) * PAGE);
+  const setQuery = (v) => { setQ(v); setPage(0); setModelPages({}); };
 
   return (
     <div className="models-table-wrap">
@@ -111,10 +120,10 @@ export default function ModelsTable({ providers, newIds = [] }) {
           className="mt-search"
           placeholder="Search models…"
           value={q}
-          onChange={(e) => setQ(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
           spellCheck={false}
         />
-        <span className="mt-count">{shown.reduce((a, [, l]) => a + l.length, 0)} models · {shown.length} providers</span>
+        <span className="mt-count">{all.reduce((a, [, l]) => a + l.length, 0)} models · {all.length} providers</span>
       </div>
       <table className="models-table">
         <thead>
@@ -134,6 +143,8 @@ export default function ModelsTable({ providers, newIds = [] }) {
           {shown.map(([provider, list]) => {
             const openProv = !!query || openProviders.has(provider);
             const cheapest = list[0]?.inputCreditsPerMTok;
+            const mPage = Math.min(modelPages[provider] ?? 0, Math.ceil(list.length / PAGE) - 1);
+            const rows = list.slice(mPage * PAGE, (mPage + 1) * PAGE);
             return (
             <Fragment key={provider}>
               <tr className="mt-group mt-group-click" onClick={() => toggleProvider(provider)}>
@@ -143,7 +154,7 @@ export default function ModelsTable({ providers, newIds = [] }) {
                   <span className="mt-group-meta">{list.length} model{list.length === 1 ? '' : 's'}{Number.isFinite(Number(cheapest)) && Number(cheapest) > 0 ? ` · from ${fmtCredits(cheapest)} cr/MTok` : ''}</span>
                 </td>
               </tr>
-              {openProv && list.map((m) => {
+              {openProv && rows.map((m) => {
                 const isNew = newSet.has(m.id);
                 const open = openId === m.id;
                 return (
@@ -185,11 +196,29 @@ export default function ModelsTable({ providers, newIds = [] }) {
                   </Fragment>
                 );
               })}
+              {openProv && list.length > PAGE ? (
+                <tr className="mt-pager-row">
+                  <td colSpan={5}>
+                    <button type="button" className="mt-pager-btn" disabled={mPage === 0}
+                      onClick={() => setModelPages((c) => ({ ...c, [provider]: mPage - 1 }))}>‹</button>
+                    <span className="mt-pager-label">{mPage + 1} / {Math.ceil(list.length / PAGE)}</span>
+                    <button type="button" className="mt-pager-btn" disabled={(mPage + 1) * PAGE >= list.length}
+                      onClick={() => setModelPages((c) => ({ ...c, [provider]: mPage + 1 }))}>›</button>
+                  </td>
+                </tr>
+              ) : null}
             </Fragment>
             );
           })}
         </tbody>
       </table>
+      {totalPages > 1 ? (
+        <div className="mt-pager">
+          <button type="button" className="mt-pager-btn" disabled={pageClamped === 0} onClick={() => setPage(pageClamped - 1)}>‹</button>
+          <span className="mt-pager-label">Providers {pageClamped + 1} / {totalPages}</span>
+          <button type="button" className="mt-pager-btn" disabled={pageClamped + 1 >= totalPages} onClick={() => setPage(pageClamped + 1)}>›</button>
+        </div>
+      ) : null}
     </div>
   );
 }

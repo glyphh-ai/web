@@ -23,9 +23,9 @@ async function loadCatalog() {
 }
 
 export const metadata = {
-  title: 'Glyphh Gateway — every model, your keys, one governed endpoint',
+  title: 'Glyphh Gateway — every model, your keys, one endpoint',
   description:
-    'One OpenAI-compatible endpoint in front of every model you trust. Bring your own vendor keys, govern access by role, hand out keys with budgets and rate limits built in — and see every token, dollar, and millisecond without ever storing a prompt.',
+    'One endpoint in front of every model. Your keys pay the vendors. Roles decide who gets what. Every token accounted for — no prompt ever stored.',
 };
 
 /* The marks — copied from the Design page's set; Gateway reuses, never invents. */
@@ -117,18 +117,18 @@ function GatewayStage() {
 const WAYS = [
   {
     tag: 'one endpoint',
-    title: 'Point anything at it.',
-    desc: 'The gateway speaks the OpenAI API, so every SDK, agent framework, and tool you already use connects by changing one base URL. A hundred-plus providers and thousands of models behind it — one integration, forever.',
+    title: 'Change one line.',
+    desc: 'It speaks the OpenAI API. Swap the base URL and every SDK, framework, and tool you already use just works. 100+ providers behind it.',
   },
   {
     tag: 'your keys',
     title: 'The vendor bills you.',
-    desc: 'Bring your own Anthropic, OpenAI, Google, Mistral keys — the gateway routes on your credentials and the vendor invoices you directly. Glyphh never resells a token, never marks one up, never sees your bill.',
+    desc: 'Bring your own keys. We route on them. Anthropic invoices you, not us. No markup, no resale, ever.',
   },
   {
     tag: 'your call',
-    title: 'Support what you mean to.',
-    desc: 'The whole catalog is there, but nothing is on until you say so: enable a vendor by adding its key, pick the models your org supports, and let roles narrow it from there. No surprise models, no surprise spend.',
+    title: 'Nothing is on by default.',
+    desc: 'Add a key to turn a vendor on. Pick the models you support. Roles narrow it from there. No surprise spend.',
   },
 ];
 
@@ -137,21 +137,21 @@ const GOVERN = [
     icon: ICONS.apps,
     name: 'Roles',
     title: 'Governance is a role, not a spreadsheet.',
-    desc: 'Every team gets a role: the models it can call, the rate it can call them, the budget it burns — daily, weekly, or monthly, advisory or hard-stop — and even its own vendor key when the bill should split. Set it once; every key that role mints inherits all of it.',
+    desc: 'Models, rate limits, budgets — set per team, once. Hard-stop the budget when it matters. Split the vendor bill by role when it should split.',
     mock: <RolesMock />,
   },
   {
     icon: ICONS.apps,
     name: 'Keys',
     title: 'Keys the gateway hands out.',
-    desc: 'Mint a key against a role and hand it to a service, a pipeline, a teammate. It reaches exactly that role’s models, carries its limits and expiry, and dies the moment you revoke it — while its history stays on the books forever. Sign in with Glyphh and your personal key mints itself off your role.',
+    desc: 'Mint one for a service, a pipeline, a teammate. It dies the moment you revoke it. Its history stays on the books.',
     mock: <KeysMock />,
   },
   {
     icon: ICONS.apps,
     name: 'Telemetry',
     title: 'Every token. Never a transcript.',
-    desc: 'Requests, tokens, spend, and speed — per day, per model, per provider, per role — on a dashboard your org admin reads at a glance. The gateway logs request metadata only: prompts and completions are never stored, so there is nothing to subpoena, leak, or train on.',
+    desc: 'Tokens, spend, and speed — per model, per role, per day. We log metadata only. Prompts are never stored. There is nothing to leak.',
     mock: <MetricsMock />,
   },
 ];
@@ -186,10 +186,8 @@ export default async function GatewayPage() {
               <span className="hero-accent">One gateway</span><span className="dot">.</span>
             </h1>
             <p className="page-hero-sub">
-              Everything you run — the desktop, your agents, your machines — reaches every model
-              you trust through one OpenAI-compatible endpoint. Your vendor keys pay the vendors;
-              your roles decide who gets what; your dashboards see every token without ever
-              reading a prompt.
+              One endpoint in front of every model. Your keys pay the vendors. Roles decide
+              who gets what. Every token accounted for — no prompt ever stored.
             </p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
@@ -222,11 +220,9 @@ export default async function GatewayPage() {
             <div className="op-prod-mark">{ICONS.apps} Glyphh Gateway</div>
             <h3>A key that carries its own rules.</h3>
             <p>
-              A gateway key here isn&rsquo;t a bare secret in a vault — it&rsquo;s a contract.
-              Minted against a role, it arrives already knowing which models it may call, how
-              fast, on whose budget, and until when. The gateway enforces all of it at the edge;
-              your services just make requests. Change the role once and every key minted after
-              follows.
+              Every key is minted against a role. It knows which models it can call, how fast,
+              on whose budget, and until when. The gateway enforces it at the edge. Your
+              services just make requests.
             </p>
           </div>
           <div className="op-prod-mock reveal"><ContractTabs /></div>
@@ -260,8 +256,7 @@ export default async function GatewayPage() {
             </span>
           </div>
           <p className="models-intro">
-            The whole catalog, priced per million tokens in credits — search it, open a provider,
-            open a model. Your org enables the vendors it means to run; roles narrow from there.
+            Priced per million tokens, in credits. Search it. Open a provider. Turn on what you mean to run.
           </p>
           {error ? (
             <div className="models-error">The live catalog is temporarily unavailable. Please refresh in a moment.</div>
@@ -276,14 +271,14 @@ export default async function GatewayPage() {
         <div className="container">
           <div className="cta-card reveal">
             <h2>Point it at the gateway. Govern the rest.</h2>
-            <p>The Glyphh Gateway ships with every plan — full on Basic and up, role governance on Pro.</p>
+            <p>Full gateway on Basic. Governance on Pro. Trial it free.</p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
                 <span className="btn-label">Download Glyphh</span>
                 <span className="btn-fill"></span>
               </a>
-              <a href="/products/design" className="btn btn-ghost btn-lg group">
-                <span className="btn-label">See Glyphh Design</span>
+              <a href="/pricing" className="btn btn-ghost btn-lg group">
+                <span className="btn-label">See Pricing</span>
                 <span className="btn-fill"></span>
               </a>
             </div>

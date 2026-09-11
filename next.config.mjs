@@ -13,9 +13,11 @@ const nextConfig = {
     return [
       // Products is a real section again (2026-08-16). The bare index lands on
       // the lead product (Design); retired product URLs fall through to 404.
-      { source: '/products', destination: '/products/design', permanent: false },
-      // 2026-09-11: Cloud is retired outright; Office is back beside Gateway.
+      { source: '/products', destination: '/products/gateway', permanent: false },
+      // 2026-09-11 (staying tight): Gateway is the one product page.
       { source: '/products/cloud', destination: '/', permanent: false },
+      { source: '/products/office', destination: '/', permanent: false },
+      { source: '/products/design', destination: '/', permanent: false },
     ];
   },
 };

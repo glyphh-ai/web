@@ -749,6 +749,13 @@ body {
 }
 .mt-count { font-size: 11px; color: #6f6f79; font-family: var(--font-mono); }
 .mt-group-click { cursor: pointer; }
+.mt-pager, .mt-pager-row td { display: flex; align-items: center; gap: 10px; justify-content: center; padding: 10px 0; }
+.mt-pager-btn {
+  border: 1px solid var(--border-2); background: #101014; color: #8b8b95;
+  border-radius: 6px; padding: 2px 10px; cursor: pointer; font-size: 13px;
+}
+.mt-pager-btn:disabled { opacity: 0.35; cursor: default; }
+.mt-pager-label { font-family: var(--font-mono); font-size: 11px; color: #6f6f79; }
 .mt-group-click:hover td { color: #fff; }
 .mt-group-meta { margin-left: 10px; font-size: 11px; color: #6f6f79; font-weight: 400; }
 
