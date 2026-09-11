@@ -4,7 +4,6 @@ import Reveal from './components/Reveal';
 import Hero from './components/Hero';
 import StoryHeads from './components/StoryHeads';
 import Mcp from './components/Mcp';
-import Pricing from './components/Pricing';
 import Download from './components/Download';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
@@ -42,8 +41,8 @@ export default async function Home() {
           ReleaseStrip ("Build it. Ship it. Share it.") are OFF the page (his
           call, 2026-08-28: they add nothing). The components stay in the
           tree — hidden, not deleted — so either can be remounted here. */}
-      {/* The close: pricing → download → FAQ → the final CTA. */}
-      <Pricing />
+      {/* The close: download → FAQ → the final CTA. Pricing lives on its
+          own page (his order, 2026-09-11) — the nav and FAQ link to it. */}
       <Download />
       <FAQ />
       <FinalCTA />
