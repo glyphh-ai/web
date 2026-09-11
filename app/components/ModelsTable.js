@@ -87,11 +87,35 @@ function DetailRow({ model }) {
 
 export default function ModelsTable({ providers, newIds = [] }) {
   const [openId, setOpenId] = useState(null);
+  // Providers START CLOSED (his order, 2026-09-11: a 10k-long page isn't
+  // usable) — a search filters models and auto-opens the providers that match.
+  const [openProviders, setOpenProviders] = useState(() => new Set());
+  const [q, setQ] = useState('');
   const newSet = new Set(newIds);
   const toggle = (id) => setOpenId((cur) => (cur === id ? null : id));
+  const toggleProvider = (name) => setOpenProviders((cur) => {
+    const next = new Set(cur);
+    if (next.has(name)) next.delete(name); else next.add(name);
+    return next;
+  });
+  const query = q.trim().toLowerCase();
+  const shown = providers
+    .map(([provider, list]) => [provider, query ? list.filter((m) => m.name.toLowerCase().includes(query)) : list])
+    .filter(([, list]) => list.length > 0);
 
   return (
     <div className="models-table-wrap">
+      <div className="mt-toolbar">
+        <input
+          type="search"
+          className="mt-search"
+          placeholder="Search models…"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          spellCheck={false}
+        />
+        <span className="mt-count">{shown.reduce((a, [, l]) => a + l.length, 0)} models · {shown.length} providers</span>
+      </div>
       <table className="models-table">
         <thead>
           <tr>
@@ -107,12 +131,19 @@ export default function ModelsTable({ providers, newIds = [] }) {
           </tr>
         </thead>
         <tbody>
-          {providers.map(([provider, list]) => (
+          {shown.map(([provider, list]) => {
+            const openProv = !!query || openProviders.has(provider);
+            const cheapest = list[0]?.inputCreditsPerMTok;
+            return (
             <Fragment key={provider}>
-              <tr className="mt-group">
-                <td colSpan={5}>{provider}</td>
+              <tr className="mt-group mt-group-click" onClick={() => toggleProvider(provider)}>
+                <td colSpan={5}>
+                  <span className={`mt-caret${openProv ? ' is-open' : ''}`} aria-hidden="true">&#9656;</span>
+                  {provider}
+                  <span className="mt-group-meta">{list.length} model{list.length === 1 ? '' : 's'}{Number.isFinite(Number(cheapest)) && Number(cheapest) > 0 ? ` · from ${fmtCredits(cheapest)} cr/MTok` : ''}</span>
+                </td>
               </tr>
-              {list.map((m) => {
+              {openProv && list.map((m) => {
                 const isNew = newSet.has(m.id);
                 const open = openId === m.id;
                 return (
@@ -155,7 +186,8 @@ export default function ModelsTable({ providers, newIds = [] }) {
                 );
               })}
             </Fragment>
-          ))}
+            );
+          })}
         </tbody>
       </table>
     </div>

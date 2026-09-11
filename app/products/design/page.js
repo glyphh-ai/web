@@ -1,6 +1,25 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import ExpandableShot from '../../components/ExpandableShot';
+
+/* Section screenshots — the home page's shot grammar. Chris drops the files
+   into public/screen-shots/ under these names; each renders full-bleed with
+   the lightbox on click. */
+const SHOTS = {
+  extract: { src: '/screen-shots/design-extract.png', alt: 'Extracting a design system from a live site' },
+  contract: { src: '/screen-shots/design-contract.png', alt: 'The compiled CSS contract in the studio' },
+  consumers: { src: '/screen-shots/design-consumers.png', alt: 'An app styled by its design system' },
+  memory: { src: '/screen-shots/design-memory.png', alt: 'Recalling a design system from org memory' },
+};
+
+function SectionShot({ shot }) {
+  return (
+    <div className="story-split-shot reveal" style={{ marginTop: '2.2rem' }}>
+      <ExpandableShot src={shot.src} alt={shot.alt} />
+    </div>
+  );
+}
 
 export const metadata = {
   title: 'Glyphh Design — a design system for everything you ship',
@@ -193,6 +212,7 @@ export default function DesignPage() {
               </div>
             ))}
           </div>
+          <SectionShot shot={SHOTS.extract} />
         </div>
       </section>
 
@@ -212,6 +232,7 @@ export default function DesignPage() {
           </div>
           <div className="op-prod-mock reveal"><ContractMock /></div>
         </div>
+        <div className="container"><SectionShot shot={SHOTS.contract} /></div>
       </section>
 
       {/* ── CONSUMERS ── */}
@@ -233,6 +254,7 @@ export default function DesignPage() {
               </div>
             </div>
           ))}
+          <SectionShot shot={SHOTS.consumers} />
         </div>
       </section>
 
@@ -272,6 +294,7 @@ export default function DesignPage() {
               <p>Hundreds of systems per org if you want them — per client, per product, per mood. They live in your org, not on someone&rsquo;s laptop, and every member builds from the same shelf.</p>
             </div>
           </div>
+          <SectionShot shot={SHOTS.memory} />
         </div>
       </section>
 

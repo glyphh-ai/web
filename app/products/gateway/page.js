@@ -1,6 +1,26 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import ModelsTable from '../../components/ModelsTable';
+import { ContractTabs, RolesMock, KeysMock, MetricsMock, WayCard } from './mocks';
+
+// The model catalog is LIVE — same source as the platform's admin Catalog
+// (/api/catalog/public/models reads the models table itself), no-store.
+export const dynamic = 'force-dynamic';
+
+const API_BASE = process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
+
+async function loadCatalog() {
+  try {
+    const res = await fetch(`${API_BASE}/api/catalog/public/models`, { cache: 'no-store' });
+    if (!res.ok) return { models: [], error: `HTTP ${res.status}` };
+    const json = await res.json();
+    const data = json?.data ?? json ?? {};
+    return { models: Array.isArray(data.models) ? data.models : [], error: null };
+  } catch (e) {
+    return { models: [], error: e?.message || 'fetch failed' };
+  }
+}
 
 export const metadata = {
   title: 'Glyphh Gateway — every model, your keys, one governed endpoint',
@@ -93,25 +113,6 @@ function GatewayStage() {
   );
 }
 
-/* The consumable contract — the endpoint, verbatim shape (Design's ContractMock). */
-function EndpointMock() {
-  return (
-    <div className="od-contract" aria-hidden="true">
-      <div className="od-contract-tab">gateway key acme-org · engineering</div>
-      <pre className="od-contract-code">{`# Anything that speaks OpenAI speaks Glyphh.
-client = OpenAI(
-    base_url = "https://router.glyphh.ai",
-    api_key  = "sk-…"   # minted against a role
-)
-
-# The key carries its governance with it:
-#   models      the role's supported set
-#   rpm / tpm   the role's rate limits
-#   max_budget  the role's hard budget
-#   expiry      yours to choose`}</pre>
-    </div>
-  );
-}
 
 const WAYS = [
   {
@@ -137,25 +138,36 @@ const GOVERN = [
     name: 'Roles',
     title: 'Governance is a role, not a spreadsheet.',
     desc: 'Every team gets a role: the models it can call, the rate it can call them, the budget it burns — daily, weekly, or monthly, advisory or hard-stop — and even its own vendor key when the bill should split. Set it once; every key that role mints inherits all of it.',
-    chips: ['models', 'rpm_limit', 'max_budget'],
+    mock: <RolesMock />,
   },
   {
     icon: ICONS.apps,
     name: 'Keys',
     title: 'Keys the gateway hands out.',
     desc: 'Mint a key against a role and hand it to a service, a pipeline, a teammate. It reaches exactly that role’s models, carries its limits and expiry, and dies the moment you revoke it — while its history stays on the books forever. Sign in with Glyphh and your personal key mints itself off your role.',
-    chips: ['key_alias', 'expiry', 'revoke'],
+    mock: <KeysMock />,
   },
   {
     icon: ICONS.apps,
     name: 'Telemetry',
     title: 'Every token. Never a transcript.',
     desc: 'Requests, tokens, spend, and speed — per day, per model, per provider, per role — on a dashboard your org admin reads at a glance. The gateway logs request metadata only: prompts and completions are never stored, so there is nothing to subpoena, leak, or train on.',
-    chips: ['tokens', 'spend_usd', 'p95_ms'],
+    mock: <MetricsMock />,
   },
 ];
 
-export default function GatewayPage() {
+export default async function GatewayPage() {
+  const { models, error } = await loadCatalog();
+  const byProvider = new Map();
+  for (const m of models) {
+    const key = m.providerName || m.providerSlug || 'Other';
+    if (!byProvider.has(key)) byProvider.set(key, []);
+    byProvider.get(key).push(m);
+  }
+  const providers = [...byProvider.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  for (const [, list] of providers) {
+    list.sort((a, b) => (a.inputCreditsPerMTok ?? 0) - (b.inputCreditsPerMTok ?? 0));
+  }
   return (
     <div className="office-page design-page">
       <Reveal />
@@ -197,11 +209,7 @@ export default function GatewayPage() {
           <h2 className="section-title">You don&rsquo;t integrate models. You integrate once.</h2>
           <div className="od-extract-grid">
             {WAYS.map((e) => (
-              <div className="od-extract-card reveal" key={e.tag}>
-                <span className="od-extract-tag">{e.tag}</span>
-                <h3>{e.title}</h3>
-                <p>{e.desc}</p>
-              </div>
+              <WayCard key={e.tag} tag={e.tag} title={e.title} desc={e.desc} />
             ))}
           </div>
         </div>
@@ -221,7 +229,7 @@ export default function GatewayPage() {
               follows.
             </p>
           </div>
-          <div className="op-prod-mock reveal"><EndpointMock /></div>
+          <div className="op-prod-mock reveal"><ContractTabs /></div>
         </div>
       </section>
 
@@ -235,15 +243,31 @@ export default function GatewayPage() {
                 <h3>{c.title}</h3>
                 <p>{c.desc}</p>
               </div>
-              <div className="op-prod-mock">
-                <div className={`od-consumer od-consumer-${i}`} aria-hidden="true">
-                  <span className="od-consumer-chip">{c.chips[0]}</span>
-                  <span className="od-consumer-chip alt">{c.chips[1]}</span>
-                  <span className="od-consumer-chip">{c.chips[2]}</span>
-                </div>
-              </div>
+              <div className="op-prod-mock">{c.mock}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── THE CATALOG — live from the same models table the platform reads ── */}
+      <section className="models-section" id="models">
+        <div className="container">
+          <div className="models-table-head">
+            <h2>Every model behind the gateway</h2>
+            <span className="models-live">
+              <span className="models-live-dot" aria-hidden="true"></span>
+              Live from the catalog
+            </span>
+          </div>
+          <p className="models-intro">
+            The whole catalog, priced per million tokens in credits — search it, open a provider,
+            open a model. Your org enables the vendors it means to run; roles narrow from there.
+          </p>
+          {error ? (
+            <div className="models-error">The live catalog is temporarily unavailable. Please refresh in a moment.</div>
+          ) : (
+            <ModelsTable providers={providers} />
+          )}
         </div>
       </section>
 
