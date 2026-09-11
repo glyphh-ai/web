@@ -3,23 +3,19 @@ import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
 import ExpandableShot from '../../components/ExpandableShot';
 
-/* Section screenshots — the home page's shot grammar. Chris drops the files
-   into public/screen-shots/ under these names; each renders full-bleed with
-   the lightbox on click. */
+/* Screenshots land IN the mock slots (his order, 2026-09-11). Drop the files
+   into public/screen-shots/ under these names and they replace the drawn
+   mocks one-for-one. */
 const SHOTS = {
-  extract: { src: '/screen-shots/design-extract.png', alt: 'Extracting a design system from a live site' },
-  contract: { src: '/screen-shots/design-contract.png', alt: 'The compiled CSS contract in the studio' },
-  consumers: { src: '/screen-shots/design-consumers.png', alt: 'An app styled by its design system' },
-  memory: { src: '/screen-shots/design-memory.png', alt: 'Recalling a design system from org memory' },
+  hero: { src: '/screen-shots/design-studio.png', alt: 'The Glyphh Design studio' },
+  contract: { src: '/screen-shots/design-contract.png', alt: 'The compiled CSS contract' },
+  consumers: [
+    { src: '/screen-shots/design-dev.png', alt: 'A web app styled by its design system' },
+    { src: '/screen-shots/design-clients.png', alt: 'Per-client design systems on the shelf' },
+    { src: '/screen-shots/design-marketing.png', alt: 'Slides and Docs pulling the design system' },
+  ],
 };
 
-function SectionShot({ shot }) {
-  return (
-    <div className="story-split-shot reveal" style={{ marginTop: '2.2rem' }}>
-      <ExpandableShot src={shot.src} alt={shot.alt} />
-    </div>
-  );
-}
 
 export const metadata = {
   title: 'Glyphh Design — a design system for everything you ship',
@@ -64,67 +60,7 @@ const ICONS = {
   ),
 };
 
-/* ── The studio, drawn in CSS — the shots.so-shaped editor itself ── */
-function StudioMock() {
-  return (
-    <div className="od-studio" aria-hidden="true">
-      <div className="od-studio-bar">
-        <span className="od-studio-back">‹ Designs</span>
-        <span className="od-studio-name">Acme Brand</span>
-        <span className="od-studio-saved">Saved</span>
-      </div>
-      <div className="od-studio-split">
-        <div className="od-stage">
-          <div className="od-shot">
-            <div className="od-shot-card">
-              <span className="od-shot-kicker">CONFIDENT · WARM</span>
-              <span className="od-shot-h">Ship the vibe.</span>
-              <span className="od-shot-line" />
-              <span className="od-shot-line short" />
-              <div className="od-shot-btns"><i /><i className="ghost" /></div>
-              <div className="od-shot-swatches"><i /><i /><i /><i /></div>
-            </div>
-            <div className="od-shot-spec">Aa</div>
-          </div>
-        </div>
-        <div className="od-rail">
-          <div className="od-rail-sec">COLORS</div>
-          <div className="od-rail-row"><span>Primary</span><i style={{ background: '#af5fff' }} /><em>#af5fff</em></div>
-          <div className="od-rail-row"><span>Accent</span><i style={{ background: '#ec4899' }} /><em>#ec4899</em></div>
-          <div className="od-rail-row"><span>Surface</span><i style={{ background: '#17171d' }} /><em>#17171d</em></div>
-          <div className="od-rail-sec">TYPOGRAPHY</div>
-          <div className="od-rail-row"><span>Display</span><em className="od-font">Sora</em></div>
-          <div className="od-rail-row"><span>Body</span><em className="od-font">Inter</em></div>
-          <div className="od-rail-sec">STYLES</div>
-          <div className="od-rail-row"><span>Radius</span><b className="od-slider"><u /></b><em>14</em></div>
-          <div className="od-rail-row"><span>Shadow</span><em>medium</em></div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
-/* The consumable contract — the CSS block, verbatim shape. */
-function ContractMock() {
-  return (
-    <div className="od-contract" aria-hidden="true">
-      <div className="od-contract-tab">design css acme-brand</div>
-      <pre className="od-contract-code">{`/* Glyphh Design — Acme */
-:root {
-  --design-primary: #af5fff;
-  --design-accent: #ec4899;
-  --design-background: #0e0e12;
-  --design-surface: #17171d;
-  --design-font-display: "Sora", sans-serif;
-  --design-font-body: "Inter", sans-serif;
-  --design-radius: 14px;
-  --design-shadow: 0 8px 28px rgba(0,0,0,.18);
-  --design-gradient: linear-gradient(135deg,
-      #af5fff, #ec4899);
-}`}</pre>
-    </div>
-  );
-}
 
 const EXTRACT = [
   {
@@ -194,7 +130,7 @@ export default function DesignPage() {
               </a>
             </div>
           </div>
-          <div className="od-hero-mock reveal"><StudioMock /></div>
+          <div className="od-hero-mock reveal"><ExpandableShot src={SHOTS.hero.src} alt={SHOTS.hero.alt} eager /></div>
         </div>
       </header>
 
@@ -212,7 +148,6 @@ export default function DesignPage() {
               </div>
             ))}
           </div>
-          <SectionShot shot={SHOTS.extract} />
         </div>
       </section>
 
@@ -230,9 +165,8 @@ export default function DesignPage() {
               change the primary once and everything downstream follows.
             </p>
           </div>
-          <div className="op-prod-mock reveal"><ContractMock /></div>
+          <div className="op-prod-mock reveal"><ExpandableShot src={SHOTS.contract.src} alt={SHOTS.contract.alt} /></div>
         </div>
-        <div className="container"><SectionShot shot={SHOTS.contract} /></div>
       </section>
 
       {/* ── CONSUMERS ── */}
@@ -246,15 +180,10 @@ export default function DesignPage() {
                 <p>{c.desc}</p>
               </div>
               <div className="op-prod-mock">
-                <div className={`od-consumer od-consumer-${i}`} aria-hidden="true">
-                  <span className="od-consumer-chip">--design-primary</span>
-                  <span className="od-consumer-chip alt">--design-font-display</span>
-                  <span className="od-consumer-chip">--design-radius</span>
-                </div>
+                <ExpandableShot src={SHOTS.consumers[i].src} alt={SHOTS.consumers[i].alt} />
               </div>
             </div>
           ))}
-          <SectionShot shot={SHOTS.consumers} />
         </div>
       </section>
 
@@ -294,7 +223,6 @@ export default function DesignPage() {
               <p>Hundreds of systems per org if you want them — per client, per product, per mood. They live in your org, not on someone&rsquo;s laptop, and every member builds from the same shelf.</p>
             </div>
           </div>
-          <SectionShot shot={SHOTS.memory} />
         </div>
       </section>
 
