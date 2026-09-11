@@ -14,11 +14,11 @@ const VENDORS = [
   'x.ai', 'deepseek.com', 'groq.com', 'ollama.com',
 ];
 
-/* The model catalog strip riding above the hub (the relay's connections strip). */
-const CATALOG = [
-  'anthropic.com', 'openai.com', 'gemini.google.com', 'mistral.ai', 'x.ai',
-  'deepseek.com', 'groq.com', 'meta.com', 'cohere.com', 'ai21.com',
-  'perplexity.ai', 'together.ai', 'fireworks.ai', 'ollama.com',
+/* The connections strip riding above the hub — the relay's own app rail. */
+const CONNECTIONS = [
+  'slack.com', 'mail.google.com', 'salesforce.com', 'github.com', 'notion.so',
+  'figma.com', 'linear.app', 'stripe.com', 'vercel.com', 'discord.com',
+  'zoom.us', 'asana.com', 'airtable.com', 'dropbox.com', 'shopify.com',
 ];
 
 const PILLARS = [
@@ -48,8 +48,8 @@ export default function GatewayPage() {
 
       {/* ── HERO ── */}
       <header className="page-hero page-hero-tight op-hero">
-        <div className="container">
-          <div className="op-hero-copy" style={{ maxWidth: 720 }}>
+        <div className="container op-hero-inner">
+          <div className="op-hero-copy">
             <div className="hero-badge">
               <span className="badge-dot" aria-hidden="true"></span>
               GLYPHH GATEWAY
@@ -72,10 +72,10 @@ export default function GatewayPage() {
             </div>
           </div>
 
-          {/* Marketecture — the relay grammar (apx/mcx): your surfaces on the
-              left routing into the mascot, the vendors on the right, the model
-              catalog streaming through above the hub. */}
-          <div className="apx-stage mcx-stage reveal" aria-hidden="true">
+          {/* Marketecture — the relay grammar (apx/mcx), scaled into the
+              hero's right column: your surfaces routing into the mascot,
+              the vendors beyond it, connections streaming through above. */}
+          <div className="apx-stage mcx-stage gwx-hero-stage reveal" aria-hidden="true">
             <div className="apx-col">
               <div className="apx-col-label">everything you run</div>
               <div className="apx-node">Glyphh Desktop</div>
@@ -87,11 +87,11 @@ export default function GatewayPage() {
               <div className="apx-flow mcx-flow-back"><i /><i /></div>
             </div>
             <div className="apx-hub mcx-hub">
-              {/* the model catalog — every vendor the gateway fronts, streaming through */}
+              {/* everything already connected, streaming through the hub */}
               <div className="mcx-apps">
-                <span className="mcx-apps-label">models</span>
+                <span className="mcx-apps-label">connections</span>
                 <div className="mcx-apps-track">
-                  {[...CATALOG, ...CATALOG].map((d, i) => (
+                  {[...CONNECTIONS, ...CONNECTIONS].map((d, i) => (
                     <span key={d + i} className="mcx-app">
                       <img src={`https://www.google.com/s2/favicons?domain=${d}&sz=64`} alt="" width="16" height="16" loading="lazy" />
                     </span>

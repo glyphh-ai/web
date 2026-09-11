@@ -676,6 +676,12 @@ body {
 .hero-copy, .hero-stage { position: relative; z-index: 1; }
 
 /* ── PUBLISH marketecture — you build → the relay → anyone uses ─────────── */
+/* Gateway hero: the relay stage rides the hero's RIGHT column, compressed —
+   same pieces, tighter columns, no top strip overhang clipping. */
+.gwx-hero-stage { transform: scale(0.8); transform-origin: center; margin: 2rem 0 0; }
+.gwx-hero-stage .apx-col { min-width: 128px; }
+@media (max-width: 980px) { .gwx-hero-stage { transform: none; margin: 2.6rem auto 0; } }
+
 .apx-stage {
   display: flex;
   align-items: center;
