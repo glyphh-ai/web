@@ -681,7 +681,11 @@ body {
 .gwx-hero-stage { transform: scale(0.8); transform-origin: center; margin: 2rem 0 0; }
 .gwx-hero-stage .apx-col { min-width: 128px; }
 .gwx-hero-stage .apx-mascot { width: 64px; height: 64px; }
-.gwx-hero-stage .apx-hub { padding: 20px 26px; }
+/* The rings track the smaller mascot: hub box, dashed orbit (2×r), inner
+   ring, and glow all step down together so the circle hugs the icon. */
+.gwx-hero-stage .apx-hub { --apx-r: 74px; width: 184px; height: 184px; }
+.gwx-hero-stage .apx-glow { width: 128px; height: 128px; }
+.gwx-hero-stage .mcx-orbit-b { width: 84px; height: 84px; }
 @media (max-width: 980px) { .gwx-hero-stage { transform: none; margin: 2.6rem auto 0; } }
 
 .apx-stage {
