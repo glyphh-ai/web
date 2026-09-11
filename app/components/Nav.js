@@ -88,13 +88,9 @@ export default function Nav() {
                   <span className="nav-dd-name">Glyphh Design</span>
                   <span className="nav-dd-desc">Your org&rsquo;s design system — extracted, remembered, enforced.</span>
                 </a>
-                <a href="/products/office" className="nav-dd-item">
-                  <span className="nav-dd-name">Glyphh Office</span>
-                  <span className="nav-dd-desc">Slides, Docs, Sheets and Drive — the suite that writes itself.</span>
-                </a>
-                <a href="/products/cloud" className="nav-dd-item">
-                  <span className="nav-dd-name">Glyphh Cloud</span>
-                  <span className="nav-dd-desc">Start on your machine, keep going in the cloud — and agents that never sleep.</span>
+                <a href="/products/gateway" className="nav-dd-item">
+                  <span className="nav-dd-name">Glyphh Gateway</span>
+                  <span className="nav-dd-desc">Every model, your keys &mdash; one governed endpoint.</span>
                 </a>
               </div>
             </div>
@@ -138,8 +134,7 @@ export default function Nav() {
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <span className="mobile-menu-group">Products</span>
         <a href="/products/design" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Design</a>
-        <a href="/products/office" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Office</a>
-        <a href="/products/cloud" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Cloud</a>
+        <a href="/products/gateway" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Gateway</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         {loggedIn ? (
           <a href={dashHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>

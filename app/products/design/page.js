@@ -286,8 +286,8 @@ export default function DesignPage() {
                 <span className="btn-label">Download Glyphh</span>
                 <span className="btn-fill"></span>
               </a>
-              <a href="/products/office" className="btn btn-ghost btn-lg group">
-                <span className="btn-label">See Glyphh Office</span>
+              <a href="/products/gateway" className="btn btn-ghost btn-lg group">
+                <span className="btn-label">See Glyphh Gateway</span>
                 <span className="btn-fill"></span>
               </a>
             </div>

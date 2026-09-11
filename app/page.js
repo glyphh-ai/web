@@ -3,6 +3,7 @@ import Nav from './components/Nav';
 import Reveal from './components/Reveal';
 import Hero from './components/Hero';
 import StoryHeads from './components/StoryHeads';
+import Mcp from './components/Mcp';
 import Pricing from './components/Pricing';
 import Download from './components/Download';
 import FAQ from './components/FAQ';
@@ -33,6 +34,10 @@ export default async function Home() {
           the story. Bodies land under them next; nothing below is removed
           until each band absorbs or replaces its old section. */}
       <StoryHeads />
+      {/* THE RELAY — restored from 123a886^ (his order, 2026-09-11): every
+          LLM ⇄ the mascot hub ⇄ everything you build, with the MCP
+          connections streaming through. The apx/mcx CSS never left. */}
+      <Mcp />
       {/* FeatureGrid ("One app, every surface of your work.") and
           ReleaseStrip ("Build it. Ship it. Share it.") are OFF the page (his
           call, 2026-08-28: they add nothing). The components stay in the
