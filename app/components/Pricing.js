@@ -64,6 +64,7 @@ const TIERS = [
     features: (c, s) => [
       'Everything in Basic, plus:',
       'Role governance — models, budgets, keys per team',
+      'The org Library — publish tasks, agents & skills to your team, reviewed and role-gated',
       `${fmt(c)} compute credits per seat, every month`,
       `Up to ${s} seats`,
       'Highest rate limits',
