@@ -11,13 +11,11 @@ const nextConfig = {
   allowedDevOrigins: ['192.168.1.41', '192.168.1.*'],
   async redirects() {
     return [
-      // Products is a real section again (2026-08-16). The bare index lands on
-      // the lead product (Design); retired product URLs fall through to 404.
-      { source: '/products', destination: '/products/gateway', permanent: false },
-      // 2026-09-11 (staying tight): Gateway is the one product page.
-      { source: '/products/cloud', destination: '/', permanent: false },
-      { source: '/products/office', destination: '/', permanent: false },
-      { source: '/products/design', destination: '/', permanent: false },
+      // 2026-09-12: the product pages are gone (Gateway deleted) and pricing
+      // moved back onto the home page. Old links land on the home page.
+      { source: '/products', destination: '/', permanent: false },
+      { source: '/products/:slug*', destination: '/', permanent: false },
+      { source: '/pricing', destination: '/#pricing', permanent: false },
     ];
   },
 };

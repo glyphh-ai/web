@@ -17,7 +17,7 @@ export default function CreditBand() {
           is always your own, never marked up.
         </p>
       </div>
-      <a href="/pricing" className="btn btn-secondary btn-lg group">
+      <a href="/#pricing" className="btn btn-secondary btn-lg group">
         <span className="btn-label">See pricing</span>
         <span className="btn-fill"></span>
       </a>
