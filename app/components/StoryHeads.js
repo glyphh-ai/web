@@ -13,19 +13,15 @@ import ExpandableShot from './ExpandableShot';
  * — absorbs the CONTEXT beat) → MODELS → EXECUTION → COMMAND → RROT →
  * APPS / DREAM (build what's missing).
  */
-// CONNECTIONS is OFF the page (his order, 2026-09-12). The entry stays here,
-// hidden, so it can be remounted by adding it back to HEADS.
-const CONNECTIONS_HEAD = {
+const HEADS = [
+  {
     id: 'connections',
     label: 'CONNECTIONS',
     title: '3,500+ ways to connect your work.',
     ledes: [
       'Connect Glyphh to the software, services, data, and systems you already use through thousands of MCP connections. Then let RPA reach beyond APIs and interact with the applications on your screen.',
     ],
-};
-void CONNECTIONS_HEAD;
-
-const HEADS = [
+  },
   {
     id: 'loops',
     label: 'LOOPS',
