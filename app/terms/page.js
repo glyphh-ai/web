@@ -111,7 +111,10 @@ export default function TermsPage() {
           <h2>14. Changes to Terms</h2>
           <p>We may update these Terms from time to time. Continued use of the Service after changes constitutes acceptance of the revised Terms. Material changes will be communicated through the application or via email.</p>
 
-          <h2>15. Contact</h2>
+          <h2>15. Third-Party Software and Services</h2>
+          <p>The Service is built on third-party software and services, which we name plainly. The Glyphh router is a fork of LiteLLM, an open-source proxy by Berri AI, used under the MIT License (Copyright (c) 2023 Berri AI); the MIT License text accompanies the software and its terms, including the copyright and permission notice, apply to that component. Connections to third-party applications are provided through Pipedream Connect, and your use of a connected application is also subject to that application&apos;s own terms. Payments are processed by Stripe. Third-party AI tools that Glyphh runs on your behalf (including Claude Code, Codex, Gemini, Copilot, and Cursor) and the AI model providers you use are provided by their respective vendors under their own terms; Glyphh does not modify them and is not their provider. Except as stated, no third party named here sponsors or endorses the Service.</p>
+
+          <h2>16. Contact</h2>
           <p>For questions about these Terms, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>

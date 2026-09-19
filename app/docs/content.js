@@ -776,6 +776,51 @@ const console_ = [
   },
 ];
 
+const about = [
+  {
+    slug: 'built-on',
+    title: 'Built on',
+    lede: 'What Glyphh is built on, named plainly, and what Glyphh adds on top.',
+    mascot: 'sage',
+    body: (
+      <>
+        <p>
+          Glyphh is built on open source and on partners we name. Nothing here is hidden, and nothing
+          here is the product. The product is the layer on top: the desktop, the loops, the skills, the
+          org model, the hub, and the governance.
+        </p>
+        <h2>LiteLLM</h2>
+        <p>
+          The router is a fork of <a href="https://github.com/BerriAI/litellm">LiteLLM</a>, the
+          OpenAI-compatible proxy. It provides the endpoint, the model catalog, virtual keys, teams,
+          budgets, and the spend logs. Glyphh adds organizations, sign-in, the hub, billing, plans,
+          the credit strategy, and the desktop&rsquo;s gateway path. The fork is private. The upstream
+          core is used under the MIT license, copyright 2023 Berri AI, and the license text ships with
+          the software. For settings we did not change, such as the config file syntax and the
+          per-model parameters, the <a href="https://docs.litellm.ai">upstream reference</a> is the
+          source of truth. It describes LiteLLM, not Glyphh, so use it for those settings only.
+        </p>
+        <h2>Pipedream Connect</h2>
+        <p>
+          Connections run on <a href="https://pipedream.com/connect">Pipedream Connect</a>: the OAuth
+          flows and the tool surface for 3,500+ services. Glyphh holds the org&rsquo;s connections,
+          decides org-shared versus personal, and governs which tools may run and when.
+        </p>
+        <h2>Stripe</h2>
+        <p>Subscriptions, seats, invoices, and top-ups are billed through Stripe.</p>
+        <h2>The vendor CLIs</h2>
+        <p>
+          Claude Code, Codex, Gemini, Copilot, and Cursor are their vendors&rsquo; own tools. Glyphh
+          runs them and does not modify them.
+        </p>
+        <Note kind="note" title="The same answer everywhere">
+          The console&rsquo;s About page reads the same feed as this page, with the build you are running on.
+        </Note>
+      </>
+    ),
+  },
+];
+
 export const GROUPS = [
   { title: 'Start here', lede: 'Install, the desktop, and the keys worth learning on day one.', pages: start },
   { title: 'The agent', lede: 'Sessions, the loops underneath, models, and panels.', pages: agent },
@@ -783,6 +828,7 @@ export const GROUPS = [
   { title: 'Connect', lede: 'Connections and MCP, both directions.', pages: connect },
   { title: 'The gateway', lede: 'Routing, your own CLI, budgets.', pages: router },
   { title: 'Console and billing', lede: 'Roles, the hub, plans, seats, security.', pages: console_ },
+  { title: 'About', lede: 'What Glyphh is built on.', pages: about },
 ];
 
 export const PAGES = GROUPS.flatMap((g) => g.pages);
