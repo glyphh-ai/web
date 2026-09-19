@@ -110,6 +110,9 @@ export default function Nav() {
             >
               <a href="/pricing" className="nav-dd-trigger">Pricing</a>
             </div>
+            <div className="nav-dd">
+              <a href="/docs" className="nav-dd-trigger">Docs</a>
+            </div>
           </div>
           <div className="nav-cta">
             {loggedIn ? (
@@ -146,6 +149,7 @@ export default function Nav() {
         <a href="/products/skills" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Skills</a>
         <a href="/products/semantic-apps" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Semantic Apps</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
+        <a href="/docs" onClick={() => setMenuOpen(false)}>Docs</a>
         {loggedIn ? (
           <a href={dashHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>
             <span className="btn-label">Dashboard</span>
