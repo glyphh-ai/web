@@ -16,6 +16,7 @@
 export const dynamic = 'force-dynamic';
 
 const REPO = process.env.RELEASES_REPO || 'glyphh-ai/glyphh-releases';
+const API_BASE = process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
 
 function assetNameFor(platform, arch) {
   if (platform === 'win') return 'Glyphh-Setup.exe';
@@ -31,6 +32,32 @@ export async function GET(request) {
   const assetName = assetNameFor(platform, arch);
 
   const token = process.env.GITHUB_TOKEN;
+
+  // THE SERVER HOLDS THE TOKEN (his report, 2026-09-19: the homepage download
+  // answered 502). The releases repo is private and this site has no GitHub
+  // credential, so ask our own server for the newest release and the signed
+  // asset URL; it reads GitHub with the token it already has. The direct
+  // GitHub path below stays for a deployment that does set GITHUB_TOKEN.
+  if (!token) {
+    try {
+      const listRes = await fetch(`${API_BASE}/api/releases`, { cache: 'no-store' });
+      if (!listRes.ok) return new Response('Could not fetch release info', { status: 502 });
+      const releases = (await listRes.json())?.data ?? [];
+      const latest = releases.find((r) => !r.prerelease && r.assets?.some((a) => a.name === assetName))
+        ?? releases.find((r) => r.assets?.some((a) => a.name === assetName));
+      if (!latest) return new Response(`Asset "${assetName}" not found in latest release`, { status: 404 });
+      const assetRes = await fetch(
+        `${API_BASE}/api/releases/asset?tag=${encodeURIComponent(latest.tag)}&name=${encodeURIComponent(assetName)}`,
+        { cache: 'no-store' },
+      );
+      if (!assetRes.ok) return new Response('Could not resolve download URL', { status: 502 });
+      const url = (await assetRes.json())?.data?.url;
+      if (!url) return new Response('Could not resolve download URL', { status: 502 });
+      return Response.redirect(url, 302);
+    } catch {
+      return new Response('Download failed', { status: 500 });
+    }
+  }
 
   try {
     // 1. Get latest release metadata
