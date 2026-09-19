@@ -42,7 +42,11 @@ export default function ExpandableShot({ src, alt, eager = false, poster, crop }
             <img
               src={src}
               alt={alt}
-              style={crop ? { objectPosition: crop.pos, transform: `scale(${crop.zoom})`, transformOrigin: crop.pos } : undefined}
+              // A cropped shot ZOOMS (his order, 2026-09-19): it starts on the
+              // whole screen, eases into the crop, the Settings modal, holds,
+              // and eases back out, on a loop. The numbers are the same crop.
+              className={crop ? 'dv-zoom' : undefined}
+              style={crop ? { objectPosition: crop.pos, transformOrigin: crop.pos, '--zoom': crop.zoom, '--pos': crop.pos } : undefined}
               {...(eager ? { fetchPriority: 'high' } : { loading: 'lazy' })}
             />
           )}

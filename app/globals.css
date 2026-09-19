@@ -6976,3 +6976,15 @@ body:has(.office-page) { background: #000; }
 /* Two real screens on a product page. */
 .shots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 800px) { .shots-grid { grid-template-columns: 1fr; } }
+
+/* A cropped shot breathes: full frame → the modal → full frame, and again. */
+@keyframes dv-zoom-cycle {
+  0% { transform: scale(1); }
+  28% { transform: scale(var(--zoom, 1.9)); }
+  72% { transform: scale(var(--zoom, 1.9)); }
+  100% { transform: scale(1); }
+}
+.dv-shot-inner img.dv-zoom { animation: dv-zoom-cycle 12s ease-in-out infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) {
+  .dv-shot-inner img.dv-zoom { animation: none; transform: scale(var(--zoom, 1.9)); }
+}
