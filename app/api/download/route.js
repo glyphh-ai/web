@@ -15,7 +15,7 @@
 // stale "latest" (which 404s when its assets are the old Yo-* names).
 export const dynamic = 'force-dynamic';
 
-const REPO = process.env.RELEASES_REPO || 'glyphh-ai/glyphh-releases';
+const REPO = process.env.RELEASES_REPO || 'glyphh-ai/releases';
 const API_BASE = process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
 
 function assetNameFor(platform, arch) {
