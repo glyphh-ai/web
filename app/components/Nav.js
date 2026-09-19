@@ -86,7 +86,7 @@ export default function Nav() {
               <div className="nav-dd-panel">
                 <a href="/products/router" className="nav-dd-item">
                   <span className="nav-dd-name">Glyphh Router</span>
-                  <span className="nav-dd-desc">Frontier on your credits, open-weight direct. Roles and budgets.</span>
+                  <span className="nav-dd-desc">One endpoint, two ways to spend credits. Roles and budgets.</span>
                 </a>
                 <a href="/products/connect" className="nav-dd-item">
                   <span className="nav-dd-name">Glyphh Connect</span>

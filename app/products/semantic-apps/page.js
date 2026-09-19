@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import FinalCTA from '../../components/FinalCTA';
 
 // Semantic apps (his order, 2026-09-18): the task layer seeds, built-in
 // skills build the graph and the RAG, the UI extends into the user's day,
@@ -209,24 +210,12 @@ export default function SemanticAppsPage() {
         </div>
       </section>
 
-      <section className="final-cta">
-        <div className="container">
-          <div className="reveal">
-            <h2>Seed it<span className="dot">.</span> Build it<span className="dot">.</span> Ship it to the org<span className="dot">.</span></h2>
-            <p>Download <span className="compose-cmd">Glyphh</span> free and build your first semantic app with the Glyphh skill.</p>
-            <div className="hero-ctas">
-              <a href="/#download" className="btn btn-primary btn-lg group">
-                <span className="btn-label">Get Glyphh Desktop — Free</span>
-                <span className="btn-fill"></span>
-              </a>
-              <a href="/products/skills" className="btn btn-ghost btn-lg group">
-                <span className="btn-label">See Glyphh Skills</span>
-                <span className="btn-fill"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FinalCTA
+        title={<h2>Seed it<span className="dot">.</span> Build it<span className="dot">.</span> Ship it to the org<span className="dot">.</span></h2>}
+        text={<p>Download <span className="compose-cmd">Glyphh</span> free and build your first semantic app with the Glyphh skill.</p>}
+        primary={{ href: '/#download', label: 'Get Glyphh Desktop — Free' }}
+        secondary={{ href: '/products/skills', label: 'See Glyphh Skills' }}
+      />
       <Footer />
     </div>
   );

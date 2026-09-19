@@ -24,7 +24,7 @@ const pillars = [
   },
   {
     title: 'Glyphh Router',
-    desc: 'Frontier credits first, on your own keys. When they are spent, the same requests route to open-weight models, direct. Roles decide who gets what; every token is accounted for.',
+    desc: 'One endpoint in front of every model, and a choice of how to spend. Burn down: your vendor subscriptions first, the proxy when they run dry. Reserved: the heavy models stay on your subscriptions, everything lighter rides the proxy. Roles decide who gets what; every token, cached or not, is accounted for.',
   },
   {
     title: 'Local by default',

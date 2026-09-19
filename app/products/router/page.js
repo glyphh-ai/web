@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import FinalCTA from '../../components/FinalCTA';
 import ModelsTable from '../../components/ModelsTable';
 import { ContractTabs, RolesMock, KeysMock, MetricsMock, WayCard } from './mocks';
 
@@ -23,9 +24,9 @@ async function loadCatalog() {
 }
 
 export const metadata = {
-  title: 'Glyphh Router — frontier on your credits, open-weight direct',
+  title: 'Glyphh Router — one endpoint, two ways to spend',
   description:
-    'One endpoint in front of every model. Frontier AI on your own credits when it is needed, open-weight models direct when it is not. Roles decide who gets what. Every token accounted for.',
+    'One endpoint in front of every model. Burn down uses your vendor subscriptions first and the proxy when they run dry. Reserved keeps the heavy models on your subscriptions and sends everything lighter through the proxy. Roles decide who gets what. Every token accounted for, cached calls at cache rates.',
 };
 
 /* The marks — copied from the Design page's set; Gateway reuses, never invents. */
@@ -182,13 +183,15 @@ export default async function GatewayPage() {
               GLYPHH ROUTER
             </div>
             <h1 className="page-hero-title">
-              Frontier on your credits<span className="dot">.</span>{' '}
-              <span className="hero-accent">Open-weight direct</span><span className="dot">.</span>
+              One endpoint<span className="dot">.</span>{' '}
+              <span className="hero-accent">Two ways to spend</span><span className="dot">.</span>
             </h1>
             <p className="page-hero-sub">
-              One endpoint in front of every model. Your keys pay the vendors while the
-              credits last; the same requests then route to open-weight models, direct.
-              Roles decide who gets what. Every token accounted for, no prompt ever stored.
+              One endpoint in front of every model. Pick how the org spends: <strong>Burn down</strong> uses
+              each vendor subscription you already pay for first, and moves that vendor onto the proxy
+              when it runs dry. <strong>Reserved</strong> keeps the heavy models, Opus and Fable, on your
+              subscriptions and sends everything lighter through the proxy on credits. Roles decide who
+              gets what. Every token accounted for, cached calls at cache rates, no prompt ever stored.
             </p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
@@ -268,24 +271,11 @@ export default async function GatewayPage() {
       </section>
 
       {/* ── FINAL CTA ── */}
-      <section className="final-cta">
-        <div className="container">
-          <div className="cta-card reveal">
-            <h2>Point it at the router. Govern the rest.</h2>
-            <p>Full gateway on Basic. Governance on Pro. Trial it free.</p>
-            <div className="hero-ctas">
-              <a href="/#download" className="btn btn-primary btn-lg group">
-                <span className="btn-label">Download Glyphh</span>
-                <span className="btn-fill"></span>
-              </a>
-              <a href="/pricing" className="btn btn-ghost btn-lg group">
-                <span className="btn-label">See Pricing</span>
-                <span className="btn-fill"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FinalCTA
+        title={<h2>Point it at the router<span className="dot">.</span> Govern the rest<span className="dot">.</span></h2>}
+        text={<p>Full gateway on Basic. Governance on Pro. Trial it free.</p>}
+        primary={{ href: '/#download', label: 'Download Glyphh' }}
+      />
 
       <Footer />
     </div>

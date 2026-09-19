@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import FinalCTA from '../../components/FinalCTA';
 import { WayCard } from '../router/mocks';
 
 // Glyphh Connect (his order, 2026-09-18): the connections product, on its own
@@ -127,20 +128,12 @@ export default function ConnectPage() {
         </div>
       </section>
 
-      <section className="final-cta">
-        <div className="container">
-          <div className="reveal">
-            <h2>Connect it once<span className="dot">.</span> Every loop gets it<span className="dot">.</span></h2>
-            <p>Download <span className="compose-cmd">Glyphh</span> free and connect your first service in a minute.</p>
-            <div className="hero-ctas">
-              <a href="/#download" className="btn btn-primary btn-lg group">
-                <span className="btn-label">Get Glyphh Desktop — Free</span>
-                <span className="btn-fill"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FinalCTA
+        title={<h2>Connect it once<span className="dot">.</span> Every loop gets it<span className="dot">.</span></h2>}
+        text={<p>Download <span className="compose-cmd">Glyphh</span> free and connect your first service in a minute.</p>}
+        primary={{ href: '/#download', label: 'Get Glyphh Desktop — Free' }}
+        secondary={{ href: '/products/router', label: 'See Glyphh Router' }}
+      />
       <Footer />
     </div>
   );

@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import FinalCTA from '../../components/FinalCTA';
 
 // Glyphh Skills (his order, 2026-09-18): the skills framework on its own
 // page, in the router page's grammar. Skills for apps, tasks, and agents,
@@ -214,24 +215,12 @@ export default function SkillsPage() {
         </div>
       </section>
 
-      <section className="final-cta">
-        <div className="container">
-          <div className="reveal">
-            <h2>Write it once<span className="dot">.</span> Run it everywhere<span className="dot">.</span></h2>
-            <p>Download <span className="compose-cmd">Glyphh</span> free and drop your first SKILL.md into the library.</p>
-            <div className="hero-ctas">
-              <a href="/#download" className="btn btn-primary btn-lg group">
-                <span className="btn-label">Get Glyphh Desktop — Free</span>
-                <span className="btn-fill"></span>
-              </a>
-              <a href="/products/semantic-apps" className="btn btn-ghost btn-lg group">
-                <span className="btn-label">See Semantic Apps</span>
-                <span className="btn-fill"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FinalCTA
+        title={<h2>Write it once<span className="dot">.</span> Run it everywhere<span className="dot">.</span></h2>}
+        text={<p>Download <span className="compose-cmd">Glyphh</span> free and drop your first SKILL.md into the library.</p>}
+        primary={{ href: '/#download', label: 'Get Glyphh Desktop — Free' }}
+        secondary={{ href: '/products/semantic-apps', label: 'See Semantic Apps' }}
+      />
       <Footer />
     </div>
   );
