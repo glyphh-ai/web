@@ -1,5 +1,5 @@
 import { GROUPS } from './content';
-import { Cast, Mascot } from './Mascot';
+import { Mascot } from './Mascot';
 
 export const metadata = {
   title: 'Overview',
@@ -18,7 +18,7 @@ export default function DocsHome() {
             Short pages, written from the source, kept current with each release.
           </p>
         </div>
-        <Cast size={60} />
+        <Mascot name="scout" size={96} className="dx-head-mascot" />
       </header>
 
       <div className="dx-groups">

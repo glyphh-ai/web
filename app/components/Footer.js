@@ -14,6 +14,7 @@ export default function Footer() {
             <a href="/#inside">Inside the app</a>
             <a href="/pricing">Pricing</a>
             <a href="/docs">Docs</a>
+            <a href="/research">Research</a>
             <a href="/#download">Download</a>
             <a href="https://github.com/glyphh-ai/glyphh-releases/releases" target="_blank" rel="noopener noreferrer">Changelog</a>
           </div>

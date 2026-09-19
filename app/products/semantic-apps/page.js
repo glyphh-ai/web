@@ -153,7 +153,7 @@ export default function SemanticAppsPage() {
           <div className="op-hero-copy">
             <div className="hero-badge">
               <span className="badge-dot" aria-hidden="true"></span>
-              SEMANTIC APPS
+              GLYPHH SEMANTIC APPS
             </div>
             <h1 className="page-hero-title">
               Apps that know your context<span className="dot">.</span>

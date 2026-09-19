@@ -1,4 +1,4 @@
-import { Note, Row, Code } from './Mascot';
+import { Note, Row, Code, Cast } from './Mascot';
 
 // The docs, written from the source on 2026-09-18. Every page names what the
 // code does today, not what a plan says. When the app changes, this changes.
@@ -777,6 +777,29 @@ const console_ = [
 ];
 
 const about = [
+  {
+    slug: 'the-cast',
+    title: 'The cast',
+    lede: 'The six cousins of the Glyphh mark, and where each one turns up.',
+    mascot: 'scout',
+    body: (
+      <>
+        <p>
+          The Glyphh mark is a one-eyed alien. These six are its cousins. They front the desktop&rsquo;s
+          error pages, so each one means something when you meet it, and they front the callouts in
+          these docs the same way.
+        </p>
+        <Cast size={72} />
+        <h2>Who does what</h2>
+        <Row k="Scout">Not found. A page, a file, a name that does not resolve. Also the plain note in these docs</Row>
+        <Row k="Byte">Certificates, embedding refused, and anything for developers</Row>
+        <Row k="Post">Connection trouble: offline, refused, a bad gateway, a desktop that is not connected</Row>
+        <Row k="Patch">Something broke: a server error, a panel that did not load, a warning worth reading</Row>
+        <Row k="Sage">Waiting: timeouts, too many requests, and the tips in these docs</Row>
+        <Row k="Tally">Locked: sign-in required, forbidden, admin only</Row>
+      </>
+    ),
+  },
   {
     slug: 'built-on',
     title: 'Built on',

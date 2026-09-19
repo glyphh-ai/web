@@ -84,6 +84,10 @@ export default function Nav() {
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </a>
               <div className="nav-dd-panel">
+                <a href="/products/workspace" className="nav-dd-item">
+                  <span className="nav-dd-name">Glyphh Workspace</span>
+                  <span className="nav-dd-desc">Loops, models, apps and tools under one name. Switch in a keystroke.</span>
+                </a>
                 <a href="/products/router" className="nav-dd-item">
                   <span className="nav-dd-name">Glyphh Router</span>
                   <span className="nav-dd-desc">One endpoint, two ways to spend credits. Roles and budgets.</span>
@@ -97,7 +101,7 @@ export default function Nav() {
                   <span className="nav-dd-desc">Write it once. Apps, tasks, agents, every vendor.</span>
                 </a>
                 <a href="/products/semantic-apps" className="nav-dd-item">
-                  <span className="nav-dd-name">Semantic Apps</span>
+                  <span className="nav-dd-name">Glyphh Semantic Apps</span>
                   <span className="nav-dd-desc">Apps that know your context, governed by the org.</span>
                 </a>
               </div>
@@ -108,6 +112,9 @@ export default function Nav() {
               onMouseEnter={ddEnter}
               onMouseLeave={ddLeave}
             >
+              <a href="/research" className="nav-dd-trigger">Research</a>
+            </div>
+            <div className="nav-dd">
               <a href="/pricing" className="nav-dd-trigger">Pricing</a>
             </div>
             <div className="nav-dd">
@@ -144,10 +151,12 @@ export default function Nav() {
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <span className="mobile-menu-group">Products</span>
+        <a href="/products/workspace" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Workspace</a>
         <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Router</a>
         <a href="/products/connect" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Connect</a>
         <a href="/products/skills" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Skills</a>
-        <a href="/products/semantic-apps" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Semantic Apps</a>
+        <a href="/products/semantic-apps" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Semantic Apps</a>
+        <a href="/research" onClick={() => setMenuOpen(false)}>Research</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href="/docs" onClick={() => setMenuOpen(false)}>Docs</a>
         {loggedIn ? (

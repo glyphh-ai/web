@@ -17,6 +17,8 @@ const HEADS = [
   // metaphors: what it is, what it does.
   {
     id: 'cowork',
+    href: '/products/workspace',
+    cta: 'Glyphh Workspace',
     label: 'LOCAL CO-WORK',
     title: 'It runs on your machine.',
     ledes: [

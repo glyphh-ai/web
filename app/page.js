@@ -6,6 +6,7 @@ import StoryHeads from './components/StoryHeads';
 import Mcp from './components/Mcp';
 import Download from './components/Download';
 import FAQ from './components/FAQ';
+import OpenSourceSection from './components/OpenSourceSection';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 
@@ -43,6 +44,7 @@ export default async function Home() {
       {/* The close: download → FAQ → the final CTA. Pricing lives on its
           own page (his order, 2026-09-11) — the nav and FAQ link to it. */}
       <Download />
+      <OpenSourceSection />
       <FAQ />
       <FinalCTA />
       <Footer />
