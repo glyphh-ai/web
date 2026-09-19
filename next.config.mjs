@@ -9,6 +9,23 @@ const nextConfig = {
   // loads but never hydrates — every button goes dead. localhost is exempt,
   // which is why it only breaks over the network. Add your LAN host/subnet.
   allowedDevOrigins: ['192.168.1.41', '192.168.1.*'],
+  // PAGES ARE NEVER CACHED PAST A DEPLOY (his report, 2026-09-19: a product
+  // page "lost the styling of the entire web surface"). Prerendered pages
+  // shipped with s-maxage of a year while their stylesheet names change on
+  // every build, so a cached copy pointed at CSS that no longer existed and
+  // painted bare. HTML revalidates every time; hashed assets stay immutable.
+  async headers() {
+    return [
+      {
+        source: '/:path((?!_next/static|_next/image|favicon.ico).*)',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=0, s-maxage=0, must-revalidate' }],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+    ];
+  },
   async redirects() {
     return [
       // Products is a real section again (2026-08-16). The bare index lands on
