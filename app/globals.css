@@ -6959,7 +6959,7 @@ body:has(.office-page) { background: #000; }
 
 /* ── The hero stage: Chat, Work, Code, rotating (2026-09-19). ── */
 .hs { width: 100%; }
-.hs-tabs { display: flex; justify-content: center; gap: 0.4rem; margin: 0 0 1rem; }
+.hs-tabs { display: flex; justify-content: center; gap: 0.4rem; margin: 2.4rem 0 1.1rem; }
 .hs-tab {
   padding: 0.4rem 1rem; border-radius: 999px; border: 1px solid var(--border);
   background: var(--surface); color: var(--text-2); font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer;
