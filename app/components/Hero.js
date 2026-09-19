@@ -2,7 +2,7 @@
 
 import { heroes } from '../heroes';
 import HeroCTA from './HeroCTA';
-import ExpandableShot from './ExpandableShot';
+import HeroStage from './HeroStage';
 
 /**
  * Hero — the thesis and ONE payoff frame beneath it.
@@ -16,14 +16,6 @@ import ExpandableShot from './ExpandableShot';
  * extension, so pointing HERO_SHOT at an .mp4 (with the still as its poster,
  * which paints instantly while the file loads) is the whole edit.
  */
-/* Cut from the 3.0 pitch master (marketing/Glyphh-3.0/pitch-master-v1.0.0.mp4)
-   — eight product moments, ~25s, muted and looping. It opens AND closes on the
-   command center, so the loop point is invisible. The poster is its first
-   frame, so nothing flashes while the file loads. */
-const HERO_SHOT = '/videos/pitch-master-v1.0.0.mp4';
-const HERO_POSTER = '/videos/home-hero-poster.jpg';
-const HERO_ALT =
-  'Glyphh in use — the command center, an agent beside code, design boards, music, and media panels';
 
 export default function Hero({ variant = 'default' }) {
   const h = heroes[variant] || heroes.default;
@@ -52,9 +44,9 @@ export default function Hero({ variant = 'default' }) {
         </div>
       </div>
 
-      {/* The stage IS the hero's payoff — a touch wider than the container. */}
+      {/* The stage IS the hero's payoff — Chat, Work and Code, rotating (his order, 2026-09-19). */}
       <div className="rhero-tabs-wrap">
-        <ExpandableShot src={HERO_SHOT} poster={HERO_POSTER} alt={HERO_ALT} eager />
+        <HeroStage />
       </div>
     </section>
   );

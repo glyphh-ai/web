@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import ExpandableShot from '../../components/ExpandableShot';
 import FinalCTA from '../../components/FinalCTA';
 
 // Glyphh Workspace (his order, 2026-09-19): a workspace is the intersection
@@ -183,6 +184,15 @@ export default function WorkspacePage() {
           <h2 className="section-title reveal">Loops, models, apps, tools. One name. One keystroke.</h2>
           <div className="od-extract-grid">
             {PILLARS.map((p) => <Card key={p.tag} {...p} />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="od-extract">
+        <div className="container">
+          <div className="shots-grid">
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-workspaces-1.jpg" alt="Workspaces in Glyphh: three saved grids" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-workspaces-2.jpg" alt="The workspace editor: the grid, the loop and models, the app setup per cell" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
           </div>
         </div>
       </section>

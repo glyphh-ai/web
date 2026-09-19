@@ -26,15 +26,20 @@ const HEADS = [
       'Every model is a plug: Claude, GPT, Gemini, Kimi K3, and hundreds of open-weight models, direct. Switch mid-task. The harness, the tools, and the skills stay the same.',
     ],
     shot: {
-      src: '/screen-shots/glyphh-workspace.png',
+      src: '/screen-shots/v2/work-1.jpg',
       alt: 'Glyphh on the desktop: the agent beside Gmail, Slack, and a dashboard, each in its own panel',
-      crop: { pos: '0% 30%', zoom: 1.8 },
+      crop: { pos: '50% 25%', zoom: 1.35 },
     },
   },
   {
     id: 'mcp',
     href: '/products/connect',
     cta: 'Glyphh Connect',
+    shot: {
+      src: '/screen-shots/v2/settings-connections-2.jpg',
+      alt: 'A connection in Glyphh: Gmail with each tool set to Always allow or Needs approval',
+      crop: { pos: '50% 48%', zoom: 1.9 },
+    },
     label: 'MCP TOOLS FOR ANYTHING',
     title: 'Every app you install is a tool your agent can call.',
     ledes: [
@@ -53,9 +58,9 @@ const HEADS = [
       'A task is a skill on a clock: a program the desktop runs on a schedule, with a checkpoint journal, so the same work happens the same way every morning without anyone typing it.',
     ],
     shot: {
-      src: '/screen-shots/glyphh-app-home.png',
+      src: '/screen-shots/v2/settings-skill-1.jpg',
       alt: 'Skills and tasks in Glyphh: named skills with a role and a schedule',
-      crop: { pos: '50% 30%', zoom: 1.6 },
+      crop: { pos: '50% 48%', zoom: 1.9 },
     },
   },
   {
@@ -69,14 +74,19 @@ const HEADS = [
       'The agent reads that memory into every turn, so a prompt in Glyphh starts with your context instead of a blank page.',
     ],
     shot: {
-      src: '/screen-shots/glyphh-custom-apps.png',
+      src: '/screen-shots/v2/settings-artifacts.jpg',
       alt: 'Semantic apps in Glyphh: an app with its own data, search, and graph',
-      crop: { pos: '70% 30%', zoom: 1.7 },
+      crop: { pos: '50% 48%', zoom: 1.9 },
     },
   },
   {
     id: 'plugins',
     label: 'PLUGINS',
+    shot: {
+      src: '/screen-shots/v2/settings-skills-3.jpg',
+      alt: 'A plugin in Glyphh: the Glyphh plugin, its manifest and files',
+      crop: { pos: '50% 48%', zoom: 1.9 },
+    },
     title: 'Extend the harness, not the vendor.',
     ledes: [
       'Plugins add to Glyphh itself: new panels, new tool kinds, new loops. They work with every model because they plug into the harness, not into one vendor\'s client.',

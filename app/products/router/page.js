@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import ExpandableShot from '../../components/ExpandableShot';
 import FinalCTA from '../../components/FinalCTA';
 import ModelsTable from '../../components/ModelsTable';
 import { ContractTabs, RolesMock, KeysMock, MetricsMock, WayCard } from './mocks';
@@ -234,6 +235,15 @@ export default async function GatewayPage() {
       </section>
 
       {/* ── GOVERNANCE ── */}
+      <section className="od-extract">
+        <div className="container">
+          <div className="shots-grid">
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/code-2.jpg" alt="Claude Code in a Glyphh terminal, routed through the org" /></div>
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/code-1.5.jpg" alt="The agent reading Gmail beside the code it is writing" /></div>
+          </div>
+        </div>
+      </section>
+
       <section className="op-products">
         <div className="container">
           {GOVERN.map((c, i) => (

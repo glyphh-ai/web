@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import ExpandableShot from '../../components/ExpandableShot';
 import FinalCTA from '../../components/FinalCTA';
 
 // Glyphh Skills (his order, 2026-09-18): the skills framework on its own
@@ -185,6 +186,15 @@ export default function SkillsPage() {
           <h2 className="section-title reveal">Skills are the unit. Everything else is built from them.</h2>
           <div className="od-extract-grid">
             {BETS.map((b) => <Card key={b.tag} {...b} />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="od-extract">
+        <div className="container">
+          <div className="shots-grid">
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-skill-1.jpg" alt="Discover in Glyphh: the featured pick, For you, and categories" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-skills-2.jpg" alt="A skill of type app: its tools, read-only and write, each with a permission" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
           </div>
         </div>
       </section>

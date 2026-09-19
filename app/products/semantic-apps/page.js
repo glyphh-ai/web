@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import ExpandableShot from '../../components/ExpandableShot';
 import FinalCTA from '../../components/FinalCTA';
 
 // Semantic apps (his order, 2026-09-18): the task layer seeds, built-in
@@ -180,6 +181,15 @@ export default function SemanticAppsPage() {
           <h2 className="section-title reveal">Your data, on your machine, in the agent&rsquo;s context.</h2>
           <div className="od-extract-grid">
             {PILLARS.map((p) => <Card key={p.tag} {...p} />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="od-extract">
+        <div className="container">
+          <div className="shots-grid">
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-artifacts.jpg" alt="Artifacts in Glyphh: files the agent made, with previews" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-tabs.jpg" alt="Tabs in Glyphh: web apps and Glyphh apps kept as panels" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
           </div>
         </div>
       </section>

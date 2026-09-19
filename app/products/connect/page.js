@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import ExpandableShot from '../../components/ExpandableShot';
 import FinalCTA from '../../components/FinalCTA';
 import { WayCard } from '../router/mocks';
 
@@ -112,6 +113,15 @@ export default function ConnectPage() {
           <h2 className="section-title reveal">Connect once. Call from anywhere.</h2>
           <div className="od-extract-grid">
             {WAYS.map((w) => <WayCard key={w.tag} tag={w.tag} title={w.title} desc={w.desc} />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="od-extract">
+        <div className="container">
+          <div className="shots-grid">
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-connections-1.jpg" alt="Connections in Glyphh: Gmail, Google Calendar and Google Drive connected" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-connections-2.jpg" alt="Gmail tool permissions: Always allow for reads, approval for the rest" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
           </div>
         </div>
       </section>
