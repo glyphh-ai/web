@@ -23,9 +23,9 @@ async function loadCatalog() {
 }
 
 export const metadata = {
-  title: 'Glyphh Gateway — every model, your keys, one endpoint',
+  title: 'Glyphh Router — frontier on your credits, open-weight direct',
   description:
-    'One endpoint in front of every model. Your keys pay the vendors. Roles decide who gets what. Every token accounted for — no prompt ever stored.',
+    'One endpoint in front of every model. Frontier AI on your own credits when it is needed, open-weight models direct when it is not. Roles decide who gets what. Every token accounted for.',
 };
 
 /* The marks — copied from the Design page's set; Gateway reuses, never invents. */
@@ -76,7 +76,7 @@ function GatewayStage() {
       </div>
       <div className="apx-hub mcx-hub">
         <div className="mcx-apps">
-          <span className="mcx-apps-label">connections</span>
+          <span className="mcx-apps-label">Glyphh Connect</span>
           <div className="mcx-apps-track">
             {[...CONNECTIONS, ...CONNECTIONS].map((d, i) => (
               <span key={d + i} className="mcx-app">
@@ -179,15 +179,16 @@ export default async function GatewayPage() {
           <div className="op-hero-copy">
             <div className="hero-badge">
               <span className="badge-dot" aria-hidden="true"></span>
-              GLYPHH GATEWAY
+              GLYPHH ROUTER
             </div>
             <h1 className="page-hero-title">
-              Every model<span className="dot">.</span> Your keys<span className="dot">.</span>{' '}
-              <span className="hero-accent">One gateway</span><span className="dot">.</span>
+              Frontier on your credits<span className="dot">.</span>{' '}
+              <span className="hero-accent">Open-weight direct</span><span className="dot">.</span>
             </h1>
             <p className="page-hero-sub">
-              One endpoint in front of every model. Your keys pay the vendors. Roles decide
-              who gets what. Every token accounted for — no prompt ever stored.
+              One endpoint in front of every model. Your keys pay the vendors while the
+              credits last; the same requests then route to open-weight models, direct.
+              Roles decide who gets what. Every token accounted for, no prompt ever stored.
             </p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
@@ -204,7 +205,7 @@ export default async function GatewayPage() {
       <section className="od-extract">
         <div className="container">
           <span className="rp-eyebrow">{'{'} the front door {'}'}</span>
-          <h2 className="section-title">You don&rsquo;t integrate models. You integrate once.</h2>
+          <h2 className="section-title">You don&rsquo;t integrate models. You point at the router.</h2>
           <div className="od-extract-grid">
             {WAYS.map((e) => (
               <WayCard key={e.tag} tag={e.tag} title={e.title} desc={e.desc} />
@@ -249,7 +250,7 @@ export default async function GatewayPage() {
       <section className="models-section" id="models">
         <div className="container">
           <div className="models-table-head">
-            <h2>Every model behind the gateway</h2>
+            <h2>Every model behind the router</h2>
             <span className="models-live">
               <span className="models-live-dot" aria-hidden="true"></span>
               Live from the catalog
@@ -270,7 +271,7 @@ export default async function GatewayPage() {
       <section className="final-cta">
         <div className="container">
           <div className="cta-card reveal">
-            <h2>Point it at the gateway. Govern the rest.</h2>
+            <h2>Point it at the router. Govern the rest.</h2>
             <p>Full gateway on Basic. Governance on Pro. Trial it free.</p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">

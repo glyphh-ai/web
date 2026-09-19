@@ -29,14 +29,13 @@ export default async function Home() {
       <Reveal />
       <Nav />
       <Hero variant={variant} />
-      {/* The new messaging pass, top-down: header bands for every section of
-          the story. Bodies land under them next; nothing below is removed
-          until each band absorbs or replaces its old section. */}
-      <StoryHeads />
-      {/* THE RELAY — restored from 123a886^ (his order, 2026-09-11): every
-          LLM ⇄ the mascot hub ⇄ everything you build, with the MCP
-          connections streaming through. The apx/mcx CSS never left. */}
+      {/* THE CALLOUT (his order, 2026-09-18): Glyphh in the middle, the loops
+          on the left, Glyphh Connect above, Glyphh Router on the right. It
+          sits right under the hero because it IS the pitch, drawn. */}
       <Mcp />
+      {/* Then each section is a direct attack: local co-work, MCP tools for
+          anything, skills that extend to tasks, semantic apps, plugins. */}
+      <StoryHeads />
       {/* FeatureGrid ("One app, every surface of your work.") and
           ReleaseStrip ("Build it. Ship it. Share it.") are OFF the page (his
           call, 2026-08-28: they add nothing). The components stay in the

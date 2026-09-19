@@ -6,7 +6,7 @@ import { styledText } from './cmd-style';
 const faqs = [
   {
     q: 'What is Glyphh Desktop?',
-    a: 'A new class of desktop agent for Mac and Windows. Every task needs the right agents, workflow, and apps — Glyphh Desktop combines all three into Layouts you switch instantly. Your agents do real work — a deck, a brief, a batch of replies, shipped code — in the apps open beside them, on models you choose.',
+    a: 'A desktop application for Mac, Windows, and Linux. It is the harness: chat, work, and code run on your machine, driven by whichever loop you pick, with your apps, files, skills, and connections beside them. It is vendor-agnostic, so the harness stays the same when the model changes.',
   },
   {
     q: 'What are loops?',
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: 'Which models can I use?',
-    a: 'Frontier models like Fable, GPT, and Gemini — and a growing index of open-weight models like Llama, Qwen, and Mistral. All in one picker, all on one subscription. And you can bring your own keys: any provider that speaks the OpenAI API plugs in, billed by your provider, never marked up — we only ever charge for compute on our infrastructure.',
+    a: 'Frontier models on your own credits: Claude, GPT, Gemini. When those credits are spent, the same requests route to open-weight models, direct: Kimi K3, Llama, Qwen, Mistral, and hundreds more. Bring your own keys or use the router; either way the desktop does not change.',
   },
   {
     q: 'What is a credit?',
@@ -30,7 +30,7 @@ const faqs = [
   },
   {
     q: 'What are connected services?',
-    a: 'Your tools, linked once: Gmail, Slack, Drive, Notion, Salesforce — 3,500+ services. Connect an account and the agent can act on it: send the message, file the ticket, build the doc. Teams share org connections; members can add their own.',
+    a: 'Glyphh Connect: 3,500+ services linked once and exposed as tools. Gmail, Slack, Drive, Notion, Salesforce, GitHub, and the rest. Connect an account and any loop can act on it. An admin can share a connection with the whole organization, or each person connects their own.',
   },
   {
     q: 'Is my data safe? Who approves what?',

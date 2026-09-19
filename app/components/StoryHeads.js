@@ -8,68 +8,73 @@ import ExpandableShot from './ExpandableShot';
  * their bodies (demos, grids, shots) built under these one at a time, and
  * bands may migrate into existing components as the structure settles.
  *
- * The hierarchy: CONNECTIONS (everything you use, connected) → LOOPS (turn
- * connections into your way of working) → MEMORY (your context follows you
- * — absorbs the CONTEXT beat) → MODELS → EXECUTION → COMMAND → RROT →
- * APPS / DREAM (build what's missing).
+ * The order (his order, 2026-09-18): LOCAL CO-WORK → MCP TOOLS FOR ANYTHING
+ * → SKILLS THAT EXTEND TO TASKS → SEMANTIC APPS → PLUGINS. Each a direct
+ * attack, no framing.
  */
 const HEADS = [
+  // Each band is a direct attack (his order, 2026-09-18). No framing, no
+  // metaphors: what it is, what it does.
   {
-    id: 'connections',
-    label: 'CONNECTIONS',
-    title: '3,500+ ways to connect your work.',
+    id: 'cowork',
+    label: 'LOCAL CO-WORK',
+    title: 'It runs on your machine.',
     ledes: [
-      'Connect Glyphh to the software, services, data, and systems you already use through thousands of MCP connections. Then let RPA reach beyond APIs and interact with the applications on your screen.',
+      'Glyphh is a desktop application. Chat, work, and code run locally, beside the apps you already use, with your files and your keys on your own disk. Nothing you make is hosted by us.',
+      'Every model is a plug: Claude, GPT, Gemini, Kimi K3, and hundreds of open-weight models, direct. Switch mid-task. The harness, the tools, and the skills stay the same.',
     ],
-  },
-  {
-    id: 'loops',
-    label: 'LOOPS',
-    title: 'Build your way of working once.',
-    ledes: [
-      'Connect Workspaces with their own apps, tools, model slots, and reasoning loops. Hot-swap models without breaking the workflow. Move from research to email to code and back again—your Loop comes with you.',
-    ],
-    // The "Your apps, beside the agent" shot, promoted from the detail grid.
-    // Cropped into its LEFT portion inline; the lightbox shows it whole.
     shot: {
       src: '/screen-shots/glyphh-workspace.png',
-      alt: 'Your apps beside the agent — Gmail, Slack, and dashboards open as panels next to Glyphh',
+      alt: 'Glyphh on the desktop: the agent beside Gmail, Slack, and a dashboard, each in its own panel',
       crop: { pos: '0% 30%', zoom: 1.8 },
     },
   },
   {
-    id: 'memory',
-    label: 'MEMORY',
-    title: 'Your context follows you.',
+    id: 'mcp',
+    label: 'MCP TOOLS FOR ANYTHING',
+    title: 'Every app you install is a tool your agent can call.',
     ledes: [
-      'Switch layouts, models, apps, devices, and environments without rebuilding the context behind your work. Glyphh carries the context that matters from one task to the next, so every prompt starts warm.',
-      "Glyphh continuously carries relevant context forward—from what you're doing right now to the goals and knowledge accumulated over time. Your next prompt is never cold.",
+      'An app declares its tools in its manifest. Install it and those tools are in the local toolbox for whichever model is driving. Other apps reach them the same way, through the framework, not through us.',
+      '3,500+ connected services come in as tools too: Gmail, Slack, Salesforce, GitHub, Notion, and the rest, with org-shared or personal auth. RPA covers what has no API.',
     ],
-    // The agents shot ("Agents that work your way"), promoted from the
-    // detail grid — the agents that follow you across the workspace.
+  },
+  {
+    id: 'skills',
+    label: 'SKILLS THAT EXTEND TO TASKS',
+    title: 'Teach it once. Schedule it.',
+    ledes: [
+      'A skill is a folder with a SKILL.md at its root, the standard every CLI reads. Glyphh reads yours, ships its own, and lets your org publish more to its hub, reviewed and role-gated.',
+      'A task is a skill on a clock: a program the desktop runs on a schedule, with a checkpoint journal, so the same work happens the same way every morning without anyone typing it.',
+    ],
     shot: {
       src: '/screen-shots/glyphh-app-home.png',
-      alt: 'Agents that follow you — named agents, each with a role, a loop, and a model team, carrying your context',
+      alt: 'Skills and tasks in Glyphh: named skills with a role and a schedule',
       crop: { pos: '50% 30%', zoom: 1.6 },
     },
   },
   {
-    id: 'models',
-    label: 'MODELS',
-    title: 'Your workflow. Any intelligence.',
+    id: 'semantic',
+    label: 'SEMANTIC APPS',
+    title: 'Apps that remember what you were doing.',
     ledes: [
-      'The AI editor that runs Claude, GPT, Gemini, Kimi K3, and more side by side—frontier, open-weight, self-hosted, local, or cloud. Switch models mid-thought, loop agents on the hard problems, and only pay for what you run.',
-      'Or build your own deterministic Loops that interchange them—repeatable reasoning circuits running the models, tools, and steps you define, in the order you define them. Shape each one to your workflow, your Workspace, and your apps, and get the same dependable process every run.',
+      'Every Glyphh app gets SQLite, on-device vector search, and a knowledge graph out of the box. What you do in one is retrievable from the next, on your machine, with no model call to get there.',
+      'The agent reads that memory into every turn, so a prompt in Glyphh starts with your context instead of a blank page.',
     ],
-    // "The right models, every task" shot, promoted from the detail grid.
     shot: {
       src: '/screen-shots/glyphh-custom-apps.png',
-      alt: 'The right models, every task — a small team of AIs in a circuit, any seat swappable',
+      alt: 'Semantic apps in Glyphh: an app with its own data, search, and graph',
       crop: { pos: '70% 30%', zoom: 1.7 },
     },
   },
-  // EXECUTION, COMMAND, RROT, and APPS live as cards in the { INSIDE }
-  // FeatureGrid section (FeatureGrid.js), which follows these bands.
+  {
+    id: 'plugins',
+    label: 'PLUGINS',
+    title: 'Extend the harness, not the vendor.',
+    ledes: [
+      'Plugins add to Glyphh itself: new panels, new tool kinds, new loops. They work with every model because they plug into the harness, not into one vendor\'s client.',
+      'Build one with the Glyphh skill and the same loop you already use. Publish it to your org, or keep it on your machine.',
+    ],
+  },
 ];
 
 function HeadCopy({ h }) {
@@ -110,7 +115,7 @@ function HeadBand({ h }) {
       )}
       {/* CONNECTIONS carries its body already: the icon river + note,
           moved up from the old standalone Integrations section. */}
-      {h.id === 'connections' && <ConnectionsRiver />}
+      {h.id === 'mcp' && <ConnectionsRiver />}
     </section>
   );
 }

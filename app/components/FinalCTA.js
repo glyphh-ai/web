@@ -25,8 +25,8 @@ export default function FinalCTA() {
         <div className="cta-card" ref={cardRef}>
           {/* The home page owns "Ask for the work. Set the rules. Get it
               done." — this close is about the install decision instead. */}
-          <h2>Pick a Layout<span className="dot">.</span> Fill the slots<span className="dot">.</span> Let it run<span className="dot">.</span></h2>
-          <p>Download <span className="compose-cmd">Glyphh Desktop</span> free — the right Agents, Workflow and Apps for every task, one keystroke away.</p>
+          <h2>One harness<span className="dot">.</span> Every vendor<span className="dot">.</span> Your desktop<span className="dot">.</span></h2>
+          <p>Download <span className="compose-cmd">Glyphh</span> free. Frontier AI when you need it, open-weight models when you don&rsquo;t, 3,500+ connections either way.</p>
           <div className="cta-buttons">
             <a href="#download" className="btn btn-white btn-lg group">
               <span className="btn-label">Download for Mac — Free</span>

@@ -62,7 +62,7 @@ export default async function PricingPage() {
 
       <Pricing />
 
-      {/* The model catalog moved to /products/gateway (his order, 2026-09-11). */}
+      {/* The model catalog lives on /products/router (his order, 2026-09-11). */}
 
       <Footer />
     </div>

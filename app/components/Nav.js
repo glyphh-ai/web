@@ -79,14 +79,18 @@ export default function Nav() {
               onMouseEnter={prodEnter}
               onMouseLeave={prodLeave}
             >
-              <a href="/products/gateway" className="nav-dd-trigger">
+              <a href="/products/router" className="nav-dd-trigger">
                 Products
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </a>
               <div className="nav-dd-panel">
-                <a href="/products/gateway" className="nav-dd-item">
-                  <span className="nav-dd-name">Glyphh Gateway</span>
-                  <span className="nav-dd-desc">Every model, your keys &mdash; one governed endpoint.</span>
+                <a href="/products/router" className="nav-dd-item">
+                  <span className="nav-dd-name">Glyphh Router</span>
+                  <span className="nav-dd-desc">Frontier on your credits, open-weight direct. Roles and budgets.</span>
+                </a>
+                <a href="/products/connect" className="nav-dd-item">
+                  <span className="nav-dd-name">Glyphh Connect</span>
+                  <span className="nav-dd-desc">3,500+ services as tools for any loop.</span>
                 </a>
               </div>
             </div>
@@ -129,7 +133,8 @@ export default function Nav() {
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <span className="mobile-menu-group">Products</span>
-        <a href="/products/gateway" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Gateway</a>
+        <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Router</a>
+        <a href="/products/connect" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Connect</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         {loggedIn ? (
           <a href={dashHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>

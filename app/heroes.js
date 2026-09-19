@@ -13,8 +13,9 @@ const PLATFORM_URL =
 
 // Shared announcement pill — sits above the headline, links to the live
 // /models table. Announces the newest catalog addition.
+// The pill announces the product, not a model: the model is no longer the point.
 const KIMI_PILL = {
-  label: 'New — Kimi K3 is live',
+  label: 'New — direct-attach to open-weight models',
   cta: 'See all models',
   href: '/pricing#models',
 };
@@ -23,51 +24,52 @@ export const heroes = {
   // Bare glyphh.ai — the configurable-workspace thesis (his copy,
   // 2026-08-28). The hero tab bar is gone, so this entry is what the home
   // page actually shows; the campaign paths below still swap it.
+  // Bare glyphh.ai (his copy, 2026-09-18): the vendor-agnostic harness.
   default: {
     pill: KIMI_PILL,
     title: {
-      lead: 'Context switching with AI ',
-      accent: 'is constant.',
+      lead: 'Glyphh is the vendor-agnostic AI desktop harness for ',
+      accent: 'chat, work, and code.',
     },
     sub:
-      'Glyphh aligns your apps, agents, and workspaces so moving between ' +
-      'them is efficient and shaped to how you work.',
-    cta: { label: 'Get started free', href: PLATFORM_URL },
+      'Glyphh allows your team to spend frontier AI credits on chat, work, and ' +
+      "code only when they're needed, and run open-weight models when they don't. " +
+      'In one amazing desktop app.',
+    cta: { label: 'Download Glyphh', href: '/#download' },
   },
 
   // glyphh.ai/chat — the conversational front door: every model, one thread.
   chat: {
     pill: KIMI_PILL,
-    title: { lead: 'One chat. ', accent: 'Every AI.' },
+    title: { lead: 'Glyphh is the vendor-agnostic AI desktop harness for ', accent: 'chat.' },
     sub:
-      'Ask anything — the right model answers, with your browser, files, and ' +
-      'apps working beside the conversation. Persistent memory carries your ' +
-      'context, so you never start cold.',
-    cta: { label: 'Start chatting free', href: PLATFORM_URL },
+      'Glyphh allows your team to spend frontier AI credits on chat, work, and ' +
+      "code only when they're needed, and run open-weight models when they don't. " +
+      'In one amazing desktop app.',
+    cta: { label: 'Download Glyphh', href: '/#download' },
   },
 
   // glyphh.ai/work — the always-on agent pitch (Gemini Spark register), but
   // anchored to the one thing single-model agents can't say: every model.
   work: {
     pill: KIMI_PILL,
-    title: { lead: 'Your 24/7 ', accent: 'AI coworker.' },
+    title: { lead: 'Glyphh is the vendor-agnostic AI desktop harness for ', accent: 'work.' },
     sub:
-      'Hand Glyphh your work and it keeps going in the background — 24/7, even ' +
-      'when your laptop and phone are off. It runs autonomously but always ' +
-      'under your direction, draws on every model at once, and checks with you ' +
-      'before it makes a big move.',
-    cta: { label: 'Get started free', href: PLATFORM_URL },
+      'Glyphh allows your team to spend frontier AI credits on chat, work, and ' +
+      "code only when they're needed, and run open-weight models when they don't. " +
+      'In one amazing desktop app.',
+    cta: { label: 'Download Glyphh', href: '/#download' },
   },
 
   // glyphh.ai/code — simple, Cursor-like, model-forward.
   code: {
     pill: KIMI_PILL,
-    title: { lead: 'Code with ', accent: 'every model.' },
+    title: { lead: 'Glyphh is the vendor-agnostic AI desktop harness for ', accent: 'code.' },
     sub:
-      'The AI editor that runs Claude, GPT, Gemini, and Kimi K3 side by side. ' +
-      'Switch models mid-thought, loop agents on the hard problems, and only ' +
-      'pay for what you run.',
-    cta: { label: 'Start coding free', href: PLATFORM_URL },
+      'Glyphh allows your team to spend frontier AI credits on chat, work, and ' +
+      "code only when they're needed, and run open-weight models when they don't. " +
+      'In one amazing desktop app.',
+    cta: { label: 'Download Glyphh', href: '/#download' },
   },
 
   // glyphh.ai/dream — the builder's close (the retired DREAM band's copy).

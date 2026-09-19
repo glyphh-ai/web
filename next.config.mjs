@@ -13,7 +13,9 @@ const nextConfig = {
     return [
       // Products is a real section again (2026-08-16). The bare index lands on
       // the lead product (Design); retired product URLs fall through to 404.
-      { source: '/products', destination: '/products/gateway', permanent: false },
+      { source: '/products', destination: '/products/router', permanent: false },
+      // Gateway became Router (his order, 2026-09-18); old links keep working.
+      { source: '/products/gateway', destination: '/products/router', permanent: true },
       // 2026-09-11 (staying tight): Gateway is the one product page.
       { source: '/products/cloud', destination: '/', permanent: false },
       { source: '/products/office', destination: '/', permanent: false },

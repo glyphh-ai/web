@@ -1,7 +1,7 @@
 /**
- * MCP — the lead story: Glyphh is the connective tissue between every LLM a
- * developer uses and everything they've connected and built. Wire it up once;
- * every client gets it.
+ * THE CALLOUT (his order, 2026-09-18): Glyphh in the middle. The loops on the
+ * left, Glyphh Connect streaming in above, Glyphh Router on the right. This is
+ * the pitch drawn once, and it sits directly under the hero.
  */
 
 // The hero panel's app rail (GlyphhHero APPS) — the connections that flow
@@ -15,20 +15,20 @@ const MCX_APPS = [
 
 const pillars = [
   {
-    title: 'Bring the AI you already pay for',
-    desc: 'Claude, ChatGPT, Gemini, Cursor — any MCP client connects to your Glyphh endpoint with one approval. No copied tokens, no config files: sign in, connect, done.',
+    title: 'Any loop drives it',
+    desc: 'Claude Code, Codex, Gemini, or the Glyphh loop. The desktop, the tools, the skills, and the connections are the same whichever one is in the seat. Swap mid-task.',
   },
   {
-    title: 'Build once, call from every LLM',
-    desc: 'Automations, integrations, agents, apps — whatever you build becomes MCP tools. Every connected client can call them instantly; no per-model plugins, no rebuilds when you switch LLMs.',
+    title: 'Glyphh Connect',
+    desc: '3,500+ services as tools: Gmail, Slack, Salesforce, GitHub, Notion, and the rest, with org-shared or personal auth. Every loop can call them. RPA reaches what has no API.',
   },
   {
-    title: 'Every tool, one surface',
-    desc: 'Connected services (Gmail, Slack, Notion, GitHub — 3,500+), your Glyphh apps, your skills, and your local MCP servers all appear as tools any client can discover and call.',
+    title: 'Glyphh Router',
+    desc: 'Frontier credits first, on your own keys. When they are spent, the same requests route to open-weight models, direct. Roles decide who gets what; every token is accounted for.',
   },
   {
-    title: 'Guarded by default',
-    desc: 'An injection firewall screens every request before it reaches your machine, tool calls are scoped per user, and there’s a local-only server mode when you want no cloud at all.',
+    title: 'Local by default',
+    desc: 'Apps, files, memory, and keys stay on the machine. The router is the only thing in the cloud, and only when the org turns it on.',
   },
 ];
 
@@ -37,16 +37,15 @@ export default function Mcp() {
     <section className="adal" id="mcp">
       <div className="container">
         <div className="section-label reveal">{'{'}
-          <span className="accent">THE RELAY</span>
+          <span className="accent">THE HARNESS</span>
           {'}'}</div>
         <h2 className="section-title reveal">
-          Every LLM on one side.<br/>Everything you build on the other.
+          Glyphh in the middle.<br/>Loops on one side, models on the other.
         </h2>
         <p className="adal-lede reveal">
-          Glyphh is the connective tissue between the LLMs you use and your
-          stack. Connect your services once, build automations, agents, and
-          apps on top — and every client you point at your Glyphh endpoint
-          can use all of it, through one secure relay.
+          Any loop drives the desktop. Glyphh Connect brings 3,500+ services in
+          as tools. Glyphh Router sends the work to frontier AI on your credits,
+          then to open-weight models when those run out.
         </p>
 
         {/* Marketecture: every LLM (left) ⇄ one relay (mascot) ⇄ everything
@@ -54,11 +53,14 @@ export default function Mcp() {
             Shares the apx-* visual language from the PUBLISH graphic. */}
         <div className="apx-stage mcx-stage reveal" aria-hidden="true">
           <div className="apx-col">
-            <div className="apx-col-label">every LLM</div>
+            <div className="apx-col-label">the loops</div>
+            <div className="apx-node">Claude Code</div>
+            <div className="apx-node">Codex</div>
+            <div className="apx-node">Gemini</div>
+            <div className="apx-node">Glyphh loop</div>
             <div className="mcx-llms">
               {[
-                'claude.ai', 'chatgpt.com', 'gemini.google.com', 'grok.com',
-                'copilot.microsoft.com', 'chat.mistral.ai', 'chat.qwen.ai', 'ollama.com',
+                'claude.ai', 'chatgpt.com', 'gemini.google.com', 'github.com',
               ].map((domain, i) => (
                 <span key={domain} className="mcx-llm" style={{ '--d': `${i * 0.45}s` }}>
                   <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`} alt="" width="20" height="20" loading="lazy" />
@@ -74,7 +76,7 @@ export default function Mcp() {
             {/* connections strip — the hero panel's app rail, marquee-scrolled
                 above the hub: everything already connected flows through. */}
             <div className="mcx-apps">
-              <span className="mcx-apps-label">connections</span>
+              <span className="mcx-apps-label">Glyphh Connect · 3,500+ services</span>
               <div className="mcx-apps-track">
                 {[...MCX_APPS, ...MCX_APPS].map((d, i) => (
                   <span key={d + i} className="mcx-app">
@@ -99,10 +101,10 @@ export default function Mcp() {
             <div className="apx-flow mcx-flow-back"><i /><i /></div>
           </div>
           <div className="apx-col">
-            <div className="apx-col-label">everything you build</div>
-            <div className="apx-node">3,500+ services</div>
-            <div className="apx-node">tools &amp; skills</div>
-            <div className="apx-node">apps &amp; agents</div>
+            <div className="apx-col-label">Glyphh Router</div>
+            <div className="apx-node">frontier, on your credits</div>
+            <div className="apx-node">open-weight, direct</div>
+            <div className="apx-node">roles &amp; budgets</div>
           </div>
         </div>
 

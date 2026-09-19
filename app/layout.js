@@ -7,9 +7,8 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 
 // Homepage metadata — title carries the pitch; the description is the full
 // hero subline, verbatim.
-const HOME_TITLE = 'Glyphh — This isn’t three products. It’s one workspace.';
-const HOME_DESCRIPTION =
-  'It connects to the 3,500+ apps you use every day — Gmail, Slack, Salesforce. And where every other AI is isolated, here Claude, ChatGPT, and open models all work from the same thread. You pick who does what: PowerPoints from Claude, images from GPT, grunt work from Mistral. You never start over.';
+const HOME_TITLE = 'Glyphh — the vendor-agnostic AI desktop harness for chat, work, and code';
+const HOME_DESCRIPTION = "Spend frontier AI credits on chat, work, and code only when they're needed, and run open-weight models when they don't. In one amazing desktop app. 3,500+ connections. Hundreds of models.";
 
 export const metadata = {
   metadataBase: new URL('https://glyphh.ai'),
