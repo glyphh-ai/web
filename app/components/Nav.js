@@ -92,6 +92,14 @@ export default function Nav() {
                   <span className="nav-dd-name">Glyphh Connect</span>
                   <span className="nav-dd-desc">3,500+ services as tools for any loop.</span>
                 </a>
+                <a href="/products/skills" className="nav-dd-item">
+                  <span className="nav-dd-name">Glyphh Skills</span>
+                  <span className="nav-dd-desc">Write it once. Apps, tasks, agents, every vendor.</span>
+                </a>
+                <a href="/products/semantic-apps" className="nav-dd-item">
+                  <span className="nav-dd-name">Semantic Apps</span>
+                  <span className="nav-dd-desc">Apps that know your context, governed by the org.</span>
+                </a>
               </div>
             </div>
             <div
@@ -135,6 +143,8 @@ export default function Nav() {
         <span className="mobile-menu-group">Products</span>
         <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Router</a>
         <a href="/products/connect" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Connect</a>
+        <a href="/products/skills" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Skills</a>
+        <a href="/products/semantic-apps" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Semantic Apps</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         {loggedIn ? (
           <a href={dashHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>

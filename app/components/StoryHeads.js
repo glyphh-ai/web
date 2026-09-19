@@ -31,6 +31,8 @@ const HEADS = [
   },
   {
     id: 'mcp',
+    href: '/products/connect',
+    cta: 'Glyphh Connect',
     label: 'MCP TOOLS FOR ANYTHING',
     title: 'Every app you install is a tool your agent can call.',
     ledes: [
@@ -41,6 +43,8 @@ const HEADS = [
   {
     id: 'skills',
     label: 'SKILLS THAT EXTEND TO TASKS',
+    href: '/products/skills',
+    cta: 'The skills framework',
     title: 'Teach it once. Schedule it.',
     ledes: [
       'A skill is a folder with a SKILL.md at its root, the standard every CLI reads. Glyphh reads yours, ships its own, and lets your org publish more to its hub, reviewed and role-gated.',
@@ -55,6 +59,8 @@ const HEADS = [
   {
     id: 'semantic',
     label: 'SEMANTIC APPS',
+    href: '/products/semantic-apps',
+    cta: 'Semantic apps',
     title: 'Apps that remember what you were doing.',
     ledes: [
       'Every Glyphh app gets SQLite, on-device vector search, and a knowledge graph out of the box. What you do in one is retrievable from the next, on your machine, with no model call to get there.',
@@ -94,6 +100,14 @@ function HeadCopy({ h }) {
         <p key={lede.slice(0, 24)} className="section-subtitle reveal">{lede}</p>
       ))}
       {h.tag && <p className="story-tag reveal">{h.tag}</p>}
+      {h.href && (
+        <p className="reveal">
+          <a href={h.href} className="btn btn-secondary btn-sm group">
+            <span className="btn-label">{h.cta}</span>
+            <span className="btn-fill"></span>
+          </a>
+        </p>
+      )}
     </>
   );
 }
