@@ -26,15 +26,11 @@ const start = [
         <p>
           The first person from a new email domain gets a new organization. Everyone invited after that joins it.
         </p>
-        <Note kind="note" title="Sessions rotate">
-          Your session is a short-lived access token and a single-use refresh token. Each refresh issues a new pair
-          and retires the old one. Log out from the account menu and the device&rsquo;s tokens are revoked.
-        </Note>
+        <p>Sign in once and stay signed in. Log out from the account menu and this device is signed out.</p>
         <h2>Updates</h2>
         <p>
-          The app checks for a new version shortly after launch and every six hours after that. When one is ready,
-          a dot appears next to <strong>About</strong> in the account menu. Open About to install it. Automatic
-          download is a preference; it never installs while you are working.
+          When a new version is ready, a dot appears next to <strong>About</strong> in the account menu. Open
+          About to install it. Automatic download is a preference; it never installs while you are working.
         </p>
       </>
     ),
@@ -543,9 +539,22 @@ const router = [
           When the gateway is off, the member key still authenticates your MCP access, and the CLI rides its own
           login or the loop&rsquo;s own key.
         </p>
-        <Note kind="admin" title="Turning it on">
-          The gateway is available on paid plans. An org admin turns it on in the console. The desktop polls the
-          org&rsquo;s settings every minute, so the change reaches every member without a restart.
+        <h2>Turn it on, step by step</h2>
+        <ol>
+          <li>In the console, open <strong>Settings &rarr; Organization</strong> and switch <strong>Gateway lane</strong> on. Paid plans only.</li>
+          <li>On the row below, pick the <strong>Credit strategy</strong>: Burn down or Reserved. The remaining balance is shown beside it.</li>
+          <li>On the desktop, nothing. Within a minute every member&rsquo;s Claude Code and Codex loops route through the org. A restart makes it immediate.</li>
+          <li>Send a turn and watch it land on the console&rsquo;s <strong>Logs</strong> page.</li>
+        </ol>
+        <p>
+          For a CLI outside the desktop, see <a href="/docs/own-cli">Use your own CLI</a>.
+        </p>
+        <h2>Two ways to spend</h2>
+        <Row k="Burn down">Each vendor stays direct while its own allowance lasts. When it runs dry, that vendor&rsquo;s traffic moves onto the proxy and spends the org&rsquo;s credits</Row>
+        <Row k="Reserved">The vendor&rsquo;s heavy models, Opus and Fable, stay on the member&rsquo;s own subscription, with that spend tracked off the proxy. Everything lighter rides the proxy</Row>
+        <Note kind="note" title="Cached tokens count">
+          Through the proxy, cache reads and writes are priced at the vendor&rsquo;s cache rates. Off the proxy, the
+          desktop reports them too, so the allowance counts them.
         </Note>
       </>
     ),
@@ -750,16 +759,14 @@ const console_ = [
         <Row k="Device flow">How the desktop signs in: approve the device in the browser</Row>
         <h2>What the server refuses</h2>
         <ul>
-          <li>A sign-in redirect that is not the desktop, the console, a Glyphh domain, or the org&rsquo;s own claimed hub domain.</li>
-          <li>More than five sign-in starts per address, or twenty per IP, in five minutes.</li>
+          <li>A sign-in redirect to anywhere but the desktop, the console, a Glyphh domain, or the org&rsquo;s own hub domain.</li>
+          <li>Repeated sign-in attempts from one address.</li>
           <li>A magic link for an org that requires SSO.</li>
-          <li>A domain check against an internal or private address.</li>
-          <li>A gateway request for another org, unless the caller is a platform admin.</li>
+          <li>A gateway request for another org.</li>
         </ul>
-        <h2>Tokens</h2>
+        <h2>Sessions</h2>
         <p>
-          A refresh token is single use and belongs to a family. Reuse of a consumed token revokes the family.
-          Logout revokes the device. Logging out on one device does not touch another.
+          Sessions are short-lived and refreshed under the hood. Logging out signs out this device and no other.
         </p>
         <h2>On your machine</h2>
         <ul>
@@ -771,6 +778,212 @@ const console_ = [
         <Note kind="warn" title="Report a problem">
           Found something? Write to <a href="mailto:security@glyphh.ai">security@glyphh.ai</a>. We answer.
         </Note>
+      </>
+    ),
+  },
+];
+
+
+const admin = [
+  {
+    slug: 'org-settings',
+    title: 'Organization settings',
+    lede: 'The six switches that shape how your org uses Glyphh.',
+    mascot: 'tally',
+    body: (
+      <>
+        <p>In the console, open <strong>Settings &rarr; Organization</strong>. Every row saves as you change it.</p>
+        <Row k="Governance">On: the servers on the MCP Servers page are the only apps members may connect. Off: members connect any app for themselves. Pro and Enterprise</Row>
+        <Row k="Gateway lane">On: members&rsquo; Claude Code and Codex traffic routes through the org, metered in credits and capped by budgets. Paid plans</Row>
+        <Row k="Credit strategy">Burn down or Reserved, with the remaining balance beside it. See <a href="/docs/gateway">the gateway</a></Row>
+        <Row k="Auto only">On: members pick no model. Every turn goes to the org&rsquo;s auto-router</Row>
+        <Row k="Terminal access">Off: members cannot drop from the chat into the loop&rsquo;s own CLI</Row>
+        <Row k="Review model">The model that reads every submission to the hub and files a verdict for you</Row>
+        <Note kind="admin" title="Who sees this page">
+          Org admins and platform admins. A member never sees Settings.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'domain',
+    title: 'Your hub on your domain',
+    lede: 'Serve the AI Hub on the org subdomain, or on a host you own with one CNAME.',
+    mascot: 'post',
+    body: (
+      <>
+        <p>
+          Your hub is already live on your org&rsquo;s Glyphh subdomain with nothing to set up. To serve it on a
+          host you own, such as <code>hub.yourcompany.com</code>:
+        </p>
+        <ol>
+          <li>Open <strong>Settings &rarr; Domain</strong>.</li>
+          <li>Switch <strong>Hub on your own domain</strong> on and type the host.</li>
+          <li>Add the CNAME the page shows at your DNS provider. The steps listed on the page name the exact record.</li>
+          <li>Press <strong>Check status</strong>. It tells you two things: whether the name resolves, and whether it resolves to Glyphh.</li>
+        </ol>
+        <p>
+          To require your identity provider on the hub, set up <a href="/docs/sso">single sign-on</a> first, then
+          turn on <strong>Require single sign-on</strong> on the same page. The hub is always private to the org.
+        </p>
+        <Note kind="warn" title="Private addresses are refused">
+          The check rejects internal and private hosts. Use a public name.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'brand',
+    title: 'Brand the hub',
+    lede: 'Your logo, your accent, light or dark.',
+    mascot: 'byte',
+    body: (
+      <>
+        <ol>
+          <li>Open <strong>AI Hub</strong> in the console.</li>
+          <li>Press <strong>Brand this hub</strong>.</li>
+          <li>Upload the logo, pick the accent color, and choose <strong>Light</strong> or <strong>Dark</strong>. The theme is the org&rsquo;s choice. Every visitor gets it.</li>
+          <li>Save. Clear a field to go back to the default.</li>
+        </ol>
+        <p>The hub reads the brand on every load, so the change is live at once, on the console&rsquo;s hub URL and on your own domain.</p>
+      </>
+    ),
+  },
+  {
+    slug: 'sso',
+    title: 'Single sign-on',
+    lede: 'Connect your identity provider and, if you want, make it the only way in.',
+    mascot: 'tally',
+    body: (
+      <>
+        <p>Glyphh signs in through any OpenID Connect provider: Okta, Entra, Google Workspace, and the rest.</p>
+        <ol>
+          <li>In your provider, create an OpenID Connect application with this redirect URL: <code>https://api.glyphh.ai/api/auth/sso/callback</code></li>
+          <li>Open <strong>Settings &rarr; Security</strong>.</li>
+          <li><strong>Issuer URL</strong>: the provider&rsquo;s base URL, for example <code>https://yourcompany.okta.com</code>. Glyphh reads its discovery document from there.</li>
+          <li><strong>Client ID</strong> and <strong>Client secret</strong> from the application you created. The secret is never shown again. Leave it blank later to keep it.</li>
+          <li><strong>Email domains</strong>: the domains your people sign in with, comma separated.</li>
+          <li>Save. The page reports whether your provider answered.</li>
+          <li>Sign in once yourself through the provider. Then switch <strong>Require single sign-on</strong> on. From then on, magic links are refused for your domains.</li>
+        </ol>
+        <Note kind="admin" title="Enterprise plan">
+          SSO is an Enterprise feature. Sign in as an org admin to see the page.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'review',
+    title: 'Review and approve',
+    lede: 'What a member publishes waits for you. What you publish goes live.',
+    mascot: 'sage',
+    body: (
+      <>
+        <p>Open <strong>AI Hub</strong> in the console. Three lists:</p>
+        <Row k="Your organization">Everything live on the org hub, with installs and version</Row>
+        <Row k="Your submissions">What you sent up yourself, and its status</Row>
+        <Row k="Publish to Glyphh">Items you have offered to the public Glyphh catalog</Row>
+        <h2>Approving a submission</h2>
+        <ol>
+          <li>A pending item shows at the top of the org list. Press <strong>Review</strong>.</li>
+          <li>The review opens with the same tabs the desktop shows a bundle: Overview, Contents, Skills, and Connections for an app, plus <strong>Agent review</strong> if a review model is set. The agent&rsquo;s verdict is advice. You decide.</li>
+          <li>Press <strong>Approve</strong> or <strong>Reject</strong>. An approved version is mirrored to the gateway and every desktop can install it.</li>
+        </ol>
+        <h2>Who can see an item</h2>
+        <p>
+          On any item, <strong>Everyone in the organization</strong> is the default. Turn it off to name specific
+          members. Under governance, members only see what you allow.
+        </p>
+        <h2>Categories</h2>
+        <p>
+          <strong>Categories</strong> on an item corrects the shelves it sits on. <strong>Add a category</strong> makes
+          one of your own. Keywords help the hub file new shares automatically.
+        </p>
+        <h2>Offering something to Glyphh</h2>
+        <p>
+          <strong>Publish to Glyphh</strong> sends an item to the public catalog queue. Glyphh reviews it. <strong>Withdraw
+          from Glyphh</strong> takes it back at any time before a decision.
+        </p>
+      </>
+    ),
+  },
+  {
+    slug: 'org-models',
+    title: 'Models and keys',
+    lede: 'Pick what the org may use of Glyphh&rsquo;s models, or run your own deployment on your own key.',
+    mascot: 'sage',
+    body: (
+      <>
+        <p>Open <strong>Models</strong> in the console. As an org admin the page is scoped to your org.</p>
+        <h2>Glyphh models</h2>
+        <p>
+          The <strong>Glyphh models</strong> tab lists what Glyphh runs. Turn on what your org may use. That
+          list is what members see in the desktop&rsquo;s picker and what the gateway allows on their keys.
+        </p>
+        <h2>Your own deployment</h2>
+        <ol>
+          <li>Press <strong>Add model</strong>.</li>
+          <li>Pick the provider and the model, and paste your provider key. The key is stored encrypted and scoped to your org&rsquo;s team. No other org can see or ride it.</li>
+          <li>Save. Calls to that model use your key and are invoiced to you by the vendor. They still count in the org&rsquo;s usage and logs.</li>
+        </ol>
+        <h2>The auto-router</h2>
+        <p>
+          <strong>Auto-routers</strong> lets you define a route that picks the model per request. Turn on
+          <strong> Auto only</strong> in Organization settings and members pick nothing else.
+        </p>
+        <Note kind="warn" title="Keys stay in the console">
+          A provider key is entered here and nowhere else. No agent, tool, or skill can read it back.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'mcp-servers',
+    title: 'MCP servers and connections',
+    lede: 'The servers the org shares, and the connections every member gets.',
+    mascot: 'post',
+    body: (
+      <>
+        <h2>An MCP server for the org</h2>
+        <ol>
+          <li>Open <strong>MCP Servers</strong> in the console and add one.</li>
+          <li>Name it, paste the URL, and pick the transport.</li>
+          <li>Under <strong>Authentication</strong>, choose the server&rsquo;s auth. OAuth servers walk each member through their own sign-in the first time.</li>
+          <li>Save. The server&rsquo;s tools join every member&rsquo;s toolkit.</li>
+        </ol>
+        <h2>Org-shared connections</h2>
+        <p>
+          On the desktop&rsquo;s Connections page, an org admin connects a service as <strong>org</strong>: one shared
+          account every member can use without doing their own auth. A member connects the same service as
+          <strong> personal</strong> for their own account.
+        </p>
+        <h2>Governance</h2>
+        <p>
+          With <strong>Governance</strong> on in Organization settings, the servers on this page are the only apps
+          members may connect, and the desktop&rsquo;s picker shows just those.
+        </p>
+      </>
+    ),
+  },
+  {
+    slug: 'billing-admin',
+    title: 'Billing',
+    lede: 'Plan, seats, credits, invoices, and the card on file.',
+    mascot: 'tally',
+    body: (
+      <>
+        <p>Open <strong>Billing</strong> in the console. Org admins only.</p>
+        <Row k="Current plan">Your tier, seats in use, and the next invoice&rsquo;s amount and date</Row>
+        <Row k="Credits">What the org holds, what it has spent, and what remains</Row>
+        <Row k="Top up credits">Buy credits now. Volume discounts apply at 2,500, 5,000, and 10,000</Row>
+        <Row k="Auto top-up">Press <strong>Configure</strong>: a threshold and an amount. When remaining credits fall below the threshold, the card on file is charged and the credits land at once</Row>
+        <Row k="Invoices">Every invoice, with proration lines marked</Row>
+        <Row k="Manage in Stripe">The card, the billing address, and receipts, on Stripe&rsquo;s portal</Row>
+        <Row k="Sync with Stripe">If a seat count or a plan looks stale, this re-reads the subscription</Row>
+        <p>
+          Adding a member raises the seat count now and prorates onto the next invoice. Removing one drops it at the
+          next cycle. See <a href="/docs/seats">seats and invoices</a>.
+        </p>
       </>
     ),
   },
@@ -851,6 +1064,7 @@ export const GROUPS = [
   { title: 'Connect', lede: 'Connections and MCP, both directions.', pages: connect },
   { title: 'The gateway', lede: 'Routing, your own CLI, budgets.', pages: router },
   { title: 'Console and billing', lede: 'Roles, the hub, plans, seats, security.', pages: console_ },
+  { title: 'Org admin', lede: 'Step by step: the domain, the brand, SSO, review, models, MCP servers, billing.', pages: admin },
   { title: 'About', lede: 'What Glyphh is built on.', pages: about },
 ];
 
