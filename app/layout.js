@@ -7,8 +7,8 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 
 // Homepage metadata — title carries the pitch; the description is the full
 // hero subline, verbatim.
-const HOME_TITLE = 'Glyphh — the vendor-agnostic AI desktop harness for chat, work, and code';
-const HOME_DESCRIPTION = "Spend frontier AI credits on chat, work, and code only when they're needed, and run open-weight models when they don't. In one amazing desktop app. 3,500+ connections. Hundreds of models.";
+const HOME_TITLE = 'Glyphh — the open desktop client for frontier AI';
+const HOME_DESCRIPTION = "Glyphh is the vendor-neutral interface for Claude, ChatGPT, Gemini, and open-source models. Work with every top-tier AI provider through a single, consistent desktop app.";
 
 export const metadata = {
   metadataBase: new URL('https://glyphh.ai'),

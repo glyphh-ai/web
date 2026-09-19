@@ -24,28 +24,26 @@ export const heroes = {
   // Bare glyphh.ai — the configurable-workspace thesis (his copy,
   // 2026-08-28). The hero tab bar is gone, so this entry is what the home
   // page actually shows; the campaign paths below still swap it.
-  // Bare glyphh.ai (his copy, 2026-09-18): the vendor-agnostic harness.
+  // Bare glyphh.ai (his copy, 2026-09-19): the open desktop client for frontier AI.
   default: {
     pill: KIMI_PILL,
     title: {
-      lead: 'Glyphh is the vendor-agnostic AI desktop harness for ',
-      accent: 'chat, work, and code.',
+      lead: 'The open desktop client for ',
+      accent: 'frontier AI.',
     },
     sub:
-      'Glyphh allows your team to spend frontier AI credits on chat, work, and ' +
-      "code only when they're needed, and run open-weight models when they don't. " +
-      'In one amazing desktop app.',
+      'Glyphh is the vendor-neutral interface for Claude, ChatGPT, Gemini, and open-source models. ' +
+      'Work with every top-tier AI provider through a single, consistent desktop app.',
     cta: { label: 'Download Glyphh', href: '/#download' },
   },
 
   // glyphh.ai/chat — the conversational front door: every model, one thread.
   chat: {
     pill: KIMI_PILL,
-    title: { lead: 'Glyphh is the vendor-agnostic AI desktop harness for ', accent: 'chat.' },
+    title: { lead: 'The open desktop client for frontier AI. Built for ', accent: 'chat.' },
     sub:
-      'Glyphh allows your team to spend frontier AI credits on chat, work, and ' +
-      "code only when they're needed, and run open-weight models when they don't. " +
-      'In one amazing desktop app.',
+      'Glyphh is the vendor-neutral interface for Claude, ChatGPT, Gemini, and open-source models. ' +
+      'Work with every top-tier AI provider through a single, consistent desktop app.',
     cta: { label: 'Download Glyphh', href: '/#download' },
   },
 
@@ -53,22 +51,20 @@ export const heroes = {
   // anchored to the one thing single-model agents can't say: every model.
   work: {
     pill: KIMI_PILL,
-    title: { lead: 'Glyphh is the vendor-agnostic AI desktop harness for ', accent: 'work.' },
+    title: { lead: 'The open desktop client for frontier AI. Built for ', accent: 'work.' },
     sub:
-      'Glyphh allows your team to spend frontier AI credits on chat, work, and ' +
-      "code only when they're needed, and run open-weight models when they don't. " +
-      'In one amazing desktop app.',
+      'Glyphh is the vendor-neutral interface for Claude, ChatGPT, Gemini, and open-source models. ' +
+      'Work with every top-tier AI provider through a single, consistent desktop app.',
     cta: { label: 'Download Glyphh', href: '/#download' },
   },
 
   // glyphh.ai/code — simple, Cursor-like, model-forward.
   code: {
     pill: KIMI_PILL,
-    title: { lead: 'Glyphh is the vendor-agnostic AI desktop harness for ', accent: 'code.' },
+    title: { lead: 'The open desktop client for frontier AI. Built for ', accent: 'code.' },
     sub:
-      'Glyphh allows your team to spend frontier AI credits on chat, work, and ' +
-      "code only when they're needed, and run open-weight models when they don't. " +
-      'In one amazing desktop app.',
+      'Glyphh is the vendor-neutral interface for Claude, ChatGPT, Gemini, and open-source models. ' +
+      'Work with every top-tier AI provider through a single, consistent desktop app.',
     cta: { label: 'Download Glyphh', href: '/#download' },
   },
 
