@@ -145,7 +145,7 @@ const GOVERN = [
   {
     icon: ICONS.apps,
     name: 'Keys',
-    title: 'Keys the gateway hands out.',
+    title: 'Keys the Router hands out.',
     desc: 'Mint one for a service, a pipeline, a teammate. It dies the moment you revoke it. Its history stays on the books.',
     mock: <KeysMock />,
   },
@@ -222,11 +222,11 @@ export default async function GatewayPage() {
       <section className="od-contract-band">
         <div className="container op-prod">
           <div className="op-prod-copy">
-            <div className="op-prod-mark">{ICONS.apps} Glyphh Gateway</div>
+            <div className="op-prod-mark">{ICONS.apps} Glyphh Router</div>
             <h3>A key that carries its own rules.</h3>
             <p>
               Every key is minted against a role. It knows which models it can call, how fast,
-              on whose budget, and until when. The gateway enforces it at the edge. Your
+              on whose budget, and until when. The Router enforces it at the edge. Your
               services just make requests.
             </p>
           </div>
@@ -283,7 +283,7 @@ export default async function GatewayPage() {
       {/* ── FINAL CTA ── */}
       <FinalCTA
         title={<h2>Point it at the router<span className="dot">.</span> Govern the rest<span className="dot">.</span></h2>}
-        text={<p>Full gateway on Basic. Governance on Pro. Trial it free.</p>}
+        text={<p>The full Router on Basic. Governance on Pro. Trial it free.</p>}
         primary={{ href: '/#download', label: 'Download Glyphh' }}
       />
 

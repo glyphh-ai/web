@@ -104,7 +104,7 @@ const LAYERS = [
     mock: (
       <Studio back="Sales desk" name="Loop" right="bound">
         <div className="gwm-sec">LOOP</div>
-        <Row left="Claude Code" right="via the gateway" />
+        <Row left="Claude Code" right="via the Router" />
         <div className="gwm-sec">MODELS</div>
         <Row left="planner" right="claude-fable-5-1" />
         <Row left="worker" right="claude-haiku-4-5" />
