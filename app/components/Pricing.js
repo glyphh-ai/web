@@ -29,7 +29,7 @@ const TIERS = [
     popular: false,
     desc: 'The whole desktop and the agent, on the house. No card.',
     priceTitle: 'One seat',
-    priceSub: 'Free for everyone.\u00A0*',
+    priceSub: 'Free for everyone.',
     lead: null,
     features: () => [
       'Glyphh Desktop: the agent, your apps, saved layouts',
@@ -159,22 +159,11 @@ export default async function Pricing() {
 
         <PricingCards tiers={tiers} salesEmail={SALES_EMAIL} platformUrl={PLATFORM_URL} />
 
-        {/* Disclosures the free tier's abuse gates require (2026-09-01):
-            reduced grant for unverified sign-ins. */}
         <p className="pricing-footnote reveal">
-          * The full Free budget requires a verified sign-in (Google or
-          Apple). Accounts created with email alone start with a reduced
-          budget until an identity is verified.
+          Each plan&rsquo;s budget is its monthly limit. Spend it and connector calls pause until you add
+          funds or the month turns. Plan budget resets every month; funds you add never expire. Cancel
+          anytime. See our <a href="/terms">Terms of Use</a>.
         </p>
-        <p className="pricing-footnote reveal">
-          <a href="/docs/budgets">Usage limits</a>{' '}apply: each plan&rsquo;s budget is its monthly limit for
-          connector calls. When it is spent, those calls pause until you add funds or the month turns.
-          Plan-included budget resets every month; funds you add never expire. Admins set their own spend
-          limits, in dollars, on their own keys. Budgets, included features and limits may change. See our{' '}
-          <a href="/terms">Terms of Use</a>.
-        </p>
-
-        <p className="pricing-note">Cancel anytime. Budget spent? Add funds, dollar for dollar, prepaid, never billed in arrears.</p>
         <p className="pricing-tax">Prices are exclusive of applicable taxes and duties, including VAT and applicable sales tax.</p>
       </div>
     </section>
