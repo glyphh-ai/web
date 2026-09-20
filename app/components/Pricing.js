@@ -29,7 +29,7 @@ const TIERS = [
     popular: false,
     desc: 'The whole desktop and the agent, on the house. No card.',
     priceTitle: 'One seat',
-    priceSub: 'Free for everyone. A dollar of connector calls a month, on us.\u00A0*',
+    priceSub: 'Free for everyone.\u00A0*',
     lead: null,
     features: () => [
       'Glyphh Desktop: the agent, your apps, saved layouts',
@@ -50,7 +50,7 @@ const TIERS = [
     popular: true,
     desc: 'The full gateway and real automation for a team.',
     priceTitle: 'Standard seat',
-    priceSub: 'Per seat / month, billed monthly. The same $40 is the seat\u2019s connector budget, dollar for dollar.',
+    priceSub: 'Per seat / month.',
     lead: 'Everything in Free, plus:',
     features: (s) => [
       'Glyphh Gateway in full: every provider, your own keys, never marked up',
@@ -72,7 +72,7 @@ const TIERS = [
     popular: false,
     desc: 'For teams that govern: roles, budgets, and the highest limits.',
     priceTitle: 'Premium seat',
-    priceSub: 'Per seat / month, billed monthly. The same $150 is the seat\u2019s connector budget, dollar for dollar.',
+    priceSub: 'Per seat / month.',
     lead: 'Everything in Basic, plus:',
     features: (s) => [
       'Role governance: models, budgets and keys per team',
@@ -96,7 +96,7 @@ const TIERS = [
     desc: 'For large organizations running at scale.',
     priceTitle: 'Seat price + usage',
     priceFigure: 'Custom',
-    priceSub: 'Seats and a connector budget sized to you, on one invoice, at our published per-token rates.',
+    priceSub: 'Sized to you, on one invoice.',
     lead: 'Everything in Pro, plus:',
     features: () => [
       'Single sign-on and SCIM through your IdP',
@@ -136,14 +136,12 @@ export default async function Pricing() {
 
   const tiers = TIERS.map((t) => {
     const p = catalog?.find((x) => x.tier === t.tier);
-    const budget = p?.poolUsdPerMonth ?? t.budgetUsd;
     const seats = p?.maxSeats ?? t.seats;
     const price = p ? p.monthlyUsdCents / 100 : t.priceUsd;
     const { features, ...plain } = t;
     return {
       ...plain,
       priceFigure: t.priceFigure ?? usd(price),
-      priceSub: t.priceSub.replace(/\$\d+/, usd(budget)),
       featureList: features(seats),
     };
   });
