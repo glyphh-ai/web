@@ -640,7 +640,7 @@ codex`}</Code>
           team or a key, and it caps what your own vendor keys may spend. Glyphh never writes it.
         </p>
         <p>
-          The Pipedream budget is what Glyphh funds: your plan&rsquo;s price each month, dollar for dollar, never
+          The budget is what Glyphh funds: your plan&rsquo;s price each month, dollar for dollar, never
           less than one dollar, plus any funds you add. Connector calls draw on it and stop when it runs out.
         </p>
         <h2>Roles and keys</h2>
