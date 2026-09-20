@@ -1,3 +1,5 @@
+import PricingTabs from './PricingTabs';
+
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
 
@@ -20,64 +22,106 @@ const usd = (n) => `$${Number(n).toLocaleString('en-US', { maximumFractionDigits
 const TIERS = [
   {
     tier: 'free',
+    group: 'individual',
     name: 'Free',
     priceUsd: 0,
     budgetUsd: 1,
     seats: 1,
-    period: 'forever',
     popular: false,
-    desc: 'The full workspace and the agent, on the house — no card.',
-    features: (b) => [
-      'Glyphh Desktop — the agent, your apps, saved layouts',
-      'Glyphh Gateway — 14-day trial, your own keys',
-      `Connected services — ${usd(b)} of budget a month\u00A0*`,
-      'Loops built in — plan, work, check',
+    desc: 'The whole desktop and the agent, on the house. No card.',
+    priceTitle: 'One seat',
+    priceSub: 'Free for everyone. Sign in and you are working.',
+    budgetSub: 'A dollar of connector calls a month, on us. *',
+    lead: null,
+    features: () => [
+      'Glyphh Desktop: the agent, your apps, saved layouts',
+      'Every loop: Claude Code, Codex, Gemini, Copilot, Cursor',
+      'Glyphh Gateway, a 14-day trial on your own keys',
+      'Connected services, 3,500+ apps',
+      'Memory across every session',
     ],
-    excluded: ['Team members — Free is single-seat', 'Lower rate limits'],
     cta: 'Download now',
     btn: 'btn-secondary',
   },
   {
     tier: 'basic',
+    group: 'team',
     name: 'Basic',
     priceUsd: 40,
     budgetUsd: 40,
     seats: 25,
-    period: 'per seat / month',
     popular: true,
-    desc: 'The full gateway and real automation, every month.',
-    features: (b, s) => [
-      'Everything in Free, plus:',
-      'Glyphh Gateway — full, no trial, every provider',
-      `${usd(b)} of budget per seat, every month`,
-      `Invite your team — up to ${s} seats`,
-      'Connected services — 3,500+ apps',
+    desc: 'The full gateway and real automation for a team.',
+    priceTitle: 'Standard seat',
+    priceSub: 'Per seat / month, billed monthly. Cancel anytime.',
+    budgetSub: 'Per seat, every month. The plan price, dollar for dollar.',
+    lead: 'Everything in Free, plus:',
+    features: (s) => [
+      'Glyphh Gateway in full: every provider, your own keys, never marked up',
+      'Glyphh Router: burn down or reserve your vendor plans',
+      `Invite your team, up to ${s} seats`,
+      'Team budgets and rate limits in dollars',
+      'Logging, alerts and a daily spend report',
+      'Usage itemized per call, in dollars',
     ],
-    excluded: [],
     cta: 'Get started',
     btn: 'btn-primary',
   },
   {
     tier: 'pro',
+    group: 'team',
     name: 'Pro',
     priceUsd: 150,
     budgetUsd: 150,
     seats: 100,
-    period: 'per seat / month',
     popular: false,
-    desc: 'For teams that govern — roles, budgets, and the highest limits.',
-    features: (b, s) => [
-      'Everything in Basic, plus:',
-      'Role governance — models, budgets, keys per team',
-      'The org Library — publish tasks, agents & skills to your team, reviewed and role-gated',
-      `${usd(b)} of budget per seat, every month`,
+    desc: 'For teams that govern: roles, budgets, and the highest limits.',
+    priceTitle: 'Premium seat',
+    priceSub: 'Per seat / month, billed monthly. Cancel anytime.',
+    budgetSub: 'Per seat, every month. Nearly four times Basic.',
+    lead: 'Everything in Basic, plus:',
+    features: (s) => [
+      'Role governance: models, budgets and keys per team',
+      'The org Library: tasks, agents and skills, reviewed and role-gated',
+      'Org default model and auto-only routing',
+      'Memory policy for the whole org',
       `Up to ${s} seats`,
       'Highest rate limits',
     ],
-    excluded: [],
     cta: 'Get started',
     btn: 'btn-secondary',
   },
+  {
+    tier: 'enterprise',
+    group: 'team',
+    name: 'Enterprise',
+    priceUsd: 0,
+    budgetUsd: 0,
+    seats: 0,
+    popular: false,
+    contactSales: true,
+    desc: 'For large organizations running at scale.',
+    priceTitle: 'Seat price + usage',
+    priceFigure: 'Custom',
+    priceSub: 'Seats and budget sized to you, on one invoice.',
+    budgetFigure: 'Custom',
+    budgetSub: 'A budget sized to your connector volume, at our published per-token rates.',
+    lead: 'Everything in Pro, plus:',
+    features: () => [
+      'Single sign-on and SCIM through your IdP',
+      'One shared organization for the whole company',
+      'Admins set org, team and member spend limits',
+      'Audit log of every change',
+      'Priority support',
+    ],
+    cta: 'Contact sales',
+    btn: 'btn-secondary',
+  },
+];
+
+const GROUPS = [
+  { key: 'individual', label: 'Individual' },
+  { key: 'team', label: 'Team & Enterprise' },
 ];
 
 const SALES_EMAIL = 'sales@glyphh.ai';
@@ -108,100 +152,47 @@ export default async function Pricing() {
     const p = catalog?.find((x) => x.tier === t.tier);
     const budget = p?.poolUsdPerMonth ?? t.budgetUsd;
     const seats = p?.maxSeats ?? t.seats;
+    const price = p ? p.monthlyUsdCents / 100 : t.priceUsd;
+    const { features, ...plain } = t;
     return {
-      ...t,
-      price: String(Math.round(p ? p.monthlyUsdCents / 100 : t.priceUsd)),
-      budgetLine: seats <= 1
-        ? `${usd(budget)} of budget a month`
-        : `${usd(budget)} of budget per seat / month`,
-      seatsLine: t.contactSales
-        ? `${seats}+ seats`
-        : seats <= 1 ? '1 seat' : `Up to ${seats} seats`,
-      featureList: t.features(budget, seats),
+      ...plain,
+      priceFigure: t.priceFigure ?? usd(price),
+      budgetFigure: t.budgetFigure ?? `${usd(budget)}${seats > 1 ? ' / seat' : ''}`,
+      featureList: features(seats),
     };
   });
+
+  const groups = GROUPS.map((g) => ({ ...g, tiers: tiers.filter((t) => t.group === g.key) }));
 
   return (
     <section className="pricing" id="pricing">
       <div className="container">
         <h2 className="section-title">Simple, transparent pricing</h2>
         <p className="section-subtitle">
-          One budget for everything Glyphh does for you, in dollars. A
-          plan&rsquo;s price is its monthly budget, dollar for dollar. Your AI
-          runs on your own keys at your vendor&rsquo;s price, and every charge
-          is itemized in your usage feed.
+          A plan&rsquo;s price is its monthly budget, dollar for dollar. That
+          budget is your usage limit for what Glyphh runs for you. Your AI runs
+          on your own keys at your vendor&rsquo;s price, and every charge is
+          itemized in your usage feed.
         </p>
 
-        <div className="pricing-grid">
-          {tiers.map((t) => (
-            <div key={t.tier} className={`pricing-card reveal${t.popular ? ' pricing-card-popular' : ''}`}>
-              <div className="pricing-header">
-                <span className="pricing-plan-name">{t.name}</span>
-                <div className="pricing-amount">
-                  {t.contactSales ? (
-                    <span className="pricing-number">{t.priceLabel}</span>
-                  ) : (
-                    <>
-                      <span className="pricing-dollar">$</span>
-                      <span className="pricing-number">{t.price}</span>
-                    </>
-                  )}
-                </div>
-                <span className="pricing-period">{t.period}</span>
-              </div>
-              <p className="pricing-usage">{t.budgetLine}</p>
-              <p className="pricing-seats">{t.seatsLine}</p>
-              <p className="pricing-desc">{t.desc}</p>
-              <ul className="pricing-features">
-                {t.featureList.map((f, i) => (
-                  <li key={i}><span className="check">✓</span> {f}</li>
-                ))}
-                {t.excluded.map((f, i) => (
-                  <li key={`x${i}`} className="pricing-excluded"><span className="x">✗</span> {f}</li>
-                ))}
-              </ul>
-              <a
-                href={t.contactSales ? `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Glyphh Enterprise')}` : PLATFORM_URL}
-                className={`btn ${t.btn} btn-lg btn-full group`}
-              >
-                <span className="btn-label">{t.cta}</span>
-                <span className="btn-fill"></span>
-              </a>
-            </div>
-          ))}
-        </div>
+        <PricingTabs groups={groups} salesEmail={SALES_EMAIL} platformUrl={PLATFORM_URL} />
 
         {/* Disclosures the free tier's abuse gates require (2026-09-01):
-            reduced grant for unverified sign-ins + the model allow-list. */}
+            reduced grant for unverified sign-ins. */}
         <p className="pricing-footnote reveal">
           * The full Free budget requires a verified sign-in (Google or
           Apple). Accounts created with email alone start with a reduced
-          budget until an identity is verified. Plan-included budget resets
-          every month; funds you add never expire. Budgets, included features,
-          and limits may change. See our <a href="/terms">Terms of Use</a>.
+          budget until an identity is verified.
+        </p>
+        <p className="pricing-footnote reveal">
+          <a href="/docs/budgets">Usage limits</a> apply: each plan&rsquo;s budget is its monthly limit for
+          connector calls. When it is spent, those calls pause until you add funds or the month turns.
+          Plan-included budget resets every month; funds you add never expire. Admins set their own spend
+          limits, in dollars, on their own keys. Budgets, included features and limits may change. See our{' '}
+          <a href="/terms">Terms of Use</a>.
         </p>
 
-        {/* Enterprise / custom — a compact band under the tiers instead of a
-            fourth "Custom" card (mirrors the home page's one-pricing band). */}
-        <div className="prods-pricing reveal pricing-enterprise-band">
-          <div className="prods-pricing-copy">
-            <h3>Need SSO, SCIM, or a bigger budget?</h3>
-            <p>
-              Enterprise adds single sign-on and SCIM through your IdP (Okta,
-              Entra, …), one shared org for your whole company, a custom
-              budget, and priority support. Custom pricing — talk to us.
-            </p>
-          </div>
-          <a
-            href={`mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Glyphh Enterprise')}`}
-            className="btn btn-secondary btn-lg group"
-          >
-            <span className="btn-label">Contact sales</span>
-            <span className="btn-fill"></span>
-          </a>
-        </div>
-
-        <p className="pricing-note">Cancel anytime. Budget spent? Add funds, dollar for dollar, prepaid, never billed in arrears. Every charge is itemized per tool call in your usage feed.</p>
+        <p className="pricing-note">Cancel anytime. Budget spent? Add funds, dollar for dollar, prepaid, never billed in arrears.</p>
         <p className="pricing-tax">Prices are exclusive of applicable taxes and duties, including VAT and applicable sales tax.</p>
       </div>
     </section>
