@@ -1,4 +1,5 @@
-// Every stylesheet of the current build, for a page cached from an older one.
+// Every stylesheet of the current build, for a page cached from an older one
+// (the fallback rewrite in next.config.mjs).
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 

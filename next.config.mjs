@@ -36,6 +36,15 @@ const nextConfig = {
       },
     ];
   },
+  // A page a browser cached before 2026-09-19 (a year, immutable) still asks
+  // for the stylesheet of the build that made it. That file is gone after a
+  // deploy, so the page painted bare. A chunk stylesheet that no longer
+  // exists is answered with every stylesheet of the current build.
+  async rewrites() {
+    return {
+      fallback: [{ source: '/_next/static/chunks/:name*.css', destination: '/api/css/all' }],
+    };
+  },
   async redirects() {
     return [
       // Products is a real section again (2026-08-16). The bare index lands on
