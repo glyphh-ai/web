@@ -24,6 +24,16 @@ const nextConfig = {
         source: '/_next/static/:path*',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
+      // Chunk stylesheets are answered by these two (middleware.js): a real
+      // file is the immutable asset; the fallback bundle is never kept.
+      {
+        source: '/api/css/asset',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        source: '/api/css/all',
+        headers: [{ key: 'Cache-Control', value: 'no-store' }],
+      },
     ];
   },
   async redirects() {

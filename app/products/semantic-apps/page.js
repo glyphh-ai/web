@@ -157,7 +157,7 @@ export default function SemanticAppsPage() {
               GLYPHH SEMANTIC APPS
             </div>
             <h1 className="page-hero-title">
-              Apps that know your context<span className="dot">.</span>
+              Apps that know <span className="hero-accent">your context</span><span className="dot">.</span>
             </h1>
             <p className="page-hero-sub">
               Every Glyphh app ships with SQLite, on-device vector search, and a knowledge

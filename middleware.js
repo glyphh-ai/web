@@ -24,6 +24,18 @@ export function middleware(request) {
     }
   }
 
+  // A page cached before 2026-09-19 (a year, immutable) still asks for the
+  // stylesheet of the build that made it. That file is gone after a deploy,
+  // so the page painted bare. Every chunk stylesheet is answered by the css
+  // route, which serves the named file when it exists and today's CSS when
+  // it does not (/api/css/all).
+  if (pathname.startsWith('/_next/static/chunks/') && pathname.endsWith('.css')) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/api/css/asset';
+    url.searchParams.set('f', pathname.slice('/_next/static/chunks/'.length));
+    return NextResponse.rewrite(url);
+  }
+
   let response;
   const heroVariant = HERO_VARIANTS[pathname];
   if (heroVariant) {
@@ -49,5 +61,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.svg).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.svg).*)', '/_next/static/chunks/:name*.css'],
 };
