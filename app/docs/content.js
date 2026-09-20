@@ -591,6 +591,39 @@ codex`}</Code>
           The base URL is the one shown on your console&rsquo;s Virtual Keys page. It is the same host your
           console runs on.
         </Note>
+        <h2>Your org&rsquo;s skills, in Claude Code</h2>
+        <p>
+          Every skill and plugin approved on the org hub is a Claude Code plugin. Open the AI Hub in the
+          console, press <strong>Use in Claude Code</strong>, and paste the two lines it shows:
+        </p>
+        <Code lang="bash">{`/plugin marketplace add https://api.glyphh.ai/api/hub/<org>/claude-code/<token>.git
+/plugin install <name>@glyphh-<org>`}</Code>
+        <p>
+          The hub is served as a plugin marketplace, so <strong>/plugin marketplace update</strong> picks up
+          what admins approve later. The link is private to your organization. Nothing has to live in a git
+          repository.
+        </p>
+        <h2>Your accounts, from any MCP client</h2>
+        <p>
+          Add the gateway&rsquo;s MCP endpoint to Claude Code, Codex, Cursor, or claude.ai with your virtual
+          key, and three tools are there beside the search tool:
+        </p>
+        <Row k="glyphh_connections">Your connected accounts, the apps the org shares, and what is ready</Row>
+        <Row k="glyphh_connect">Returns a link. Open it, authorize the app, and its tools are searchable</Row>
+        <Row k="glyphh_disconnect">Drop one account, or every one of yours with <strong>all</strong></Row>
+        <Code lang="bash">{`claude mcp add --transport http glyphh https://api.glyphh.ai/mcp \
+  --header "Authorization: Bearer sk-…"`}</Code>
+        <p>
+          Ask the agent to connect Gmail. It calls the tool, hands you the link, and once you have signed in
+          the Gmail tools answer to <strong>mcp_tool_search</strong>. The same accounts show up on the desktop
+          if you install it later.
+        </p>
+        <h2>Your org&rsquo;s agents</h2>
+        <p>
+          An agent your admin registered on the console&rsquo;s Agents page is a model on the gateway. Send a
+          chat request with <strong>model: a2a/&lt;name&gt;</strong> and the gateway forwards it over A2A. The
+          name is on the agent&rsquo;s hub page.
+        </p>
       </>
     ),
   },
@@ -966,6 +999,30 @@ const admin = [
     ),
   },
   {
+    slug: 'org-agents',
+    title: 'Agents',
+    lede: 'Register the agents your organization runs. Members find them on the hub and call them as models.',
+    mascot: 'byte',
+    body: (
+      <>
+        <ol>
+          <li>Open <strong>Agents</strong> in the console and press <strong>Add agent</strong>.</li>
+          <li>Name it and paste its A2A endpoint. If the agent publishes a card at <strong>/.well-known/agent-card.json</strong>, the description, version and skills come from there.</li>
+          <li>If the endpoint needs a header, set the header name and value. It is stored on the gateway and never shown again.</li>
+          <li>Save. The agent is on the AI Hub for every member, with the model id <strong>a2a/&lt;org&gt;-&lt;name&gt;</strong>.</li>
+        </ol>
+        <p>
+          A member calls it like any other model through the gateway, from the desktop or from their own
+          tools. Only your organization&rsquo;s keys can see it or reach it. Remove it from the same page.
+        </p>
+        <Note kind="note" title="One name space">
+          Agent names are global on the gateway, so yours are prefixed with your organization. Two orgs can each
+          have a <strong>sales-bot</strong>.
+        </Note>
+      </>
+    ),
+  },
+  {
     slug: 'billing-admin',
     title: 'Billing',
     lede: 'Plan, seats, credits, invoices, and the card on file.',
@@ -1064,7 +1121,7 @@ export const GROUPS = [
   { title: 'Connect', lede: 'Connections and MCP, both directions.', pages: connect },
   { title: 'The gateway', lede: 'Routing, your own CLI, budgets.', pages: router },
   { title: 'Console and billing', lede: 'Roles, the hub, plans, seats, security.', pages: console_ },
-  { title: 'Org admin', lede: 'Step by step: the domain, the brand, SSO, review, models, MCP servers, billing.', pages: admin },
+  { title: 'Org admin', lede: 'Step by step: the domain, the brand, SSO, review, models, MCP servers, agents, billing.', pages: admin },
   { title: 'About', lede: 'What Glyphh is built on.', pages: about },
 ];
 
