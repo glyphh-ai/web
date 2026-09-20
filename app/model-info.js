@@ -235,7 +235,7 @@ export const MODEL_INFO = {
   },
   'local::qwen2.5-7b': {
     goodFor:
-      'The balanced on-device pick — solid quality on mainstream hardware, no credits, nothing leaves your machine.',
+      'The balanced on-device pick — solid quality on mainstream hardware, no key, no bill, nothing leaves your machine.',
     strengths: ['On-device', 'Free', 'Private'],
   },
   'local::qwen2.5-3b': {

@@ -215,7 +215,7 @@ const agent = [
         <p>
           The picker&rsquo;s shape comes from the loop. One model slot is one dropdown. Choices, the resolved
           default, and where each choice came from are decided on the server and shown as-is. Each choice carries
-          its context window, output limit, and price per million tokens in credits.
+          its context window, output limit, and price per million tokens in dollars, the vendor&rsquo;s own rate on your keys.
         </p>
         <h2>On-device</h2>
         <p>
@@ -462,7 +462,8 @@ const connect = [
           both places.
         </p>
         <Note kind="admin" title="Connections are a paid feature">
-          Connections are available on paid plans. Each call is metered in credits.
+          Connections are available on paid plans. Each call is metered on the tokens it sends and returns and
+          billed against your plan&rsquo;s monthly budget in dollars.
         </Note>
       </>
     ),
@@ -542,15 +543,14 @@ const router = [
         <h2>Turn it on, step by step</h2>
         <ol>
           <li>In the console, open <strong>Settings &rarr; Organization</strong> and switch <strong>Gateway lane</strong> on. Paid plans only.</li>
-          <li>On the row below, pick the <strong>Credit strategy</strong>: Burn down or Reserved. The remaining balance is shown beside it.</li>
           <li>On the desktop, nothing. Within a minute every member&rsquo;s Claude Code and Codex loops route through the org. A restart makes it immediate.</li>
           <li>Send a turn and watch it land on the console&rsquo;s <strong>Logs</strong> page.</li>
         </ol>
         <p>
           For a CLI outside the desktop, see <a href="/docs/own-cli">Use your own CLI</a>.
         </p>
-        <h2>Two ways to spend</h2>
-        <Row k="Burn down">Each vendor stays direct while its own allowance lasts. When it runs dry, that vendor&rsquo;s traffic moves onto the proxy and spends the org&rsquo;s credits</Row>
+        <h2>Two ways to route</h2>
+        <Row k="Burn down">Each vendor stays direct while its own allowance lasts. When it runs dry, that vendor&rsquo;s traffic moves onto the proxy, on the org&rsquo;s own keys at the vendor&rsquo;s price</Row>
         <Row k="Reserved">The vendor&rsquo;s heavy models, Opus and Fable, stay on the member&rsquo;s own subscription, with that spend tracked off the proxy. Everything lighter rides the proxy</Row>
         <Note kind="note" title="Cached tokens count">
           Through the proxy, cache reads and writes are priced at the vendor&rsquo;s cache rates. Off the proxy, the
@@ -634,12 +634,14 @@ codex`}</Code>
     mascot: 'sage',
     body: (
       <>
-        <h2>The org ceiling</h2>
+        <h2>Two budgets, two units never mixed</h2>
         <p>
-          Every organization carries a hard spend ceiling on the gateway, in vendor dollars, over a rolling thirty
-          days. It is the plan&rsquo;s monthly credits converted at the credit rate, and never less than one dollar.
-          A free org gets the one-dollar floor. The ceiling is applied when an org is created, when its plan
-          changes, and at boot for any org that predates it.
+          Your organization&rsquo;s spend budget on the gateway is yours: set it in dollars on the organization, a
+          team or a key, and it caps what your own vendor keys may spend. Glyphh never writes it.
+        </p>
+        <p>
+          The Pipedream budget is what Glyphh funds: your plan&rsquo;s price each month, dollar for dollar, never
+          less than one dollar, plus any funds you add. Connector calls draw on it and stop when it runs out.
         </p>
         <h2>Roles and keys</h2>
         <p>
@@ -679,7 +681,7 @@ const console_ = [
         <Row k="Usage">Their spend</Row>
         <Row k="Logs">Their requests</Row>
         <h2>An org admin also gets</h2>
-        <Row k="Billing">Plan, seats, credits, invoices, the next invoice amount and date</Row>
+        <Row k="Billing">Plan, seats, budget, invoices, the next invoice amount and date</Row>
         <Row k="Models">Which models the org supports and any BYOK keys</Row>
         <Row k="Teams · Internal Users">Membership, invites, roles</Row>
         <Row k="Loops · MCP Servers">Org-shared loops and MCP connections</Row>
@@ -719,19 +721,19 @@ const console_ = [
   },
   {
     slug: 'plans',
-    title: 'Plans and credits',
-    lede: 'What each tier includes, and what a credit costs.',
+    title: 'Plans and pricing',
+    lede: 'What each tier includes, and what the budget pays for.',
     mascot: 'sage',
     body: (
       <>
         <h2>Tiers</h2>
         <div className="dx-table">
           <table>
-            <thead><tr><th>Tier</th><th>Price</th><th>Monthly credits</th><th>Seats</th><th>Governance</th><th>SSO</th></tr></thead>
+            <thead><tr><th>Tier</th><th>Price</th><th>Monthly budget</th><th>Seats</th><th>Governance</th><th>SSO</th></tr></thead>
             <tbody>
-              <tr><td>Free</td><td>$0</td><td>0</td><td>1</td><td>no</td><td>no</td></tr>
-              <tr><td>Basic</td><td>$40 / seat / month</td><td>2,000</td><td>up to 25</td><td>no</td><td>no</td></tr>
-              <tr><td>Pro</td><td>$150 / seat / month</td><td>10,000</td><td>up to 100</td><td>roles and budgets</td><td>no</td></tr>
+              <tr><td>Free</td><td>$0</td><td>$1</td><td>1</td><td>no</td><td>no</td></tr>
+              <tr><td>Basic</td><td>$40 / seat / month</td><td>$40 / seat</td><td>up to 25</td><td>no</td><td>no</td></tr>
+              <tr><td>Pro</td><td>$150 / seat / month</td><td>$150 / seat</td><td>up to 100</td><td>roles and budgets</td><td>no</td></tr>
               <tr><td>Enterprise</td><td>custom</td><td>custom</td><td>unlimited</td><td>yes</td><td>yes</td></tr>
             </tbody>
           </table>
@@ -740,14 +742,24 @@ const console_ = [
           The live catalog is served from the same table the console edits, so this site&rsquo;s
           <a href="/pricing"> pricing page</a> and the desktop&rsquo;s Billing page always agree.
         </p>
-        <h2>Credits</h2>
-        <p>One dollar buys 62.5 credits. Models are priced per million tokens in credits, shown in the picker.</p>
-        <h2>Top-ups</h2>
-        <p>A top-up is two cents a credit, with volume discounts:</p>
-        <Row k="2,500 credits">10% off</Row>
-        <Row k="5,000 credits">20% off</Row>
-        <Row k="10,000 credits">30% off</Row>
-        <p>Auto top-up can be configured from the Billing page: a threshold and an amount.</p>
+        <h2>Budget</h2>
+        <p>
+          Plans are dollars per month, dollar for dollar: a paid plan includes its price as budget, per seat, every
+          month, and Free includes one dollar. Every Glyphh product draws on that one budget. Today it pays for
+          connector calls, metered on the tokens each call sends and returns at a published per-token price, the
+          same way a model is priced. Plan-included budget resets each month.
+        </p>
+        <p>
+          Your own model calls are not on the budget. They run on your keys at the vendor&rsquo;s price, shown per
+          million tokens in the picker, and Glyphh never marks them up.
+        </p>
+        <h2>Add funds</h2>
+        <p>
+          Add dollars to the budget from the Billing page, dollar for dollar. There are no tiers and no discounts.
+          Purchased funds never expire.
+        </p>
+        <h2>Auto-reload</h2>
+        <p>Auto-reload can be configured from the Billing page: a threshold and an amount, both in dollars.</p>
       </>
     ),
   },
@@ -821,14 +833,13 @@ const admin = [
   {
     slug: 'org-settings',
     title: 'Organization settings',
-    lede: 'The six switches that shape how your org uses Glyphh.',
+    lede: 'The five switches that shape how your org uses Glyphh.',
     mascot: 'tally',
     body: (
       <>
         <p>In the console, open <strong>Settings &rarr; Organization</strong>. Every row saves as you change it.</p>
         <Row k="Governance">On: the servers on the MCP Servers page are the only apps members may connect. Off: members connect any app for themselves. Pro and Enterprise</Row>
-        <Row k="Gateway lane">On: members&rsquo; Claude Code and Codex traffic routes through the org, metered in credits and capped by budgets. Paid plans</Row>
-        <Row k="Credit strategy">Burn down or Reserved, with the remaining balance beside it. See <a href="/docs/gateway">the gateway</a></Row>
+        <Row k="Gateway lane">On: members&rsquo; Claude Code and Codex traffic routes through the org, on the org&rsquo;s own keys and capped by budgets. Paid plans</Row>
         <Row k="Auto only">On: members pick no model. Every turn goes to the org&rsquo;s auto-router</Row>
         <Row k="Terminal access">Off: members cannot drop from the chat into the loop&rsquo;s own CLI</Row>
         <Row k="Review model">The model that reads every submission to the hub and files a verdict for you</Row>
@@ -1025,15 +1036,15 @@ const admin = [
   {
     slug: 'billing-admin',
     title: 'Billing',
-    lede: 'Plan, seats, credits, invoices, and the card on file.',
+    lede: 'Plan, seats, budget, invoices, and the card on file.',
     mascot: 'tally',
     body: (
       <>
         <p>Open <strong>Billing</strong> in the console. Org admins only.</p>
         <Row k="Current plan">Your tier, seats in use, and the next invoice&rsquo;s amount and date</Row>
-        <Row k="Credits">What the org holds, what it has spent, and what remains</Row>
-        <Row k="Top up credits">Buy credits now. Volume discounts apply at 2,500, 5,000, and 10,000</Row>
-        <Row k="Auto top-up">Press <strong>Configure</strong>: a threshold and an amount. When remaining credits fall below the threshold, the card on file is charged and the credits land at once</Row>
+        <Row k="Budget">What the org holds this month, what it has spent, and what remains, in dollars</Row>
+        <Row k="Add funds">Add dollars now, dollar for dollar. Purchased funds never expire</Row>
+        <Row k="Auto-reload">Press <strong>Configure</strong>: a threshold and an amount, in dollars. When the remaining budget falls below the threshold, the card on file is charged and the funds land at once</Row>
         <Row k="Invoices">Every invoice, with proration lines marked</Row>
         <Row k="Manage in Stripe">The card, the billing address, and receipts, on Stripe&rsquo;s portal</Row>
         <Row k="Sync with Stripe">If a seat count or a plan looks stale, this re-reads the subscription</Row>
@@ -1087,7 +1098,7 @@ const about = [
           The router is a fork of <a href="https://github.com/BerriAI/litellm">LiteLLM</a>, the
           OpenAI-compatible proxy. It provides the endpoint, the model catalog, virtual keys, teams,
           budgets, and the spend logs. Glyphh adds organizations, sign-in, the hub, billing, plans,
-          the credit strategy, and the desktop&rsquo;s gateway path. The fork is private. The upstream
+          and the desktop&rsquo;s gateway path. The fork is private. The upstream
           core is used under the MIT license, copyright 2023 Berri AI, and the license text ships with
           the software. For settings we did not change, such as the config file syntax and the
           per-model parameters, the <a href="https://docs.litellm.ai">upstream reference</a> is the
@@ -1100,7 +1111,7 @@ const about = [
           decides org-shared versus personal, and governs which tools may run and when.
         </p>
         <h2>Stripe</h2>
-        <p>Subscriptions, seats, invoices, and top-ups are billed through Stripe.</p>
+        <p>Subscriptions, seats, invoices, and added funds are billed through Stripe.</p>
         <h2>The vendor CLIs</h2>
         <p>
           Claude Code, Codex, Gemini, Copilot, and Cursor are their vendors&rsquo; own tools. Glyphh

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import CreditBand from './CreditBand';
+import UsageBand from './UsageBand';
 
 /**
  * HomeClose — the pricing strip and the final CTA. The primary download
@@ -26,7 +26,7 @@ export default function HomeClose() {
     <section className="final-cta home-close" id="get-started">
       <div className="container">
         <div className="section-label reveal">{'{'} <span className="accent">PRICING</span> {'}'}</div>
-        <CreditBand />
+        <UsageBand />
 
         <div className="cta-card" ref={cardRef}>
           <h2>Ask for the work<span className="dot">.</span> Set the rules<span className="dot">.</span> Get it done<span className="dot">.</span></h2>

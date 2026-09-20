@@ -22,11 +22,11 @@ const faqs = [
   },
   {
     q: 'Which models can I use?',
-    a: 'Frontier models on your own credits: Claude, GPT, Gemini. When those credits are spent, the same requests route to open-weight models, direct: Kimi K3, Llama, Qwen, Mistral, and hundreds more. Bring your own keys or use the router; either way the desktop does not change.',
+    a: 'Frontier models on your own keys and subscriptions: Claude, GPT, Gemini. When a subscription runs dry, the same requests route to open-weight models, direct: Kimi K3, Llama, Qwen, Mistral, and hundreds more. Bring your own keys or use the router; either way the desktop does not change, and Glyphh never marks a model call up.',
   },
   {
-    q: 'What is a credit?',
-    a: 'The one currency for everything Glyphh does — model calls, tools, compute. Every plan includes a monthly allowance, open-weight models cost a fraction of frontier ones, and every charge is itemized in your usage feed.',
+    q: 'How does the budget work?',
+    a: 'Every plan includes a monthly budget in dollars, equal to its price: $40 a seat buys $40 of budget a seat. Free includes $1. Glyphh spends it on your behalf, today on connector calls, metered on the tokens they send and return at a published per-token price. Your own model calls run on your keys at the vendor’s price and never touch it. Add funds any time, dollar for dollar; purchased funds never expire, and every charge is itemized in your usage feed.',
   },
   {
     q: 'What are connected services?',

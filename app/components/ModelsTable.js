@@ -12,11 +12,13 @@ import { infoFor } from '../model-info';
  * layer lives in app/model-info.js.
  */
 
-function fmtCredits(n) {
+// Dollars per million tokens, the vendor's own list price on the customer's
+// keys. Sub-cent rates keep up to three decimals; whole dollars stay whole.
+function fmtUsd(n) {
   if (n === 0) return 'Free';
   const num = Number(n);
   if (!Number.isFinite(num)) return '—';
-  return num.toLocaleString('en-US', { maximumFractionDigits: 3 });
+  return `$${num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 3 })}`;
 }
 
 function fmtCtx(n) {
@@ -132,17 +134,17 @@ export default function ModelsTable({ providers, newIds = [] }) {
             <th className="mt-use">Best for</th>
             <th className="mt-ctx">Context</th>
             <th className="mt-num">
-              Input<span className="mt-unit"> credits / 1M tokens</span>
+              Input<span className="mt-unit"> $ / 1M tokens</span>
             </th>
             <th className="mt-num">
-              Output<span className="mt-unit"> credits / 1M tokens</span>
+              Output<span className="mt-unit"> $ / 1M tokens</span>
             </th>
           </tr>
         </thead>
         <tbody>
           {shown.map(([provider, list]) => {
             const openProv = !!query || openProviders.has(provider);
-            const cheapest = list[0]?.inputCreditsPerMTok;
+            const cheapest = list[0]?.inputUsdPerMTok;
             const mPage = Math.min(modelPages[provider] ?? 0, Math.ceil(list.length / PAGE) - 1);
             const rows = list.slice(mPage * PAGE, (mPage + 1) * PAGE);
             return (
@@ -151,7 +153,7 @@ export default function ModelsTable({ providers, newIds = [] }) {
                 <td colSpan={5}>
                   <span className={`mt-caret${openProv ? ' is-open' : ''}`} aria-hidden="true">&#9656;</span>
                   {provider}
-                  <span className="mt-group-meta">{list.length} model{list.length === 1 ? '' : 's'}{Number.isFinite(Number(cheapest)) && Number(cheapest) > 0 ? ` · from ${fmtCredits(cheapest)} cr/MTok` : ''}</span>
+                  <span className="mt-group-meta">{list.length} model{list.length === 1 ? '' : 's'}{Number.isFinite(Number(cheapest)) && Number(cheapest) > 0 ? ` · from ${fmtUsd(cheapest)} / MTok` : ''}</span>
                 </td>
               </tr>
               {openProv && rows.map((m) => {
@@ -189,8 +191,8 @@ export default function ModelsTable({ providers, newIds = [] }) {
                         </span>
                       </td>
                       <td className="mt-ctx">{fmtCtx(m.contextWindow)}</td>
-                      <td className="mt-num">{fmtCredits(m.inputCreditsPerMTok)}</td>
-                      <td className="mt-num">{fmtCredits(m.outputCreditsPerMTok)}</td>
+                      <td className="mt-num">{fmtUsd(m.inputUsdPerMTok)}</td>
+                      <td className="mt-num">{fmtUsd(m.outputUsdPerMTok)}</td>
                     </tr>
                     {open ? <DetailRow model={m} /> : null}
                   </Fragment>

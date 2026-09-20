@@ -44,7 +44,7 @@ export default function Mcp() {
         </h2>
         <p className="adal-lede reveal">
           Any loop drives the desktop. Glyphh Connect brings 3,500+ services in
-          as tools. Glyphh Router sends the work to frontier AI on your credits,
+          as tools. Glyphh Router sends the work to frontier AI on your own keys,
           then to open-weight models when those run out.
         </p>
 
@@ -102,7 +102,7 @@ export default function Mcp() {
           </div>
           <div className="apx-col">
             <div className="apx-col-label">Glyphh Router</div>
-            <div className="apx-node">frontier, on your credits</div>
+            <div className="apx-node">frontier, on your keys</div>
             <div className="apx-node">open-weight, direct</div>
             <div className="apx-node">roles &amp; budgets</div>
           </div>

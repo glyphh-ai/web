@@ -90,7 +90,7 @@ export default function Nav() {
                 </a>
                 <a href="/products/router" className="nav-dd-item">
                   <span className="nav-dd-name">Glyphh Router</span>
-                  <span className="nav-dd-desc">One endpoint, two ways to spend credits. Roles and budgets.</span>
+                  <span className="nav-dd-desc">One endpoint, two ways to route. Roles and budgets.</span>
                 </a>
                 <a href="/products/connect" className="nav-dd-item">
                   <span className="nav-dd-name">Glyphh Connect</span>

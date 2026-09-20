@@ -65,7 +65,7 @@ running, and still deployed on every `main` push during the parallel period.
 | **SSL/TLS mode = Full (strict)** | ⚠ UNCONFIRMED — check dashboard → SSL/TLS. Must be Full (strict); Flexible would mean CF→origin plaintext and can loop redirects. |
 | SPF record | Missing entirely (`v=spf1 include:_spf.google.com ~all` TXT on root) — pre-existing gap, hurts mail deliverability; add any time. |
 | Origin lockdown | `glyphh-ai-web.fly.dev` still answers directly. Cosmetic for the marketing site; harden with Authenticated Origin Pulls as part of the server migration (task #4), where it actually matters. |
-| `CF-Connecting-IP` in the server | `api.glyphh.ai` is ALREADY behind CF (since the zone import) — the server's IP-keyed rate limiter + guest credit cap must read the real client IP from CF's headers, trusted only from CF peers. Lands with task #4. |
+| `CF-Connecting-IP` in the server | `api.glyphh.ai` is ALREADY behind CF (since the zone import) — the server's IP-keyed rate limiter + guest usage cap must read the real client IP from CF's headers, trusted only from CF peers. Lands with task #4. |
 | Heroku decommission (web) | After cutover + ~1 week clean: remove the `deploy-heroku` job from `web/.github/workflows/deploy.yml`, then scale down/delete the `glyphh-web` Heroku app. |
 | `next.glyphh.ai` cleanup | After cutover settles: `fly certs remove next.glyphh.ai -a glyphh-ai-web`, delete the `next`, `_acme-challenge.next`, `_fly-ownership.next` records. |
 

@@ -25,7 +25,7 @@ async function loadCatalog() {
 }
 
 export const metadata = {
-  title: 'Glyphh Router — one endpoint, two ways to spend',
+  title: 'Glyphh Router — one endpoint, two ways to route',
   description:
     'One endpoint in front of every model. Burn down uses your vendor subscriptions first and the proxy when they run dry. Reserved keeps the heavy models on your subscriptions and sends everything lighter through the proxy. Roles decide who gets what. Every token accounted for, cached calls at cache rates.',
 };
@@ -168,7 +168,7 @@ export default async function GatewayPage() {
   }
   const providers = [...byProvider.entries()].sort((a, b) => a[0].localeCompare(b[0]));
   for (const [, list] of providers) {
-    list.sort((a, b) => (a.inputCreditsPerMTok ?? 0) - (b.inputCreditsPerMTok ?? 0));
+    list.sort((a, b) => (a.inputUsdPerMTok ?? 0) - (b.inputUsdPerMTok ?? 0));
   }
   return (
     <div className="office-page design-page">
@@ -185,14 +185,15 @@ export default async function GatewayPage() {
             </div>
             <h1 className="page-hero-title">
               One endpoint<span className="dot">.</span>{' '}
-              <span className="hero-accent">Two ways to spend</span><span className="dot">.</span>
+              <span className="hero-accent">Two ways to route</span><span className="dot">.</span>
             </h1>
             <p className="page-hero-sub">
-              One endpoint in front of every model. Pick how the org spends: <strong>Burn down</strong> uses
+              One endpoint in front of every model. Pick how the org routes: <strong>Burn down</strong> uses
               each vendor subscription you already pay for first, and moves that vendor onto the proxy
               when it runs dry. <strong>Reserved</strong> keeps the heavy models, Opus and Fable, on your
-              subscriptions and sends everything lighter through the proxy on credits. Roles decide who
-              gets what. Every token accounted for, cached calls at cache rates, no prompt ever stored.
+              subscriptions and sends everything lighter through the proxy on the org&rsquo;s own keys.
+              Either way the model bill is your vendor&rsquo;s, never marked up. Roles decide who gets what.
+              Every token accounted for, cached calls at cache rates, no prompt ever stored.
             </p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
@@ -270,7 +271,7 @@ export default async function GatewayPage() {
             </span>
           </div>
           <p className="models-intro">
-            Priced per million tokens, in credits. Search it. Open a provider. Turn on what you mean to run.
+            Priced in dollars per million tokens: your vendor&rsquo;s price, on your keys. Search it. Open a provider. Turn on what you mean to run.
           </p>
           {error ? (
             <div className="models-error">The live catalog is temporarily unavailable. Please refresh in a moment.</div>

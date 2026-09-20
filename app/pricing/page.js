@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 export const metadata = {
   title: 'Pricing — Glyphh',
   description:
-    'One credit system across every Glyphh product. 1 credit = 30 seconds of compute — no token markup, ever.',
+    'One monthly budget across every Glyphh product, in dollars. A plan’s price is its budget, dollar for dollar. Your AI on your own keys, never marked up.',
 };
 
 // Live plan numbers on every request.
@@ -14,16 +14,16 @@ export const dynamic = 'force-dynamic';
 
 const RULES = [
   {
-    title: '1 credit = 30 seconds',
-    desc: 'Every product meters the same way: 30 seconds of compute per credit, rounded up, 1-credit minimum per call.',
+    title: 'Dollar for dollar',
+    desc: 'A plan’s price is its monthly budget. $40 a seat buys $40 of budget a seat, every month. Free includes $1. Add funds any time at the same rate.',
   },
   {
     title: 'Browsing is free',
-    desc: 'Listing tools, browsing apps, and reading your own data never costs a credit. You pay when Glyphh computes for you.',
+    desc: 'Listing tools, browsing apps, and reading your own data never costs a cent. You pay when Glyphh runs a connector call for you, metered on the tokens it sends and returns at a published per-token price.',
   },
   {
     title: 'Prepaid, itemized',
-    desc: 'Credits are prepaid — never billed in arrears — and every charge is itemized per call in your usage feed.',
+    desc: 'Funds are prepaid, never billed in arrears. Purchased funds never expire. Every charge is itemized per call in your usage feed.',
   },
 ];
 
@@ -41,17 +41,17 @@ export default async function PricingPage() {
             PRICING
           </div>
           <h1 className="page-hero-title">
-            One credit system<span className="dot">.</span>{' '}
-            <span className="hero-accent">Every model.</span>
+            One budget<span className="dot">.</span>{' '}
+            <span className="hero-accent">Every product.</span>
           </h1>
           <p className="page-hero-sub">
-            Glyphh Desktop — and everything we ship next — draws from the same
-            pool of credits. Each product spends them differently; the meter
-            never changes.
+            Glyphh Desktop, and everything we ship next, draws from the same
+            monthly budget in dollars. It pays for what Glyphh does for you.
+            Your AI runs on your own keys at your vendor&rsquo;s price.
           </p>
-          <div className="credit-rules">
+          <div className="usage-rules">
             {RULES.map((r) => (
-              <div key={r.title} className="credit-rule reveal">
+              <div key={r.title} className="usage-rule reveal">
                 <h3>{r.title}</h3>
                 <p>{r.desc}</p>
               </div>

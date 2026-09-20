@@ -26,14 +26,14 @@ export default function MarketplaceTermsPage() {
           <h2>3. The Developer Is the Vendor of Record for Support</h2>
           <p>The developer of an app — not Glyphh — is responsible for supporting it: answering questions, fixing defects, and maintaining it. Each listing shows the developer&apos;s support contact, and the &ldquo;Support&rdquo; link on a listing points to the developer. We do not provide support for third-party apps.</p>
 
-          <h2>4. Subscriptions in Credits</h2>
+          <h2>4. Subscriptions and Your Budget</h2>
           <ul>
-            <li><strong>Credits only.</strong> Paid apps are priced in credits and billed as a monthly credit subscription per install. Credits are a limited license to use the Service — not money, not redeemable for cash — as described in our <a href="/terms">Terms of Use</a>.</li>
-            <li><strong>Glyphh is the merchant.</strong> We are the merchant for Marketplace credit subscriptions: we charge the subscription from your credit balance and account for the developer&apos;s share under the <a href="/developer-agreement">Developer Agreement</a>. Your billing relationship for a Marketplace subscription is with us — the developer never bills you directly for it.</li>
+            <li><strong>Priced in dollars, charged to your budget.</strong> Paid apps are priced in dollars and billed as a monthly subscription per install, charged against your organization&apos;s usage budget. The budget is a limited license to use the Service — not money, not redeemable for cash — as described in our <a href="/terms">Terms of Use</a>.</li>
+            <li><strong>Glyphh is the merchant.</strong> We are the merchant for Marketplace subscriptions: we charge the subscription against your organization&apos;s budget and account for the developer&apos;s share under the <a href="/developer-agreement">Developer Agreement</a>. Your billing relationship for a Marketplace subscription is with us — the developer never bills you directly for it.</li>
             <li><strong>Your usage is your own.</strong> The subscription covers the app itself, not the metered work it performs for you. Model inference and other metered operations an app runs are metered as your own usage, at your organization&apos;s model choices and rates, in addition to the subscription price.</li>
-            <li><strong>Renewal and lapse.</strong> The subscription renews monthly from your credit balance. If the charge cannot be met, the app is disabled until the subscription is restored. Lapse disables the app — it never deletes your data, which remains in your organization&apos;s plane and is available again when the subscription resumes.</li>
+            <li><strong>Renewal and lapse.</strong> The subscription renews monthly against your organization&apos;s budget. If the charge cannot be met, the app is disabled until the subscription is restored. Lapse disables the app — it never deletes your data, which remains in your organization&apos;s plane and is available again when the subscription resumes.</li>
             <li><strong>Discounts.</strong> Discounts and promotional pricing are honored as stated on the listing at the time you subscribe, for the period the listing states.</li>
-            <li><strong>Refunds.</strong> Credits spent on Marketplace apps are non-refundable except as set out in our <a href="/refund">Refund Policy</a> or required by law.</li>
+            <li><strong>Refunds.</strong> Budget spent on Marketplace apps is non-refundable except as set out in our <a href="/refund">Refund Policy</a> or required by law.</li>
           </ul>
 
           <h2>5. Ratings, Reviews, and Comments</h2>
@@ -43,7 +43,7 @@ export default function MarketplaceTermsPage() {
           <p>If you believe an app is malicious, deceptive, or otherwise violates our policies, report it through the listing&apos;s report tool. Reports go to a triage queue and are taken seriously; we may suspend or delist an app while we investigate.</p>
 
           <h2>7. Removal and Changes</h2>
-          <p>We may remove, suspend, or delist any app or developer at any time. Developers may also unpublish their apps or change pricing prospectively. If an app you subscribe to is removed, your subscription stops renewing; removal does not entitle you to a refund of previously spent credits except as our <a href="/refund">Refund Policy</a> provides.</p>
+          <p>We may remove, suspend, or delist any app or developer at any time. Developers may also unpublish their apps or change pricing prospectively. If an app you subscribe to is removed, your subscription stops renewing; removal does not entitle you to a refund of budget already spent except as our <a href="/refund">Refund Policy</a> provides.</p>
 
           <h2>8. Disclaimer</h2>
           <p>THIRD-PARTY APPS ARE PROVIDED BY THEIR DEVELOPERS, NOT BY US. TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE MAKE NO WARRANTY OF ANY KIND REGARDING ANY MARKETPLACE APP, AND OUR REVIEW OR APPROVAL OF AN APP DOES NOT CREATE ONE. THE LIMITATIONS OF LIABILITY IN OUR <a href="/terms">TERMS OF USE</a> APPLY TO YOUR USE OF THE MARKETPLACE.</p>

@@ -19,7 +19,7 @@ export default function PrivacyPage() {
 
           <h2>1. Information We Collect</h2>
           <p><strong>Account Information:</strong> When you register or subscribe, we collect your email address, name, organization name (if provided), and an encrypted (hashed) password. Payment information is processed by Stripe; we do not store your full payment card details.</p>
-          <p><strong>Billing and Usage Metadata:</strong> When the Service performs a billable operation for you — driving your workspace, controlling windows, or executing a tool or integration call — we record metadata about that operation so we can meter credits, show your usage, and prevent abuse: the operation performed, the app or tool involved, whether it ran on your machine or through an integration, its measured duration, the credits charged, a request identifier, status, and a timestamp. This metadata does not include the content of your AI prompts or the models&apos; responses.</p>
+          <p><strong>Billing and Usage Metadata:</strong> When the Service performs a billable operation for you — driving your workspace, controlling windows, or executing a tool or integration call — we record metadata about that operation so we can meter your usage budget, show your usage, and prevent abuse: the operation performed, the app or tool involved, whether it ran on your machine or through an integration, the tokens it sent and received, the amount charged to your budget, a request identifier, status, and a timestamp. This metadata does not include the content of your AI prompts or the models&apos; responses.</p>
           <p><strong>Usage Data:</strong> We may collect anonymized, aggregated product analytics (e.g., feature usage, error reports) to improve the Service.</p>
           <p><strong>Device Information:</strong> For activation and validation, we may generate a machine fingerprint (a one-way hash of hardware identifiers). This hash cannot be used to identify your specific hardware.</p>
 
@@ -43,8 +43,8 @@ export default function PrivacyPage() {
           <h2>5. How We Use Information</h2>
           <ul>
             <li>To provide, maintain, and improve the Service</li>
-            <li>To route relayed requests to your workspace and meter credit usage</li>
-            <li>To process payments and manage your subscription and credit balance</li>
+            <li>To route relayed requests to your workspace and meter usage against your budget</li>
+            <li>To process payments and manage your subscription and usage budget</li>
             <li>To detect, prevent, and respond to abuse, fraud, and policy violations</li>
             <li>To communicate with you about the Service (updates, security alerts)</li>
             <li>To comply with legal obligations</li>

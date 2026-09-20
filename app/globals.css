@@ -2508,7 +2508,7 @@ body {
   line-height: 1.5;
   font-weight: 500;
 }
-.pricing-credits {
+.pricing-usage {
   font-size: 0.875rem;
   font-weight: 700;
   color: var(--text);
@@ -4050,8 +4050,8 @@ footer > .container { position: relative; z-index: 1; }
   max-width: 40ch;
 }
 
-/* ── Pricing page: credit rules ────────────────────────── */
-.credit-rules {
+/* ── Pricing page: usage rules ─────────────────────────── */
+.usage-rules {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
@@ -4060,14 +4060,14 @@ footer > .container { position: relative; z-index: 1; }
   text-align: left;
 }
 
-.credit-rule {
+.usage-rule {
   padding: 1.5rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
 }
 
-.credit-rule h3 {
+.usage-rule h3 {
   font-family: var(--font-mono);
   font-size: 0.9rem;
   font-weight: 600;
@@ -4075,7 +4075,7 @@ footer > .container { position: relative; z-index: 1; }
   margin-bottom: 0.45rem;
 }
 
-.credit-rule p {
+.usage-rule p {
   font-size: 0.88rem;
   color: var(--text-2);
   line-height: 1.6;
@@ -4087,7 +4087,7 @@ footer > .container { position: relative; z-index: 1; }
     grid-template-columns: 1fr;
   }
 
-  .credit-rules {
+  .usage-rules {
     grid-template-columns: 1fr;
   }
 }
@@ -5530,7 +5530,7 @@ body:has(.home-page) { background: #000; }
 /* ── S9 Close — pricing strip + final CTA + the CLI one-liner. The strip
    is deliberately quiet (bordered, no glow): the CTA card below is the
    section's single loud element. ── */
-.credit-band {
+.usage-band {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -5540,27 +5540,27 @@ body:has(.home-page) { background: #000; }
   border: 1px solid var(--border-2);
   border-radius: var(--radius-lg);
 }
-.credit-band-copy h3 {
+.usage-band-copy h3 {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--white);
   letter-spacing: -0.01em;
   margin: 0 0 0.4rem;
 }
-.credit-band-copy p {
+.usage-band-copy p {
   font-size: 0.9rem;
   color: var(--text-2);
   line-height: 1.6;
   margin: 0;
   max-width: 62ch;
 }
-.credit-band-copy b { color: var(--text); }
-.credit-band .btn { flex-shrink: 0; }
+.usage-band-copy b { color: var(--text); }
+.usage-band .btn { flex-shrink: 0; }
 @media (max-width: 760px) {
-  .credit-band { flex-direction: column; align-items: flex-start; }
+  .usage-band { flex-direction: column; align-items: flex-start; }
 }
-.home-close .credit-band { margin-bottom: 4rem; }
-.cli-close .credit-band { margin-bottom: 4.5rem; }
+.home-close .usage-band { margin-bottom: 4rem; }
+.cli-close .usage-band { margin-bottom: 4.5rem; }
 /* Sits INSIDE the .cta-card gradient, which is light — so it takes the
    card's dark ink, not the page's dark-theme muted tokens (which vanish
    against it). */
@@ -5850,7 +5850,7 @@ body:has(.home-page) { background: #000; }
   min-height: 100dvh;
 }
 
-/* Intro cards: switch / loop / credits */
+/* Intro cards: switch / loop / budget */
 .models-facts {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -6267,7 +6267,7 @@ body:has(.home-page) { background: #000; }
       on every page-level card surface (pricing, research, FAQ, download).
       Mockup internals (phones, fake apps) keep their soft radii — those
       depict PRODUCTS, not our chrome. Colors untouched. ── */
-.credit-rule,
+.usage-rule,
 .models-fact,
 .models-table-wrap,
 .price-card,
