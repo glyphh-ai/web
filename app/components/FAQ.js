@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'How does the budget work?',
-    a: 'Every plan includes a monthly budget in dollars, equal to its price: $40 a seat buys $40 of budget a seat. Free includes $1. Glyphh spends it on your behalf, today on connector calls, metered on the tokens they send and return at a published per-token price. Your own model calls run on your keys at the vendor’s price and never touch it. Add funds any time, dollar for dollar; purchased funds never expire, and every charge is itemized in your usage feed.',
+    a: 'Every plan includes a monthly budget in dollars, equal to its price: $40 a seat buys $40 of budget a seat. Free includes $1. Glyphh spends it on your behalf, today on calls through Glyphh, metered on the tokens they send and return at a published per-token price. Your own model calls run on your keys at the vendor’s price and never touch it. Add funds any time, dollar for dollar; purchased funds never expire, and every charge is itemized in your usage feed.',
   },
   {
     q: 'What are connected services?',

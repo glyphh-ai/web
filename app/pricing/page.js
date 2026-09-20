@@ -19,7 +19,7 @@ const RULES = [
   },
   {
     title: 'Browsing is free',
-    desc: 'Listing tools, browsing apps, and reading your own data never costs a cent. You pay when Glyphh runs a connector call for you, metered on the tokens it sends and returns at a published per-token price.',
+    desc: 'Listing tools, browsing apps, and reading your own data never costs a cent. You pay for what runs through Glyphh, connector tools and the models Glyphh provides, metered on the tokens it sends and returns at a published per-token price.',
   },
   {
     title: 'Prepaid, itemized',

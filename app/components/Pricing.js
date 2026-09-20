@@ -8,7 +8,7 @@ const usd = (n) => `$${Number(n).toLocaleString('en-US', { maximumFractionDigits
 
 // Plans = dollars per month, dollar for dollar. Every product draws on one
 // monthly budget in dollars that Glyphh spends on the customer's behalf
-// (today: connector calls, metered per token). A paid plan includes its
+// (today: calls through Glyphh, metered per token). A paid plan includes its
 // price as budget per seat per month; Free includes $1. Model calls run on
 // the customer's own keys at the vendor's price and never touch the budget.
 // Prepaid; never billed in arrears.
@@ -160,7 +160,7 @@ export default async function Pricing() {
         <PricingCards tiers={tiers} salesEmail={SALES_EMAIL} platformUrl={PLATFORM_URL} />
 
         <p className="pricing-footnote reveal">
-          Each plan&rsquo;s budget is its monthly limit. Spend it and connector calls pause until you add
+          Each plan&rsquo;s budget is its monthly limit. Spend it and calls through Glyphh pause until you add
           funds or the month turns. Plan budget resets every month; funds you add never expire. Cancel
           anytime. See our <a href="/terms">Terms of Use</a>.
         </p>

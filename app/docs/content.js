@@ -641,7 +641,7 @@ codex`}</Code>
         </p>
         <p>
           The budget is what Glyphh funds: your plan&rsquo;s price each month, dollar for dollar, never
-          less than one dollar, plus any funds you add. Connector calls draw on it and stop when it runs out.
+          less than one dollar, plus any funds you add. Through Glyphh draw on it and stop when it runs out.
         </p>
         <h2>Roles and keys</h2>
         <p>
@@ -746,7 +746,7 @@ const console_ = [
         <p>
           Plans are dollars per month, dollar for dollar: a paid plan includes its price as budget, per seat, every
           month, and Free includes one dollar. Every Glyphh product draws on that one budget. Today it pays for
-          connector calls, metered on the tokens each call sends and returns at a published per-token price, the
+          calls through Glyphh, metered on the tokens each call sends and returns at a published per-token price, the
           same way a model is priced. Plan-included budget resets each month.
         </p>
         <p>
