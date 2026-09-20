@@ -1,4 +1,4 @@
-import PricingTabs from './PricingTabs';
+import PricingCards from './PricingCards';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
@@ -22,7 +22,6 @@ const usd = (n) => `$${Number(n).toLocaleString('en-US', { maximumFractionDigits
 const TIERS = [
   {
     tier: 'free',
-    group: 'individual',
     name: 'Free',
     priceUsd: 0,
     budgetUsd: 1,
@@ -30,8 +29,7 @@ const TIERS = [
     popular: false,
     desc: 'The whole desktop and the agent, on the house. No card.',
     priceTitle: 'One seat',
-    priceSub: 'Free for everyone. Sign in and you are working.',
-    budgetSub: 'A dollar of connector calls a month, on us. *',
+    priceSub: 'Free for everyone. A dollar of connector calls a month, on us.\u00A0*',
     lead: null,
     features: () => [
       'Glyphh Desktop: the agent, your apps, saved layouts',
@@ -45,7 +43,6 @@ const TIERS = [
   },
   {
     tier: 'basic',
-    group: 'team',
     name: 'Basic',
     priceUsd: 40,
     budgetUsd: 40,
@@ -53,8 +50,7 @@ const TIERS = [
     popular: true,
     desc: 'The full gateway and real automation for a team.',
     priceTitle: 'Standard seat',
-    priceSub: 'Per seat / month, billed monthly. Cancel anytime.',
-    budgetSub: 'Per seat, every month. The plan price, dollar for dollar.',
+    priceSub: 'Per seat / month, billed monthly. The same $40 is the seat\u2019s connector budget, dollar for dollar.',
     lead: 'Everything in Free, plus:',
     features: (s) => [
       'Glyphh Gateway in full: every provider, your own keys, never marked up',
@@ -69,7 +65,6 @@ const TIERS = [
   },
   {
     tier: 'pro',
-    group: 'team',
     name: 'Pro',
     priceUsd: 150,
     budgetUsd: 150,
@@ -77,8 +72,7 @@ const TIERS = [
     popular: false,
     desc: 'For teams that govern: roles, budgets, and the highest limits.',
     priceTitle: 'Premium seat',
-    priceSub: 'Per seat / month, billed monthly. Cancel anytime.',
-    budgetSub: 'Per seat, every month. Nearly four times Basic.',
+    priceSub: 'Per seat / month, billed monthly. The same $150 is the seat\u2019s connector budget, dollar for dollar.',
     lead: 'Everything in Basic, plus:',
     features: (s) => [
       'Role governance: models, budgets and keys per team',
@@ -93,7 +87,6 @@ const TIERS = [
   },
   {
     tier: 'enterprise',
-    group: 'team',
     name: 'Enterprise',
     priceUsd: 0,
     budgetUsd: 0,
@@ -103,9 +96,7 @@ const TIERS = [
     desc: 'For large organizations running at scale.',
     priceTitle: 'Seat price + usage',
     priceFigure: 'Custom',
-    priceSub: 'Seats and budget sized to you, on one invoice.',
-    budgetFigure: 'Custom',
-    budgetSub: 'A budget sized to your connector volume, at our published per-token rates.',
+    priceSub: 'Seats and a connector budget sized to you, on one invoice, at our published per-token rates.',
     lead: 'Everything in Pro, plus:',
     features: () => [
       'Single sign-on and SCIM through your IdP',
@@ -117,11 +108,6 @@ const TIERS = [
     cta: 'Contact sales',
     btn: 'btn-secondary',
   },
-];
-
-const GROUPS = [
-  { key: 'individual', label: 'Individual' },
-  { key: 'team', label: 'Team & Enterprise' },
 ];
 
 const SALES_EMAIL = 'sales@glyphh.ai';
@@ -157,12 +143,10 @@ export default async function Pricing() {
     return {
       ...plain,
       priceFigure: t.priceFigure ?? usd(price),
-      budgetFigure: t.budgetFigure ?? `${usd(budget)}${seats > 1 ? ' / seat' : ''}`,
+      priceSub: t.priceSub.replace(/\$\d+/, usd(budget)),
       featureList: features(seats),
     };
   });
-
-  const groups = GROUPS.map((g) => ({ ...g, tiers: tiers.filter((t) => t.group === g.key) }));
 
   return (
     <section className="pricing" id="pricing">
@@ -175,7 +159,7 @@ export default async function Pricing() {
           itemized in your usage feed.
         </p>
 
-        <PricingTabs groups={groups} salesEmail={SALES_EMAIL} platformUrl={PLATFORM_URL} />
+        <PricingCards tiers={tiers} salesEmail={SALES_EMAIL} platformUrl={PLATFORM_URL} />
 
         {/* Disclosures the free tier's abuse gates require (2026-09-01):
             reduced grant for unverified sign-ins. */}
@@ -185,7 +169,7 @@ export default async function Pricing() {
           budget until an identity is verified.
         </p>
         <p className="pricing-footnote reveal">
-          <a href="/docs/budgets">Usage limits</a> apply: each plan&rsquo;s budget is its monthly limit for
+          <a href="/docs/budgets">Usage limits</a>{' '}apply: each plan&rsquo;s budget is its monthly limit for
           connector calls. When it is spent, those calls pause until you add funds or the month turns.
           Plan-included budget resets every month; funds you add never expire. Admins set their own spend
           limits, in dollars, on their own keys. Budgets, included features and limits may change. See our{' '}

@@ -6991,7 +6991,6 @@ body:has(.office-page) { background: #000; }
 
 /* Pricing, the ledger card (2026-09-20): what a seat costs, what budget it
    carries, what it unlocks. Left-aligned on top of the shared .pricing-card. */
-.pricing-tabs { margin: 0.5rem 0 2.25rem; }
 .pricing-card-ledger { text-align: left; padding: 2.25rem 1.75rem; }
 .pricing-card-ledger .pricing-plan-name { display: block; font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
 .pricing-card-ledger .pricing-desc { margin: 0.35rem 0 1.5rem; min-height: 2.6em; }
