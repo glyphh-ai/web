@@ -78,6 +78,7 @@ const TIERS = [
       'Role governance: models, budgets and keys per team',
       'The org Library: tasks, agents and skills, reviewed and role-gated',
       'Org default model and auto-only routing',
+      'Bridge Mode: Claude Desktop through the Glyphh bridge, routed per model',
       'Memory policy for the whole org',
       `Up to ${s} seats`,
       'Highest rate limits',
