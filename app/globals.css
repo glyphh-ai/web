@@ -6767,18 +6767,42 @@ body:has(.office-page) { background: #000; }
   gap: 0;
   max-width: none;
   margin: 0;
-  padding: 5.5rem 0 5rem;
+  padding: 0 0 5rem;
   align-items: start;
 }
+/* No site header on the docs (his order, 2026-09-20): the rail is the chrome,
+   the logo sits above it, and a link leads back to the site. */
 .dx-side {
   position: sticky;
-  top: 5.5rem;
-  max-height: calc(100vh - 5.5rem);
+  top: 0;
+  max-height: 100vh;
   overflow-y: auto;
-  padding: 1.6rem 1rem 2rem clamp(1rem, 2vw, 1.75rem);
+  padding: 1.25rem 1rem 2rem clamp(1rem, 2vw, 1.75rem);
   border-right: 1px solid var(--border);
 }
-.dx-main { padding: 1.6rem clamp(1.5rem, 4vw, 4rem) 0; }
+.dx-side-brand { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin: 0 0 1.6rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border); }
+.dx-side-logo { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text); text-decoration: none; }
+.dx-side-logo img { height: 26px; width: auto; display: block; }
+.dx-side-logo span { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-3); }
+.dx-side-home-link { font-size: 0.8rem; color: var(--text-3); text-decoration: none; white-space: nowrap; }
+.dx-side-home-link:hover { color: var(--text); }
+.dx-main { padding: 2.4rem clamp(1.5rem, 4vw, 4rem) 0; }
+/* Thin, theme-coloured scrollbars on the docs: the rail's and the page's. */
+/* Chromium and Safari draw the ::-webkit-scrollbar rules (and Chromium drops
+   them the moment scrollbar-width is set), so the standard properties are for
+   engines without the pseudo-element only. */
+.dx-side { scrollbar-gutter: stable; }
+.dx-side::-webkit-scrollbar { width: 6px; height: 6px; }
+.dx-side::-webkit-scrollbar-track { background: transparent; }
+.dx-side::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+.dx-side::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+html.docs-html::-webkit-scrollbar { width: 8px; }
+html.docs-html::-webkit-scrollbar-track { background: transparent; }
+html.docs-html::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+html.docs-html::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+@supports not selector(::-webkit-scrollbar) {
+  .dx-side, html.docs-html { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+}
 .dx-side-toggle { display: none; }
 .dx-side-nav { display: flex; flex-direction: column; gap: 1.2rem; }
 .dx-side-home, .dx-side-link {
@@ -6952,8 +6976,9 @@ body:has(.office-page) { background: #000; }
 .dx-card-lede { color: var(--text-3); font-size: 0.85rem; line-height: 1.45; }
 
 @media (max-width: 900px) {
-  .dx .dx-shell { grid-template-columns: 1fr; gap: 0; padding-top: 5.2rem; }
-  .dx-side { position: static; max-height: none; overflow: visible; border-right: 0; padding: 0 1.25rem; }
+  .dx .dx-shell { grid-template-columns: 1fr; gap: 0; padding-top: 0; }
+  .dx-side { position: static; max-height: none; overflow: visible; border-right: 0; padding: 1rem 1.25rem 0; }
+  .dx-side-brand { margin-bottom: 0.9rem; }
   .dx-main { padding: 1rem 1.25rem 0; }
   .dx-side-toggle {
     display: inline-flex; align-items: center; gap: 0.5rem;

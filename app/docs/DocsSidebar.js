@@ -11,6 +11,13 @@ export default function DocsSidebar({ groups }) {
   useEffect(() => { setOpen(false); }, [path]);
   return (
     <aside className={`dx-side ${open ? 'open' : ''}`}>
+      <div className="dx-side-brand">
+        <a href="/docs" className="dx-side-logo" aria-label="Glyphh Docs">
+          <img src="/glyphh-logo-black.png" alt="Glyphh" />
+          <span>Docs</span>
+        </a>
+        <a href="/" className="dx-side-home-link">&larr; glyphh.ai</a>
+      </div>
       <button type="button" className="dx-side-toggle" onClick={() => setOpen(!open)} aria-expanded={open}>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" /></svg>
         Contents

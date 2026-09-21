@@ -1,7 +1,7 @@
-import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { GROUPS } from './content';
 import DocsSidebar from './DocsSidebar';
+import DocsHtmlClass from './DocsHtmlClass';
 
 export const metadata = {
   title: { default: 'Glyphh Docs', template: '%s — Glyphh Docs' },
@@ -11,7 +11,7 @@ export const metadata = {
 export default function DocsLayout({ children }) {
   return (
     <div className="office-page dx">
-      <Nav />
+      <DocsHtmlClass />
       <div className="container dx-shell">
         <DocsSidebar groups={GROUPS} />
         <main className="dx-main">{children}</main>
