@@ -6758,15 +6758,27 @@ body:has(.office-page) { background: #000; }
    desktop's error-page cousins. dx-* is the whole namespace.
    ═══════════════════════════════════════════════════════════════════ */
 .dx { background: var(--bg); min-height: 100vh; }
-.dx-shell {
+/* Docs read like a docs site (his order, 2026-09-20): the rail sits at the far
+   left edge with its own border and the page runs full width; the article keeps
+   a reading measure but starts right beside the rail. */
+.dx .dx-shell {
   display: grid;
-  grid-template-columns: 236px minmax(0, 1fr);
-  gap: 3rem;
-  padding-top: 6.5rem;
-  padding-bottom: 5rem;
+  grid-template-columns: 264px minmax(0, 1fr);
+  gap: 0;
+  max-width: none;
+  margin: 0;
+  padding: 5.5rem 0 5rem;
   align-items: start;
 }
-.dx-side { position: sticky; top: 5.5rem; }
+.dx-side {
+  position: sticky;
+  top: 5.5rem;
+  max-height: calc(100vh - 5.5rem);
+  overflow-y: auto;
+  padding: 1.6rem 1rem 2rem clamp(1rem, 2vw, 1.75rem);
+  border-right: 1px solid var(--border);
+}
+.dx-main { padding: 1.6rem clamp(1.5rem, 4vw, 4rem) 0; }
 .dx-side-toggle { display: none; }
 .dx-side-nav { display: flex; flex-direction: column; gap: 1.2rem; }
 .dx-side-home, .dx-side-link {
@@ -6790,7 +6802,7 @@ body:has(.office-page) { background: #000; }
   color: var(--text-3);
 }
 .dx-main { min-width: 0; }
-.dx-article { max-width: 780px; }
+.dx-article { max-width: 860px; }
 .dx-eyebrow {
   display: inline-block;
   font-family: var(--font-mono);
@@ -6940,8 +6952,9 @@ body:has(.office-page) { background: #000; }
 .dx-card-lede { color: var(--text-3); font-size: 0.85rem; line-height: 1.45; }
 
 @media (max-width: 900px) {
-  .dx-shell { grid-template-columns: 1fr; gap: 1.2rem; padding-top: 5.2rem; }
-  .dx-side { position: static; }
+  .dx .dx-shell { grid-template-columns: 1fr; gap: 0; padding-top: 5.2rem; }
+  .dx-side { position: static; max-height: none; overflow: visible; border-right: 0; padding: 0 1.25rem; }
+  .dx-main { padding: 1rem 1.25rem 0; }
   .dx-side-toggle {
     display: inline-flex; align-items: center; gap: 0.5rem;
     padding: 0.5rem 0.9rem; border-radius: 8px;
