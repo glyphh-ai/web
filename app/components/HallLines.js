@@ -1,0 +1,98 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+
+/**
+ * HallLines — hover one of the hero's four cards and lines shoot from its
+ * corners toward the hall's vanishing point (his order, 2026-09-22), with
+ * square particles running down them into the distance, shrinking as they
+ * go. One canvas over the whole hero, under the copy. The lines extend over
+ * half a second and retract when the pointer leaves.
+ */
+
+const VP_Y = 0.36;       // the vanishing point, as HeroAscii places it: centred, 36% down
+const PER_LINE = 7;      // particles per line
+const rnd = (a, b) => a + Math.random() * (b - a);
+
+export default function HallLines({ selector = '.oshero-points li' }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const canvas = ref.current;
+    if (!canvas) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const host = canvas.parentElement;
+    const ctx = canvas.getContext('2d');
+    let w = 0, h = 0, raf = 0, last = 0;
+    const cards = [...host.querySelectorAll(selector)].map((el) => ({ el, heat: 0, hot: false, rect: null, seed: Math.random() * 10 }));
+
+    const measure = () => {
+      const r = host.getBoundingClientRect();
+      w = r.width; h = r.height;
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      for (const c of cards) {
+        const b = c.el.getBoundingClientRect();
+        c.rect = { x: b.left - r.left, y: b.top - r.top, w: b.width, h: b.height };
+      }
+    };
+
+    const step = (now) => {
+      const t = now / 1000;
+      const dt = last ? Math.min(0.05, t - last) : 0.016;
+      last = t;
+      ctx.clearRect(0, 0, w, h);
+      const vp = { x: w / 2, y: h * VP_Y };
+      let alive = false;
+      for (const c of cards) {
+        c.heat += ((c.hot ? 1 : 0) - c.heat) * (c.hot ? 0.14 : 0.08);
+        if (c.heat < 0.01 || !c.rect) continue;
+        alive = true;
+        const { x, y, w: cw, h: ch } = c.rect;
+        const corners = [[x, y], [x + cw, y], [x, y + ch], [x + cw, y + ch]];
+        // the lines grow toward the vanishing point with the heat
+        const reach = Math.min(1, c.heat * 1.15) * 0.92;   // stop just short of the point
+        corners.forEach(([px, py], ci) => {
+          const ex = px + (vp.x - px) * reach, ey = py + (vp.y - py) * reach;
+          const g = ctx.createLinearGradient(px, py, ex, ey);
+          g.addColorStop(0, `rgba(176, 102, 255, ${(0.7 * c.heat).toFixed(3)})`);
+          g.addColorStop(0.6, `rgba(214, 172, 255, ${(0.35 * c.heat).toFixed(3)})`);
+          g.addColorStop(1, 'rgba(255, 255, 255, 0)');
+          ctx.strokeStyle = g;
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(ex, ey); ctx.stroke();
+          // particles run the line toward the point and shrink into the distance
+          for (let k = 0; k < PER_LINE; k++) {
+            const s = ((t * (0.45 + 0.1 * ((k + ci) % 3)) + k / PER_LINE + c.seed) % 1);
+            if (s > reach) continue;
+            const qx = px + (vp.x - px) * s, qy = py + (vp.y - py) * s;
+            const size = Math.max(1, Math.round(4 * (1 - s) + 1));
+            const white = s > 0.55;
+            const a = c.heat * (s < 0.08 ? s / 0.08 : 1 - Math.pow(s, 3));
+            ctx.fillStyle = white ? `rgba(255, 255, 255, ${a.toFixed(3)})` : `rgba(214, 172, 255, ${a.toFixed(3)})`;
+            ctx.fillRect(Math.round(qx - size / 2), Math.round(qy - size / 2), size, size);
+          }
+        });
+      }
+      if (alive || cards.some((c) => c.hot)) raf = requestAnimationFrame(step);
+      else { raf = 0; ctx.clearRect(0, 0, w, h); }
+    };
+    const start = () => { if (!raf) { last = 0; raf = requestAnimationFrame(step); } };
+
+    const offs = cards.map((c) => {
+      const enter = () => { measure(); c.hot = true; start(); };
+      const leave = () => { c.hot = false; start(); };
+      c.el.addEventListener('pointerenter', enter);
+      c.el.addEventListener('pointerleave', leave);
+      return () => { c.el.removeEventListener('pointerenter', enter); c.el.removeEventListener('pointerleave', leave); };
+    });
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(host);
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); offs.forEach((f) => f()); };
+  }, [selector]);
+
+  return <canvas ref={ref} className="oshero-hall" aria-hidden="true" />;
+}
