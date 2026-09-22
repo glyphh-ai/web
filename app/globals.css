@@ -8464,3 +8464,12 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 .pl-core-title { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); }
 .pl-core-sub { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.04em; color: var(--text-3); max-width: 14ch; line-height: 1.4; }
 @media (max-width: 760px) { .pl-wrap { --gut: 44px; } .pl-core { display: none; } }
+
+/* The centre square is bigger than the gutter, so the four planes overlap its
+   corners; the planes sit above it, the arrows above them. */
+.pl-sq { z-index: 2; }
+.pl-arrow { z-index: 3; }
+.pl-core { z-index: 1; width: 320px; height: 320px; }
+.pl-core img { width: 64px; height: 64px; }
+.pl-core-title { font-size: 0.8rem; }
+.pl-core-sub { font-size: 0.68rem; }
