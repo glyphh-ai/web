@@ -148,25 +148,26 @@ export default async function Pricing() {
   });
 
   return (
-    <section className="pricing" id="pricing">
-      <div className="container">
-        <h2 className="section-title">Simple, transparent pricing</h2>
-        <p className="section-subtitle">
-          A plan&rsquo;s price is its monthly budget, dollar for dollar. That
-          budget is your usage limit for what Glyphh runs for you. Your AI runs
-          on your own keys at your vendor&rsquo;s price, and every charge is
-          itemized in your usage feed.
-        </p>
-
-        <PricingCards tiers={tiers} salesEmail={SALES_EMAIL} platformUrl={PLATFORM_URL} />
-
-        <p className="pricing-footnote reveal">
-          Each plan&rsquo;s budget is its monthly limit. Spend it and calls through Glyphh pause until you add
-          funds or the month turns. Plan budget resets every month; funds you add never expire. Cancel
-          anytime. See our <a href="/terms">Terms of Use</a>.
-        </p>
-        <p className="pricing-tax">Prices are exclusive of applicable taxes and duties, including VAT and applicable sales tax.</p>
+    <section className="ix-section" id="pricing">
+      <div className="ix-section-head">
+        <div>
+          <span className="qs-kicker">Plans</span>
+          <h2 className="ix-h2">A plan&rsquo;s price is its monthly budget.</h2>
+          <p className="ix-desc">
+            That budget is your usage limit for what Glyphh runs for you. Your AI runs on your own keys at your
+            vendor&rsquo;s price, and every charge is itemized in your usage feed.
+          </p>
+        </div>
       </div>
+
+      <PricingCards tiers={tiers} salesEmail={SALES_EMAIL} platformUrl={PLATFORM_URL} />
+
+      <p className="pp-note">
+        Each plan&rsquo;s budget is its monthly limit. Spend it and calls through Glyphh pause until you add funds or
+        the month turns. Plan budget resets every month; funds you add never expire. Cancel anytime. See our{' '}
+        <a href="/terms">Terms of Use</a>. Prices are exclusive of applicable taxes and duties, including VAT and
+        applicable sales tax.
+      </p>
     </section>
   );
 }
