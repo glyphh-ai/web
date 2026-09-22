@@ -8519,3 +8519,84 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 .pl-arrow i { width: var(--size, 4px); height: var(--size, 4px); box-shadow: 0 0 var(--glow, 6px) var(--accent-glow); }
 .pl-right i, .pl-left i { top: calc(var(--size, 4px) / -2 + var(--jit, 0px)); }
 .pl-down i, .pl-up i { left: calc(var(--size, 4px) / -2 + var(--jit, 0px)); }
+
+/* Particles back on the line — one size, no scatter. */
+.pl-arrow i { width: 4px; height: 4px; box-shadow: 0 0 6px var(--accent-glow); }
+.pl-right i, .pl-left i { top: -1.5px; }
+.pl-down i, .pl-up i { left: -1.5px; }
+
+/* The tiny cubes that emit off the line: 2px, dim, they ride along and drift off
+   at right angles while they fade. Same start points as the particles. */
+.pl-arrow b {
+  position: absolute; width: 2px; height: 2px; background: var(--accent-light); opacity: 0;
+  animation: pl-emit 2.4s linear infinite;
+}
+.pl-right b { top: -0.5px; left: 0; --dx: var(--gut); --dy: 0px; }
+.pl-down b { left: -0.5px; top: 0; --dx: 0px; --dy: var(--gut); }
+.pl-left b { top: -0.5px; left: var(--gut); --dx: calc(var(--gut) * -1); --dy: 0px; }
+.pl-up b { left: -0.5px; top: var(--gut); --dx: 0px; --dy: calc(var(--gut) * -1); }
+@keyframes pl-emit {
+  0% { transform: translate(0, 0); opacity: 0; }
+  15% { opacity: 0.9; }
+  70% { opacity: 0.35; }
+  100% { transform: translate(calc(var(--dx) + var(--ex, 0px)), calc(var(--dy) + var(--ey, 0px))); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .pl-arrow b { animation: none; } }
+
+/* Hover a plane and purple fire licks up from behind it: layered shadows
+   flickering upward, behind the square's own face. */
+.pl-sq { transition: border-color 0.2s ease, box-shadow 0.35s ease; }
+.pl-sq:hover {
+  border-color: var(--accent);
+  animation: pl-fire 1.1s ease-in-out infinite alternate;
+}
+@keyframes pl-fire {
+  0% {
+    box-shadow:
+      0 -6px 22px 2px rgba(176, 102, 255, 0.35),
+      0 -18px 46px 8px rgba(176, 102, 255, 0.22),
+      -12px -34px 70px 10px rgba(140, 59, 242, 0.14),
+      14px -28px 64px 8px rgba(214, 172, 255, 0.10);
+  }
+  50% {
+    box-shadow:
+      0 -10px 28px 4px rgba(176, 102, 255, 0.42),
+      6px -26px 54px 10px rgba(176, 102, 255, 0.24),
+      -18px -44px 84px 14px rgba(140, 59, 242, 0.16),
+      10px -40px 76px 10px rgba(214, 172, 255, 0.12);
+  }
+  100% {
+    box-shadow:
+      0 -8px 24px 3px rgba(176, 102, 255, 0.38),
+      -8px -22px 50px 9px rgba(176, 102, 255, 0.20),
+      -10px -38px 78px 12px rgba(140, 59, 242, 0.15),
+      18px -32px 70px 9px rgba(214, 172, 255, 0.11);
+  }
+}
+@media (prefers-reduced-motion: reduce) { .pl-sq:hover { animation: none; box-shadow: 0 -8px 30px 4px rgba(176, 102, 255, 0.3); } }
+.pl-arrow b { width: var(--cs, 2px); height: var(--cs, 2px); }
+
+/* The fire is on the edge now: a hot segment racing round the border with a
+   flicker, and only a faint glow behind. */
+@property --pl-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.pl-sq:hover { animation: none; box-shadow: 0 0 26px 2px rgba(176, 102, 255, 0.16); }
+.pl-sq > :not(.lf) { z-index: 2; }
+.pl-sq::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 1;
+  padding: 2px;
+  background: conic-gradient(from var(--pl-a),
+    transparent 0deg, transparent 240deg,
+    rgba(176, 102, 255, 0.35) 285deg, rgba(214, 172, 255, 0.95) 325deg, #fff 340deg, rgba(176, 102, 255, 0.35) 352deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.pl-sq:hover::before { opacity: 1; animation: pl-ring 1.6s linear infinite, pl-flicker 0.28s steps(2) infinite; }
+@keyframes pl-ring { to { --pl-a: 360deg; } }
+@keyframes pl-flicker { 50% { filter: brightness(1.35) drop-shadow(0 0 4px rgba(214, 172, 255, 0.9)); } }
+@media (prefers-reduced-motion: reduce) { .pl-sq:hover::before { animation: none; } }

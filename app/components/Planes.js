@@ -44,24 +44,27 @@ const LOOPS = [
   { name: 'Cursor', domain: 'cursor.com' },
 ];
 
-// `n` particles spread evenly along the 2.4s run, and a `level` that grows round
-// the loop: bigger particles, more scatter off the line, a wider glow — the
-// signal gets louder and noisier with every step.
+// `n` particles ride the line, spread evenly along the 2.4s run. `level` grows
+// round the loop and sets how many tiny cubes emit off the line as they go —
+// they start on it and drift away at right angles, fading.
 function Arrow({ dir, n = 3, level = 1 }) {
+  const horizontal = dir === 'right' || dir === 'left';
+  const emits = level * 4;                                              // 4, 8, 12, 16 round the loop
   return (
     <div className={`pl-arrow pl-${dir}`} aria-hidden="true">
-      {Array.from({ length: n }, (_, k) => {
-        const size = 3 + level * 0.9 + ((k * 7) % 3) * 0.4 * level;      // px
-        const jit = (((k * 7919) % 11) - 5) * 0.7 * level;              // px off the line
-        const glow = 4 + level * 3;                                     // px
+      {Array.from({ length: n }, (_, k) => <i key={k} style={{ animationDelay: `${(-2.4 * k / n).toFixed(2)}s` }} />)}
+      {Array.from({ length: emits }, (_, k) => {
+        const side = k % 2 ? 1 : -1;
+        const drift = (7 + level * 5 + ((k * 7919) % 8)) * side;        // px, off the line — farther each step
+        const ex = horizontal ? 0 : drift, ey = horizontal ? drift : 0;
         return (
-          <i
+          <b
             key={k}
             style={{
-              animationDelay: `${(-2.4 * k / n).toFixed(2)}s`,
-              '--size': `${size.toFixed(1)}px`,
-              '--jit': `${jit.toFixed(1)}px`,
-              '--glow': `${glow}px`,
+              animationDelay: `${(-2.4 * ((k * 0.618) % 1)).toFixed(2)}s`,
+              '--ex': `${ex}px`,
+              '--ey': `${ey}px`,
+              '--cs': `${(2 + level * 0.4).toFixed(1)}px`,                 // the cube, a shade bigger each step
             }}
           />
         );
