@@ -8621,3 +8621,35 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 .pl-wrap:has(.pl-core:hover)::before { opacity: 1; animation: pl-ring 3.2s linear infinite, pl-flicker 0.28s steps(2) infinite; }
 .pl-core { pointer-events: auto; }
 @media (prefers-reduced-motion: reduce) { .pl-wrap:has(.pl-core:hover)::before { animation: none; } }
+
+/* ── The border flame on hover, everywhere a card can be hovered ─────────
+   How it works tiles, the Quick Start terminal, the video frame, the
+   Integrations and Pricing cards, the Research tiles: the same hot segment
+   racing the edge with a flicker that the planes have. */
+.hv-tile, .ix-card, .term, .hv-video .dv-shot { position: relative; }
+.hv-tile::before, .ix-card::before, .term::before, .hv-video .dv-shot::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 1;
+  padding: 2px;
+  background: conic-gradient(from var(--pl-a),
+    transparent 0deg, transparent 240deg,
+    rgba(176, 102, 255, 0.35) 285deg, rgba(214, 172, 255, 0.95) 325deg, #fff 340deg, rgba(176, 102, 255, 0.35) 352deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.hv-tile:hover::before, .ix-card:hover::before, .term:hover::before, .hv-video .dv-shot:hover::before {
+  opacity: 1;
+  animation: pl-ring 1.6s linear infinite, pl-flicker 0.28s steps(2) infinite;
+}
+.hv-video .dv-shot:hover::before { animation-duration: 3.2s, 0.28s; }
+/* content above the ring */
+.ix-card > *, .term > * { position: relative; z-index: 2; }
+.hv-video .dv-shot > * { position: relative; z-index: 2; }
+@media (prefers-reduced-motion: reduce) {
+  .hv-tile:hover::before, .ix-card:hover::before, .term:hover::before, .hv-video .dv-shot:hover::before { animation: none; }
+}
