@@ -199,6 +199,75 @@ const agent = [
     ),
   },
   {
+    slug: 'cli',
+    title: 'The Glyphh CLI',
+    lede: 'Install the glyphh command, sign in to your org, and run the loop in any terminal.',
+    mascot: 'byte',
+    body: (
+      <>
+        <p>
+          The <code>glyphh</code> command is the Glyphh loop in your terminal: the same engine the desktop&rsquo;s
+          Agent panel runs, on your organization&rsquo;s gateway, on any model the org allows. It signs in to your
+          org on its first screen and keeps one conversation history with the desktop.
+        </p>
+        <h2>Install</h2>
+        <p>It is an npm package. You need Node.js 18 or newer.</p>
+        <Code lang="bash">{`npm i -g @glyphh-ai/cli
+glyphh`}</Code>
+        <p>
+          The desktop offers the same line when it cannot find <code>glyphh</code> on your machine, so a member who
+          picks the Glyphh loop and has no CLI yet is shown exactly this.
+        </p>
+        <h2>Sign in</h2>
+        <p>
+          The first screen is a device login. Open the link it prints, sign in with your Glyphh account, and the
+          terminal picks up the session. It lives in <code>~/.glyphh/session.json</code>, separate from the
+          desktop&rsquo;s own login, so signing out of one does not sign out the other.
+        </p>
+        <Note kind="wire" title="The gateway has to be on">
+          The Glyphh loop runs on the gateway and nowhere else. If your org has not enabled it, the CLI signs in
+          and then tells you so. An org admin turns it on under Settings &rarr; Organization in the console.
+        </Note>
+        <h2>The first run in a folder</h2>
+        <p>
+          Like the other agent CLIs, <code>glyphh</code> asks once whether it may work in the folder you started it
+          in. Answer yes and it remembers; <code>--trust</code> skips the question for scripts and launchers.
+        </p>
+        <h2>Day to day</h2>
+        <Row k="/model">Pick a model from the org&rsquo;s roster with the arrow keys or a number</Row>
+        <Row k="/permissions">Default, accept edits, plan, or bypass. Shift+Tab cycles the first three</Row>
+        <Row k="/resume">Reopen an earlier conversation, yours from the desktop included</Row>
+        <Row k="--continue">Start on your most recent conversation</Row>
+        <Row k="--resume <id>">Start on one conversation by id</Row>
+        <Row k="--model <name>">Start on a model</Row>
+        <Row k="--permission <mode>">Start in a permission mode: default, acceptEdits, plan, bypass</Row>
+        <p>
+          Type <code>/</code> for the command menu; <code>?</code> on an empty line is help. Ctrl+C clears the
+          line, and a second press within two seconds quits.
+        </p>
+        <h2>One history with the desktop</h2>
+        <p>
+          Conversations are stored per user under <code>~/.glyphh/users/</code>, the same file the desktop reads.
+          A chat you start in the terminal shows in the desktop&rsquo;s left rail; switch to the Glyphh view on
+          the desktop and the conversation is there, and the desktop can hand the same chat back to a terminal.
+        </p>
+        <h2>Your own server</h2>
+        <p>
+          The CLI talks to <code>https://api.glyphh.ai</code>. To point it elsewhere set{' '}
+          <code>GLYPHH_SERVER_URL</code>, or write a <code>server</code> field in{' '}
+          <code>~/.glyphh/config.json</code>. <code>/config</code> shows which one is in effect.
+        </p>
+        <h2>Update and remove</h2>
+        <Code lang="bash">{`npm i -g @glyphh-ai/cli@latest   # update
+npm rm -g @glyphh-ai/cli          # remove`}</Code>
+        <p>
+          To keep Claude Code or Codex and point it at the gateway instead, see{' '}
+          <a href="/docs/own-cli">Use your own CLI</a>.
+        </p>
+      </>
+    ),
+  },
+  {
     slug: 'models',
     title: 'Models',
     lede: 'Where the model list comes from and how the picker resolves.',
