@@ -8316,7 +8316,7 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 @media (max-width: 860px) { .dx-mock-pair, .dx-mock-trio { grid-template-columns: 1fr; } }
 
 /* ── Pricing, in the frame ─────────────────────────────────────────────── */
-.pp-card { display: flex; flex-direction: column; padding: 1.5rem 1.4rem 1.6rem; }
+.pp-card { display: flex; flex-direction: column; padding: 1.75rem 1.6rem 1.9rem; }
 .pp-card-popular { background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--accent); }
 .pp-card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.5rem; }
 .pp-plan { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-light); }
@@ -8325,11 +8325,11 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 .pp-price { margin: 0 0 1.1rem; }
 .pp-price b { display: block; font-size: 2rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; color: var(--text); }
 .pp-price span { display: block; margin-top: 0.25rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--text-3); }
-.pp-features { list-style: none; margin: 1.25rem 0 0; padding: 1.1rem 0 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.55rem; }
+.pp-features { list-style: none; margin: 1.5rem 0 0; padding: 1.25rem 0 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.65rem; }
 .pp-features li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.86rem; line-height: 1.5; color: var(--text-2); }
 .pp-lead { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.2rem; }
 .pp-check { font-family: var(--font-mono); color: var(--accent-light); flex: none; }
-.pp-note { margin: 1.25rem 0 0; font-family: var(--font-mono); font-size: 0.74rem; line-height: 1.6; color: var(--text-3); max-width: 90ch; }
+.pp-note { margin: 1.25rem 0 0; font-family: var(--font-mono); font-size: 0.74rem; line-height: 1.6; color: var(--text-3); }
 .pp-note a { color: var(--text-2); }
 .pp-faq { margin: 0; border: 1px solid var(--border); background: var(--surface); }
 .pp-faq-row { display: grid; grid-template-columns: 1fr 1.4fr; gap: 1.5rem; padding: 1rem 1.3rem; border-bottom: 1px solid var(--border); }
@@ -8338,3 +8338,29 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 .pp-faq dd { margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
 .pp-close { margin-top: 0; padding-top: 0; border-top: 0; }
 @media (max-width: 900px) { .pp-faq-row { grid-template-columns: 1fr; gap: 0.4rem; } }
+/* Enterprise: a band under the self-serve grid — plan + blurb | bullets in
+   two columns | the door — because a sales tier has no figure to line up. */
+.pp-band {
+  display: grid;
+  grid-template-columns: minmax(200px, 0.9fr) 2fr auto;
+  gap: 2.5rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding: 1.75rem 1.6rem 1.9rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.pp-band-head .pp-plan { display: block; margin-bottom: 0.5rem; }
+.pp-band-head .pp-desc { margin: 0 0 0.4rem; min-height: 0; }
+.pp-band-sub { margin: 0; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--text-3); }
+.pp-band-features { margin: 0; padding: 0; border-top: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem 1.5rem; }
+.pp-band-features .pp-lead { grid-column: 1 / -1; }
+.pp-band-cta { white-space: nowrap; }
+@media (max-width: 900px) {
+  .pp-grid.ix-grid-3 { grid-template-columns: 1fr; }
+  .pp-grid.ix-grid-3 .ix-card { border-right: 0; border-bottom: 1px solid var(--border); }
+  .pp-grid.ix-grid-3 .ix-card:last-child { border-bottom: 0; }
+  .pp-band { grid-template-columns: 1fr; gap: 1.25rem; }
+  .pp-band-features { grid-template-columns: 1fr; }
+  .pp-band-cta { justify-self: start; }
+}
