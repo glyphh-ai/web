@@ -2,7 +2,7 @@
 
 /**
  * AppMarquee — the favicon wall as a slim two-row band directly under the
- * hero (moved up from /products/desktop). Continuous scroll, paused on
+ * home hero (his order, 2026-09-21: between the hero and the callout). Continuous scroll, paused on
  * hover; a static wrap-grid under prefers-reduced-motion (the duplicate
  * set used for the seamless loop is hidden there).
  *
@@ -33,7 +33,6 @@ const APPS_ROW2 = [
   { name: 'Gemini', domain: 'gemini.google.com' },
   { name: 'Mistral', domain: 'chat.mistral.ai' },
   { name: 'Discord', domain: 'discord.com' },
-  { name: 'Zapier', domain: 'zapier.com' },
   { name: 'Asana', domain: 'asana.com' },
   { name: 'Airtable', domain: 'airtable.com' },
   { name: 'Dropbox', domain: 'dropbox.com' },
@@ -46,6 +45,26 @@ const APPS_ROW2 = [
   { name: 'Canva', domain: 'canva.com' },
   { name: 'Miro', domain: 'miro.com' },
   { name: 'Sentry', domain: 'sentry.io' },
+];
+
+// Row 3 (his order, 2026-09-21): the integration platforms, reached over MCP.
+const APPS_ROW3 = [
+  { name: 'Zapier', domain: 'zapier.com' },
+  { name: 'Make', domain: 'make.com' },
+  { name: 'n8n', domain: 'n8n.io' },
+  { name: 'Boomi', domain: 'boomi.com' },
+  { name: 'Workato', domain: 'workato.com' },
+  { name: 'Pipedream', domain: 'pipedream.com' },
+  { name: 'MuleSoft', domain: 'mulesoft.com' },
+  { name: 'Power Automate', domain: 'powerautomate.microsoft.com' },
+  { name: 'Tray', domain: 'tray.ai' },
+  { name: 'Celigo', domain: 'celigo.com' },
+  { name: 'SnapLogic', domain: 'snaplogic.com' },
+  { name: 'Jitterbit', domain: 'jitterbit.com' },
+  { name: 'Activepieces', domain: 'activepieces.com' },
+  { name: 'Pabbly', domain: 'pabbly.com' },
+  { name: 'Integrately', domain: 'integrately.com' },
+  { name: 'Relay.app', domain: 'relay.app' },
 ];
 
 function MarqueeRow({ apps, direction }) {
@@ -92,8 +111,13 @@ export default function AppMarquee() {
       <div className="scroll-rows marquee-rows">
         <MarqueeRow apps={APPS_ROW1} direction="scroll-left" />
         <MarqueeRow apps={APPS_ROW2} direction="scroll-right" />
+        <MarqueeRow apps={APPS_ROW3} direction="scroll-left" />
       </div>
-      <p className="marquee-cap">3,500+ apps, connected once.</p>
+      {/* His copy, 2026-09-21: the scroller sits between the hero and the callout. */}
+      <p className="marquee-cap">
+        3,500+ connected services &mdash; and your integration platforms, from Zapier and Make
+        to n8n, Boomi, and Workato, over MCP. Shared with your team, governed by your admins.
+      </p>
     </section>
   );
 }

@@ -7054,3 +7054,176 @@ html.docs-html::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 .pricing-card-ledger .pricing-features { margin: 0.25rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--border); }
 .pricing-card-ledger .pricing-features .pricing-lead { color: var(--text); font-weight: 600; padding-bottom: 0.4rem; }
 @media (max-width: 720px) { .pricing-card-ledger .pricing-desc { min-height: 0; } }
+
+/* ════ GLYPHH CODE product page (/products/code) — gcx-* (2026-09-21) ════
+   Studios reuse od-studio + gwm-*. This block adds the lane switch, the two
+   screenshot stand-ins (mockups until the real images land), the drawn
+   terminal, and the small bits the strategy + relay mocks need. */
+
+/* — section headers that sit between product bands: tighter than od-extract — */
+.gcx-band { padding: 5rem 0 0; }
+.gcx-band .section-subtitle { margin-bottom: 0; }
+.gcx-relay-band { padding-top: 0; }
+/* a <pre> in a mock must scroll inside its grid cell, never widen it */
+.gcx-page .op-prod-mock, .gcx-page .op-prod-copy { min-width: 0; }
+.gcx-page .od-contract { max-width: min(520px, 100%); }
+
+/* — the lane switch (od-contract chrome, two big tabs) — */
+.gcx-lane { max-width: 520px; }
+.gcx-lane-tabs { display: flex; gap: 6px; padding: 8px 10px; border-bottom: 1px solid #232328; background: #131317; }
+.gcx-lane-tab {
+  flex: 1; font-family: var(--font-mono); font-size: 11px; padding: 7px 10px;
+  border-radius: 8px; border: 1px solid transparent; color: #8b8b95; background: transparent; cursor: pointer;
+}
+.gcx-lane-tab:hover { color: #e8e8ee; }
+.gcx-lane-tab.active { color: #fff; background: rgba(175, 95, 255, 0.18); border-color: rgba(175, 95, 255, 0.4); }
+.gcx-lane-note { padding: 0 16px 14px; font-size: 11px; color: #8b8b95; }
+.gcx-lane-note em { font-style: normal; color: #4d4d56; }
+
+/* — screenshot stand-ins: a 16:9 frame in the dv-shot footprint — */
+.gcx-shot {
+  position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border); background: #0b0b0e;
+  margin-top: clamp(1.6rem, 3vw, 2.6rem);
+  font-family: var(--font-sans); text-align: left;
+}
+.gcx-shot-tag {
+  position: absolute; right: 10px; top: 10px; z-index: 2;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #6f6f79; border: 1px solid #2a2a30; border-radius: 100px; padding: 3px 8px;
+  background: rgba(11, 11, 14, 0.85);
+}
+.gcx-desk { position: absolute; inset: 0; display: grid; grid-template-columns: 40px 1fr 1.1fr; grid-template-rows: minmax(0, 1fr); }
+.gcx-rail { border-right: 1px solid #1e1e23; display: flex; flex-direction: column; align-items: center; gap: 10px; padding-top: 12px; background: #0e0e12; }
+.gcx-rail i { width: 18px; height: 18px; border-radius: 6px; background: #1f1f25; }
+.gcx-rail i.on { background: var(--accent); }
+.gcx-pane { display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden; }
+.gcx-pane + .gcx-pane { border-left: 1px solid #1e1e23; }
+.gcx-pane-bar {
+  display: flex; align-items: center; gap: 6px; padding: 7px 10px;
+  border-bottom: 1px solid #1e1e23; font-size: 9px; color: #8b8b95; white-space: nowrap; overflow: hidden;
+}
+.gcx-pane-bar b { color: #e8e8ee; font-weight: 650; }
+.gcx-pane-bar .gcx-pill { margin-left: auto; }
+.gcx-pill {
+  font-family: var(--font-mono); font-size: 8.5px; color: #c9a8ff;
+  border: 1px solid rgba(175, 95, 255, 0.4); border-radius: 100px; padding: 1px 7px; white-space: nowrap;
+}
+.gcx-pill.dim { color: #8b8b95; border-color: #2a2a30; }
+.gcx-lines { padding: 10px; display: flex; flex-direction: column; gap: 6px; flex: 1; min-height: 0; overflow: hidden; }
+.gcx-lines > * { flex: none; }
+.gcx-line { display: block; height: 5px; border-radius: 3px; background: #232329; width: var(--w, 80%); }
+.gcx-line.me { background: #3a2a55; align-self: flex-end; }
+.gcx-line.code { background: #1c2a3a; }
+.gcx-line.code.k { background: #2a3a1c; }
+.gcx-tool { font-family: var(--font-mono); font-size: 8.5px; color: #8b8b95; display: flex; gap: 6px; align-items: center; white-space: nowrap; overflow: hidden; }
+.gcx-tool::before { content: '✓'; color: #4ade80; }
+.gcx-tool.edit::before { content: '✎'; color: #c9a8ff; }
+.gcx-composer {
+  margin: auto 10px 10px; border: 1px solid #2a2a30; border-radius: 8px; padding: 7px 9px;
+  font-size: 9px; color: #6f6f79; display: flex; justify-content: space-between; gap: 8px; background: #101014;
+}
+.gcx-composer b { color: #c9a8ff; font-weight: 600; font-family: var(--font-mono); font-size: 8.5px; }
+
+/* — the terminal (the CLI, drawn). Shared by TerminalShot and TerminalMock — */
+.gcx-term {
+  border-radius: 14px; overflow: hidden; border: 1px solid var(--border-2); background: #0b0b0e;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-mono); font-size: 11px; color: #c9c9d2; max-width: 520px; width: 100%; margin: 0 auto;
+}
+.gcx-shot-term { display: flex; flex-direction: column; font-family: var(--font-mono); font-size: 10.5px; color: #c9c9d2; }
+.gcx-term-bar {
+  display: flex; align-items: center; gap: 6px; padding: 8px 12px;
+  border-bottom: 1px solid #1e1e23; background: #101014; font-size: 10px; color: #6f6f79;
+}
+.gcx-term-bar i { width: 9px; height: 9px; border-radius: 50%; }
+.gcx-term-bar i:nth-child(1) { background: #ff5f57; }
+.gcx-term-bar i:nth-child(2) { background: #febc2e; }
+.gcx-term-bar i:nth-child(3) { background: #28c840; }
+.gcx-term-bar span { margin-left: 8px; }
+.gcx-term-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 5px; min-height: 230px; line-height: 1.5; }
+.gcx-term-body-shot { flex: 1; min-height: 0; overflow: hidden; -webkit-mask-image: linear-gradient(#000 72%, transparent); mask-image: linear-gradient(#000 72%, transparent); }
+.gcx-term-body code { font-family: inherit; color: #c9a8ff; }
+.gcx-t-logo { color: #c9a8ff; font-weight: 700; letter-spacing: 0.06em; }
+.gcx-t-logo .gcx-t-dim { font-weight: 400; letter-spacing: 0; }
+.gcx-t-dim { color: #6f6f79; }
+.gcx-t-you { color: #f0f0f4; }
+.gcx-t-you::before { content: '› '; color: #c9a8ff; }
+.gcx-t-tool { color: #8b8b95; padding-left: 14px; }
+.gcx-t-tool.ok::before { content: '✓ '; color: #4ade80; }
+.gcx-t-tool.edit::before { content: '✎ '; color: #c9a8ff; }
+.gcx-t-tool.run::before { content: '$ '; color: #e5a50a; }
+.gcx-t-ai { color: #c9c9d2; }
+.gcx-t-cursor::after { content: '▍'; color: #c9a8ff; animation: gcx-blink 1s steps(2) infinite; }
+@keyframes gcx-blink { to { opacity: 0; } }
+.gcx-term-foot {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 7px 12px; border-top: 1px solid #1e1e23; font-size: 10px; color: #8b8b95; background: #0e0e12;
+}
+.gcx-term-foot button { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; }
+.gcx-term-foot button:hover { color: #f0f0f4; }
+.gcx-term-foot .mode.bypass { color: #ff7b86; }
+.gcx-term-foot .model { color: #c9a8ff; }
+.gcx-term-foot .faint { color: #4d4d56; }
+.gcx-picker { border: 1px solid #2a2a30; border-radius: 8px; background: #101014; padding: 6px; margin-top: 6px; display: flex; flex-direction: column; gap: 2px; }
+.gcx-picker .gcx-t-dim { padding: 2px 8px 4px; font-size: 10px; }
+.gcx-picker button {
+  text-align: left; background: none; border: 0; padding: 4px 8px; border-radius: 6px;
+  font: inherit; color: #c9c9d2; cursor: pointer; display: flex; justify-content: space-between; gap: 10px;
+}
+.gcx-picker button:hover, .gcx-picker button.active { background: rgba(175, 95, 255, 0.16); color: #fff; }
+.gcx-picker button em { font-style: normal; color: #6f6f79; }
+
+/* — strategy mock — */
+.gcx-prompts { display: flex; flex-direction: column; gap: 4px; }
+.gcx-prompts .gwm-row.gcx-on { border-color: rgba(175, 95, 255, 0.55); background: rgba(175, 95, 255, 0.08); }
+.gcx-route {
+  display: flex; align-items: center; gap: 8px; margin-top: 2px; padding: 8px 10px; border-radius: 8px;
+  border: 1px solid rgba(175, 95, 255, 0.35); background: rgba(175, 95, 255, 0.08);
+  animation: gcx-in 0.25s ease both;
+}
+.gcx-route .arrow { color: #6f6f79; }
+.gcx-route b { font-family: var(--font-mono); font-size: 11px; color: #fff; font-weight: 600; }
+.gcx-why { font-size: 10px; color: #8b8b95; }
+
+/* — relay mock — */
+.gcx-frames { display: flex; flex-direction: column; gap: 3px; min-height: 60px; }
+.gcx-frame { font-family: var(--font-mono); font-size: 10px; color: #8b8b95; animation: gcx-in 0.25s ease both; }
+.gcx-frame b { color: #e8e8ee; font-weight: 600; }
+@keyframes gcx-in { from { opacity: 0; transform: translateY(3px); } }
+.gcx-dev { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.gcx-dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.18); }
+.gcx-dot.off { background: #3a3a42; box-shadow: none; }
+.gwm-btn:disabled { opacity: 0.6; cursor: default; }
+
+@media (max-width: 800px) {
+  .gcx-shot { margin-top: 0.5rem; }
+  .gcx-desk { grid-template-columns: 32px 1fr 1fr; }
+  .gcx-pill { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gcx-t-cursor::after, .gcx-route, .gcx-frame { animation: none; }
+}
+
+/* ════ Home hero, split (his order, 2026-09-21): copy left, the Router
+   marketecture right. Without .rhero-split the hero stays centered. ════ */
+.rhero-split {
+  display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3rem; align-items: center;
+}
+.rhero-split .rhero-copy { text-align: left; align-items: flex-start; max-width: none; }
+.rhero-split .rhero-title { max-width: 14ch; }
+.home-page .rhero-split .rhero-sub { text-align: left; margin-left: 0; margin-right: 0; }
+.rhero-split .rhero-ctas { justify-content: flex-start; }
+/* The stage fills its column so the flow tracks keep room for the Connect strip. */
+.rhero-side { min-width: 0; }
+.rhero-side .apx-stage { margin: 0; width: 100%; max-width: none; }
+@media (max-width: 900px) {
+  .rhero-split { grid-template-columns: 1fr; gap: 2.5rem; }
+  .rhero-split .rhero-copy { text-align: center; align-items: center; }
+  .rhero-split .rhero-title { max-width: none; }
+  .rhero-split .rhero-ctas { justify-content: center; }
+}
+
+/* The announcement pill stays on one line in the split hero's narrower column. */
+.rhero-split .rhero-copy .hero-badge { white-space: nowrap; }
+@media (max-width: 480px) { .rhero-split .rhero-copy .hero-badge { white-space: normal; } }

@@ -20,9 +20,16 @@ const nextConfig = {
         source: '/:path((?!_next/static|_next/image|favicon.ico).*)',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=0, s-maxage=0, must-revalidate' }],
       },
+      // PRODUCTION ONLY (2026-09-21): dev chunk names never change, so a
+      // year of `immutable` pinned every open tab to the first bundle it saw
+      // and no edit ever showed up without a hard refresh. Hashed prod assets
+      // keep the long cache; dev gets no-store.
       {
         source: '/_next/static/:path*',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+        headers: [{
+          key: 'Cache-Control',
+          value: process.env.NODE_ENV === 'development' ? 'no-store' : 'public, max-age=31536000, immutable',
+        }],
       },
       // Chunk stylesheets are answered by these two (middleware.js): a real
       // file is the immutable asset; the fallback bundle is never kept.
@@ -52,6 +59,8 @@ const nextConfig = {
       { source: '/products', destination: '/products/router', permanent: false },
       // Gateway became Router (his order, 2026-09-18); old links keep working.
       { source: '/products/gateway', destination: '/products/router', permanent: true },
+      // Workspace became Desktop (his order, 2026-09-21); old links keep working.
+      { source: '/products/workspace', destination: '/products/desktop', permanent: true },
       // 2026-09-11 (staying tight): Gateway is the one product page.
       { source: '/products/cloud', destination: '/', permanent: false },
       { source: '/products/office', destination: '/', permanent: false },

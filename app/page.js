@@ -4,6 +4,8 @@ import Reveal from './components/Reveal';
 import Hero from './components/Hero';
 import StoryHeads from './components/StoryHeads';
 import Mcp from './components/Mcp';
+import RouterStage from './components/RouterStage';
+import AppMarquee from './components/AppMarquee';
 import Download from './components/Download';
 import FAQ from './components/FAQ';
 import OpenSourceSection from './components/OpenSourceSection';
@@ -29,11 +31,20 @@ export default async function Home() {
     <div className="home-page">
       <Reveal />
       <Nav />
-      <Hero variant={variant} />
-      {/* THE CALLOUT (his order, 2026-09-18): Glyphh in the middle, the loops
-          on the left, Glyphh Connect above, Glyphh Router on the right. It
-          sits right under the hero because it IS the pitch, drawn. */}
-      <Mcp />
+      {/* The Router hero (his order, 2026-09-21): copy left, the marketecture
+          right. Campaign variants (/code, /work) keep the desktop stage. */}
+      <Hero
+        variant={variant}
+        stage={variant !== 'default'}
+        side={variant === 'default' ? <RouterStage className="gwx-hero-stage" style={{ margin: 0, width: '100%', maxWidth: 'none' }} /> : null}
+      />
+      {/* The connections scroller (his order, 2026-09-21): right under the
+          hero, before the callout. */}
+      <AppMarquee />
+      {/* THE CALLOUT (2026-09-18) is OFF the page (his order, 2026-09-21): its
+          stage now sits beside the hero and its four cards came off. Hidden,
+          not deleted. */}
+      {false && <Mcp />}
       {/* Then each section is a direct attack: local co-work, MCP tools for
           anything, skills that extend to tasks, semantic apps, plugins. */}
       <StoryHeads />

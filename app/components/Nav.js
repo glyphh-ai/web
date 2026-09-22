@@ -84,9 +84,13 @@ export default function Nav() {
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </a>
               <div className="nav-dd-panel">
-                <a href="/products/workspace" className="nav-dd-item">
-                  <span className="nav-dd-name">Glyphh Workspace</span>
-                  <span className="nav-dd-desc">Loops, models, apps and tools under one name. Switch in a keystroke.</span>
+                <a href="/products/code" className="nav-dd-item">
+                  <span className="nav-dd-name">Glyphh Code</span>
+                  <span className="nav-dd-desc">The coding agent and CLI. Your subscription or the router, one switch.</span>
+                </a>
+                <a href="/products/desktop" className="nav-dd-item">
+                  <span className="nav-dd-name">Glyphh Desktop</span>
+                  <span className="nav-dd-desc">The open desktop client for frontier AI. Every loop, every model, one app.</span>
                 </a>
                 <a href="/products/router" className="nav-dd-item">
                   <span className="nav-dd-name">Glyphh Router</span>
@@ -151,7 +155,8 @@ export default function Nav() {
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <span className="mobile-menu-group">Products</span>
-        <a href="/products/workspace" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Workspace</a>
+        <a href="/products/code" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Code</a>
+        <a href="/products/desktop" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Desktop</a>
         <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Router</a>
         <a href="/products/connect" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Connect</a>
         <a href="/products/skills" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Skills</a>

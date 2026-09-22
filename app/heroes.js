@@ -25,7 +25,24 @@ export const heroes = {
   // 2026-08-28). The hero tab bar is gone, so this entry is what the home
   // page actually shows; the campaign paths below still swap it.
   // Bare glyphh.ai (his copy, 2026-09-19): the open desktop client for frontier AI.
+  // Bare glyphh.ai (his copy, 2026-09-21): the AI Router for the enterprise.
+  // The desktop message that used to sit here moved to `desktop` below and
+  // fronts /products/desktop.
   default: {
+    pill: KIMI_PILL,
+    title: {
+      lead: 'The AI Router for the ',
+      accent: 'enterprise.',
+    },
+    sub:
+      'Put your whole AI stack behind one key. See who is driving spend, cap it ' +
+      'before it runs away, and send every request to the model that should handle it.',
+    cta: { label: 'Get started free', href: PLATFORM_URL },
+  },
+
+  // /products/desktop — the open desktop client for frontier AI (his copy,
+  // 2026-09-19; the home hero until 2026-09-21).
+  desktop: {
     pill: KIMI_PILL,
     title: {
       lead: 'The open desktop client for ',

@@ -1,52 +1,22 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
+import Hero from '../../components/Hero';
 import ExpandableShot from '../../components/ExpandableShot';
 import FinalCTA from '../../components/FinalCTA';
 
-// Glyphh Workspace (his order, 2026-09-19): a workspace is the intersection
-// of loops, models, apps and the MCP tools exposed. Navigating and
-// context-switching between them is the daily way of working with AI.
-// Router page grammar, direct copy.
+// Glyphh Desktop (his order, 2026-09-21): Workspace renamed to Desktop, and
+// the home page's hero until today, "The open desktop client for frontier
+// AI" with the Chat / Work / Code stage, now fronts it. Below the hero the
+// page keeps the workspace story (2026-09-19): a workspace is the
+// intersection of loops, models, apps and the MCP tools exposed, and
+// switching between them is the daily way of working with AI.
 
 export const metadata = {
-  title: 'Glyphh Workspace — every AI superpower in one place',
+  title: 'Glyphh Desktop — the open desktop client for frontier AI',
   description:
-    'A workspace is a loop, its models, the apps beside it, and the tools it can reach, saved under one name. Switch between them in one keystroke. Every superpower, one message.',
+    'Glyphh is the vendor-neutral desktop for Claude, ChatGPT, Gemini, and open-source models. Chat, work, and code run on your machine, beside the apps you already use. Save a loop, its models, its apps and its tools under one name and switch in a keystroke.',
 };
-
-const LOOPS = ['Claude Code', 'Codex', 'Gemini', 'Glyphh'];
-const INSIDE = ['models', 'apps and tabs', 'MCP tools', 'the working folder'];
-
-function WorkspaceStage() {
-  return (
-    <div className="apx-stage mcx-stage gwx-hero-stage" aria-hidden="true">
-      <div className="apx-col">
-        <div className="apx-col-label">the loop</div>
-        {LOOPS.map((l) => <div key={l} className="apx-node">{l}</div>)}
-      </div>
-      <div className="mcx-flows">
-        <div className="apx-flow"><i /><i /><i /></div>
-        <div className="apx-flow mcx-flow-back"><i /><i /></div>
-      </div>
-      <div className="apx-hub mcx-hub">
-        <div className="apx-glow" />
-        <div className="apx-orbit" />
-        <div className="mcx-orbit-b" />
-        <img src="/glyphh-mascot-square-black.png" alt="" className="apx-mascot" width="88" height="88" />
-        <span className="apx-hub-label">Glyphh Workspace</span>
-      </div>
-      <div className="mcx-flows">
-        <div className="apx-flow"><i /><i /><i /></div>
-        <div className="apx-flow mcx-flow-back"><i /><i /></div>
-      </div>
-      <div className="apx-col">
-        <div className="apx-col-label">bound to it</div>
-        {INSIDE.map((n) => <div key={n} className="apx-node">{n}</div>)}
-      </div>
-    </div>
-  );
-}
 
 const PILLARS = [
   { tag: 'INTERSECTION', title: 'One name for the whole setup', desc: 'A workspace holds a loop, the model for each of its slots, the panels around it, the tools those panels expose, and the working folder. Open the name and all of it is there.' },
@@ -146,37 +116,13 @@ const LAYERS = [
   },
 ];
 
-export default function WorkspacePage() {
+export default function DesktopPage() {
   return (
     <div className="office-page design-page">
       <Reveal />
       <Nav />
-      <header className="page-hero page-hero-tight op-hero">
-        <div className="container op-hero-inner">
-          <div className="op-hero-copy">
-            <div className="hero-badge">
-              <span className="badge-dot" aria-hidden="true"></span>
-              GLYPHH WORKSPACE
-            </div>
-            <h1 className="page-hero-title">
-              Every AI superpower<span className="dot">.</span>{' '}
-              <span className="hero-accent">One message</span><span className="dot">.</span>
-            </h1>
-            <p className="page-hero-sub">
-              A workspace is the intersection of a loop, its models, the apps beside it, and the
-              tools they expose, saved under one name. Switching between them is how you work
-              with AI every day. Open the name and the whole stack is in the room.
-            </p>
-            <div className="hero-ctas">
-              <a href="/#download" className="btn btn-primary btn-lg group">
-                <span className="btn-label">Get Glyphh Desktop — Free</span>
-                <span className="btn-fill"></span>
-              </a>
-            </div>
-          </div>
-          <div className="od-hero-mock reveal"><WorkspaceStage /></div>
-        </div>
-      </header>
+      {/* The desktop hero: the home page's hero until 2026-09-21, stage and all. */}
+      <Hero variant="desktop" stage />
 
       <section className="od-extract">
         <div className="container">
@@ -191,7 +137,7 @@ export default function WorkspacePage() {
       <section className="od-extract">
         <div className="container">
           <div className="shots-grid">
-            <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-workspaces-1.jpg" alt="Workspaces in Glyphh: three saved grids" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
+            <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-workspaces-1.jpg" alt="Workspaces in Glyphh Desktop: three saved grids" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
             <div className="reveal"><ExpandableShot src="/screen-shots/v2/settings-workspaces-2.jpg" alt="The workspace editor: the grid, the loop and models, the app setup per cell" crop={{ pos: '50% 48%', zoom: 1.9 }} /></div>
           </div>
         </div>
@@ -225,7 +171,7 @@ export default function WorkspacePage() {
 
       <FinalCTA
         title={<h2>Name it<span className="dot">.</span> Switch to it<span className="dot">.</span> Get to work<span className="dot">.</span></h2>}
-        text={<p>Download <span className="compose-cmd">Glyphh</span> free and save your first workspace.</p>}
+        text={<p>Download <span className="compose-cmd">Glyphh Desktop</span> free and save your first workspace.</p>}
         primary={{ href: '/#download', label: 'Get Glyphh Desktop — Free' }}
         secondary={{ href: '/products/router', label: 'See Glyphh Router' }}
       />
