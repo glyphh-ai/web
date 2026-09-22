@@ -1,140 +1,92 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
+const PAGE = 96;
 
 /**
- * ConnectCatalog — the browsable slice of the Pipedream Connect catalog on
- * the public site (site refactor 2026-09-22). The full 3,500+ is searchable
- * inside the app once you are signed in (the server's app search needs an
- * org); here a curated set is grouped by what it is for, with a filter box.
+ * ConnectCatalog — the Pipedream Connect app directory, searchable on the
+ * public site (his order, 2026-09-22). `apps` is the whole directory from the
+ * server's anonymous /api/public/connect/directory (the same cached index the
+ * desktop's picker reads); when that is empty the page passes the curated
+ * fallback instead and says so. Search, a category filter, Pipedream's own
+ * icons, and "show more" paging so 3,500 cards never land at once.
  */
 
-const CATALOG = [
-  // Mail, calendar, docs
-  ['Gmail', 'mail.google.com', 'Mail and calendar'],
-  ['Outlook', 'outlook.live.com', 'Mail and calendar'],
-  ['Google Calendar', 'calendar.google.com', 'Mail and calendar'],
-  ['Calendly', 'calendly.com', 'Mail and calendar'],
-  ['Google Docs', 'docs.google.com', 'Docs and files'],
-  ['Google Drive', 'drive.google.com', 'Docs and files'],
-  ['Google Sheets', 'sheets.google.com', 'Docs and files'],
-  ['Notion', 'notion.so', 'Docs and files'],
-  ['Dropbox', 'dropbox.com', 'Docs and files'],
-  ['Box', 'box.com', 'Docs and files'],
-  ['Airtable', 'airtable.com', 'Docs and files'],
-  ['Confluence', 'atlassian.net', 'Docs and files'],
-  // Messaging
-  ['Slack', 'app.slack.com', 'Messaging'],
-  ['Discord', 'discord.com', 'Messaging'],
-  ['Microsoft Teams', 'teams.microsoft.com', 'Messaging'],
-  ['Telegram', 'telegram.org', 'Messaging'],
-  ['WhatsApp', 'whatsapp.com', 'Messaging'],
-  ['Twilio', 'twilio.com', 'Messaging'],
-  ['Intercom', 'intercom.com', 'Messaging'],
-  ['Zendesk', 'zendesk.com', 'Messaging'],
-  // Dev
-  ['GitHub', 'github.com', 'Developer tools'],
-  ['GitLab', 'gitlab.com', 'Developer tools'],
-  ['Linear', 'linear.app', 'Developer tools'],
-  ['Jira', 'atlassian.net', 'Developer tools'],
-  ['Vercel', 'vercel.com', 'Developer tools'],
-  ['Sentry', 'sentry.io', 'Developer tools'],
-  ['PostHog', 'app.posthog.com', 'Developer tools'],
-  ['Supabase', 'supabase.com', 'Developer tools'],
-  ['AWS', 'console.aws.amazon.com', 'Developer tools'],
-  ['Cloudflare', 'cloudflare.com', 'Developer tools'],
-  // CRM, sales, commerce
-  ['Salesforce', 'salesforce.com', 'CRM and commerce'],
-  ['HubSpot', 'hubspot.com', 'CRM and commerce'],
-  ['Pipedrive', 'pipedrive.com', 'CRM and commerce'],
-  ['Stripe', 'dashboard.stripe.com', 'CRM and commerce'],
-  ['Shopify', 'shopify.com', 'CRM and commerce'],
-  ['QuickBooks', 'quickbooks.intuit.com', 'CRM and commerce'],
-  ['Mailchimp', 'mailchimp.com', 'CRM and commerce'],
-  // Project and design
-  ['Asana', 'asana.com', 'Projects and design'],
-  ['Trello', 'trello.com', 'Projects and design'],
-  ['Monday', 'monday.com', 'Projects and design'],
-  ['ClickUp', 'clickup.com', 'Projects and design'],
-  ['Figma', 'figma.com', 'Projects and design'],
-  ['Canva', 'canva.com', 'Projects and design'],
-  ['Miro', 'miro.com', 'Projects and design'],
-  // Social and media
-  ['LinkedIn', 'linkedin.com', 'Social and media'],
-  ['X / Twitter', 'x.com', 'Social and media'],
-  ['YouTube', 'youtube.com', 'Social and media'],
-  ['Reddit', 'reddit.com', 'Social and media'],
-  // Automation platforms — reached over MCP
-  ['Zapier', 'zapier.com', 'Automation platforms'],
-  ['Make', 'make.com', 'Automation platforms'],
-  ['n8n', 'n8n.io', 'Automation platforms'],
-  ['Boomi', 'boomi.com', 'Automation platforms'],
-  ['Workato', 'workato.com', 'Automation platforms'],
-  ['Pipedream', 'pipedream.com', 'Automation platforms'],
-  ['MuleSoft', 'mulesoft.com', 'Automation platforms'],
-  ['Power Automate', 'powerautomate.microsoft.com', 'Automation platforms'],
-  ['Activepieces', 'activepieces.com', 'Automation platforms'],
-].map(([name, domain, group]) => ({ name, domain, group }));
-
-const GROUPS = [...new Set(CATALOG.map((a) => a.group))];
-
-export default function ConnectCatalog() {
+export default function ConnectCatalog({ apps, categories = [], live = true }) {
   const [q, setQ] = useState('');
+  const [cat, setCat] = useState('');
+  const [limit, setLimit] = useState(PAGE);
   const needle = q.trim().toLowerCase();
+
   const shown = useMemo(
-    () => (needle ? CATALOG.filter((a) => `${a.name} ${a.group}`.toLowerCase().includes(needle)) : CATALOG),
-    [needle],
+    () => apps.filter((a) =>
+      (!cat || (a.categories || []).includes(cat)) &&
+      (!needle || a.name.toLowerCase().includes(needle) || (a.description || '').toLowerCase().includes(needle) || (a.categories || []).some((c) => c.toLowerCase().includes(needle)))),
+    [apps, needle, cat],
   );
+  useEffect(() => { setLimit(PAGE); }, [needle, cat]);
 
   return (
     <>
-      <label className="ix-search">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
-        <input
-          type="search"
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="Filter services"
-          aria-label="Filter services"
-          autoComplete="off"
-          spellCheck={false}
-        />
-        <span className="ix-search-count">{shown.length} shown</span>
-      </label>
+      <div className="mc-filters cx-filters">
+        <label className="ix-search mc-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+          <input
+            type="search"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder={`Search ${apps.length.toLocaleString('en-US')} services`}
+            aria-label="Search services"
+            autoComplete="off"
+            spellCheck={false}
+          />
+        </label>
+        {categories.length ? (
+          <select className="mc-select" value={cat} onChange={(e) => setCat(e.target.value)} aria-label="Category">
+            <option value="">All categories</option>
+            {categories.map((c) => <option key={c.name} value={c.name}>{c.name} ({c.count})</option>)}
+          </select>
+        ) : null}
+      </div>
+      <p className="mc-count">
+        {shown.length.toLocaleString('en-US')} services
+        {!live ? ' · curated list — the live directory was not reachable' : ''}
+      </p>
 
-      {GROUPS.map((g) => {
-        const items = shown.filter((a) => a.group === g);
-        if (!items.length) return null;
-        return (
-          <div key={g} className="ix-group">
-            <h2 className="ix-group-title">{g}</h2>
-            <div className="ix-grid ix-grid-4">
-              {items.map((a) => (
-                <div key={`${a.domain}-${a.name}`} className="ix-card ix-card-slim">
-                  <img
-                    className="ix-icon"
-                    src={`https://www.google.com/s2/favicons?domain=${a.domain}&sz=64`}
-                    alt=""
-                    width={28}
-                    height={28}
-                    loading="lazy"
-                  />
-                  <h3>{a.name}</h3>
-                </div>
-              ))}
+      <div className="ix-grid ix-grid-4 cx-grid">
+        {shown.slice(0, limit).map((a) => (
+          <div key={a.id} className="ix-card cx-card">
+            <div className="cx-card-head">
+              {a.icon ? (
+                <img className="ix-icon cx-icon" src={a.icon} alt="" width={28} height={28} loading="lazy" referrerPolicy="no-referrer" />
+              ) : (
+                <span className="ix-icon ix-icon-blank" />
+              )}
+              <h3>{a.name}</h3>
             </div>
+            {a.description ? <p>{a.description}</p> : null}
+            {a.categories?.length ? (
+              <span className="cx-cats">{a.categories.slice(0, 2).join(' · ')}</span>
+            ) : null}
           </div>
-        );
-      })}
-      {!shown.length && <p className="ix-empty">Nothing here matches &ldquo;{q.trim()}&rdquo; &mdash; it is likely in the full catalog below.</p>}
+        ))}
+      </div>
+      {!shown.length && <p className="ix-empty">Nothing matches &ldquo;{q.trim()}&rdquo;.</p>}
+      {shown.length > limit ? (
+        <div className="mc-more">
+          <button type="button" className="os-cta os-cta-ghost" onClick={() => setLimit(limit + PAGE * 2)}>
+            Show more ({(shown.length - limit).toLocaleString('en-US')} left)
+          </button>
+        </div>
+      ) : null}
 
       <div className="ix-cta">
         <div>
-          <span className="qs-kicker">The rest of the 3,500+</span>
-          <h3>Search the full catalog in the app.</h3>
-          <p>Every Pipedream Connect service is searchable from Settings &rarr; Connections once you are signed in. One sign-in per service; then it is a tool everywhere.</p>
+          <span className="qs-kicker">Connect one</span>
+          <h3>Sign in once. Then it is a tool everywhere.</h3>
+          <p>Every service here connects from Settings &rarr; Connections in the desktop or the platform. One sign-in per service; every loop, app, and program can call it.</p>
         </div>
         <div className="ix-actions">
           <a href={PLATFORM_URL} className="os-cta os-cta-primary">Open the platform &rarr;</a>

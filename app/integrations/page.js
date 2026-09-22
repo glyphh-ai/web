@@ -2,6 +2,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { APPS_ROW1, APPS_ROW2 } from '../components/apps-data';
 import { PROVIDERS } from '../model-info';
+import { PanelIcon } from '../components/panel-icons';
 
 /**
  * /integrations — the hub (site refactor 2026-09-22): everything Glyphh
@@ -39,14 +40,14 @@ const FEATURED = APPS_ROW1.slice(0, 12);
 // What the harness ships with — the panels and tools every loop can use
 // (docs: Panels and tools).
 const BUILT_IN = [
-  { title: 'Files and editor', body: 'The working folder’s tree and a Monaco editor over it.', href: '/docs/panels' },
-  { title: 'Terminal', body: 'A real shell in the working folder, beside the agent.', href: '/docs/panels' },
-  { title: 'Diff', body: 'What changed as the agent works, as it works.', href: '/docs/panels' },
-  { title: 'Browser', body: 'Tabs and an address bar; the agent drives the screen where there is no API.', href: '/docs/panels' },
-  { title: 'Plan and transcript', body: 'The agent’s plan, live, and the full turn log.', href: '/docs/panels' },
-  { title: 'Scheduled tasks', body: 'Every schedule and run. A task is a skill on a clock.', href: '/docs/tasks' },
-  { title: 'Work panels', body: 'Slides, Drive, and Design: decks, folders, and documents the agent writes with you.', href: '/docs/panels' },
-  { title: 'Generated media', body: 'Image, video, and sound panels for what the models make.', href: '/docs/panels' },
+  { title: 'Files and editor', icons: ['files','monaco'], body: 'The working folder’s tree and a Monaco editor over it.', href: '/docs/panels' },
+  { title: 'Terminal', icons: ['terminal'], body: 'A real shell in the working folder, beside the agent.', href: '/docs/panels' },
+  { title: 'Diff', icons: ['diff'], body: 'What changed as the agent works, as it works.', href: '/docs/panels' },
+  { title: 'Browser', icons: ['preview'], body: 'Tabs and an address bar; the agent drives the screen where there is no API.', href: '/docs/panels' },
+  { title: 'Plan and transcript', icons: ['plan','thread'], body: 'The agent’s plan, live, and the full turn log.', href: '/docs/panels' },
+  { title: 'Scheduled tasks', icons: ['tasks'], body: 'Every schedule and run. A task is a skill on a clock.', href: '/docs/tasks' },
+  { title: 'Work panels', icons: ['gpoint','gdrive','gdesign'], body: 'Slides, Drive, and Design: decks, folders, and documents the agent writes with you.', href: '/docs/panels' },
+  { title: 'Generated media', icons: ['gimage','gvideo','gsound'], body: 'Image, video, and sound panels for what the models make.', href: '/docs/panels' },
 ];
 
 const BACKGROUND = [
@@ -78,6 +79,7 @@ export default function IntegrationsPage() {
       <Nav />
       <main className="site-frame ix-frame">
         <section className="ix-head">
+          <a href="/" className="ix-crumb">&larr; Home</a>
           <span className="qs-kicker">Works with everything</span>
           <h1 className="ix-title">Integrations</h1>
           <p className="ix-lede">Connect Glyphh to the models, services, tools, and apps you already use.</p>
@@ -134,7 +136,7 @@ export default function IntegrationsPage() {
           </div>
           <div className="ix-grid ix-grid-4">
             {providers.map(([key, p]) => (
-              <a key={key} href="/integrations/models" className="ix-card">
+              <a key={key} href="/integrations/models" className="ix-card ix-card-prov">
                 {p.domain ? <Icon domain={p.domain} /> : <span className="ix-icon ix-icon-blank" />}
                 <h3>{key}</h3>
                 <p>{p.blurb}</p>
@@ -158,23 +160,27 @@ export default function IntegrationsPage() {
           <div className="ix-grid ix-grid-4">
             {BUILT_IN.map((t) => (
               <a key={t.title} href={t.href} className="ix-card">
+                <span className="ix-icons">{t.icons.map((n) => <PanelIcon key={n} name={n} />)}</span>
                 <h3>{t.title}</h3>
                 <p>{t.body}</p>
               </a>
             ))}
           </div>
-          <div className="ix-bg">
-            <div className="ix-bg-copy">
-              <span className="qs-kicker">Background work</span>
-              <h3>Automation is more than a prompt</h3>
-              <p>Tasks on a clock, skills that teach, artifacts that persist, workspaces that remember.</p>
+          {/* The "Background work" list came off (his order, 2026-09-22: too OpenClaw). Hidden, not deleted. */}
+          {false && (
+            <div className="ix-bg">
+              <div className="ix-bg-copy">
+                <span className="qs-kicker">Background work</span>
+                <h3>Automation is more than a prompt</h3>
+                <p>Tasks on a clock, skills that teach, artifacts that persist, workspaces that remember.</p>
+              </div>
+              <ol className="ix-bg-list">
+                {BACKGROUND.map((b) => (
+                  <li key={b.n}><a href={b.href}><span>{b.n}</span>{b.label} &nearr;</a></li>
+                ))}
+              </ol>
             </div>
-            <ol className="ix-bg-list">
-              {BACKGROUND.map((b) => (
-                <li key={b.n}><a href={b.href}><span>{b.n}</span>{b.label} &nearr;</a></li>
-              ))}
-            </ol>
-          </div>
+            )}
         </section>
 
         <section className="ix-section" id="apps">
@@ -191,6 +197,7 @@ export default function IntegrationsPage() {
           </div>
           <div className="ix-grid ix-grid-3">
             <a href="/docs/panels" className="ix-card ix-card-tall">
+              <span className="ix-icons">{['gpoint', 'gdrive', 'gdesign', 'gimage', 'gvideo', 'gsound'].map((n) => <PanelIcon key={n} name={n} size={24} />)}</span>
               <h3>House apps</h3>
               <p>The panels the desktop ships with: Slides, Drive, Design, media, the dev tools. Present on every seat from the first open.</p>
             </a>

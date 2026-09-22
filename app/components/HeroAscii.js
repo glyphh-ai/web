@@ -29,7 +29,7 @@ const FONT = 7;      // px — tiny, so a letter reads as a particle first and a
 const CW = 5;        // px per letter column
 const CH = 8;        // px per row
 const FRAMES = 7;    // corridor cross-sections in flight at once
-const FLOW = 0.028;  // hall lengths per second — a frame crosses the hero in ~36s
+const FLOW = 0.036;  // hall lengths per second — a frame crosses the hero in ~28s
 const FPS = 20;
 const REACH = 150;   // px — how far the cursor lights the letters
 // where the hall's edge lines run: the ratio |x| / |y| from the vanishing point
@@ -59,7 +59,7 @@ function render(width, height, t, cursor) {
     const s = (k / FRAMES + flow) % 1;
     frames.push({ size: Math.pow(s, 1.7), s });
   }
-  const tick = Math.floor(t * 3);     // the flicker clock
+  const tick = Math.floor(t * 4);     // the flicker clock
 
   const cells = [];
   for (let j = 0; j < rows; j++) {
@@ -144,6 +144,7 @@ export default function HeroAscii() {
     // draw every showing cell as its letter, at the density's opacity
     const paint = (t) => {
       const cells = render(w, h, t, cursor);
+      const slow = Math.floor(t * 1.5);   // the glow re-roll clock
       ctx.clearRect(0, 0, w, h);
       ctx.font = FONT + 'px ' + mono;
       ctx.textBaseline = 'top';
@@ -151,10 +152,16 @@ export default function HeroAscii() {
         const i = cells[n], j = cells[n + 1], val = cells[n + 2];
         const k = (i + j * 7) % PHRASE.length;
         const ch = PHRASE[k];
-        // "peace" — the first five letters of the phrase — burns a shade brighter and lighter
+        // "peace" — the first five letters of the phrase — but not every one: a hash
+        // picks which occurrences glow and how hard; c and e can go brightest
         const peace = k < 5;
-        const alpha = peace ? Math.min(1, 0.22 + 1.1 * val) : 0.12 + 0.88 * val;
-        ctx.fillStyle = (peace ? 'rgba(196, 140, 255, ' : 'rgba(175, 95, 255, ') + alpha.toFixed(3) + ')';
+        // near-random: the pick re-rolls on its own slow clock, so which ones glow keeps changing
+        const pick = peace ? hash(i * 1.3 + slow * 0.37 + 7, j * 0.7 + slow * 0.53 + 11) : 0;
+        const lit = peace && pick > 0.42;
+        const extra = k === 3 || k === 1 || k === 4 ? 0.45 : 0.15;     // c, e, e burn hotter than p, a
+        const glow = lit ? ((pick - 0.42) / 0.58) * (0.55 + extra) : 0;
+        const alpha = Math.min(1, 0.12 + 0.88 * val + glow);
+        ctx.fillStyle = (lit ? 'rgba(214, 172, 255, ' : 'rgba(175, 95, 255, ') + alpha.toFixed(3) + ')';
         ctx.fillText(ch, i * CW, j * CH + 1);
       }
     };

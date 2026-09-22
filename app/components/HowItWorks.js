@@ -1,3 +1,5 @@
+import LetterField from './LetterField';
+
 /**
  * HowItWorks — the section above Quick Start (site refactor 2026-09-22):
  * what Glyphh is, in six tiles — Desktop, Router, Connect, Semantic Apps,
@@ -96,8 +98,9 @@ export default function HowItWorks() {
         <a href="/docs" className="qs-more">Read the docs &rarr;</a>
       </div>
       <div className="hv-grid">
-        {TILES.map((t) => (
+        {TILES.map((t, i) => (
           <a key={t.title} href={t.href} className="hv-tile">
+            <LetterField seed={i + 1} />
             <svg
               className="hv-tile-icon"
               width="22"

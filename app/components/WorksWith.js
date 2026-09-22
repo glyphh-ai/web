@@ -1,4 +1,5 @@
 import { APPS_ROW1, APPS_ROW2 } from './apps-data';
+import ModelTicker from './ModelTicker';
 
 /**
  * WorksWith — the "Works with everything" section in the frame (site refactor
@@ -46,7 +47,10 @@ export default function WorksWith() {
       </div>
       <div className="hv-panel ww-panel">
         <Row apps={APPS_ROW1} direction="scroll-left" />
-        <div className="ww-rail" aria-hidden="true" />
+        {/* The tick rail between the rows came off (his order, 2026-09-22). Hidden, not deleted. */}
+        {false && <div className="ww-rail" aria-hidden="true" />}
+        {/* The model ticker (his order, 2026-09-22): a split-flap row of model names between the connection rows. */}
+        <ModelTicker />
         <Row apps={APPS_ROW2} direction="scroll-right" />
         <div className="ww-foot">
           <a href="/integrations/connect">Browse all connections &rarr;</a>

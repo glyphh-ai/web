@@ -1,16 +1,24 @@
 import Nav from '../components/Nav';
-import Reveal from '../components/Reveal';
 import Pricing from '../components/Pricing';
 import Footer from '../components/Footer';
+
+/**
+ * /pricing — trust, in the frame (site.md §8; restyled 2026-09-22). Kill the
+ * "where's the catch" objection with the no-markup story, then let the tiers
+ * sell themselves. The plan numbers are live (Pricing.js); the copy is the
+ * blueprint's.
+ */
 
 export const metadata = {
   title: 'Pricing — Glyphh',
   description:
-    'One monthly budget across every Glyphh product, in dollars. A plan’s price is its budget, dollar for dollar. Your AI on your own keys, never marked up.',
+    'Dollar for dollar. Your AI runs on your own keys at your vendor’s price. A plan’s price is its monthly usage pool — itemized per call, nothing marked up, nothing on by default.',
 };
 
 // Live plan numbers on every request.
 export const dynamic = 'force-dynamic';
+
+const SALES = 'mailto:sales@glyphh.ai?subject=' + encodeURIComponent('Glyphh Enterprise');
 
 const RULES = [
   {
@@ -27,43 +35,86 @@ const RULES = [
   },
 ];
 
+// Objection handling (site.md §8.6).
+const FAQ = [
+  ['Do you mark up model usage?', 'No. The vendor bills you at their price.'],
+  ['Do you store our prompts?', 'No. Usage telemetry, never transcripts.'],
+  ['Can we use the subscriptions we already pay for?', 'Yes — that’s the point. Burn-down routing exhausts them first.'],
+  ['Who owns the programs we build?', 'You do. No vendor, no seat license, no renewal.'],
+  ['Why open-weight models?', 'Accuracy, efficiency, and scale at runtime — the kernel routes the volume there so frontier credits go to build time.'],
+  ['What happens when the pool runs out?', 'Hard stop or top-up — your admin decides. Nothing is on by default.'],
+];
 
 export default async function PricingPage() {
   return (
-    <div className="pricing-page">
-      <Reveal />
+    <div className="ix-page">
       <Nav />
-      <header className="page-hero page-hero-tight">
-        <div className="pricing-glow" aria-hidden="true" />
-        <div className="container">
-          <div className="hero-badge">
-            <span className="badge-dot" aria-hidden="true"></span>
-            PRICING
-          </div>
-          <h1 className="page-hero-title">
-            One budget<span className="dot">.</span>{' '}
-            <span className="hero-accent">Every product.</span>
-          </h1>
-          <p className="page-hero-sub">
-            Glyphh Desktop, and everything we ship next, draws from the same
-            monthly budget in dollars. It pays for what Glyphh does for you.
-            Your AI runs on your own keys at your vendor&rsquo;s price.
+      <main className="site-frame ix-frame">
+        <section className="ix-head">
+          <a href="/" className="ix-crumb">&larr; Home</a>
+          <span className="qs-kicker">Pricing</span>
+          <h1 className="ix-title">Dollar for dollar.</h1>
+          <p className="ix-lede">
+            Your AI runs on your own keys at your vendor&rsquo;s price. A plan&rsquo;s price is its monthly usage
+            pool &mdash; itemized per call, nothing marked up, nothing on by default.
           </p>
-          <div className="usage-rules">
+          <div className="ix-actions">
+            <a href="/#quick-start" className="os-cta os-cta-primary">Start free</a>
+            <a href={SALES} className="os-cta os-cta-ghost">Talk to us</a>
+          </div>
+        </section>
+
+        <section className="ix-section" id="how">
+          <div className="ix-section-head">
+            <div>
+              <span className="qs-kicker">How the dollars work</span>
+              <h2 className="ix-h2">When you can see every dollar, you don&rsquo;t need to trust us.</h2>
+            </div>
+            <a href="/integrations/models" className="qs-more">Model prices &rarr;</a>
+          </div>
+          <div className="ix-grid ix-grid-3">
             {RULES.map((r) => (
-              <div key={r.title} className="usage-rule reveal">
+              <div key={r.title} className="ix-card ix-card-tall">
                 <h3>{r.title}</h3>
                 <p>{r.desc}</p>
               </div>
             ))}
           </div>
-        </div>
-      </header>
+        </section>
 
-      <Pricing />
+        <Pricing />
 
-      {/* The model catalog lives on /products/router (his order, 2026-09-11). */}
+        <section className="ix-section" id="faq">
+          <div className="ix-section-head">
+            <div>
+              <span className="qs-kicker">Questions</span>
+              <h2 className="ix-h2">The catch, looked for.</h2>
+            </div>
+          </div>
+          <dl className="pp-faq">
+            {FAQ.map(([q, a]) => (
+              <div key={q} className="pp-faq-row">
+                <dt>{q}</dt>
+                <dd>{a}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
 
+        <section className="ix-section">
+          <div className="ix-cta pp-close">
+            <div>
+              <span className="qs-kicker">Start free</span>
+              <h3>Build your first program.</h3>
+              <p>Free forever on your own logins. No trial, no card. Team plans from $40 a seat, dollar for dollar.</p>
+            </div>
+            <div className="ix-actions">
+              <a href="/#quick-start" className="os-cta os-cta-primary">Quick Start</a>
+              <a href={SALES} className="os-cta os-cta-ghost">Talk to us</a>
+            </div>
+          </div>
+        </section>
+      </main>
       <Footer />
     </div>
   );

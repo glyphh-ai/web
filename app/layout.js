@@ -40,8 +40,14 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${geist.variable} ${jetbrains.variable}`}>
+    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${geist.variable} ${jetbrains.variable}`}>
       <head>
+        {/* The theme, before first paint: the saved choice, else the OS preference (his order, 2026-09-22). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{var t=localStorage.getItem('glyphh-theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t}catch(e){}",
+          }}
+        />
         {/* Sentient italic — the emphasis face — from Fontshare. Geist (display + body) loads via next/font. */}
         <link rel="preconnect" href="https://api.fontshare.com" />
         <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />

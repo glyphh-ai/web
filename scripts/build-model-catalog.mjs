@@ -47,6 +47,16 @@ const out = {
   modes,
   models,
 };
+// The home page's ticker: chat models from the well-known providers, short ids,
+// no provider prefix, deduped — a few hundred names, not the whole table.
+const TICKER_PROVIDERS = new Set(['anthropic', 'openai', 'gemini', 'vertex_ai-language-models', 'xai', 'mistral', 'groq', 'deepseek', 'together_ai', 'fireworks_ai', 'cohere_chat', 'perplexity', 'ollama', 'openrouter', 'moonshot', 'cerebras']);
+const tickerNames = [...new Set(models
+  .filter((m) => m.mode === 'chat' && TICKER_PROVIDERS.has(m.p))
+  .map((m) => m.id.split('/').pop())
+  .filter((n) => n.length <= 34 && !/\d{8}|-\d{4}-\d{2}-\d{2}|:/.test(n)))].sort();
+writeFileSync(resolve(here, '../public/data/model-ticker.json'), JSON.stringify(tickerNames));
+console.log(`ticker: ${tickerNames.length} names`);
+
 const dest = resolve(here, '../public/data/model-catalog.json');
 writeFileSync(dest, JSON.stringify(out));
 console.log(`wrote ${dest}: ${models.length} models, ${providers.length} providers, ${modes.length} modes, ${combos} combos (${(JSON.stringify(out).length / 1024).toFixed(0)} KB)`);

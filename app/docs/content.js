@@ -1,5 +1,7 @@
 import { Note, Row, Code, Cast, Shot } from './Mascot';
 import ModelCatalog from '../components/ModelCatalog';
+import { GatewayStage, ConnectStage, SemanticStage, TaskRunMock, GraphMock, HubReviewMock, WorkspaceMock, LoopMock, ToolsMock } from '../components/product-mocks';
+import { ContractTabs, RolesMock, KeysMock, MetricsMock } from '../products/router/mocks';
 import catalogStats from '../../public/data/model-catalog.json';
 
 // The docs, written from the source on 2026-09-18. Every page names what the
@@ -45,6 +47,7 @@ const start = [
     body: (
       <>
         <Shot src="/screen-shots/glyphh-app-home.png" alt="The Glyphh desktop: the wall with the agent, tabs, tools, and workspaces" caption="The desktop on first open — the wall, the dock, and the agent one keystroke away." />
+        <div className="dx-mock dx-mock-trio"><WorkspaceMock /><LoopMock /><ToolsMock /></div>
         <h2>The wall</h2>
         <p>
           Glyphh opens on the wall: tiles for the agent, your tabs, your tools, and your workspaces. Open one and it
@@ -391,6 +394,7 @@ const build = [
     body: (
       <>
         <Shot src="/screen-shots/v2/work-1.jpg" alt="A task running on the desktop" caption="A task is a skill on a clock — the desktop runs it without you in the chair." />
+        <div className="dx-mock"><TaskRunMock /></div>
         <p>
           A task is a skill folder with a <code>task.json</code> and a <code>run.js</code>. The desktop runs it in
           a separate process, on a schedule or on demand, and journals every step so a run can pick up where it
@@ -1215,23 +1219,27 @@ const system = [
           harness with cross-vendor models or open weights.
         </p>
         <Shot src="/screen-shots/glyphh-governance.png" alt="The Router's governance view in the console" caption="Roles, budgets, and allow-lists ride every key." />
+        <div className="dx-mock dx-mock-stage"><GatewayStage /></div>
         <h2>Burn your frontier credits strategically</h2>
         <p>
           Two routing strategies out of the box: burn down the vendor plans you already own first, or reserve
           premium models on your own keys and proxy the rest to open weights. The desktop routes through the
           Router natively; so does anything that speaks the OpenAI API.
         </p>
+        <div className="dx-mock"><ContractTabs /></div>
         <h2>Teams, budgets, governance</h2>
         <p>
           Every key is minted against a role. Budgets, rate limits, and model allow-lists travel with the
           credential — into the desktop, the CLI, CI, anywhere the key goes. Nothing is on by default.
         </p>
+        <div className="dx-mock dx-mock-pair"><RolesMock /><KeysMock /></div>
         <h2>Semantic routing</h2>
         <p>
           The Router sends each job to the compute it deserves: frontier quality where a program gets written,
           accuracy and efficiency where it runs. Telemetry shows every token per user, key, and model — never a
           transcript.
         </p>
+        <div className="dx-mock"><MetricsMock /></div>
         <Note title="Where to go next">
           <a href="/docs/gateway">The gateway</a> covers the routing strategies in detail;{' '}
           <a href="/docs/budgets">Budgets and limits</a> the caps; <a href="/docs/own-cli">Use your own CLI</a> the
@@ -1253,6 +1261,7 @@ const system = [
           organization through the Router.
         </p>
         <Shot src="/screen-shots/v2/settings-connections-1.jpg" alt="The Connections page in the desktop" caption="Connections: one sign-in per service, then it is a tool everywhere." />
+        <div className="dx-mock dx-mock-stage"><ConnectStage /></div>
         <h2>Govern who connects to what</h2>
         <p>
           Individuals connect their own accounts. Admins share connections org-wide and decide who can connect to
@@ -1283,17 +1292,20 @@ const system = [
           the same way every time.
         </p>
         <Shot src="/screen-shots/glyphh-custom-apps.png" alt="Custom apps on the desktop wall" caption="Apps your teams built, on the wall beside the agent." />
+        <div className="dx-mock dx-mock-stage"><SemanticStage /></div>
         <h2>Built with AI once</h2>
         <p>
           You do not hire the frontier model to do the job every day. You hire it once, to write the program that
           does. The output is an artifact, not a transcript: a manifest that declares its tools, storage and memory
           from the system, state that persists.
         </p>
+        <div className="dx-mock dx-mock-pair"><TaskRunMock /><GraphMock /></div>
         <h2>Review, approve, distribute</h2>
         <p>
           Teams submit an app for review. An admin approves it. The org library puts it on every seat, with roles,
           budgets, and permissions riding along. Distribution is a property of the OS, not a deployment project.
         </p>
+        <div className="dx-mock"><HubReviewMock /></div>
         <Note title="Where to go next">
           <a href="/docs/review">Review and approve</a> for the admin side; <a href="/docs/hub">The org hub</a> for
           where approved apps live; <a href="/docs/skills">Skills</a> for the folder an app is built from.
@@ -1341,6 +1353,7 @@ const system = [
           Memory extends to everything you do every day, across every model or app you touch. It is schema-on-write:
           no model in the read path, exact answers, versioned history. Governed at the org level.
         </p>
+        <div className="dx-mock"><GraphMock /></div>
         <h2>Deterministic loops</h2>
         <p>
           Rrotor runs the open RotorSpec runtime: reproducible runs, auditable behavior. HDC inference routes intent

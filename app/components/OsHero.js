@@ -20,14 +20,10 @@ export default function OsHero({ variant = 'default' }) {
         <HeroAscii />
       </div>
       <div className="oshero-inner container">
-        <img
-          className="oshero-mark"
-          src="/glyphh-mascot.png"
-          alt=""
-          width="72"
-          height="72"
-          aria-hidden="true"
-        />
+        {/* The mascot mark came off the hero (his order, 2026-09-22). Hidden, not deleted. */}
+        {false && (
+          <img className="oshero-mark" src="/glyphh-mascot.png" alt="" width="72" height="72" aria-hidden="true" />
+        )}
         <p className="oshero-eyebrow">Open Weights · Every frontier model · Programs you own</p>
 
         <h1 className="oshero-title">

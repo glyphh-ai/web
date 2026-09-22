@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import ThemeToggle from './ThemeToggle';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 
@@ -75,46 +76,52 @@ export default function Nav() {
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
         <div className="nav-inner">
           <a href="/" className="nav-logo" aria-label="Glyphh">
-            <img src="/glyphh-logo-text-black.png" alt="Glyphh" />
+            <img src="/glyphh-logo-black.png" alt="Glyphh" />
           </a>
           <div className="nav-links">
-            <div
-              className={`nav-dd ${prodOpen ? 'open' : ''}`}
-              ref={prodRef}
-              onMouseEnter={prodEnter}
-              onMouseLeave={prodLeave}
-            >
-              <a href="/products/router" className={`nav-dd-trigger${active('/products')}`}>
-                Products
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-              </a>
-              <div className="nav-dd-panel">
-                <a href="/products/code" className="nav-dd-item">
-                  <span className="nav-dd-name">Glyphh Code</span>
-                  <span className="nav-dd-desc">The coding agent and CLI. Your subscription or the router, one switch.</span>
-                </a>
-                <a href="/products/desktop" className="nav-dd-item">
-                  <span className="nav-dd-name">Glyphh Desktop</span>
-                  <span className="nav-dd-desc">The open desktop client for frontier AI. Every loop, every model, one app.</span>
-                </a>
-                <a href="/products/router" className="nav-dd-item">
-                  <span className="nav-dd-name">Glyphh Router</span>
-                  <span className="nav-dd-desc">One endpoint, two ways to route. Roles and budgets.</span>
-                </a>
-                <a href="/products/connect" className="nav-dd-item">
-                  <span className="nav-dd-name">Glyphh Connect</span>
-                  <span className="nav-dd-desc">3,500+ services as tools for any loop.</span>
-                </a>
-                <a href="/products/skills" className="nav-dd-item">
-                  <span className="nav-dd-name">Glyphh Skills</span>
-                  <span className="nav-dd-desc">Write it once. Apps, tasks, agents, every vendor.</span>
-                </a>
-                <a href="/products/semantic-apps" className="nav-dd-item">
-                  <span className="nav-dd-name">Glyphh Semantic Apps</span>
-                  <span className="nav-dd-desc">Apps that know your context, governed by the org.</span>
-                </a>
-              </div>
+            <div className="nav-dd">
+              <a href="/" className={`nav-dd-trigger${pathname === '/' ? ' active' : ''}`}>Product</a>
             </div>
+            {/* The Products dropdown came off (his order, 2026-09-22): Product is the home page. Hidden, not deleted. */}
+            {false && (
+              <div
+                className={`nav-dd ${prodOpen ? 'open' : ''}`}
+                ref={prodRef}
+                onMouseEnter={prodEnter}
+                onMouseLeave={prodLeave}
+              >
+                <a href="/products/router" className={`nav-dd-trigger${active('/products')}`}>
+                  Product
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+                <div className="nav-dd-panel">
+                  <a href="/products/code" className="nav-dd-item">
+                    <span className="nav-dd-name">Glyphh Code</span>
+                    <span className="nav-dd-desc">The coding agent and CLI. Your subscription or the router, one switch.</span>
+                  </a>
+                  <a href="/products/desktop" className="nav-dd-item">
+                    <span className="nav-dd-name">Glyphh Desktop</span>
+                    <span className="nav-dd-desc">The open desktop client for frontier AI. Every loop, every model, one app.</span>
+                  </a>
+                  <a href="/products/router" className="nav-dd-item">
+                    <span className="nav-dd-name">Glyphh Router</span>
+                    <span className="nav-dd-desc">One endpoint, two ways to route. Roles and budgets.</span>
+                  </a>
+                  <a href="/products/connect" className="nav-dd-item">
+                    <span className="nav-dd-name">Glyphh Connect</span>
+                    <span className="nav-dd-desc">3,500+ services as tools for any loop.</span>
+                  </a>
+                  <a href="/products/skills" className="nav-dd-item">
+                    <span className="nav-dd-name">Glyphh Skills</span>
+                    <span className="nav-dd-desc">Write it once. Apps, tasks, agents, every vendor.</span>
+                  </a>
+                  <a href="/products/semantic-apps" className="nav-dd-item">
+                    <span className="nav-dd-name">Glyphh Semantic Apps</span>
+                    <span className="nav-dd-desc">Apps that know your context, governed by the org.</span>
+                  </a>
+                </div>
+              </div>
+              )}
             <div className="nav-dd">
               <a href="/integrations" className={`nav-dd-trigger${active('/integrations')}`}>Integrations</a>
             </div>
@@ -144,6 +151,7 @@ export default function Nav() {
                 <a href={signupHref} className="nav-auth-link nav-auth-primary">Sign up</a>
               </>
             )}
+            <ThemeToggle />
           </div>
           <button
             className={`nav-mobile-toggle ${menuOpen ? 'active' : ''}`}
@@ -160,13 +168,18 @@ export default function Nav() {
         </div>
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <span className="mobile-menu-group">Products</span>
-        <a href="/products/code" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Code</a>
-        <a href="/products/desktop" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Desktop</a>
-        <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Router</a>
-        <a href="/products/connect" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Connect</a>
-        <a href="/products/skills" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Skills</a>
-        <a href="/products/semantic-apps" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Semantic Apps</a>
+        <a href="/" onClick={() => setMenuOpen(false)}>Product</a>
+        {false && (
+          <>
+            <span className="mobile-menu-group">Product</span>
+            <a href="/products/code" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Code</a>
+            <a href="/products/desktop" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Desktop</a>
+            <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Router</a>
+            <a href="/products/connect" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Connect</a>
+            <a href="/products/skills" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Skills</a>
+            <a href="/products/semantic-apps" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Semantic Apps</a>
+              </>
+        )}
         <a href="/integrations" onClick={() => setMenuOpen(false)}>Integrations</a>
         <a href="/research" onClick={() => setMenuOpen(false)}>Research</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
