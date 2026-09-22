@@ -8514,3 +8514,8 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 .pl-core { padding-bottom: 1.4rem; gap: 0.3rem; }
 .pl-core-sub { max-width: 22ch; }
 .pl-loops { position: static; margin-top: 0.9rem; }
+
+/* Arrow particles take their size, scatter, and glow from the arrow's level. */
+.pl-arrow i { width: var(--size, 4px); height: var(--size, 4px); box-shadow: 0 0 var(--glow, 6px) var(--accent-glow); }
+.pl-right i, .pl-left i { top: calc(var(--size, 4px) / -2 + var(--jit, 0px)); }
+.pl-down i, .pl-up i { left: calc(var(--size, 4px) / -2 + var(--jit, 0px)); }

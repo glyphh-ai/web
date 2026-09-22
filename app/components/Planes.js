@@ -44,11 +44,28 @@ const LOOPS = [
   { name: 'Cursor', domain: 'cursor.com' },
 ];
 
-// `n` particles, spread evenly along the 2.4s run — more with every step round the loop.
-function Arrow({ dir, n = 3 }) {
+// `n` particles spread evenly along the 2.4s run, and a `level` that grows round
+// the loop: bigger particles, more scatter off the line, a wider glow — the
+// signal gets louder and noisier with every step.
+function Arrow({ dir, n = 3, level = 1 }) {
   return (
     <div className={`pl-arrow pl-${dir}`} aria-hidden="true">
-      {Array.from({ length: n }, (_, k) => <i key={k} style={{ animationDelay: `${(-2.4 * k / n).toFixed(2)}s` }} />)}
+      {Array.from({ length: n }, (_, k) => {
+        const size = 3 + level * 0.9 + ((k * 7) % 3) * 0.4 * level;      // px
+        const jit = (((k * 7919) % 11) - 5) * 0.7 * level;              // px off the line
+        const glow = 4 + level * 3;                                     // px
+        return (
+          <i
+            key={k}
+            style={{
+              animationDelay: `${(-2.4 * k / n).toFixed(2)}s`,
+              '--size': `${size.toFixed(1)}px`,
+              '--jit': `${jit.toFixed(1)}px`,
+              '--glow': `${glow}px`,
+            }}
+          />
+        );
+      })}
     </div>
   );
 }
@@ -87,10 +104,10 @@ export default function Planes() {
             ))}
           </div>
         </div>
-        <Arrow dir="right" n={2} />
-        <Arrow dir="down" n={4} />
-        <Arrow dir="left" n={6} />
-        <Arrow dir="up" n={8} />
+        <Arrow dir="right" n={2} level={1} />
+        <Arrow dir="down" n={4} level={2} />
+        <Arrow dir="left" n={6} level={3} />
+        <Arrow dir="up" n={8} level={4} />
       </div>
     </section>
   );
