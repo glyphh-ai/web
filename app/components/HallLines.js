@@ -11,7 +11,9 @@ import { useEffect, useRef } from 'react';
  */
 
 const VP_Y = 0.36;       // the vanishing point, as HeroAscii places it: centred, 36% down
-const PER_LINE = 7;      // particles per line
+const PER_LINE = 5;      // particles per line
+const FLARE_AFTER = 0.5; // s of dwell before the flare begins to build
+const FLARE_FULL = 3.2;  // s of dwell for the flare to reach full
 const rnd = (a, b) => a + Math.random() * (b - a);
 
 export default function HallLines({ selector = '.oshero-points li' }) {
@@ -23,7 +25,7 @@ export default function HallLines({ selector = '.oshero-points li' }) {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const host = canvas.parentElement;
     const ctx = canvas.getContext('2d');
-    let w = 0, h = 0, raf = 0, last = 0;
+    let w = 0, h = 0, raf = 0, last = 0, dwell = 0, flare = 0;
     const cards = [...host.querySelectorAll(selector)].map((el) => ({ el, heat: 0, hot: false, rect: null, seed: Math.random() * 10 }));
 
     const measure = () => {
@@ -45,6 +47,35 @@ export default function HallLines({ selector = '.oshero-points li' }) {
       ctx.clearRect(0, 0, w, h);
       const vp = { x: w / 2, y: h * VP_Y };
       let alive = false;
+      // the longer the pointer stays on one card, the more the vanishing point flares
+      const anyHot = cards.some((c) => c.hot);
+      dwell = anyHot ? dwell + dt : 0;
+      const target = anyHot ? Math.min(1, Math.max(0, (dwell - FLARE_AFTER) / (FLARE_FULL - FLARE_AFTER))) : 0;
+      flare += (target - flare) * (anyHot ? 0.06 : 0.1);
+      if (flare > 0.01) {
+        alive = true;
+        const R = 40 + 220 * flare;
+        const pulse = 0.85 + 0.15 * Math.sin(t * 6.3) + 0.06 * Math.sin(t * 17);
+        // the corona: white core, lavender, purple, out to nothing
+        const g = ctx.createRadialGradient(vp.x, vp.y, 0, vp.x, vp.y, R);
+        g.addColorStop(0, `rgba(255, 255, 255, ${(0.85 * flare * pulse).toFixed(3)})`);
+        g.addColorStop(0.12, `rgba(214, 172, 255, ${(0.55 * flare * pulse).toFixed(3)})`);
+        g.addColorStop(0.4, `rgba(176, 102, 255, ${(0.22 * flare).toFixed(3)})`);
+        g.addColorStop(1, 'rgba(140, 59, 242, 0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(vp.x - R, vp.y - R, R * 2, R * 2);
+        // the rays: thin spikes turning slowly, flickering
+        const rays = 10;
+        for (let i = 0; i < rays; i++) {
+          const ang = (i / rays) * Math.PI * 2 + t * 0.25 + (i % 2 ? 0.3 : 0);
+          const len = R * (0.9 + 0.5 * Math.abs(Math.sin(t * 3.1 + i * 1.7))) * flare;
+          const rg = ctx.createLinearGradient(vp.x, vp.y, vp.x + Math.cos(ang) * len, vp.y + Math.sin(ang) * len);
+          rg.addColorStop(0, `rgba(255, 255, 255, ${(0.5 * flare).toFixed(3)})`);
+          rg.addColorStop(1, 'rgba(214, 172, 255, 0)');
+          ctx.strokeStyle = rg; ctx.lineWidth = i % 3 === 0 ? 2 : 1;
+          ctx.beginPath(); ctx.moveTo(vp.x, vp.y); ctx.lineTo(vp.x + Math.cos(ang) * len, vp.y + Math.sin(ang) * len); ctx.stroke();
+        }
+      }
       for (const c of cards) {
         c.heat += ((c.hot ? 1 : 0) - c.heat) * (c.hot ? 0.14 : 0.08);
         if (c.heat < 0.01 || !c.rect) continue;
@@ -75,7 +106,7 @@ export default function HallLines({ selector = '.oshero-points li' }) {
           }
         });
       }
-      if (alive || cards.some((c) => c.hot)) raf = requestAnimationFrame(step);
+      if (alive || anyHot) raf = requestAnimationFrame(step);
       else { raf = 0; ctx.clearRect(0, 0, w, h); }
     };
     const start = () => { if (!raf) { last = 0; raf = requestAnimationFrame(step); } };
