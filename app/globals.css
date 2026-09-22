@@ -8600,3 +8600,24 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 @keyframes pl-ring { to { --pl-a: 360deg; } }
 @keyframes pl-flicker { 50% { filter: brightness(1.35) drop-shadow(0 0 4px rgba(214, 172, 255, 0.9)); } }
 @media (prefers-reduced-motion: reduce) { .pl-sq:hover::before { animation: none; } }
+
+/* Hover the desktop in the centre and the flame runs the border of the whole
+   planes diagram instead. */
+.pl-wrap::before {
+  content: "";
+  position: absolute; inset: -14px; z-index: 0;
+  padding: 2px;
+  background: conic-gradient(from var(--pl-a),
+    transparent 0deg, transparent 240deg,
+    rgba(176, 102, 255, 0.35) 285deg, rgba(214, 172, 255, 0.95) 325deg, #fff 340deg, rgba(176, 102, 255, 0.35) 352deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.pl-wrap:has(.pl-core:hover)::before { opacity: 1; animation: pl-ring 3.2s linear infinite, pl-flicker 0.28s steps(2) infinite; }
+.pl-core { pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) { .pl-wrap:has(.pl-core:hover)::before { animation: none; } }
