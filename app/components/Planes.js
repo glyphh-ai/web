@@ -59,6 +59,12 @@ export default function Planes() {
             <p className="pl-body">{p.body}</p>
           </a>
         ))}
+        {/* The centre: the desktop, the universal operating system — behind the arrows, in the middle of the loop. */}
+        <div className="pl-core" aria-hidden="true">
+          <img src="/glyphh-mascot.png" alt="" width="64" height="64" />
+          <span className="pl-core-title">Desktop</span>
+          <span className="pl-core-sub">the universal operating system</span>
+        </div>
         <Arrow dir="right" />
         <Arrow dir="down" />
         <Arrow dir="left" />
