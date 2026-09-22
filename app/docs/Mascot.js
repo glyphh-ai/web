@@ -71,3 +71,18 @@ export function Code({ children, lang }) {
     <pre className="dx-code" data-lang={lang}>{children}</pre>
   );
 }
+
+// A screenshot with a caption. Without a `src` it draws the frame and says
+// the shot is coming, so a page can be written before the picture exists.
+export function Shot({ src, alt = '', caption }) {
+  return (
+    <figure className="dx-shot">
+      {src ? (
+        <img src={src} alt={alt} loading="lazy" />
+      ) : (
+        <div className="dx-shot-empty" role="img" aria-label={alt || 'Screenshot coming'}>Screenshot coming</div>
+      )}
+      {caption ? <figcaption>{caption}</figcaption> : null}
+    </figure>
+  );
+}

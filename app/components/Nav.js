@@ -1,10 +1,15 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 
 export default function Nav() {
+  const pathname = usePathname() || '/';
+  // The section the visitor is in lights up in the accent (OpenClaw's
+  // `.active` link). Products covers every /products/* page.
+  const active = (prefix) => (pathname.startsWith(prefix) ? ' active' : '');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [ddOpen, setDdOpen] = useState(false);
@@ -70,7 +75,7 @@ export default function Nav() {
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
         <div className="nav-inner">
           <a href="/" className="nav-logo" aria-label="Glyphh">
-            <img src="/glyphh-logo-black.png" alt="Glyphh" />
+            <img src="/glyphh-logo-text-black.png" alt="Glyphh" />
           </a>
           <div className="nav-links">
             <div
@@ -79,7 +84,7 @@ export default function Nav() {
               onMouseEnter={prodEnter}
               onMouseLeave={prodLeave}
             >
-              <a href="/products/router" className="nav-dd-trigger">
+              <a href="/products/router" className={`nav-dd-trigger${active('/products')}`}>
                 Products
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </a>
@@ -110,46 +115,47 @@ export default function Nav() {
                 </a>
               </div>
             </div>
+            <div className="nav-dd">
+              <a href="/integrations" className={`nav-dd-trigger${active('/integrations')}`}>Integrations</a>
+            </div>
             <div
               className={`nav-dd ${ddOpen ? 'open' : ''}`}
               ref={ddRef}
               onMouseEnter={ddEnter}
               onMouseLeave={ddLeave}
             >
-              <a href="/research" className="nav-dd-trigger">Research</a>
+              <a href="/research" className={`nav-dd-trigger${active('/research')}`}>Research</a>
             </div>
             <div className="nav-dd">
-              <a href="/pricing" className="nav-dd-trigger">Pricing</a>
+              <a href="/pricing" className={`nav-dd-trigger${active('/pricing')}`}>Pricing</a>
             </div>
             <div className="nav-dd">
-              <a href="/docs" className="nav-dd-trigger">Docs</a>
+              <a href="/docs" className={`nav-dd-trigger${active('/docs')}`}>Docs</a>
             </div>
           </div>
+          {/* No buttons in the bar (the reference has none): the account links
+              are two more mono links, set off by a hairline. */}
           <div className="nav-cta">
             {loggedIn ? (
-              <a href={dashHref} className="btn btn-primary btn-sm group">
-                <span className="btn-label">Dashboard</span>
-                <span className="btn-fill"></span>
-              </a>
+              <a href={dashHref} className="nav-auth-link nav-auth-primary">Dashboard</a>
             ) : (
               <>
-                <a href={loginHref} className="btn btn-secondary btn-sm group">
-                  <span className="btn-label">Log in</span>
-                  <span className="btn-fill"></span>
-                </a>
-                <a href={signupHref} className="btn btn-primary btn-sm group">
-                  <span className="btn-label">Sign up</span>
-                  <span className="btn-fill"></span>
-                </a>
+                <a href={loginHref} className="nav-auth-link">Log in</a>
+                <a href={signupHref} className="nav-auth-link nav-auth-primary">Sign up</a>
               </>
             )}
           </div>
           <button
             className={`nav-mobile-toggle ${menuOpen ? 'active' : ''}`}
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menu"
+            aria-label="Toggle main navigation"
+            aria-expanded={menuOpen}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            <span className="nav-burger" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
           </button>
         </div>
       </nav>
@@ -161,24 +167,16 @@ export default function Nav() {
         <a href="/products/connect" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Connect</a>
         <a href="/products/skills" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Skills</a>
         <a href="/products/semantic-apps" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Semantic Apps</a>
+        <a href="/integrations" onClick={() => setMenuOpen(false)}>Integrations</a>
         <a href="/research" onClick={() => setMenuOpen(false)}>Research</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href="/docs" onClick={() => setMenuOpen(false)}>Docs</a>
         {loggedIn ? (
-          <a href={dashHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>
-            <span className="btn-label">Dashboard</span>
-            <span className="btn-fill"></span>
-          </a>
+          <a href={dashHref} className="os-cta os-cta-primary os-cta-sm" onClick={() => setMenuOpen(false)}>Dashboard</a>
         ) : (
           <>
-            <a href={loginHref} className="btn btn-secondary btn-sm group" onClick={() => setMenuOpen(false)}>
-              <span className="btn-label">Log in</span>
-              <span className="btn-fill"></span>
-            </a>
-            <a href={signupHref} className="btn btn-primary btn-sm group" onClick={() => setMenuOpen(false)}>
-              <span className="btn-label">Sign up</span>
-              <span className="btn-fill"></span>
-            </a>
+            <a href={loginHref} className="os-cta os-cta-ghost os-cta-sm" onClick={() => setMenuOpen(false)}>Log in</a>
+            <a href={signupHref} className="os-cta os-cta-primary os-cta-sm" onClick={() => setMenuOpen(false)}>Sign up</a>
           </>
         )}
       </div>

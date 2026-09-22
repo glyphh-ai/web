@@ -5,6 +5,7 @@
  *   GET /api/download?platform=mac&arch=arm64   → Apple Silicon DMG
  *   GET /api/download?platform=mac&arch=x64     → Intel DMG
  *   GET /api/download?platform=win              → Windows installer
+ *   GET /api/download?platform=linux            → Linux AppImage (x64)
  *
  * Uses GITHUB_TOKEN to authenticate with the GitHub API, fetches the
  * latest release asset URL, and 302-redirects the user to a temporary
@@ -20,6 +21,8 @@ const API_BASE = process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
 
 function assetNameFor(platform, arch) {
   if (platform === 'win') return 'Glyphh-Setup.exe';
+  // Linux ships as one x64 AppImage (app/electron-builder.yml).
+  if (platform === 'linux') return 'Glyphh-x64.AppImage';
   // Mac is multi-arch — default to Apple Silicon.
   const a = arch === 'x64' ? 'x64' : 'arm64';
   return `Glyphh-${a}.dmg`;

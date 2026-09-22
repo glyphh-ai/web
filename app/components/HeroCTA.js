@@ -18,7 +18,11 @@ function track(event, variant) {
   }
 }
 
-export default function HeroCTA({ variant = 'default', href, label }) {
+export default function HeroCTA({ variant = 'default', href, label, className }) {
+  // A custom className renders a plain link — no wipe layer — for heroes that
+  // bring their own button style (OsHero). The beacon fires either way.
+  const plain = Boolean(className);
+
   useEffect(() => {
     track('hero_viewed', variant);
   }, [variant]);
@@ -26,11 +30,15 @@ export default function HeroCTA({ variant = 'default', href, label }) {
   return (
     <a
       href={href}
-      className="btn btn-primary btn-lg group"
+      className={className || 'btn btn-primary btn-lg group'}
       onClick={() => track('hero_cta_click', variant)}
     >
-      <span className="btn-label">{label}</span>
-      <span className="btn-fill"></span>
+      {plain ? label : (
+        <>
+          <span className="btn-label">{label}</span>
+          <span className="btn-fill"></span>
+        </>
+      )}
     </a>
   );
 }

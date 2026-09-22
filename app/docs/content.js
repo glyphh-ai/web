@@ -1,4 +1,6 @@
-import { Note, Row, Code, Cast } from './Mascot';
+import { Note, Row, Code, Cast, Shot } from './Mascot';
+import ModelCatalog from '../components/ModelCatalog';
+import catalogStats from '../../public/data/model-catalog.json';
 
 // The docs, written from the source on 2026-09-18. Every page names what the
 // code does today, not what a plan says. When the app changes, this changes.
@@ -42,6 +44,7 @@ const start = [
     mascot: 'post',
     body: (
       <>
+        <Shot src="/screen-shots/glyphh-app-home.png" alt="The Glyphh desktop: the wall with the agent, tabs, tools, and workspaces" caption="The desktop on first open — the wall, the dock, and the agent one keystroke away." />
         <h2>The wall</h2>
         <p>
           Glyphh opens on the wall: tiles for the agent, your tabs, your tools, and your workspaces. Open one and it
@@ -387,6 +390,7 @@ const build = [
     mascot: 'tally',
     body: (
       <>
+        <Shot src="/screen-shots/v2/work-1.jpg" alt="A task running on the desktop" caption="A task is a skill on a clock — the desktop runs it without you in the chair." />
         <p>
           A task is a skill folder with a <code>task.json</code> and a <code>run.js</code>. The desktop runs it in
           a separate process, on a schedule or on demand, and journals every step so a run can pick up where it
@@ -1194,8 +1198,166 @@ const about = [
   },
 ];
 
+// The six things the home page's "How it works" names (his copy, 2026-09-22).
+// Desktop and Tasks have their own pages in Start here / Build; these four are
+// the rest. Each opens with a screenshot slot so the picture can land later.
+const system = [
+  {
+    slug: 'router',
+    title: 'The Router',
+    lede: 'One key, 100s of models, governed by you.',
+    mascot: 'scout',
+    body: (
+      <>
+        <p>
+          The Router is the kernel: it allocates models, money, and permission from one OpenAI-compatible
+          endpoint. It is built on LiteLLM. Put your whole AI stack behind one key and extend your frontier
+          harness with cross-vendor models or open weights.
+        </p>
+        <Shot src="/screen-shots/glyphh-governance.png" alt="The Router's governance view in the console" caption="Roles, budgets, and allow-lists ride every key." />
+        <h2>Burn your frontier credits strategically</h2>
+        <p>
+          Two routing strategies out of the box: burn down the vendor plans you already own first, or reserve
+          premium models on your own keys and proxy the rest to open weights. The desktop routes through the
+          Router natively; so does anything that speaks the OpenAI API.
+        </p>
+        <h2>Teams, budgets, governance</h2>
+        <p>
+          Every key is minted against a role. Budgets, rate limits, and model allow-lists travel with the
+          credential — into the desktop, the CLI, CI, anywhere the key goes. Nothing is on by default.
+        </p>
+        <h2>Semantic routing</h2>
+        <p>
+          The Router sends each job to the compute it deserves: frontier quality where a program gets written,
+          accuracy and efficiency where it runs. Telemetry shows every token per user, key, and model — never a
+          transcript.
+        </p>
+        <Note title="Where to go next">
+          <a href="/docs/gateway">The gateway</a> covers the routing strategies in detail;{' '}
+          <a href="/docs/budgets">Budgets and limits</a> the caps; <a href="/docs/own-cli">Use your own CLI</a> the
+          base-URL swap.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'connect',
+    title: 'Connect',
+    lede: '3,500+ MCP tools give you reach.',
+    mascot: 'byte',
+    body: (
+      <>
+        <p>
+          Connect is the drivers. Pipedream Connect powers the connector framework: sign in to a service once and
+          it appears as a tool in every loop, every app, every program on the desktop. Extended to your
+          organization through the Router.
+        </p>
+        <Shot src="/screen-shots/v2/settings-connections-1.jpg" alt="The Connections page in the desktop" caption="Connections: one sign-in per service, then it is a tool everywhere." />
+        <h2>Govern who connects to what</h2>
+        <p>
+          Individuals connect their own accounts. Admins share connections org-wide and decide who can connect to
+          what, and which tools they can call. Both live under the same roles and budgets as everything else.
+        </p>
+        <h2>Protect the moat</h2>
+        <p>
+          Limit sensitive data at the connection: which services, which tools, which accounts. Browsing and data
+          access are free; active tool calls are itemized from the plan&rsquo;s dollar pool.
+        </p>
+        <Note title="Where to go next">
+          <a href="/docs/connections">Connections</a> for the day-to-day; <a href="/docs/mcp">MCP in both directions</a>{' '}
+          for how tools reach the loop; <a href="/docs/mcp-servers">MCP servers and connections</a> for org admins.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'semantic-apps',
+    title: 'Semantic Apps',
+    lede: 'Stop using inference, use data.',
+    mascot: 'post',
+    body: (
+      <>
+        <p>
+          A semantic app is a small program on deterministic data. The desktop ships with a database, a vector DB,
+          and a semantic knowledge-graph harness, plus 100s of tools your build agents use to create apps that run
+          the same way every time.
+        </p>
+        <Shot src="/screen-shots/glyphh-custom-apps.png" alt="Custom apps on the desktop wall" caption="Apps your teams built, on the wall beside the agent." />
+        <h2>Built with AI once</h2>
+        <p>
+          You do not hire the frontier model to do the job every day. You hire it once, to write the program that
+          does. The output is an artifact, not a transcript: a manifest that declares its tools, storage and memory
+          from the system, state that persists.
+        </p>
+        <h2>Review, approve, distribute</h2>
+        <p>
+          Teams submit an app for review. An admin approves it. The org library puts it on every seat, with roles,
+          budgets, and permissions riding along. Distribution is a property of the OS, not a deployment project.
+        </p>
+        <Note title="Where to go next">
+          <a href="/docs/review">Review and approve</a> for the admin side; <a href="/docs/hub">The org hub</a> for
+          where approved apps live; <a href="/docs/skills">Skills</a> for the folder an app is built from.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'model-catalog',
+    title: 'The model catalog',
+    lede: 'Every model the Router can serve — prices, limits, features — from the LiteLLM table.',
+    mascot: 'tally',
+    body: (
+      <>
+        <p>
+          The Router is built on LiteLLM, and this is LiteLLM's price and context table as our fork carries it:{' '}
+          <strong>{catalogStats.stats.models.toLocaleString('en-US')} models</strong> across{' '}
+          <strong>{catalogStats.stats.providers.toLocaleString('en-US')} providers</strong> and{' '}
+          {catalogStats.stats.modes} modes. Open a row for its pricing, its limits, its features, and a snippet that
+          calls it through the Router. The same catalog, full width, is at <a href="/integrations/models">/integrations/models</a>.
+        </p>
+        <ModelCatalog compact />
+        <Note title="Where the numbers come from">
+          Prices are the vendor's list prices per million tokens on your own keys; the Router never marks them up.
+          The table is rebuilt from the fork on every upstream bump.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'rrotor',
+    title: 'Rrotor',
+    lede: 'Recursive reasoning on top of reasoning.',
+    mascot: 'scout',
+    body: (
+      <>
+        <p>
+          Rrotor is semantic memory and recursive model routing on the desktop. Data is local and never leaves the
+          machine. Programmatic execution improves model performance and the user&rsquo;s experience with
+          probabilistic AI.
+        </p>
+        <Shot src="/screen-shots/hero/command-research.png" alt="Rrotor memory on the desktop" caption="Memory that persists across every model and app you touch." />
+        <h2>Memory that follows you</h2>
+        <p>
+          Memory extends to everything you do every day, across every model or app you touch. It is schema-on-write:
+          no model in the read path, exact answers, versioned history. Governed at the org level.
+        </p>
+        <h2>Deterministic loops</h2>
+        <p>
+          Rrotor runs the open RotorSpec runtime: reproducible runs, auditable behavior. HDC inference routes intent
+          in microseconds with no GPU, so the same input gives the same answer.
+        </p>
+        <Note title="Where to go next">
+          <a href="/research">Research</a> for the substrate; <a href="/docs/loops">Loops</a> for how the desktop runs
+          them; <a href="/docs/built-on">Built on</a> for the repos.
+        </Note>
+      </>
+    ),
+  },
+];
+
 export const GROUPS = [
   { title: 'Start here', lede: 'Install, the desktop, and the keys worth learning on day one.', pages: start },
+  { title: 'The system', lede: 'The Router, Connect, Semantic Apps, and Rrotor — the pieces the home page names.', pages: system },
   { title: 'The agent', lede: 'Sessions, the loops underneath, models, and panels.', pages: agent },
   { title: 'Build', lede: 'Skills, tasks, artifacts, and the org hub.', pages: build },
   { title: 'Connect', lede: 'Connections and MCP, both directions.', pages: connect },

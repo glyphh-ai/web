@@ -1,14 +1,14 @@
 import './globals.css';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Geist, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
 
 // Homepage metadata — title carries the pitch; the description is the full
 // hero subline, verbatim.
-const HOME_TITLE = 'Glyphh — the open desktop client for frontier AI';
-const HOME_DESCRIPTION = "Glyphh is the vendor-neutral interface for Claude, ChatGPT, Gemini, and open-source models. Work with every top-tier AI provider through a single, consistent desktop app.";
+const HOME_TITLE = "Glyphh — the operating system for frontier AI";
+const HOME_DESCRIPTION = "Productivity doesn't come from prompting. It comes from using blended AI models to build predictable semantic applications that run on your data deterministically — validated, distributed, and governed by your teams at scale.";
 
 export const metadata = {
   metadataBase: new URL('https://glyphh.ai'),
@@ -35,13 +35,20 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#1a1a1c',
+  themeColor: '#000000',
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={`${geist.variable} ${jetbrains.variable}`}>
       <head>
+        {/* Sentient italic — the emphasis face — from Fontshare. Geist (display + body) loads via next/font. */}
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=sentient@400i&display=swap"
+          rel="stylesheet"
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-YZ78CLMRWY"
           strategy="afterInteractive"

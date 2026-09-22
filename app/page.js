@@ -2,9 +2,12 @@ import { headers } from 'next/headers';
 import Nav from './components/Nav';
 import Reveal from './components/Reveal';
 import Hero from './components/Hero';
+import OsHero from './components/OsHero';
+import QuickStart from './components/QuickStart';
+import HowItWorks from './components/HowItWorks';
+import WorksWith from './components/WorksWith';
 import StoryHeads from './components/StoryHeads';
 import Mcp from './components/Mcp';
-import RouterStage from './components/RouterStage';
 import AppMarquee from './components/AppMarquee';
 import Download from './components/Download';
 import FAQ from './components/FAQ';
@@ -31,13 +34,21 @@ export default async function Home() {
     <div className="home-page">
       <Reveal />
       <Nav />
-      {/* The Router hero (his order, 2026-09-21): copy left, the marketecture
-          right. Campaign variants (/code, /work) keep the desktop stage. */}
-      <Hero
-        variant={variant}
-        stage={variant !== 'default'}
-        side={variant === 'default' ? <RouterStage className="gwx-hero-stage" style={{ margin: 0, width: '100%', maxWidth: 'none' }} /> : null}
-      />
+      {/* The OS hero (site refactor 2026-09-22, site.md §1.1): the golden pitch,
+          centered. Campaign variants (/code, /work) keep the desktop stage hero. */}
+      {variant === 'default' ? <OsHero variant={variant} /> : <Hero variant={variant} stage />}
+      {/* The frame (site refactor 2026-09-22): below the hero the page runs
+          inside a railed column. Quick Start is the first section in it. */}
+      <div className="site-frame">
+        <HowItWorks />
+        <QuickStart />
+        <WorksWith />
+      </div>
+      {/* EVERYTHING under the hero is OFF the page while the refactor works
+          down from the top (his order, 2026-09-22). Hidden, not deleted —
+          each band comes back restyled in site.md order. */}
+      {false && (
+        <>
       {/* The connections scroller (his order, 2026-09-21): right under the
           hero, before the callout. */}
       <AppMarquee />
@@ -59,6 +70,8 @@ export default async function Home() {
       <FAQ />
       <FinalCTA />
       <Footer />
+        </>
+      )}
     </div>
   );
 }
