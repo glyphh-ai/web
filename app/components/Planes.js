@@ -44,10 +44,11 @@ const LOOPS = [
   { name: 'Cursor', domain: 'cursor.com' },
 ];
 
-function Arrow({ dir }) {
+// `n` particles, spread evenly along the 2.4s run — more with every step round the loop.
+function Arrow({ dir, n = 3 }) {
   return (
     <div className={`pl-arrow pl-${dir}`} aria-hidden="true">
-      <i /><i /><i />
+      {Array.from({ length: n }, (_, k) => <i key={k} style={{ animationDelay: `${(-2.4 * k / n).toFixed(2)}s` }} />)}
     </div>
   );
 }
@@ -86,10 +87,10 @@ export default function Planes() {
             ))}
           </div>
         </div>
-        <Arrow dir="right" />
-        <Arrow dir="down" />
-        <Arrow dir="left" />
-        <Arrow dir="up" />
+        <Arrow dir="right" n={2} />
+        <Arrow dir="down" n={4} />
+        <Arrow dir="left" n={6} />
+        <Arrow dir="up" n={8} />
       </div>
     </section>
   );
