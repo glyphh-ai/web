@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import OsHero from './components/OsHero';
 import QuickStart from './components/QuickStart';
 import HowItWorks from './components/HowItWorks';
+import Planes from './components/Planes';
 import WorksWith from './components/WorksWith';
 import ExpandableShot from './components/ExpandableShot';
 import StoryHeads from './components/StoryHeads';
@@ -56,6 +57,7 @@ export default async function Home() {
           </div>
           <ExpandableShot src="/screen-shots/glyphh-hero.mp4" poster="/screen-shots/glyphh-app-home.png" alt="Glyphh — the desktop in motion" eager />
         </section>
+        <Planes />
         <HowItWorks />
         <QuickStart />
         <WorksWith />
