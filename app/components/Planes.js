@@ -35,6 +35,15 @@ const PLANES = [
   },
 ];
 
+// The loops the desktop runs, besides its own.
+const LOOPS = [
+  { name: 'Claude Code', domain: 'claude.ai' },
+  { name: 'Codex', domain: 'chatgpt.com' },
+  { name: 'Gemini', domain: 'gemini.google.com' },
+  { name: 'Copilot', domain: 'github.com' },
+  { name: 'Cursor', domain: 'cursor.com' },
+];
+
 function Arrow({ dir }) {
   return (
     <div className={`pl-arrow pl-${dir}`} aria-hidden="true">
@@ -68,6 +77,14 @@ export default function Planes() {
           <img src="/glyphh-mascot.png" alt="" width="64" height="64" />
           <span className="pl-core-title">Desktop</span>
           <span className="pl-core-sub">the universal operating system</span>
+          {/* the loops the desktop runs (the Glyphh loop aside): white-bordered squares along the foot */}
+          <div className="pl-loops">
+            {LOOPS.map((l) => (
+              <span key={l.name} className="pl-loop" title={l.name}>
+                <img src={`https://www.google.com/s2/favicons?domain=${l.domain}&sz=64`} alt={l.name} width="20" height="20" loading="lazy" />
+              </span>
+            ))}
+          </div>
         </div>
         <Arrow dir="right" />
         <Arrow dir="down" />
