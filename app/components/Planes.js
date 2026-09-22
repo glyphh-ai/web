@@ -47,24 +47,30 @@ const LOOPS = [
 // `n` particles ride the line, spread evenly along the 2.4s run. `level` grows
 // round the loop and sets how many tiny cubes emit off the line as they go —
 // they start on it and drift away at right angles, fading.
+const frac = (x) => x - Math.floor(x);
+
 function Arrow({ dir, n = 3, level = 1 }) {
-  const horizontal = dir === 'right' || dir === 'left';
   const emits = level * 4;                                              // 4, 8, 12, 16 round the loop
   return (
     <div className={`pl-arrow pl-${dir}`} aria-hidden="true">
       {Array.from({ length: n }, (_, k) => <i key={k} style={{ animationDelay: `${(-2.4 * k / n).toFixed(2)}s` }} />)}
       {Array.from({ length: emits }, (_, k) => {
-        const side = k % 2 ? 1 : -1;
-        const drift = (7 + level * 5 + ((k * 7919) % 8)) * side;        // px, off the line — farther each step
-        const ex = horizontal ? 0 : drift, ey = horizontal ? drift : 0;
+        // each cube its own heading and speed, from a hash of its index; the reach
+        // and the speed spread both grow with the level
+        const h1 = frac(k * 0.618 + level * 0.113), h2 = frac(k * 0.371 + 0.5), h3 = frac(k * 0.827 + level * 0.29);
+        const angle = h1 * Math.PI * 2;
+        const reach = (7 + level * 5) * (0.5 + h2);                       // px
+        const ex = Math.cos(angle) * reach, ey = Math.sin(angle) * reach;
+        const dur = 2.4 * (1.15 - h3 * (0.35 + level * 0.12));            // s — faster spread each step
         return (
           <b
             key={k}
             style={{
-              animationDelay: `${(-2.4 * ((k * 0.618) % 1)).toFixed(2)}s`,
-              '--ex': `${ex}px`,
-              '--ey': `${ey}px`,
-              '--cs': `${(2 + level * 0.4).toFixed(1)}px`,                 // the cube, a shade bigger each step
+              animationDuration: `${dur.toFixed(2)}s`,
+              animationDelay: `${(-dur * frac(k * 0.917)).toFixed(2)}s`,
+              '--ex': `${ex.toFixed(1)}px`,
+              '--ey': `${ey.toFixed(1)}px`,
+              '--cs': `${(2 + level * 0.4).toFixed(1)}px`,
             }}
           />
         );
