@@ -61,6 +61,10 @@ export default function Planes() {
         ))}
         {/* The centre: the desktop, the universal operating system — behind the arrows, in the middle of the loop. */}
         <div className="pl-core" aria-hidden="true">
+          {/* particles run the border the other way round — counter to the loop outside */}
+          {['top', 'left', 'bottom', 'right'].map((e) => (
+            <div key={e} className={`pl-edge pl-edge-${e}`}><i /><i /><i /></div>
+          ))}
           <img src="/glyphh-mascot.png" alt="" width="64" height="64" />
           <span className="pl-core-title">Desktop</span>
           <span className="pl-core-sub">the universal operating system</span>
