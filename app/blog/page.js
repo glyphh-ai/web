@@ -47,7 +47,9 @@ export default function BlogIndex() {
           ) : null}
           {rest.map((p) => (
             <a key={p.slug} href={`/blog/${p.slug}`} className="bl-row">
-              <div className="bl-cover bl-cover-sm"><LetterField seed={p.slug.length} /></div>
+              {p.cover
+                ? <div className="bl-cover bl-cover-sm"><img src={p.cover} alt={p.coverAlt || ''} className="bl-cover-img" /></div>
+                : <div className="bl-cover bl-cover-sm"><LetterField seed={p.slug.length} /></div>}
               <div>
                 <p className="bl-meta"><span className="bl-date">{fmtDate(p.date)}</span></p>
                 <h3 className="bl-row-title">{p.title}</h3>
