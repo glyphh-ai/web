@@ -4,27 +4,29 @@ import { useEffect, useState } from 'react';
 
 /**
  * DesktopShots — the home page's "Glyphh Desktop" section (his order,
- * 2026-09-23): the v2 screenshots he provided, run in a cycle inside the
+ * 2026-09-23): the home screenshots he provided (public/screen-shots/home,
+ * glyphh-home-1…15, from his Desktop the same day), run in a cycle inside the
  * white-ruled frame the video used to sit in. One image at a time, a
  * crossfade between them, a caption row naming the screen, and a dot per
  * shot to jump. The cycle pauses while the pointer is over the frame.
  */
 
 const SHOTS = [
-  ['/screen-shots/v2/chat-1.jpg', 'Chat', 'Glyphh Desktop — chat'],
-  ['/screen-shots/v2/code-1.jpg', 'Code', 'Glyphh Desktop — code'],
-  ['/screen-shots/v2/code-1.5.jpg', 'Code · agent', 'Glyphh Desktop — code, the agent at work'],
-  ['/screen-shots/v2/code-2.jpg', 'Code · review', 'Glyphh Desktop — code, reviewing'],
-  ['/screen-shots/v2/work-1.jpg', 'Work', 'Glyphh Desktop — work'],
-  ['/screen-shots/v2/settings-connections-1.jpg', 'Connections', 'Glyphh Desktop — settings, connections'],
-  ['/screen-shots/v2/settings-connections-2.jpg', 'Connections · detail', 'Glyphh Desktop — settings, a connection'],
-  ['/screen-shots/v2/settings-skill-1.jpg', 'Skill', 'Glyphh Desktop — settings, a skill'],
-  ['/screen-shots/v2/settings-skills-2.jpg', 'Skills', 'Glyphh Desktop — settings, skills'],
-  ['/screen-shots/v2/settings-skills-3.jpg', 'Skills · install', 'Glyphh Desktop — settings, installing a skill'],
-  ['/screen-shots/v2/settings-artifacts.jpg', 'Artifacts', 'Glyphh Desktop — settings, artifacts'],
-  ['/screen-shots/v2/settings-tabs.jpg', 'Tabs', 'Glyphh Desktop — settings, tabs'],
-  ['/screen-shots/v2/settings-workspaces-1.jpg', 'Workspaces', 'Glyphh Desktop — settings, workspaces'],
-  ['/screen-shots/v2/settings-workspaces-2.jpg', 'Workspaces · detail', 'Glyphh Desktop — settings, a workspace'],
+  ['/screen-shots/home/glyphh-home-1.png', 'Code', 'Glyphh Desktop — the code panel, an agent at work'],
+  ['/screen-shots/home/glyphh-home-2.png', 'Research', 'Glyphh Desktop — research, a live map beside the chat'],
+  ['/screen-shots/home/glyphh-home-3.png', 'Design', 'Glyphh Desktop — design, a brand across artboards'],
+  ['/screen-shots/home/glyphh-home-4.png', 'Design · board', 'Glyphh Desktop — design, one board full-frame'],
+  ['/screen-shots/home/glyphh-home-5.png', 'Connections', 'Glyphh Desktop — the connections grid'],
+  ['/screen-shots/home/glyphh-home-6.png', 'Work', 'Glyphh Desktop — work, apps tiled beside the chat'],
+  ['/screen-shots/home/glyphh-home-7.png', 'Settings · Connections', 'Glyphh Desktop — settings, connections'],
+  ['/screen-shots/home/glyphh-home-8.png', 'Settings · Connection', 'Glyphh Desktop — settings, a connection and its tools'],
+  ['/screen-shots/home/glyphh-home-9.png', 'Settings · Skills', 'Glyphh Desktop — settings, skills'],
+  ['/screen-shots/home/glyphh-home-10.png', 'Settings · Skill', 'Glyphh Desktop — settings, a skill'],
+  ['/screen-shots/home/glyphh-home-11.png', 'Settings · Workspaces', 'Glyphh Desktop — settings, workspaces'],
+  ['/screen-shots/home/glyphh-home-12.png', 'Settings · Skill editor', 'Glyphh Desktop — settings, editing a skill'],
+  ['/screen-shots/home/glyphh-home-13.png', 'Settings · Accounts', 'Glyphh Desktop — settings, connected accounts'],
+  ['/screen-shots/home/glyphh-home-14.png', 'Work · inbox', 'Glyphh Desktop — work, mail, calendar and chat tiled'],
+  ['/screen-shots/home/glyphh-home-15.png', 'Work · agent', 'Glyphh Desktop — work, the agent beside the tiles'],
 ];
 const HOLD_MS = 3800;
 
