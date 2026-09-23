@@ -30,11 +30,11 @@ export default function OsHero({ variant = 'default' }) {
         <p className="oshero-eyebrow">Open Weights · Every frontier model · Programs you own</p>
 
         <h1 className="oshero-title">
-          AI at build time. <em>Not</em> runtime.
+          Glyphh is the operating system for frontier AI.
         </h1>
 
         <p className="oshero-pitch">
-          <strong>Glyphh is the operating system for frontier AI.</strong>
+          <strong>AI at build time. <em>Not</em> runtime.</strong>
         </p>
         {/* The four points (his options, 2026-09-22 — the Option 3 blend, to look at):
             replaces the pitch's second sentence, which stays hidden below. */}
