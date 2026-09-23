@@ -7,6 +7,7 @@ import QuickStart from './components/QuickStart';
 import HowItWorks from './components/HowItWorks';
 import Planes from './components/Planes';
 import WorksWith from './components/WorksWith';
+import Latest from './components/Latest';
 import ExpandableShot from './components/ExpandableShot';
 import StoryHeads from './components/StoryHeads';
 import Mcp from './components/Mcp';
@@ -61,6 +62,7 @@ export default async function Home() {
         <HowItWorks />
         <QuickStart />
         <WorksWith />
+        <Latest />
       </div>
       {/* EVERYTHING under the hero is OFF the page while the refactor works
           down from the top (his order, 2026-09-22). Hidden, not deleted —

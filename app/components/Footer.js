@@ -26,6 +26,7 @@ const COLS = [
   {
     title: 'Resources',
     links: [
+      ['Blog', '/blog'],
       ['Research', '/research'],
       ['Install', '/docs/install'],
       ['The CLI', '/docs/cli'],
