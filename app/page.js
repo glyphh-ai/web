@@ -45,7 +45,7 @@ export default async function Home() {
       <div className="site-frame">
         {/* The pitch (his order, 2026-09-23: "switch the sections") — what the
             hero used to say, first in the frame; the screenshots took the hero. */}
-        <OsPitch variant={variant} />
+        <OsPitch />
         <Planes />
         <HowItWorks />
         <QuickStart />

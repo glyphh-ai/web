@@ -8729,7 +8729,9 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 /* ── The switch (2026-09-23): the screenshots take the hero, the pitch takes the frame ── */
 .oshero-shots-hero { padding: 8rem 0 4.5rem; }
 .oshero-shots-hero .oshero-pitch { max-width: 52rem; }
-.oshero-shots-hero .oshero-links { margin-top: 1rem; }
+.oshero-shots-hero .oshero-actions { margin-top: 1.4rem; }
+.oshero-shots-hero .oshero-pitch + .oshero-actions { margin-top: 1.4rem; }
+.hv-pitch .oshero-points + .oshero-pitch-after { margin-top: 2rem; }
 .oshero-links { display: inline-flex; gap: 1.25rem; margin: 0; }
 .oshero-shots { width: 100%; max-width: 1020px; margin: 2.25rem auto 0; text-align: left; }
 .oshero .dv-shot { display: block; width: 100%; margin: 0; border-radius: 0; border: 1px solid var(--rail); background: #000; }
