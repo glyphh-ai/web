@@ -42,7 +42,7 @@ export const POSTS = [
         id: 'the-math',
         heading: 'Does the math math?',
         body: [
-          'An example: my IT org is 50 people and my AI spend with Anthropic is $7 million. I need X more people to manage all the enablement, the training, the risk-mitigation software, the governance software — the people, the process, and so on — so my total AI spend is closer to $10–11 million. Can we cut or outgrow that delta materially in the same window as the burn? Does sending AI emails, building fancier decks, and getting half-baked agentic solutions equate to more revenue? No. This math does not math.',
+          'An example: take a 2,500-person org running Anthropic at list prices. Seats alone at $100 per person per month are $3 million a year, and usage on top of that takes the spend to $7 million without much effort. Now add the headcount uplift: roughly 20 more people across security, enterprise AI, data science, and business transformation to handle the enablement, the training, the risk-mitigation software, the governance software — the people, the process, and so on. Fully loaded, the total AI spend is closer to $10–11 million. Can the org cut or outgrow that delta materially in the same window as the burn? Does sending AI emails, building fancier decks, and getting half-baked agentic solutions equate to more revenue? No. This math does not math.',
         ],
       },
       {
