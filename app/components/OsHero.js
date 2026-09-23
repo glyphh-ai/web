@@ -30,7 +30,7 @@ export default function OsHero() {
         <p className="oshero-eyebrow">Open Weights · Every frontier model · Programs you own</p>
 
         <h1 className="oshero-title">
-          Glyphh is the operating system for frontier AI.
+          Glyphh is the operating system for <em>frontier AI.</em>
         </h1>
 
         <p className="oshero-pitch">
