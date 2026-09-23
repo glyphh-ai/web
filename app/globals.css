@@ -8381,8 +8381,8 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
    How it works tiles, the Quick Start terminal, the video frame, the
    Integrations and Pricing cards, the Research tiles: the same hot segment
    racing the edge with a flicker that the planes have. */
-.hv-tile, .ix-card, .term, .hv-video .dv-shot { position: relative; }
-.hv-tile::before, .ix-card::before, .term::before, .hv-video .dv-shot::before {
+.hv-tile, .ix-card, .term, .hv-video .dv-shot, .oshero .dv-shot { position: relative; }
+.hv-tile::before, .ix-card::before, .term::before, .hv-video .dv-shot::before, .oshero .dv-shot::before {
   content: "";
   position: absolute; inset: 0; z-index: 1;
   padding: 2px;
@@ -8397,14 +8397,14 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
   pointer-events: none;
   transition: opacity 0.25s ease;
 }
-.hv-tile:hover::before, .ix-card:hover::before, .term:hover::before, .hv-video .dv-shot:hover::before {
+.hv-tile:hover::before, .ix-card:hover::before, .term:hover::before, .hv-video .dv-shot:hover::before, .oshero .dv-shot:hover::before {
   opacity: 1;
   animation: pl-ring 1.6s linear infinite, pl-flicker 0.28s steps(2) infinite;
 }
-.hv-video .dv-shot:hover::before { animation-duration: 3.2s, 0.28s; }
+.hv-video .dv-shot:hover::before, .oshero .dv-shot:hover::before { animation-duration: 3.2s, 0.28s; }
 /* content above the ring */
 .ix-card > *, .term > * { position: relative; z-index: 2; }
-.hv-video .dv-shot > * { position: relative; z-index: 2; }
+.hv-video .dv-shot > *, .oshero .dv-shot > * { position: relative; z-index: 2; }
 @media (prefers-reduced-motion: reduce) {
   .hv-tile:hover::before, .ix-card:hover::before, .term:hover::before, .hv-video .dv-shot:hover::before { animation: none; }
 }
@@ -8701,7 +8701,7 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 
 /* ── Glyphh Desktop: the screenshots, in a cycle (2026-09-23) ─────────── */
 .ds-h2 { margin: 0 0 1.25rem; max-width: 40rem; }
-.ds-frame { display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; }
+.ds-frame { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; }
 .ds-frame .ds-img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
   opacity: 0; transition: opacity 0.9s ease; z-index: 2;
@@ -8725,3 +8725,17 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
   .ds-bar { flex-wrap: wrap; }
   .ds-cap { min-width: 0; }
 }
+
+/* ── The switch (2026-09-23): the screenshots take the hero, the pitch takes the frame ── */
+.oshero-shots-hero { padding: 8rem 0 4.5rem; }
+.oshero-shots-hero .oshero-pitch { max-width: 52rem; }
+.oshero-shots-hero .oshero-links { margin-top: 1rem; }
+.oshero-links { display: inline-flex; gap: 1.25rem; margin: 0; }
+.oshero-shots { width: 100%; max-width: 1020px; margin: 2.25rem auto 0; text-align: left; }
+.oshero .dv-shot { display: block; width: 100%; margin: 0; border-radius: 0; border: 1px solid var(--rail); background: #000; }
+[data-theme="light"] .oshero .dv-shot { background: var(--surface); }
+.oshero-shots .ds-bar { position: relative; z-index: 2; }
+.site-frame > .hv-pitch { padding: 4rem 2.5rem 3.75rem; text-align: center; }
+.hv-pitch .oshero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.hv-pitch .oshero-title { margin-top: 0; }
+@media (max-width: 720px) { .site-frame > .hv-pitch { padding: 2.75rem 1.25rem 2.5rem; } }

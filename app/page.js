@@ -8,7 +8,7 @@ import HowItWorks from './components/HowItWorks';
 import Planes from './components/Planes';
 import WorksWith from './components/WorksWith';
 import Latest from './components/Latest';
-import DesktopShots from './components/DesktopShots';
+import OsPitch from './components/OsPitch';
 import StoryHeads from './components/StoryHeads';
 import Mcp from './components/Mcp';
 import AppMarquee from './components/AppMarquee';
@@ -39,26 +39,13 @@ export default async function Home() {
       <Nav />
       {/* The OS hero (site refactor 2026-09-22, site.md §1.1): the golden pitch,
           centered. Campaign variants (/code, /work) keep the desktop stage hero. */}
-      {variant === 'default' ? <OsHero variant={variant} /> : <Hero variant={variant} stage />}
+      {variant === 'default' ? <OsHero /> : <Hero variant={variant} stage />}
       {/* The frame (site refactor 2026-09-22): below the hero the page runs
           inside a railed column. Quick Start is the first section in it. */}
       <div className="site-frame">
-        {/* The product video (his order, 2026-09-22): the old site's hero reel,
-            first in the frame; he is re-cutting it today — swap the src. */}
-        <section className="hv-video" id="desktop">
-          <div className="qs-head">
-            <span className="qs-kicker">Glyphh Desktop</span>
-            <span className="qs-links">
-              <a href="/video-demo" className="qs-more">Watch the demo &rarr;</a>
-              <a href="https://www.youtube.com/@glyphhai" className="qs-more qs-yt" target="_blank" rel="noopener">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
-                YouTube
-              </a>
-            </span>
-          </div>
-          <h2 className="ix-h2 ds-h2">The vendor neutral alternative to Claude Code, OpenAI Work, and Gemini Desktop.</h2>
-          <DesktopShots />
-        </section>
+        {/* The pitch (his order, 2026-09-23: "switch the sections") — what the
+            hero used to say, first in the frame; the screenshots took the hero. */}
+        <OsPitch variant={variant} />
         <Planes />
         <HowItWorks />
         <QuickStart />
