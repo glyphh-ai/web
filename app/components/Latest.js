@@ -19,7 +19,9 @@ export default function Latest() {
       <div className={`lt-grid lt-grid-${posts.length}`}>
         {posts.map((p, i) => (
           <a key={p.slug} href={`/blog/${p.slug}`} className="lt-card">
-            <div className="bl-cover"><LetterField seed={i + 60} /><span className="bl-cover-mark"><img src="/glyphh-mascot.png" alt="" width="40" height="40" /></span></div>
+            {p.cover
+              ? <div className="bl-cover"><img src={p.cover} alt={p.coverAlt || ''} className="bl-cover-img" /></div>
+              : <div className="bl-cover"><LetterField seed={i + 60} /><span className="bl-cover-mark"><img src="/glyphh-mascot.png" alt="" width="40" height="40" /></span></div>}
             <div className="lt-copy">
               <span className="bl-date">{fmtDate(p.date)}</span>
               <h3 className="lt-title">{p.title}</h3>
