@@ -42,7 +42,9 @@ export default async function BlogPost({ params }) {
               <span className="bl-author"><img src="/glyphh-mascot.png" alt="" width="26" height="26" /> {p.author}</span>
               <span className="bl-meta">{fmtDate(p.date)} &middot; {p.minutes} min read</span>
             </div>
-            <div className="bl-cover bl-cover-hero"><LetterField seed={11} /><span className="bl-cover-mark"><img src="/glyphh-mascot.png" alt="" width="64" height="64" /></span></div>
+            {p.cover
+              ? <div className="bl-cover bl-cover-hero"><img src={p.cover} alt={p.coverAlt || ''} className="bl-cover-img" /></div>
+              : <div className="bl-cover bl-cover-hero"><LetterField seed={11} /><span className="bl-cover-mark"><img src="/glyphh-mascot.png" alt="" width="64" height="64" /></span></div>}
             <div className="bl-body">
               {p.sections.map((s) => (
                 <section key={s.id} id={s.id}>
@@ -50,7 +52,8 @@ export default async function BlogPost({ params }) {
                   {s.body.map((para, i) =>
                     typeof para === 'string'
                       ? <p key={i} className={para.startsWith('—') ? 'bl-sign' : undefined}>{para}</p>
-                      : <p key={i} dangerouslySetInnerHTML={{ __html: para.html }} />,
+                      // a div, not a p: html bodies can carry block markup (lists)
+                      : <div key={i} className="bl-html" dangerouslySetInnerHTML={{ __html: para.html }} />,
                   )}
                 </section>
               ))}

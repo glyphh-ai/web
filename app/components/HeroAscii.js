@@ -21,7 +21,10 @@ import { useEffect, useRef } from 'react';
  * canvas so each letter carries its own opacity, in the site's mono type.
  *
  * The cursor lights the letters near it. Under prefers-reduced-motion it
- * draws one still frame. It pauses off screen.
+ * draws one still frame. It pauses off screen. On touch devices (phone,
+ * iPad) it draws the same still frame — the 20fps cell loop is what made
+ * the page chug on mobile Safari (his report, 2026-09-22), and there is no
+ * cursor to light letters there anyway.
  */
 
 const PHRASE = 'peaceloveandprosperityforallmankind';
@@ -127,7 +130,9 @@ export default function HeroAscii() {
     const hero = host.parentElement;   // the whole hero, so the cursor effect follows the pointer over the copy too
     const ctx = canvas.getContext('2d');
     const mono = getComputedStyle(canvas).fontFamily || 'monospace';
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduced =
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      window.matchMedia('(hover: none), (pointer: coarse)').matches;
     let w = 0, h = 0, raf = 0, last = -1, visible = true;
     // the cursor, in the art's own coordinates: where it is, where the field thinks it is (eased), how present
     const cursor = { tx: -1e4, ty: -1e4, x: -1e4, y: -1e4, on: 0, target: 0 };

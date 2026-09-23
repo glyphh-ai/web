@@ -23,6 +23,9 @@ export default function HallLines({ selector = '.oshero-points li' }) {
     const canvas = ref.current;
     if (!canvas) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // A hover effect: on touch devices there is no hover, only taps that would
+    // strand the lines mid-flight — skip the canvas entirely (2026-09-22).
+    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
     const host = canvas.parentElement;
     const ctx = canvas.getContext('2d');
     let w = 0, h = 0, raf = 0, last = 0, dwell = 0, flare = 0;

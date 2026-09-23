@@ -34,7 +34,9 @@ export default function BlogIndex() {
         <section className="ix-section">
           {first ? (
             <a href={`/blog/${first.slug}`} className="bl-feature">
-              <div className="bl-cover"><LetterField seed={7} /><span className="bl-cover-mark"><img src="/glyphh-mascot.png" alt="" width="48" height="48" /></span></div>
+              {first.cover
+                ? <div className="bl-cover"><img src={first.cover} alt={first.coverAlt || ''} className="bl-cover-img" /></div>
+                : <div className="bl-cover"><LetterField seed={7} /><span className="bl-cover-mark"><img src="/glyphh-mascot.png" alt="" width="48" height="48" /></span></div>}
               <div className="bl-feature-copy">
                 <p className="bl-meta"><span className="bl-date">{fmtDate(first.date)}</span> {first.author} &middot; {first.minutes} min read</p>
                 <h2 className="bl-feature-title">{first.title}</h2>

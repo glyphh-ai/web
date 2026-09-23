@@ -7,12 +7,72 @@
 
 export const POSTS = [
   {
-    slug: 'welcome-to-glyphh-ai',
-    title: 'Welcome to Glyphh AI',
-    summary: 'Chris, aka Timme, on the official launch of Glyphh AI: where it came from, what it turned into, and why AI belongs at build time.',
+    slug: 'the-critical-inversion',
+    title: 'The Critical Inversion — Big AI vs. Open Weights',
+    summary: 'The five promises of AI are all margin plays. Does the math math? Timme runs the numbers, and makes the case for vendor-neutral tooling and a heavy helping of open weights.',
     date: '2026-09-22',
     author: 'Chris "Timme"',
-    minutes: 8,
+    minutes: 4,
+    cover: '/blog/critical-inversion-hero.png',
+    coverAlt: 'One massive Big AI cube against a field of small open-weight cubes, routed by Glyphh: frontier where it counts, open weights for the rest.',
+    tags: ['Strategy', 'Open Weights', 'The Router'],
+    related: [
+      ['The Router', '/docs/router'],
+      ['Every model', '/integrations/models'],
+      ['Welcome to Glyphh AI', '/blog/welcome-to-glyphh-ai'],
+    ],
+    sections: [
+      {
+        id: 'hold-that-thought',
+        heading: null,
+        body: [
+          'Take a step back and consider the message being pushed onto the world: Big AI is responsible, is reliable, and is morally on the side of good. Cool, sounds great. But I have heard this before, and what are you really selling me on? Hold that thought…',
+        ],
+      },
+      {
+        id: 'five-promises',
+        heading: 'The five promises of AI',
+        body: [
+          'The five promises of AI are all margin plays. Does the math math? I am not so sure. Let me explain:',
+          { html: '<ol><li>Because I am increasing my spend in frontier AI, I can continue to grow my business and keep my headcount flat.</li><li>Because I am increasing my spend in AI, I can reduce my costs — people and software — and maintain my current state.</li><li>Because I am increasing my spend in AI, I can increase my revenue by (a) selling more and (b) reaching net-new customers, without (c) increasing headcount in sales.</li><li>Because I am increasing my spend with AI, I can reduce my risk by having more security insight and intelligence.</li><li>Because I am increasing my spend in AI, I can produce more features, ship more code, and fix more holes and defects without increasing headcount.</li></ol>' },
+          'All of these have to overcome (a) the amount of the increased AI spend, (b) the increased risk introduced by the increased AI usage, and (c) the increased headcount required to deploy, manage, and govern the net-new AI in the org.',
+        ],
+      },
+      {
+        id: 'the-math',
+        heading: 'Does the math math?',
+        body: [
+          'An example: my IT org is 50 people and my AI spend with Anthropic is $7 million. I need X more people to manage all the enablement, the training, the risk-mitigation software, the governance software — the people, the process, and so on — so my total AI spend is closer to $10–11 million. Can we cut or outgrow that delta materially in the same window as the burn? Does sending AI emails, building fancier decks, and getting half-baked agentic solutions equate to more revenue? No. This math does not math.',
+        ],
+      },
+      {
+        id: 'what-does',
+        heading: 'So what does?',
+        body: [
+          'Using AI responsibly to improve efficiency: very little frontier AI and a heavy helping of open-weight models, blended by semantic routing. The question becomes: what tooling does your user base adopt? Claude, OpenAI, Gemini, Cursor, Copilot… Glyphh?',
+        ],
+      },
+      {
+        id: 'why-pick-a-vendor',
+        heading: 'Why pick a vendor?',
+        body: [
+          'You don\'t want to be constantly changing interfaces; the user population can\'t sustain the pace at which change is already coming. So pick something vendor-neutral. Something that maximizes your spend and fits nicely into a strategy that lets you pivot to new tech without changing harnesses or getting stuck with a massive, unpredictable AI bill.',
+          'This is going to sound anti-AI, but it isn\'t: do more with AI, and for your business, by reducing AI usage at runtime. Only use it when you have absolutely no choice — which, in reality, should be seldom.',
+          'Put the human back in intelligence.',
+          '— Timme',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'welcome-to-glyphh-ai',
+    title: 'Welcome to Glyphh AI',
+    summary: 'Chris, aka Timme, on the official launch of Glyphh AI. The whole idea in one breath: use AI to build the app, not to run it.',
+    date: '2026-09-22',
+    author: 'Chris "Timme"',
+    minutes: 6,
+    cover: '/blog/welcome-hero.png',
+    coverAlt: 'The Glyphh mascot under a shower of glyph confetti: Glyphh AI is live — build with AI, run without it.',
     tags: ['Launch', 'Architecture', 'Research'],
     related: [
       ['Research', '/research'],
@@ -25,78 +85,72 @@ export const POSTS = [
         id: 'hi',
         heading: null,
         body: [
-          'Hi everyone, my name is Chris, aka Timme, and this is the official launch of Glyphh AI. It has been years in the making and honestly an amazing journey. I can\'t thank everyone in my life enough for enduring the endless conversations, the re-writes, the failures, the "hey, try this one more time" calls to our beta testers. We are so proud of what we have built and we truly hope you see value from the technology.',
-          'Our mission is one based on peace, love, and respect for everyone. We are putting the human back in intelligence. I believe respect is earned, not demanded, and with that I give my nights, weekends, and endless dev cycles to all of you in what I have created here.',
-          'Will it cure cancer, or solve the world\'s problems? Likely not, but hey, I had to set my sights on something 🙂',
+          'Hi everyone, my name is Chris, aka Timme, and this is the official launch of Glyphh AI. Years in the making, a lot of rewrites, a lot of "hey, try this one more time" calls to our beta testers. Thank you to everyone who put up with the endless conversations. We are very proud of what we built.',
+          'Here\'s the whole idea in one breath: use AI to build the app, not to run it.',
+          'Frontier models are incredible at one thing, iterative generation. For those of us in software that means code gen. They are not good at being the runtime. So Glyphh puts Claude, OpenAI, Gemini, or your open-weight model of choice at build time, where they shine, and then runs what you built deterministically on your data, with no LLM in the middle. You build it on your desktop, you run it on your desktop, you share it with your org, and your peers install it and run it on theirs. Same tool for both.',
+          'That\'s it. Everything below is how we got there and why it matters.',
         ],
       },
       {
-        id: 'what-is-glyphh',
-        heading: 'What is Glyphh?',
+        id: 'origins',
+        heading: 'Where it came from',
         body: [
-          'Turns out that is a very, very hard question to answer. Like so many AI products it started off trying to be everything to everyone. Coding these days, and I have 30 years under my belt, is much faster in some ways and way slower in others. Vibe coding is an exercise in restraint, process, and rigor. It is so, so easy to let a model run, so to speak. Then you\'re cleaning up thousands of lines of code that moved the needle hardly at all.',
-          { html: 'Glyphh started as a memory substrate, <a href="https://github.com/glyphh-ai/ada" target="_blank" rel="noopener noreferrer">Ada</a>, named after Ada Lovelace. I did a write-up on her on our <a href="/research">research page</a>; fascinating to think about. Glyphh is a multi-dimensional HDC lattice, an attempt to harden semantic knowledge beyond RAG. Turns out it works incredibly well for storing temporal signal. Over time I built adaL, which took Ada to the next level with a new type of semantic graph, but ultimately found that RAG or simple SQL with large context windows is hard to beat. Though the research paved the way for what we call rrotors (recursive reasoning on top of reasoning) and the loop our Glyphh runtime executes on. As with any research, the finding isn\'t always the thing that moves the needle the furthest, but more the path that got you there.' },
-          { html: 'Where we landed: Glyphh is more like an operating system than anything else. Honestly, if I was more zealous I would have written it that way, and may yet still. Why? If you\'re like me, AI didn\'t simplify my day, it complicated it 100 times over. My context switching from task to task increased 10x, what seemed like overnight. The use of Ctrl+C and Ctrl+V was epic before gen AI and, well, around April it hit an all-time high. I wanted a way to combine the different model loops I was coding with and my app layouts, with more deterministic outcomes. It was clear to me very early on that these models are not good at runtime but excel at one thing clearly: iterative generation, which for most of us in software engineering means code gen. The first versions of Glyphh, beyond the Ada and adaL runtimes, were the primitive <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code</a>. However, that codebase lacked something I could never quite put my finger on, and then it hit me. I want context switching and loop / model selection combined with model routing and semantic data. Why?' },
-          'What defines a software application? MVC is a common pattern which refers to Model, View, and Controller. I won\'t go into it; just ask your favorite model to break it down. Generally speaking we need data, which most will tell you is the start of all application development, but I am not sure that is entirely true. I have written software in some of the largest technology companies for some of the largest global customers, and sometimes starting with the experience and working backwards is the right call. But for this conversation, indulge me: let\'s start with data.',
-        ],
-      },
-      {
-        id: 'model',
-        heading: 'Model',
-        body: [
-          'Now, unless you can connect to or derive the schemas of SaaS apps, and you have that skillset, you\'re going to need a way to understand data models. Nothing to do with AI. That skill, to become a DBA, is years of work, and I have the battle scars with those folks from building multi-tenant, HA-based data tiers that are active / active in high-volume orgs. What you\'re going to build isn\'t likely that, but you need some way to understand the data model.',
-          'The model also generally holds the business logic, state, calculations, etc. So in order to build an application, somewhere you need to have a level of domain expertise or access to someone that can help you define the logic. Why? Well, as fun as it might be to try and guess how a team works or an app should work, there is no replacement for domain experts. AI is not a replacement, if you are wondering. I\'ll circle back to why this is so critical relative to Glyphh\'s architecture.',
-        ],
-      },
-      {
-        id: 'controller',
-        heading: 'Controller',
-        body: [
-          'In order to move the data and store it we need a layer that sits between the user interface and the data. The controller acts mostly like a traffic cop of sorts. It takes a request from a caller, parses the data, calls the model, etc. CRUD operations (create, read, update, and delete) are the basics; controller bloat is a thing. Frameworks like the MEAN and MERN stacks are saviors in this regard, so is good old Rails, but frameworks like Go are my new go-to.',
-        ],
-      },
-      {
-        id: 'view',
-        heading: 'View',
-        body: [
-          'This is obvious, I hope: the view is the interaction with the user and, IMHO, the place that matters most, even in the world of AI. In fact, maybe more so now that AI is in the picture.',
-          'So why did I explain that relative to Glyphh? Glyphh is not just a "harness"; it is a way to create micro applications, using AI, to improve how you work. What? Let me say that again in a different way. Glyphh allows you to leverage AI, Claude, OpenAI, Gemini, Cursor, GitHub, etc., to build micro MVC applications that you can instantly use, share, and extend. Why does that matter?',
+          { html: 'Glyphh started as a memory substrate called <a href="https://github.com/glyphh-ai/ada" target="_blank" rel="noopener noreferrer">Ada</a>, named after Ada Lovelace (I did a write-up on her on our <a href="/research">research page</a>; fascinating to think about). Ada is a multi-dimensional HDC lattice, an attempt to harden semantic knowledge beyond RAG. It turned out to be excellent at storing temporal signal. I built <a href="https://github.com/glyphh-ai/adaL" target="_blank" rel="noopener noreferrer">adaL</a> on top of it with a new kind of semantic graph, and then ran into an honest finding: for most workloads, RAG or plain SQL with a big context window is really hard to beat.' },
+          { html: 'That\'s research. The finding isn\'t always the thing that moves the needle; the path usually is. The path here gave us <a href="https://github.com/glyphh-ai/rrotor" target="_blank" rel="noopener noreferrer">rrotors</a>, recursive reasoning on top of reasoning, which is the loop the Glyphh runtime executes at build time. More on that in <a href="/docs/rrotor">the docs</a>.' },
+          { html: 'Meanwhile my actual day got worse, not better. AI didn\'t simplify anything, it multiplied my context switching 10x, seemingly overnight. Around April my Ctrl+C / Ctrl+V usage hit an all-time high. I had a pile of model loops I was coding with, a pile of app layouts, and no way to combine them into something predictable. The first attempt was <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code</a>. It was missing something I couldn\'t name for a while, and then it hit me: I wanted model selection, routing, and semantic data in one place, producing real applications, not chat transcripts.' },
         ],
       },
       {
         id: 'prompt-ui',
         heading: 'Who said a prompt was a good UI?',
         body: [
-          'For the life of me I can\'t figure out who came up with the idea that asking for something, getting a random-ish response, re-asking, another random-ish response, was a good way to interact with software. Is it cool? Yes, very, very cool. Is it efficient or effective? Not really. Gen AI is very, very good at build time, but if I have to ask for what I want in a sentence every time, have it interpret, charge me cash, then figure out it got it wrong, with no way to get a refund... that is not efficient, practical, or scalable. Great job, frontier AI, convincing the world this is the best thing since sliced bread. Not to burst anyone\'s bubble, but it isn\'t any of those things. You have to ask yourself: if this technology can do anything and solve any problem, then why does OpenAI or Anthropic or anyone want to sell it to anyone else? Why not just use it to take over the world, SaaS product by SaaS product? The answer, IMHO, is that the invention isn\'t a new way to use AI but the model itself, which is fantastic at several very specific things.',
+          'For the life of me I can\'t figure out who decided that asking for something, getting a random-ish answer, re-asking, paying again, and finding out it was wrong (no refunds) was a good way to interact with software. Is it cool? Very. Is it efficient, practical, or scalable? Not really.',
+          'I don\'t think the models are the problem. The model is the invention, and it\'s fantastic at several very specific things. The mistake is treating the prompt box as the product. Every SaaS app you use is data, logic, and a UI, and those three things have to be built by someone who knows the domain. AI is not a replacement for that person, if you were wondering. But AI is a phenomenal accelerator for that person, if you give it a proven process instead of a text file of instructions and a prayer.',
+          'Good software is dependable, functional, scalable, easy to use, and secure. A markdown file of instructions is none of those. Data engineering, API development, and real UI / UX work are. Glyphh is my almost-30 years of doing that, turned into a deterministic build process anyone can run.',
         ],
       },
       {
-        id: 'good-use',
-        heading: 'So what is scalable and a good use of AI?',
+        id: 'what-it-looks-like',
+        heading: 'What it looks like',
         body: [
-          'Using AI to build something, iteratively, is frankly the only real use case I can see that merits my investment. To that end, what makes good software? Good software is dependable, functional, scalable, easy to use, and secure. Creating a skill.md file with instructions in text is not software or business logic; it is a horrible way to make anything any of those words I just typed. Using a proven methodology of data engineering, API development, and UI / UX development is. Why not extend my 30 years of experience into a deterministic process to help anyone and everyone build software that can be run in the same tool you use to build it in? That is what Glyphh is. An efficient way to build AI with frontier and open-weight models, connectivity to thousands of endpoints, deterministic ways to push and pull data, with no LLM in the middle of running the application. We are using the LLM at build time to refine something that supercharges what we do at runtime.',
+          'Say your ops team lives in three SaaS tools and a spreadsheet. In Glyphh you describe the app, pick your model (or let the Router pick), and it generates the data model, the connectors to those three tools, and the UI. You iterate with the AI until it\'s right. Then you hit run. From that point on the app is just an app: no tokens, no latency lottery, same answer every time. You publish it to your org, someone reviews and approves it, and your teammates install it and run it locally against their own connections.',
         ],
       },
       {
-        id: 'ux',
-        heading: 'The UX',
+        id: 'share-app-not-data',
+        heading: 'Share the app, not the data',
         body: [
-          'Glyphh is more than just a harness; I have said that a few times. What I mean is that you leverage the desktop to build using AI, fun and, well, very fun even. Then in the same tooling you can build and run the apps you create. You can share those apps with your organization, they can review and approve, and then ship those same apps to your peers, who can install them locally and run them also. It is the opposite of SaaS. Why? Data residency is attentive to the persona making the call. In Glyphh our MCP connections can be scoped to the org (rarely advisable) or to the desktop user. This allows us to keep data scoped to just that user\'s writes without having to build single-instance multi-tenant SaaS apps the org would have to host. Glyphh apps are very effective at securely keeping data in the hands of only those allowed to see it. Sharing applications, not data, allows the desktop runtime to key off connections and not shared credentials.',
+          'This is the part I care about most, and it\'s the opposite of SaaS. In Glyphh, MCP connections are scoped to the desktop user (you can scope them to the org, but I rarely advise it). Every app runs against the credentials of the person running it. So you can share an application with 200 people and never share a single row of data, and nobody has to stand up a multi-tenant instance to make that true. The runtime keys off connections, not shared secrets.',
+        ],
+      },
+      {
+        id: 'semantic-data',
+        heading: 'Semantic data',
+        body: [
+          { html: 'There are times when you\'ll want to extend your workspace itself and build apps that improve how you work. This is another critical insight from <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code v1</a>, now open source. With the Glyphh desktop runtime you get a database, a vector DB, a knowledge graph, Ada, and adaL (KB graph triples) built into the harness. Combine that with MCP tools and any loop you run can consume it all immediately. So build a new file browser that remembers everything you\'ve browsed, as a fun add, and watch that app get integrated into your harness and become part of how you work. Find an unlock, share it with your org or the world.' },
+        ],
+      },
+      {
+        id: 'connections',
+        heading: 'Connections',
+        body: [
+          'We leverage Pipedream to extend 3,500+ MCP tools to your desktop, completely independent of any vendor. Your skills, apps, plugins, and tasks (rrotor loops) are all yours, completely portable across every vendor and model you use — the build capabilities come along seamlessly, every turn you take.',
         ],
       },
       {
         id: 'router',
         heading: 'The Router',
         body: [
-          'The Glyphh Router is a fork of LiteLLM. We took their server and improved and extended it. Why? Why not; it works, it is proven, and the license allowed us to do it. In doing that we extended our ability to make our desktop, or any agent loop, better at build time. How? The Router has the ability to semantically route calls to frontier and open-weight models based on the nature of the request, with overrides when needed. This can cut token usage within an organization dramatically. You combine that with our desktop and now you can burn down your frontier credits with a balance of open models. Thus allowing you to leverage whatever strategy you want; say, keep your frontier credits for super-expensive Fable and use open weights for dev tasks or sending emails ;). The balance is real and the dollars saved are legit.',
+          'The Glyphh Router is a fork of LiteLLM. It works, it\'s proven, the license allowed it, and we needed things upstream didn\'t have. The main one: semantic routing. The Router reads the nature of a request and sends it to a frontier or open-weight model accordingly, with overrides when you need them. In practice that means you keep your frontier credits for the hard stuff (super-expensive Fable, say) and burn open weights on dev tasks and sending emails ;). The token savings across an org are real.',
         ],
       },
       {
-        id: 'why-glyphh',
-        heading: 'Why Glyphh?',
+        id: 'why-us',
+        heading: 'Why us',
         body: [
-          'We have over 40 years of combined software engineering and architecture experience. As I said, I have traveled globally for almost 30 years architecting and implementing software for some of the largest global corporations at massive scale. We are not vibe coders, though we do vibe code a lot these days; we would be insane not to. Our software is HA, fault tolerant, secure, and reliable. We have extensive experience in security and governance and we applied that to our infrastructure architecture.',
-          'All in all there has been a tremendous amount of development and this is an exciting day. I can\'t wait for you to try Glyphh and see the power we are putting in your hands and the value to your teams. You might just get addicted to this new way of working in the desktop. Super excited to get your feedback.',
+          'I\'ve spent almost 30 years architecting and implementing software for some of the largest global companies at serious scale. My co-founder and I have built HA, fault-tolerant, secure systems for a living, and we brought that to Glyphh\'s infrastructure. We vibe code plenty these days, we\'d be insane not to, but vibe coding is an exercise in restraint, and restraint is what we sell.',
+          'Glyphh puts the human back in intelligence: you decide what gets built, the AI helps you build it, and what runs is yours.',
+          'Install Glyphh and tell me what you build. I\'m serious about the feedback.',
           '— Timme',
         ],
       },
