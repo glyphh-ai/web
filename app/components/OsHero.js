@@ -34,7 +34,7 @@ export default function OsHero() {
         </h1>
 
         <p className="oshero-pitch">
-          <strong>The vendor neutral alternative to Claude Code, OpenAI Work, and Gemini Desktop.</strong>
+          The vendor neutral alternative to Claude Code, OpenAI Work, and Gemini Desktop.
         </p>
 
         <div className="oshero-actions">

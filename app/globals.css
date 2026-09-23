@@ -8739,6 +8739,10 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 /* the pitch section wears the frame pattern (kicker row, small heading, lede, tiles) */
 .hv-pitch .ix-h2 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent); }
 .hv-pitch-lede { max-width: none; margin: 0 0 1.5rem; }
+/* the four cards, as they were in the hero, spanning the frame; the hall-lines canvas under them */
+.hv-pitch { position: relative; }
+.hv-pitch > :not(.oshero-hall) { position: relative; z-index: 2; }
+.hv-pitch .oshero-points { max-width: none; margin: 0; }
 .hv-grid-2 { grid-template-columns: repeat(2, 1fr); }
 .hv-grid-2 .hv-tile:nth-child(3n) { border-right: 1px solid var(--border); }
 .hv-grid-2 .hv-tile:nth-child(2n) { border-right: 0; }
