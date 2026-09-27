@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
         {/* The theme, before first paint: the saved choice, else the OS preference (his order, 2026-09-22). */}
         <script
           dangerouslySetInnerHTML={{
-            __html: "try{var t=localStorage.getItem('glyphh-theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t}catch(e){}",
+            __html: "try{var t=localStorage.getItem('glyphh-theme');if(t!=='light'&&t!=='dark'){t='dark'}document.documentElement.dataset.theme=t}catch(e){}",
           }}
         />
         {/* Sentient italic — the emphasis face — from Fontshare. Geist (display + body) loads via next/font. */}
