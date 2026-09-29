@@ -14,7 +14,7 @@ export default function Controls() {
         <h2 className="section-title reveal">You decide how far it goes.</h2>
         <p className="section-subtitle reveal">
           Anything risky stops on an approval card. Connections shared by the
-          org, tools narrowed per team, budgets enforced at the gateway —
+          org, tools narrowed per team, budgets enforced on every call —
           agents this capable need rules, and you set them.
         </p>
 

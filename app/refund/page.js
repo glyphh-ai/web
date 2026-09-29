@@ -16,8 +16,8 @@ export default function RefundPage() {
           <p><strong>Effective Date:</strong> July 3, 2026</p>
           <p>This Refund Policy applies to paid plans and usage budget purchases for Glyphh, offered by Glyphh AI LLC. Capitalized terms have the meaning given in our <a href="/terms">Terms of Use</a>.</p>
 
-          <h2>1. Free Tier</h2>
-          <p>The free tier is available at no cost and requires no payment. No refund applies.</p>
+          <h2>1. Installing Without a Plan</h2>
+          <p>Installing and setting up Glyphh without a plan costs nothing and requires no payment. No refund applies.</p>
 
           <h2>2. How Billing Works</h2>
           <p>Paid plans are billed on a recurring monthly basis and include a monthly usage budget in dollars. You may also add funds to that budget as one-time purchases (including automatic reloads you enable). The budget is a prepaid, consumable right to access the Service, as described in our Terms of Use.</p>

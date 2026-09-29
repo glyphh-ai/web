@@ -14,9 +14,9 @@ import HallLines from './HallLines';
 
 const POINTS = [
   ['Run anywhere · Desktop optional', 'Mac, Windows, Linux, CLI, or a headless server daemon. Your skills, apps, and tasks port with you.'],
-  ['Model Router', 'Governed access to 3,900+ models and open weights. Frontier where it counts, open weights for the rest.'],
+  ['Model Router', 'Governed access to every model Glyphh runs, open weights included. Frontier where it counts, open weights for the rest.'],
   ['MCP Engine', '3,500+ tool integrations powered by Pipedream. Govern who connects to what, and which tools, by team.'],
-  ['Governed by you', 'Approve models, set budgets, and gate apps by role. Your keys, your vendor’s price, never marked up.'],
+  ['Governed by you', 'Approve models, set budgets, and gate apps by role. One bill, one published rate per model per plan.'],
 ];
 
 export default function OsPitch() {

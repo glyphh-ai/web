@@ -6,39 +6,38 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVE
 // Dollars, always whole where they are whole: "$40", "$1", "$0.50".
 const usd = (n) => `$${Number(n).toLocaleString('en-US', { maximumFractionDigits: 2 })}`;
 
-// Plans = dollars per month, dollar for dollar. Every product draws on one
-// monthly budget in dollars that Glyphh spends on the customer's behalf
-// (today: calls through Glyphh, metered per token). A paid plan includes its
-// price as budget per seat per month; Free includes $1. Model calls run on
-// the customer's own keys at the vendor's price and never touch the budget.
-// Prepaid; never billed in arrears.
+// Plans = dollars per month, dollar for dollar (his orders, 2026-09-29: no free
+// plan, no BYOK; "Solo: 40%, Basic: 30%, Pro: 20%. Solo is going to be 20.00 per
+// month… Enterprise is per customer"). A plan's price is its monthly budget;
+// every plan runs every model at its own rate, and the bigger the plan, the
+// better the rate. Prepaid; never billed in arrears.
 //
 // NUMBERS (price, budget, seats) are fed from the server's super-admin plan
 // catalog via GET /api/public/pricing (`monthlyUsdCents`, `poolUsdPerMonth`,
 // `maxSeats`); the values below are the offline fallback so the page never
 // breaks when the API is unreachable. The marketing bullets are template
 // functions over those numbers, so copy stays here and figures stay
-// server-truth.
+// server-truth. Each model's rate per plan is ModelCatalog's, from the server.
 const TIERS = [
   {
-    tier: 'free',
-    name: 'Free',
-    priceUsd: 0,
-    budgetUsd: 1,
+    tier: 'solo',
+    name: 'Solo',
+    priceUsd: 20,
+    budgetUsd: 20,
     seats: 1,
     popular: false,
-    desc: 'The whole desktop and the agent, on the house. No card.',
+    desc: 'One person, every model.',
     priceTitle: 'One seat',
-    priceSub: 'Free for everyone.',
+    priceSub: 'Per month.',
     lead: null,
     features: () => [
       'Glyphh Desktop: the agent, your apps, saved layouts',
-      'Every loop: Claude Code, Codex, Gemini, Copilot, Cursor',
-      'Glyphh Gateway, a 14-day trial on your own keys',
+      'Every model we run, at the Solo rate',
       'Connected services, 3,500+ apps',
       'Memory across every session',
+      'Add funds any time',
     ],
-    cta: 'Download now',
+    cta: 'Get started',
     btn: 'btn-secondary',
   },
   {
@@ -48,13 +47,12 @@ const TIERS = [
     budgetUsd: 40,
     seats: 25,
     popular: true,
-    desc: 'The full gateway and real automation for a team.',
+    desc: 'Every model and real automation for a team.',
     priceTitle: 'Standard seat',
     priceSub: 'Per seat / month.',
-    lead: 'Everything in Free, plus:',
+    lead: 'Everything in Solo, plus:',
     features: (s) => [
-      'Glyphh Gateway in full: every provider, your own keys, never marked up',
-      'Glyphh Router: burn down or reserve your vendor plans',
+      'A better rate on every model',
       `Invite your team, up to ${s} seats`,
       'Team budgets and rate limits in dollars',
       'Logging, alerts and a daily spend report',
@@ -70,15 +68,15 @@ const TIERS = [
     budgetUsd: 150,
     seats: 100,
     popular: false,
-    desc: 'For teams that govern: roles, budgets, and the highest limits.',
+    desc: 'For teams that govern: roles, budgets, and the best rates.',
     priceTitle: 'Premium seat',
     priceSub: 'Per seat / month.',
     lead: 'Everything in Basic, plus:',
     features: (s) => [
+      'Our best self-serve rate on every model',
       'Role governance: models, budgets and keys per team',
       'The org Library: tasks, agents and skills, reviewed and role-gated',
-      'Org default model and auto-only routing',
-      'Bridge Mode: Claude Desktop through the Glyphh bridge, routed per model',
+      'Org default model and auto-routers',
       'Memory policy for the whole org',
       `Up to ${s} seats`,
       'Highest rate limits',
@@ -100,6 +98,7 @@ const TIERS = [
     priceSub: 'Sized to you, on one invoice.',
     lead: 'Everything in Pro, plus:',
     features: () => [
+      'Rates set for you',
       'Single sign-on and SCIM through your IdP',
       'One shared organization for the whole company',
       'Admins set org, team and member spend limits',
@@ -154,8 +153,8 @@ export default async function Pricing() {
           <span className="qs-kicker">Plans</span>
           <h2 className="ix-h2">A plan&rsquo;s price is its monthly budget.</h2>
           <p className="ix-desc">
-            That budget is your usage limit for what Glyphh runs for you. Your AI runs on your own keys at your
-            vendor&rsquo;s price, and every charge is itemized in your usage feed.
+            Every plan runs every model. Your budget is spent at your plan&rsquo;s rate, the bigger the plan the better
+            the rate, and every charge is itemized in your usage feed.
           </p>
         </div>
       </div>
@@ -163,8 +162,8 @@ export default async function Pricing() {
       <PricingCards tiers={tiers} salesEmail={SALES_EMAIL} platformUrl={PLATFORM_URL} />
 
       <p className="pp-note">
-        Each plan&rsquo;s budget is its monthly limit. Spend it and calls through Glyphh pause until you add funds or
-        the month turns. Plan budget resets every month; funds you add never expire. Cancel anytime. See our{' '}
+        Each plan&rsquo;s budget is its monthly limit. Spend it and model calls pause until you add funds or the month
+        turns. Plan budget resets every month; funds you add never expire. Cancel anytime. See our{' '}
         <a href="/terms">Terms of Use</a>. Prices are exclusive of applicable taxes and duties, including VAT and
         applicable sales tax.
       </p>

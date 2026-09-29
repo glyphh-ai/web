@@ -172,7 +172,7 @@ export default function DesktopPage() {
       <FinalCTA
         title={<h2>Name it<span className="dot">.</span> Switch to it<span className="dot">.</span> Get to work<span className="dot">.</span></h2>}
         text={<p>Download <span className="compose-cmd">Glyphh Desktop</span> free and save your first workspace.</p>}
-        primary={{ href: '/#download', label: 'Get Glyphh Desktop — Free' }}
+        primary={{ href: '/#download', label: 'Get Glyphh Desktop' }}
         secondary={{ href: '/products/router', label: 'See Glyphh Router' }}
       />
       <Footer />

@@ -166,7 +166,7 @@ export default function SemanticAppsPage() {
             </p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
-                <span className="btn-label">Get Glyphh Desktop — Free</span>
+                <span className="btn-label">Get Glyphh Desktop</span>
                 <span className="btn-fill"></span>
               </a>
             </div>
@@ -223,7 +223,7 @@ export default function SemanticAppsPage() {
       <FinalCTA
         title={<h2>Seed it<span className="dot">.</span> Build it<span className="dot">.</span> Ship it to the org<span className="dot">.</span></h2>}
         text={<p>Download <span className="compose-cmd">Glyphh</span> free and build your first semantic app with the Glyphh skill.</p>}
-        primary={{ href: '/#download', label: 'Get Glyphh Desktop — Free' }}
+        primary={{ href: '/#download', label: 'Get Glyphh Desktop' }}
         secondary={{ href: '/products/skills', label: 'See Glyphh Skills' }}
       />
       <Footer />

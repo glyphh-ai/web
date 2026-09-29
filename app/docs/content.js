@@ -2,7 +2,6 @@ import { Note, Row, Code, Cast, Shot } from './Mascot';
 import ModelCatalog from '../components/ModelCatalog';
 import { GatewayStage, ConnectStage, SemanticStage, TaskRunMock, GraphMock, HubReviewMock, WorkspaceMock, LoopMock, ToolsMock } from '../components/product-mocks';
 import { ContractTabs, RolesMock, KeysMock, MetricsMock } from '../products/router/mocks';
-import catalogStats from '../../public/data/model-catalog.json';
 
 // The docs, written from the source on 2026-09-18. Every page names what the
 // code does today, not what a plan says. When the app changes, this changes.
@@ -169,37 +168,36 @@ const agent = [
   },
   {
     slug: 'loops',
-    title: 'Loops',
-    lede: 'The coding CLIs Glyphh drives, and what changes when the gateway is on.',
+    title: 'The agent',
+    lede: 'One agent loop, two kinds of session, and the folder it works in.',
     mascot: 'tally',
     body: (
       <>
         <p>
-          A loop is a vendor CLI that Glyphh runs for you: Claude Code, Codex, Gemini, Copilot, or Cursor, plus a
-          custom command of your own. The desktop is the harness. It owns the composer, the panels, the skills, and
-          the connections. The loop is the engine that runs the turn.
+          Glyphh runs one agent loop: the same engine in the desktop&rsquo;s agent panel and in the{' '}
+          <a href="/docs/cli">glyphh CLI</a>. It speaks the Messages API and MCP, calls every model through your
+          organization&rsquo;s <a href="/docs/gateway">Router</a>, and runs any model your team allows.
         </p>
-        <h2>What a loop carries</h2>
-        <ul>
-          <li>Which CLI to run and its starting model.</li>
-          <li>Its working folder.</li>
-          <li>Whether Glyphh&rsquo;s tools and connections are attached to it.</li>
-          <li>A key of its own, if you want that loop to bill its own vendor account.</li>
-        </ul>
-        <h2>Capabilities differ</h2>
+        <h2>Two kinds of session</h2>
+        <Row k="Work">Chat and act: your apps, connections, memory, and Glyphh&rsquo;s own tools. No file system or shell</Row>
+        <Row k="Code">Everything in Work, plus files and a shell, confined to the folder the session works in</Row>
+        <p>A session is born one kind and stays it: its transcript was written with that toolbelt.</p>
+        <h2>The folder is the sandbox</h2>
         <p>
-          Each CLI declares what it can do: run headless, resume the last session, resume by id, take a model flag,
-          speak MCP, and accept a base URL. The composer only offers what the current loop supports.
+          A Code session works in one folder and nowhere else. File tools refuse any path outside it, reads
+          included, and on macOS the shell runs under the system sandbox with writes allowed only inside that
+          folder, temp space, and package caches. Change the folder and the session keeps the new one.
         </p>
-        <Note kind="wire" title="Gateway on means two loops">
-          When your organization routes through the Glyphh gateway, only Claude Code and Codex are offered. Gemini
-          validates model names against Google&rsquo;s own list, and Copilot and Cursor have no base URL to point at
-          the gateway. With the gateway on, the model is pinned to the first chat model in your org&rsquo;s roster.
-        </Note>
-        <h2>Bring your own key</h2>
+        <h2>Sub-agents</h2>
         <p>
-          Give a loop a key and a variable name, for example <code>GEMINI_API_KEY</code>, and that loop calls the
-          vendor directly with it. A loop with its own key keeps it even when the gateway is on.
+          The agent can hand work to sub-agents you define under Settings &rarr; Build &rarr; Agents: a name, a
+          brief, and a model of their own. They run the same loop in parallel and report back; the Agents panel
+          shows each one working.
+        </p>
+        <h2>What it costs</h2>
+        <p>
+          Every turn is a model call paid from your organization&rsquo;s budget at your plan&rsquo;s rate for that
+          model. Without a plan, everything works except model calls.
         </p>
       </>
     ),
@@ -213,26 +211,22 @@ const agent = [
       <>
         <p>
           The <code>glyphh</code> command is the Glyphh loop in your terminal: the same engine the desktop&rsquo;s
-          Agent panel runs, on your organization&rsquo;s gateway, on any model the org allows. It signs in to your
-          org on its first screen and keeps one conversation history with the desktop.
+          agent panel runs, through your organization&rsquo;s Router, on any model your team allows. It signs in to
+          your org on its first screen and keeps one conversation history with the desktop.
         </p>
         <h2>Install</h2>
         <p>It is an npm package. You need Node.js 18 or newer.</p>
         <Code lang="bash">{`npm i -g @glyphh-ai/cli
 glyphh`}</Code>
-        <p>
-          The desktop offers the same line when it cannot find <code>glyphh</code> on your machine, so a member who
-          picks the Glyphh loop and has no CLI yet is shown exactly this.
-        </p>
         <h2>Sign in</h2>
         <p>
           The first screen is a device login. Open the link it prints, sign in with your Glyphh account, and the
           terminal picks up the session. It lives in <code>~/.glyphh/session.json</code>, separate from the
           desktop&rsquo;s own login, so signing out of one does not sign out the other.
         </p>
-        <Note kind="wire" title="The gateway has to be on">
-          The Glyphh loop runs on the gateway and nowhere else. If your org has not enabled it, the CLI signs in
-          and then tells you so. An org admin turns it on under Settings &rarr; Organization in the console.
+        <Note kind="wire" title="Model calls need a plan">
+          The CLI signs in and works without one, but a model call is refused until an org admin chooses a plan
+          on Billing.
         </Note>
         <h2>The first run in a folder</h2>
         <p>
@@ -280,17 +274,21 @@ npm rm -g @glyphh-ai/cli          # remove`}</Code>
     mascot: 'sage',
     body: (
       <>
-        <h2>The list is whatever the endpoint says</h2>
-        <p>The model list has three sources, and the app never keeps its own:</p>
-        <Row k="gateway">Your org&rsquo;s gateway, scoped by your minted key. You see the org&rsquo;s allow-list</Row>
-        <Row k="byok">The vendor&rsquo;s endpoint, with the loop&rsquo;s own key</Row>
-        <Row k="login">The CLI&rsquo;s own login. The configured model plus what its flag accepts</Row>
-        <p>The list is cached for a minute. Each entry is the raw model id the CLI&rsquo;s model flag accepts.</p>
-        <h2>The picker</h2>
+        <h2>The list is your team&rsquo;s</h2>
         <p>
-          The picker&rsquo;s shape comes from the loop. One model slot is one dropdown. Choices, the resolved
-          default, and where each choice came from are decided on the server and shown as-is. Each choice carries
-          its context window, output limit, and price per million tokens in dollars, the vendor&rsquo;s own rate on your keys.
+          The picker shows one list: the models your team may call. Glyphh runs them; your org admin turns models
+          on or off for the organization and can narrow each team further. The same list is what your key is
+          allowed on the Router, so a model you can pick is a model you can run. It refreshes when you open the
+          picker, when you come back to the app, and for every new session.
+        </p>
+        <h2>The default</h2>
+        <Row k="Yours">The model you set under Settings &rarr; General</Row>
+        <Row k="Your team&rsquo;s">The one your team is flagged to start on, if you set none</Row>
+        <Row k="Your org&rsquo;s">The organization&rsquo;s default, behind both</Row>
+        <h2>What a model costs</h2>
+        <p>
+          Every model has a rate per million tokens on each plan, paid from your organization&rsquo;s budget. The
+          bigger the plan, the better the rate. See them all on the <a href="/pricing#rates">pricing page</a>.
         </p>
         <h2>On-device</h2>
         <p>
@@ -493,7 +491,7 @@ const build = [
           <li>A member publishes a bundle from its page. The bundle is capped at 1 MiB.</li>
           <li>If the publisher is an org admin, the version goes live at once.</li>
           <li>If the publisher is a member, the version lands in <strong>pending</strong> and appears on the admin&rsquo;s review desk.</li>
-          <li>An admin approves or rejects. Approved versions are mirrored to the gateway so every desktop can install them.</li>
+          <li>An admin approves or rejects. Approved versions are mirrored to the Router so every desktop can install them.</li>
         </ol>
         <p>A member sees the status of their own submissions on the AI Hub page in the console.</p>
         <h2>The review model</h2>
@@ -589,62 +587,52 @@ const connect = [
 const router = [
   {
     slug: 'gateway',
-    title: 'The gateway',
-    lede: 'How a loop gets routed through your org, and what the app writes to make it happen.',
+    title: 'The Router',
+    lede: 'How a turn reaches a model, and what it costs.',
     mascot: 'tally',
     body: (
       <>
         <p>
-          When your organization turns the gateway on, Claude Code and Codex call your org&rsquo;s endpoint instead
-          of the vendor. The org&rsquo;s roles, budgets, and allow-lists apply, and every token is accounted for
-          in the console.
+          Every model call goes through your organization&rsquo;s Router: the desktop&rsquo;s agent, your own CLI,
+          and anything that speaks the OpenAI or Anthropic API. Your org&rsquo;s roles, budgets, and models apply,
+          and every token is accounted for in the console.
         </p>
         <h2>What the app does</h2>
         <ol>
           <li>It asks the server for a member key. The key is minted once per user and reused.</li>
-          <li>It writes that key and the gateway base URL into an env file for each loop, readable only by you.</li>
-          <li>It sources that file when it launches the CLI. Nothing is typed into a visible terminal, nothing lands in the CLI&rsquo;s own config.</li>
+          <li>The agent sends each turn to the Router with that key. The key carries your team, its models, and its budget.</li>
+          <li>Log out and the key is gone from the machine.</li>
         </ol>
-        <Row k="Claude Code">ANTHROPIC_BASE_URL and ANTHROPIC_AUTH_TOKEN</Row>
-        <Row k="Codex">OPENAI_BASE_URL and OPENAI_API_KEY</Row>
-        <Row k="Gemini">GOOGLE_GEMINI_BASE_URL and GEMINI_API_KEY, when the gateway is off</Row>
+        <h2>What it costs</h2>
         <p>
-          The file is rewritten whole on every launch, so a stale base URL cannot linger. A loop with its own key
-          keeps it. Log out and every variable is removed from every loop.
+          Each call is paid from your organization&rsquo;s monthly budget at your plan&rsquo;s published rate for
+          that model. The bigger the plan, the better the rate. There are no provider keys to bring. Without a
+          plan, everything works except model calls. See the rates on the <a href="/pricing#rates">pricing page</a>.
         </p>
-        <h2>Gateway off</h2>
+        <h2>Auto-routers</h2>
         <p>
-          When the gateway is off, the member key still authenticates your MCP access, and the CLI rides its own
-          login or the loop&rsquo;s own key.
+          An auto-router picks the model per request: frontier models for the hard turns, open weights for the
+          rest. Your admin builds them on the console&rsquo;s <strong>Models</strong> page, from any model the org
+          has access to.
         </p>
-        <h2>Turn it on, step by step</h2>
-        <ol>
-          <li>In the console, open <strong>Settings &rarr; Organization</strong> and switch <strong>Gateway lane</strong> on. Paid plans only.</li>
-          <li>On the desktop, nothing. Within a minute every member&rsquo;s Claude Code and Codex loops route through the org. A restart makes it immediate.</li>
-          <li>Send a turn and watch it land on the console&rsquo;s <strong>Logs</strong> page.</li>
-        </ol>
+        <Note kind="note" title="Cached tokens count">
+          Cache reads and writes are priced at their own rates, so a cached turn costs less.
+        </Note>
         <p>
           For a CLI outside the desktop, see <a href="/docs/own-cli">Use your own CLI</a>.
         </p>
-        <h2>Two ways to route</h2>
-        <Row k="Burn down">Each vendor stays direct while its own allowance lasts. When it runs dry, that vendor&rsquo;s traffic moves onto the proxy, on the org&rsquo;s own keys at the vendor&rsquo;s price</Row>
-        <Row k="Reserved">The vendor&rsquo;s heavy models, Opus and Fable, stay on the member&rsquo;s own subscription, with that spend tracked off the proxy. Everything lighter rides the proxy</Row>
-        <Note kind="note" title="Cached tokens count">
-          Through the proxy, cache reads and writes are priced at the vendor&rsquo;s cache rates. Off the proxy, the
-          desktop reports them too, so the allowance counts them.
-        </Note>
       </>
     ),
   },
   {
     slug: 'own-cli',
     title: 'Use your own CLI',
-    lede: 'Point a plain Claude Code or Codex install at the gateway from a terminal.',
+    lede: 'Point a plain Claude Code or Codex install at the Router from a terminal.',
     mascot: 'byte',
     body: (
       <>
         <p>
-          You do not need the desktop to use the gateway. Mint a virtual key on the console&rsquo;s Virtual Keys
+          You do not need the desktop to use the Router. Mint a virtual key on the console&rsquo;s Virtual Keys
           page, then set two variables in the shell that runs the CLI.
         </p>
         <h2>Claude Code</h2>
@@ -662,7 +650,7 @@ codex`}</Code>
 )`}</Code>
         <p>
           The key carries its governance with it: which models it may call, how fast, and on whose budget. The
-          gateway enforces that at the edge. Your code just makes requests.
+          Router enforces that at the edge. Your code just makes requests.
         </p>
         <Note kind="warn" title="Use the org&rsquo;s base URL">
           The base URL is the one shown on your console&rsquo;s Virtual Keys page. It is the same host your
@@ -682,7 +670,7 @@ codex`}</Code>
         </p>
         <h2>Your accounts, from any MCP client</h2>
         <p>
-          Add the gateway&rsquo;s MCP endpoint to Claude Code, Codex, Cursor, or claude.ai with your virtual
+          Add the Router&rsquo;s MCP endpoint to Claude Code, Codex, Cursor, or claude.ai with your virtual
           key, and three tools are there beside the search tool:
         </p>
         <Row k="glyphh_connections">Your connected accounts, the apps the org shares, and what is ready</Row>
@@ -697,8 +685,8 @@ codex`}</Code>
         </p>
         <h2>Your org&rsquo;s agents</h2>
         <p>
-          An agent your admin registered on the console&rsquo;s Agents page is a model on the gateway. Send a
-          chat request with <strong>model: a2a/&lt;name&gt;</strong> and the gateway forwards it over A2A. The
+          An agent your admin registered on the console&rsquo;s Agents page is a model on the Router. Send a
+          chat request with <strong>model: a2a/&lt;name&gt;</strong> and the Router forwards it over A2A. The
           name is on the agent&rsquo;s hub page.
         </p>
       </>
@@ -711,14 +699,15 @@ codex`}</Code>
     mascot: 'sage',
     body: (
       <>
-        <h2>Two budgets, two units never mixed</h2>
+        <h2>One budget</h2>
         <p>
-          Your organization&rsquo;s spend budget on the gateway is yours: set it in dollars on the organization, a
-          team or a key, and it caps what your own vendor keys may spend. Glyphh never writes it.
+          Your organization&rsquo;s dollars are your plan&rsquo;s price each month, dollar for dollar, plus any
+          funds you add. Every model call and connector tool draws on them at your plan&rsquo;s published rates,
+          and stops when they run out.
         </p>
         <p>
-          The budget is what Glyphh funds: your plan&rsquo;s price each month, dollar for dollar, never
-          less than one dollar, plus any funds you add. Through Glyphh draw on it and stop when it runs out.
+          An org admin may cap the month lower with a spend limit on the organization, never below the
+          plan&rsquo;s price, and set budgets per team or key beneath it.
         </p>
         <h2>Roles and keys</h2>
         <p>
@@ -759,7 +748,7 @@ const console_ = [
         <Row k="Logs">Their requests</Row>
         <h2>An org admin also gets</h2>
         <Row k="Billing">Plan, seats, budget, invoices, the next invoice amount and date</Row>
-        <Row k="Models">Which models the org supports and any BYOK keys</Row>
+        <Row k="Models">Which models the org turns on, and its auto-routers</Row>
         <Row k="Teams · Internal Users">Membership, invites, roles</Row>
         <Row k="Loops · MCP Servers">Org-shared loops and MCP connections</Row>
         <Row k="Settings">Organization, Domain, Security, Router, Logging</Row>
@@ -821,14 +810,15 @@ const console_ = [
         </p>
         <h2>Budget</h2>
         <p>
-          Plans are dollars per month, dollar for dollar: a paid plan includes its price as budget, per seat, every
-          month, and Free includes one dollar. Every Glyphh product draws on that one budget. Today it pays for
-          calls through Glyphh, metered on the tokens each call sends and returns at a published per-token price, the
-          same way a model is priced. Plan-included budget resets each month.
+          Plans are dollars per month, dollar for dollar: a plan includes its price as budget, per seat, every
+          month. There is no free plan: Solo is $20 a month. Every Glyphh product draws on that one budget: model
+          calls at your plan&rsquo;s published rate for each model, and connector tools at their published
+          per-token price. Plan-included budget resets each month.
         </p>
         <p>
-          Your own model calls are not on the budget. They run on your keys at the vendor&rsquo;s price, shown per
-          million tokens in the picker, and Glyphh never marks them up.
+          Every plan runs every model; the bigger the plan, the better the rate. There are no provider keys to bring:
+          every call runs on Glyphh. Without a plan, everything works except model calls. See the rates on the{' '}
+          <a href="/pricing#rates">pricing page</a>.
         </p>
         <h2>Add funds</h2>
         <p>
@@ -884,7 +874,7 @@ const console_ = [
           <li>A sign-in redirect to anywhere but the desktop, the console, a Glyphh domain, or the org&rsquo;s own hub domain.</li>
           <li>Repeated sign-in attempts from one address.</li>
           <li>A magic link for an org that requires SSO.</li>
-          <li>A gateway request for another org.</li>
+          <li>A Router request for another org.</li>
         </ul>
         <h2>Sessions</h2>
         <p>
@@ -892,7 +882,7 @@ const console_ = [
         </p>
         <h2>On your machine</h2>
         <ul>
-          <li>Gateway credentials live in an env file only you can read, and are removed at logout.</li>
+          <li>Router credentials stay on your machine, readable only by you, and are removed at logout.</li>
           <li>MCP connection secrets are stored owner-only.</li>
           <li>The last identity is mirrored locally so the app can boot offline. It scopes local state only, never authorization.</li>
           <li>The shell&rsquo;s privileged bridge is granted only to the app&rsquo;s own home page, matched exactly.</li>
@@ -916,8 +906,7 @@ const admin = [
       <>
         <p>In the console, open <strong>Settings &rarr; Organization</strong>. Every row saves as you change it.</p>
         <Row k="Governance">On: the servers on the MCP Servers page are the only apps members may connect. Off: members connect any app for themselves. Pro and Enterprise</Row>
-        <Row k="Gateway lane">On: members&rsquo; Claude Code and Codex traffic routes through the org, on the org&rsquo;s own keys and capped by budgets. Paid plans</Row>
-        <Row k="Auto only">On: members pick no model. Every turn goes to the org&rsquo;s auto-router</Row>
+        <Row k="Spend limit">The most the org may spend in a month, across every team. Never below the plan&rsquo;s price; blank spends up to the balance</Row>
         <Row k="Terminal access">Off: members cannot drop from the chat into the loop&rsquo;s own CLI</Row>
         <Row k="Review model">The model that reads every submission to the hub and files a verdict for you</Row>
         <Note kind="admin" title="Who sees this page">
@@ -1008,7 +997,7 @@ const admin = [
         <ol>
           <li>A pending item shows at the top of the org list. Press <strong>Review</strong>.</li>
           <li>The review opens with the same tabs the desktop shows a bundle: Overview, Contents, Skills, and Connections for an app, plus <strong>Agent review</strong> if a review model is set. The agent&rsquo;s verdict is advice. You decide.</li>
-          <li>Press <strong>Approve</strong> or <strong>Reject</strong>. An approved version is mirrored to the gateway and every desktop can install it.</li>
+          <li>Press <strong>Approve</strong> or <strong>Reject</strong>. An approved version is mirrored to the Router and every desktop can install it.</li>
         </ol>
         <h2>Who can see an item</h2>
         <p>
@@ -1030,30 +1019,25 @@ const admin = [
   },
   {
     slug: 'org-models',
-    title: 'Models and keys',
-    lede: 'Pick what the org may use of Glyphh&rsquo;s models, or run your own deployment on your own key.',
+    title: 'Models',
+    lede: 'Turn Glyphh&rsquo;s models on or off for your org, and build auto-routers over them.',
     mascot: 'sage',
     body: (
       <>
         <p>Open <strong>Models</strong> in the console. As an org admin the page is scoped to your org.</p>
-        <h2>Glyphh models</h2>
+        <h2>Models</h2>
         <p>
-          The <strong>Glyphh models</strong> tab lists what Glyphh runs. Turn on what your org may use. That
-          list is what members see in the desktop&rsquo;s picker and what the gateway allows on their keys.
+          The <strong>Models</strong> tab lists every model Glyphh runs. Every one is on until you turn it off.
+          What stays on is what members see in the desktop&rsquo;s picker and what their keys may call. Limit a
+          team further on its own <strong>Models</strong> tab under Teams.
         </p>
-        <h2>Your own deployment</h2>
-        <ol>
-          <li>Press <strong>Add model</strong>.</li>
-          <li>Pick the provider and the model, and paste your provider key. The key is stored encrypted and scoped to your org&rsquo;s team. No other org can see or ride it.</li>
-          <li>Save. Calls to that model use your key and are invoiced to you by the vendor. They still count in the org&rsquo;s usage and logs.</li>
-        </ol>
         <h2>The auto-router</h2>
         <p>
-          <strong>Auto-routers</strong> lets you define a route that picks the model per request. Turn on
-          <strong> Auto only</strong> in Organization settings and members pick nothing else.
+          <strong>Auto-routers</strong> lets you define a route that picks the model per request, from any model
+          your org has access to, whether or not it is turned on by itself.
         </p>
-        <Note kind="warn" title="Keys stay in the console">
-          A provider key is entered here and nowhere else. No agent, tool, or skill can read it back.
+        <Note kind="warn" title="No provider keys">
+          Organizations do not add models on their own keys. Every call runs on Glyphh, at your plan&rsquo;s rate.
         </Note>
       </>
     ),
@@ -1096,15 +1080,15 @@ const admin = [
         <ol>
           <li>Open <strong>Agents</strong> in the console and press <strong>Add agent</strong>.</li>
           <li>Name it and paste its A2A endpoint. If the agent publishes a card at <strong>/.well-known/agent-card.json</strong>, the description, version and skills come from there.</li>
-          <li>If the endpoint needs a header, set the header name and value. It is stored on the gateway and never shown again.</li>
+          <li>If the endpoint needs a header, set the header name and value. It is stored on the Router and never shown again.</li>
           <li>Save. The agent is on the AI Hub for every member, with the model id <strong>a2a/&lt;org&gt;-&lt;name&gt;</strong>.</li>
         </ol>
         <p>
-          A member calls it like any other model through the gateway, from the desktop or from their own
+          A member calls it like any other model through the Router, from the desktop or from their own
           tools. Only your organization&rsquo;s keys can see it or reach it. Remove it from the same page.
         </p>
         <Note kind="note" title="One name space">
-          Agent names are global on the gateway, so yours are prefixed with your organization. Two orgs can each
+          Agent names are global on the Router, so yours are prefixed with your organization. Two orgs can each
           have a <strong>sales-bot</strong>.
         </Note>
       </>
@@ -1175,7 +1159,7 @@ const about = [
           The router is a fork of <a href="https://github.com/BerriAI/litellm">LiteLLM</a>, the
           OpenAI-compatible proxy. It provides the endpoint, the model catalog, virtual keys, teams,
           budgets, and the spend logs. Glyphh adds organizations, sign-in, the hub, billing, plans,
-          and the desktop&rsquo;s gateway path. The fork is private. The upstream
+          and the desktop&rsquo;s Router path. The fork is private. The upstream
           core is used under the MIT license, copyright 2023 Berri AI, and the license text ships with
           the software. For settings we did not change, such as the config file syntax and the
           per-model parameters, the <a href="https://docs.litellm.ai">upstream reference</a> is the
@@ -1220,11 +1204,10 @@ const system = [
         </p>
         <Shot src="/screen-shots/glyphh-governance.png" alt="The Router's governance view in the console" caption="Roles, budgets, and allow-lists ride every key." />
         <div className="dx-mock dx-mock-stage"><GatewayStage /></div>
-        <h2>Burn your frontier credits strategically</h2>
+        <h2>Spend frontier models where they count</h2>
         <p>
-          Two routing strategies out of the box: burn down the vendor plans you already own first, or reserve
-          premium models on your own keys and proxy the rest to open weights. The desktop routes through the
-          Router natively; so does anything that speaks the OpenAI API.
+          An auto-router picks the model per request: frontier models for the hard turns, open weights for the rest.
+          The desktop routes through the Router natively; so does anything that speaks the OpenAI API.
         </p>
         <div className="dx-mock"><ContractTabs /></div>
         <h2>Teams, budgets, governance</h2>
@@ -1241,7 +1224,7 @@ const system = [
         </p>
         <div className="dx-mock"><MetricsMock /></div>
         <Note title="Where to go next">
-          <a href="/docs/gateway">The gateway</a> covers the routing strategies in detail;{' '}
+          <a href="/docs/gateway">The Router</a> covers routing and cost in detail;{' '}
           <a href="/docs/budgets">Budgets and limits</a> the caps; <a href="/docs/own-cli">Use your own CLI</a> the
           base-URL swap.
         </Note>
@@ -1315,22 +1298,20 @@ const system = [
   },
   {
     slug: 'model-catalog',
-    title: 'The model catalog',
-    lede: 'Every model the Router can serve — prices, limits, features — from the LiteLLM table.',
+    title: 'The models',
+    lede: 'Every model Glyphh runs, and its rate on every plan.',
     mascot: 'tally',
     body: (
       <>
         <p>
-          The Router is built on LiteLLM, and this is LiteLLM's price and context table as our fork carries it:{' '}
-          <strong>{catalogStats.stats.models.toLocaleString('en-US')} models</strong> across{' '}
-          <strong>{catalogStats.stats.providers.toLocaleString('en-US')} providers</strong> and{' '}
-          {catalogStats.stats.modes} modes. Open a row for its pricing, its limits, its features, and a snippet that
-          calls it through the Router. The same catalog, full width, is at <a href="/integrations/models">/integrations/models</a>.
+          These are the models Glyphh runs today, read live from the server. Every plan runs every model; what changes
+          is the rate. Open a row for its limits and a snippet that calls it through the Router. The same list, full
+          width, is at <a href="/integrations/models">/integrations/models</a>.
         </p>
         <ModelCatalog compact />
         <Note title="Where the numbers come from">
-          Prices are the vendor's list prices per million tokens on your own keys; the Router never marks them up.
-          The table is rebuilt from the fork on every upstream bump.
+          A rate is per million tokens, input and output, on that plan. Calls are paid from your plan&rsquo;s monthly
+          budget and any funds you add. Your admin turns models on or off for your organization.
         </Note>
       </>
     ),
@@ -1374,7 +1355,7 @@ export const GROUPS = [
   { title: 'The agent', lede: 'Sessions, the loops underneath, models, and panels.', pages: agent },
   { title: 'Build', lede: 'Skills, tasks, artifacts, and the org hub.', pages: build },
   { title: 'Connect', lede: 'Connections and MCP, both directions.', pages: connect },
-  { title: 'The gateway', lede: 'Routing, your own CLI, budgets.', pages: router },
+  { title: 'The Router', lede: 'Routing, your own CLI, budgets.', pages: router },
   { title: 'Console and billing', lede: 'Roles, the hub, plans, seats, security.', pages: console_ },
   { title: 'Org admin', lede: 'Step by step: the domain, the brand, SSO, review, models, MCP servers, agents, billing.', pages: admin },
   { title: 'About', lede: 'What Glyphh is built on.', pages: about },

@@ -22,7 +22,7 @@ export default function FinalCTA({ title, text, primary, secondary, id = 'get-st
     return () => observer.disconnect();
   }, []);
 
-  const p = primary || { href: '/#download', label: 'Download for Mac — Free' };
+  const p = primary || { href: '/#download', label: 'Download for Mac' };
   const s = secondary === null ? null : (secondary || { href: '/pricing', label: 'See Pricing' });
 
   return (

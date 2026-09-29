@@ -14,7 +14,7 @@ const TILES = [
     title: 'Desktop',
     head: 'A universal desktop harness',
     body:
-      'Windows, Mac, Linux, and CLI — runs on your machine. Leverage your frontier credits, host your own models, or proxy to 100s of open weights through the router.',
+      'Windows, Mac, Linux, and CLI — runs on your machine. Frontier models where they count, open weights through the router for the rest.',
     icon: (
       <>
         <rect x="2" y="4" width="20" height="13" rx="2" />
@@ -25,7 +25,7 @@ const TILES = [
   {
     href: '/docs/router',
     title: 'Router',
-    head: '3,900+ models, 125+ providers, governed by you',
+    head: 'Every model we run, governed by you',
     body:
       'Based on LiteLLM — extend your frontier harness with cross-vendor models or open weights. Teams, budgets, governance, and semantic routing maximize your AI spend.',
     icon: (

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 /**
- * Gateway page mocks — CLICKABLE (his order, 2026-09-11): each section's
+ * Router page mocks — CLICKABLE (his order, 2026-09-11): each section's
  * mock demonstrates the flow it describes, following the app cleanly but
  * not faithfully. All wear the od-studio window chrome (Design's mock
  * grammar) with gwm-* internals; no data leaves the page — every mock is
@@ -94,7 +94,7 @@ export function KeysMock() {
   return (
     <div className="od-studio gwm" aria-hidden="true">
       <div className="od-studio-bar">
-        <span className="od-studio-back">‹ Gateway</span>
+        <span className="od-studio-back">‹ Router</span>
         <span className="od-studio-name">API Keys</span>
         <span className="od-studio-saved">{minted ? '2 keys' : '1 key'}</span>
       </div>
@@ -144,7 +144,7 @@ export function MetricsMock() {
   return (
     <div className="od-studio gwm" aria-hidden="true">
       <div className="od-studio-bar">
-        <span className="od-studio-back">‹ Gateway</span>
+        <span className="od-studio-back">‹ Router</span>
         <span className="od-studio-name">Metrics</span>
         <span className="gwm-winrow">
           {Object.keys(WINDOWS).map((w) => (
@@ -170,8 +170,8 @@ export function MetricsMock() {
 /* ── The front door — click a way in, see the one line that changes ── */
 const WAY_DETAIL = {
   'one endpoint': 'base_url = "https://router.glyphh.ai"  # the only line that changes',
-  'your keys': 'Anthropic key added ✓ — vendor invoices your org directly',
-  'your call': 'anthropic enabled · 4 models supported · roles narrow from here',
+  'one bill': 'claude-fable-5-1 · Pro rate · paid from the org budget, itemized per call',
+  'your call': 'gpt-5.6 turned off · 23 models on · teams narrow from here',
 };
 
 export function WayCard({ tag, title, desc }) {

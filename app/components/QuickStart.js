@@ -82,7 +82,7 @@ export default function QuickStart() {
             ))}
           </ol>
           <p className="term-line term-dim">
-            free forever on your own logins &middot; no trial, no card &middot; <a href="/docs/install">docs/install</a>
+            free to install &middot; plans from $20 a month &middot; <a href="/docs/install">docs/install</a>
             <span className="term-cursor" aria-hidden="true" />
           </p>
         </div>

@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from 'react';
  * ModelTicker — a split-flap row between the connection rows (his order,
  * 2026-09-22): a strip of slots, each showing a model name; at random
  * moments a slot flips — the next name rises from the bottom and the old
- * one leaves off the top. Names come from public/data/model-ticker.json,
- * built from the catalog. Still under prefers-reduced-motion.
+ * one leaves off the top. Names are the models Glyphh runs (/api/models, the
+ * server's own list). Still under prefers-reduced-motion.
  */
 
 const SLOTS = 6;
@@ -27,8 +27,9 @@ export default function ModelTicker() {
   const timers = useRef([]);
 
   useEffect(() => {
-    fetch('/data/model-ticker.json', { cache: 'force-cache' })
-      .then((r) => (r.ok ? r.json() : []))
+    fetch('/api/models')
+      .then((r) => (r.ok ? r.json() : { models: [] }))
+      .then((body) => (body.models ?? []).map((m) => m.name))
       .then((list) => {
         if (!Array.isArray(list) || !list.length) return;
         // names that fit a slot without truncation

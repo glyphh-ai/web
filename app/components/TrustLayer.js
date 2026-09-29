@@ -8,7 +8,7 @@
 
 const GOVERNED = [
   { tag: 'approvals', title: 'Approvals', line: 'Irreversible actions wait for your yes.' },
-  { tag: 'limits', title: 'Limits & budgets', line: 'Tool scopes, call caps, and spend ceilings, enforced at the gateway.' },
+  { tag: 'limits', title: 'Limits & budgets', line: 'Tool scopes, call caps, and spend ceilings, enforced on every call.' },
   { tag: 'firewall', title: 'Injection firewall', line: 'Every relayed request is screened before it reaches your machine.' },
   { tag: 'local', title: 'Local-only mode', line: 'Skip the cloud entirely when you want to.' },
 ];

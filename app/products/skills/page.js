@@ -171,7 +171,7 @@ export default function SkillsPage() {
             </p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
-                <span className="btn-label">Get Glyphh Desktop — Free</span>
+                <span className="btn-label">Get Glyphh Desktop</span>
                 <span className="btn-fill"></span>
               </a>
             </div>
@@ -228,7 +228,7 @@ export default function SkillsPage() {
       <FinalCTA
         title={<h2>Write it once<span className="dot">.</span> Run it everywhere<span className="dot">.</span></h2>}
         text={<p>Download <span className="compose-cmd">Glyphh</span> free and drop your first SKILL.md into the library.</p>}
-        primary={{ href: '/#download', label: 'Get Glyphh Desktop — Free' }}
+        primary={{ href: '/#download', label: 'Get Glyphh Desktop' }}
         secondary={{ href: '/products/semantic-apps', label: 'See Semantic Apps' }}
       />
       <Footer />

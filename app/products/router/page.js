@@ -3,31 +3,16 @@ import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
 import ExpandableShot from '../../components/ExpandableShot';
 import FinalCTA from '../../components/FinalCTA';
-import ModelsTable from '../../components/ModelsTable';
+import ModelCatalog from '../../components/ModelCatalog';
 import { ContractTabs, RolesMock, KeysMock, MetricsMock, WayCard } from './mocks';
 
-// The model catalog is LIVE — same source as the platform's admin Catalog
-// (/api/catalog/public/models reads the models table itself), no-store.
-export const dynamic = 'force-dynamic';
-
-const API_BASE = process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
-
-async function loadCatalog() {
-  try {
-    const res = await fetch(`${API_BASE}/api/catalog/public/models`, { cache: 'no-store' });
-    if (!res.ok) return { models: [], error: `HTTP ${res.status}` };
-    const json = await res.json();
-    const data = json?.data ?? json ?? {};
-    return { models: Array.isArray(data.models) ? data.models : [], error: null };
-  } catch (e) {
-    return { models: [], error: e?.message || 'fetch failed' };
-  }
-}
+// The models are LIVE — the server's list at each plan's rate (ModelCatalog,
+// /api/models). No BYOK, no subscriptions to burn down (his order, 2026-09-29).
 
 export const metadata = {
-  title: 'Glyphh Router — one endpoint, two ways to route',
+  title: 'Glyphh Router — one endpoint, every model',
   description:
-    'One endpoint in front of every model. Burn down uses your vendor subscriptions first and the proxy when they run dry. Reserved keeps the heavy models on your subscriptions and sends everything lighter through the proxy. Roles decide who gets what. Every token accounted for, cached calls at cache rates.',
+    'One endpoint in front of every model Glyphh runs. Auto-routers pick the model per request: frontier where it counts, open weights for the rest. Roles decide who gets what. Every token accounted for at your plan’s published rate, cached calls at cache rates.',
 };
 
 /* The marks — copied from the Design page's set; Gateway reuses, never invents. */
@@ -120,17 +105,17 @@ const WAYS = [
   {
     tag: 'one endpoint',
     title: 'Change one line.',
-    desc: 'It speaks the OpenAI API. Swap the base URL and every SDK, framework, and tool you already use just works. 100+ providers behind it.',
+    desc: 'It speaks the OpenAI API. Swap the base URL and every SDK, framework, and tool you already use just works. Every model Glyphh runs behind it.',
   },
   {
-    tag: 'your keys',
-    title: 'The vendor bills you.',
-    desc: 'Bring your own keys. We route on them. Anthropic invoices you, not us. No markup, no resale, ever.',
+    tag: 'one bill',
+    title: 'One rate per model, per plan.',
+    desc: 'No keys to bring. Every call is paid from your plan’s budget at a published rate, and the bigger the plan, the better the rate.',
   },
   {
     tag: 'your call',
-    title: 'Nothing is on by default.',
-    desc: 'Add a key to turn a vendor on. Pick the models you support. Roles narrow it from there. No surprise spend.',
+    title: 'Turn off what you do not run.',
+    desc: 'Every model is on until your admin turns it off. Teams narrow it from there. Budgets stop at the line. No surprise spend.',
   },
 ];
 
@@ -139,7 +124,7 @@ const GOVERN = [
     icon: ICONS.apps,
     name: 'Roles',
     title: 'Governance is a role, not a spreadsheet.',
-    desc: 'Models, rate limits, budgets — set per team, once. Hard-stop the budget when it matters. Split the vendor bill by role when it should split.',
+    desc: 'Models, rate limits, budgets — set per team, once. Hard-stop the budget when it matters.',
     mock: <RolesMock />,
   },
   {
@@ -159,17 +144,6 @@ const GOVERN = [
 ];
 
 export default async function GatewayPage() {
-  const { models, error } = await loadCatalog();
-  const byProvider = new Map();
-  for (const m of models) {
-    const key = m.providerName || m.providerSlug || 'Other';
-    if (!byProvider.has(key)) byProvider.set(key, []);
-    byProvider.get(key).push(m);
-  }
-  const providers = [...byProvider.entries()].sort((a, b) => a[0].localeCompare(b[0]));
-  for (const [, list] of providers) {
-    list.sort((a, b) => (a.inputUsdPerMTok ?? 0) - (b.inputUsdPerMTok ?? 0));
-  }
   return (
     <div className="office-page design-page">
       <Reveal />
@@ -185,19 +159,17 @@ export default async function GatewayPage() {
             </div>
             <h1 className="page-hero-title">
               One endpoint<span className="dot">.</span>{' '}
-              <span className="hero-accent">Two ways to route</span><span className="dot">.</span>
+              <span className="hero-accent">Every model</span><span className="dot">.</span>
             </h1>
             <p className="page-hero-sub">
-              One endpoint in front of every model. Pick how the org routes: <strong>Burn down</strong> uses
-              each vendor subscription you already pay for first, and moves that vendor onto the proxy
-              when it runs dry. <strong>Reserved</strong> keeps the heavy models, Opus and Fable, on your
-              subscriptions and sends everything lighter through the proxy on the org&rsquo;s own keys.
-              Either way the model bill is your vendor&rsquo;s, never marked up. Roles decide who gets what.
-              Every token accounted for, cached calls at cache rates, no prompt ever stored.
+              One endpoint in front of every model Glyphh runs. An <strong>auto-router</strong> picks the model
+              per request: frontier models for the hard turns, open weights for the rest. Every plan runs every
+              model at its own published rate. Roles decide who gets what. Every token accounted for, cached
+              calls at cache rates, no prompt ever stored.
             </p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
-                <span className="btn-label">Get Glyphh Desktop — Free</span>
+                <span className="btn-label">Get Glyphh Desktop</span>
                 <span className="btn-fill"></span>
               </a>
             </div>
@@ -260,31 +232,27 @@ export default async function GatewayPage() {
         </div>
       </section>
 
-      {/* ── THE CATALOG — live from the same models table the platform reads ── */}
+      {/* ── THE MODELS — live from the server, at every plan's rate ── */}
       <section className="models-section" id="models">
         <div className="container">
           <div className="models-table-head">
             <h2>Every model behind the router</h2>
             <span className="models-live">
               <span className="models-live-dot" aria-hidden="true"></span>
-              Live from the catalog
+              Live from the server
             </span>
           </div>
           <p className="models-intro">
-            Priced in dollars per million tokens: your vendor&rsquo;s price, on your keys. Search it. Open a provider. Turn on what you mean to run.
+            Per million tokens, input and output, on every plan. The bigger the plan, the better the rate.
           </p>
-          {error ? (
-            <div className="models-error">The live catalog is temporarily unavailable. Please refresh in a moment.</div>
-          ) : (
-            <ModelsTable providers={providers} />
-          )}
+          <ModelCatalog compact />
         </div>
       </section>
 
       {/* ── FINAL CTA ── */}
       <FinalCTA
         title={<h2>Point it at the router<span className="dot">.</span> Govern the rest<span className="dot">.</span></h2>}
-        text={<p>The full Router on Basic. Governance on Pro. Trial it free.</p>}
+        text={<p>Every model on every plan. Governance on Pro. Solo from $20 a month.</p>}
         primary={{ href: '/#download', label: 'Download Glyphh' }}
       />
 

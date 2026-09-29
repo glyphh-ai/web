@@ -22,11 +22,11 @@ const faqs = [
   },
   {
     q: 'Which models can I use?',
-    a: 'Frontier models on your own keys and subscriptions: Claude, GPT, Gemini. When a subscription runs dry, the same requests route to open-weight models, direct: Kimi K3, Llama, Qwen, Mistral, and hundreds more. Bring your own keys or use the router; either way the desktop does not change, and Glyphh never marks a model call up.',
+    a: 'Every model Glyphh runs, on every plan: frontier models like Claude, GPT and Gemini, and open-weight models like Kimi, Llama, Qwen and Mistral. An auto-router can pick per request, frontier where it counts and open weights for the rest. Each model has a published rate on each plan, and the bigger the plan, the better the rate.',
   },
   {
     q: 'How does the budget work?',
-    a: 'Every plan includes a monthly budget in dollars, equal to its price: $40 a seat buys $40 of budget a seat. Free includes $1. Glyphh spends it on your behalf, today on calls through Glyphh, metered on the tokens they send and return at a published per-token price. Your own model calls run on your keys at the vendor’s price and never touch it. Add funds any time, dollar for dollar; purchased funds never expire, and every charge is itemized in your usage feed.',
+    a: 'Every plan includes a monthly budget in dollars, equal to its price: Solo’s $20 buys $20 of usage, and $40 a seat buys $40 a seat. Model calls and connector tools are paid from it at your plan’s published rates, metered on the tokens they send and return. There is no free plan: install and set up without one, and choose a plan when you make your first model call. Add funds any time, dollar for dollar; purchased funds never expire, and every charge is itemized in your usage feed.',
   },
   {
     q: 'What are connected services?',
@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: 'Is my data safe? Who approves what?',
-    a: 'Anything risky — sending, deleting, spending — stops on an approval card until you say go. Org admins set the rules once at the gateway: which models are allowed, which tools each team can touch, and budgets that stop at the line.',
+    a: 'Anything risky — sending, deleting, spending — stops on an approval card until you say go. Org admins set the rules once: which models are allowed, which tools each team can touch, and budgets that stop at the line.',
   },
   {
     q: 'Does it work for teams?',

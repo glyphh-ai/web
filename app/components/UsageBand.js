@@ -13,8 +13,7 @@ export default function UsageBand() {
         <p>
           Every Glyphh product draws on one monthly budget, in dollars:{' '}
           <b>a plan&rsquo;s price is its budget, dollar for dollar</b>. Add funds
-          any time at the same rate. Your AI runs on your own keys at your
-          vendor&rsquo;s price, never marked up.
+          any time. Every model runs on every plan, at your plan&rsquo;s rate.
         </p>
       </div>
       <a href="/pricing" className="btn btn-secondary btn-lg group">

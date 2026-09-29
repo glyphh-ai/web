@@ -98,7 +98,7 @@ export default function ConnectPage() {
             </p>
             <div className="hero-ctas">
               <a href="/#download" className="btn btn-primary btn-lg group">
-                <span className="btn-label">Get Glyphh Desktop — Free</span>
+                <span className="btn-label">Get Glyphh Desktop</span>
                 <span className="btn-fill"></span>
               </a>
             </div>
@@ -141,7 +141,7 @@ export default function ConnectPage() {
       <FinalCTA
         title={<h2>Connect it once<span className="dot">.</span> Every loop gets it<span className="dot">.</span></h2>}
         text={<p>Download <span className="compose-cmd">Glyphh</span> free and connect your first service in a minute.</p>}
-        primary={{ href: '/#download', label: 'Get Glyphh Desktop — Free' }}
+        primary={{ href: '/#download', label: 'Get Glyphh Desktop' }}
         secondary={{ href: '/products/router', label: 'See Glyphh Router' }}
       />
       <Footer />

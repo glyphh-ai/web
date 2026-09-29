@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * Glyphh Code page mocks (his order, 2026-09-21). Same rules as the Router
+ * Glyphh Code page mocks (his order, 2026-09-21; the lanes went with BYOK and
+ * the CLI bridge, 2026-09-29). Same rules as the Router
  * page: every mock is CLICKABLE and demonstrates the flow beside it, following
  * the app cleanly but not faithfully. Studios wear the od-studio window chrome
  * with gwm-* internals; the terminal and the two screenshot stand-ins wear
@@ -14,49 +15,7 @@ import { useEffect, useRef, useState } from 'react';
  * page.js and delete the stand-in here.
  */
 
-/* ── The lane switch — your subscription or the router, one flip ── */
-const LANES = {
-  subscription: {
-    label: 'your subscription',
-    lines: [
-      'lane        your login',
-      'loop        claude          # or codex, gemini',
-      'models      what the vendor gives your seat',
-      'bill        the vendor, on the plan you already pay',
-      'tools       Glyphh Connect + your apps, attached',
-    ],
-    note: 'Glyphh is the harness. Anthropic bills the seat.',
-  },
-  router: {
-    label: 'glyphh router',
-    lines: [
-      'lane        gateway',
-      'loop        glyphh          # or claude, codex',
-      'models      every model the org allows',
-      'bill        the vendor, on the org\'s own keys',
-      'strategy    semantic · auto · burn down · reserved',
-    ],
-    note: 'Same loop, same folder, same skills. Different lane.',
-  },
-};
-
-export function LaneSwitch() {
-  const [lane, setLane] = useState('subscription');
-  const d = LANES[lane];
-  return (
-    <div className="od-contract gcx-lane" aria-hidden="true">
-      <div className="gcx-lane-tabs">
-        {Object.entries(LANES).map(([k, v]) => (
-          <button key={k} className={`gcx-lane-tab ${lane === k ? 'active' : ''}`} onClick={() => setLane(k)}>{v.label}</button>
-        ))}
-      </div>
-      <pre className="od-contract-code">{d.lines.join('\n')}</pre>
-      <div className="gcx-lane-note">{d.note} <em>· click the other tab</em></div>
-    </div>
-  );
-}
-
-/* ── Screenshot stand-in 1: Claude Code inside the Glyphh desktop ── */
+/* ── Screenshot stand-in 1: the agent inside the Glyphh desktop ── */
 export function DesktopShot() {
   return (
     <div className="gcx-shot" aria-hidden="true">
@@ -65,7 +24,7 @@ export function DesktopShot() {
         <div className="gcx-rail"><i className="on" /><i /><i /><i /><i /></div>
         <div className="gcx-pane">
           <div className="gcx-pane-bar">
-            <b>Agent</b> Claude Code
+            <b>Agent</b> Code · ~/work/api
             <span className="gcx-pill">via the router</span>
           </div>
           <div className="gcx-lines">
@@ -131,42 +90,6 @@ export function TerminalShot() {
   );
 }
 
-/* ── The bridge — pick the lane, watch what the desktop writes ── */
-export function BridgeMock() {
-  const [lane, setLane] = useState('router');
-  const onRouter = lane === 'router';
-  return (
-    <div className="od-studio gwm" aria-hidden="true">
-      <div className="od-studio-bar">
-        <span className="od-studio-back">‹ Loops</span>
-        <span className="od-studio-name">Claude Code</span>
-        <span className="od-studio-saved">{onRouter ? 'gateway lane' : 'own login'}</span>
-      </div>
-      <div className="gwm-body">
-        <div className="gwm-sec">LANE</div>
-        <button className="gwm-row" onClick={() => setLane('subscription')}>
-          <span className="gwm-mono">your subscription <em>Anthropic bills the seat</em></span>
-          <i className={`gwm-toggle ${!onRouter ? 'on' : ''}`} />
-        </button>
-        <button className="gwm-row" onClick={() => setLane('router')}>
-          <span className="gwm-mono">glyphh router <em>the org's models and budget</em></span>
-          <i className={`gwm-toggle ${onRouter ? 'on' : ''}`} />
-        </button>
-        <div className="gwm-sec">WHAT THE DESKTOP WRITES · env, readable only by you</div>
-        {onRouter ? (
-          <>
-            <div className="gwm-row gwm-static"><span className="gwm-mono">ANTHROPIC_BASE_URL <em>the org's endpoint</em></span></div>
-            <div className="gwm-row gwm-static"><span className="gwm-mono">ANTHROPIC_AUTH_TOKEN <em>your member key</em></span></div>
-          </>
-        ) : (
-          <div className="gwm-row gwm-static"><span className="gwm-mono">— <em>nothing. the CLI rides its own login</em></span></div>
-        )}
-        <div className="gwm-foot">rewritten whole on every launch · nothing typed in a terminal · log out and it is gone</div>
-      </div>
-    </div>
-  );
-}
-
 /* ── The Glyphh loop, in the terminal — cycle the mode, pick the model ── */
 const MODES = [
   { key: 'default', label: '◈ default' },
@@ -174,17 +97,17 @@ const MODES = [
   { key: 'plan', label: '⏸ plan mode on' },
   { key: 'bypass', label: '⏵⏵ bypass permissions on' },
 ];
-const GATEWAY_MODELS = [
+const ROUTER_MODELS = [
   { id: 'claude-sonnet-5', why: 'org default' },
-  { id: 'claude-fable-5-1', why: 'reserved · your seat' },
-  { id: 'gpt-5.2', why: 'gateway' },
+  { id: 'claude-fable-5-1', why: 'the heavy one' },
+  { id: 'gpt-5.2', why: 'your team allows it' },
   { id: 'qwen3-coder', why: 'open weights' },
   { id: 'a2a/reviewer', why: 'org agent' },
 ];
 
 export function TerminalMock() {
   const [mode, setMode] = useState(0);
-  const [model, setModel] = useState(GATEWAY_MODELS[0].id);
+  const [model, setModel] = useState(ROUTER_MODELS[0].id);
   const [picker, setPicker] = useState(false);
   const m = MODES[mode];
   return (
@@ -200,7 +123,7 @@ export function TerminalMock() {
         {picker ? (
           <div className="gcx-picker">
             <div className="gcx-t-dim">/model · the org's roster</div>
-            {GATEWAY_MODELS.map((g) => (
+            {ROUTER_MODELS.map((g) => (
               <button key={g.id} className={g.id === model ? 'active' : ''} onClick={() => { setModel(g.id); setPicker(false); }}>
                 <span>{g.id}</span><em>{g.why}</em>
               </button>
@@ -240,15 +163,10 @@ const STRATEGIES = {
     route: { rename: ['claude-haiku-4-5', 'auto · light'], tests: ['claude-sonnet-5', 'auto · mid'], design: ['claude-fable-5-1', 'auto · heavy'] },
     foot: 'the org\'s auto-router picks per request. members pick nothing',
   },
-  burn: {
-    label: 'burn down',
-    route: { rename: ['claude-sonnet-5', 'your seat · 62% left this month'], tests: ['claude-sonnet-5', 'your seat · 62% left this month'], design: ['claude-fable-5-1', 'your seat · 62% left this month'] },
-    foot: 'your subscription first. when it runs dry, the proxy on the org\'s keys',
-  },
-  reserved: {
-    label: 'reserved',
-    route: { rename: ['claude-haiku-4-5', 'proxy · org keys'], tests: ['claude-sonnet-5', 'proxy · org keys'], design: ['claude-fable-5-1', 'your seat · Fable stays on the subscription'] },
-    foot: 'the heavy models on your subscription, everything lighter on the proxy',
+  pinned: {
+    label: 'your pick',
+    route: { rename: ['claude-sonnet-5', 'the model you picked, every turn'], tests: ['claude-sonnet-5', 'the model you picked, every turn'], design: ['claude-sonnet-5', 'the model you picked, every turn'] },
+    foot: 'no router: every turn on the model in your picker, at your plan\'s rate',
   },
 };
 
@@ -291,14 +209,14 @@ export function StrategyMock() {
 
 /* ── Install — the same loop, three doors in ── */
 const DOORS = {
-  desktop: `# The Agent panel. Pick "Glyphh" in the loop picker.
+  desktop: `# The agent panel. Open a Code session in a folder.
 # Same engine as the CLI, with the panels around it.
-Glyphh Desktop → Agent → loop: glyphh`,
+Glyphh Desktop → Agent → Code → pick a folder`,
   terminal: `# The CLI. Signs in to your org, runs the loop in-process.
 npm i -g @glyphh-ai/cli
 glyphh                 # in any folder
 glyphh --continue      # pick up the last chat here`,
-  'claude code': `# Or keep Claude Code and give it the router.
+  'claude code': `# Or point Claude Code at the router, paid from the org budget.
 export ANTHROPIC_BASE_URL="https://api.glyphh.ai"
 export ANTHROPIC_AUTH_TOKEN="sk-…"   # a virtual key
 claude`,
@@ -381,8 +299,8 @@ export function RelayMock() {
 
 /* ── The pillars — click one, see the one line that proves it ── */
 const PILLAR_DETAIL = {
-  'your seat': 'loop: claude · lane: your login · Anthropic bills the seat you already pay for',
-  'one switch': 'lane: gateway · same folder, same skills, same chat · 0 config typed',
+  'your folder': 'write ../secrets.env → refused: outside this session\'s folder · the shell writes only here',
+  'every model': 'claude-fable-5-1 · Pro rate · paid from the org budget, itemized per call',
   'semantic routing': 'strategy: semantic · "design the migration" → claude-fable-5-1 · "rename usr" → qwen3-coder',
 };
 

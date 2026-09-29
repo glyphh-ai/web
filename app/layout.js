@@ -42,10 +42,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="dark" suppressHydrationWarning className={`${geist.variable} ${jetbrains.variable}`}>
       <head>
-        {/* The theme, before first paint: the saved choice, else the OS preference (his order, 2026-09-22). */}
+        {/* The theme, before first paint: the saved choice, else DARK — never the OS preference (his order, 2026-09-29: "the web and the server should default to the dark theme 100% of the time"). */}
         <script
           dangerouslySetInnerHTML={{
-            __html: "try{var t=localStorage.getItem('glyphh-theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t}catch(e){}",
+            __html: "try{var t=localStorage.getItem('glyphh-theme');if(t!=='light'&&t!=='dark'){t='dark'}document.documentElement.dataset.theme=t}catch(e){}",
           }}
         />
         {/* Sentient italic — the emphasis face — from Fontshare. Geist (display + body) loads via next/font. */}

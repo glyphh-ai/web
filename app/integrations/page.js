@@ -15,7 +15,7 @@ import { PanelIcon } from '../components/panel-icons';
 export const metadata = {
   title: 'Integrations — Glyphh',
   description:
-    'Connect Glyphh to the models, services, tools, and apps you already use. 3,500+ services through Connect, 125+ model providers through the Router, and the tools built into the desktop.',
+    'Connect Glyphh to the models, services, tools, and apps you already use. 3,500+ services through Connect, every model Glyphh runs through the Router, and the tools built into the desktop.',
 };
 
 // One line for each featured service on the hub. Anything not listed here
@@ -84,8 +84,7 @@ export default function IntegrationsPage() {
           <h1 className="ix-title">Integrations</h1>
           <p className="ix-lede">Connect Glyphh to the models, services, tools, and apps you already use.</p>
           <p className="ix-sub">
-            Bring your own keys, sign in with the subscriptions you already pay for, route through your org&rsquo;s
-            Router, or run models locally. Reach 3,500+ services through Connect. Extend the desktop with skills,
+            Every model Glyphh runs, on every plan, through one Router. Reach 3,500+ services through Connect. Extend the desktop with skills,
             tasks, and apps &mdash; yours, the house&rsquo;s, and your org&rsquo;s.
           </p>
           <div className="ix-actions">
@@ -94,7 +93,7 @@ export default function IntegrationsPage() {
           </div>
           <div className="ix-stats">
             <div><b>3,500+</b><span>Connected services</span></div>
-            <div><b>125+</b><span>Model providers</span></div>
+            <div><b>Every</b><span>Model, on every plan</span></div>
             <div><b>{BUILT_IN.length}</b><span>Built-in panels</span></div>
           </div>
         </section>
@@ -125,14 +124,14 @@ export default function IntegrationsPage() {
         <section className="ix-section" id="models">
           <div className="ix-section-head">
             <div>
-              <span className="qs-kicker">Cloud, subscription, router, or local</span>
+              <span className="qs-kicker">Every plan, every model</span>
               <h2 className="ix-h2">Models and providers</h2>
               <p className="ix-desc">
-                Glyphh separates model choice from where it runs. Use your own logins, your own keys, or your
-                org&rsquo;s Router &mdash; built on LiteLLM, one endpoint in front of 3,900+ models from 125+ providers, open weights included.
+                One Router in front of every model Glyphh runs, open weights included. Each model has a published rate
+                on each plan, and your admin turns models on or off for your organization.
               </p>
             </div>
-            <a href="/integrations/models" className="qs-more">Full catalog &rarr;</a>
+            <a href="/integrations/models" className="qs-more">Every model &rarr;</a>
           </div>
           <div className="ix-grid ix-grid-4">
             {providers.map(([key, p]) => (
