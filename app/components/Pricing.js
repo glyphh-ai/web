@@ -6,11 +6,13 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVE
 // Dollars, always whole where they are whole: "$40", "$1", "$0.50".
 const usd = (n) => `$${Number(n).toLocaleString('en-US', { maximumFractionDigits: 2 })}`;
 
-// Plans = dollars per month, dollar for dollar (his orders, 2026-09-29: no free
-// plan, no BYOK; "Solo: 40%, Basic: 30%, Pro: 20%. Solo is going to be 20.00 per
-// month… Enterprise is per customer"). A plan's price is its monthly budget;
-// every plan runs every model at its own rate, and the bigger the plan, the
-// better the rate. Prepaid; never billed in arrears.
+// Plans = dollars per month, dollar for dollar (his orders, 2026-09-29: no BYOK;
+// "Solo: 40%, Basic: 30%, Pro: 20%. Solo is going to be 20.00 per month…
+// Enterprise is per customer"). A paid plan's price is its monthly budget; every
+// paid plan runs every model at its own rate, and the bigger the plan, the
+// better the rate. Free (his order, 2026-09-30) is $0 with $1 a month for
+// connections: the desktop, your own CLI and connected services, and no Glyphh
+// models or memory. Prepaid; never billed in arrears.
 //
 // NUMBERS (price, budget, seats) are fed from the server's super-admin plan
 // catalog via GET /api/public/pricing (`monthlyUsdCents`, `poolUsdPerMonth`,
@@ -19,6 +21,26 @@ const usd = (n) => `$${Number(n).toLocaleString('en-US', { maximumFractionDigits
 // functions over those numbers, so copy stays here and figures stay
 // server-truth. Each model's rate per plan is ModelCatalog's, from the server.
 const TIERS = [
+  {
+    tier: 'free',
+    name: 'Free',
+    priceUsd: 0,
+    budgetUsd: 1,
+    seats: 1,
+    popular: false,
+    desc: 'The desktop and your own CLI. No card required.',
+    priceTitle: 'One seat',
+    priceSub: 'Free for everyone.',
+    lead: null,
+    features: (_s, budget) => [
+      'Glyphh Desktop and the workspace',
+      'Your own CLI: Claude Code, Codex, Gemini, Copilot, Cursor, Glyphh CLI',
+      `Connected services, 3,500+ apps, with ${usd(budget)} a month included`,
+    ],
+    cta: 'Download now',
+    href: '/#download',
+    btn: 'btn-secondary',
+  },
   {
     tier: 'solo',
     name: 'Solo',
@@ -29,11 +51,10 @@ const TIERS = [
     desc: 'One person, every model.',
     priceTitle: 'One seat',
     priceSub: 'Per month.',
-    lead: null,
+    lead: 'Everything in Free, plus:',
     features: () => [
-      'Glyphh Desktop: the agent, your apps, saved layouts',
+      'The Glyphh agent, your apps, saved layouts',
       'Every model we run, at the Solo rate',
-      'Connected services, 3,500+ apps',
       'Memory across every session',
       'Add funds any time',
     ],
@@ -138,11 +159,12 @@ export default async function Pricing() {
     const p = catalog?.find((x) => x.tier === t.tier);
     const seats = p?.maxSeats ?? t.seats;
     const price = p ? p.monthlyUsdCents / 100 : t.priceUsd;
+    const budget = p?.poolUsdPerMonth ?? t.budgetUsd;
     const { features, ...plain } = t;
     return {
       ...plain,
       priceFigure: t.priceFigure ?? usd(price),
-      featureList: features(seats),
+      featureList: features(seats, budget),
     };
   });
 
@@ -153,8 +175,9 @@ export default async function Pricing() {
           <span className="qs-kicker">Plans</span>
           <h2 className="ix-h2">A plan&rsquo;s price is its monthly budget.</h2>
           <p className="ix-desc">
-            Every plan runs every model. Your budget is spent at your plan&rsquo;s rate, the bigger the plan the better
-            the rate, and every charge is itemized in your usage feed.
+            Start free with your own CLI and connections. Every paid plan runs every model, your budget is spent at
+            your plan&rsquo;s rate, the bigger the plan the better the rate, and every charge is itemized in your usage
+            feed.
           </p>
         </div>
       </div>
@@ -162,7 +185,7 @@ export default async function Pricing() {
       <PricingCards tiers={tiers} salesEmail={SALES_EMAIL} platformUrl={PLATFORM_URL} />
 
       <p className="pp-note">
-        Each plan&rsquo;s budget is its monthly limit. Spend it and model calls pause until you add funds or the month
+        Each plan&rsquo;s budget is its monthly limit. Spend it and calls pause until you add funds or the month
         turns. Plan budget resets every month; funds you add never expire. Cancel anytime. See our{' '}
         <a href="/terms">Terms of Use</a>. Prices are exclusive of applicable taxes and duties, including VAT and
         applicable sales tax.

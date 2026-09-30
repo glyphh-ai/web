@@ -22,7 +22,7 @@ export default function PricingCards({ tiers, salesEmail, platformUrl }) {
               <b>{t.priceFigure}</b>
               <span>{t.priceSub}</span>
             </div>
-            <a href={platformUrl} className={`os-cta os-cta-wide ${t.popular ? 'os-cta-primary' : 'os-cta-ghost'}`}>
+            <a href={t.href ?? platformUrl} className={`os-cta os-cta-wide ${t.popular ? 'os-cta-primary' : 'os-cta-ghost'}`}>
               {t.cta}
             </a>
             <ul className="pp-features">

@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'How does the budget work?',
-    a: 'Every plan includes a monthly budget in dollars, equal to its price: Solo’s $20 buys $20 of usage, and $40 a seat buys $40 a seat. Model calls and connector tools are paid from it at your plan’s published rates, metered on the tokens they send and return. There is no free plan: install and set up without one, and choose a plan when you make your first model call. Add funds any time, dollar for dollar; purchased funds never expire, and every charge is itemized in your usage feed.',
+    a: 'Every plan includes a monthly budget in dollars, equal to its price: Solo’s $20 buys $20 of usage, and $40 a seat buys $40 a seat. Model calls and connector tools are paid from it at your plan’s published rates, metered on the tokens they send and return. Free is $0 and includes $1 a month for connector tools; it runs your own CLI and connected services, and Glyphh models start with Solo. Add funds any time, dollar for dollar; purchased funds never expire, and every charge is itemized in your usage feed.',
   },
   {
     q: 'What are connected services?',

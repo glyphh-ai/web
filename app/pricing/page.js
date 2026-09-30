@@ -40,7 +40,7 @@ const RULES = [
 // Objection handling (site.md §8.6).
 const FAQ = [
   ['What does a model cost?', 'Each model has a published rate on each plan, per million tokens in and out. The bigger the plan, the better the rate. Every rate is on this page.'],
-  ['Is there a free plan?', 'No. Solo is $20 a month and includes $20 of usage. Install and set up without one; you choose a plan when you make your first model call.'],
+  ['Is there a free plan?', 'Yes. Free is $0, no card required: the desktop and workspace, your own CLI (Claude Code, Codex, Gemini, Copilot, Cursor, Glyphh CLI) and connected services, with $1 a month for connections. Glyphh models and memory start with Solo at $20 a month.'],
   ['Can we bring our own API keys?', 'No. Every call runs on Glyphh and is paid from your plan’s budget: one bill, one set of rates, one place to see it.'],
   ['Do you store our prompts?', 'No. Usage telemetry, never transcripts.'],
   ['Who owns the programs we build?', 'You do. No vendor, no seat license, no renewal.'],

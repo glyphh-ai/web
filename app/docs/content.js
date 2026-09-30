@@ -224,9 +224,9 @@ glyphh`}</Code>
           terminal picks up the session. It lives in <code>~/.glyphh/session.json</code>, separate from the
           desktop&rsquo;s own login, so signing out of one does not sign out the other.
         </p>
-        <Note kind="wire" title="Model calls need a plan">
-          The CLI signs in and works without one, but a model call is refused until an org admin chooses a plan
-          on Billing.
+        <Note kind="wire" title="Model calls need a paid plan">
+          The CLI signs in and works on Free, but a model call is refused until an org admin chooses Solo, Basic or
+          Pro on Billing.
         </Note>
         <h2>The first run in a folder</h2>
         <p>
@@ -797,7 +797,8 @@ const console_ = [
           <table>
             <thead><tr><th>Tier</th><th>Price</th><th>Monthly budget</th><th>Seats</th><th>Governance</th><th>SSO</th></tr></thead>
             <tbody>
-              <tr><td>Free</td><td>$0</td><td>$1</td><td>1</td><td>no</td><td>no</td></tr>
+              <tr><td>Free</td><td>$0</td><td>$1, for connections</td><td>1</td><td>no</td><td>no</td></tr>
+              <tr><td>Solo</td><td>$20 / month</td><td>$20</td><td>1</td><td>no</td><td>no</td></tr>
               <tr><td>Basic</td><td>$40 / seat / month</td><td>$40 / seat</td><td>up to 25</td><td>no</td><td>no</td></tr>
               <tr><td>Pro</td><td>$150 / seat / month</td><td>$150 / seat</td><td>up to 100</td><td>roles and budgets</td><td>no</td></tr>
               <tr><td>Enterprise</td><td>custom</td><td>custom</td><td>unlimited</td><td>yes</td><td>yes</td></tr>
@@ -810,14 +811,16 @@ const console_ = [
         </p>
         <h2>Budget</h2>
         <p>
-          Plans are dollars per month, dollar for dollar: a plan includes its price as budget, per seat, every
-          month. There is no free plan: Solo is $20 a month. Every Glyphh product draws on that one budget: model
-          calls at your plan&rsquo;s published rate for each model, and connector tools at their published
-          per-token price. Plan-included budget resets each month.
+          Plans are dollars per month, dollar for dollar: a paid plan includes its price as budget, per seat, every
+          month. Free is $0 and includes $1 a month for the organization, spent on connector tools; it runs your
+          own CLI and connected services, and makes no Glyphh model call. Every Glyphh product draws on that one
+          budget: model calls at your plan&rsquo;s published rate for each model, and connector tools at their
+          published per-token price. Plan-included budget resets each month.
         </p>
         <p>
           Every plan runs every model; the bigger the plan, the better the rate. There are no provider keys to bring:
-          every call runs on Glyphh. Without a plan, everything works except model calls. See the rates on the{' '}
+          every call runs on Glyphh. On Free, everything works except Glyphh model calls, memory included. See the
+          rates on the{' '}
           <a href="/pricing#rates">pricing page</a>.
         </p>
         <h2>Add funds</h2>
