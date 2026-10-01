@@ -1461,7 +1461,7 @@ const { data: models } = await r.json();`}</Code>
         <h2>Claude Code</h2>
         <p>The plugin installs the Ada connection and the <code>ada</code> skill, which tells Claude when to reach for Ada.</p>
         <Code lang="bash">{`claude plugin marketplace add glyphh-ai/ada
-claude plugin install glyphh@glyphh`}</Code>
+claude plugin install ada@glyphh-ai`}</Code>
         <p>
           Then run <code>/mcp</code> in Claude Code, pick <code>ada</code> and choose <strong>Authenticate</strong>.
           Your browser opens and you sign in with your Glyphh account. There is no key to create.
@@ -1499,7 +1499,7 @@ claude plugin install glyphh@glyphh`}</Code>
         </p>
         <Note title="Use it">
           Ask in plain words: &ldquo;Use Ada to remember how we fixed this deploy failure, and check it before the
-          next deploy.&rdquo; In Claude Code, <code>/glyphh:ada</code> invokes the skill directly.
+          next deploy.&rdquo; In Claude Code, <code>/ada:ada</code> invokes the skill directly.
         </Note>
       </>
     ),
