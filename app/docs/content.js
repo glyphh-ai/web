@@ -1403,14 +1403,29 @@ const ada = [
         <ul>
           <li><strong>Weights.</strong> Say how much each key decides: <code>{'{"risk": 1, "team": 0.1}'}</code>. A number weighs a key; an object weighs inside it. Unlisted keys weigh 1. Set defaults on the model, or pass weights on one call.</li>
           <li><strong>Calibration.</strong> Once a model has 10 or more wins, <code>ada_calibrate</code> fits its probabilities to its own records. The result is saved with the model.</li>
+          <li><strong>Learned weights.</strong> Once a model has 10 or more wins, an org admin can run <code>ada_learn</code>. It works out which keys decide by holding records out and predicting them from the rest, saves those weights as the model&rsquo;s defaults, calibrates it, and reports how often the model predicts its own held-out records before and after.</li>
           <li><strong>Clearance.</strong> An org admin sets each team&rsquo;s clearance on a model from 0 to 1. A team with no setting has full clearance.</li>
+        </ul>
+        <h2>Values said another way</h2>
+        <p>
+          A query does not have to use the same word a record used. When a cloud model records a value it has not
+          seen, Ada works out once how else that value is said and keeps it with the model, so a query for{' '}
+          <code>production</code> reaches records that say <code>prod</code>. Nothing changes in the calls you make.
+        </p>
+        <ul>
+          <li><strong>No model runs when you query.</strong> The lexicon is built when a record is written, and a query only reads it.</li>
+          <li><strong>A match by lexicon is never exact.</strong> It scores at most 0.95, so it needs three records and 0.7 confidence to act, like any other near match.</li>
+          <li><strong>Recorded values stay distinct.</strong> Two values your records use are never treated as the same.</li>
+          <li><strong>Fact trees show it.</strong> The key&rsquo;s leaf shows your word, the record&rsquo;s word and the score.</li>
+          <li><strong>What is sent.</strong> To build the lexicon, a cloud model&rsquo;s short text values are sent to the language model that fronts Ada. A local model&rsquo;s values are never sent, so a local model matches exact values only. Keys with more than 200 distinct values, such as ids, are left out.</li>
         </ul>
         <h2>When Ada says to act</h2>
         <p>
           A query returns <code>act</code>, true only when the answer is sufficient, its confidence is at least
-          0.5, and the outcome is not vetoed by a recorded failure. Records less than 0.40 similar to the
-          situation are not counted. An answer is marked <code>calibrated</code> once three or more records stand
-          behind it.
+          0.7, three or more records stand behind it, and the outcome is not vetoed by a recorded failure. A
+          record that matches the situation exactly is the answer and acts alone. Records less than 0.40 similar
+          to the situation are not counted. An answer is marked <code>calibrated</code> once the model has been
+          calibrated.
         </p>
         <Note kind="warn" title="A single record is not consensus">
           Ada cites what it stands on. Read <code>count</code> and <code>receipts</code> before acting on a thin
@@ -1535,6 +1550,7 @@ claude plugin install ada@glyphh-ai`}</Code>
               <tr><td><code>ada_record</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code></td><td>Records a win: this outcome worked here</td></tr>
               <tr><td><code>ada_veto</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code></td><td>Records a failure: this outcome failed or was rejected here</td></tr>
               <tr><td><code>ada_calibrate</code></td><td><code>model_id</code></td><td>Fits the model&rsquo;s probabilities to its records (10 or more wins)</td></tr>
+              <tr><td><code>ada_learn</code></td><td><code>model_id</code></td><td>Learns which keys decide from the model&rsquo;s wins (10 or more), saves them as its default weights and calibrates it (org admins)</td></tr>
             </tbody>
           </table>
         </div>
