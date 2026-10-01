@@ -1352,9 +1352,264 @@ const system = [
   },
 ];
 
+// Ada, written from the server on 2026-10-01 (glyphh_auth/ada*.py). The tool
+// list, the limits and the answer fields are the ones the code returns.
+const ada = [
+  {
+    slug: 'ada',
+    title: 'Ada models',
+    lede: 'Typed models your agents build, feed and query, with every answer a fact tree.',
+    mascot: 'scout',
+    body: (
+      <>
+        <p>
+          An Ada model holds records: a situation, the outcome that was tried, and whether it worked. Ask it about a
+          new situation and it answers with the outcome that worked in situations like it, how confident it is, and
+          the records it stands on. Ada runs on Glyphh&rsquo;s servers and is reached over MCP, at{' '}
+          <code>POST /ada</code>, or as a chat model.
+        </p>
+        <h2>Current model</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Model</th><th>Pricing</th><th>Situation size</th><th>Outcome label</th><th>Input</th></tr></thead>
+            <tbody>
+              <tr><td><code>glyphh-ada-1.0</code></td><td>Per token, in and out</td><td>Up to 16 KB of JSON</td><td>Up to 200 characters</td><td>JSON</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Pricing.</strong> Every Ada call is metered per input and output token on the <code>glyphh-ada-1.0</code> row and paid from your organization&rsquo;s monthly budget, at your plan&rsquo;s rate. The current rate is on <a href="/docs/model-catalog">The models</a>.</li>
+          <li><strong>Budget.</strong> A call meets the same budget wall as any model call: without a plan, or over budget, it is refused before it runs.</li>
+          <li><strong>Situations.</strong> A situation is JSON of any shape. Arrays are treated as sets.</li>
+          <li><strong>One id per call.</strong> Every call names a <code>model_id</code> (<code>am_</code> and 12 hex digits). An organization can have many models.</li>
+        </ul>
+        <h2>Where records live</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Storage</th><th>Records are kept</th><th>Needs</th></tr></thead>
+            <tbody>
+              <tr><td><code>cloud</code></td><td>With Glyphh, in your organization&rsquo;s own schema</td><td>Nothing</td></tr>
+              <tr><td><code>local</code></td><td>On a device your organization registered</td><td>That device online when the model is used</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          A model&rsquo;s configuration always lives on the server: its name, where its records live, its weights
+          and its calibration. Only the records themselves can live on a device. Register one with{' '}
+          <code>glyphh ada register</code>, then create the model with <code>storage: &quot;local&quot;</code> and
+          that device&rsquo;s id.
+        </p>
+        <h2>Customizing a model</h2>
+        <ul>
+          <li><strong>Weights.</strong> Say how much each key decides: <code>{'{"risk": 1, "team": 0.1}'}</code>. A number weighs a key; an object weighs inside it. Unlisted keys weigh 1. Set defaults on the model, or pass weights on one call.</li>
+          <li><strong>Calibration.</strong> Once a model has 10 or more wins, <code>ada_calibrate</code> fits its probabilities to its own records. The result is saved with the model.</li>
+          <li><strong>Clearance.</strong> An org admin sets each team&rsquo;s clearance on a model from 0 to 1. A team with no setting has full clearance.</li>
+        </ul>
+        <h2>When Ada says to act</h2>
+        <p>
+          A query returns <code>act</code>, true only when the answer is sufficient, its confidence is at least
+          0.5, and the outcome is not vetoed by a recorded failure. Records less than 0.40 similar to the
+          situation are not counted. An answer is marked <code>calibrated</code> once three or more records stand
+          behind it.
+        </p>
+        <Note kind="warn" title="A single record is not consensus">
+          Ada cites what it stands on. Read <code>count</code> and <code>receipts</code> before acting on a thin
+          answer.
+        </Note>
+        <h2>Listing models</h2>
+        <p>Over MCP, call <code>ada_models</code>. Over HTTP, the same call is an <code>op</code>:</p>
+        <Code lang="bash">{`curl https://api.glyphh.ai/ada \\
+  -H "x-glyphh-api-key: Bearer $GLYPHH_API_KEY" \\
+  -H "content-type: application/json" \\
+  -d '{"op": "models"}'`}</Code>
+        <Code lang="python">{`import os, requests
+
+r = requests.post(
+    "https://api.glyphh.ai/ada",
+    headers={"x-glyphh-api-key": f"Bearer {os.environ['GLYPHH_API_KEY']}"},
+    json={"op": "models"},
+)
+models = r.json()["data"]`}</Code>
+        <Code lang="javascript">{`const r = await fetch("https://api.glyphh.ai/ada", {
+  method: "POST",
+  headers: {
+    "x-glyphh-api-key": \`Bearer \${process.env.GLYPHH_API_KEY}\`,
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({ op: "models" }),
+});
+const { data: models } = await r.json();`}</Code>
+        <p>
+          Each model comes back with its <code>id</code>, <code>name</code>, <code>storage</code>, default{' '}
+          <code>weights</code>, and whether it is <code>calibrated</code>. Pass a <code>model_id</code> to get one
+          model with its record counts.
+        </p>
+        <Note title="Where to go next">
+          <a href="/docs/ada-install">Install Ada</a> to connect an agent; <a href="/docs/ada-tools">Ada tools and API</a>{' '}
+          for every call.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'ada-install',
+    title: 'Install Ada',
+    lede: 'Connect an agent to Ada: the Claude Code plugin, any MCP client, or an API key.',
+    mascot: 'byte',
+    body: (
+      <>
+        <h2>Claude Code</h2>
+        <p>The plugin installs the Ada connection and the <code>ada</code> skill, which tells Claude when to reach for Ada.</p>
+        <Code lang="bash">{`claude plugin marketplace add glyphh-ai/ada
+claude plugin install glyphh@glyphh`}</Code>
+        <p>
+          Then run <code>/mcp</code> in Claude Code, pick <code>ada</code> and choose <strong>Authenticate</strong>.
+          Your browser opens and you sign in with your Glyphh account. There is no key to create.
+        </p>
+        <h2>Claude and other clients that sign in</h2>
+        <p>Add a custom connector or remote MCP server with this URL, and sign in with your Glyphh account when asked:</p>
+        <Code>{`https://api.glyphh.ai/mcp`}</Code>
+        <p>
+          Ada sends its own usage guidance when a client connects, so these clients use it well without the skill.
+        </p>
+        <h2>Other agents</h2>
+        <p>Install the skill with skills.sh, then add the URL above as an MCP server in that agent.</p>
+        <Code lang="bash">{`npx skills add glyphh-ai/ada --skill ada`}</Code>
+        <h2>API key</h2>
+        <p>
+          For CI, a headless agent, or a client that cannot open a browser, create a key on the console&rsquo;s
+          Virtual Keys page and send it as a header.
+        </p>
+        <Code lang="bash">{`claude mcp add --transport http ada https://api.glyphh.ai/mcp \\
+  --header "x-glyphh-api-key: Bearer $GLYPHH_API_KEY"`}</Code>
+        <Code lang="json">{`{
+  "mcpServers": {
+    "ada": {
+      "type": "http",
+      "url": "https://api.glyphh.ai/mcp",
+      "headers": { "x-glyphh-api-key": "Bearer sk-…" }
+    }
+  }
+}`}</Code>
+        <h2>What the agent sees</h2>
+        <p>
+          The <code>ada_*</code> tools, plus <code>mcp_tool_search</code> and <code>mcp_tool_call</code> for your
+          organization&rsquo;s other connected tools. Connected tools are found by search and are not listed one by
+          one.
+        </p>
+        <Note title="Use it">
+          Ask in plain words: &ldquo;Use Ada to remember how we fixed this deploy failure, and check it before the
+          next deploy.&rdquo; In Claude Code, <code>/glyphh:ada</code> invokes the skill directly.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'ada-tools',
+    title: 'Ada tools and API',
+    lede: 'Every Ada call, over MCP or POST /ada, and what comes back.',
+    mascot: 'tally',
+    body: (
+      <>
+        <p>
+          The same calls answer in three places: as <code>ada_*</code> tools on your organization&rsquo;s MCP
+          endpoint, as <code>op</code> values at <code>POST /ada</code>, and behind the{' '}
+          <code>glyphh-ada-1.0</code> chat model, which turns plain language into these calls.
+        </p>
+        <h2>Ask and explain</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Tool</th><th>Takes</th><th>Returns</th></tr></thead>
+            <tbody>
+              <tr><td><code>ada_query</code></td><td><code>model_id</code>, <code>situation</code>, optional <code>weights</code></td><td>The top outcome, its confidence, the records behind it, and <code>act</code></td></tr>
+              <tr><td><code>ada_facts</code></td><td><code>model_id</code>, <code>situation</code>, optional <code>weights</code>, <code>top</code> (1 to 50, default 3)</td><td>The nearest wins and failures, each as a fact tree</td></tr>
+              <tr><td><code>ada_check</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code></td><td>How close the nearest win and failure of that outcome are</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>Record</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Tool</th><th>Takes</th><th>Does</th></tr></thead>
+            <tbody>
+              <tr><td><code>ada_record</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code></td><td>Records a win: this outcome worked here</td></tr>
+              <tr><td><code>ada_veto</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code></td><td>Records a failure: this outcome failed or was rejected here</td></tr>
+              <tr><td><code>ada_calibrate</code></td><td><code>model_id</code></td><td>Fits the model&rsquo;s probabilities to its records (10 or more wins)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <Note kind="warn" title="Record what the world graded">
+          Record an outcome only once it is known, and only when the user or the world confirmed it. An agent should
+          never grade its own work as a win.
+        </Note>
+        <h2>Models, records and devices</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Tool</th><th>Who</th><th>Does</th></tr></thead>
+            <tbody>
+              <tr><td><code>ada_models</code></td><td>Any member</td><td>Lists the organization&rsquo;s models, or one with its record counts</td></tr>
+              <tr><td><code>ada_records</code></td><td>Any member</td><td>Browses a model&rsquo;s records, newest first, by store (<code>wins</code> or <code>vetoes</code>)</td></tr>
+              <tr><td><code>ada_devices</code></td><td>Any member</td><td>Lists registered devices and whether each is online</td></tr>
+              <tr><td><code>ada_create_model</code></td><td>Org admins</td><td>Creates a model with <code>name</code> and <code>storage</code> (<code>cloud</code> or <code>local</code>)</td></tr>
+              <tr><td><code>ada_update_model</code></td><td>Org admins</td><td>Renames a model or sets its default weights</td></tr>
+              <tr><td><code>ada_delete_model</code></td><td>Org admins</td><td>Deletes a model and its records, wherever they live</td></tr>
+              <tr><td><code>ada_edit_record</code></td><td>Org admins</td><td>Corrects a record&rsquo;s situation or outcome</td></tr>
+              <tr><td><code>ada_delete_record</code></td><td>Org admins</td><td>Deletes one record</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>Describing a situation</h2>
+        <p>
+          Give only the attributes that should decide, as short canonical values, and use the same keys every time
+          for the same kind of situation. Leave out ids, paths, names and timestamps: they make unrelated situations
+          look alike.
+        </p>
+        <Code lang="json">{`{ "task": "deploy_service", "constraint": "canary_required" }`}</Code>
+        <h2>POST /ada</h2>
+        <p>
+          One endpoint, on a gateway key. The <code>op</code> is the tool name without <code>ada_</code>; the rest
+          of the body is that tool&rsquo;s arguments.
+        </p>
+        <Code lang="bash">{`curl https://api.glyphh.ai/ada \\
+  -H "x-glyphh-api-key: Bearer $GLYPHH_API_KEY" \\
+  -H "content-type: application/json" \\
+  -d '{
+    "op": "query",
+    "model_id": "am_0123456789ab",
+    "situation": { "task": "deploy_service", "constraint": "canary_required" }
+  }'`}</Code>
+        <p>A query answers with:</p>
+        <Row k="top">The outcome that worked most in situations like this one.</Row>
+        <Row k="confidence">How strongly the records agree on it, 0 to 1.</Row>
+        <Row k="count">How many records stand behind the answer.</Row>
+        <Row k="outcomes">Every outcome found, with its share.</Row>
+        <Row k="receipts">The records cited: id, similarity, outcome, author.</Row>
+        <Row k="veto_match">How close the nearest recorded failure of the top outcome is.</Row>
+        <Row k="act">True when it is safe to act; <code>reason</code> says why or why not.</Row>
+        <Row k="calibrated">True once three or more records stand behind the answer.</Row>
+        <p>
+          A success is <code>{'{"data": …}'}</code>. A refusal is <code>{'{"error": {"code", "message"}}'}</code>{' '}
+          with a 400.
+        </p>
+        <h2>As a chat model</h2>
+        <p>
+          Pick <code>glyphh-ada-1.0</code> like any other model and talk to it in plain language or JSON. It answers
+          only by calling the tools above, and replies with the answer, whether it is safe to act, and the records
+          it cites.
+        </p>
+        <Note title="Where to go next">
+          <a href="/docs/ada">Ada models</a> for storage, weights and calibration;{' '}
+          <a href="/docs/ada-install">Install Ada</a> to connect an agent.
+        </Note>
+      </>
+    ),
+  },
+];
+
 export const GROUPS = [
   { title: 'Start here', lede: 'Install, the desktop, and the keys worth learning on day one.', pages: start },
   { title: 'The system', lede: 'The Router, Connect, Semantic Apps, and Rrotor — the pieces the home page names.', pages: system },
+  { title: 'Ada', lede: 'Typed models your agents build, feed and query.', pages: ada },
   { title: 'The agent', lede: 'Sessions, the loops underneath, models, and panels.', pages: agent },
   { title: 'Build', lede: 'Skills, tasks, artifacts, and the org hub.', pages: build },
   { title: 'Connect', lede: 'Connections and MCP, both directions.', pages: connect },
