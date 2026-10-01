@@ -6,8 +6,9 @@ import { POSTS, postBySlug, fmtDate } from '../posts';
 
 /**
  * /blog/[slug] — an article, in the frame: the title, the summary as the
- * lede, the author row, a cover, the sections, and a right rail with
- * "On this page" and "Related docs". Share links for the social feeds.
+ * lede, the author row, a cover (the video, when the post has one), the
+ * sections, and a right rail with "On this page" and "Related docs". Share
+ * links for the social feeds.
  */
 
 export function generateStaticParams() {
@@ -42,7 +43,9 @@ export default async function BlogPost({ params }) {
               <span className="bl-author"><img src="/glyphh-mascot.png" alt="" width="26" height="26" /> {p.author}</span>
               <span className="bl-meta">{fmtDate(p.date)} &middot; {p.minutes} min read</span>
             </div>
-            {p.cover
+            {p.video
+              ? <div className="bl-cover bl-cover-hero"><iframe src={`https://www.youtube-nocookie.com/embed/${p.video}`} title={p.title} className="bl-cover-img" style={{ border: 0 }} allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+              : p.cover
               ? <div className="bl-cover bl-cover-hero"><img src={p.cover} alt={p.coverAlt || ''} className="bl-cover-img" /></div>
               : <div className="bl-cover bl-cover-hero"><LetterField seed={11} /><span className="bl-cover-mark"><img src="/glyphh-mascot.png" alt="" width="64" height="64" /></span></div>}
             <div className="bl-body">

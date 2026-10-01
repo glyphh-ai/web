@@ -7,6 +7,81 @@
 
 export const POSTS = [
   {
+    slug: 'glyphh-desktop-workspaces',
+    title: 'Glyphh Desktop Workspaces — Stop Losing the Thread',
+    summary: 'Context switching costs you 15 minutes and 40% of your brain power every single time, and AI made it 10x worse. Timme demos Glyphh workspaces: models, loops, apps and connectors in one place, and your session follows you through the day.',
+    date: '2026-10-01',
+    author: 'Chris "Timme"',
+    minutes: 4,
+    cover: 'https://i.ytimg.com/vi/ABXhO46Delw/maxresdefault.jpg',
+    coverAlt: 'Glyphh Desktop Workspaces, the demo video.',
+    video: 'ABXhO46Delw',
+    tags: ['Desktop', 'Workspaces', 'Demo'],
+    related: [
+      ['Semantic Apps', '/docs/semantic-apps'],
+      ['The Router', '/docs/router'],
+      ['The Critical Inversion', '/blog/the-critical-inversion'],
+    ],
+    sections: [
+      {
+        id: 'the-video',
+        heading: null,
+        body: [
+          'Hi everyone, Chris here. Today we\'re talking Glyphh desktop workspaces. If you haven\'t heard about Glyphh desktop yet, it\'s the brand new vendor neutral alternative to Claude Code or Cowork on your desktop, OpenAI, Gemini, and potentially Cursor. Watch the demo above, or read on, I\'ll walk you through the highlights.',
+        ],
+      },
+      {
+        id: 'context-switching',
+        heading: 'The real cost of context switching',
+        body: [
+          'My typical day starts with about 15 to 20 tabs open in my browser. To be clear, this isn\'t my dev workflow, when I\'m in engineering mode with VS Code open. These are the things I\'m doing when I get distracted from the workflows that are really well oriented. My day spans me trying to get some work done, doing 50 meetings in between, and at the same time bouncing between five or six different chat interfaces and copying and pasting everywhere.',
+          'The problem with that is context switching, and I\'m not talking about switching between large language models. I\'m talking about I was working on one thing, someone interrupted me and I had to switch to something else. That costs you 15 minutes at least in clock time every single time and about 40% of your brain power. You lose the thread. You lose the context. And getting back into that rhythm again is very difficult. In the world of AI that is 10x worse in my opinion, we are constantly context switching. That\'s the premise behind workspaces.',
+        ],
+      },
+      {
+        id: 'feels-like-an-os',
+        heading: 'It should feel like an operating system',
+        body: [
+          'When you close everything down Glyphh starts to look different, more like an operating system, more like an iPad or the command center on your Mac. I can click and drag and open up what we call work panels, these are like browser tabs. I hit Command Shift Space (Control Shift Space on Windows) and I\'m back in the Echo panel. You might hear the little click, the most satisfying sound ever, that\'s why we call it Echo. From there I can add another panel, close panels, drag them around, expand them full screen, hold Command (or Control) and pick and choose the apps I want to open. It\'s a dynamic workspace and it\'s a very handy way of working.',
+          'In the code/vibe layout you get files, diff and a browser, work panels that should feel very familiar if you\'re used to Claude Code on the desktop or Codex or other IDEs that are more vibe in nature. And here\'s the important point that comes up again and again: these work panels are what we call semantic applications, written in Glyphh for Glyphh. You can add applications to a workspace that extend the MCP tools available to the agent as you work.',
+        ],
+      },
+      {
+        id: 'workspaces',
+        heading: 'Workspaces',
+        body: [
+          'My development workspace is where I do most of my work when I\'m coding, and I\'ve got the CLI version of Claude Code running in it. I like the CLI when I\'m writing software, it\'s just my preference and I like Claude\'s interface for it. The Glyphh CLI is also wicked cool and you could use it, but I happen to prefer Claude even though I build Glyphh. What that means is Claude is not only wired into the workspace with access to the 250+ MCP tools the workspace provides, it\'s also wired through the Glyphh model router. Glyphh supports 80+ models today and can reach somewhere around 3,900 across 129 providers, because we forked LiteLLM. Very important to understand.',
+          'But I can come up to the dock, click on another workspace, and completely reorient how I\'m working. Those four work panels are Glyphh semantic applications, and each one comes with a set of MCP tools hardwired into the workspace and accessible from the agent, whatever CLI or loop I happen to be running. Through our gateway we also support semantic routing of models, really cool feature, but that\'s another post. The core concept is a workspace with semantic applications oriented to the job I\'m trying to get done. There\'s one for design, one for email, so on and so forth.',
+        ],
+      },
+      {
+        id: 'never-lose-the-thread',
+        heading: 'Never lose the thread',
+        body: [
+          'So what does that have to do with context switching? Let\'s say I\'m in my design layout in the middle of working and someone pings me, or I hear Slack going off in the background. Command Shift Space, straight into Slack, and it jumped right where I pinned it. Need to send an email? Dip into Gmail and it orients there. Glyphh has many ways to jump around without losing the thread you\'re working on, and behind the scenes there are over 3,500 MCP servers and connections available through Pipedream, one of our partners.',
+          'Why is that important? Because in the middle of working, when I need to jump from one task to the next, I can move the context of the agent I\'m working with along with me as I progress through the day. I dip to my email layout and the thread I was working on in design comes with me. Then I jump back into Slack, back into the workspace, and away I go. It\'s really really quite effective.',
+        ],
+      },
+      {
+        id: 'build-your-own',
+        heading: 'Build your own',
+        body: [
+          'The other major piece is how you orient each workspace to each other. My design, development and Jira workspaces may be closer together than say my email or financial workspaces. When you build a workspace you set the number of columns and the number of rows per column, then you pick the semantic applications (or applications) to fill those slots. Pick the Glyphh agent and some options show up. Some orient the workspace to itself: run this model, this loop. Others orient the workspace to everything else you\'re doing: start a new session, or carry the current session from agent to agent, workspace to workspace, so you are never losing the context or the thread. You can also keep an agent from getting interrupted on what it\'s currently working on. Take all the models and loops we support into consideration and that\'s really quite profound.',
+          'And yes, I\'m still using my hands. I feel like the kids in Back to the Future, "oh my gosh, you still have to use your hands." All of this can be driven through your desktop agent too, but that\'s a video for another day.',
+        ],
+      },
+      {
+        id: 'summary',
+        heading: 'To summarize',
+        body: [
+          'Glyphh gives you desktop applications, semantic applications that you build using Glyphh. Workspaces combine models, loops, applications and connectors into one thing so your session follows you as you work through the day. Yielding all those superpowers, all 3,900+ models, gives you the ability to play them in the right order at the right time and make you superhuman at the things you do all day long.',
+          'I\'d love to hear your comments and thoughts. Give me your ideas or questions and I\'ll be happy to respond.',
+          '— Timme',
+        ],
+      },
+    ],
+  },
+  {
     slug: 'the-critical-inversion',
     title: 'The Critical Inversion — Big AI vs. Open Weights',
     summary: 'The five promises of AI are all margin plays. Does the math math? Timme runs the numbers, and makes the case for vendor-neutral tooling and a heavy helping of open weights.',
