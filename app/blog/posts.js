@@ -177,8 +177,8 @@ export const POSTS = [
         id: 'origins',
         heading: 'Where it came from',
         body: [
-          { html: 'Glyphh started as a memory substrate called <a href="https://github.com/glyphh-ai/ada" target="_blank" rel="noopener noreferrer">Ada</a>, named after Ada Lovelace (I did a write-up on her on our <a href="/research">research page</a>; fascinating to think about). Ada is a multi-dimensional HDC lattice, an attempt to harden semantic knowledge beyond RAG. It turned out to be excellent at storing temporal signal. I kept building on top of it, and then ran into an honest finding: as plain memory, for most workloads, RAG or plain SQL with a big context window is really hard to beat.' },
-          { html: 'That\'s research. The finding isn\'t always the thing that moves the needle; the path usually is. The path here gave us what Ada is today: the first Glyphh model, software\'s reasoning substrate. Ada speaks in math. Seed her with data and she builds a lattice of algebraic meaning: hierarchical, weighted, typed and temporal. Send her a like glyph and she answers with a fact tree: what is near, how near, and why. Your agents build the typed models, and your software leverages them at runtime, with no LLM in the middle. More on that in <a href="https://docs.glyphh.ai/ada">the docs</a>.' },
+          { html: 'Glyphh started as a memory substrate called <a href="/products/ada">Ada</a>, named after Ada Lovelace (I did a write-up on her on our <a href="/research">research page</a>; fascinating to think about). Ada is a multi-dimensional HDC lattice, an attempt to harden semantic knowledge beyond RAG. It turned out to be excellent at storing temporal signal, and I kept building on top of it.' },
+          { html: 'That path gave us what Ada is today: the first Glyphh model, software\'s reasoning substrate. Ada speaks in math. Seed her with data and she builds a lattice of algebraic meaning: hierarchical, weighted, typed and temporal. Send her a like glyph and she answers with a fact tree: what is near, how near, and why. Your agents build the typed models, and your software leverages them at runtime, with no LLM in the middle. Ada is a major part of this release, and she is what the apps you build stand on. More on <a href="/products/ada">the Ada page</a> and in <a href="https://docs.glyphh.ai/ada">the docs</a>.' },
           { html: 'Meanwhile my actual day got worse, not better. AI didn\'t simplify anything, it multiplied my context switching 10x, seemingly overnight. Around April my Ctrl+C / Ctrl+V usage hit an all-time high. I had a pile of model loops I was coding with, a pile of app layouts, and no way to combine them into something predictable. The first attempt was <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code</a>. It was missing something I couldn\'t name for a while, and then it hit me: I wanted model selection, routing, and semantic data in one place, producing real applications, not chat transcripts.' },
         ],
       },
@@ -195,7 +195,7 @@ export const POSTS = [
         id: 'what-it-looks-like',
         heading: 'What it looks like',
         body: [
-          'Say your ops team lives in three SaaS tools and a spreadsheet. In Glyphh you describe the app, pick your model (or let the Router pick), and it generates the data model, the connectors to those three tools, and the UI. You iterate with the AI until it\'s right. Then you hit run. From that point on the app is just an app: no tokens, no latency lottery, same answer every time. You publish it to your org, someone reviews and approves it, and your teammates install it and run it locally against their own connections.',
+          'Say your ops team lives in three SaaS tools and a spreadsheet. In Glyphh you describe the app, pick your model (or let the Router pick), and it generates the data model, the connectors to those three tools, and the UI. You iterate with the AI until it\'s right. Then you hit run. From that point on the app is just an app: no tokens, no latency lottery, same answer every time. When it needs to reason over your data, it asks Ada, not a model. You publish it to your org, someone reviews and approves it, and your teammates install it and run it locally against their own connections.',
         ],
       },
       {
@@ -207,8 +207,9 @@ export const POSTS = [
       },
       {
         id: 'semantic-data',
-        heading: 'Semantic data',
+        heading: 'Semantic apps',
         body: [
+          { html: 'This is where <a href="/products/ada">Ada</a> comes in, and it is kind of the whole point. Use AI to build the app, not to run it: at build time your agents build typed Ada models and seed them with your data. At runtime the app asks Ada. The answer is deterministic, it comes back as a fact tree, and it tells you what it stands on. That is what makes a semantic app an app and not a chat transcript.' },
           { html: 'There are times when you\'ll want to extend your workspace itself and build apps that improve how you work. This is another critical insight from <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code v1</a>, now open source. With the Glyphh desktop runtime you get a database, a vector DB, a knowledge graph, and Ada built into the harness. Combine that with MCP tools and any loop you run can consume it all immediately. So build a new file browser that remembers everything you\'ve browsed, as a fun add, and watch that app get integrated into your harness and become part of how you work. Find an unlock, share it with your org or the world.' },
         ],
       },
