@@ -167,7 +167,7 @@ export const POSTS = [
         id: 'hi',
         heading: null,
         body: [
-          'Hi everyone, my name is Chris, aka Timme, and this is the official launch of Glyphh AI. Years in the making, a lot of rewrites, a lot of "hey, try this one more time" calls to our beta testers. Thank you to everyone who put up with the endless conversations. We are very proud of what we built.',
+          'Hi everyone, my name is Chris, aka Timme, and this is the official launch of Glyphh AI. Years in the making, a lot of rewrites, a lot of "hey, try this one more time" calls to our beta testers. Thank you to everyone who put up with the endless pursuit of this primitive and how to wield it. We are still not there yet, but we are very proud of what we have built thus far.',
           'Here\'s the whole idea in one breath: use AI to build the app, not to run it.',
           'Frontier models are incredible at one thing, iterative generation. For those of us in software that means code gen. They are not good at being the runtime. So Glyphh puts Claude, OpenAI, Gemini, or your open-weight model of choice at build time, where they shine, and then runs what you built deterministically on your data, with no LLM in the middle. You build it on your desktop, you run it on your desktop, you share it with your org, and your peers install it and run it on theirs. Same tool for both.',
           'That\'s it. Everything below is how we got there and why it matters.',
