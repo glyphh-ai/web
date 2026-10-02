@@ -62,6 +62,9 @@ const nextConfig = {
       // Workspace became Desktop (his order, 2026-09-21); old links keep working.
       { source: '/products/workspace', destination: '/products/desktop', permanent: true },
       // 2026-09-11 (staying tight): Gateway is the one product page.
+      // The research page is off the site for now (his order, 2026-10-01). The
+      // page stays in the tree; the route lands on the home page until it returns.
+      { source: '/research', destination: '/', permanent: false },
       { source: '/products/cloud', destination: '/', permanent: false },
       { source: '/products/office', destination: '/', permanent: false },
       { source: '/products/design', destination: '/', permanent: false },

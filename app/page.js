@@ -2,13 +2,13 @@ import { headers } from 'next/headers';
 import Nav from './components/Nav';
 import Reveal from './components/Reveal';
 import Hero from './components/Hero';
-import OsHero from './components/OsHero';
-import QuickStart from './components/QuickStart';
-import HowItWorks from './components/HowItWorks';
-import Planes from './components/Planes';
-import WorksWith from './components/WorksWith';
+import CompanyHero from './components/CompanyHero';
+import AdaSpeaks from './components/AdaSpeaks';
+import Products from './components/Products';
+import Limits from './components/Limits';
+import OneAccount from './components/OneAccount';
+import WhyAda from './components/WhyAda';
 import Latest from './components/Latest';
-import OsPitch from './components/OsPitch';
 import StoryHeads from './components/StoryHeads';
 import Mcp from './components/Mcp';
 import AppMarquee from './components/AppMarquee';
@@ -37,20 +37,22 @@ export default async function Home() {
     <div className="home-page">
       <Reveal />
       <Nav />
-      {/* The OS hero (site refactor 2026-09-22, site.md §1.1): the golden pitch,
-          centered. Campaign variants (/code, /work) keep the desktop stage hero. */}
-      {variant === 'default' ? <OsHero /> : <Hero variant={variant} stage />}
-      {/* The frame (site refactor 2026-09-22): below the hero the page runs
-          inside a railed column. Quick Start is the first section in it. */}
+      {/* THE COMPANY HOME (his order, 2026-10-01): the hero is Glyphh the AI
+          company, and the page is three doors: Ada, Glyphh Desktop, the Model
+          Router. The desktop's hero and its sections moved to
+          /products/desktop. Campaign variants (/code, /work) keep the desktop
+          stage hero. */}
+      {variant === 'default' ? <CompanyHero /> : <Hero variant={variant} stage />}
       <div className="site-frame">
-        {/* The pitch (his order, 2026-09-23: "switch the sections") — what the
-            hero used to say, first in the frame; the screenshots took the hero. */}
-        <OsPitch />
-        <Planes />
-        <HowItWorks />
-        <QuickStart />
-        <WorksWith />
-        <Latest />
+        <AdaSpeaks />
+        <Products />
+        <Limits />
+        {/* The One platform section is off the page (his order, 2026-10-01). Hidden, not deleted. */}
+        {false && <OneAccount />}
+        {/* The blog section is off the home page (his order, 2026-10-01); Blog is
+            in the header menu. Hidden, not deleted. */}
+        {false && <Latest />}
+        <WhyAda />
       </div>
       {/* EVERYTHING under the hero is OFF the page while the refactor works
           down from the top (his order, 2026-09-22). Hidden, not deleted —

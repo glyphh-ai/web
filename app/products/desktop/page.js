@@ -1,7 +1,12 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
-import Hero from '../../components/Hero';
+import OsHero from '../../components/OsHero';
+import OsPitch from '../../components/OsPitch';
+import Planes from '../../components/Planes';
+import HowItWorks from '../../components/HowItWorks';
+import QuickStart from '../../components/QuickStart';
+import WorksWith from '../../components/WorksWith';
 import ExpandableShot from '../../components/ExpandableShot';
 import FinalCTA from '../../components/FinalCTA';
 
@@ -118,11 +123,28 @@ const LAYERS = [
 
 export default function DesktopPage() {
   return (
-    <div className="office-page design-page">
+    <div className="office-page design-page home-page">
       <Reveal />
       <Nav />
       {/* The desktop hero: the home page's hero until 2026-09-21, stage and all. */}
-      <Hero variant="desktop" stage />
+      {/* The home page until 2026-10-01 (his order: "most of that page should
+          become the glyphh desktop page"): the OS hero with the screenshots,
+          then the frame: the pitch, the planes, how it works, quick start,
+          works with. The workspace story follows. */}
+      <OsHero />
+      <div className="site-frame">
+        <OsPitch />
+        <Planes />
+        <HowItWorks />
+        <QuickStart />
+        <WorksWith />
+      </div>
+
+      {/* The workspace story (2026-09-19: the pillars, the screenshots, the
+          layers, the closing CTA) is off the page (his order, 2026-10-01). Hidden,
+          not deleted. */}
+      {false && (
+        <>
 
       <section className="od-extract">
         <div className="container">
@@ -175,6 +197,8 @@ export default function DesktopPage() {
         primary={{ href: '/#download', label: 'Get Glyphh Desktop' }}
         secondary={{ href: '/products/router', label: 'See Glyphh Router' }}
       />
+        </>
+      )}
       <Footer />
     </div>
   );

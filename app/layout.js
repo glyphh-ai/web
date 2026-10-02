@@ -1,9 +1,11 @@
 import './globals.css';
-import { Geist, JetBrains_Mono } from 'next/font/google';
+import { Geist, JetBrains_Mono, Orbitron } from 'next/font/google';
 import Script from 'next/script';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
+// The display face (his pick, 2026-10-01: "B4 · Orbitron 500 ... throughout"): every heading.
+const orbitron = Orbitron({ subsets: ['latin'], weight: ['500'], variable: '--font-orbitron' });
 
 // Homepage metadata — title carries the pitch; the description is the full
 // hero subline, verbatim.
@@ -40,7 +42,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${geist.variable} ${jetbrains.variable}`}>
+    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${geist.variable} ${jetbrains.variable} ${orbitron.variable}`}>
       <head>
         {/* The theme, before first paint: the saved choice, else DARK — never the OS preference (his order, 2026-09-29: "the web and the server should default to the dark theme 100% of the time"). */}
         <script

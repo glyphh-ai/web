@@ -27,7 +27,6 @@ const COLS = [
     title: 'Resources',
     links: [
       ['Blog', '/blog'],
-      ['Research', '/research'],
       ['Install', 'https://docs.glyphh.ai/install'],
       ['The CLI', 'https://docs.glyphh.ai/cli'],
       ['Changelog', 'https://github.com/glyphh-ai/releases/releases'],

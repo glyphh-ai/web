@@ -95,6 +95,10 @@ export default function Nav() {
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </a>
                 <div className="nav-dd-panel">
+                  <a href="/products/ada" className="nav-dd-item">
+                    <span className="nav-dd-name">Ada</span>
+                    <span className="nav-dd-desc">Typed models your agents build, feed and query. Every answer a fact tree.</span>
+                  </a>
                   <a href="/products/code" className="nav-dd-item">
                     <span className="nav-dd-name">Glyphh Code</span>
                     <span className="nav-dd-desc">The coding agent and CLI. Your subscription or the router, one switch.</span>
@@ -131,7 +135,7 @@ export default function Nav() {
               onMouseEnter={ddEnter}
               onMouseLeave={ddLeave}
             >
-              <a href="/research" className={`nav-dd-trigger${active('/research')}`}>Research</a>
+              <a href="/blog" className={`nav-dd-trigger${active('/blog')}`}>Blog</a>
             </div>
             <div className="nav-dd">
               <a href="/pricing" className={`nav-dd-trigger${active('/pricing')}`}>Pricing</a>
@@ -172,6 +176,7 @@ export default function Nav() {
         {false && (
           <>
             <span className="mobile-menu-group">Product</span>
+            <a href="/products/ada" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Ada</a>
             <a href="/products/code" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Code</a>
             <a href="/products/desktop" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Desktop</a>
             <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Router</a>
@@ -181,7 +186,7 @@ export default function Nav() {
               </>
         )}
         <a href="/integrations" onClick={() => setMenuOpen(false)}>Integrations</a>
-        <a href="/research" onClick={() => setMenuOpen(false)}>Research</a>
+        <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href="https://docs.glyphh.ai" onClick={() => setMenuOpen(false)}>Docs</a>
         {loggedIn ? (
