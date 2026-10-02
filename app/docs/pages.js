@@ -1,4 +1,5 @@
 import { Note, Row, Code } from './ui';
+import { DOCS } from './base';
 
 // The docs, kept short. Each page is written from the source; when the product
 // changes, the page changes in the same push.
@@ -28,7 +29,7 @@ export const ada = [
         <ul>
           <li><strong>Pricing.</strong> Every Ada call is metered per input and output token on the <code>glyphh-ada-1.0</code> row and paid from your organization&rsquo;s monthly budget, at your plan&rsquo;s rate. The current rate is in the <a href="https://glyphh.ai/integrations/models">model catalog</a>.</li>
           <li><strong>Budget.</strong> A call meets the same budget wall as any model call: without a plan, or over budget, it is refused before it runs.</li>
-          <li><strong>Situations.</strong> A model has a spec that gives every field a type, and a situation is data in that shape: anything else is refused. See <a href="/docs/ada-typed">Typed models</a>. A model created without a spec is flat: it takes JSON of any shape, with arrays treated as sets, and checks nothing.</li>
+          <li><strong>Situations.</strong> A model has a spec that gives every field a type, and a situation is data in that shape: anything else is refused. See <a href={`${DOCS}/ada-typed`}>Typed models</a>. A model created without a spec is flat: it takes JSON of any shape, with arrays treated as sets, and checks nothing.</li>
           <li><strong>One id per call.</strong> Every call names a <code>model_id</code> (<code>am_</code> and 12 hex digits). An organization can have many models.</li>
         </ul>
         <h2>Where records live</h2>
@@ -59,9 +60,9 @@ export const ada = [
         <h2>Customizing a model</h2>
         <ul>
           <li><strong>Weights.</strong> Say how much each key decides: <code>{'{"risk": 1, "team": 0.1}'}</code>. A number weighs a key; an object weighs inside it. Unlisted keys weigh 1, and a key that weighs 0 is never looked at. Set defaults on the model, or pass weights on one call. A typed model&rsquo;s weights live in its spec.</li>
-          <li><strong>Scale.</strong> What <code>act</code> takes, set per model with <code>ada_update_model</code>: <code>{'{"similarity": 0.4, "confidence": 0.7, "records": 3, "exact": true, "must_match": [], "unseen": false}'}</code>. See <a href="/docs/ada-act">When Ada acts</a>.</li>
+          <li><strong>Scale.</strong> What <code>act</code> takes, set per model with <code>ada_update_model</code>: <code>{'{"similarity": 0.4, "confidence": 0.7, "records": 3, "exact": true, "must_match": [], "unseen": false}'}</code>. See <a href={`${DOCS}/ada-act`}>When Ada acts</a>.</li>
           <li><strong>Calibration.</strong> Once a model has 10 or more wins, <code>ada_calibrate</code> fits its probabilities to its own records. A record is held out together with every copy of itself, so repeats teach it nothing. The result is saved with the model.</li>
-          <li><strong>Learned weights.</strong> Once a model has 10 or more wins, an org admin can run <code>ada_learn</code>. It works out what decides by holding records out and predicting them from the rest, saves the weights, calibrates the model, and reports how often it predicts its own held-out records before and after. A flat model learns the weight of each top-level key. A <a href="/docs/ada-typed">typed model</a> learns each role&rsquo;s weight, saved in its spec.</li>
+          <li><strong>Learned weights.</strong> Once a model has 10 or more wins, an org admin can run <code>ada_learn</code>. It works out what decides by holding records out and predicting them from the rest, saves the weights, calibrates the model, and reports how often it predicts its own held-out records before and after. A flat model learns the weight of each top-level key. A <a href={`${DOCS}/ada-typed`}>typed model</a> learns each role&rsquo;s weight, saved in its spec.</li>
           <li><strong>Clearance.</strong> An org admin sets each team&rsquo;s clearance on a model from 0 to 1. A team with no setting has full clearance. A typed model&rsquo;s spec says which parts need one.</li>
         </ul>
         <h2>Values said another way</h2>
@@ -76,7 +77,7 @@ export const ada = [
           <li><strong>Only a close word counts as the recorded one.</strong> A word held at 0.8 or closer is another way to say a recorded value. A word that is only related leans the answer and is still new.</li>
           <li><strong>Recorded values stay distinct.</strong> Two values your records use are never treated as the same.</li>
           <li><strong>Fact trees show it.</strong> The key&rsquo;s leaf shows your word, the record&rsquo;s word and the score.</li>
-          <li><strong>What is sent.</strong> To build the lexicon, a cloud model&rsquo;s short text values are sent to the language model that fronts Ada. In a flat model those are the values of its top-level keys. In a typed model they are the values of its open categories only: see <a href="/docs/ada-typed">Typed models</a>. A local model&rsquo;s values are never sent, so a local model matches exact values only. Keys with more than 200 distinct values, such as ids, are left out.</li>
+          <li><strong>What is sent.</strong> To build the lexicon, a cloud model&rsquo;s short text values are sent to the language model that fronts Ada. In a flat model those are the values of its top-level keys. In a typed model they are the values of its open categories only: see <a href={`${DOCS}/ada-typed`}>Typed models</a>. A local model&rsquo;s values are never sent, so a local model matches exact values only. Keys with more than 200 distinct values, such as ids, are left out.</li>
         </ul>
         <h2>When Ada says to act</h2>
         <p>
@@ -102,7 +103,7 @@ export const ada = [
         </div>
         <p>
           <code>act: false</code> never means no answer: the nearest outcome and the records behind it come back
-          either way. <a href="/docs/ada-act">When Ada acts</a> covers each check, each reason with an example, why
+          either way. <a href={`${DOCS}/ada-act`}>When Ada acts</a> covers each check, each reason with an example, why
           a question that carries something never recorded is not acted on, and how to set that per model.
         </p>
         <Note kind="warn" title="A single record is not consensus">
@@ -157,7 +158,7 @@ const { data: models } = await r.json();`}</Code>
           thing I have, and here is why I would not act on it alone&rdquo;. An agent or a person can read the
           answer and decide. A program should branch on <code>act</code>.
         </p>
-        <p>The examples below use the model from the <a href="/docs/quickstart">Quickstart</a>, holding three kubelet tickets at severity 6, 7 and 8, all routed to platform.</p>
+        <p>The examples below use the model from the <a href={`${DOCS}/quickstart`}>Quickstart</a>, holding three kubelet tickets at severity 6, 7 and 8, all routed to platform.</p>
         <h2>The checks, in order</h2>
         <p>Ada runs these in order and stops at the first that fails. <code>reason</code> names it.</p>
         <div className="dx-table">
@@ -365,7 +366,7 @@ switch (a.reason) {
               <tr><td><code>text</code></td><td>A string, by <code>bag_of_words</code> or <code>ngrams</code></td><td>The share of words in common, or of character n-grams, so another spelling of a word is near</td></tr>
               <tr><td><code>boolean</code></td><td>True or false</td><td>The same or not</td></tr>
               <tr><td><code>time</code></td><td>Epoch seconds or ISO 8601</td><td>Never scored. It stamps the record.</td></tr>
-              <tr><td><code>ref</code></td><td>The key of another thing, or a list of them with <code>many</code></td><td>Like a category or a set. It is also a relation: see <a href="/docs/ada-graph">Relations and the graph</a>.</td></tr>
+              <tr><td><code>ref</code></td><td>The key of another thing, or a list of them with <code>many</code></td><td>Like a category or a set. It is also a relation: see <a href={`${DOCS}/ada-graph`}>Relations and the graph</a>.</td></tr>
             </tbody>
           </table>
         </div>
@@ -393,7 +394,7 @@ switch (a.reason) {
 }`}</Code>
         <Row k="similarity_weight">How much a layer, segment or role counts, 0 to 1. A typed model&rsquo;s weights live in its spec.</Row>
         <Row k="security_weight">The clearance a reader&rsquo;s team needs to see that part. Below it, the part has no voice in the score and does not appear in any answer.</Row>
-        <Row k="key_part">The roles that say which thing a record describes. See <a href="/docs/ada-time">Versions and time</a>.</Row>
+        <Row k="key_part">The roles that say which thing a record describes. See <a href={`${DOCS}/ada-time`}>Versions and time</a>.</Row>
         <Row k="temporal_source">The role that carries when a record happened.</Row>
         <Row k="together">On a segment: its roles decide only in combination. See below.</Row>
         <p>
@@ -424,7 +425,7 @@ switch (a.reason) {
         <h2>What counts as new</h2>
         <p>
           By default Ada does not tell a program to act on a question that carries something its wins were never
-          shown (<a href="/docs/ada-act">When Ada acts</a>). In a typed model that follows the type:
+          shown (<a href={`${DOCS}/ada-act`}>When Ada acts</a>). In a typed model that follows the type:
         </p>
         <ul>
           <li><strong>A category or a set:</strong> a value no win recorded.</li>
@@ -435,7 +436,7 @@ switch (a.reason) {
         <p>
           A category that lists its <code>values</code> is closed: a record or a question with anything else is
           refused. A category that lists none is open, and Ada learns other ways its values are said
-          (<a href="/docs/ada">Values said another way</a>): a question for <code>software as a service</code>{' '}
+          (<a href={`${DOCS}/ada`}>Values said another way</a>): a question for <code>software as a service</code>{' '}
           reaches records that say <code>saas</code>, scores below 1, and is never exact.
         </p>
         <ul>
@@ -468,7 +469,7 @@ switch (a.reason) {
     body: (
       <>
         <p>
-          In a <a href="/docs/ada-typed">typed model</a>, the roles marked <code>key_part</code> say which thing a
+          In a <a href={`${DOCS}/ada-typed`}>typed model</a>, the roles marked <code>key_part</code> say which thing a
           record describes: a deal, a ticket, a device. Record the same thing again and it is a new version, placed
           by when it happened, not by when it arrived.
         </p>
@@ -608,7 +609,7 @@ AGGREGATE AVG deal.metrics.meetings GROUP BY outcome`}</Code>
         <Code>{`TREND glyph("d1") OVER 30d ALERT ON drift > 0.1
 PREDICT glyph("d1") WINDOW 7d`}</Code>
         <p>
-          These are <a href="/docs/ada-time">Versions and time</a> as statements. <code>TREND</code> reads the
+          These are <a href={`${DOCS}/ada-time`}>Versions and time</a> as statements. <code>TREND</code> reads the
           versions inside the window and adds <code>alert</code>, which compares <code>drift</code>,{' '}
           <code>pace</code> or <code>versions</code> with a number and says whether it <code>fired</code>.{' '}
           <code>PREDICT</code> is for the latest version plus the window. Both need a typed model with key parts.
@@ -618,7 +619,7 @@ PREDICT glyph("d1") WINDOW 7d`}</Code>
 PATH FROM glyph("web") TO glyph("db")`}</Code>
         <p>
           These walk the relations a model&rsquo;s <code>ref</code> roles make, across models.{' '}
-          <a href="/docs/ada-graph">Relations and the graph</a> covers them.
+          <a href={`${DOCS}/ada-graph`}>Relations and the graph</a> covers them.
         </p>
         <h2>Parameters</h2>
         <p>
@@ -633,12 +634,12 @@ PATH FROM glyph("web") TO glyph("db")`}</Code>
           number after <code>LIMIT</code>, <code>THRESHOLD</code> and <code>DEPTH</code>. It is placed in the parsed
           statement, never in its text, and checked for the place it takes, so a value cannot become part of a
           statement. A statement you run often can be saved under a name: see{' '}
-          <a href="/docs/ada-procedures">Stored procedures</a>.
+          <a href={`${DOCS}/ada-procedures`}>Stored procedures</a>.
         </p>
         <h2>Cached</h2>
         <p>
           Every answer says <code>cached</code>. An answer is given again only for the same statement, by meaning,
-          and only while nothing it read has changed. <a href="/docs/ada-procedures">Stored procedures</a> has the
+          and only while nothing it read has changed. <a href={`${DOCS}/ada-procedures`}>Stored procedures</a> has the
           rules.
         </p>
         <h2>Errors</h2>
@@ -678,7 +679,7 @@ PATH FROM glyph("web") TO glyph("db")`}</Code>
         <Row k="Temporal">Between two versions of one thing: how much it changed at the level, which is 1 minus how alike they are.</Row>
         <p>
           Both are measured. A relation one thing names, such as the service it depends on, is stated, and
-          is a third thing: <a href="/docs/ada-graph">Relations and the graph</a>. <code>ada_edges</code> returns
+          is a third thing: <a href={`${DOCS}/ada-graph`}>Relations and the graph</a>. <code>ada_edges</code> returns
           a thing&rsquo;s <code>relations</code> too, out and in.
         </p>
         <h2>A thing&rsquo;s edges</h2>
@@ -718,7 +719,7 @@ PATH FROM glyph("web") TO glyph("db")`}</Code>
             </tbody>
           </table>
         </div>
-        <p>See the <a href="/docs/ada-gql">Query language</a>.</p>
+        <p>See the <a href={`${DOCS}/ada-gql`}>Query language</a>.</p>
       </>
     ),
   },
@@ -730,7 +731,7 @@ PATH FROM glyph("web") TO glyph("db")`}</Code>
       <>
         <p>
           Likeness is measured. A relation is stated: this service depends on that one, this ticket belongs to that
-          account. In a <a href="/docs/ada-typed">typed model</a>, a role of type <code>ref</code> holds the key of
+          account. In a <a href={`${DOCS}/ada-typed`}>typed model</a>, a role of type <code>ref</code> holds the key of
           another thing. Ada keeps those as a graph you can walk, in the same model or across models.
         </p>
         <h2>A ref role</h2>
@@ -789,7 +790,7 @@ PATH FROM glyph("web") TO glyph("db")`}</Code>
           <li><strong>The same walk returns the same answer.</strong> It is breadth first in one fixed order, cycles included: a thing is visited once.</li>
           <li><strong>A walk is bounded.</strong> At most 8 relations deep and 5,000 things. Past that, <code>truncated</code> is true.</li>
           <li><strong>A relation to nothing is kept and marked.</strong> Without <code>strict</code>, an edge to a thing not on record comes back with <code>missing: true</code>. So does an edge to a thing deleted later.</li>
-          <li><strong>The graph is of things as they are now.</strong> A thing&rsquo;s relations are those of its newest version. <a href="/docs/ada-time">Its history</a> shows a relation changing like any role.</li>
+          <li><strong>The graph is of things as they are now.</strong> A thing&rsquo;s relations are those of its newest version. <a href={`${DOCS}/ada-time`}>Its history</a> shows a relation changing like any role.</li>
           <li><strong>Clearance applies per model.</strong> A ref role above the reader&rsquo;s clearance is not followed, and a model above it is not walked into: its things read as missing.</li>
         </ul>
         <h2>Relations also score</h2>
@@ -797,7 +798,7 @@ PATH FROM glyph("web") TO glyph("db")`}</Code>
           A ref is part of the glyph like any role. Two things that point at the same things are alike: one target
           is the same or it is not, and a list of targets scores by the share they have in common. A target no
           thing ever named is new, so a query that carries it does not act
-          (<a href="/docs/ada-act">When Ada acts</a>).
+          (<a href={`${DOCS}/ada-act`}>When Ada acts</a>).
         </p>
         <Code>{`FIND SIMILAR TO {"svc": {"links": {"depends_on": ["db", "queue"], "account": "acme"}}}`}</Code>
         <h2>One thing&rsquo;s relations</h2>
@@ -834,7 +835,7 @@ PATH FROM glyph("web") TO glyph("db")`}</Code>
         <Code lang="json">{`{ "statement": "list", "procedure": "by_outcome", "cached": false, "count": 1,
   "records": [ { "key": "34412f715fb0", "outcome": "won", "data": { "deal": { … } } } ] }`}</Code>
         <p>
-          The answer is the statement&rsquo;s own, as in the <a href="/docs/ada-gql">Query language</a>, with the
+          The answer is the statement&rsquo;s own, as in the <a href={`${DOCS}/ada-gql`}>Query language</a>, with the
           procedure&rsquo;s name. A parameter that is missing, or a value that does not fit the place it takes, is
           refused with <code>E_VALIDATION</code>. A value is placed in the parsed statement, never in its text.
         </p>
@@ -864,7 +865,7 @@ PATH FROM glyph("web") TO glyph("db")`}</Code>
       <>
         <p>
           An agent builds a model. Your software calls it, with no agent in the path. The SDKs wrap{' '}
-          <a href="/docs/ada-tools">POST /ada</a>: every answer is typed, and every refusal is one error type with
+          <a href={`${DOCS}/ada-tools`}>POST /ada</a>: every answer is typed, and every refusal is one error type with
           a code. Neither has dependencies.
         </p>
         <Code lang="bash">{`npm install @glyphh-ai/ada
@@ -894,7 +895,7 @@ if answer["act"]:
 elif answer["reason"] == "unseen":
     ask_someone(answer["unseen"])`}</Code>
         <p>
-          <code>act</code> is the one thing to branch on. <a href="/docs/ada-act">When Ada acts</a> covers each{' '}
+          <code>act</code> is the one thing to branch on. <a href={`${DOCS}/ada-act`}>When Ada acts</a> covers each{' '}
           <code>reason</code>.
         </p>
         <h2>Record</h2>
@@ -911,10 +912,10 @@ tickets.record(situation, "route_to_platform", at="2026-01-03T10:00:00Z")`}</Cod
             <tbody>
               <tr><td><code>query</code>, <code>facts</code>, <code>check</code></td><td>the same</td><td>Ask, explain, and test one outcome</td></tr>
               <tr><td><code>record</code>, <code>veto</code></td><td>the same</td><td>A graded win or failure</td></tr>
-              <tr><td><code>history</code>, <code>trend</code>, <code>predict</code></td><td>the same</td><td><a href="/docs/ada-time">Versions and time</a></td></tr>
-              <tr><td><code>edges</code></td><td>the same</td><td><a href="/docs/ada-edges">Edges and levels</a>, with a thing&rsquo;s relations</td></tr>
-              <tr><td><code>gql(query, args)</code></td><td>the same</td><td>One <a href="/docs/ada-gql">GQL</a> statement, with its parameters</td></tr>
-              <tr><td><code>call</code>, <code>procedures</code>, <code>saveProcedure</code>, <code>deleteProcedure</code></td><td><code>call</code>, <code>procedures</code>, <code>save_procedure</code>, <code>delete_procedure</code></td><td><a href="/docs/ada-procedures">Stored procedures</a></td></tr>
+              <tr><td><code>history</code>, <code>trend</code>, <code>predict</code></td><td>the same</td><td><a href={`${DOCS}/ada-time`}>Versions and time</a></td></tr>
+              <tr><td><code>edges</code></td><td>the same</td><td><a href={`${DOCS}/ada-edges`}>Edges and levels</a>, with a thing&rsquo;s relations</td></tr>
+              <tr><td><code>gql(query, args)</code></td><td>the same</td><td>One <a href={`${DOCS}/ada-gql`}>GQL</a> statement, with its parameters</td></tr>
+              <tr><td><code>call</code>, <code>procedures</code>, <code>saveProcedure</code>, <code>deleteProcedure</code></td><td><code>call</code>, <code>procedures</code>, <code>save_procedure</code>, <code>delete_procedure</code></td><td><a href={`${DOCS}/ada-procedures`}>Stored procedures</a></td></tr>
               <tr><td><code>info</code>, <code>update</code>, <code>delete</code>, <code>records</code>, <code>editRecord</code>, <code>deleteRecord</code></td><td><code>info</code>, <code>update</code>, <code>delete</code>, <code>records</code>, <code>edit_record</code>, <code>delete_record</code></td><td>The model and its records</td></tr>
               <tr><td><code>calibrate</code>, <code>learn</code>, <code>contract</code></td><td>the same</td><td>Fit it, and read the schema of its data and answers</td></tr>
             </tbody>
@@ -950,7 +951,7 @@ try:
 except AdaError as e:
     print(e.code, e.status, e.message)`}</Code>
         <p>
-          The codes are those of <a href="/docs/ada-tools">POST /ada</a>, plus <code>E_UNREACHABLE</code> when a
+          The codes are those of <a href={`${DOCS}/ada-tools`}>POST /ada</a>, plus <code>E_UNREACHABLE</code> when a
           request never got an answer. On a rate limit the error carries how long to wait: <code>retryAfter</code>{' '}
           in TypeScript, <code>retry_after</code> in Python. A model that does not act is not an error.
         </p>
@@ -1047,15 +1048,15 @@ claude plugin install ada@glyphh-ai`}</Code>
             </tbody>
           </table>
         </div>
-        <p><code>ada_trend</code> and <code>ada_predict</code> need a <a href="/docs/ada-typed">typed model</a> with key parts. See <a href="/docs/ada-time">Versions and time</a>.</p>
+        <p><code>ada_trend</code> and <code>ada_predict</code> need a <a href={`${DOCS}/ada-typed`}>typed model</a> with key parts. See <a href={`${DOCS}/ada-time`}>Versions and time</a>.</p>
         <h2>Query and edges</h2>
         <div className="dx-table">
           <table>
             <thead><tr><th>Tool</th><th>Takes</th><th>Returns</th></tr></thead>
             <tbody>
-              <tr><td><code>ada_gql</code></td><td><code>model_id</code>, <code>query</code>: one GQL statement, optional <code>args</code> for its <code>$parameters</code></td><td>What the statement asks for. See the <a href="/docs/ada-gql">Query language</a>.</td></tr>
-              <tr><td><code>ada_edges</code></td><td><code>model_id</code>, <code>situation</code>, optional <code>level</code> and <code>top</code> (1 to 50, default 5)</td><td>The things nearest one thing at a level, the change between each of its versions, and its relations. See <a href="/docs/ada-edges">Edges and levels</a>.</td></tr>
-              <tr><td><code>ada_call</code></td><td><code>model_id</code>, <code>name</code>, optional <code>args</code></td><td>Runs a <a href="/docs/ada-procedures">stored procedure</a></td></tr>
+              <tr><td><code>ada_gql</code></td><td><code>model_id</code>, <code>query</code>: one GQL statement, optional <code>args</code> for its <code>$parameters</code></td><td>What the statement asks for. See the <a href={`${DOCS}/ada-gql`}>Query language</a>.</td></tr>
+              <tr><td><code>ada_edges</code></td><td><code>model_id</code>, <code>situation</code>, optional <code>level</code> and <code>top</code> (1 to 50, default 5)</td><td>The things nearest one thing at a level, the change between each of its versions, and its relations. See <a href={`${DOCS}/ada-edges`}>Edges and levels</a>.</td></tr>
+              <tr><td><code>ada_call</code></td><td><code>model_id</code>, <code>name</code>, optional <code>args</code></td><td>Runs a <a href={`${DOCS}/ada-procedures`}>stored procedure</a></td></tr>
               <tr><td><code>ada_procedures</code></td><td><code>model_id</code></td><td>The model&rsquo;s stored procedures, each with its statement and parameters</td></tr>
               <tr><td><code>ada_save_procedure</code></td><td><code>model_id</code>, <code>name</code>, <code>query</code>, optional <code>description</code></td><td>Saves a GQL statement under a name, new or replaced (org admins)</td></tr>
               <tr><td><code>ada_delete_procedure</code></td><td><code>model_id</code>, <code>name</code></td><td>Deletes one (org admins)</td></tr>
@@ -1108,7 +1109,7 @@ claude plugin install ada@glyphh-ai`}</Code>
         </p>
         <Code lang="json">{`{ "task": "deploy_service", "constraint": "canary_required" }`}</Code>
         <p>
-          In a <a href="/docs/ada-typed">typed model</a> the spec does this for you: every role has a type, an
+          In a <a href={`${DOCS}/ada-typed`}>typed model</a> the spec does this for you: every role has a type, an
           identity role is a key part, and a time is never scored.
         </p>
         <h2>POST /ada</h2>
@@ -1125,7 +1126,7 @@ claude plugin install ada@glyphh-ai`}</Code>
     "situation": { "task": "deploy_service", "constraint": "canary_required" }
   }'`}</Code>
         <p>A query answers with:</p>
-        <Row k="act">Branch on this. True only when <code>reason</code> is <code>reflex</code>. See <a href="/docs/ada-act">When Ada acts</a>.</Row>
+        <Row k="act">Branch on this. True only when <code>reason</code> is <code>reflex</code>. See <a href={`${DOCS}/ada-act`}>When Ada acts</a>.</Row>
         <Row k="reason">Why <code>act</code> is what it is: <code>reflex</code>, <code>insufficient</code>, <code>unseen</code>, <code>vetoed</code>, <code>uncalibrated</code>, <code>mismatch</code> or <code>low_confidence</code>.</Row>
         <Row k="top">The outcome that worked most in situations like this one. Null when nothing is close enough.</Row>
         <Row k="unseen">What the situation carries that no win has recorded: a key (<code>force</code>) or a value (<code>target=main</code>).</Row>
@@ -1168,7 +1169,7 @@ claude plugin install ada@glyphh-ai`}</Code>
         </div>
         <p>
           A model that does not act is not an error. It is a 200 with <code>act: false</code> and a{' '}
-          <code>reason</code>. The <a href="/docs/ada-sdk">SDKs</a> raise an <code>AdaError</code> with the code for
+          <code>reason</code>. The <a href={`${DOCS}/ada-sdk`}>SDKs</a> raise an <code>AdaError</code> with the code for
           each refusal.
         </p>
         <h2>As a chat model</h2>
@@ -1221,8 +1222,8 @@ const desktop = [
       <>
         <p>
           Glyphh runs one agent loop: the same engine in the desktop&rsquo;s agent panel and in the{' '}
-          <a href="/docs/cli">glyphh CLI</a>. It speaks the Messages API and MCP, calls every model through your
-          organization&rsquo;s <a href="/docs/gateway">Router</a>, and runs any model your team allows.
+          <a href={`${DOCS}/cli`}>glyphh CLI</a>. It speaks the Messages API and MCP, calls every model through your
+          organization&rsquo;s <a href={`${DOCS}/gateway`}>Router</a>, and runs any model your team allows.
         </p>
         <h2>Two kinds of session</h2>
         <Row k="Work">Chat and act: your apps, connections, memory, and Glyphh&rsquo;s own tools. No file system or shell</Row>
@@ -1307,7 +1308,7 @@ glyphh`}</Code>
 npm rm -g @glyphh-ai/cli          # remove`}</Code>
         <p>
           To keep Claude Code or Codex and point it at the gateway instead, see{' '}
-          <a href="/docs/own-cli">Use your own CLI</a>.
+          <a href={`${DOCS}/own-cli`}>Use your own CLI</a>.
         </p>
       </>
     ),
@@ -1520,7 +1521,7 @@ const router = [
           Cache reads and writes are priced at their own rates, so a cached turn costs less.
         </Note>
         <p>
-          For a CLI outside the desktop, see <a href="/docs/own-cli">Use your own CLI</a>.
+          For a CLI outside the desktop, see <a href={`${DOCS}/own-cli`}>Use your own CLI</a>.
         </p>
       </>
     ),

@@ -1,5 +1,6 @@
 import { Code, Row, GlyphFlow, GlyphDistance, GlyphTree, Traits, GlyphhStack, BuildRun, Doors, FactTreeFig, AnswerFig, LlmVsGlyphh } from './ui';
 import { PRODUCT_GROUPS, ada } from './pages';
+import { DOCS } from './base';
 
 const glyphh = [
   {
@@ -42,10 +43,10 @@ const glyphh = [
         <Doors />
         <h2>Next steps</h2>
         <ol>
-          <li><a href="/docs/ada-introduction">Ada</a>: the model, how it works, and the four steps.</li>
-          <li><a href="/docs/glyph">The glyph</a>: the primitive and the five operations that build it.</li>
-          <li><a href="/docs/install">Glyphh Desktop</a>: install it and sign in.</li>
-          <li><a href="/docs/own-cli">Model Router</a>: point Claude Code or Codex at one endpoint.</li>
+          <li><a href={`${DOCS}/ada-introduction`}>Ada</a>: the model, how it works, and the four steps.</li>
+          <li><a href={`${DOCS}/glyph`}>The glyph</a>: the primitive and the five operations that build it.</li>
+          <li><a href={`${DOCS}/install`}>Glyphh Desktop</a>: install it and sign in.</li>
+          <li><a href={`${DOCS}/own-cli`}>Model Router</a>: point Claude Code or Codex at one endpoint.</li>
         </ol>
         <p>
           The code is at <a href="https://github.com/glyphh-ai">github.com/glyphh-ai</a>.
@@ -198,10 +199,10 @@ const start = [
           <table>
             <thead><tr><th>Product</th><th>What it is</th><th>Start at</th></tr></thead>
             <tbody>
-              <tr><td><strong>Ada</strong></td><td>The language, served. Define a typed model, load data in that shape, and query it from any agent or program.</td><td><a href="/docs/ada">Ada models</a></td></tr>
-              <tr><td><strong>Glyphh Desktop</strong></td><td>The agent, skills, tasks and tools on your machine, with any model.</td><td><a href="/docs/install">Install and sign in</a></td></tr>
-              <tr><td><strong>Model Router</strong></td><td>One endpoint for every model, with your organization&rsquo;s budgets and rates.</td><td><a href="/docs/gateway">The Router</a></td></tr>
-              <tr><td><strong>Connect</strong></td><td>Your apps as tools over MCP, governed by team.</td><td><a href="/docs/connections">Connections</a></td></tr>
+              <tr><td><strong>Ada</strong></td><td>The language, served. Define a typed model, load data in that shape, and query it from any agent or program.</td><td><a href={`${DOCS}/ada`}>Ada models</a></td></tr>
+              <tr><td><strong>Glyphh Desktop</strong></td><td>The agent, skills, tasks and tools on your machine, with any model.</td><td><a href={`${DOCS}/install`}>Install and sign in</a></td></tr>
+              <tr><td><strong>Model Router</strong></td><td>One endpoint for every model, with your organization&rsquo;s budgets and rates.</td><td><a href={`${DOCS}/gateway`}>The Router</a></td></tr>
+              <tr><td><strong>Connect</strong></td><td>Your apps as tools over MCP, governed by team.</td><td><a href={`${DOCS}/connections`}>Connections</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -213,12 +214,12 @@ const start = [
         )}
         <h2>Next steps</h2>
         <ol>
-          <li><a href="/docs/ada-install">Install</a>: connect Claude Code or any MCP client, or use an API key.</li>
-          <li><a href="/docs/quickstart">Quickstart</a>: create a model, record into it, and query it.</li>
-          <li><a href="/docs/primer">Primer</a>: why Ada measures meaning instead of generating text.</li>
-          <li><a href="/docs/glyph">The glyph</a>: the primitive, and the five operations that build it.</li>
-          <li><a href="/docs/fact-trees">Fact trees</a>: how Ada reports what it found and how sure it is, and how to build on that.</li>
-          <li><a href="/docs/patterns">Patterns</a>: a switch, a classifier, a router, memory, precedent.</li>
+          <li><a href={`${DOCS}/ada-install`}>Install</a>: connect Claude Code or any MCP client, or use an API key.</li>
+          <li><a href={`${DOCS}/quickstart`}>Quickstart</a>: create a model, record into it, and query it.</li>
+          <li><a href={`${DOCS}/primer`}>Primer</a>: why Ada measures meaning instead of generating text.</li>
+          <li><a href={`${DOCS}/glyph`}>The glyph</a>: the primitive, and the five operations that build it.</li>
+          <li><a href={`${DOCS}/fact-trees`}>Fact trees</a>: how Ada reports what it found and how sure it is, and how to build on that.</li>
+          <li><a href={`${DOCS}/patterns`}>Patterns</a>: a switch, a classifier, a router, memory, precedent.</li>
         </ol>
       </>
     ),
@@ -230,7 +231,7 @@ const start = [
     body: (
       <>
         <p>
-          You need a Glyphh account and one client connected: see <a href="/docs/ada-install">Install</a>. Every call
+          You need a Glyphh account and one client connected: see <a href={`${DOCS}/ada-install`}>Install</a>. Every call
           below is a tool your agent can call, and the same call as an <code>op</code> at <code>POST /ada</code>.
         </p>
         <h2>1. Create a model</h2>
@@ -256,7 +257,7 @@ const start = [
         <p>
           A spec nests layers, segments and roles. The types are <code>category</code>, <code>set</code>,{' '}
           <code>number</code>, <code>text</code>, <code>boolean</code> and <code>time</code>: see{' '}
-          <a href="/docs/ada-typed">Typed models</a>.
+          <a href={`${DOCS}/ada-typed`}>Typed models</a>.
         </p>
         <h2>2. Record</h2>
         <p>Send data in the spec&rsquo;s shape, and what it resolved to.</p>
@@ -288,12 +289,12 @@ const start = [
         <p>
           <code>top</code> and the records behind it come back either way. <code>act</code> is a separate yes or
           no for code that branches without reading the answer, and you choose per model whether a best guess is
-          enough. <a href="/docs/ada-act">When Ada acts</a> covers every case in detail.
+          enough. <a href={`${DOCS}/ada-act`}>When Ada acts</a> covers every case in detail.
         </p>
         <h2>4. Ask why</h2>
         <p>
           The same question with <code>&quot;op&quot;: &quot;facts&quot;</code> returns the nearest records as{' '}
-          <a href="/docs/fact-trees">fact trees</a>: which parts matched, how closely, and how much each counted.
+          <a href={`${DOCS}/fact-trees`}>fact trees</a>: which parts matched, how closely, and how much each counted.
           Asked about a kubelet ticket at severity 9, the record at severity 7 scores 0.9: the component is the
           same (1.0) and the severity is two bins of ten apart (0.8).
         </p>
@@ -432,10 +433,10 @@ five incidents, then tell me where this new one should go and why.`}</Code>
         <Row k="sufficient">Whether anything was close enough to answer at all.</Row>
         <Row k="unseen">What the question carries that the model was never shown.</Row>
         <Row k="act">True when the answer is confident, nothing in the question is new, and no newer recorded failure rules it out.</Row>
-        <Row k="reason">Why <code>act</code> is what it is. Each value is explained in <a href="/docs/ada-act">When Ada acts</a>.</Row>
+        <Row k="reason">Why <code>act</code> is what it is. Each value is explained in <a href={`${DOCS}/ada-act`}>When Ada acts</a>.</Row>
         <h2>Building on it</h2>
         <ul>
-          <li><strong>Gate on <code>act</code>.</strong> Branch when it is true. When it is false, read <code>reason</code>, fall back to a person or a model, and record what they decide. <a href="/docs/ada-act">When Ada acts</a> has each case.</li>
+          <li><strong>Gate on <code>act</code>.</strong> Branch when it is true. When it is false, read <code>reason</code>, fall back to a person or a model, and record what they decide. <a href={`${DOCS}/ada-act`}>When Ada acts</a> has each case.</li>
           <li><strong>Read <code>count</code>.</strong> One record is not consensus, unless it is the same situation (<code>exact</code>).</li>
           <li><strong>Hold the shape.</strong> <code>{'{"op": "contract"}'}</code> returns the JSON Schema of every answer, so your program&rsquo;s types come from the source.</li>
           <li><strong>Show the tree.</strong> When someone asks why, the shares are the explanation. No second call to a model is needed.</li>
@@ -475,7 +476,7 @@ five incidents, then tell me where this new one should go and why.`}</Code>
           Your code queries and branches on <code>top</code> when <code>act</code> is true. A case that was never
           recorded, such as a new intent, comes back with <code>act</code> false and <code>reason</code>{' '}
           <code>unseen</code>: the switch has a default branch. A router that should take the nearest destination
-          anyway sets <code>unseen: true</code> in its scale (<a href="/docs/ada-act">When Ada acts</a>).
+          anyway sets <code>unseen: true</code> in its scale (<a href={`${DOCS}/ada-act`}>When Ada acts</a>).
         </p>
         <h2>A router</h2>
         <p>Record what each destination handles. The outcome is the destination.</p>
@@ -488,8 +489,8 @@ five incidents, then tell me where this new one should go and why.`}</Code>
         </p>
         <h2>A thing over time</h2>
         <p>
-          In a <a href="/docs/ada-typed">typed model</a>, mark the roles that identify a thing as key parts and
-          record it each time it changes. <a href="/docs/ada-time">Versions and time</a> covers reading its
+          In a <a href={`${DOCS}/ada-typed`}>typed model</a>, mark the roles that identify a thing as key parts and
+          record it each time it changes. <a href={`${DOCS}/ada-time`}>Versions and time</a> covers reading its
           history, its trend and its next version.
         </p>
         <h2>Keep situations clean</h2>
@@ -508,4 +509,4 @@ const ADA = ['ada-introduction', 'ada-install', 'quickstart', 'primer', 'glyph',
 
 export const GROUPS = [{ title: 'Glyphh', pages: glyphh }, { title: 'Ada', pages: ADA }, ...PRODUCT_GROUPS];
 export const PAGES = GROUPS.flatMap((g) => g.pages);
-export const hrefOf = (p) => (p.slug === 'introduction' ? '/docs' : `/docs/${p.slug}`);
+export const hrefOf = (p) => (p.slug === 'introduction' ? DOCS : `${DOCS}/${p.slug}`);

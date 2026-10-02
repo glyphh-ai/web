@@ -32,7 +32,27 @@ function sourceOf(url) {
   return { ...found, landing: url.pathname.slice(0, 200) };
 }
 
+// The docs are their own host (his order: docs.glyphh.ai). This app serves
+// them from app/docs, so on that host /ada is the page at /docs/ada, and an
+// old /docs/ada address there loses its prefix.
+const DOCS_HOST = 'docs.glyphh.ai';
+const hostOf = (request) =>
+  (request.headers.get('x-forwarded-host') || request.headers.get('host') || request.nextUrl.hostname).split(':')[0].toLowerCase();
+const isFile = (pathname) => pathname.startsWith('/_next') || pathname.startsWith('/api/') || /\.[a-z0-9]+$/i.test(pathname);
+
+function docsHost(request) {
+  const { pathname } = request.nextUrl;
+  if (isFile(pathname)) return NextResponse.next();
+  if (pathname === '/docs' || pathname.startsWith('/docs/')) {
+    return NextResponse.redirect(new URL((pathname.slice('/docs'.length) || '/') + request.nextUrl.search, `https://${DOCS_HOST}`), 308);
+  }
+  const url = request.nextUrl.clone();
+  url.pathname = pathname === '/' ? '/docs' : `/docs${pathname}`;
+  return NextResponse.rewrite(url);
+}
+
 export function middleware(request) {
+  if (hostOf(request) === DOCS_HOST) return docsHost(request);
   const { pathname } = request.nextUrl;
 
   // Admin routes require server-side auth check
@@ -61,7 +81,7 @@ export function middleware(request) {
   if (source) {
     // Behind the proxy, nextUrl names the machine, not the site: the Host the
     // visitor asked for is in the forwarded header.
-    const host = (request.headers.get('x-forwarded-host') || request.headers.get('host') || request.nextUrl.hostname).split(':')[0].toLowerCase();
+    const host = hostOf(request);
     response.cookies.set(SOURCE_COOKIE, JSON.stringify(source), {
       path: '/',
       maxAge: SOURCE_DAYS * 24 * 60 * 60,

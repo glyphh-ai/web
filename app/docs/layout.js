@@ -1,6 +1,7 @@
 import './docs.css';
 import { GROUPS } from './content';
 import DocsSidebar from './DocsSidebar';
+import { SITE } from './base';
 import DocsHtmlClass from './DocsHtmlClass';
 
 export const metadata = {
@@ -19,7 +20,7 @@ export default function DocsLayout({ children }) {
           {children}
           <footer className="dx-foot dx-article">
             <span>&copy; Glyphh</span>
-            <a href="/">glyphh.ai</a>
+            <a href={SITE}>glyphh.ai</a>
             <a href="https://platform.glyphh.ai">Console</a>
             <a href="https://github.com/glyphh-ai">GitHub</a>
             <a href="mailto:support@glyphh.ai">Support</a>

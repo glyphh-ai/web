@@ -2,8 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { DOCS, SITE } from './base';
 
-const hrefOf = (p) => (p.slug === 'introduction' ? '/docs' : `/docs/${p.slug}`);
+const hrefOf = (p) => (p.slug === 'introduction' ? DOCS : `${DOCS}/${p.slug}`);
+// The page a path names, on either host: /docs/ada and /ada are both 'ada'; the home is 'introduction'.
+const slugOf = (path) => path.replace(/^\/docs(?=\/|$)/, '').replace(/^\//, '').replace(/\/$/, '') || 'introduction';
 
 // The rail: a way back to the site, the logo, a search over every page, then
 // the grouped links with the current page marked. Collapsible on phones.
@@ -36,8 +39,8 @@ export default function DocsSidebar({ groups }) {
   return (
     <aside className={`dx-side ${open ? 'open' : ''}`}>
       <div className="dx-side-brand">
-        <a href="/" className="dx-side-home-link">&larr; glyphh.ai</a>
-        <a href="/docs" className="dx-side-logo" aria-label="Glyphh Docs">
+        <a href={SITE} className="dx-side-home-link">&larr; glyphh.ai</a>
+        <a href={DOCS} className="dx-side-logo" aria-label="Glyphh Docs">
           <img className="logo-dark" src="/glyphh-logo-black.png" alt="Glyphh" />
           <img className="logo-light" src="/glyphh-logo-white.png" alt="Glyphh" />
         </a>
@@ -68,7 +71,7 @@ export default function DocsSidebar({ groups }) {
             {g.pages.map((p) => {
               const href = hrefOf(p);
               return (
-                <a key={p.slug} href={href} className={`dx-side-link ${path === href ? 'active' : ''}`}>
+                <a key={p.slug} href={href} className={`dx-side-link ${slugOf(path) === p.slug ? 'active' : ''}`}>
                   {p.title}
                 </a>
               );

@@ -1,3 +1,4 @@
+import { DOCS } from './base';
 // The docs' three building blocks: a callout, a key/value row, a code block.
 
 const KINDS = {
@@ -344,10 +345,10 @@ export function BuildRun() {
 }
 
 const DOORS = [
-  ['/docs/ada-introduction', 'Ada', 'The first model on the glyph. Define a space, encode your data, and get answers as fact trees.', <><path d="M12 3v6" /><path d="M12 9 6 15" /><path d="M12 9l6 6" /><circle cx="12" cy="3" r="1.5" /><circle cx="6" cy="17" r="2" /><circle cx="18" cy="17" r="2" /></>],
-  ['/docs/install', 'Glyphh Desktop', 'The agent, skills, tasks and tools on your machine, with every frontier model and open weights.', <><rect x="2" y="4" width="20" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></>],
-  ['/docs/gateway', 'Model Router', 'One endpoint in front of every model, with your budgets, roles and published rates.', <><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4" /></>],
-  ['/docs/connections', 'Connect', 'Your apps as tools for any agent, over MCP, governed by team.', <><path d="M12 22v-5M9 8V2M15 8V2" /><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z" /></>],
+  [`${DOCS}/ada-introduction`, 'Ada', 'The first model on the glyph. Define a space, encode your data, and get answers as fact trees.', <><path d="M12 3v6" /><path d="M12 9 6 15" /><path d="M12 9l6 6" /><circle cx="12" cy="3" r="1.5" /><circle cx="6" cy="17" r="2" /><circle cx="18" cy="17" r="2" /></>],
+  [`${DOCS}/install`, 'Glyphh Desktop', 'The agent, skills, tasks and tools on your machine, with every frontier model and open weights.', <><rect x="2" y="4" width="20" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></>],
+  [`${DOCS}/gateway`, 'Model Router', 'One endpoint in front of every model, with your budgets, roles and published rates.', <><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4" /></>],
+  [`${DOCS}/connections`, 'Connect', 'Your apps as tools for any agent, over MCP, governed by team.', <><path d="M12 22v-5M9 8V2M15 8V2" /><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z" /></>],
 ];
 
 export function Doors() {
