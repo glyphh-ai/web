@@ -21,14 +21,14 @@ export const ada = [
           <table>
             <thead><tr><th>Model</th><th>Pricing</th><th>Situation size</th><th>Outcome label</th><th>Input</th></tr></thead>
             <tbody>
-              <tr><td><code>glyphh-ada-1.0</code></td><td>Per token, in and out</td><td>Up to 16 KB of JSON</td><td>Up to 200 characters</td><td>JSON</td></tr>
+              <tr><td><code>glyphh-ada-1.0</code></td><td>Per token, in and out</td><td>Up to 16 KB of JSON</td><td>Up to 200 characters</td><td>Typed JSON</td></tr>
             </tbody>
           </table>
         </div>
         <ul>
           <li><strong>Pricing.</strong> Every Ada call is metered per input and output token on the <code>glyphh-ada-1.0</code> row and paid from your organization&rsquo;s monthly budget, at your plan&rsquo;s rate. The current rate is in the <a href="https://glyphh.ai/integrations/models">model catalog</a>.</li>
           <li><strong>Budget.</strong> A call meets the same budget wall as any model call: without a plan, or over budget, it is refused before it runs.</li>
-          <li><strong>Situations.</strong> In a flat model a situation is JSON of any shape, and arrays are treated as sets. In a <a href="/docs/ada-typed">typed model</a> it is data in the shape the model&rsquo;s spec gives, and anything else is refused.</li>
+          <li><strong>Situations.</strong> A model has a spec that gives every field a type, and a situation is data in that shape: anything else is refused. See <a href="/docs/ada-typed">Typed models</a>. A model created without a spec is flat: it takes JSON of any shape, with arrays treated as sets, and checks nothing.</li>
           <li><strong>One id per call.</strong> Every call names a <code>model_id</code> (<code>am_</code> and 12 hex digits). An organization can have many models.</li>
         </ul>
         <h2>Where records live</h2>

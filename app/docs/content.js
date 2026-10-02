@@ -227,7 +227,7 @@ const start = [
   {
     slug: 'quickstart',
     title: 'Quickstart',
-    lede: 'Create a model, record into it, and query it.',
+    lede: 'Create a typed model, record into it, and query it.',
     body: (
       <>
         <p>
@@ -236,36 +236,65 @@ const start = [
         </p>
         <h2>1. Create a model</h2>
         <p>
-          An org admin creates a model once. It gets an id that every later call names. This one is flat: it takes
-          any JSON. To give every field a type, create it with a spec: see <a href="/docs/ada-typed">Typed models</a>.
+          An org admin creates a model once, with a spec that gives every field a type. It gets an id that every
+          later call names.
         </p>
         <Code lang="bash">{`curl https://api.glyphh.ai/ada \\
   -H "x-glyphh-api-key: Bearer $GLYPHH_API_KEY" \\
   -H "content-type: application/json" \\
-  -d '{"op": "create_model", "name": "tickets", "storage": "cloud"}'`}</Code>
+  -d '{
+    "op": "create_model", "name": "tickets", "storage": "cloud",
+    "spec": {
+      "name": "tickets",
+      "layers": [ { "name": "ticket", "segments": [ { "name": "issue", "roles": [
+        { "name": "component", "type": "category" },
+        { "name": "symptom", "type": "category" },
+        { "name": "severity", "type": "number",
+          "numeric_config": { "min_value": 0, "max_value": 10, "bin_width": 1 } }
+      ] } ] } ]
+    }
+  }'`}</Code>
+        <p>
+          A spec nests layers, segments and roles. The types are <code>category</code>, <code>set</code>,{' '}
+          <code>number</code>, <code>text</code>, <code>boolean</code> and <code>time</code>: see{' '}
+          <a href="/docs/ada-typed">Typed models</a>.
+        </p>
         <h2>2. Record</h2>
-        <p>Send an object and what it resolved to. The object is JSON of any shape.</p>
+        <p>Send data in the spec&rsquo;s shape, and what it resolved to.</p>
         <Code lang="json">{`{
   "op": "record",
   "model_id": "am_0123456789ab",
-  "situation": { "component": "kubelet", "symptom": "crash_on_boot", "severity": 7 },
+  "situation": { "ticket": { "issue": { "component": "kubelet", "symptom": "crash_on_boot", "severity": 7 } } },
   "outcome": "route_to_platform"
 }`}</Code>
+        <p>Data that does not fit its type is refused, and nothing is stored. A severity of <code>&quot;high&quot;</code> answers:</p>
+        <Code lang="json">{`{ "error": { "code": "E_VALIDATION",
+  "message": "situation: ticket.issue.severity: a numeric role takes a finite number" } }`}</Code>
         <h2>3. Query</h2>
-        <p>
-          Send a like object. Ada returns the nearest outcome, how sure it is, the records behind it, and{' '}
-          <code>act</code>: whether your code should branch on it. A question that carries something the model was
-          never shown comes back with <code>act</code> false and says what was new.
-        </p>
+        <p>Send a like object with the roles you are asking about. Only those are scored.</p>
         <Code lang="json">{`{
   "op": "query",
   "model_id": "am_0123456789ab",
-  "situation": { "component": "kubelet", "symptom": "crash_on_boot" }
+  "situation": { "ticket": { "issue": { "component": "kubelet", "symptom": "crash_on_boot" } } }
 }`}</Code>
+        <p>The answer gives your code one thing to branch on:</p>
+        <Code lang="json">{`{ "act": true, "reason": "reflex", "top": "route_to_platform",
+  "exact": true, "confidence": 1.0, "count": 1, "unseen": [] }`}</Code>
+        <p>Ask about a component the model was never shown, and it does not act:</p>
+        <Code lang="json">{`{ "act": false, "reason": "unseen", "top": "route_to_platform",
+  "exact": false, "unseen": ["ticket.issue.component=etcd"] }`}</Code>
         <h2>4. Ask why</h2>
         <p>
           The same question with <code>&quot;op&quot;: &quot;facts&quot;</code> returns the nearest records as{' '}
           <a href="/docs/fact-trees">fact trees</a>: which parts matched, how closely, and how much each counted.
+          Asked about a kubelet ticket at severity 9, the record at severity 7 scores 0.9: the component is the
+          same (1.0) and the severity is two bins of ten apart (0.8).
+        </p>
+        <h2>Without a spec</h2>
+        <p>
+          Leave <code>spec</code> out and the model is flat: it takes JSON of any shape and weighs its keys. That
+          is quick for an agent trying an idea. Nothing is checked on the way in, so give a model a spec before
+          software depends on it.
         </p>
         <h2>From an agent</h2>
         <p>With the plugin or connector installed, ask in plain words:</p>
