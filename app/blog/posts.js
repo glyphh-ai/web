@@ -7,6 +7,84 @@
 
 export const POSTS = [
   {
+    slug: 'glyphh-desktop-connections',
+    title: 'Glyphh Desktop Connections — Your Apps, Wired to the Agent',
+    summary: 'Connect Gmail and Slack to Glyphh Desktop in a couple of clicks, then ask the agent to read your email, send it to you in Slack, and open Slack right in your workspace. Timme walks through connections, tool permissions, and ask versus auto.',
+    date: '2026-10-02',
+    author: 'Chris "Timme"',
+    minutes: 3,
+    cover: 'https://i.ytimg.com/vi/RDdJxb0tbf4/maxresdefault.jpg',
+    coverAlt: 'Glyphh Desktop Connections, the demo video.',
+    video: 'RDdJxb0tbf4',
+    tags: ['Desktop', 'Connections', 'Demo'],
+    related: [
+      ['Connections', 'https://docs.glyphh.ai/connections'],
+      ['Glyphh Desktop Workspaces', '/blog/glyphh-desktop-workspaces'],
+      ['Install Glyphh', 'https://docs.glyphh.ai/install'],
+    ],
+    sections: [
+      {
+        id: 'the-video',
+        heading: null,
+        body: [
+          'Hi everyone, Chris here. Today we\'re covering Glyphh desktop connections. If you haven\'t heard of Glyphh desktop yet, it\'s the brand new vendor neutral alternative to Claude Code or Cowork on your desktop, OpenAI, or Gemini. This one is episode 3, and it\'s a quick one: connect a couple of apps, call them from the agent, and move around Glyphh using them. Watch the demo above, or read on, I\'ll walk you through it.',
+          'I\'m in the vibe layout for this. I\'ve covered layouts and the dock in the workspaces video, so I\'m not going to spend a whole lot of time there.',
+        ],
+      },
+      {
+        id: 'three-ways-in',
+        heading: 'Three ways to get to connections',
+        body: [
+          'There are a few ways to get to the connections menu. The first is the dock: go up to the dock, open Settings, and go to Connections. That\'s the list of connections I currently have.',
+          'The second is the Build panel. Open it and click Connections. That\'s another way to add connections to your account.',
+          'The last one is the way I typically go: down to the settings menu, then Connections.',
+        ],
+      },
+      {
+        id: 'adding-a-connection',
+        heading: 'Adding a connection',
+        body: [
+          'To add a new connection I go to Discover and type in the name of the one I want. There\'s my Gmail. I click the plus sign, and what you see on the screen is the OAuth 2 sign-in to Gmail. I say continue, Google asks me for my credentials, I say allow, and now I\'m connected. Close that window and Gmail is on my account.',
+          'Now you see the list of MCP tools that connection brings with it. I can pick and choose which tools I want the agent to be able to use, based on the permission mode I have the agent in.',
+        ],
+      },
+      {
+        id: 'ask-or-auto',
+        heading: 'Ask, or auto',
+        body: [
+          'So what does that mean? Down in the agent input there\'s a permission box. If I turn it to ask and say "hey, can you read my last five emails?", before it reads those five emails it asks for my permission. A little dialog pops up at the bottom, and I say yes.',
+          'If I change the permission mode to auto, the next tool call won\'t ask. It goes ahead and executes the request without any additional input from me.',
+          'That\'s an easy way to use connections, and you can do some very powerful things with them.',
+        ],
+      },
+      {
+        id: 'two-apps-one-ask',
+        heading: 'Two apps, one ask',
+        body: [
+          'Let\'s go back into connections. I go to Discover, put in Slack, and connect it. Continue, agree, approve, and Slack is connected. Back in my connections, there it is.',
+          'Now back to the agent. I say: "can you send these to me in Slack, please? And also open my Slack app in Glyphh." The idea is to show you how easy it is to navigate around Glyphh using connections and the workspace management that\'s part of the desktop.',
+          'It opens Slack. I make it full screen, click on my name, and there are the five emails.',
+        ],
+      },
+      {
+        id: 'a-word-on-auto',
+        heading: 'A word on auto',
+        body: [
+          'You\'ll notice it didn\'t ask me for permission to do any of that. In real production scenarios, be careful about what you allow the agent to do without your permission. You can get yourself into trouble.',
+        ],
+      },
+      {
+        id: 'summary',
+        heading: 'To summarize',
+        body: [
+          'I\'m going to leave the demo there, because I think it\'s important to have a couple of quick videos out there that show the immense power of Glyphh desktop when it\'s lined up with things like connections and connectivity.',
+          'I\'d love your comments and your feedback. Thank you for watching, and I hope you have an amazing day.',
+          '— Timme',
+        ],
+      },
+    ],
+  },
+  {
     slug: 'glyphh-desktop-workspaces',
     title: 'Glyphh Desktop Workspaces — Stop Losing the Thread',
     summary: 'Context switching costs you 15 minutes and 40% of your brain power every single time, and AI made it 10x worse. Timme demos Glyphh workspaces: models, loops, apps and connectors in one place, and your session follows you through the day.',
