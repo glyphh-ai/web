@@ -49,16 +49,19 @@ export const ada = [
         </p>
         <h2>How large</h2>
         <p>
-          A model&rsquo;s records are held in memory and scored together, a field at a time. Measured on a typed
-          model with six fields: a query takes about 4 ms at 10,000 records, 28 ms at 100,000 and 230 ms at
-          1,000,000. A million records take about 2 GB.
+          A model&rsquo;s records are held in memory as columns and scored together, a field at a time. A
+          record&rsquo;s data as you wrote it stays in the database and is read when an answer shows it. Measured
+          on a typed model with six fields: a query takes about 33 ms at 100,000 records and 200 ms at
+          1,000,000, and a million records take about 0.7 GB. The columns are also kept in the database, so a
+          server that restarts reads them (3 seconds for a million records) and not every record again (53
+          seconds).
         </p>
         <h2>Customizing a model</h2>
         <ul>
           <li><strong>Weights.</strong> Say how much each key decides: <code>{'{"risk": 1, "team": 0.1}'}</code>. A number weighs a key; an object weighs inside it. Unlisted keys weigh 1, and a key that weighs 0 is never looked at. Set defaults on the model, or pass weights on one call. A typed model&rsquo;s weights live in its spec.</li>
           <li><strong>Scale.</strong> What <code>act</code> takes, set per model with <code>ada_update_model</code>: <code>{'{"similarity": 0.4, "confidence": 0.7, "records": 3, "exact": true, "must_match": [], "unseen": false}'}</code>. See <a href="/docs/ada-act">When Ada acts</a>.</li>
           <li><strong>Calibration.</strong> Once a model has 10 or more wins, <code>ada_calibrate</code> fits its probabilities to its own records. A record is held out together with every copy of itself, so repeats teach it nothing. The result is saved with the model.</li>
-          <li><strong>Learned weights.</strong> Once a flat model has 10 or more wins, an org admin can run <code>ada_learn</code>. It works out which keys decide by holding records out and predicting them from the rest, saves those weights as the model&rsquo;s defaults, calibrates it, and reports how often the model predicts its own held-out records before and after.</li>
+          <li><strong>Learned weights.</strong> Once a model has 10 or more wins, an org admin can run <code>ada_learn</code>. It works out what decides by holding records out and predicting them from the rest, saves the weights, calibrates the model, and reports how often it predicts its own held-out records before and after. A flat model learns the weight of each top-level key. A <a href="/docs/ada-typed">typed model</a> learns each role&rsquo;s weight, saved in its spec.</li>
           <li><strong>Clearance.</strong> An org admin sets each team&rsquo;s clearance on a model from 0 to 1. A team with no setting has full clearance. A typed model&rsquo;s spec says which parts need one.</li>
         </ul>
         <h2>Values said another way</h2>
@@ -73,7 +76,7 @@ export const ada = [
           <li><strong>Only a close word counts as the recorded one.</strong> A word held at 0.8 or closer is another way to say a recorded value. A word that is only related leans the answer and is still new.</li>
           <li><strong>Recorded values stay distinct.</strong> Two values your records use are never treated as the same.</li>
           <li><strong>Fact trees show it.</strong> The key&rsquo;s leaf shows your word, the record&rsquo;s word and the score.</li>
-          <li><strong>What is sent.</strong> To build the lexicon, a cloud model&rsquo;s short text values are sent to the language model that fronts Ada. A local model&rsquo;s values are never sent, so a local model matches exact values only. Keys with more than 200 distinct values, such as ids, are left out.</li>
+          <li><strong>What is sent.</strong> To build the lexicon, a cloud model&rsquo;s short text values are sent to the language model that fronts Ada. In a flat model those are the values of its top-level keys. In a typed model they are the values of its open categories only: see <a href="/docs/ada-typed">Typed models</a>. A local model&rsquo;s values are never sent, so a local model matches exact values only. Keys with more than 200 distinct values, such as ids, are left out.</li>
         </ul>
         <h2>When Ada says to act</h2>
         <p>
@@ -395,7 +398,8 @@ switch (a.reason) {
         <Row k="together">On a segment: its roles decide only in combination. See below.</Row>
         <p>
           Create the model with <code>spec</code>, or set it with <code>ada_update_model</code> while the model
-          has no records. Once a model has a record its spec is fixed: create a new model for a new spec.
+          has no records. Once a model has a record its shape is fixed: after that only similarity weights may
+          change, by <code>ada_learn</code> or by hand. Create a new model for a new shape.
         </p>
         <h2>Roles that decide together</h2>
         <p>
@@ -427,9 +431,33 @@ switch (a.reason) {
           <li><strong>A number:</strong> one outside every number recorded on its scale. Between two recorded numbers is covered.</li>
           <li><strong>Text and key parts:</strong> never new.</li>
         </ul>
-        <Note title="Not typed yet">
-          <a href="/docs/ada">Values said another way</a> and <code>ada_learn</code> work on flat models only.
-        </Note>
+        <h2>Open and closed categories</h2>
+        <p>
+          A category that lists its <code>values</code> is closed: a record or a question with anything else is
+          refused. A category that lists none is open, and Ada learns other ways its values are said
+          (<a href="/docs/ada">Values said another way</a>): a question for <code>software as a service</code>{' '}
+          reaches records that say <code>saas</code>, scores below 1, and is never exact.
+        </p>
+        <ul>
+          <li><strong>Only open categories are sent</strong> to the language model that builds the lexicon, once per value. Never a key part, a set, a text, a number, a closed category, or any role under a <code>security_weight</code>.</li>
+          <li><strong>A local model sends nothing.</strong></li>
+        </ul>
+        <h2>Learned weights</h2>
+        <p>
+          Once a typed model has 10 or more wins, <code>ada_learn</code> works out which roles decide. It holds
+          out each of the newest 100 wins, scores it against the rest the way a question is scored, and moves one
+          role&rsquo;s <code>similarity_weight</code> at a time while the held-out outcomes get more likely. A role
+          that is different on every record ends at 0. The weights are saved in the spec, and the answer says how
+          often the model predicted its held-out records before and after.
+        </p>
+        <Code lang="json">{`{ "weights": { "ticket.issue.component": 1, "ticket.issue.reporter": 0, "ticket.issue.severity": 0,
+               "ticket.where.region": 0, "ticket.where.plan": 0, "meta.source.channel": 1 },
+  "held_out_accuracy": { "before": 0.875, "after": 1 }, "held": 80, "scored": 80, "tau": 0.12, "size": 80 }`}</Code>
+        <p>
+          That is a model of 80 tickets where the component alone decides the team. A weight of 0 also means a
+          new value under that role no longer stops the model from acting, so read what was learned before you
+          rely on it. An admin can set any role&rsquo;s weight by hand with <code>ada_update_model</code>.
+        </p>
       </>
     ),
   },
@@ -1041,7 +1069,7 @@ claude plugin install ada@glyphh-ai`}</Code>
               <tr><td><code>ada_record</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code>, optional <code>at</code></td><td>Records a win: this outcome worked here</td></tr>
               <tr><td><code>ada_veto</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code>, optional <code>at</code></td><td>Records a failure: this outcome failed or was rejected here</td></tr>
               <tr><td><code>ada_calibrate</code></td><td><code>model_id</code></td><td>Fits the model&rsquo;s probabilities to its records (10 or more wins)</td></tr>
-              <tr><td><code>ada_learn</code></td><td><code>model_id</code></td><td>Learns which keys decide from a flat model&rsquo;s wins (10 or more), saves them as its default weights and calibrates it (org admins)</td></tr>
+              <tr><td><code>ada_learn</code></td><td><code>model_id</code></td><td>Learns what decides from a model&rsquo;s wins (10 or more) and calibrates it (org admins): a flat model&rsquo;s key weights, saved as its defaults, or a typed model&rsquo;s role weights, saved in its spec</td></tr>
             </tbody>
           </table>
         </div>
@@ -1064,7 +1092,7 @@ claude plugin install ada@glyphh-ai`}</Code>
               <tr><td><code>ada_devices</code></td><td>Any member</td><td>Lists registered devices and whether each is online</td></tr>
               <tr><td><code>ada_contract</code></td><td>Any member</td><td>The shape of every answer as JSON Schema, and with a typed model&rsquo;s <code>model_id</code> the shape of its data</td></tr>
               <tr><td><code>ada_create_model</code></td><td>Org admins</td><td>Creates a model with <code>name</code> and <code>storage</code> (<code>cloud</code> or <code>local</code>), flat with optional <code>weights</code> or typed with a <code>spec</code></td></tr>
-              <tr><td><code>ada_update_model</code></td><td>Org admins</td><td>Renames a model, sets its default weights or its scale, or sets its spec while it has no records</td></tr>
+              <tr><td><code>ada_update_model</code></td><td>Org admins</td><td>Renames a model, sets its default weights or its scale, or sets its spec: any spec while it has no records, and after that one that differs only in similarity weights</td></tr>
               <tr><td><code>ada_delete_model</code></td><td>Org admins</td><td>Deletes a model and its records, wherever they live</td></tr>
               <tr><td><code>ada_edit_record</code></td><td>Org admins</td><td>Corrects a record&rsquo;s situation or outcome</td></tr>
               <tr><td><code>ada_delete_record</code></td><td>Org admins</td><td>Deletes one record</td></tr>
