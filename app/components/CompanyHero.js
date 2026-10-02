@@ -15,8 +15,8 @@ export default function CompanyHero() {
         <p className="oshero-eyebrow">Introducing Glyphh Ada...</p>
 
         <h1 className="oshero-title">
-          <span>The first Glyphh model:</span>
-          <span><em>Ada</em> gives AI algebraic reasoning.</span>
+          <span><em>Ada</em> is software&rsquo;s AI</span>
+          <span>reasoning substrate.</span>
         </h1>
 
         <div className="oshero-actions">
