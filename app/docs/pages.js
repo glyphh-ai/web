@@ -28,7 +28,7 @@ export const ada = [
         <ul>
           <li><strong>Pricing.</strong> Every Ada call is metered per input and output token on the <code>glyphh-ada-1.0</code> row and paid from your organization&rsquo;s monthly budget, at your plan&rsquo;s rate. The current rate is in the <a href="https://glyphh.ai/integrations/models">model catalog</a>.</li>
           <li><strong>Budget.</strong> A call meets the same budget wall as any model call: without a plan, or over budget, it is refused before it runs.</li>
-          <li><strong>Situations.</strong> A situation is JSON of any shape. Arrays are treated as sets.</li>
+          <li><strong>Situations.</strong> In a flat model a situation is JSON of any shape, and arrays are treated as sets. In a <a href="/docs/ada-typed">typed model</a> it is data in the shape the model&rsquo;s spec gives, and anything else is refused.</li>
           <li><strong>One id per call.</strong> Every call names a <code>model_id</code> (<code>am_</code> and 12 hex digits). An organization can have many models.</li>
         </ul>
         <h2>Where records live</h2>
@@ -49,10 +49,11 @@ export const ada = [
         </p>
         <h2>Customizing a model</h2>
         <ul>
-          <li><strong>Weights.</strong> Say how much each key decides: <code>{'{"risk": 1, "team": 0.1}'}</code>. A number weighs a key; an object weighs inside it. Unlisted keys weigh 1. Set defaults on the model, or pass weights on one call.</li>
-          <li><strong>Calibration.</strong> Once a model has 10 or more wins, <code>ada_calibrate</code> fits its probabilities to its own records. The result is saved with the model.</li>
-          <li><strong>Learned weights.</strong> Once a model has 10 or more wins, an org admin can run <code>ada_learn</code>. It works out which keys decide by holding records out and predicting them from the rest, saves those weights as the model&rsquo;s defaults, calibrates it, and reports how often the model predicts its own held-out records before and after.</li>
-          <li><strong>Clearance.</strong> An org admin sets each team&rsquo;s clearance on a model from 0 to 1. A team with no setting has full clearance.</li>
+          <li><strong>Weights.</strong> Say how much each key decides: <code>{'{"risk": 1, "team": 0.1}'}</code>. A number weighs a key; an object weighs inside it. Unlisted keys weigh 1, and a key that weighs 0 is never looked at. Set defaults on the model, or pass weights on one call. A typed model&rsquo;s weights live in its spec.</li>
+          <li><strong>Scale.</strong> What <code>act</code> takes, set per model with <code>ada_update_model</code>: <code>{'{"similarity": 0.4, "confidence": 0.7, "records": 3, "exact": true, "must_match": [], "unseen": false}'}</code>. For a model software acts on, list the keys that decide in <code>must_match</code>.</li>
+          <li><strong>Calibration.</strong> Once a model has 10 or more wins, <code>ada_calibrate</code> fits its probabilities to its own records. A record is held out together with every copy of itself, so repeats teach it nothing. The result is saved with the model.</li>
+          <li><strong>Learned weights.</strong> Once a flat model has 10 or more wins, an org admin can run <code>ada_learn</code>. It works out which keys decide by holding records out and predicting them from the rest, saves those weights as the model&rsquo;s defaults, calibrates it, and reports how often the model predicts its own held-out records before and after.</li>
+          <li><strong>Clearance.</strong> An org admin sets each team&rsquo;s clearance on a model from 0 to 1. A team with no setting has full clearance. A typed model&rsquo;s spec says which parts need one.</li>
         </ul>
         <h2>Values said another way</h2>
         <p>
@@ -63,18 +64,45 @@ export const ada = [
         <ul>
           <li><strong>No model runs when you query.</strong> The lexicon is built when a record is written, and a query only reads it.</li>
           <li><strong>A match by lexicon is never exact.</strong> It scores at most 0.95, so it needs three records and 0.7 confidence to act, like any other near match.</li>
+          <li><strong>Only a close word counts as the recorded one.</strong> A word held at 0.8 or closer is another way to say a recorded value. A word that is only related leans the answer and is still new.</li>
           <li><strong>Recorded values stay distinct.</strong> Two values your records use are never treated as the same.</li>
           <li><strong>Fact trees show it.</strong> The key&rsquo;s leaf shows your word, the record&rsquo;s word and the score.</li>
           <li><strong>What is sent.</strong> To build the lexicon, a cloud model&rsquo;s short text values are sent to the language model that fronts Ada. A local model&rsquo;s values are never sent, so a local model matches exact values only. Keys with more than 200 distinct values, such as ids, are left out.</li>
         </ul>
         <h2>When Ada says to act</h2>
         <p>
-          A query returns <code>act</code>, true only when the answer is sufficient, its confidence is at least
-          0.7, three or more records stand behind it, and the outcome is not vetoed by a recorded failure. A
-          record that matches the situation exactly is the answer and acts alone. Records less than 0.40 similar
-          to the situation are not counted. An answer is marked <code>calibrated</code> once the model has been
-          calibrated.
+          A query returns <code>act</code> and a <code>reason</code>. By default <code>act</code> is true only when
+          nothing in the situation is new to the model, its confidence is at least 0.7, three or more records stand
+          behind it, and the outcome is not vetoed by a newer recorded failure. A record of the same situation is
+          the answer and acts alone. Every record at least 0.40 similar to the situation votes; the rest are not
+          counted.
         </p>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th><code>reason</code></th><th>Means</th></tr></thead>
+            <tbody>
+              <tr><td><code>reflex</code></td><td>Act: the records back the top outcome and nothing stands against it</td></tr>
+              <tr><td><code>insufficient</code></td><td>No record is close enough, or too few of the top outcome are</td></tr>
+              <tr><td><code>unseen</code></td><td>The situation carries a key or a value no win has recorded. <code>unseen</code> lists them.</td></tr>
+              <tr><td><code>vetoed</code></td><td>A recorded failure of the top outcome is as close as its wins, and newer</td></tr>
+              <tr><td><code>uncalibrated</code></td><td>Fewer records than the scale takes, and none is the same situation</td></tr>
+              <tr><td><code>mismatch</code></td><td>The records differ under a key the scale says must match</td></tr>
+              <tr><td><code>low_confidence</code></td><td>The records disagree on the outcome</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>Never shown, never acted on</h2>
+        <p>
+          Similarity is the share of weighted keys that agree, so a force push to <code>main</code> looks half like
+          a push to a feature branch. Ada does not act on that. When a situation carries a key or a value none of
+          the model&rsquo;s wins has recorded, <code>act</code> is false and <code>unseen</code> says what was new,
+          for example <code>["force", "target=main"]</code>.
+        </p>
+        <ul>
+          <li><strong>To let a key vary freely,</strong> give it weight 0.</li>
+          <li><strong>To act on likeness alone,</strong> set <code>unseen: true</code> in the model&rsquo;s scale. That is the model&rsquo;s risk to take.</li>
+          <li><strong>What this does not catch:</strong> values that were each recorded, but never together. Use <code>must_match</code> on the keys that decide.</li>
+        </ul>
         <Note kind="warn" title="A single record is not consensus">
           Ada cites what it stands on. Read <code>count</code> and <code>receipts</code> before acting on a thin
           answer.
@@ -104,9 +132,155 @@ models = r.json()["data"]`}</Code>
 const { data: models } = await r.json();`}</Code>
         <p>
           Each model comes back with its <code>id</code>, <code>name</code>, <code>storage</code>, default{' '}
-          <code>weights</code>, and whether it is <code>calibrated</code>. Pass a <code>model_id</code> to get one
-          model with its record counts.
+          <code>weights</code>, its <code>scale</code>, its <code>spec</code> when it is typed, and whether it is{' '}
+          <code>calibrated</code>. Pass a <code>model_id</code> to get one model with its record counts.
         </p>
+      </>
+    ),
+  },
+  {
+    slug: 'ada-typed',
+    title: 'Typed models',
+    lede: 'Give every field a type. Ada checks every record and every question against it.',
+    body: (
+      <>
+        <p>
+          A model is flat or typed. A flat model takes any JSON and weighs its keys. A typed model carries a{' '}
+          <strong>spec</strong>: layers, segments and roles, each role with a type. Anything that does not fit is
+          refused before it is stored or scored, with the path of the role that was wrong. Use a typed model when
+          software will call it without an agent in the path.
+        </p>
+        <h2>Types</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Type</th><th>Takes</th><th>How two values score</th></tr></thead>
+            <tbody>
+              <tr><td><code>category</code></td><td>One value. <code>values</code> lists what it may hold.</td><td>The same is 1, different is 0</td></tr>
+              <tr><td><code>set</code></td><td>A list of values</td><td>The share of items they have in common</td></tr>
+              <tr><td><code>number</code></td><td>A number on a scale you give (<code>numeric_config</code>)</td><td>1 minus the bins apart over the bins on the scale, so 7 is nearer 8 than 2</td></tr>
+              <tr><td><code>text</code></td><td>A string, by <code>bag_of_words</code> or <code>ngrams</code></td><td>The share of words in common, or of character n-grams, so another spelling of a word is near</td></tr>
+              <tr><td><code>boolean</code></td><td>True or false</td><td>The same or not</td></tr>
+              <tr><td><code>time</code></td><td>Epoch seconds or ISO 8601</td><td>Never scored. It stamps the record.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Every score is exact arithmetic on the values. The same two values always give the same number.</p>
+        <h2>A spec</h2>
+        <Code lang="json">{`{
+  "name": "deals",
+  "temporal_source": "meta.time.seen",
+  "layers": [
+    { "name": "deal", "segments": [
+      { "name": "identity", "roles": [
+        { "name": "deal_id", "type": "category", "key_part": true, "similarity_weight": 0 } ] },
+      { "name": "profile", "roles": [
+        { "name": "stage", "type": "category",
+          "values": ["discovery", "proposal", "negotiation", "closed"] },
+        { "name": "tags", "type": "set" } ] },
+      { "name": "metrics", "roles": [
+        { "name": "meetings", "type": "number",
+          "numeric_config": { "min_value": 0, "max_value": 20, "bin_width": 1 } },
+        { "name": "notes", "type": "text", "text_encoding": "ngrams" } ] } ] },
+    { "name": "meta", "segments": [
+      { "name": "time", "roles": [ { "name": "seen", "type": "time" } ] },
+      { "name": "owner", "security_weight": 0.8, "roles": [ { "name": "rep" } ] } ] }
+  ]
+}`}</Code>
+        <Row k="similarity_weight">How much a layer, segment or role counts, 0 to 1. A typed model&rsquo;s weights live in its spec.</Row>
+        <Row k="security_weight">The clearance a reader&rsquo;s team needs to see that part. Below it, the part has no voice in the score and does not appear in any answer.</Row>
+        <Row k="key_part">The roles that say which thing a record describes. See <a href="/docs/ada-time">Versions and time</a>.</Row>
+        <Row k="temporal_source">The role that carries when a record happened.</Row>
+        <p>
+          Create the model with <code>spec</code>, or set it with <code>ada_update_model</code> while the model
+          has no records. Once a model has a record its spec is fixed: create a new model for a new spec.
+        </p>
+        <h2>Data in that shape</h2>
+        <p>A record or a question is the same shape, by name. A question gives only the roles it asks about, and only those are scored.</p>
+        <Code lang="json">{`{
+  "op": "query",
+  "model_id": "am_0123456789ab",
+  "situation": { "deal": { "profile": { "stage": "negotiation" }, "metrics": { "meetings": 6 } } }
+}`}</Code>
+        <p>
+          <code>{'{"op": "contract", "model_id": "am_…"}'}</code> returns the shape of the model&rsquo;s data as
+          JSON Schema, next to the schema of every answer. Generate your types from it.
+        </p>
+        <h2>What counts as new</h2>
+        <p>
+          Ada does not act on a question that carries something its wins were never shown. In a typed model that
+          follows the type:
+        </p>
+        <ul>
+          <li><strong>A category or a set:</strong> a value no win recorded.</li>
+          <li><strong>A number:</strong> one outside every number recorded on its scale. Between two recorded numbers is covered.</li>
+          <li><strong>Text and key parts:</strong> never new.</li>
+        </ul>
+        <Note title="Not typed yet">
+          <a href="/docs/ada">Values said another way</a> and <code>ada_learn</code> work on flat models only.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'ada-time',
+    title: 'Versions and time',
+    lede: 'Records that share their key parts are versions of one thing. Read its history, its trend and its next version.',
+    body: (
+      <>
+        <p>
+          In a <a href="/docs/ada-typed">typed model</a>, the roles marked <code>key_part</code> say which thing a
+          record describes: a deal, a ticket, a device. Record the same thing again and it is a new version, placed
+          by when it happened, not by when it arrived.
+        </p>
+        <ul>
+          <li><strong>A query answers from what things are now.</strong> Each thing takes part as its newest version. Older versions are its history.</li>
+          <li><strong>Leave the key parts out of a query</strong> to ask what a thing is like. Give them to follow one thing.</li>
+          <li><strong>When it happened.</strong> A record takes its time from <code>at</code>, else from the spec&rsquo;s <code>temporal_source</code> role, else now.</li>
+        </ul>
+        <h2>History</h2>
+        <p><code>ada_history</code> returns every version, oldest first, each with what changed since the one before.</p>
+        <Code lang="json">{`{
+  "version": 3, "ts": 1767312000, "outcome": "open",
+  "data": { "deal": { "profile": { "stage": "proposal" }, "metrics": { "meetings": 4 } } },
+  "changes": [
+    { "path": "deal.metrics.meetings", "from": 3, "to": 4, "score": 0.95 },
+    { "path": "deal.profile.stage", "from": "discovery", "to": "proposal", "score": 0 }
+  ],
+  "change": 0.525
+}`}</Code>
+        <Row k="changes">Each role that differs: its path, both values, and how close they are by the role&rsquo;s type.</Row>
+        <Row k="change">How far the whole version moved from the one before, 0 to 1.</Row>
+        <p>In a flat model, <code>ada_history</code> returns every record of exactly that situation, wins and failures together.</p>
+        <h2>Trend</h2>
+        <p><code>ada_trend</code> says where one thing has been going.</p>
+        <Row k="drift">How far the latest version is from the first.</Row>
+        <Row k="pace">How far one version is from the one before, on average.</Row>
+        <Row k="period">After how many steps the thing is back where it was, every time. Null when it does not repeat.</Row>
+        <Row k="roles">Per role: a number&rsquo;s <code>slope_per_day</code>, how well a line fits it (<code>fit</code>) and its <code>direction</code>; for anything else, how many times it changed and since when it has held its latest value.</Row>
+        <h2>Predict</h2>
+        <p>
+          <code>ada_predict</code> returns the thing&rsquo;s next version as data in the model&rsquo;s shape. It needs
+          two versions. Pass <code>at</code> for a time; left out, it is one usual step after the latest version.
+        </p>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th><code>basis</code></th><th>The role goes</th><th><code>confidence</code></th></tr></thead>
+            <tbody>
+              <tr><td><code>trend</code></td><td>Where the line through its numbers goes, kept on its scale</td><td>How well the line fits</td></tr>
+              <tr><td><code>own_history</code></td><td>Where it went from this value before, in this thing</td><td>The share of times that value followed</td></tr>
+              <tr><td><code>model</code></td><td>Where it went from this value in the model&rsquo;s other things</td><td>The share of times that value followed</td></tr>
+              <tr><td><code>unchanged</code></td><td>Nowhere: nothing says it moves</td><td>Null</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <code>answer</code> is what a query returns for the predicted version, with the thing itself left out:
+          what the model&rsquo;s other things say about where this one is heading.
+        </p>
+        <Note kind="warn" title="A prediction is arithmetic on the past">
+          A number follows its own straight line and a category follows what came after it before. Read{' '}
+          <code>basis</code> and <code>confidence</code> on each role before acting on one.
+        </Note>
       </>
     ),
   },
@@ -178,24 +352,41 @@ claude plugin install ada@glyphh-ai`}</Code>
           <table>
             <thead><tr><th>Tool</th><th>Takes</th><th>Returns</th></tr></thead>
             <tbody>
-              <tr><td><code>ada_query</code></td><td><code>model_id</code>, <code>situation</code>, optional <code>weights</code></td><td>The top outcome, its confidence, the records behind it, and <code>act</code></td></tr>
-              <tr><td><code>ada_facts</code></td><td><code>model_id</code>, <code>situation</code>, optional <code>weights</code>, <code>top</code> (1 to 50, default 3)</td><td>The nearest wins and failures, each as a fact tree</td></tr>
+              <tr><td><code>ada_query</code></td><td><code>model_id</code>, <code>situation</code>, optional <code>weights</code></td><td>The top outcome, its confidence, the situations on record behind it, what was new, and <code>act</code> with its <code>reason</code></td></tr>
+              <tr><td><code>ada_facts</code></td><td><code>model_id</code>, <code>situation</code>, optional <code>weights</code>, <code>top</code> (1 to 50, default 3)</td><td>The nearest situations among the wins and failures, each as a fact tree</td></tr>
               <tr><td><code>ada_check</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code></td><td>How close the nearest win and failure of that outcome are</td></tr>
             </tbody>
           </table>
         </div>
+        <h2>Time</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Tool</th><th>Takes</th><th>Returns</th></tr></thead>
+            <tbody>
+              <tr><td><code>ada_history</code></td><td><code>model_id</code>, <code>situation</code></td><td>Every record of that situation, oldest first. In a model with key parts: every version of the thing, each with what changed.</td></tr>
+              <tr><td><code>ada_trend</code></td><td><code>model_id</code>, <code>situation</code> with its key parts</td><td>How far one thing has moved, how fast, whether it repeats, and each role&rsquo;s slope or changes</td></tr>
+              <tr><td><code>ada_predict</code></td><td><code>model_id</code>, <code>situation</code> with its key parts, optional <code>at</code></td><td>The thing&rsquo;s next version, what each role stands on, and what the model answers for it</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><code>ada_trend</code> and <code>ada_predict</code> need a <a href="/docs/ada-typed">typed model</a> with key parts. See <a href="/docs/ada-time">Versions and time</a>.</p>
         <h2>Record</h2>
         <div className="dx-table">
           <table>
             <thead><tr><th>Tool</th><th>Takes</th><th>Does</th></tr></thead>
             <tbody>
-              <tr><td><code>ada_record</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code></td><td>Records a win: this outcome worked here</td></tr>
-              <tr><td><code>ada_veto</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code></td><td>Records a failure: this outcome failed or was rejected here</td></tr>
+              <tr><td><code>ada_record</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code>, optional <code>at</code></td><td>Records a win: this outcome worked here</td></tr>
+              <tr><td><code>ada_veto</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code>, optional <code>at</code></td><td>Records a failure: this outcome failed or was rejected here</td></tr>
               <tr><td><code>ada_calibrate</code></td><td><code>model_id</code></td><td>Fits the model&rsquo;s probabilities to its records (10 or more wins)</td></tr>
-              <tr><td><code>ada_learn</code></td><td><code>model_id</code></td><td>Learns which keys decide from the model&rsquo;s wins (10 or more), saves them as its default weights and calibrates it (org admins)</td></tr>
+              <tr><td><code>ada_learn</code></td><td><code>model_id</code></td><td>Learns which keys decide from a flat model&rsquo;s wins (10 or more), saves them as its default weights and calibrates it (org admins)</td></tr>
             </tbody>
           </table>
         </div>
+        <p>
+          <code>at</code> is when the outcome happened, as epoch seconds or ISO 8601. Left out, it is now. Set it
+          when you load records of things that happened earlier: a newer failure blocks an older win, so load order
+          must not stand in for history.
+        </p>
         <Note kind="warn" title="Record what the world graded">
           Record an outcome only once it is known, and only when the user or the world confirmed it. An agent should
           never grade its own work as a win.
@@ -206,10 +397,11 @@ claude plugin install ada@glyphh-ai`}</Code>
             <thead><tr><th>Tool</th><th>Who</th><th>Does</th></tr></thead>
             <tbody>
               <tr><td><code>ada_models</code></td><td>Any member</td><td>Lists the organization&rsquo;s models, or one with its record counts</td></tr>
-              <tr><td><code>ada_records</code></td><td>Any member</td><td>Browses a model&rsquo;s records, newest first, by store (<code>wins</code> or <code>vetoes</code>)</td></tr>
+              <tr><td><code>ada_records</code></td><td>Any member</td><td>Browses a model&rsquo;s records, newest first, by store (<code>wins</code> or <code>vetoes</code>), each with its situation&rsquo;s <code>key</code></td></tr>
               <tr><td><code>ada_devices</code></td><td>Any member</td><td>Lists registered devices and whether each is online</td></tr>
-              <tr><td><code>ada_create_model</code></td><td>Org admins</td><td>Creates a model with <code>name</code> and <code>storage</code> (<code>cloud</code> or <code>local</code>)</td></tr>
-              <tr><td><code>ada_update_model</code></td><td>Org admins</td><td>Renames a model or sets its default weights</td></tr>
+              <tr><td><code>ada_contract</code></td><td>Any member</td><td>The shape of every answer as JSON Schema, and with a typed model&rsquo;s <code>model_id</code> the shape of its data</td></tr>
+              <tr><td><code>ada_create_model</code></td><td>Org admins</td><td>Creates a model with <code>name</code> and <code>storage</code> (<code>cloud</code> or <code>local</code>), flat with optional <code>weights</code> or typed with a <code>spec</code></td></tr>
+              <tr><td><code>ada_update_model</code></td><td>Org admins</td><td>Renames a model, sets its default weights or its scale, or sets its spec while it has no records</td></tr>
               <tr><td><code>ada_delete_model</code></td><td>Org admins</td><td>Deletes a model and its records, wherever they live</td></tr>
               <tr><td><code>ada_edit_record</code></td><td>Org admins</td><td>Corrects a record&rsquo;s situation or outcome</td></tr>
               <tr><td><code>ada_delete_record</code></td><td>Org admins</td><td>Deletes one record</td></tr>
@@ -223,6 +415,10 @@ claude plugin install ada@glyphh-ai`}</Code>
           look alike.
         </p>
         <Code lang="json">{`{ "task": "deploy_service", "constraint": "canary_required" }`}</Code>
+        <p>
+          In a <a href="/docs/ada-typed">typed model</a> the spec does this for you: every role has a type, an
+          identity role is a key part, and a time is never scored.
+        </p>
         <h2>POST /ada</h2>
         <p>
           One endpoint, on a gateway key. The <code>op</code> is the tool name without <code>ada_</code>; the rest
@@ -237,14 +433,28 @@ claude plugin install ada@glyphh-ai`}</Code>
     "situation": { "task": "deploy_service", "constraint": "canary_required" }
   }'`}</Code>
         <p>A query answers with:</p>
-        <Row k="top">The outcome that worked most in situations like this one.</Row>
-        <Row k="confidence">How strongly the records agree on it, 0 to 1.</Row>
-        <Row k="count">How many records stand behind the answer.</Row>
+        <Row k="act">Branch on this. True only when <code>reason</code> is <code>reflex</code>.</Row>
+        <Row k="reason">Why <code>act</code> is what it is: <code>reflex</code>, <code>insufficient</code>, <code>unseen</code>, <code>vetoed</code>, <code>uncalibrated</code>, <code>mismatch</code> or <code>low_confidence</code>.</Row>
+        <Row k="top">The outcome that worked most in situations like this one. Null when nothing is close enough.</Row>
+        <Row k="unseen">What the situation carries that no win has recorded: a key (<code>force</code>) or a value (<code>target=main</code>).</Row>
+        <Row k="exact">True when the same situation is on record.</Row>
+        <Row k="confidence">The top outcome&rsquo;s share of the vote, 0 to 1.</Row>
+        <Row k="count">How many records voted: every one that cleared the model&rsquo;s similarity floor.</Row>
         <Row k="outcomes">Every outcome found, with its share.</Row>
-        <Row k="receipts">The records cited: id, similarity, outcome, author.</Row>
+        <Row k="receipts">The nearest situations on record, one entry per situation and outcome: <code>score</code>, how many times it was recorded (<code>count</code>), <code>first</code> and <code>latest</code>, and the newest record&rsquo;s <code>id</code> and <code>author</code>.</Row>
         <Row k="veto_match">How close the nearest recorded failure of the top outcome is.</Row>
-        <Row k="act">True when it is safe to act; <code>reason</code> says why or why not.</Row>
-        <Row k="calibrated">True once three or more records stand behind the answer.</Row>
+        <Row k="lifted">True when a close failure exists and a newer win outranks it.</Row>
+        <Row k="calibrated">True once the model has been calibrated.</Row>
+        <Row k="scale">The scale the answer was measured on.</Row>
+        <Row k="key">The situation&rsquo;s identity: the same for the same data in any key order.</Row>
+        <Row k="contract">The version of this shape. It goes up when a field is removed or changes meaning, never when one is added.</Row>
+        <h2>The contract</h2>
+        <p>
+          For software that calls a model with no agent in the path, <code>{'{"op": "contract"}'}</code> returns
+          the JSON Schema of what <code>query</code>, <code>facts</code>, <code>history</code>, <code>trend</code> and{' '}
+          <code>predict</code> return, and what each <code>reason</code> means. With a typed model&rsquo;s{' '}
+          <code>model_id</code> it also returns the shape of that model&rsquo;s data.
+        </p>
         <p>
           A success is <code>{'{"data": …}'}</code>. A refusal is <code>{'{"error": {"code", "message"}}'}</code>{' '}
           with a 400.

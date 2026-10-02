@@ -235,7 +235,10 @@ const start = [
           below is a tool your agent can call, and the same call as an <code>op</code> at <code>POST /ada</code>.
         </p>
         <h2>1. Create a model</h2>
-        <p>An org admin creates a model once. It gets an id that every later call names.</p>
+        <p>
+          An org admin creates a model once. It gets an id that every later call names. This one is flat: it takes
+          any JSON. To give every field a type, create it with a spec: see <a href="/docs/ada-typed">Typed models</a>.
+        </p>
         <Code lang="bash">{`curl https://api.glyphh.ai/ada \\
   -H "x-glyphh-api-key: Bearer $GLYPHH_API_KEY" \\
   -H "content-type: application/json" \\
@@ -249,7 +252,11 @@ const start = [
   "outcome": "route_to_platform"
 }`}</Code>
         <h2>3. Query</h2>
-        <p>Send a like object. Ada returns the nearest outcome, how sure it is, and the records behind it.</p>
+        <p>
+          Send a like object. Ada returns the nearest outcome, how sure it is, the records behind it, and{' '}
+          <code>act</code>: whether your code should branch on it. A question that carries something the model was
+          never shown comes back with <code>act</code> false and says what was new.
+        </p>
         <Code lang="json">{`{
   "op": "query",
   "model_id": "am_0123456789ab",
@@ -289,7 +296,7 @@ five incidents, then tell me where this new one should go and why.`}</Code>
             <tbody>
               <tr><td><strong>Returns</strong></td><td>Generated text</td><td>A measurement: what is near, how near, and why</td></tr>
               <tr><td><strong>Same input twice</strong></td><td>May differ</td><td>The same answer</td></tr>
-              <tr><td><strong>When it does not know</strong></td><td>Answers anyway</td><td>Says nothing is close enough</td></tr>
+              <tr><td><strong>When it does not know</strong></td><td>Answers anyway</td><td>Says nothing is close enough, or names what it was never shown</td></tr>
               <tr><td><strong>Evidence</strong></td><td>None by default</td><td>The records it stands on, by id</td></tr>
               <tr><td><strong>Learns by</strong></td><td>Training</td><td>Recording. A new record counts on the next query</td></tr>
             </tbody>
@@ -366,12 +373,19 @@ five incidents, then tell me where this new one should go and why.`}</Code>
         <Row k="weight">How much that part counts.</Row>
         <Row k="share">Its contribution to the node above. The shares of the parts add up to the score of the whole.</Row>
         <Row k="status">Whether the part was in both glyphs, only the query, or only the record.</Row>
+        <Row k="match">At a leaf both carry, how the two values compare: <code>same</code>, <code>lexical</code> (another way to say it), <code>partial</code> (two sets or texts that share some items), <code>near</code> (two numbers some bins apart) or <code>different</code>.</Row>
+        <p>A leaf&rsquo;s score is exact. Two different values score 0, never a small accidental number.</p>
         <h2>A record</h2>
-        <p>Each record that comes back carries its tree and its citation.</p>
-        <Row k="id">The record, so you can look it up.</Row>
-        <Row k="outcome">What that record resolved to.</Row>
-        <Row k="score">The weighted match of the whole record.</Row>
-        <Row k="probability">The chance of that outcome given the question, across the nearest records.</Row>
+        <p>
+          Each situation that comes back carries its tree and its citation. A situation recorded many times with
+          one outcome is one tree, counted.
+        </p>
+        <Row k="id">The newest record of it, so you can look it up.</Row>
+        <Row k="key">The situation&rsquo;s identity. Records that share it are the same situation at different times.</Row>
+        <Row k="outcome">What it resolved to.</Row>
+        <Row k="score">The weighted match of the whole situation.</Row>
+        <Row k="count, first, latest">How many times it was recorded, and when first and last.</Row>
+        <Row k="probability">The chance of that outcome given the question, across the records that are close enough.</Row>
         <Row k="author, ts">Who recorded it, and when.</Row>
         <h2>The answer</h2>
         <p>A query sums the records up, and gives your code one thing to branch on:</p>
@@ -380,11 +394,14 @@ five incidents, then tell me where this new one should go and why.`}</Code>
         <Row k="confidence">How strongly the nearest records agree on it.</Row>
         <Row k="count">How many records stand behind it.</Row>
         <Row k="sufficient">Whether anything was close enough to answer at all.</Row>
-        <Row k="act">True when the answer is sufficient, confident, and no recorded failure rules it out.</Row>
+        <Row k="unseen">What the question carries that the model was never shown.</Row>
+        <Row k="act">True when the answer is confident, nothing in the question is new, and no newer recorded failure rules it out.</Row>
+        <Row k="reason">Why <code>act</code> is what it is. The values are listed under <a href="/docs/ada">Ada models</a>.</Row>
         <h2>Building on it</h2>
         <ul>
-          <li><strong>Gate on <code>act</code>.</strong> Branch when it is true. When it is false, fall back to a person or a model, and record what they decide.</li>
-          <li><strong>Read <code>count</code>.</strong> One record is not consensus. An answer is marked <code>calibrated</code> once three or more stand behind it.</li>
+          <li><strong>Gate on <code>act</code>.</strong> Branch when it is true. When it is false, read <code>reason</code>, fall back to a person or a model, and record what they decide.</li>
+          <li><strong>Read <code>count</code>.</strong> One record is not consensus, unless it is the same situation (<code>exact</code>).</li>
+          <li><strong>Hold the shape.</strong> <code>{'{"op": "contract"}'}</code> returns the JSON Schema of every answer, so your program&rsquo;s types come from the source.</li>
           <li><strong>Show the tree.</strong> When someone asks why, the shares are the explanation. No second call to a model is needed.</li>
           <li><strong>Calibrate.</strong> Once a model has ten or more records with outcomes, calibration fits its probabilities to its own history.</li>
         </ul>
@@ -410,6 +427,7 @@ five incidents, then tell me where this new one should go and why.`}</Code>
               <tr><td><strong>Router</strong></td><td>What each agent, tool or model is for</td><td>Where this piece of work should go</td></tr>
               <tr><td><strong>Memory</strong></td><td>Facts, in the shape you gave them</td><td>The facts that match</td></tr>
               <tr><td><strong>Precedent</strong></td><td>What was tried, and whether it worked</td><td>What to do, and what to avoid</td></tr>
+              <tr><td><strong>A thing over time</strong></td><td>Each version of a deal, a ticket, a device</td><td>What changed, where it is heading, and its next version</td></tr>
             </tbody>
           </table>
         </div>
@@ -417,7 +435,11 @@ five incidents, then tell me where this new one should go and why.`}</Code>
         <p>Record each case once. The outcome is the branch.</p>
         <Code lang="json">{`{ "situation": { "intent": "refund", "amount_band": "under_50" }, "outcome": "auto_approve" }
 { "situation": { "intent": "refund", "amount_band": "over_500" }, "outcome": "send_to_human" }`}</Code>
-        <p>Your code queries and branches on <code>top</code> when <code>act</code> is true.</p>
+        <p>
+          Your code queries and branches on <code>top</code> when <code>act</code> is true. A case that was never
+          recorded, such as a new intent, comes back with <code>act</code> false and <code>reason</code>{' '}
+          <code>unseen</code>: the switch has a default branch.
+        </p>
         <h2>A router</h2>
         <p>Record what each destination handles. The outcome is the destination.</p>
         <Code lang="json">{`{ "situation": { "domain": "billing", "needs": ["ledger", "stripe"] }, "outcome": "billing_agent" }
@@ -426,6 +448,12 @@ five incidents, then tell me where this new one should go and why.`}</Code>
         <p>
           Record a win when something worked and a failure when it did not. A recorded failure of an outcome
           close to the question blocks <code>act</code>, however many wins agree.
+        </p>
+        <h2>A thing over time</h2>
+        <p>
+          In a <a href="/docs/ada-typed">typed model</a>, mark the roles that identify a thing as key parts and
+          record it each time it changes. <a href="/docs/ada-time">Versions and time</a> covers reading its
+          history, its trend and its next version.
         </p>
         <h2>Keep situations clean</h2>
         <ul>
@@ -439,7 +467,7 @@ five incidents, then tell me where this new one should go and why.`}</Code>
 ];
 
 const byslug = Object.fromEntries([...start, ...ada].map((p) => [p.slug, p]));
-const ADA = ['ada-introduction', 'ada-install', 'quickstart', 'primer', 'glyph', 'fact-trees', 'patterns', 'ada', 'ada-tools'].map((x) => byslug[x]);
+const ADA = ['ada-introduction', 'ada-install', 'quickstart', 'primer', 'glyph', 'fact-trees', 'patterns', 'ada', 'ada-typed', 'ada-time', 'ada-tools'].map((x) => byslug[x]);
 
 export const GROUPS = [{ title: 'Glyphh', pages: glyphh }, { title: 'Ada', pages: ADA }, ...PRODUCT_GROUPS];
 export const PAGES = GROUPS.flatMap((g) => g.pages);
