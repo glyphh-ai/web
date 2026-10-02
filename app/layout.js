@@ -1,6 +1,7 @@
 import './globals.css';
 import { Geist, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
+import AdPixels from './components/AdPixels';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
@@ -68,7 +69,10 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <AdPixels />
+      </body>
     </html>
   );
 }
