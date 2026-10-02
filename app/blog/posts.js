@@ -7,6 +7,96 @@
 
 export const POSTS = [
   {
+    slug: 'ada-in-your-code',
+    title: 'Ada in Your Code — Tickets Routed, Churn Called',
+    summary: 'The Ada SDKs are out for TypeScript and Python. Two worked examples, run for real: a helpdesk that routes its own tickets, and a churn call that shows its work. No model at runtime.',
+    date: '2026-10-02',
+    author: 'Glyphh',
+    minutes: 5,
+    cover: '/blog/ada-sdk-hero.png',
+    coverAlt: 'Ask a model. Get a reason. Two answers from Ada: a ticket routed to platform, and an account called as churned.',
+    tags: ['Ada', 'SDK', 'Guides'],
+    related: [
+      ['Guide: route support tickets', 'https://docs.glyphh.ai/ada-guide-tickets'],
+      ['Guide: customer churn', 'https://docs.glyphh.ai/ada-guide-churn'],
+      ['The SDKs', 'https://docs.glyphh.ai/ada-sdk'],
+      ['Ada', '/products/ada'],
+    ],
+    sections: [
+      {
+        id: 'what-shipped',
+        heading: null,
+        body: [
+          'Ada has SDKs now. One for TypeScript, one for Python. An agent builds the model. Your software calls it. Nothing generates the answer: it is measured against what you recorded, and it comes with the records it stands on.',
+          {
+            html: '<pre><code>npm install @glyphh-ai/ada\npip install glyphh-ada</code></pre>',
+          },
+          'We wrote two programs with them, start to finish, and ran every line. Here is what came back.',
+        ],
+      },
+      {
+        id: 'tickets',
+        heading: 'A helpdesk that routes its own tickets',
+        body: [
+          'Take 96 resolved tickets. Say what a ticket is: a product, a component, a severity, a plan, a summary. Record each one with the team that fixed it. That is the whole setup. No training run.',
+          'Then a new ticket comes in:',
+          {
+            html: '<pre><code>answer = model.query(ticket("api", "webhooks", 4, "pro", "webhook delivery fails with a 500"))\n\n{ "act": true, "top": "platform", "confidence": 1.0, "count": 16 }</code></pre>',
+          },
+          { html: '<code>act</code> is the only thing your code branches on. True means route it. And when a ticket shows up about something no ticket ever mentioned, Ada does not bluff:' },
+          {
+            html: '<pre><code>{ "act": false, "reason": "unseen", "top": "platform", "unseen": ["ticket.issue.component=sso"] }</code></pre>',
+          },
+          'It names its nearest guess and tells you exactly what was new. That one goes to a person. Record what the person decides, three times, and Ada routes that kind on its own. A team bounces a ticket? Record the failure, and Ada stops making that call.',
+          'Ask why, and you get the nearest ticket on record, field by field:',
+          {
+            html: '<img src="/blog/ada-sdk-facts.png" alt="The fact tree for a routed ticket: component, plan and product the same, severity near at 0.75, summary a partial match at 0.4486." loading="lazy" />',
+          },
+          'Every number in that table is arithmetic on two values. Same ticket tomorrow, same answer tomorrow.',
+        ],
+      },
+      {
+        id: 'churn',
+        heading: 'A churn call that shows its work',
+        body: [
+          'Sixty past accounts, three monthly snapshots each, and how each term ended. Record a snapshot with the same account id and Ada keeps it as a new version of that account. Then ask about a live one, as it is today:',
+          {
+            html: '<pre><code>const a = await model.query(snapshot(account));\n\n{ "act": true, "top": "churned", "confidence": 0.9443, "count": 47,\n  "outcomes": { "churned": 0.9443, "renewed": 0.0557 } }</code></pre>',
+          },
+          'Which churned accounts does it look like? One statement:',
+          {
+            html: '<pre><code>FIND SIMILAR TO $account WHERE outcome = $outcome LIMIT 3\n\n[ { "account": "acct-03", "score": 0.8889 },\n  { "account": "acct-06", "score": 0.7861 },\n  { "account": "acct-12", "score": 0.7694 } ]</code></pre>',
+          },
+          'And because every version was kept, you can watch one of them slide:',
+          {
+            html: '<img src="/blog/ada-sdk-churn.png" alt="Account acct-03 over three months: logins per seat fall from 6 to 2 while open tickets rise from 3 to 7. Risk: high, 94% of the vote of 47 past accounts." loading="lazy" />',
+          },
+          { html: 'An account in an industry the model has never seen gets <code>unknown</code>, with the reason. Your success team sees a name, a number, and the three accounts it resembles. Not a vibe.' },
+        ],
+      },
+      {
+        id: 'the-shape',
+        heading: 'The same shape, both times',
+        body: [
+          {
+            html: '<ol><li>Say what the thing is. Every field gets a type.</li><li>Record what happened.</li><li>Ask. Branch on <code>act</code>.</li><li>When it will not act, hand it to a person, with the reason.</li><li>Record what the person decided.</li></ol>',
+          },
+          'That loop is the product. The model gets better because your business kept happening, and it can always tell you what it is standing on.',
+        ],
+      },
+      {
+        id: 'go',
+        heading: 'Run them',
+        body: [
+          {
+            html: 'Both guides are step by step, with every output: <a href="https://docs.glyphh.ai/ada-guide-tickets">route support tickets</a> in Python and <a href="https://docs.glyphh.ai/ada-guide-churn">customer churn</a> in TypeScript. The programs are in <a href="https://github.com/glyphh-ai/ada/tree/main/examples">the Ada repo</a>. Grab a key from the console and go.',
+          },
+          'Build with AI. Run without it.',
+        ],
+      },
+    ],
+  },
+  {
     slug: 'glyphh-desktop-connections',
     title: 'Glyphh Desktop Connections — Your Apps, Wired to the Agent',
     summary: 'Connect Gmail and Slack to Glyphh Desktop in a couple of clicks, then ask the agent to read your email, send it to you in Slack, and open Slack right in your workspace. Timme walks through connections, tool permissions, and ask versus auto.',
