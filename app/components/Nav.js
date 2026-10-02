@@ -80,18 +80,17 @@ export default function Nav() {
           </a>
           <div className="nav-links">
             <div className="nav-dd">
-              <a href="/" className={`nav-dd-trigger${pathname === '/' ? ' active' : ''}`}>Product</a>
+              <a href="/" className={`nav-dd-trigger${pathname === '/' ? ' active' : ''}`}>Home</a>
             </div>
-            {/* The Products dropdown came off (his order, 2026-09-22): Product is the home page. Hidden, not deleted. */}
-            {false && (
-              <div
+            {/* The Products dropdown is back (his order, 2026-10-02) with the three products the home page names. */}
+            <div
                 className={`nav-dd ${prodOpen ? 'open' : ''}`}
                 ref={prodRef}
                 onMouseEnter={prodEnter}
                 onMouseLeave={prodLeave}
               >
-                <a href="/products/router" className={`nav-dd-trigger${active('/products')}`}>
-                  Product
+                <a href="/products/ada" className={`nav-dd-trigger${active('/products')}`}>
+                  Products
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </a>
                 <div className="nav-dd-panel">
@@ -99,33 +98,37 @@ export default function Nav() {
                     <span className="nav-dd-name">Ada</span>
                     <span className="nav-dd-desc">Typed models your agents build, feed and query. Every answer a fact tree.</span>
                   </a>
-                  <a href="/products/code" className="nav-dd-item">
-                    <span className="nav-dd-name">Glyphh Code</span>
-                    <span className="nav-dd-desc">The coding agent and CLI. Your subscription or the router, one switch.</span>
-                  </a>
                   <a href="/products/desktop" className="nav-dd-item">
                     <span className="nav-dd-name">Glyphh Desktop</span>
                     <span className="nav-dd-desc">The open desktop client for frontier AI. Every loop, every model, one app.</span>
                   </a>
                   <a href="/products/router" className="nav-dd-item">
-                    <span className="nav-dd-name">Glyphh Router</span>
+                    <span className="nav-dd-name">Model Router</span>
                     <span className="nav-dd-desc">One endpoint, two ways to route. Roles and budgets.</span>
                   </a>
-                  <a href="/products/connect" className="nav-dd-item">
-                    <span className="nav-dd-name">Glyphh Connect</span>
-                    <span className="nav-dd-desc">3,500+ services as tools for any loop.</span>
-                  </a>
-                  <a href="/products/skills" className="nav-dd-item">
-                    <span className="nav-dd-name">Glyphh Skills</span>
-                    <span className="nav-dd-desc">Write it once. Apps, tasks, agents, every vendor.</span>
-                  </a>
-                  <a href="/products/semantic-apps" className="nav-dd-item">
-                    <span className="nav-dd-name">Glyphh Semantic Apps</span>
-                    <span className="nav-dd-desc">Apps that know your context, governed by the org.</span>
-                  </a>
+                  {/* Code, Connect, Skills and Semantic Apps keep their pages; they are off the menu. Hidden, not deleted. */}
+                  {false && (
+                    <>
+                      <a href="/products/code" className="nav-dd-item">
+                        <span className="nav-dd-name">Glyphh Code</span>
+                        <span className="nav-dd-desc">The coding agent and CLI. Your subscription or the router, one switch.</span>
+                      </a>
+                      <a href="/products/connect" className="nav-dd-item">
+                        <span className="nav-dd-name">Glyphh Connect</span>
+                        <span className="nav-dd-desc">3,500+ services as tools for any loop.</span>
+                      </a>
+                      <a href="/products/skills" className="nav-dd-item">
+                        <span className="nav-dd-name">Glyphh Skills</span>
+                        <span className="nav-dd-desc">Write it once. Apps, tasks, agents, every vendor.</span>
+                      </a>
+                      <a href="/products/semantic-apps" className="nav-dd-item">
+                        <span className="nav-dd-name">Glyphh Semantic Apps</span>
+                        <span className="nav-dd-desc">Apps that know your context, governed by the org.</span>
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
-              )}
             <div className="nav-dd">
               <a href="/integrations" className={`nav-dd-trigger${active('/integrations')}`}>Integrations</a>
             </div>
@@ -172,19 +175,11 @@ export default function Nav() {
         </div>
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <a href="/" onClick={() => setMenuOpen(false)}>Product</a>
-        {false && (
-          <>
-            <span className="mobile-menu-group">Product</span>
-            <a href="/products/ada" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Ada</a>
-            <a href="/products/code" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Code</a>
-            <a href="/products/desktop" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Desktop</a>
-            <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Router</a>
-            <a href="/products/connect" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Connect</a>
-            <a href="/products/skills" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Skills</a>
-            <a href="/products/semantic-apps" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Semantic Apps</a>
-              </>
-        )}
+        <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
+        <span className="mobile-menu-group">Products</span>
+        <a href="/products/ada" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Ada</a>
+        <a href="/products/desktop" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Desktop</a>
+        <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Model Router</a>
         <a href="/integrations" onClick={() => setMenuOpen(false)}>Integrations</a>
         <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
