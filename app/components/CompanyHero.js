@@ -1,4 +1,5 @@
 import HeroAscii from './HeroAscii';
+import HeroMap from './HeroMap';
 
 /**
  * CompanyHero: the home hero as of the 2026-10-01 mock. Glyphh as an AI
@@ -23,6 +24,8 @@ export default function CompanyHero() {
           <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Create an account</a>
           <a href="https://docs.glyphh.ai" className="os-cta os-cta-ghost">Read the Docs</a>
         </div>
+
+        <HeroMap />
       </div>
     </header>
   );
