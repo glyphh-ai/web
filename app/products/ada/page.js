@@ -9,9 +9,9 @@ import LetterField from '../../components/LetterField';
 // fields, where records live. The example answer is illustrative.
 
 export const metadata = {
-  title: 'Ada: typed models your agents build, feed and query',
+  title: 'Ada: typed models your agents build',
   description:
-    'An Ada model holds what was tried and whether it worked. Ask it about a new situation and it answers with what worked before, how confident it is, and the records it stands on.',
+    'Typed models your agents build. You feed them with your data. Your software queries them with no LLM in the middle.',
 };
 
 const DOCS = "https://docs.glyphh.ai";
@@ -115,11 +115,10 @@ export default function AdaPage() {
         <div className="oshero-inner container">
           <p className="oshero-eyebrow">Ada · glyphh-ada-1.0</p>
           <h1 className="oshero-title">
-            Typed models your agents build, feed and <em>query.</em>
+            Typed models your agents <em>build.</em>
           </h1>
           <p className="oshero-pitch">
-            An Ada model holds what was tried and whether it worked. Ask it about a new situation and it answers
-            with what worked before, how confident it is, and the records it stands on.
+            You feed them with your data. Your software queries them with no LLM in the middle.
           </p>
           <div className="oshero-actions">
             <a href={`${DOCS}/ada-install`} className="os-cta os-cta-primary">Install Ada</a>
