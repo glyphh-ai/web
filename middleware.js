@@ -59,7 +59,9 @@ export function middleware(request) {
 
   const source = sourceOf(request.nextUrl);
   if (source) {
-    const host = request.nextUrl.hostname;
+    // Behind the proxy, nextUrl names the machine, not the site: the Host the
+    // visitor asked for is in the forwarded header.
+    const host = (request.headers.get('x-forwarded-host') || request.headers.get('host') || request.nextUrl.hostname).split(':')[0].toLowerCase();
     response.cookies.set(SOURCE_COOKIE, JSON.stringify(source), {
       path: '/',
       maxAge: SOURCE_DAYS * 24 * 60 * 60,
