@@ -14,7 +14,7 @@ import { ContractTabs, RolesMock, KeysMock, MetricsMock } from './mocks';
 export const metadata = {
   title: 'Model Router: one endpoint, every model',
   description:
-    'One endpoint in front of every model Glyphh runs. Auto-routers pick the model per request: frontier where it counts, open weights for the rest. Roles decide who gets what. Every token accounted for.',
+    'One endpoint, every model. Reduce your organization\'s token spend and harness the power of open models.',
 };
 
 const DOCS = "https://docs.glyphh.ai";
@@ -92,9 +92,7 @@ export default function RouterPage() {
             One endpoint. Every <em>model.</em>
           </h1>
           <p className="oshero-pitch">
-            One endpoint in front of every model Glyphh runs. An auto-router picks the model per request:
-            frontier models for the hard turns, open weights for the rest. Roles decide who gets what, and
-            every token is accounted for.
+            Reduce your organization&rsquo;s token spend and harness the power of open models.
           </p>
           <div className="oshero-actions">
             <a href={PLATFORM_URL} className="os-cta os-cta-primary">Create an account</a>
