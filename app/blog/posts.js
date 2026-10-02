@@ -158,10 +158,9 @@ export const POSTS = [
     coverAlt: 'The Glyphh mascot under a shower of glyph confetti: Glyphh AI is live — build with AI, run without it.',
     tags: ['Launch', 'Architecture', 'Research'],
     related: [
-      ['Research', '/research'],
+      ['Ada', '/products/ada'],
+      ['Ada models', 'https://docs.glyphh.ai/ada'],
       ['The Router', 'https://docs.glyphh.ai/gateway'],
-      ['Semantic Apps', 'https://docs.glyphh.ai/ada'],
-      ['Rrotor', 'https://docs.glyphh.ai/gateway'],
     ],
     sections: [
       {
@@ -178,8 +177,8 @@ export const POSTS = [
         id: 'origins',
         heading: 'Where it came from',
         body: [
-          { html: 'Glyphh started as a memory substrate called <a href="https://github.com/glyphh-ai/ada" target="_blank" rel="noopener noreferrer">Ada</a>, named after Ada Lovelace (I did a write-up on her on our <a href="/research">research page</a>; fascinating to think about). Ada is a multi-dimensional HDC lattice, an attempt to harden semantic knowledge beyond RAG. It turned out to be excellent at storing temporal signal. I built <a href="https://github.com/glyphh-ai/adaL" target="_blank" rel="noopener noreferrer">adaL</a> on top of it with a new kind of semantic graph, and then ran into an honest finding: for most workloads, RAG or plain SQL with a big context window is really hard to beat.' },
-          { html: 'That\'s research. The finding isn\'t always the thing that moves the needle; the path usually is. The path here gave us <a href="https://github.com/glyphh-ai/rrotor" target="_blank" rel="noopener noreferrer">rrotors</a>, recursive reasoning on top of reasoning, which is the loop the Glyphh runtime executes at build time. More on that in <a href="https://docs.glyphh.ai/gateway">the docs</a>.' },
+          { html: 'Glyphh started as a memory substrate called <a href="https://github.com/glyphh-ai/ada" target="_blank" rel="noopener noreferrer">Ada</a>, named after Ada Lovelace (I did a write-up on her on our <a href="/research">research page</a>; fascinating to think about). Ada is a multi-dimensional HDC lattice, an attempt to harden semantic knowledge beyond RAG. It turned out to be excellent at storing temporal signal. I kept building on top of it, and then ran into an honest finding: as plain memory, for most workloads, RAG or plain SQL with a big context window is really hard to beat.' },
+          { html: 'That\'s research. The finding isn\'t always the thing that moves the needle; the path usually is. The path here gave us what Ada is today: the first Glyphh model, software\'s reasoning substrate. Ada speaks in math. Seed her with data and she builds a lattice of algebraic meaning: hierarchical, weighted, typed and temporal. Send her a like glyph and she answers with a fact tree: what is near, how near, and why. Your agents build the typed models, and your software leverages them at runtime, with no LLM in the middle. More on that in <a href="https://docs.glyphh.ai/ada">the docs</a>.' },
           { html: 'Meanwhile my actual day got worse, not better. AI didn\'t simplify anything, it multiplied my context switching 10x, seemingly overnight. Around April my Ctrl+C / Ctrl+V usage hit an all-time high. I had a pile of model loops I was coding with, a pile of app layouts, and no way to combine them into something predictable. The first attempt was <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code</a>. It was missing something I couldn\'t name for a while, and then it hit me: I wanted model selection, routing, and semantic data in one place, producing real applications, not chat transcripts.' },
         ],
       },
@@ -210,14 +209,14 @@ export const POSTS = [
         id: 'semantic-data',
         heading: 'Semantic data',
         body: [
-          { html: 'There are times when you\'ll want to extend your workspace itself and build apps that improve how you work. This is another critical insight from <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code v1</a>, now open source. With the Glyphh desktop runtime you get a database, a vector DB, a knowledge graph, Ada, and adaL (KB graph triples) built into the harness. Combine that with MCP tools and any loop you run can consume it all immediately. So build a new file browser that remembers everything you\'ve browsed, as a fun add, and watch that app get integrated into your harness and become part of how you work. Find an unlock, share it with your org or the world.' },
+          { html: 'There are times when you\'ll want to extend your workspace itself and build apps that improve how you work. This is another critical insight from <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code v1</a>, now open source. With the Glyphh desktop runtime you get a database, a vector DB, a knowledge graph, and Ada built into the harness. Combine that with MCP tools and any loop you run can consume it all immediately. So build a new file browser that remembers everything you\'ve browsed, as a fun add, and watch that app get integrated into your harness and become part of how you work. Find an unlock, share it with your org or the world.' },
         ],
       },
       {
         id: 'connections',
         heading: 'Connections',
         body: [
-          'We leverage Pipedream to extend 3,500+ MCP tools to your desktop, completely independent of any vendor. Your skills, apps, plugins, and tasks (rrotor loops) are all yours, completely portable across every vendor and model you use — the build capabilities come along seamlessly, every turn you take.',
+          'We leverage Pipedream to extend 3,500+ MCP tools to your desktop, completely independent of any vendor. Your skills, apps, plugins, and tasks are all yours, completely portable across every vendor and model you use — the build capabilities come along seamlessly, every turn you take.',
         ],
       },
       {
