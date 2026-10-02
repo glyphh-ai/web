@@ -955,10 +955,356 @@ except AdaError as e:
           request never got an answer. On a rate limit the error carries how long to wait: <code>retryAfter</code>{' '}
           in TypeScript, <code>retry_after</code> in Python. A model that does not act is not an error.
         </p>
+        <h2>Worked examples</h2>
+        <ul>
+          <li><a href="/docs/ada-guide-tickets">Route support tickets</a>, in Python: records, failures, learned weights, a stored procedure.</li>
+          <li><a href="/docs/ada-guide-churn">Customer churn</a>, in TypeScript: accounts over time, trend and drift, typed GQL.</li>
+        </ul>
         <Note title="The contract">
           Both SDKs are tested against the same recorded requests and answers, and against the JSON Schema that{' '}
           <code>{'{"op": "contract"}'}</code> returns. The source is in{' '}
           <a href="https://github.com/glyphh-ai/ada">glyphh-ai/ada</a>.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'ada-guide-tickets',
+    title: 'Guide: route support tickets',
+    lede: 'Python, start to finish: a typed model from your ticket history, and one function your helpdesk calls.',
+    body: (
+      <>
+        <p>
+          You have a helpdesk and a history of tickets, each resolved by some team. This guide builds an Ada model from that history and ends with one function, <code>route(ticket)</code>, that your helpdesk calls for every new ticket. It routes the ones it has ground for, and hands the rest to a person with a reason. No language model runs when a ticket is routed, and the same ticket always gets the same answer.
+        </p>
+        <p>
+          Everything below was run as written. The whole program is <a href="https://github.com/glyphh-ai/ada/blob/main/examples/support-tickets/tickets.py">tickets.py</a> in the Ada repository.
+        </p>
+        <h2>Before you start</h2>
+        <Code lang="bash">{`pip install glyphh-ada
+export GLYPHH_API_KEY=sk-...`}</Code>
+        <p>
+          Create the key on the console&rsquo;s Virtual Keys page. Creating a model, and <code>learn</code> later on, need an org admin&rsquo;s key. Everything else works with any member&rsquo;s key. Every call is metered on your plan: this guide makes about 115.
+        </p>
+        <h2>1. Say what a ticket is</h2>
+        <p>
+          A typed model starts from a spec: every field of a ticket gets a type, and Ada compares each by its type. Two products are the same or they are not. Two severities are close when they are one step apart. Two summaries are close when they share words, even spelled a little differently.
+        </p>
+        <Code lang="python">{`from glyphh_ada import Ada, AdaError
+
+ada = Ada()
+
+SPEC = {
+    "name": "support-tickets",
+    "layers": [{"name": "ticket", "segments": [
+        {"name": "issue", "roles": [
+            {"name": "product", "type": "category", "values": ["api", "billing", "dashboard", "mobile"]},
+            {"name": "component", "type": "category"},
+            {"name": "severity", "type": "number", "numeric_config": {"min_value": 1, "max_value": 5, "bin_width": 1}},
+            {"name": "plan", "type": "category", "values": ["free", "pro", "enterprise"]},
+        ]},
+        {"name": "text", "similarity_weight": 0.5, "roles": [
+            {"name": "summary", "type": "text", "text_encoding": "ngrams"},
+        ]},
+    ]}],
+}
+
+model = ada.create_model("support-tickets", spec=SPEC)`}</Code>
+        <ul>
+          <li><strong><code>product</code> and <code>plan</code> list their values.</strong> Anything else is refused with the path of the field that was wrong, before it is stored or scored.</li>
+          <li><strong><code>component</code> lists none.</strong> New components will appear, and the model should notice when one does.</li>
+          <li><strong>The summary counts half as much</strong> as the structured fields (<code>similarity_weight</code>).</li>
+        </ul>
+        <p>
+          See <a href="/docs/ada-typed">Typed models</a> for every type.
+        </p>
+        <h2>2. Load what already happened</h2>
+        <p>
+          A record is a ticket and the team that resolved it. Pass <code>at</code>, when it happened, so history is in the right order. In your code the loop reads from your helpdesk; the example generates 96 tickets across eight components.
+        </p>
+        <Code lang="python">{`def ticket(product, component, severity, plan, summary=None):
+    issue = {"product": product, "component": component, "severity": severity, "plan": plan}
+    return {"ticket": {"issue": issue, **({"text": {"summary": summary}} if summary else {})}}
+
+for situation, team, when in history():          # your helpdesk's resolved tickets
+    model.record(situation, team, at=when)`}</Code>
+        <h2>3. Ask about a new ticket</h2>
+        <Code lang="python">{`new = ticket("api", "webhooks", 4, "pro", "webhook delivery fails with a 500")
+answer = model.query(new)`}</Code>
+        <Code lang="json">{`{ "act": true, "reason": "reflex", "top": "platform", "confidence": 1.0, "count": 16, "unseen": [] }`}</Code>
+        <p>
+          <code>act</code> is the one thing to branch on. It is true here because tickets like this one are on record, they agree, and nothing in the ticket is new. <code>count</code> is how many past tickets had a vote.
+        </p>
+        <h2>4. A ticket the model has no ground for</h2>
+        <Code lang="python">{`odd = ticket("api", "sso", 3, "enterprise", "saml login fails for one tenant")
+model.query(odd)`}</Code>
+        <Code lang="json">{`{ "act": false, "reason": "unseen", "top": "platform", "unseen": ["ticket.issue.component=sso"] }`}</Code>
+        <p>
+          No ticket about <code>sso</code> was ever recorded. Ada still says which team is nearest, and says it has no ground to act: <code>unseen</code> names exactly what was new. This is the case to send to a person. <a href="/docs/ada-act">When Ada acts</a> covers every reason.
+        </p>
+        <h2>5. Record what the person decided</h2>
+        <p>
+          The model learns by being told what happened. Three tickets later it routes this kind on its own. There is no training run: a record counts from the next question.
+        </p>
+        <Code lang="python">{`for severity in (3, 4, 2):
+    model.record(ticket("api", "sso", severity, "enterprise", "saml login fails for one tenant"), "identity")
+model.query(odd)`}</Code>
+        <Code lang="json">{`{ "act": true, "reason": "reflex", "top": "identity", "confidence": 1.0 }`}</Code>
+        <h2>6. Record a route that was wrong</h2>
+        <p>
+          When a team bounces a ticket, record the failure with <code>veto</code>. A recorded failure as close as the wins, and newer than them, stops the model from making that call again for that situation. A later win for the same situation lifts it.
+        </p>
+        <Code lang="python">{`bounced = ticket("billing", "refunds", 5, "enterprise", "double charge needs refund")
+before = model.query(bounced)          # act: true, top: "billing"
+model.veto(bounced, before["top"])
+model.query(bounced)`}</Code>
+        <Code lang="json">{`{ "act": false, "reason": "vetoed", "top": "billing", "veto_match": 1.0 }`}</Code>
+        <h2>7. Show why</h2>
+        <p>
+          Every answer can be explained. <code>facts</code> returns the nearest tickets as fact trees: field by field, what you asked, what was on record, and how close the two are.
+        </p>
+        <Code lang="python">{`why = model.facts(new, top=1)["wins"][0]`}</Code>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Field</th><th>This ticket</th><th>On record</th><th>Match</th><th>Score</th></tr></thead>
+            <tbody>
+              <tr><td>component</td><td>webhooks</td><td>webhooks</td><td>same</td><td>1.0</td></tr>
+              <tr><td>plan</td><td>pro</td><td>pro</td><td>same</td><td>1.0</td></tr>
+              <tr><td>product</td><td>api</td><td>api</td><td>same</td><td>1.0</td></tr>
+              <tr><td>severity</td><td>4</td><td>3</td><td>near</td><td>0.75</td></tr>
+              <tr><td>summary</td><td>webhook delivery fails with a 500</td><td>webhook deliveries failing</td><td>partial</td><td>0.4486</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          The whole ticket scored 0.7745 against that one. Nothing here is a model&rsquo;s opinion: each number is arithmetic on the two values, by the field&rsquo;s type.
+        </p>
+        <h2>8. Learn which fields decide</h2>
+        <p>
+          Once the model has ten or more records, an org admin can ask it which fields decide. It holds out its newest tickets, predicts each from the rest, and moves one field&rsquo;s weight at a time while the predictions get better. The weights are saved in the spec.
+        </p>
+        <Code lang="python">{`fit = model.learn()`}</Code>
+        <Code lang="json">{`{ "weights": { "ticket.issue.product": 1.0, "ticket.issue.component": 1.0, "ticket.issue.severity": 0.0,
+               "ticket.issue.plan": 0.0, "ticket.text.summary": 1.0 },
+  "held_out_accuracy": { "before": 1.0, "after": 1.0 } }`}</Code>
+        <p>
+          In this history, severity and plan say nothing about who resolves a ticket, so they end at 0. A field at 0 is no longer looked at, which also means a new value there no longer stops the model from acting. Read what was learned before you rely on it; an admin can set any weight by hand with <code>model.update(spec=...)</code>.
+        </p>
+        <h2>9. Save a question you ask every day</h2>
+        <p>
+          A <a href="/docs/ada-procedures">stored procedure</a> is a <a href="/docs/ada-gql">GQL</a> statement saved with the model under a name. Your code calls it by name with values, and you can change the statement without shipping your application again.
+        </p>
+        <Code lang="python">{`model.save_procedure(
+    "load_by_team",
+    "AGGREGATE COUNT WHERE store = wins AND ticket.issue.severity >= $severity GROUP BY outcome",
+    "How many tickets at or above a severity each team resolved.")
+load = model.call("load_by_team", {"severity": 4})
+{g["by"]["outcome"]: g["value"] for g in load["groups"]}`}</Code>
+        <Code lang="json">{`{ "billing": 9, "frontend": 10, "identity": 6, "mobile": 7, "platform": 9 }`}</Code>
+        <h2>10. The function your helpdesk calls</h2>
+        <Code lang="python">{`def route(new_ticket):
+    try:
+        answer = model.query(new_ticket)
+    except AdaError as e:
+        if e.code == "E_RATE_LIMITED":
+            return {"queue": "triage", "because": f"retry in {e.retry_after}s"}
+        raise
+    if answer["act"]:
+        return {"queue": answer["top"], "because": f"{answer['count']} tickets like it, confidence {answer['confidence']}"}
+    return {"queue": "triage", "because": answer["reason"], "suggest": answer["top"], "new": answer["unseen"]}`}</Code>
+        <Code lang="python">{`route(ticket("api", "webhooks", 4, "pro", "webhook delivery fails with a 500"))
+# {"queue": "platform", "because": "12 tickets like it, confidence 1.0"}
+
+route(ticket("dashboard", "charts", 2, "free"))
+# {"queue": "frontend", "because": "12 tickets like it, confidence 1.0"}
+
+route(ticket("mobile", "widgets", 1, "free"))
+# {"queue": "triage", "because": "unseen", "suggest": "identity", "new": ["ticket.issue.component=widgets"]}`}</Code>
+        <p>
+          That is the whole integration: route when <code>act</code> is true, send the rest to a person with the reason and the suggestion, and record what the person decides.
+        </p>
+        <Note title="Where to go next">
+          <a href="/docs/ada-act">When Ada acts</a> for every reason and how to tune the bar,{' '}
+          <a href="/docs/ada-gql">the query language</a> for reporting on the model, and the{' '}
+          <a href="/docs/ada-guide-churn">customer churn guide</a> for records that change over time.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'ada-guide-churn',
+    title: 'Guide: customer churn',
+    lede: 'TypeScript, start to finish: accounts that change over time, and one function your success tooling calls.',
+    body: (
+      <>
+        <p>
+          You have accounts, a few usage numbers for each, month by month, and you know how past terms ended. This guide builds an Ada model from the accounts that already renewed or churned, and ends with one function, <code>risk(account)</code>, that your success tooling calls for a live account. It also shows what Ada does with records that change over time: versions, trend and drift.
+        </p>
+        <p>
+          Everything below was run as written. The whole program is <a href="https://github.com/glyphh-ai/ada/blob/main/examples/churn/churn.ts">churn.ts</a> in the Ada repository.
+        </p>
+        <h2>Before you start</h2>
+        <Code lang="bash">{`npm install @glyphh-ai/ada
+export GLYPHH_API_KEY=sk-...`}</Code>
+        <p>
+          Create the key on the console&rsquo;s Virtual Keys page. Creating a model needs an org admin&rsquo;s key. Every call is metered on your plan: this guide makes about 200.
+        </p>
+        <h2>1. Say what an account is</h2>
+        <Code lang="ts">{`import { Ada, AdaError, type Answer, type Spec } from "@glyphh-ai/ada";
+
+const ada = new Ada();
+
+const SPEC: Spec = {
+  name: "renewals",
+  layers: [{ name: "account", segments: [
+    { name: "identity", roles: [{ name: "account_id", type: "category", key_part: true, similarity_weight: 0 }] },
+    { name: "profile", similarity_weight: 0.5, roles: [
+      { name: "plan", type: "category", values: ["starter", "growth", "scale"] },
+      { name: "industry", type: "category" },
+    ] },
+    { name: "usage", roles: [
+      { name: "seats", type: "number", numeric_config: { min_value: 0, max_value: 200, bin_width: 10 } },
+      { name: "logins_per_seat", type: "number", numeric_config: { min_value: 0, max_value: 10, bin_width: 1 } },
+      { name: "open_tickets", type: "number", numeric_config: { min_value: 0, max_value: 10, bin_width: 1 } },
+      { name: "features_used", type: "number", numeric_config: { min_value: 0, max_value: 12, bin_width: 1 } },
+    ] },
+  ] }],
+};
+
+const model = await ada.createModel({ name: "renewals", storage: "cloud", spec: SPEC });`}</Code>
+        <ul>
+          <li><strong><code>account_id</code> is a key part.</strong> Records that share it are versions of one account. It weighs 0: which account it is should not decide how alike two accounts are.</li>
+          <li><strong>Each number has a scale.</strong> Two accounts with 6 and 7 logins per seat are close; 6 and 1 are far. The bin width says how fine the difference is.</li>
+          <li><strong>The profile counts half as much as the usage.</strong></li>
+        </ul>
+        <h2>2. Load the accounts whose terms have ended</h2>
+        <p>
+          Record each monthly snapshot with how the term ended and when the snapshot was taken. The example loads 60 accounts with three snapshots each; in your code the loop reads from your warehouse.
+        </p>
+        <Code lang="ts">{`const snapshot = (a: Account) => ({
+  account: {
+    ...(a.id ? { identity: { account_id: a.id } } : {}),
+    profile: { plan: a.plan, industry: a.industry },
+    usage: a.usage,
+  },
+});
+
+for (const { account, month, outcome } of past())            // your warehouse
+  await model.record(snapshot(account), outcome, { at: T0 + month * MONTH });
+
+await model.calibrate();`}</Code>
+        <p>
+          The model now holds 60 accounts, each as its newest snapshot, with every earlier version kept behind it. <code>calibrate</code> fits the model&rsquo;s probabilities to its own records; run it once you have ten or more, and again as the model grows.
+        </p>
+        <h2>3. Ask about a live account</h2>
+        <p>
+          Leave the id out. The question is not about one account on record; it is what happened to accounts like this one.
+        </p>
+        <Code lang="ts">{`const sliding = { plan: "growth", industry: "saas", usage: { seats: 40, logins_per_seat: 2, open_tickets: 6, features_used: 3 } };
+const healthy = { plan: "growth", industry: "saas", usage: { seats: 60, logins_per_seat: 7, open_tickets: 0, features_used: 9 } };
+
+await model.query(snapshot(sliding));
+await model.query(snapshot(healthy));`}</Code>
+        <Code lang="json">{`{ "act": true, "reason": "reflex", "top": "churned", "confidence": 0.9443, "count": 47,
+  "outcomes": { "churned": 0.9443, "renewed": 0.0557 }, "unseen": [] }
+
+{ "act": true, "reason": "reflex", "top": "renewed", "confidence": 0.9998, "count": 53,
+  "outcomes": { "renewed": 0.9998, "churned": 0.0002 }, "unseen": [] }`}</Code>
+        <p>
+          <code>outcomes</code> is the vote of the past accounts close enough to count, the nearest weighing most. <code>act</code> is true because the vote is clear and nothing about the account is new.
+        </p>
+        <h2>4. Show why</h2>
+        <Code lang="ts">{`const why = (await model.facts(snapshot(sliding), { top: 1 })).wins[0];`}</Code>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Field</th><th>This account</th><th>Nearest past account</th><th>Match</th><th>Score</th></tr></thead>
+            <tbody>
+              <tr><td>logins_per_seat</td><td>2</td><td>2</td><td>same</td><td>1</td></tr>
+              <tr><td>open_tickets</td><td>6</td><td>7</td><td>near</td><td>0.9</td></tr>
+              <tr><td>features_used</td><td>3</td><td>5</td><td>near</td><td>0.8333</td></tr>
+              <tr><td>seats</td><td>40</td><td>120</td><td>near</td><td>0.6</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          That account churned, and scored 0.8889 against this one. A success manager can read this table; so can a program.
+        </p>
+        <h2>5. Which churned accounts does it look like?</h2>
+        <p>
+          One <a href="/docs/ada-gql">GQL</a> statement, with its values passed as parameters. Each match names its account by its key parts.
+        </p>
+        <Code lang="ts">{`const alike = await model.gql(
+  "FIND SIMILAR TO $account WHERE outcome = $outcome LIMIT 3",
+  { account: snapshot(sliding), outcome: "churned" });
+
+if (alike.statement === "find")
+  alike.matches.map((m) => ({ account: m.parts?.[0], score: m.score, versions: m.count }));`}</Code>
+        <Code lang="json">{`[ { "account": "acct-03", "score": 0.8889, "versions": 3 },
+  { "account": "acct-06", "score": 0.7861, "versions": 3 },
+  { "account": "acct-12", "score": 0.7694, "versions": 3 } ]`}</Code>
+        <p>
+          In TypeScript a GQL answer is a union: narrow it on <code>statement</code> and its fields are typed.
+        </p>
+        <h2>6. How one of them slid</h2>
+        <p>
+          Because the model kept every version, you can read an account through time: what changed between months, the slope of each number, and how far it drifted from where it started. See <a href="/docs/ada-time">Versions and time</a>.
+        </p>
+        <Code lang="ts">{`const lost = { account: { identity: { account_id: "acct-03" } } };
+
+const trend = await model.trend(lost);
+const drift = await model.gql(
+  "DETECT DRIFT FROM glyph($first) TO glyph($latest) THRESHOLD 0.2",
+  { first: "acct-03@1", latest: "acct-03" });`}</Code>
+        <Code lang="json">{`{ "drift": 0.2056,
+  "logins":  { "first": 6, "latest": 2, "slope_per_day": -0.066667, "fit": 1, "direction": "down" },
+  "tickets": { "first": 3, "latest": 7, "slope_per_day": 0.066667, "fit": 1, "direction": "up" } }
+
+{ "drift": 0.2056, "drifted": true,
+  "changed": ["features_used: 9 to 5", "logins_per_seat: 6 to 2", "open_tickets: 3 to 7", "seats: 140 to 120"] }`}</Code>
+        <p>
+          <code>glyph(&quot;acct-03@1&quot;)</code> is the account&rsquo;s first version; without the <code>@</code> it is the newest.
+        </p>
+        <h2>7. The whole book, in one statement</h2>
+        <Code lang="ts">{`await model.gql("AGGREGATE AVG account.usage.logins_per_seat GROUP BY outcome");`}</Code>
+        <Code lang="json">{`{ "churned": 2.25, "renewed": 6.225 }`}</Code>
+        <p>
+          Save a statement you run often as a <a href="/docs/ada-procedures">stored procedure</a> and call it by name:
+        </p>
+        <Code lang="ts">{`await model.saveProcedure(
+  "usage_by_plan",
+  "AGGREGATE AVG account.usage.logins_per_seat WHERE account.profile.plan = $plan GROUP BY outcome",
+  "Average logins per seat at the end of a term, for one plan, by how the term ended.");
+
+await model.call("usage_by_plan", { plan: "growth" });   // { churned: 2.166667, renewed: 5.916667 }`}</Code>
+        <h2>8. The function your success tooling calls</h2>
+        <Code lang="ts">{`async function risk(account: Account) {
+  try {
+    const a = await model.query(snapshot(account));
+    if (!a.act) return { risk: "unknown", because: a.reason, new: a.unseen };
+    return {
+      risk: a.top === "churned" ? "high" : "low",
+      because: \`\${Math.round(a.confidence * 100)}% of the vote of \${a.count} past accounts says \${a.top}\`,
+    };
+  } catch (e) {
+    if (e instanceof AdaError && e.code === "E_RATE_LIMITED") return { risk: "unknown", because: \`retry in \${e.retryAfter}s\` };
+    throw e;
+  }
+}`}</Code>
+        <Code lang="ts">{`await risk(sliding);                             // { risk: "high", because: "94% of the vote of 47 past accounts says churned" }
+await risk(healthy);                             // { risk: "low", because: "100% of the vote of 53 past accounts says renewed" }
+await risk({ ...healthy, industry: "gaming" });  // { risk: "unknown", because: "unseen", new: ["account.profile.industry=gaming"] }`}</Code>
+        <p>
+          The third account is in an industry no past account was in. Ada does not guess: it says what was new, and your tooling shows the account to a person. <a href="/docs/ada-act">When Ada acts</a> covers how to change that bar.
+        </p>
+        <h2>9. Close the loop</h2>
+        <p>
+          When a live account&rsquo;s term ends, record how it ended. The model has one more account to stand on, from the next question.
+        </p>
+        <Code lang="ts">{`await model.record(snapshot({ ...sliding, id: "acct-live-1" }), "churned");`}</Code>
+        <Note title="Where to go next">
+          <a href="/docs/ada-time">Versions and time</a> for history, trend and predict,{' '}
+          <a href="/docs/ada-graph">relations</a> when accounts point at other things, and the{' '}
+          <a href="/docs/ada-guide-tickets">support tickets guide</a> for records, failures and learned weights.
         </Note>
       </>
     ),
@@ -1134,7 +1480,7 @@ claude plugin install ada@glyphh-ai`}</Code>
         <Row k="confidence">The top outcome&rsquo;s share of the vote, 0 to 1.</Row>
         <Row k="count">How many records voted: every one that cleared the model&rsquo;s similarity floor.</Row>
         <Row k="outcomes">Every outcome found, with its share.</Row>
-        <Row k="receipts">The nearest situations on record, one entry per situation and outcome: <code>score</code>, how many times it was recorded (<code>count</code>), <code>first</code> and <code>latest</code>, and the newest record&rsquo;s <code>id</code> and <code>author</code>.</Row>
+        <Row k="receipts">The nearest situations on record, one entry per situation and outcome: <code>score</code>, how many times it was recorded (<code>count</code>), <code>first</code> and <code>latest</code>, and the newest record&rsquo;s <code>id</code> and <code>author</code>. In a model with key parts, each also carries <code>parts</code>: the thing&rsquo;s key parts as written, which is what <code>glyph(...)</code> and a question take to name it.</Row>
         <Row k="veto_match">How close the nearest recorded failure of the top outcome is.</Row>
         <Row k="lifted">True when a close failure exists and a newer win outranks it.</Row>
         <Row k="calibrated">True once the model has been calibrated.</Row>
