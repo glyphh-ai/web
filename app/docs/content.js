@@ -505,7 +505,7 @@ five incidents, then tell me where this new one should go and why.`}</Code>
 ];
 
 const byslug = Object.fromEntries([...start, ...ada].map((p) => [p.slug, p]));
-const ADA = ['ada-introduction', 'ada-install', 'quickstart', 'primer', 'glyph', 'fact-trees', 'patterns', 'ada', 'ada-act', 'ada-typed', 'ada-time', 'ada-tools'].map((x) => byslug[x]);
+const ADA = ['ada-introduction', 'ada-install', 'quickstart', 'primer', 'glyph', 'fact-trees', 'patterns', 'ada', 'ada-act', 'ada-typed', 'ada-time', 'ada-edges', 'ada-gql', 'ada-tools'].map((x) => byslug[x]);
 
 export const GROUPS = [{ title: 'Glyphh', pages: glyphh }, { title: 'Ada', pages: ADA }, ...PRODUCT_GROUPS];
 export const PAGES = GROUPS.flatMap((g) => g.pages);

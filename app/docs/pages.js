@@ -47,6 +47,12 @@ export const ada = [
           <code>glyphh ada register</code>, then create the model with <code>storage: &quot;local&quot;</code> and
           that device&rsquo;s id.
         </p>
+        <h2>How large</h2>
+        <p>
+          A model&rsquo;s records are held in memory and scored together, a field at a time. Measured on a typed
+          model with six fields: a query takes about 4 ms at 10,000 records, 28 ms at 100,000 and 230 ms at
+          1,000,000. A million records take about 2 GB.
+        </p>
         <h2>Customizing a model</h2>
         <ul>
           <li><strong>Weights.</strong> Say how much each key decides: <code>{'{"risk": 1, "team": 0.1}'}</code>. A number weighs a key; an object weighs inside it. Unlisted keys weigh 1, and a key that weighs 0 is never looked at. Set defaults on the model, or pass weights on one call. A typed model&rsquo;s weights live in its spec.</li>
@@ -480,6 +486,168 @@ switch (a.reason) {
     ),
   },
   {
+    slug: 'ada-gql',
+    title: 'Query language',
+    lede: 'GQL: nine statements over a model’s records, for what a single question does not cover.',
+    body: (
+      <>
+        <p>
+          A query asks one thing: what do situations like this one resolve to. GQL asks the rest: which records
+          meet a condition, how alike two things are at one level, how far a thing has moved. Send one statement
+          with <code>ada_gql</code>, or <code>{'{"op": "gql", "model_id": "am_…", "query": "…"}'}</code>.
+          No model runs it, and the same statement always returns the same answer.
+        </p>
+        <h2>Statements</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Statement</th><th>Returns</th></tr></thead>
+            <tbody>
+              <tr><td><code>FIND SIMILAR TO (data | glyph) [AT level] [WHERE condition] [LIMIT n] [THRESHOLD x]</code></td><td>The nearest things, each with its score</td></tr>
+              <tr><td><code>LIST ALL [WHERE condition] [LIMIT n]</code></td><td>The records that meet the condition, newest first</td></tr>
+              <tr><td><code>COUNT ALL [WHERE condition]</code></td><td>How many there are</td></tr>
+              <tr><td><code>AGGREGATE (COUNT | AVG | MIN | MAX | SUM) [path] [WHERE condition] [GROUP BY path, …]</code></td><td>One value per group</td></tr>
+              <tr><td><code>COMPARE glyph TO glyph [AT level]</code></td><td>How alike two things are, with the fact tree</td></tr>
+              <tr><td><code>DETECT DRIFT FROM glyph TO glyph [AT level] [THRESHOLD x]</code></td><td>How far apart they are, what changed, and whether that is past the threshold</td></tr>
+              <tr><td><code>INTROSPECT glyph DECOMPOSE BY (LAYER | SEGMENT | ROLE)</code></td><td>What a thing is made of, part by part, with each part&rsquo;s weight</td></tr>
+              <tr><td><code>TREND glyph OVER duration [AT level] [ALERT ON field op number]</code></td><td>Where a thing has been going inside a window</td></tr>
+              <tr><td><code>PREDICT glyph [AT ROLE path] [WINDOW duration]</code></td><td>Its next version</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Keywords are in any case, and a statement&rsquo;s optional clauses are in any order.</p>
+        <h2>The parts of a statement</h2>
+        <Row k="data">A JSON object in the model&rsquo;s shape, as in a query: <code>{'{"deal": {"profile": {"stage": "closed"}}}'}</code>.</Row>
+        <Row k="glyph">One thing. <code>glyph(&quot;d1&quot;)</code> names it by its key parts, in the order the spec gives them; <code>glyph(&quot;d1@2&quot;)</code> is its second version. In a model without key parts it is one record, by its id.</Row>
+        <Row k="level">Where to measure: <code>CORTEX</code> (the whole, the default), <code>LAYER a</code>, <code>SEGMENT a.b</code> or <code>ROLE a.b.c</code>.</Row>
+        <Row k="condition">A path compared with a value by <code>=</code> <code>!=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code>, joined by <code>AND</code>, <code>OR</code>, <code>NOT</code> and brackets. <code>outcome</code>, <code>store</code> and <code>ts</code> are paths too.</Row>
+        <Row k="duration">A whole number and <code>d</code>, <code>h</code>, <code>m</code> or <code>s</code>: <code>30d</code>, <code>12h</code>.</Row>
+        <h2>Conditions</h2>
+        <ul>
+          <li><strong>A role a record does not carry satisfies nothing,</strong> <code>!=</code> included. Use <code>NOT</code> to ask for the records without it.</li>
+          <li><strong>A set equals a value it holds:</strong> <code>deal.profile.tags = eu</code> is true for a record tagged <code>eu</code>.</li>
+          <li><strong><code>&lt;</code> and <code>&gt;</code> compare numbers only.</strong></li>
+          <li><strong>A reader sees what their team may.</strong> A role above their clearance is not there to compare.</li>
+        </ul>
+        <h2>Find</h2>
+        <Code>{`FIND SIMILAR TO {"deal": {"profile": {"stage": "closed"}, "metrics": {"meetings": 8}}}
+  WHERE outcome = "won" LIMIT 3`}</Code>
+        <Code lang="json">{`{ "statement": "find", "level": "cortex", "threshold": 0.4, "count": 1,
+  "matches": [ { "key": "34412f715fb0", "id": "e865d7e67d6c", "store": "wins", "outcome": "won",
+                 "score": 0.975, "count": 3, "first": 1767225600, "latest": 1767398400 } ] }`}</Code>
+        <p>
+          <code>THRESHOLD</code> is the lowest score to return; left out, it is the model&rsquo;s floor of 0.4.{' '}
+          <code>AT ROLE deal.metrics.meetings</code> ranks by that one role. <code>FIND SIMILAR TO glyph(&quot;d1&quot;)</code>{' '}
+          finds the things like a thing, never itself. FIND measures; it does not decide. For a verdict, use a query.
+        </p>
+        <h2>Compare and drift</h2>
+        <Code>{`COMPARE glyph("d1") TO glyph("d2") AT SEGMENT deal.metrics`}</Code>
+        <Code lang="json">{`{ "statement": "compare", "level": "deal.metrics", "score": 0.85,
+  "tree": { "key": "metrics", "score": 0.85, "children": [
+    { "key": "meetings", "score": 0.85, "match": "near", "query": 6, "record": 9 } ] } }`}</Code>
+        <Code>{`DETECT DRIFT FROM glyph("d1@1") TO glyph("d1") AT LAYER deal THRESHOLD 0.2`}</Code>
+        <Code lang="json">{`{ "statement": "drift", "level": "deal", "drift": 0.35, "threshold": 0.2, "drifted": true,
+  "changes": [ { "path": "deal.metrics.meetings", "from": 2, "to": 6, "score": 0.8 },
+               { "path": "deal.profile.stage", "from": "discovery", "to": "negotiation", "score": 0 } ] }`}</Code>
+        <p>
+          Drift is 1 minus the score at the level. Without <code>THRESHOLD</code>, <code>drifted</code> is null: the
+          statement measured, and gave no verdict.
+        </p>
+        <h2>Count and aggregate</h2>
+        <Code>{`COUNT ALL WHERE deal.metrics.meetings > 6
+AGGREGATE AVG deal.metrics.meetings GROUP BY outcome`}</Code>
+        <Code lang="json">{`{ "statement": "aggregate", "function": "avg", "path": "deal.metrics.meetings",
+  "groups": [ { "by": { "outcome": "open" }, "value": 6, "count": 1 },
+              { "by": { "outcome": "won" }, "value": 9, "count": 1 } ] }`}</Code>
+        <p>
+          These read what things are now: in a model with key parts, each thing as its newest version. Only
+          numbers are averaged or summed.
+        </p>
+        <h2>Trend and predict</h2>
+        <Code>{`TREND glyph("d1") OVER 30d ALERT ON drift > 0.1
+PREDICT glyph("d1") WINDOW 7d`}</Code>
+        <p>
+          These are <a href="/docs/ada-time">Versions and time</a> as statements. <code>TREND</code> reads the
+          versions inside the window and adds <code>alert</code>, which compares <code>drift</code>,{' '}
+          <code>pace</code> or <code>versions</code> with a number and says whether it <code>fired</code>.{' '}
+          <code>PREDICT</code> is for the latest version plus the window. Both need a typed model with key parts.
+        </p>
+        <h2>Errors</h2>
+        <p>A statement that is not GQL is refused, saying what was expected and where:</p>
+        <Code lang="json">{`{ "error": { "code": "E_VALIDATION",
+  "message": "query: expected TO (at character 20)" } }`}</Code>
+        <Note title="What GQL does not do">
+          It reads. Nothing in it writes a record. It also does not follow a link from one thing to another:
+          Ada measures how alike things are, and holds no named relations between them.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'ada-edges',
+    title: 'Edges and levels',
+    lede: 'Two things can be alike as a whole and different in one part. An edge is the measurement at one level.',
+    body: (
+      <>
+        <p>
+          A glyph is hierarchical, so likeness is too. The same two deals can match on their profile and differ
+          on their metrics. Ada measures at any of four levels, and the answer at each is exact.
+        </p>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Level</th><th>Measures</th><th>Written as</th></tr></thead>
+            <tbody>
+              <tr><td>Cortex</td><td>The whole thing</td><td><code>cortex</code></td></tr>
+              <tr><td>Layer</td><td>One layer</td><td><code>deal</code></td></tr>
+              <tr><td>Segment</td><td>One segment of a layer</td><td><code>deal.metrics</code></td></tr>
+              <tr><td>Role</td><td>One value</td><td><code>deal.metrics.meetings</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>In a flat model the levels are the keys of its JSON, by path.</p>
+        <h2>Two kinds of edge</h2>
+        <Row k="Neural">Between two things: how alike they are at the level.</Row>
+        <Row k="Temporal">Between two versions of one thing: how much it changed at the level, which is 1 minus how alike they are.</Row>
+        <h2>A thing&rsquo;s edges</h2>
+        <p>
+          <code>ada_edges</code> takes a thing, by its key parts, and a level. It returns the things nearest it
+          there, and the change between each of its versions and the next.
+        </p>
+        <Code lang="json">{`{ "op": "edges", "model_id": "am_0123456789ab",
+  "situation": { "deal": { "identity": { "deal_id": "d1" } } },
+  "level": "deal.metrics" }`}</Code>
+        <Code lang="json">{`{ "key": "e9268d61334f", "level": "deal.metrics",
+  "neural": [ { "target": "34412f715fb0", "outcome": "won", "score": 0.85 } ],
+  "temporal": [
+    { "from": 1, "to": 2, "change": 0.1,
+      "changes": [ { "path": "deal.metrics.meetings", "from": 2, "to": 4, "score": 0.9 } ] },
+    { "from": 2, "to": 3, "change": 0.1,
+      "changes": [ { "path": "deal.metrics.meetings", "from": 4, "to": 6, "score": 0.9 } ] } ] }`}</Code>
+        <p>
+          At the cortex the same two deals score 0.34: they have different owners and are at different stages.
+          On their metrics alone they score 0.85. Which level you ask at is part of the question.
+        </p>
+        <ul>
+          <li><strong>A thing is never its own neighbour.</strong></li>
+          <li><strong>A neighbour that shares nothing at the level is left out.</strong></li>
+          <li><strong>In a model without key parts</strong> the situation you send is the thing, and it has no versions.</li>
+          <li><strong>Clearance applies.</strong> A level above the reader&rsquo;s clearance is refused.</li>
+        </ul>
+        <h2>The same edges, in GQL</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>You want</th><th>Statement</th></tr></thead>
+            <tbody>
+              <tr><td>The edge between two things</td><td><code>COMPARE glyph(&quot;d1&quot;) TO glyph(&quot;d2&quot;) AT SEGMENT deal.metrics</code></td></tr>
+              <tr><td>The edge between two versions</td><td><code>DETECT DRIFT FROM glyph(&quot;d1@1&quot;) TO glyph(&quot;d1&quot;) AT LAYER deal</code></td></tr>
+              <tr><td>The nearest things at a level</td><td><code>FIND SIMILAR TO glyph(&quot;d1&quot;) AT ROLE deal.metrics.meetings</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>See the <a href="/docs/ada-gql">Query language</a>.</p>
+      </>
+    ),
+  },
+  {
     slug: 'ada-install',
     title: 'Install',
     lede: 'Connect an agent to Ada: the Claude Code plugin, any MCP client, or an API key.',
@@ -565,6 +733,16 @@ claude plugin install ada@glyphh-ai`}</Code>
           </table>
         </div>
         <p><code>ada_trend</code> and <code>ada_predict</code> need a <a href="/docs/ada-typed">typed model</a> with key parts. See <a href="/docs/ada-time">Versions and time</a>.</p>
+        <h2>Query and edges</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Tool</th><th>Takes</th><th>Returns</th></tr></thead>
+            <tbody>
+              <tr><td><code>ada_gql</code></td><td><code>model_id</code>, <code>query</code>: one GQL statement</td><td>What the statement asks for. See the <a href="/docs/ada-gql">Query language</a>.</td></tr>
+              <tr><td><code>ada_edges</code></td><td><code>model_id</code>, <code>situation</code>, optional <code>level</code> and <code>top</code> (1 to 50, default 5)</td><td>The things nearest one thing at a level, and the change between each of its versions. See <a href="/docs/ada-edges">Edges and levels</a>.</td></tr>
+            </tbody>
+          </table>
+        </div>
         <h2>Record</h2>
         <div className="dx-table">
           <table>
@@ -646,8 +824,8 @@ claude plugin install ada@glyphh-ai`}</Code>
         <h2>The contract</h2>
         <p>
           For software that calls a model with no agent in the path, <code>{'{"op": "contract"}'}</code> returns
-          the JSON Schema of what <code>query</code>, <code>facts</code>, <code>history</code>, <code>trend</code> and{' '}
-          <code>predict</code> return, and what each <code>reason</code> means. With a typed model&rsquo;s{' '}
+          the JSON Schema of what <code>query</code>, <code>facts</code>, <code>history</code>, <code>trend</code>,{' '}
+          <code>predict</code>, <code>gql</code> and <code>edges</code> return, and what each <code>reason</code> means. With a typed model&rsquo;s{' '}
           <code>model_id</code> it also returns the shape of that model&rsquo;s data.
         </p>
         <p>
