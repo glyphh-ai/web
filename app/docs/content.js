@@ -207,8 +207,7 @@ const start = [
         </div>
         <p>
           The position in one line: <strong>AI at build time, not runtime.</strong> Use models to build typed,
-          predictable programs, then run them on your data without a model in the path. More on the work at{' '}
-          <a href="https://glyphh.ai/research">glyphh.ai/research</a>.
+          predictable programs, then run them on your data without a model in the path.
         </p>
           </>
         )}

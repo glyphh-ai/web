@@ -62,10 +62,6 @@ export default function OpenSourceSection() {
           ))}
         </div>
         <div className="oss-ctas reveal">
-          <a href="/research" className="btn btn-primary btn-lg group">
-            <span className="btn-label">All research projects</span>
-            <span className="btn-fill"></span>
-          </a>
           <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-lg group">
             <span className="btn-label">Follow on GitHub</span>
             <span className="btn-fill"></span>

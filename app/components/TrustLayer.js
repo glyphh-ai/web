@@ -68,7 +68,6 @@ export default function TrustLayer() {
           ))}
         </div>
 
-        <p className="trust-cta reveal"><a href="/research">Explore the research &rarr;</a></p>
       </div>
     </section>
   );
