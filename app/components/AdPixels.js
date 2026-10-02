@@ -10,7 +10,7 @@ import Script from 'next/script';
  * account, Sign up, Log in) reports a lead. The sign-up itself is counted by
  * the server (glyphh_auth/attribution.py), not here.
  */
-export const REDDIT_PIXEL_ID = '';
+export const REDDIT_PIXEL_ID = 'a2_ipk9ezvxinmg';
 export const META_PIXEL_ID = '';
 
 const PLATFORM_HOST = 'platform.glyphh.ai';
