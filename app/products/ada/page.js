@@ -9,7 +9,7 @@ import LetterField from '../../components/LetterField';
 // fields, where records live. The example answer is illustrative.
 
 export const metadata = {
-  title: 'Ada: typed models your agents build',
+  title: 'Ada: typed models your agents build for your software to leverage at runtime',
   description:
     'Seed Ada with data and she builds a lattice of algebraic meaning. Leverage our SDK or direct API to then make deterministic calls with no LLM in the middle.',
 };
@@ -115,7 +115,7 @@ export default function AdaPage() {
         <div className="oshero-inner container">
           <p className="oshero-eyebrow">Ada · glyphh-ada-1.0</p>
           <h1 className="oshero-title">
-            Typed models your agents <em>build.</em>
+            Typed models your agents build for your software to leverage at <em>runtime.</em>
           </h1>
           <p className="oshero-pitch">
             Seed Ada with data and she builds a lattice of algebraic meaning. Leverage our SDK or direct API to
