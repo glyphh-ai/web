@@ -51,9 +51,16 @@ function docsHost(request) {
   return NextResponse.rewrite(url);
 }
 
+const SITE_HOSTS = ['glyphh.ai', 'www.glyphh.ai'];
+
 export function middleware(request) {
-  if (hostOf(request) === DOCS_HOST) return docsHost(request);
+  const host = hostOf(request);
+  if (host === DOCS_HOST) return docsHost(request);
   const { pathname } = request.nextUrl;
+  // The docs moved to their own host: an old glyphh.ai/docs address follows them.
+  if (SITE_HOSTS.includes(host) && (pathname === '/docs' || pathname.startsWith('/docs/'))) {
+    return NextResponse.redirect(new URL((pathname.slice('/docs'.length) || '/') + request.nextUrl.search, `https://${DOCS_HOST}`), 308);
+  }
 
   // Admin routes require server-side auth check
   if (pathname.startsWith('/admin')) {
@@ -81,7 +88,6 @@ export function middleware(request) {
   if (source) {
     // Behind the proxy, nextUrl names the machine, not the site: the Host the
     // visitor asked for is in the forwarded header.
-    const host = hostOf(request);
     response.cookies.set(SOURCE_COOKIE, JSON.stringify(source), {
       path: '/',
       maxAge: SOURCE_DAYS * 24 * 60 * 60,
