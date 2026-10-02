@@ -8818,28 +8818,28 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 .hero-loud .oshero-title em { text-shadow: 0 0 38px rgba(176, 102, 255, 0.9); letter-spacing: -0.02em; }
 [data-theme="light"] .hero-loud .oshero-title, [data-theme="light"] .hero-loud .oshero-title em { text-shadow: none; }
 
-/* ── The display face, throughout (his pick, 2026-10-01): Orbitron 500 on
-   every heading. Body text stays Geist; labels stay JetBrains Mono; the
-   italic emphasis stays the serif. ─────────────────────────────────────── */
-:root { --font-display: var(--font-orbitron), var(--font-geist), system-ui, sans-serif; }
+/* ── The display face, throughout (his pick, 2026-10-02): JetBrains Mono 700
+   on every heading, so a heading reads as the language. Body text stays
+   Geist; labels stay JetBrains Mono; the italic emphasis stays the serif. ── */
+:root { --font-display: var(--font-jetbrains), 'SF Mono', ui-monospace, monospace; }
 h1, h2, h3, h4,
 .oshero-title, .page-hero-title, .section-title, .ix-h2, .lt-h2,
 .hv-tile-head, .nav-dd-name, .dx-card-title {
   font-family: var(--font-display) !important;
-  font-weight: 500 !important;
-  letter-spacing: -0.01em;
+  font-weight: 700 !important;
+  letter-spacing: -0.04em;
 }
 h1 em, h2 em, h3 em, .oshero-title em { font-family: var(--font-serif) !important; font-weight: 400 !important; }
-.hero-loud .oshero-title { font-size: clamp(2.2rem, 6.6vw, 6.4rem); font-style: normal; letter-spacing: -0.01em; line-height: 1; }
+.hero-loud .oshero-title { font-size: clamp(2.2rem, 6.6vw, 6.4rem); font-style: normal; letter-spacing: -0.04em; line-height: 1; }
 .why-ada-quote blockquote { font-family: var(--font-serif) !important; }
 
-/* ── Every hero, loud (his order, 2026-10-01): Orbitron caps with the glow. The
+/* ── Every hero, loud (his order, 2026-10-01): display caps with the glow. The
    home headline is the biggest; longer titles step down. ─────────────────── */
 .oshero-title, .page-hero-title {
   text-transform: uppercase;
   font-size: clamp(1.9rem, 4.5vw, 4.3rem);
   line-height: 1.04;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.04em;
   max-width: none;
   text-shadow: 0 0 44px rgba(176, 102, 255, 0.45);
 }
@@ -8939,7 +8939,7 @@ h1 em, h2 em, h3 em, .oshero-title em { font-family: var(--font-serif) !importan
 .hero-loud .oshero-title em { font-size: 1.7em; line-height: 0.95; }
 /* "Ada" at the same size as the words around it. */
 .hero-loud .oshero-title em { font-size: 1em; line-height: inherit; }
-/* "Ada" in the headline's own face (Orbitron caps), kept purple. The serif
+/* "Ada" in the headline's own face (the display caps), kept purple. The serif
    italic did not belong beside the capitals. */
 .hero-loud .oshero-title em {
   font-family: var(--font-display) !important;
@@ -8966,7 +8966,7 @@ h1 em, h2 em, h3 em, h4 em,
 }
 
 /* No serif anywhere (his order, 2026-10-01: "anywhere that isn't using the
-   correct fonts"). The three faces are Orbitron (display), Geist (body) and
+   correct fonts"). The three faces are JetBrains Mono (display), Geist (body) and
    JetBrains Mono (labels). Everything that asked for the serif gets the
    display face; emphasis inside body text takes the body face. */
 :root, [data-theme="light"] { --font-serif: var(--font-display); }
