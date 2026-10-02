@@ -13,6 +13,25 @@ const HERO_VARIANTS = {
   '/dream': 'dream',
 };
 
+// Where a visitor came from (2026-10-02): the tags on the link they arrived on
+// (utm_*, and the ad platform's click id) are kept for 90 days in a first-party
+// cookie on .glyphh.ai, so sign-up on platform.glyphh.ai can read it and the
+// server can store it on the new account (glyphh_auth/attribution.py). The
+// latest tagged link wins. HttpOnly: only the server ever reads it.
+const SOURCE_COOKIE = 'glyphh_src';
+const SOURCE_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'rdt_cid', 'gclid'];
+const SOURCE_DAYS = 90;
+
+function sourceOf(url) {
+  const found = {};
+  for (const key of SOURCE_KEYS) {
+    const value = (url.searchParams.get(key) || '').trim().slice(0, 200);
+    if (value) found[key] = value;
+  }
+  if (Object.keys(found).length === 0) return null;
+  return { ...found, landing: url.pathname.slice(0, 200) };
+}
+
 export function middleware(request) {
   const { pathname } = request.nextUrl;
 
@@ -36,6 +55,19 @@ export function middleware(request) {
     response = NextResponse.rewrite(url, { request: { headers: requestHeaders } });
   } else {
     response = NextResponse.next();
+  }
+
+  const source = sourceOf(request.nextUrl);
+  if (source) {
+    const host = request.nextUrl.hostname;
+    response.cookies.set(SOURCE_COOKIE, JSON.stringify(source), {
+      path: '/',
+      maxAge: SOURCE_DAYS * 24 * 60 * 60,
+      sameSite: 'lax',
+      httpOnly: true,
+      secure: host !== 'localhost',
+      ...(host === 'glyphh.ai' || host.endsWith('.glyphh.ai') ? { domain: '.glyphh.ai' } : {}),
+    });
   }
 
   // Security headers
