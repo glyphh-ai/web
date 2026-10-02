@@ -50,7 +50,7 @@ export const ada = [
         <h2>Customizing a model</h2>
         <ul>
           <li><strong>Weights.</strong> Say how much each key decides: <code>{'{"risk": 1, "team": 0.1}'}</code>. A number weighs a key; an object weighs inside it. Unlisted keys weigh 1, and a key that weighs 0 is never looked at. Set defaults on the model, or pass weights on one call. A typed model&rsquo;s weights live in its spec.</li>
-          <li><strong>Scale.</strong> What <code>act</code> takes, set per model with <code>ada_update_model</code>: <code>{'{"similarity": 0.4, "confidence": 0.7, "records": 3, "exact": true, "must_match": [], "unseen": false}'}</code>. For a model software acts on, list the keys that decide in <code>must_match</code>.</li>
+          <li><strong>Scale.</strong> What <code>act</code> takes, set per model with <code>ada_update_model</code>: <code>{'{"similarity": 0.4, "confidence": 0.7, "records": 3, "exact": true, "must_match": [], "unseen": false}'}</code>. See <a href="/docs/ada-act">When Ada acts</a>.</li>
           <li><strong>Calibration.</strong> Once a model has 10 or more wins, <code>ada_calibrate</code> fits its probabilities to its own records. A record is held out together with every copy of itself, so repeats teach it nothing. The result is saved with the model.</li>
           <li><strong>Learned weights.</strong> Once a flat model has 10 or more wins, an org admin can run <code>ada_learn</code>. It works out which keys decide by holding records out and predicting them from the rest, saves those weights as the model&rsquo;s defaults, calibrates it, and reports how often the model predicts its own held-out records before and after.</li>
           <li><strong>Clearance.</strong> An org admin sets each team&rsquo;s clearance on a model from 0 to 1. A team with no setting has full clearance. A typed model&rsquo;s spec says which parts need one.</li>
@@ -91,18 +91,11 @@ export const ada = [
             </tbody>
           </table>
         </div>
-        <h2>Never shown, never acted on</h2>
         <p>
-          Similarity is the share of weighted keys that agree, so a force push to <code>main</code> looks half like
-          a push to a feature branch. Ada does not act on that. When a situation carries a key or a value none of
-          the model&rsquo;s wins has recorded, <code>act</code> is false and <code>unseen</code> says what was new,
-          for example <code>["force", "target=main"]</code>.
+          <code>act: false</code> never means no answer: the nearest outcome and the records behind it come back
+          either way. <a href="/docs/ada-act">When Ada acts</a> covers each check, each reason with an example, why
+          a question that carries something never recorded is not acted on, and how to set that per model.
         </p>
-        <ul>
-          <li><strong>To let a key vary freely,</strong> give it weight 0.</li>
-          <li><strong>To act on likeness alone,</strong> set <code>unseen: true</code> in the model&rsquo;s scale. That is the model&rsquo;s risk to take.</li>
-          <li><strong>What this does not catch:</strong> values that were each recorded, but never together. Use <code>must_match</code> on the keys that decide.</li>
-        </ul>
         <Note kind="warn" title="A single record is not consensus">
           Ada cites what it stands on. Read <code>count</code> and <code>receipts</code> before acting on a thin
           answer.
@@ -134,6 +127,208 @@ const { data: models } = await r.json();`}</Code>
           Each model comes back with its <code>id</code>, <code>name</code>, <code>storage</code>, default{' '}
           <code>weights</code>, its <code>scale</code>, its <code>spec</code> when it is typed, and whether it is{' '}
           <code>calibrated</code>. Pass a <code>model_id</code> to get one model with its record counts.
+        </p>
+      </>
+    ),
+  },
+  {
+    slug: 'ada-act',
+    title: 'When Ada acts',
+    lede: 'Every query returns the nearest match and why. act is a separate yes or no on top of it, for code that branches without reading the answer.',
+    body: (
+      <>
+        <h2>Two things come back</h2>
+        <p>A query always measures, and it always tells you what it found:</p>
+        <ul>
+          <li><strong>The measurement.</strong> <code>top</code> (the nearest outcome), <code>receipts</code> (the situations on record behind it, each with its score), <code>outcomes</code> and <code>confidence</code>. <code>ada_facts</code> gives the same records as fact trees. You get these whether or not Ada would act.</li>
+          <li><strong>The verdict.</strong> <code>act</code>, true or false, and <code>reason</code>. It answers one question: are the records behind <code>top</code> strong enough for a program to branch on it with nobody reading the answer?</li>
+        </ul>
+        <p>
+          So <code>act: false</code> never means &ldquo;no answer&rdquo;. It means &ldquo;here is the closest
+          thing I have, and here is why I would not act on it alone&rdquo;. An agent or a person can read the
+          answer and decide. A program should branch on <code>act</code>.
+        </p>
+        <p>The examples below use the model from the <a href="/docs/quickstart">Quickstart</a>, holding three kubelet tickets at severity 6, 7 and 8, all routed to platform.</p>
+        <h2>The checks, in order</h2>
+        <p>Ada runs these in order and stops at the first that fails. <code>reason</code> names it.</p>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th></th><th>Check</th><th>Fails as</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Is any record at least 0.40 similar to the question?</td><td><code>insufficient</code></td></tr>
+              <tr><td>2</td><td>Is everything the question carries something the model&rsquo;s wins have recorded?</td><td><code>unseen</code></td></tr>
+              <tr><td>3</td><td>Is the top outcome free of a newer recorded failure that is as close as its wins?</td><td><code>vetoed</code></td></tr>
+              <tr><td>4</td><td>Do enough records stand behind it (three, or one that is the same situation)?</td><td><code>uncalibrated</code></td></tr>
+              <tr><td>5</td><td>Do those records meet the model&rsquo;s scale: close enough, and agreeing on its must-match keys?</td><td><code>insufficient</code> or <code>mismatch</code></td></tr>
+              <tr><td>6</td><td>Do the records agree on the outcome (confidence at least 0.7)?</td><td><code>low_confidence</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Pass all six and the answer is <code>act: true</code> with <code>reason: &quot;reflex&quot;</code>.</p>
+        <h2>It acts</h2>
+        <p>A question the records cover. Here it names the same situation one record holds, so that record answers alone:</p>
+        <Code lang="json">{`// component kubelet, symptom crash_on_boot, severity 7
+{ "act": true, "reason": "reflex", "top": "route_to_platform",
+  "exact": true, "confidence": 1.0, "count": 1, "unseen": [],
+  "receipts": [ { "outcome": "route_to_platform", "score": 1.0 },
+                { "outcome": "route_to_platform", "score": 0.9667 },
+                { "outcome": "route_to_platform", "score": 0.9667 } ] }`}</Code>
+        <ul>
+          <li><strong><code>exact</code></strong> is true when the same situation is on record. One such record is enough; without it, three records have to stand behind the outcome.</li>
+          <li><strong>A query scores only the roles it gives.</strong> Ask with just the component and the symptom and all three tickets match exactly, whatever their severity.</li>
+        </ul>
+        <h2>It was never shown this: unseen</h2>
+        <p>Ask about a component no record has:</p>
+        <Code lang="json">{`// component etcd, symptom crash_on_boot
+{ "act": false, "reason": "unseen", "top": "route_to_platform",
+  "unseen": ["ticket.issue.component=etcd"],
+  "exact": false, "confidence": 1.0, "support": 0.5, "count": 3,
+  "receipts": [ { "outcome": "route_to_platform", "score": 0.5 }, … ] }`}</Code>
+        <p>
+          Ada still reached for the closest records and still tells you what they say: three tickets, half alike,
+          all routed to platform. What it will not do is tell a program to act on that.
+        </p>
+        <p>
+          <strong>Why.</strong> A score is the share of the question that agrees with a record. Here the symptom
+          agrees and the component does not, so the score is 0.5, which clears the 0.40 floor. All three records
+          agree with each other, so confidence is 1.0. Every number looks healthy, and the one thing that differs
+          is the thing the model has no evidence about. The same arithmetic makes a force push to{' '}
+          <code>main</code> look half like a push to a feature branch. Similarity cannot tell &ldquo;close
+          enough&rdquo; from &ldquo;differs in the one way that matters&rdquo;, so a value the model was never
+          shown stops the verdict, and <code>unseen</code> names it.
+        </p>
+        <h3>What counts as new</h3>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>In the question</th><th>New when</th></tr></thead>
+            <tbody>
+              <tr><td>A key or a role</td><td>No win carries it at all. Reported as its path: <code>force</code></td></tr>
+              <tr><td>A category, or an item of a set</td><td>No win recorded that value there: <code>target=main</code></td></tr>
+              <tr><td>A number on a scale</td><td>It lies outside every number recorded there. Between two recorded numbers is covered.</td></tr>
+              <tr><td>Text</td><td>Never. New words are normal.</td></tr>
+              <tr><td>A key part</td><td>Never. It says which thing, not what it is like.</td></tr>
+              <tr><td>Anything with weight 0</td><td>Never. It is not looked at.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          The model above holds severities 6 to 8. Ask at severity 7 and nothing is new. Ask at severity 2 and{' '}
+          <code>unseen</code> is <code>[&quot;ticket.issue.severity=2&quot;]</code>, even though the nearest ticket scores
+          0.87. In a flat cloud model, a word the model holds as another way to say a recorded value (0.8 or closer,
+          such as <code>production</code> for <code>prod</code>) is not new.
+        </p>
+        <h3>Three ways to let it act</h3>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>You want</th><th>Do</th><th>Then</th></tr></thead>
+            <tbody>
+              <tr><td>The model to know this case</td><td>Record it, with the outcome the world confirmed</td><td>It is no longer new. This is the normal path: a refusal is a request for a record.</td></tr>
+              <tr><td>A field to vary freely</td><td>Give it weight 0 (<code>similarity_weight</code> in a spec, <code>weights</code> on a flat model)</td><td>It has no voice in the score and is never new</td></tr>
+              <tr><td>The model to act on likeness alone</td><td>Set <code>unseen: true</code> in its scale</td><td><code>act</code> follows the other five checks. <code>unseen</code> is still listed.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <Code lang="json">{`{ "op": "update_model", "model_id": "am_0123456789ab", "scale": { "unseen": true } }`}</Code>
+        <p>With that set, the same etcd question acts on half a match:</p>
+        <Code lang="json">{`{ "act": true, "reason": "reflex", "top": "route_to_platform",
+  "unseen": ["ticket.issue.component=etcd"], "support": 0.5, "count": 3 }`}</Code>
+        <Note kind="warn" title="Choose this per model">
+          Acting on the closest match is right for a router or a classifier, where a best guess is the point and
+          a wrong one is cheap. It is wrong for a gate or a switch that software obeys, where a wrong one is the
+          failure. The default is the safe one; a model that wants the other says so.
+        </Note>
+        <h3>What unseen does not catch</h3>
+        <p>
+          Values that were each recorded, but never together. If the records hold <code>a=0, b=1</code>,{' '}
+          <code>a=1, b=0</code> and <code>a=0, b=0</code>, then <code>a=1, b=1</code> carries nothing new, and the
+          neighbours answer for it. When a combination decides, record every combination, or raise the
+          model&rsquo;s <code>similarity</code> so only close matches count.
+        </p>
+        <h2>The other reasons</h2>
+        <h3>insufficient</h3>
+        <p>Nothing on record is at least 0.40 similar. <code>top</code> is null, and <code>receipts</code> still lists the nearest records with their scores.</p>
+        <Code lang="json">{`// component etcd, symptom disk_full
+{ "act": false, "reason": "insufficient", "top": null, "sufficient": false, "count": 0,
+  "unseen": ["ticket.issue.component=etcd", "ticket.issue.symptom=disk_full"] }`}</Code>
+        <p>
+          The same reason with a <code>top</code> means records were found, but too few of them meet the
+          model&rsquo;s own <code>similarity</code>.
+        </p>
+        <h3>uncalibrated</h3>
+        <p>Records are close and agree, but there are fewer than the scale takes and none is the same situation. Two tickets at severity 4 and 6, asked at severity 5:</p>
+        <Code lang="json">{`{ "act": false, "reason": "uncalibrated", "top": "route_to_storage",
+  "exact": false, "confidence": 1.0, "support": 0.9667, "count": 2 }`}</Code>
+        <h3>low_confidence</h3>
+        <p>The records disagree. The same situation recorded once with each of two outcomes:</p>
+        <Code lang="json">{`{ "act": false, "reason": "low_confidence", "top": "route_to_platform", "confidence": 0.5,
+  "outcomes": { "route_to_platform": 0.5, "route_to_network": 0.5 } }`}</Code>
+        <p>Every record that clears the floor votes, weighted by how close it is. A situation recorded many times counts each time.</p>
+        <h3>vetoed</h3>
+        <p>
+          A failure was recorded for the top outcome (<code>ada_veto</code>), as close as the wins behind it and
+          newer than them. One is enough.
+        </p>
+        <Code lang="json">{`{ "act": false, "reason": "vetoed", "top": "route_to_platform", "veto_match": 1.0, "lifted": false }`}</Code>
+        <p>The newest evidence wins. Record a win for the same situation after the failure and the veto lifts:</p>
+        <Code lang="json">{`{ "act": true, "reason": "reflex", "top": "route_to_platform", "veto_match": 1.0, "lifted": true }`}</Code>
+        <p>
+          &ldquo;Newer&rdquo; is by when the outcome happened. When you load past records, pass <code>at</code> so
+          load order does not stand in for history.
+        </p>
+        <h3>mismatch</h3>
+        <p>
+          The records are close, but differ from the question under a key the model&rsquo;s scale lists in{' '}
+          <code>must_match</code>.
+        </p>
+        <h2>The scale</h2>
+        <p>
+          What <code>act</code> takes is a setting on the model. An org admin sets it with{' '}
+          <code>ada_update_model</code>; a part left out keeps its default. Every answer carries the{' '}
+          <code>scale</code> it was measured on.
+        </p>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Part</th><th>Default</th><th>Means</th></tr></thead>
+            <tbody>
+              <tr><td><code>similarity</code></td><td>0.4</td><td>A record backs an outcome only at this score or closer. From 0.4 to 1.</td></tr>
+              <tr><td><code>confidence</code></td><td>0.7</td><td>The top outcome&rsquo;s share of the vote that it takes.</td></tr>
+              <tr><td><code>records</code></td><td>3</td><td>How many records have to back the outcome.</td></tr>
+              <tr><td><code>exact</code></td><td>true</td><td>One record of the same situation stands in for <code>records</code> of them.</td></tr>
+              <tr><td><code>must_match</code></td><td>[]</td><td>Top-level keys a record has to share with the question to count. In a typed model those are layers; to make one role decide, raise <code>similarity</code> or weigh the role up.</td></tr>
+              <tr><td><code>unseen</code></td><td>false</td><td>True lets the model act on a question that carries something never recorded.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>Which settings for which model</h2>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>The model is a</th><th>A wrong answer</th><th>Set</th></tr></thead>
+            <tbody>
+              <tr><td>Gate or permission check</td><td>Does damage</td><td>Keep the defaults. Record every case it must allow. Consider <code>similarity: 0.9</code>.</td></tr>
+              <tr><td>Switch</td><td>Takes the wrong branch</td><td>Keep the defaults, and treat <code>act: false</code> as the default branch.</td></tr>
+              <tr><td>Router or classifier</td><td>Is cheap to correct</td><td><code>unseen: true</code>, so the nearest destination is taken.</td></tr>
+              <tr><td>Memory or lookup</td><td>Is a miss</td><td>Read <code>receipts</code> and <code>ada_facts</code>; <code>act</code> matters less.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>In your code</h2>
+        <Code lang="javascript">{`const a = await ada({ op: "query", model_id, situation });
+
+if (a.act) return take(a.top);            // the records back it
+
+switch (a.reason) {
+  case "unseen":                          // a.unseen says what was new
+  case "insufficient":
+  case "uncalibrated":
+    return askSomeone(a);                 // then record what they decide
+  case "vetoed":
+    return avoid(a.top);                  // this outcome failed here before
+  default:
+    return askSomeone(a);                 // low_confidence, mismatch
+}`}</Code>
+        <p>
+          Whatever the person or the model decides, record it once the world has graded it. The next question
+          like it is then one the model was shown.
         </p>
       </>
     ),
@@ -207,8 +402,8 @@ const { data: models } = await r.json();`}</Code>
         </p>
         <h2>What counts as new</h2>
         <p>
-          Ada does not act on a question that carries something its wins were never shown. In a typed model that
-          follows the type:
+          By default Ada does not tell a program to act on a question that carries something its wins were never
+          shown (<a href="/docs/ada-act">When Ada acts</a>). In a typed model that follows the type:
         </p>
         <ul>
           <li><strong>A category or a set:</strong> a value no win recorded.</li>
@@ -433,7 +628,7 @@ claude plugin install ada@glyphh-ai`}</Code>
     "situation": { "task": "deploy_service", "constraint": "canary_required" }
   }'`}</Code>
         <p>A query answers with:</p>
-        <Row k="act">Branch on this. True only when <code>reason</code> is <code>reflex</code>.</Row>
+        <Row k="act">Branch on this. True only when <code>reason</code> is <code>reflex</code>. See <a href="/docs/ada-act">When Ada acts</a>.</Row>
         <Row k="reason">Why <code>act</code> is what it is: <code>reflex</code>, <code>insufficient</code>, <code>unseen</code>, <code>vetoed</code>, <code>uncalibrated</code>, <code>mismatch</code> or <code>low_confidence</code>.</Row>
         <Row k="top">The outcome that worked most in situations like this one. Null when nothing is close enough.</Row>
         <Row k="unseen">What the situation carries that no win has recorded: a key (<code>force</code>) or a value (<code>target=main</code>).</Row>

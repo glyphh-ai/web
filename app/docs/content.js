@@ -280,9 +280,17 @@ const start = [
         <p>The answer gives your code one thing to branch on:</p>
         <Code lang="json">{`{ "act": true, "reason": "reflex", "top": "route_to_platform",
   "exact": true, "confidence": 1.0, "count": 1, "unseen": [] }`}</Code>
-        <p>Ask about a component the model was never shown, and it does not act:</p>
+        <p>
+          Ask about a component the model was never shown. Ada still returns the closest match, and says not to
+          act on it alone:
+        </p>
         <Code lang="json">{`{ "act": false, "reason": "unseen", "top": "route_to_platform",
   "exact": false, "unseen": ["ticket.issue.component=etcd"] }`}</Code>
+        <p>
+          <code>top</code> and the records behind it come back either way. <code>act</code> is a separate yes or
+          no for code that branches without reading the answer, and you choose per model whether a best guess is
+          enough. <a href="/docs/ada-act">When Ada acts</a> covers every case in detail.
+        </p>
         <h2>4. Ask why</h2>
         <p>
           The same question with <code>&quot;op&quot;: &quot;facts&quot;</code> returns the nearest records as{' '}
@@ -425,10 +433,10 @@ five incidents, then tell me where this new one should go and why.`}</Code>
         <Row k="sufficient">Whether anything was close enough to answer at all.</Row>
         <Row k="unseen">What the question carries that the model was never shown.</Row>
         <Row k="act">True when the answer is confident, nothing in the question is new, and no newer recorded failure rules it out.</Row>
-        <Row k="reason">Why <code>act</code> is what it is. The values are listed under <a href="/docs/ada">Ada models</a>.</Row>
+        <Row k="reason">Why <code>act</code> is what it is. Each value is explained in <a href="/docs/ada-act">When Ada acts</a>.</Row>
         <h2>Building on it</h2>
         <ul>
-          <li><strong>Gate on <code>act</code>.</strong> Branch when it is true. When it is false, read <code>reason</code>, fall back to a person or a model, and record what they decide.</li>
+          <li><strong>Gate on <code>act</code>.</strong> Branch when it is true. When it is false, read <code>reason</code>, fall back to a person or a model, and record what they decide. <a href="/docs/ada-act">When Ada acts</a> has each case.</li>
           <li><strong>Read <code>count</code>.</strong> One record is not consensus, unless it is the same situation (<code>exact</code>).</li>
           <li><strong>Hold the shape.</strong> <code>{'{"op": "contract"}'}</code> returns the JSON Schema of every answer, so your program&rsquo;s types come from the source.</li>
           <li><strong>Show the tree.</strong> When someone asks why, the shares are the explanation. No second call to a model is needed.</li>
@@ -467,7 +475,8 @@ five incidents, then tell me where this new one should go and why.`}</Code>
         <p>
           Your code queries and branches on <code>top</code> when <code>act</code> is true. A case that was never
           recorded, such as a new intent, comes back with <code>act</code> false and <code>reason</code>{' '}
-          <code>unseen</code>: the switch has a default branch.
+          <code>unseen</code>: the switch has a default branch. A router that should take the nearest destination
+          anyway sets <code>unseen: true</code> in its scale (<a href="/docs/ada-act">When Ada acts</a>).
         </p>
         <h2>A router</h2>
         <p>Record what each destination handles. The outcome is the destination.</p>
@@ -496,7 +505,7 @@ five incidents, then tell me where this new one should go and why.`}</Code>
 ];
 
 const byslug = Object.fromEntries([...start, ...ada].map((p) => [p.slug, p]));
-const ADA = ['ada-introduction', 'ada-install', 'quickstart', 'primer', 'glyph', 'fact-trees', 'patterns', 'ada', 'ada-typed', 'ada-time', 'ada-tools'].map((x) => byslug[x]);
+const ADA = ['ada-introduction', 'ada-install', 'quickstart', 'primer', 'glyph', 'fact-trees', 'patterns', 'ada', 'ada-act', 'ada-typed', 'ada-time', 'ada-tools'].map((x) => byslug[x]);
 
 export const GROUPS = [{ title: 'Glyphh', pages: glyphh }, { title: 'Ada', pages: ADA }, ...PRODUCT_GROUPS];
 export const PAGES = GROUPS.flatMap((g) => g.pages);
