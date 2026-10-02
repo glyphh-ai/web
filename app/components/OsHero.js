@@ -39,7 +39,7 @@ export default function OsHero() {
 
         <div className="oshero-actions">
           <HeroCTA variant="default" href="#quick-start" label="Quick Start" className="os-cta os-cta-primary" />
-          <a href="/docs" className="os-cta os-cta-ghost">Read the Docs</a>
+          <a href="https://docs.glyphh.ai" className="os-cta os-cta-ghost">Read the Docs</a>
         </div>
 
         <div className="oshero-shots">

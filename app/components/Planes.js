@@ -11,10 +11,10 @@ import LetterField from './LetterField';
  */
 
 const PLANES = [
-  { n: '01', title: 'Build Plane', body: 'Blend AI models with your connections, data, and tasks to build applications that run 95%+ of the time without AI at runtime.', href: '/docs/semantic-apps' },
-  { n: '02', title: 'Runtime (rrotor)', body: 'Run frontier and open-weight models together to cut cost and raise quality.', href: '/docs/rrotor' },
-  { n: '03', title: 'Control Plane', body: 'Approve models, review apps, manage spend, and decide how apps are delivered and governed.', href: '/docs/router' },
-  { n: '04', title: 'Teams', body: 'Use AI for personal productivity, and lean on curated apps, connections, and the harness for massive gains across the team.', href: '/docs/desktop' },
+  { n: '01', title: 'Build Plane', body: 'Blend AI models with your connections, data, and tasks to build applications that run 95%+ of the time without AI at runtime.', href: 'https://docs.glyphh.ai/ada' },
+  { n: '02', title: 'Runtime (rrotor)', body: 'Run frontier and open-weight models together to cut cost and raise quality.', href: 'https://docs.glyphh.ai/gateway' },
+  { n: '03', title: 'Control Plane', body: 'Approve models, review apps, manage spend, and decide how apps are delivered and governed.', href: 'https://docs.glyphh.ai/gateway' },
+  { n: '04', title: 'Teams', body: 'Use AI for personal productivity, and lean on curated apps, connections, and the harness for massive gains across the team.', href: 'https://docs.glyphh.ai/install' },
 ];
 
 // The loops the desktop runs, besides its own.

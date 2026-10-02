@@ -18,7 +18,7 @@ const TARGETS = [
   { id: 'mac-x64', key: '2', label: 'macOS · Intel', cmd: 'Glyphh-x64.dmg', href: '/api/download?platform=mac&arch=x64', verb: 'download' },
   { id: 'win', key: '3', label: 'Windows · x64', cmd: 'Glyphh-Setup.exe', href: '/api/download?platform=win', verb: 'download' },
   { id: 'linux', key: '4', label: 'Linux · x64', cmd: 'Glyphh-x64.AppImage', href: '/api/download?platform=linux', verb: 'download' },
-  { id: 'cli', key: '5', label: 'CLI · any OS', cmd: 'npm i -g @glyphh-ai/cli && glyphh', href: '/docs/cli', verb: 'install' },
+  { id: 'cli', key: '5', label: 'CLI · any OS', cmd: 'npm i -g @glyphh-ai/cli && glyphh', href: 'https://docs.glyphh.ai/cli', verb: 'install' },
   { id: 'web', key: '6', label: 'Web · the platform', cmd: 'platform.glyphh.ai', href: PLATFORM_URL, verb: 'open' },
 ];
 
@@ -52,7 +52,7 @@ export default function QuickStart() {
     <section className="qs" id="quick-start">
       <div className="qs-head">
         <span className="qs-kicker">Quick start</span>
-        <a href="/docs/install" className="qs-more">All download options &rarr;</a>
+        <a href="https://docs.glyphh.ai/install" className="qs-more">All download options &rarr;</a>
       </div>
 
       <div className="term" tabIndex={0} onKeyDown={onKey} aria-label="Quick start: pick how to get Glyphh">
@@ -82,7 +82,7 @@ export default function QuickStart() {
             ))}
           </ol>
           <p className="term-line term-dim">
-            free to install &middot; plans from $20 a month &middot; <a href="/docs/install">docs/install</a>
+            free to install &middot; plans from $20 a month &middot; <a href="https://docs.glyphh.ai/install">docs/install</a>
             <span className="term-cursor" aria-hidden="true" />
           </p>
         </div>

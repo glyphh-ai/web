@@ -40,23 +40,23 @@ const FEATURED = APPS_ROW1.slice(0, 12);
 // What the harness ships with — the panels and tools every loop can use
 // (docs: Panels and tools).
 const BUILT_IN = [
-  { title: 'Files and editor', icons: ['files','monaco'], body: 'The working folder’s tree and a Monaco editor over it.', href: '/docs/panels' },
-  { title: 'Terminal', icons: ['terminal'], body: 'A real shell in the working folder, beside the agent.', href: '/docs/panels' },
-  { title: 'Diff', icons: ['diff'], body: 'What changed as the agent works, as it works.', href: '/docs/panels' },
-  { title: 'Browser', icons: ['preview'], body: 'Tabs and an address bar; the agent drives the screen where there is no API.', href: '/docs/panels' },
-  { title: 'Plan and transcript', icons: ['plan','thread'], body: 'The agent’s plan, live, and the full turn log.', href: '/docs/panels' },
-  { title: 'Scheduled tasks', icons: ['tasks'], body: 'Every schedule and run. A task is a skill on a clock.', href: '/docs/tasks' },
-  { title: 'Work panels', icons: ['gpoint','gdrive','gdesign'], body: 'Slides, Drive, and Design: decks, folders, and documents the agent writes with you.', href: '/docs/panels' },
-  { title: 'Generated media', icons: ['gimage','gvideo','gsound'], body: 'Image, video, and sound panels for what the models make.', href: '/docs/panels' },
+  { title: 'Files and editor', icons: ['files','monaco'], body: 'The working folder’s tree and a Monaco editor over it.', href: 'https://docs.glyphh.ai/install' },
+  { title: 'Terminal', icons: ['terminal'], body: 'A real shell in the working folder, beside the agent.', href: 'https://docs.glyphh.ai/install' },
+  { title: 'Diff', icons: ['diff'], body: 'What changed as the agent works, as it works.', href: 'https://docs.glyphh.ai/install' },
+  { title: 'Browser', icons: ['preview'], body: 'Tabs and an address bar; the agent drives the screen where there is no API.', href: 'https://docs.glyphh.ai/install' },
+  { title: 'Plan and transcript', icons: ['plan','thread'], body: 'The agent’s plan, live, and the full turn log.', href: 'https://docs.glyphh.ai/install' },
+  { title: 'Scheduled tasks', icons: ['tasks'], body: 'Every schedule and run. A task is a skill on a clock.', href: 'https://docs.glyphh.ai/tasks' },
+  { title: 'Work panels', icons: ['gpoint','gdrive','gdesign'], body: 'Slides, Drive, and Design: decks, folders, and documents the agent writes with you.', href: 'https://docs.glyphh.ai/install' },
+  { title: 'Generated media', icons: ['gimage','gvideo','gsound'], body: 'Image, video, and sound panels for what the models make.', href: 'https://docs.glyphh.ai/install' },
 ];
 
 const BACKGROUND = [
-  { n: '01', label: 'Tasks', href: '/docs/tasks' },
-  { n: '02', label: 'Schedules', href: '/docs/tasks' },
-  { n: '03', label: 'Skills', href: '/docs/skills' },
-  { n: '04', label: 'Artifacts', href: '/docs/artifacts' },
-  { n: '05', label: 'Workspaces', href: '/docs/desktop' },
-  { n: '06', label: 'Loops', href: '/docs/loops' },
+  { n: '01', label: 'Tasks', href: 'https://docs.glyphh.ai/tasks' },
+  { n: '02', label: 'Schedules', href: 'https://docs.glyphh.ai/tasks' },
+  { n: '03', label: 'Skills', href: 'https://docs.glyphh.ai/skills' },
+  { n: '04', label: 'Artifacts', href: 'https://docs.glyphh.ai/install' },
+  { n: '05', label: 'Workspaces', href: 'https://docs.glyphh.ai/install' },
+  { n: '06', label: 'Loops', href: 'https://docs.glyphh.ai/loops' },
 ];
 
 function Icon({ domain }) {
@@ -88,7 +88,7 @@ export default function IntegrationsPage() {
             tasks, and apps &mdash; yours, the house&rsquo;s, and your org&rsquo;s.
           </p>
           <div className="ix-actions">
-            <a href="/docs/connect" className="os-cta os-cta-primary">Read the docs</a>
+            <a href="https://docs.glyphh.ai/connections" className="os-cta os-cta-primary">Read the docs</a>
             <a href="/integrations/connect" className="os-cta os-cta-ghost">Browse the catalog &rarr;</a>
           </div>
           <div className="ix-stats">
@@ -154,7 +154,7 @@ export default function IntegrationsPage() {
                 teach repeatable work, and apps add panels with their own data.
               </p>
             </div>
-            <a href="/docs/panels" className="qs-more">Panels and tools &rarr;</a>
+            <a href="https://docs.glyphh.ai/install" className="qs-more">Panels and tools &rarr;</a>
           </div>
           <div className="ix-grid ix-grid-4">
             {BUILT_IN.map((t) => (
@@ -192,19 +192,19 @@ export default function IntegrationsPage() {
                 desktop. You build the rest with the agent. Your org reviews, approves, and distributes them.
               </p>
             </div>
-            <a href="/docs/semantic-apps" className="qs-more">Semantic Apps &rarr;</a>
+            <a href="https://docs.glyphh.ai/ada" className="qs-more">Semantic Apps &rarr;</a>
           </div>
           <div className="ix-grid ix-grid-3">
-            <a href="/docs/panels" className="ix-card ix-card-tall">
+            <a href="https://docs.glyphh.ai/install" className="ix-card ix-card-tall">
               <span className="ix-icons">{['gpoint', 'gdrive', 'gdesign', 'gimage', 'gvideo', 'gsound'].map((n) => <PanelIcon key={n} name={n} size={24} />)}</span>
               <h3>House apps</h3>
               <p>The panels the desktop ships with: Slides, Drive, Design, media, the dev tools. Present on every seat from the first open.</p>
             </a>
-            <a href="/docs/semantic-apps" className="ix-card ix-card-tall">
+            <a href="https://docs.glyphh.ai/ada" className="ix-card ix-card-tall">
               <h3>Your apps</h3>
               <p>Built with the agent from a skill folder and a manifest. Deterministic data, the system&rsquo;s storage and memory, state that persists. Yours to run and to publish.</p>
             </a>
-            <a href="/docs/review" className="ix-card ix-card-tall">
+            <a href="https://docs.glyphh.ai/skills" className="ix-card ix-card-tall">
               <h3>Org-scoped apps</h3>
               <p>Submitted for review, approved by an admin, distributed through the org library to every seat &mdash; with roles, budgets, and permissions riding along.</p>
             </a>
@@ -216,8 +216,8 @@ export default function IntegrationsPage() {
               <p>Apps can add panels, tools, schedules, and data. Skills teach the agent how your team works.</p>
             </div>
             <div className="ix-actions">
-              <a href="/docs/semantic-apps" className="os-cta os-cta-primary">Build an app &rarr;</a>
-              <a href="/docs/skills" className="os-cta os-cta-ghost">Write a skill &rarr;</a>
+              <a href="https://docs.glyphh.ai/ada" className="os-cta os-cta-primary">Build an app &rarr;</a>
+              <a href="https://docs.glyphh.ai/skills" className="os-cta os-cta-ghost">Write a skill &rarr;</a>
             </div>
           </div>
         </section>

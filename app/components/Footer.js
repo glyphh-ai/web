@@ -20,7 +20,7 @@ const COLS = [
       ['Integrations', '/integrations'],
       ['Model catalog', '/integrations/models'],
       ['Pricing', '/pricing'],
-      ['Docs', '/docs'],
+      ['Docs', 'https://docs.glyphh.ai'],
     ],
   },
   {
@@ -28,8 +28,8 @@ const COLS = [
     links: [
       ['Blog', '/blog'],
       ['Research', '/research'],
-      ['Install', '/docs/install'],
-      ['The CLI', '/docs/cli'],
+      ['Install', 'https://docs.glyphh.ai/install'],
+      ['The CLI', 'https://docs.glyphh.ai/cli'],
       ['Changelog', 'https://github.com/glyphh-ai/releases/releases'],
       ['GitHub', GITHUB_URL],
     ],

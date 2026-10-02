@@ -125,7 +125,7 @@ export default function CodePage() {
                 <span className="btn-label">Get Glyphh Desktop</span>
                 <span className="btn-fill"></span>
               </a>
-              <a href="/docs/cli" className="btn btn-secondary btn-lg group">
+              <a href="https://docs.glyphh.ai/cli" className="btn btn-secondary btn-lg group">
                 <span className="btn-label">Install the CLI</span>
                 <span className="btn-fill"></span>
               </a>

@@ -50,7 +50,7 @@ function Snippet({ model }) {
       <pre className="hv-code mc-code"><code>{tab === 'curl' ? curl : py}</code></pre>
       <p className="mc-snippet-note">
         One base URL in front of every model. Your key from the console carries the role, the budget, and the models
-        your organization turned on. <a href="/docs/own-cli">How the base-URL swap works &rarr;</a>
+        your organization turned on. <a href="https://docs.glyphh.ai/own-cli">How the base-URL swap works &rarr;</a>
       </p>
     </div>
   );

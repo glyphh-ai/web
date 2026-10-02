@@ -10,7 +10,7 @@ import LetterField from './LetterField';
 
 const TILES = [
   {
-    href: '/docs/desktop',
+    href: 'https://docs.glyphh.ai/install',
     title: 'Desktop',
     head: 'A universal desktop harness',
     body:
@@ -23,7 +23,7 @@ const TILES = [
     ),
   },
   {
-    href: '/docs/router',
+    href: 'https://docs.glyphh.ai/gateway',
     title: 'Router',
     head: 'Every model we run, governed by you',
     body:
@@ -36,7 +36,7 @@ const TILES = [
     ),
   },
   {
-    href: '/docs/connect',
+    href: 'https://docs.glyphh.ai/connections',
     title: 'Connect',
     head: '3,500+ MCP tools give you reach',
     body:
@@ -49,7 +49,7 @@ const TILES = [
     ),
   },
   {
-    href: '/docs/semantic-apps',
+    href: 'https://docs.glyphh.ai/ada',
     title: 'Semantic Apps',
     head: 'Stop using inference, use data',
     body:
@@ -62,7 +62,7 @@ const TILES = [
     ),
   },
   {
-    href: '/docs/tasks',
+    href: 'https://docs.glyphh.ai/tasks',
     title: 'Tasks',
     head: 'Multi-step process definition',
     body:
@@ -75,7 +75,7 @@ const TILES = [
     ),
   },
   {
-    href: '/docs/rrotor',
+    href: 'https://docs.glyphh.ai/gateway',
     title: 'Rrotor',
     head: 'Patent pending memory substrate',
     body:
@@ -95,7 +95,7 @@ export default function HowItWorks() {
     <section className="hiw" id="how-it-works">
       <div className="qs-head">
         <span className="qs-kicker">How it works</span>
-        <a href="/docs" className="qs-more">Read the docs &rarr;</a>
+        <a href="https://docs.glyphh.ai" className="qs-more">Read the docs &rarr;</a>
       </div>
       <div className="hv-grid">
         {TILES.map((t, i) => (

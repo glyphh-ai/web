@@ -25,7 +25,7 @@ export default function OsPitch() {
       <HallLines />
       <div className="qs-head">
         <span className="qs-kicker">The inversion</span>
-        <a href="/docs" className="qs-more">Read the docs &rarr;</a>
+        <a href="https://docs.glyphh.ai" className="qs-more">Read the docs &rarr;</a>
       </div>
       <h2 className="ix-h2 lt-h2">AI at build time. <em>Not</em> runtime.</h2>
       <p className="ix-desc hv-pitch-lede">

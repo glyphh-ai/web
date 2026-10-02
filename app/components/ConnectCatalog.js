@@ -90,7 +90,7 @@ export default function ConnectCatalog({ apps, categories = [], live = true }) {
         </div>
         <div className="ix-actions">
           <a href={PLATFORM_URL} className="os-cta os-cta-primary">Open the platform &rarr;</a>
-          <a href="/docs/connections" className="os-cta os-cta-ghost">How connections work</a>
+          <a href="https://docs.glyphh.ai/connections" className="os-cta os-cta-ghost">How connections work</a>
         </div>
       </div>
     </>

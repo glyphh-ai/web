@@ -32,7 +32,7 @@ export default function ModelCatalogPage() {
           </p>
           <div className="ix-actions">
             <a href="/pricing" className="os-cta os-cta-primary">See the plans</a>
-            <a href="/docs/router" className="os-cta os-cta-ghost">Read the docs &rarr;</a>
+            <a href="https://docs.glyphh.ai/gateway" className="os-cta os-cta-ghost">Read the docs &rarr;</a>
           </div>
         </section>
         <section className="ix-section">

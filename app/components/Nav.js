@@ -137,7 +137,7 @@ export default function Nav() {
               <a href="/pricing" className={`nav-dd-trigger${active('/pricing')}`}>Pricing</a>
             </div>
             <div className="nav-dd">
-              <a href="/docs" className={`nav-dd-trigger${active('/docs')}`}>Docs</a>
+              <a href="https://docs.glyphh.ai" className={`nav-dd-trigger${active('/docs')}`}>Docs</a>
             </div>
           </div>
           {/* No buttons in the bar (the reference has none): the account links
@@ -183,7 +183,7 @@ export default function Nav() {
         <a href="/integrations" onClick={() => setMenuOpen(false)}>Integrations</a>
         <a href="/research" onClick={() => setMenuOpen(false)}>Research</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
-        <a href="/docs" onClick={() => setMenuOpen(false)}>Docs</a>
+        <a href="https://docs.glyphh.ai" onClick={() => setMenuOpen(false)}>Docs</a>
         {loggedIn ? (
           <a href={dashHref} className="os-cta os-cta-primary os-cta-sm" onClick={() => setMenuOpen(false)}>Dashboard</a>
         ) : (

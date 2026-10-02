@@ -18,8 +18,8 @@ export const POSTS = [
     video: 'ABXhO46Delw',
     tags: ['Desktop', 'Workspaces', 'Demo'],
     related: [
-      ['Semantic Apps', '/docs/semantic-apps'],
-      ['The Router', '/docs/router'],
+      ['Semantic Apps', 'https://docs.glyphh.ai/ada'],
+      ['The Router', 'https://docs.glyphh.ai/gateway'],
       ['The Critical Inversion', '/blog/the-critical-inversion'],
     ],
     sections: [
@@ -92,7 +92,7 @@ export const POSTS = [
     coverAlt: 'One massive Big AI cube against a field of small open-weight cubes, routed by Glyphh: frontier where it counts, open weights for the rest.',
     tags: ['Strategy', 'Open Weights', 'The Router'],
     related: [
-      ['The Router', '/docs/router'],
+      ['The Router', 'https://docs.glyphh.ai/gateway'],
       ['Every model', '/integrations/models'],
       ['Welcome to Glyphh AI', '/blog/welcome-to-glyphh-ai'],
     ],
@@ -159,9 +159,9 @@ export const POSTS = [
     tags: ['Launch', 'Architecture', 'Research'],
     related: [
       ['Research', '/research'],
-      ['The Router', '/docs/router'],
-      ['Semantic Apps', '/docs/semantic-apps'],
-      ['Rrotor', '/docs/rrotor'],
+      ['The Router', 'https://docs.glyphh.ai/gateway'],
+      ['Semantic Apps', 'https://docs.glyphh.ai/ada'],
+      ['Rrotor', 'https://docs.glyphh.ai/gateway'],
     ],
     sections: [
       {
@@ -179,7 +179,7 @@ export const POSTS = [
         heading: 'Where it came from',
         body: [
           { html: 'Glyphh started as a memory substrate called <a href="https://github.com/glyphh-ai/ada" target="_blank" rel="noopener noreferrer">Ada</a>, named after Ada Lovelace (I did a write-up on her on our <a href="/research">research page</a>; fascinating to think about). Ada is a multi-dimensional HDC lattice, an attempt to harden semantic knowledge beyond RAG. It turned out to be excellent at storing temporal signal. I built <a href="https://github.com/glyphh-ai/adaL" target="_blank" rel="noopener noreferrer">adaL</a> on top of it with a new kind of semantic graph, and then ran into an honest finding: for most workloads, RAG or plain SQL with a big context window is really hard to beat.' },
-          { html: 'That\'s research. The finding isn\'t always the thing that moves the needle; the path usually is. The path here gave us <a href="https://github.com/glyphh-ai/rrotor" target="_blank" rel="noopener noreferrer">rrotors</a>, recursive reasoning on top of reasoning, which is the loop the Glyphh runtime executes at build time. More on that in <a href="/docs/rrotor">the docs</a>.' },
+          { html: 'That\'s research. The finding isn\'t always the thing that moves the needle; the path usually is. The path here gave us <a href="https://github.com/glyphh-ai/rrotor" target="_blank" rel="noopener noreferrer">rrotors</a>, recursive reasoning on top of reasoning, which is the loop the Glyphh runtime executes at build time. More on that in <a href="https://docs.glyphh.ai/gateway">the docs</a>.' },
           { html: 'Meanwhile my actual day got worse, not better. AI didn\'t simplify anything, it multiplied my context switching 10x, seemingly overnight. Around April my Ctrl+C / Ctrl+V usage hit an all-time high. I had a pile of model loops I was coding with, a pile of app layouts, and no way to combine them into something predictable. The first attempt was <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code</a>. It was missing something I couldn\'t name for a while, and then it hit me: I wanted model selection, routing, and semantic data in one place, producing real applications, not chat transcripts.' },
         ],
       },
