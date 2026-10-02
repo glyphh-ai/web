@@ -9010,25 +9010,20 @@ p em, li em, .why-ada-copy em { font-family: inherit !important; font-style: ita
 .process-rail { overflow: hidden; height: 3px; top: -1px; background: linear-gradient(var(--border), var(--border)) center / 100% 1px no-repeat; }
 .process-rail span { top: 0; }
 
-/* ── Ada's command line (his order, 2026-10-02): bind, bundle and cosine
-   running down the input, beside "Ada speaks in math". Each line shows in
-   turn; the whole run repeats. ─────────────────────────────────────────── */
+/* ── Ada's command line (his order, 2026-10-02): the SDK's calls typed at a
+   person's pace beside "Ada speaks in math", the math answering each one. The
+   body keeps one height and the session scrolls up inside it. ───────────── */
 .ada-term { border: 1px solid var(--border); border-radius: 12px; background: var(--bg); box-shadow: 0 0 60px rgba(176, 102, 255, 0.18); overflow: hidden; font-family: var(--font-mono); }
 .ada-term-bar { display: flex; align-items: center; gap: 7px; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); }
 .ada-term-bar i { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--border-2); }
 .ada-term-bar span { margin-left: 0.6rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); }
-.ada-term-body { padding: 1rem 1.1rem 1.2rem; font-size: clamp(0.66rem, 1.02vw, 0.86rem); line-height: 1.9; }
-.ada-term-line { display: grid; grid-template-columns: minmax(0, 1fr) 6.5em 6em; column-gap: 0.9em; white-space: pre; color: var(--text-2); opacity: 0; animation: ada-term-run 14s linear infinite; animation-delay: calc(var(--i) * 0.5s); }
-.ada-term-cmd { display: flex; gap: 0.7em; color: var(--text); margin-top: 0.35em; }
-.ada-term-cmd:first-child { margin-top: 0; }
-.ada-term-op .ada-term-text, .ada-term-tree .ada-term-text { padding-left: 1.6em; overflow: hidden; text-overflow: ellipsis; }
-.ada-term-tree { display: block; color: var(--text); }
+.ada-term-body { height: 25em; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 1rem 1.1rem 1.2rem; font-size: clamp(0.64rem, 0.98vw, 0.84rem); line-height: 1.9; }
+.ada-term-line { display: flex; gap: 0.7em; white-space: pre; }
+.ada-term-in { color: var(--text); margin-top: 0.35em; }
+.ada-term-in b { font-weight: 500; color: var(--accent-light); }
+.ada-term-out { color: var(--text-3); padding-left: 1.3em; }
 .ada-term-prompt { color: var(--accent); }
-.ada-term-line .ada-term-op { color: var(--accent-light); }
-.ada-term-out { color: var(--text); text-align: right; }
-.ada-term-caret { display: inline-block; width: 0.6em; height: 1.1em; background: var(--accent); transform: translateY(0.2em); animation: ada-term-blink 1s steps(2, start) infinite; }
-@keyframes ada-term-run { 0% { opacity: 0; } 1.5% { opacity: 1; } 93% { opacity: 1; } 96%, 100% { opacity: 0; } }
+.ada-term-caret { display: inline-block; width: 0.6em; height: 1.1em; margin-left: 1px; background: var(--accent); transform: translateY(0.2em); animation: ada-term-blink 1s steps(2, start) infinite; }
 @keyframes ada-term-blink { to { visibility: hidden; } }
-@media (prefers-reduced-motion: reduce) { .ada-term-line { animation: none; opacity: 1; } .ada-term-caret { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .ada-term-caret { animation: none; } }
 [data-theme="light"] .ada-term { box-shadow: none; }
-
