@@ -11,7 +11,7 @@ import LetterField from '../../components/LetterField';
 export const metadata = {
   title: 'Ada: typed models your agents build',
   description:
-    'Typed models your agents build. You feed them with your data. Your software queries them with no LLM in the middle.',
+    'Seed Ada with data and she builds a lattice of algebraic meaning. Leverage our SDK or direct API to then make deterministic calls with no LLM in the middle.',
 };
 
 const DOCS = "https://docs.glyphh.ai";
@@ -118,7 +118,8 @@ export default function AdaPage() {
             Typed models your agents <em>build.</em>
           </h1>
           <p className="oshero-pitch">
-            You feed them with your data. Your software queries them with no LLM in the middle.
+            Seed Ada with data and she builds a lattice of algebraic meaning. Leverage our SDK or direct API to
+            then make deterministic calls with no LLM in the middle.
           </p>
           <div className="oshero-actions">
             <a href={`${DOCS}/ada-install`} className="os-cta os-cta-primary">Install Ada</a>
