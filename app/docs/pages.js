@@ -951,7 +951,8 @@ except AdaError as e:
     print(e.code, e.status, e.message)`}</Code>
         <p>
           The codes are those of <a href="/docs/ada-tools">POST /ada</a>, plus <code>E_UNREACHABLE</code> when a
-          request never got an answer. A model that does not act is not an error.
+          request never got an answer. On a rate limit the error carries how long to wait: <code>retryAfter</code>{' '}
+          in TypeScript, <code>retry_after</code> in Python. A model that does not act is not an error.
         </p>
         <Note title="The contract">
           Both SDKs are tested against the same recorded requests and answers, and against the JSON Schema that{' '}
@@ -1157,9 +1158,11 @@ claude plugin install ada@glyphh-ai`}</Code>
             <tbody>
               <tr><td><code>E_VALIDATION</code></td><td>400</td><td>An argument, a statement, or data that does not fit the model&rsquo;s types. The message names the path.</td></tr>
               <tr><td><code>E_UNAUTHENTICATED</code></td><td>401</td><td>No key, or one that is not valid</td></tr>
+              <tr><td><code>E_PAYMENT</code></td><td>402</td><td>The organization has no plan for this, or has used its budget</td></tr>
               <tr><td><code>E_FORBIDDEN</code></td><td>403</td><td>For org admins, or above the reader&rsquo;s clearance</td></tr>
               <tr><td><code>E_NOT_FOUND</code></td><td>404</td><td>No such model, record, thing or procedure</td></tr>
-              <tr><td><code>E_FAILED_PRECONDITION</code></td><td>409</td><td>The model cannot do that as it is: a spec set on a model with records, a trend on a model without key parts</td></tr>
+              <tr><td><code>E_FAILED_PRECONDITION</code></td><td>409</td><td>The model cannot do that as it is: a new shape of spec on a model with records, a trend on a model without key parts</td></tr>
+              <tr><td><code>E_RATE_LIMITED</code></td><td>429</td><td>Too many calls for the plan. <code>Retry-After</code> says how many seconds to wait.</td></tr>
             </tbody>
           </table>
         </div>
