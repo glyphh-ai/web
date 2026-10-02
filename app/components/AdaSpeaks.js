@@ -1,9 +1,9 @@
-import HoloTree from './HoloTree';
+import AdaTerminal from './AdaTerminal';
 import DistortField from './DistortField';
 
 /**
  * AdaSpeaks: the section before Products (his order, 2026-10-01). The
- * hologram fact tree on one side, his words on the other: "Ada speaks in
+ * command line on one side (the operations running down the input), his words on the other: "Ada speaks in
  * math." and the two sentences that say what that means.
  */
 export default function AdaSpeaks() {
@@ -15,7 +15,7 @@ export default function AdaSpeaks() {
         <a href="/products/ada" className="qs-more">Meet Ada &rarr;</a>
       </div>
       <div className="ada-speaks-grid">
-        <HoloTree />
+        <AdaTerminal />
         <div className="ada-speaks-copy">
           <h2 className="ada-speaks-h">Ada speaks in <em>math.</em></h2>
           <p>
