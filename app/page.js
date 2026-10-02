@@ -44,9 +44,9 @@ export default async function Home() {
           stage hero. */}
       {variant === 'default' ? <CompanyHero /> : <Hero variant={variant} stage />}
       <div className="site-frame">
+        <Limits />
         <AdaSpeaks />
         <Products />
-        <Limits />
         {/* The One platform section is off the page (his order, 2026-10-01). Hidden, not deleted. */}
         {false && <OneAccount />}
         {/* The blog section is off the home page (his order, 2026-10-01); Blog is
