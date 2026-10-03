@@ -9,10 +9,10 @@ export const POSTS = [
   {
     slug: 'ada-in-your-code',
     title: 'Ada in Your Code — Tickets Routed, Churn Called',
-    summary: 'The Ada SDKs are out for TypeScript and Python. Two worked examples, run for real: a helpdesk that routes its own tickets, and a churn call that shows its work. No model at runtime.',
+    summary: 'The Ada SDKs are out for TypeScript and Python. Instead of telling you what Ada is for the hundredth time, Timme shows you two things he built with them this week: a helpdesk that routes its own tickets, and a churn call that shows its work.',
     date: '2026-10-02',
-    author: 'Glyphh',
-    minutes: 5,
+    author: 'Chris "Timme"',
+    minutes: 6,
     cover: '/blog/ada-sdk-hero.png',
     coverAlt: 'Ask a model. Get a reason. Two answers from Ada: a ticket routed to platform, and an account called as churned.',
     tags: ['Ada', 'SDK', 'Guides'],
@@ -24,77 +24,86 @@ export const POSTS = [
     ],
     sections: [
       {
-        id: 'what-shipped',
+        id: 'hi',
         heading: null,
         body: [
-          'Ada has SDKs now. One for TypeScript, one for Python. An agent builds the model. Your software calls it. Nothing generates the answer: it is measured against what you recorded, and it comes with the records it stands on.',
+          'Hi everyone, Chris here. Today we\'re shipping the Ada SDKs, one for TypeScript and one for Python, and instead of telling you what Ada is for the hundredth time I\'m going to show you two things I built with them this week. Both are in the docs as step by step guides and both were run for real, every number you see below came back from the server, not from my imagination.',
           {
             html: '<pre><code>npm install @glyphh-ai/ada\npip install glyphh-ada</code></pre>',
           },
-          'We wrote two programs with them, start to finish, and ran every line. Here is what came back.',
+          'Quick recap if you\'re new here. Glyphh\'s whole idea is use AI to build the thing, not to run it. Ada is the piece that makes that work when the thing has to reason. You (or your agent) build a model from your own records, and then your software calls it. No LLM in the middle, no tokens, no latency lottery, same answer every single time, and every answer tells you what it\'s standing on. That last part is very important to understand, and it\'s the part the examples are really about.',
         ],
       },
       {
         id: 'tickets',
-        heading: 'A helpdesk that routes its own tickets',
+        heading: 'Example one, a helpdesk that routes its own tickets',
         body: [
-          'Take 96 resolved tickets. Say what a ticket is: a product, a component, a severity, a plan, a summary. Record each one with the team that fixed it. That is the whole setup. No training run.',
-          'Then a new ticket comes in:',
+          'Every support org I have ever been in has the same problem. Tickets come in, somebody has to look at them and figure out which team owns them, and that somebody is usually the most senior person on the floor because they\'re the only one who knows. Hold that thought.',
+          'I took 96 resolved tickets, which is nothing, you have thousands. I told Ada what a ticket is, a product, a component, a severity from 1 to 5, a plan, and a one line summary, every field with a type. Then I recorded each ticket with the team that actually fixed it. That\'s the whole setup. There is no training run, there\'s no fine tuning, there\'s no prompt. A record counts from the next question.',
+          'Then I asked about a new one:',
           {
             html: '<pre><code>answer = model.query(ticket("api", "webhooks", 4, "pro", "webhook delivery fails with a 500"))\n\n{ "act": true, "top": "platform", "confidence": 1.0, "count": 16 }</code></pre>',
           },
-          { html: '<code>act</code> is the only thing your code branches on. True means route it. And when a ticket shows up about something no ticket ever mentioned, Ada does not bluff:' },
+          {
+            html: '<code>act</code> is the only thing your code looks at. True, route it to platform, 16 tickets like it say so. Cool, sounds great. Here\'s the part I actually care about though. A ticket came in about SSO, and no ticket in the history had ever mentioned SSO:',
+          },
           {
             html: '<pre><code>{ "act": false, "reason": "unseen", "top": "platform", "unseen": ["ticket.issue.component=sso"] }</code></pre>',
           },
-          'It names its nearest guess and tells you exactly what was new. That one goes to a person. Record what the person decides, three times, and Ada routes that kind on its own. A team bounces a ticket? Record the failure, and Ada stops making that call.',
-          'Ask why, and you get the nearest ticket on record, field by field:',
+          'Ada says no, I\'m not going to act on this, here is my nearest guess, and here is exactly what I\'ve never seen before. That ticket goes to a person. The person routes it to the identity team, I record that, and after three of those Ada routes SSO tickets on its own. The senior person on the floor just got their afternoon back, and nothing was guessed in the process.',
+          'Same thing the other direction. A team bounces a ticket back? Record the failure. Ada stops making that call for that kind of ticket until a newer success says otherwise. Your helpdesk gets smarter because your business kept happening, not because somebody retrained something.',
+          'And when the manager asks why did this go to platform, you don\'t shrug:',
           {
             html: '<img src="/blog/ada-sdk-facts.png" alt="The fact tree for a routed ticket: component, plan and product the same, severity near at 0.75, summary a partial match at 0.4486." loading="lazy" />',
           },
-          'Every number in that table is arithmetic on two values. Same ticket tomorrow, same answer tomorrow.',
+          'That is the nearest ticket on record, field by field. Same component, same plan, same product, severity one step off, summary about half the same words. Every one of those numbers is arithmetic on two values. It is not an opinion and it does not change tomorrow.',
         ],
       },
       {
         id: 'churn',
-        heading: 'A churn call that shows its work',
+        heading: 'Example two, a churn call that shows its work',
         body: [
-          'Sixty past accounts, three monthly snapshots each, and how each term ended. Record a snapshot with the same account id and Ada keeps it as a new version of that account. Then ask about a live one, as it is today:',
+          'This one is for the folks who have sat in a renewal meeting looking at a dashboard that says "health score 62" with no idea where the 62 came from. I have been that guy. Here\'s the Ada version.',
+          'Sixty past accounts, three monthly snapshots each, seats, logins per seat, open tickets, features used, and how the term ended, renewed or churned. In Ada a record with the same account id is a new version of that account, so the model keeps the whole slide, not just the last photo. Then you ask about a live account, as it is today, no id:',
           {
             html: '<pre><code>const a = await model.query(snapshot(account));\n\n{ "act": true, "top": "churned", "confidence": 0.9443, "count": 47,\n  "outcomes": { "churned": 0.9443, "renewed": 0.0557 } }</code></pre>',
           },
-          'Which churned accounts does it look like? One statement:',
+          '94% of the vote of 47 past accounts says churned. Which ones? Ask:',
           {
             html: '<pre><code>FIND SIMILAR TO $account WHERE outcome = $outcome LIMIT 3\n\n[ { "account": "acct-03", "score": 0.8889 },\n  { "account": "acct-06", "score": 0.7861 },\n  { "account": "acct-12", "score": 0.7694 } ]</code></pre>',
           },
-          'And because every version was kept, you can watch one of them slide:',
+          'Now your success manager has three names, not a score. And because every version was kept, you can pull up acct-03 and watch exactly how it went:',
           {
             html: '<img src="/blog/ada-sdk-churn.png" alt="Account acct-03 over three months: logins per seat fall from 6 to 2 while open tickets rise from 3 to 7. Risk: high, 94% of the vote of 47 past accounts." loading="lazy" />',
           },
-          { html: 'An account in an industry the model has never seen gets <code>unknown</code>, with the reason. Your success team sees a name, a number, and the three accounts it resembles. Not a vibe.' },
+          {
+            html: 'Logins down, tickets up, drift measured, slope per day on every number. That\'s one GQL statement, Ada\'s query language, and it\'s the same statement whether you run it from TypeScript, Python, or an agent over MCP. Throw an account at it from an industry it has never seen and you get <code>unknown</code> with the reason, not a confident number pulled out of the air. I cannot stress enough how much I prefer that to the health score.',
+          },
         ],
       },
       {
-        id: 'the-shape',
-        heading: 'The same shape, both times',
+        id: 'the-loop',
+        heading: 'Notice it\'s the same loop both times',
         body: [
           {
-            html: '<ol><li>Say what the thing is. Every field gets a type.</li><li>Record what happened.</li><li>Ask. Branch on <code>act</code>.</li><li>When it will not act, hand it to a person, with the reason.</li><li>Record what the person decided.</li></ol>',
+            html: '<ol><li>Say what the thing is. Every field gets a type, and anything that doesn\'t fit gets refused before it\'s stored.</li><li>Record what happened.</li><li>Ask, and branch on <code>act</code>.</li><li>When Ada won\'t act, hand it to a person with the reason.</li><li>Record what the person decided.</li></ol>',
           },
-          'That loop is the product. The model gets better because your business kept happening, and it can always tell you what it is standing on.',
+          'That loop is the product. It\'s how software should use AI in my opinion, the agent builds the model at build time where frontier models are genuinely great, and at runtime it\'s just math on your data with a receipt. I\'ve spent almost 30 years building the data, logic and UI parts of software, and this is the first time the reasoning part has felt like software too, dependable, same answer every time, and explainable to the person who has to sign off on it.',
         ],
       },
       {
         id: 'go',
-        heading: 'Run them',
+        heading: 'Go build something',
         body: [
           {
-            html: 'Both guides are step by step, with every output: <a href="https://docs.glyphh.ai/ada-guide-tickets">route support tickets</a> in Python and <a href="https://docs.glyphh.ai/ada-guide-churn">customer churn</a> in TypeScript. The programs are in <a href="https://github.com/glyphh-ai/ada/tree/main/examples">the Ada repo</a>. Grab a key from the console and go.',
+            html: 'Both guides are in the docs with every line of code and every output: <a href="https://docs.glyphh.ai/ada-guide-tickets">route support tickets</a> in Python and <a href="https://docs.glyphh.ai/ada-guide-churn">customer churn</a> in TypeScript. The programs are in <a href="https://github.com/glyphh-ai/ada/tree/main/examples">the Ada repo</a>. Grab a key from the console, run one, then point it at your own data and tell me what it found. I read every one of those emails.',
           },
           'Build with AI. Run without it.',
+          '— Timme',
         ],
       },
     ],
+
   },
   {
     slug: 'glyphh-desktop-connections',
