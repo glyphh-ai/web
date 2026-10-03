@@ -499,6 +499,24 @@ five incidents, then tell me where this new one should go and why.`}</Code>
           <li>Use the same keys every time for the same kind of object.</li>
           <li>Leave out ids, paths, names and timestamps, or weigh them 0.</li>
         </ul>
+        <h2>The data is the model</h2>
+        <p>
+          Ada compares exactly, by type. So the shape you give a record is the model, and a wrong shape shows
+          in the fact tree the first time you ask. Learned building a colour classifier from pixels, where it
+          took three shapes to get one that worked:
+        </p>
+        <ul>
+          <li><strong>An absent value is not a zero.</strong> Record only what a thing has. A field at 0 on every record agrees with every question, and the vote fills with records that share nothing real. Twelve hue bins, ten of them 0, made every image look alike.</li>
+          <li><strong>A histogram or a profile is a set, not a row of numbers.</strong> Encode each part as tokens by its size (<code>orange1 … orange8</code>, <code>red1</code>) in a <code>set</code> role: two things then score by what they share over what either has. As twelve independent numbers, a 1% trace scored 0 against a missing value, and agreeing on small bins counted as much as agreeing on the big one.</li>
+          <li><strong>Drop traces before you compare,</strong> and do it the same way on the record and in the question.</li>
+          <li><strong>A number needs the right scale.</strong> <code>bin_width</code> is the difference that counts as near. Too fine and nothing is near; too coarse and everything is.</li>
+          <li><strong>A category that may grow is open</strong> (no <code>values</code>): a new value is <code>unseen</code>, the model says so and a person decides. One that must not grow lists its values and refuses the rest.</li>
+          <li><strong>Identity is a key part with weight 0.</strong> A thing that changes is recorded again under the same key parts: versions, not new things.</li>
+          <li><strong>Roles that only mean something together</strong> share a segment with <code>together</code>.</li>
+          <li><strong>Weigh what decides.</strong> At ten or more wins, <code>ada_calibrate</code> fits the vote and <code>ada_learn</code> finds the weights from the records. Read what it learned: a role at 0 no longer guards <code>unseen</code>.</li>
+          <li><strong>When an answer is off, the fact tree says which kind of wrong.</strong> The right nearest records with a wrong vote is a weighting problem. The wrong nearest records is a representation problem. <code>unseen</code> on something that is not new is a threshold, or a category that should be open.</li>
+          <li><strong>Test what the model must refuse</strong> as well as what it must answer, with a few records, before you load them all. A spec is fixed after the first record, bar its weights.</li>
+        </ul>
       </>
     ),
   },
