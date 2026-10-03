@@ -1416,6 +1416,7 @@ claude plugin install ada@glyphh-ai`}</Code>
             <tbody>
               <tr><td><code>ada_record</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code>, optional <code>at</code></td><td>Records a win: this outcome worked here</td></tr>
               <tr><td><code>ada_veto</code></td><td><code>model_id</code>, <code>situation</code>, <code>outcome</code>, optional <code>at</code></td><td>Records a failure: this outcome failed or was rejected here</td></tr>
+              <tr><td><code>ada_load</code></td><td><code>model_id</code>, <code>records</code>: up to 500 of <code>{'{situation, outcome, store?, at?}'}</code></td><td>Loads many records in one call, the seed: every one is checked first, and one that does not fit refuses the whole call by its index with nothing written. Answers <code>{'{loaded, wins, vetoes}'}</code></td></tr>
               <tr><td><code>ada_calibrate</code></td><td><code>model_id</code></td><td>Fits the model&rsquo;s probabilities to its records (10 or more wins)</td></tr>
               <tr><td><code>ada_learn</code></td><td><code>model_id</code></td><td>Learns what decides from a model&rsquo;s wins (10 or more) and calibrates it (org admins): a flat model&rsquo;s key weights, saved as its defaults, or a typed model&rsquo;s role weights, saved in its spec</td></tr>
             </tbody>
@@ -1487,11 +1488,31 @@ claude plugin install ada@glyphh-ai`}</Code>
         <Row k="scale">The scale the answer was measured on.</Row>
         <Row k="key">The situation&rsquo;s identity: the same for the same data in any key order.</Row>
         <Row k="contract">The version of this shape. It goes up when a field is removed or changes meaning, never when one is added.</Row>
+        <h2>POST /ada/load</h2>
+        <p>
+          The same door for a file. The body is NDJSON: the first line names the model, every other line is one
+          record, <code>{'{"situation", "outcome", "store"?, "at"?}'}</code>. It is read as it arrives and written in
+          batches of 500, each batch metered and budgeted like a call to <code>ada_load</code>, so a budget that runs
+          out stops the load at a line it names.
+        </p>
+        <Code lang="bash">{`curl https://api.glyphh.ai/ada/load \\
+  -H "x-glyphh-api-key: Bearer $GLYPHH_API_KEY" \\
+  -H "content-type: application/x-ndjson" \\
+  --data-binary @- <<'NDJSON'
+{"model_id": "am_0123456789ab"}
+{"situation": {"task": "deploy_service", "constraint": "canary_required"}, "outcome": "canary", "at": "2026-01-03T10:00:00Z"}
+{"situation": {"task": "deploy_service", "constraint": "none"}, "outcome": "rolling", "store": "vetoes", "at": "2026-01-04T09:00:00Z"}
+NDJSON`}</Code>
+        <p>
+          It answers <code>{'{"data": {"model_id", "loaded", "wins", "vetoes", "lines"}}'}</code>. A refusal part way is{' '}
+          <code>{'{"error": {"code", "message": "line N: …", "loaded"}}'}</code>: the batches before that line stay, the one
+          it was in does not. The SDKs call this <code>stream(records)</code>, and <code>load(records)</code> for a list.
+        </p>
         <h2>The contract</h2>
         <p>
           For software that calls a model with no agent in the path, <code>{'{"op": "contract"}'}</code> returns
           the JSON Schema of what <code>query</code>, <code>facts</code>, <code>history</code>, <code>trend</code>,{' '}
-          <code>predict</code>, <code>gql</code> and <code>edges</code> return, and what each <code>reason</code> means. With a typed model&rsquo;s{' '}
+          <code>predict</code>, <code>gql</code>, <code>edges</code> and <code>load</code> return, and what each <code>reason</code> means. With a typed model&rsquo;s{' '}
           <code>model_id</code> it also returns the shape of that model&rsquo;s data.
         </p>
         <h2>Errors</h2>
