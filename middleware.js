@@ -33,8 +33,8 @@ function sourceOf(url) {
 }
 
 // The docs are their own host (his order: docs.glyphh.ai). This app serves
-// them from app/docs, so on that host /ada is the page at /docs/ada, and an
-// old /docs/ada address there loses its prefix.
+// them from app/docs, so on that host /install is the page at /docs/install, and an
+// old /docs/install address there loses its prefix.
 const DOCS_HOST = 'docs.glyphh.ai';
 const hostOf = (request) =>
   (request.headers.get('x-forwarded-host') || request.headers.get('host') || request.nextUrl.hostname).split(':')[0].toLowerCase();

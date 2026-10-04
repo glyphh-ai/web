@@ -14,7 +14,7 @@ const MOVED = {
   seats: `${DOCS}/plans`, 'billing-admin': `${DOCS}/plans`,
   sso: `${DOCS}/security`, 'org-settings': `${DOCS}/security`, domain: `${DOCS}/security`,
   review: `${DOCS}/skills`, hub: `${DOCS}/skills`, 'ai-hub': `${DOCS}/skills`, 'org-agents': `${DOCS}/skills`,
-  'semantic-apps': `${DOCS}/ada`, 'built-on': DOCS, brand: DOCS, console: DOCS, 'the-cast': DOCS,
+  'semantic-apps': `${DOCS}/install`, 'built-on': DOCS, brand: DOCS, console: DOCS, 'the-cast': DOCS,
 };
 
 export function generateStaticParams() {

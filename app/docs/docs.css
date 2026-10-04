@@ -259,127 +259,19 @@ html.docs-html::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 [data-theme="light"] .dx-side-logo img.logo-dark { display: none; }
 [data-theme="light"] .dx-side-logo img.logo-light { display: block; }
 
-/* The four steps as a flow: hairline boxes, the model in the accent. */
-.dx-flow { margin: 1.4rem 0 1.6rem; overflow-x: auto; }
-.dx-flow svg { display: block; width: 100%; min-width: 680px; height: auto; }
-.dx-flow-box { fill: var(--bg); stroke: var(--border); stroke-width: 1; }
-.dx-flow-model { fill: var(--accent-glow); stroke: var(--accent); stroke-width: 1.2; }
-.dx-flow-line { fill: none; stroke: var(--border-2); stroke-width: 1; }
-.dx-flow-head { fill: var(--border-2); }
-.dx-flow text { text-anchor: middle; font-family: var(--font-mono); }
-.dx-flow-title { fill: var(--text); font-size: 13px; font-weight: 600; }
-.dx-flow-sub { fill: var(--text-3); font-size: 11px; }
-.dx-flow-step { fill: var(--accent-light); font-size: 10.5px; letter-spacing: 0.04em; }
-.dx-flow text.dx-flow-l { text-anchor: start; }
-.dx-flow-score { fill: var(--accent-light); font-size: 11px; font-weight: 600; }
-.dx-flow-dash { fill: none; stroke: var(--border-2); stroke-width: 1; stroke-dasharray: 3 4; }
-.dx-flow-chip { fill: var(--bg); stroke: var(--accent); stroke-width: 1; }
-.dx-flow-bar { fill: var(--surface-2); stroke: var(--border); stroke-width: 1; }
-.dx-flow-bar-top { fill: var(--accent-glow); stroke: var(--accent); }
-.dx-flow figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-4); }
-
 /* Headings sit closer to the text above them. */
 .dx-body h2 { margin: 1.5rem 0 0.7rem; padding-top: 0; }
-/* The diagrams fit the column before they scroll, and the scrollbar is thin. */
-.dx-flow svg { min-width: 560px; }
-.dx-flow { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
-.dx-flow::-webkit-scrollbar { height: 6px; }
-.dx-flow::-webkit-scrollbar-track { background: transparent; }
-.dx-flow::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
-
-/* The glyph, drawn as glyphs inside glyphs. */
-.dx-glyph { margin: 1.4rem 0 1.8rem; }
-.dx-glyph figcaption { margin-top: 0.7rem; font-size: 0.82rem; color: var(--text-4); }
-.dx-g { border: 1px solid var(--border); border-radius: 12px; background: var(--accent-glow); padding: 0.7rem 0.8rem 0.8rem; }
-.dx-glyph > .dx-g { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
-.dx-g .dx-g { margin-top: 0.6rem; background: color-mix(in srgb, var(--bg) 62%, transparent); }
-.dx-g .dx-g .dx-g { background: var(--bg); }
-.dx-g-head { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-mono); }
-.dx-g-mark { flex: none; width: 9px; height: 9px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
-.dx-g-name { color: var(--white); font-family: var(--font-mono); font-size: 0.86rem; font-weight: 600; }
-.dx-g-kind { font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-light); }
-.dx-g-weight { margin-left: auto; font-size: 0.68rem; color: var(--text-3); border: 1px solid var(--border); border-radius: 999px; padding: 0.05rem 0.55rem; }
-.dx-g-body { display: flex; flex-direction: column; }
-.dx-g-leaf { display: grid; grid-template-columns: auto minmax(84px, 110px) auto minmax(0, 1fr) auto; align-items: center; gap: 0.6rem; margin-top: 0.5rem; padding: 0.5rem 0.7rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
-.dx-g-leaf .dx-g-mark { width: 7px; height: 7px; background: none; border: 1.5px solid var(--accent); }
-.dx-g-leaf .dx-g-name { font-weight: 500; color: var(--text); }
-.dx-g-bind { color: var(--accent-light); font-size: 0.95rem; line-height: 1; }
-.dx-g-value { font-family: var(--font-mono); font-size: 0.84rem; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.dx-g-type { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-4); }
 
 .dx-traits { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin: 0 0 1.6rem; }
 .dx-trait { padding: 1rem 1rem 0.9rem; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
 .dx-trait svg { width: 22px; height: 22px; fill: none; stroke: var(--accent-light); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .dx-trait-name { margin: 0.55rem 0 0.25rem; color: var(--white); font-weight: 600; }
 .dx-body .dx-trait p { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--text-3); }
-@media (max-width: 560px) { .dx-g-leaf { grid-template-columns: auto 1fr auto; } .dx-g-bind { display: none; } .dx-g-value { grid-column: 2 / -1; } }
 .dx-traits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .dx-trait:last-child:nth-child(odd) { grid-column: 1 / -1; }
 @media (max-width: 560px) { .dx-traits { grid-template-columns: 1fr; } }
 
-/* The Glyphh introduction: the stack, the two lanes, the four doors. */
-.dx-flow-base { fill: var(--surface-2); stroke: var(--text-3); stroke-width: 1.2; }
+/* The Glyphh introduction: the doors, one per product. */
 .dx-body a.dx-door { display: block; text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
 .dx-body a.dx-door:hover { border-color: var(--accent); transform: translateY(-2px); }
 .dx-door-go { display: block; margin-top: 0.7rem; font-family: var(--font-mono); font-size: 0.76rem; color: var(--accent-light); }
-.dx-pull { margin: 1.6rem 0; padding: 0.2rem 0 0.2rem 1.1rem; border-left: 2px solid var(--accent); font-size: 1.3rem; line-height: 1.35; letter-spacing: -0.01em; color: var(--white); font-weight: 600; }
-.dx-pull em { font-style: normal; color: var(--accent-light); }
-
-/* A fact tree, drawn. */
-.dx-ft { margin: 1.4rem 0 1.8rem; border: 1px solid var(--accent); border-radius: 12px; background: var(--surface); box-shadow: 0 0 0 4px var(--accent-glow); overflow: hidden; }
-.dx-ft-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem 1.2rem; padding: 0.9rem 1rem; background: var(--accent-glow); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.86rem; }
-.dx-ft-label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-light); margin-right: 0.6rem; }
-.dx-ft-id { color: var(--white); font-weight: 600; }
-.dx-ft-arrow { color: var(--text-4); margin: 0 0.5rem; }
-.dx-ft-outcome { color: var(--white); font-weight: 600; }
-.dx-ft-stats { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; color: var(--text-3); font-size: 0.78rem; }
-.dx-ft-stats b { color: var(--accent-light); font-weight: 600; }
-.dx-ft-cols, .dx-ft-row { display: grid; grid-template-columns: minmax(120px, 1.1fr) minmax(150px, 2fr) 64px 64px 96px; align-items: center; gap: 0.8rem; padding: 0.55rem 1rem; }
-.dx-ft-cols { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-4); border-bottom: 1px solid var(--border); }
-.dx-ft-row { border-bottom: 1px solid color-mix(in srgb, var(--border) 45%, transparent); font-family: var(--font-mono); font-size: 0.84rem; }
-.dx-ft-key { display: flex; align-items: center; gap: 0.5rem; color: var(--white); font-weight: 600; }
-.dx-ft-key i { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
-.dx-ft-child .dx-ft-key { padding-left: 1.4rem; font-weight: 500; color: var(--text); }
-.dx-ft-child .dx-ft-key i { background: none; border: 1.5px solid var(--accent); width: 7px; height: 7px; }
-.dx-ft-score { display: flex; align-items: center; gap: 0.6rem; color: var(--accent-light); font-weight: 600; }
-.dx-ft-bar { flex: 1; height: 8px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); overflow: hidden; }
-.dx-ft-bar span { display: block; height: 100%; background: var(--accent); }
-.dx-ft-num { color: var(--text-3); }
-.dx-ft-share { color: var(--white); font-weight: 600; }
-.dx-ft-status { font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-4); }
-.dx-ft-off { opacity: 0.55; }
-.dx-ft figcaption, .dx-ans + figcaption { padding: 0.7rem 1rem; font-size: 0.8rem; color: var(--text-4); }
-
-/* The answer, and the line of code it feeds. */
-.dx-ans { display: grid; grid-template-columns: minmax(0, 1.25fr) auto minmax(0, 1fr); align-items: stretch; gap: 0.9rem; margin: 1.2rem 0 1.6rem; }
-.dx-ans-card { padding: 1rem 1.1rem; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
-.dx-ans-top { margin: 0.35rem 0 0.9rem; font-family: var(--font-mono); font-size: 1.15rem; font-weight: 600; color: var(--white); }
-.dx-ans-stats { display: flex; gap: 1.4rem; margin-bottom: 0.9rem; }
-.dx-ans-stats b { display: block; font-family: var(--font-mono); font-size: 1.1rem; color: var(--accent-light); }
-.dx-ans-stats span { font-size: 0.74rem; color: var(--text-3); }
-.dx-ans-gauge { position: relative; height: 8px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); }
-.dx-ans-gauge span { display: block; height: 100%; border-radius: 999px; background: var(--accent); }
-.dx-ans-gauge i { position: absolute; top: -5px; bottom: -5px; width: 1px; background: var(--text-2); }
-.dx-ans-scale { display: flex; justify-content: space-between; margin-top: 0.4rem; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-4); }
-.dx-ans-then { align-self: center; color: var(--text-4); font-size: 1.2rem; }
-.dx-ans-act { border-color: var(--accent); background: var(--accent-glow); }
-.dx-ans-true { margin: 0.35rem 0 0.3rem; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 600; color: #4ade80; }
-.dx-body .dx-ans-act p { margin: 0 0 0.8rem; font-size: 0.84rem; color: var(--text-3); }
-.dx-ans-act pre { margin: 0; padding: 0.6rem 0.7rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-mono); font-size: 0.76rem; line-height: 1.6; color: var(--text-2); overflow-x: auto; }
-@media (max-width: 720px) {
-  .dx-ans { grid-template-columns: 1fr; } .dx-ans-then { transform: rotate(90deg); justify-self: center; }
-  .dx-ft-cols { display: none; }
-  .dx-ft-row { grid-template-columns: 1fr auto auto; }
-  .dx-ft-score { grid-column: 1 / -1; order: 5; }
-  .dx-ft-status { display: none; }
-}
-
-/* The same question, two machines. */
-.dx-flow-dim { fill: var(--text-3); }
-.dx-flow-tok { fill: var(--surface-2); stroke: var(--border); stroke-width: 1; }
-.dx-flow-tok-q { stroke: var(--text-3); stroke-dasharray: 3 3; }
-.dx-flow-squig { fill: none; stroke: var(--border-2); stroke-width: 6; stroke-linecap: round; opacity: 0.55; }
-.dx-flow-rule { stroke: var(--border); stroke-width: 1; stroke-dasharray: 2 6; }
-.dx-flow-dot { fill: var(--border-2); }
-.dx-flow-dot-near { fill: var(--accent); }
-.dx-flow-dot-q { fill: var(--white); stroke: var(--accent); stroke-width: 2; }
