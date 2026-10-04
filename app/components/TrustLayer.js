@@ -2,7 +2,7 @@
  * TrustLayer — one band, two halves, one message: "you can trust this."
  * Framed like every other section ({ label } + band ground), and both
  * halves share ONE card treatment so governance and science read as a
- * single layer, not two leftovers. The full Ada narrative lives on
+ * single layer, not two leftovers. The full research narrative lives on
  * /research.
  */
 

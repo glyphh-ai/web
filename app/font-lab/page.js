@@ -53,9 +53,9 @@ const OPTIONS = [
 ];
 
 const ROWS = [
-  ['deploy_service', 'canary', '0.98', 'act'],
-  ['rotate_keys', 'staged', '0.74', 'act'],
-  ['drop_table', 'refuse', '0.51', 'ask'],
+  ['claude-fable-5-1', 'Anthropic', '$15.00', 'pro'],
+  ['gpt-5', 'OpenAI', '$10.00', 'pro'],
+  ['qwen3-coder', 'open weights', '$0.90', 'solo'],
 ];
 
 function Sample({ option }) {
@@ -74,16 +74,16 @@ function Sample({ option }) {
       <h1 className="fl-hero">AI at build time. <em>Not</em> runtime.</h1>
       <div className="fl-cols">
         <div className="fl-prose">
-          <h2>Typed models your agents build, feed and query</h2>
+          <h2>The operating system for frontier AI</h2>
           <p>
-            Productivity doesn&rsquo;t come from prompting. It comes from building. An Ada model holds records:
-            a situation, the outcome that was tried, and whether it worked. Ask it about a new situation and it
-            answers with what worked before, how confident it is, and the 12 records it stands on.
+            Productivity doesn&rsquo;t come from prompting. It comes from building. Glyphh Desktop runs the
+            agent, skills, tasks and your connections on your machine, with every frontier model and open
+            weights beside the apps you already use. Save the setup under one name and switch in a keystroke.
           </p>
-          <h3>When Ada says to act</h3>
+          <h3>When the Router picks the model</h3>
           <p className="fl-small">
-            A query returns <code>act</code>, true only when confidence is at least 0.7 and three or more records
-            stand behind the answer. 1Il| 0O 5S 8B rn m.
+            Point any client at one base URL. An auto-router picks the model per request, and every token is
+            paid from one budget at a published rate. 1Il| 0O 5S 8B rn m.
           </p>
           <div className="fl-actions">
             <a className="btn btn-primary btn-lg group" href={`#${key}`}><span className="btn-fill" /><span className="btn-label">Download Glyphh</span></a>
@@ -92,19 +92,19 @@ function Sample({ option }) {
         </div>
         <div className="fl-ui">
           <nav className="fl-nav">
-            <span className="on">Models</span><span>Records</span><span>Space</span><span>Settings</span>
+            <span className="on">Models</span><span>Keys</span><span>Budgets</span><span>Settings</span>
           </nav>
           <table className="fl-table">
-            <thead><tr><th>Situation</th><th>Outcome</th><th>Confidence</th><th>Gate</th></tr></thead>
+            <thead><tr><th>Model</th><th>Provider</th><th>Output / M</th><th>Plan</th></tr></thead>
             <tbody>
               {ROWS.map(([s, o, c, g]) => (
                 <tr key={s}><td><code>{s}</code></td><td>{o}</td><td className="fl-num">{c}</td><td><span className="fl-tag">{g}</span></td></tr>
               ))}
             </tbody>
           </table>
-          <pre className="fl-code">{`claude plugin install ada@glyphh-ai
-ada_query({ task: "deploy_service", env: "prod" })
-// => { top: "canary", act: true, confidence: 0.98 }`}</pre>
+          <pre className="fl-code">{`npm install -g @glyphh-ai/cli
+glyphh login
+// => signed in · acme · plan pro · router: auto`}</pre>
           <p className="fl-label">EP. 03 &middot; CONNECTIONS &middot; 4 MIN</p>
         </div>
       </div>

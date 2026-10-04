@@ -192,7 +192,7 @@ export default function IntegrationsPage() {
                 desktop. You build the rest with the agent. Your org reviews, approves, and distributes them.
               </p>
             </div>
-            <a href="https://docs.glyphh.ai/ada" className="qs-more">Semantic Apps &rarr;</a>
+            <a href="https://docs.glyphh.ai/install" className="qs-more">Glyphh Desktop &rarr;</a>
           </div>
           <div className="ix-grid ix-grid-3">
             <a href="https://docs.glyphh.ai/install" className="ix-card ix-card-tall">
@@ -200,7 +200,7 @@ export default function IntegrationsPage() {
               <h3>House apps</h3>
               <p>The panels the desktop ships with: Slides, Drive, Design, media, the dev tools. Present on every seat from the first open.</p>
             </a>
-            <a href="https://docs.glyphh.ai/ada" className="ix-card ix-card-tall">
+            <a href="https://docs.glyphh.ai/skills" className="ix-card ix-card-tall">
               <h3>Your apps</h3>
               <p>Built with the agent from a skill folder and a manifest. Deterministic data, the system&rsquo;s storage and memory, state that persists. Yours to run and to publish.</p>
             </a>
@@ -216,7 +216,7 @@ export default function IntegrationsPage() {
               <p>Apps can add panels, tools, schedules, and data. Skills teach the agent how your team works.</p>
             </div>
             <div className="ix-actions">
-              <a href="https://docs.glyphh.ai/ada" className="os-cta os-cta-primary">Build an app &rarr;</a>
+              <a href="https://docs.glyphh.ai/skills" className="os-cta os-cta-primary">Build an app &rarr;</a>
               <a href="https://docs.glyphh.ai/skills" className="os-cta os-cta-ghost">Write a skill &rarr;</a>
             </div>
           </div>

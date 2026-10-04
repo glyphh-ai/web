@@ -6,9 +6,9 @@ import LetterField from '../components/LetterField';
  * /research — the substrate (site.md §7), in the frame (site refactor
  * 2026-09-22). This page is why "validated" and "deterministic" are real
  * words on this site: the thread from Lovelace to vector-symbolic memory,
- * why micro programs can be trusted, the five repos, and the path from
- * research idea to product. The pre-refactor page's bands (ResearchBand,
- * AdaSection) stay in the tree, unmounted.
+ * why micro programs can be trusted, the repos, and the path from
+ * research idea to product. The pre-refactor page's band (ResearchBand)
+ * stays in the tree, unmounted.
  */
 
 const GITHUB_URL = 'https://github.com/glyphh-ai';
@@ -21,8 +21,6 @@ export const metadata = {
 
 // The stack: each a real repo (site.md §7.4).
 const STACK = [
-  { tag: 'memory', name: 'adaL', title: 'Memory that never confabulates', desc: 'Schema-on-write: exact answers, versioned history, no model in the read path.', href: `${GITHUB_URL}/adaL` },
-  { tag: 'engine', name: 'ada', title: 'The engine everything plugs into', desc: 'Ingestion, querying, streaming, MCP tools.', href: `${GITHUB_URL}/ada` },
   { tag: 'hdc', name: 'models', title: 'Inference in microseconds, no GPU', desc: 'Pure hyperdimensional computing for classification and intent.', href: `${GITHUB_URL}/models` },
   { tag: 'runtime', name: 'rrotor', title: 'Deterministic agent loops', desc: 'The open RotorSpec runtime: reproducible runs, auditable behavior.', href: `${GITHUB_URL}/rrotor` },
   { tag: 'agent', name: 'code', title: 'The coding agent, in the open', desc: 'The governed loop the desktop is built on, with memory wired in from the first turn.', href: GITHUB_URL, soon: true },
@@ -45,15 +43,6 @@ export default function ResearchPage() {
             <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="os-cta os-cta-primary">Follow the work on GitHub &rarr;</a>
             <a href="#stack" className="os-cta os-cta-ghost">The stack</a>
           </div>
-        </section>
-
-        <section className="ix-section rs-prose">
-          <span className="qs-kicker">The thread</span>
-          <p>
-            In 1843 Ada Lovelace saw that machines could act on symbols, not just numbers &mdash; patterns woven,
-            never guessed. Vector-symbolic architectures make that exact: memory that never confabulates, inference
-            you can reproduce.
-          </p>
         </section>
 
         <section className="ix-section rs-prose" id="trust">
@@ -88,7 +77,7 @@ export default function ResearchPage() {
             <div className="hv-tile rs-tile rs-tile-note">
               <span className="rs-tag">from idea to product</span>
               <p className="hv-tile-body">
-                This isn&rsquo;t a lab arm. adaL is the memory in the desktop; rrotor runs the loops; hdc models route
+                This isn&rsquo;t a lab arm. rrotor runs the loops; hdc models route
                 intent in the kernel. The path from research idea to program you can run is the product.
               </p>
             </div>

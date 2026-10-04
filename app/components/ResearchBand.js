@@ -1,6 +1,6 @@
 /**
  * ResearchBand — the line that used to lead the home hero, now opening the
- * Ada narrative on /research (moved off the homepage with it).
+ * research narrative on /research (moved off the homepage with it).
  */
 
 export default function ResearchBand() {
