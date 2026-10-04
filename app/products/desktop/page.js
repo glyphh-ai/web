@@ -18,6 +18,8 @@ import FinalCTA from '../../components/FinalCTA';
 // switching between them is the daily way of working with AI.
 
 export const metadata = {
+  // The home page is this page (his order, 2026-10-04): one canonical, the root.
+  alternates: { canonical: '/' },
   title: 'Glyphh Desktop — the open desktop client for frontier AI',
   description:
     'Glyphh is the vendor-neutral desktop for Claude, ChatGPT, Gemini, and open-source models. Chat, work, and code run on your machine, beside the apps you already use. Save a loop, its models, its apps and its tools under one name and switch in a keystroke.',

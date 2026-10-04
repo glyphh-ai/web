@@ -2,79 +2,34 @@ import { headers } from 'next/headers';
 import Nav from './components/Nav';
 import Reveal from './components/Reveal';
 import Hero from './components/Hero';
-import CompanyHero from './components/CompanyHero';
-import Products from './components/Products';
-import OneAccount from './components/OneAccount';
-import Latest from './components/Latest';
-import StoryHeads from './components/StoryHeads';
-import Mcp from './components/Mcp';
-import AppMarquee from './components/AppMarquee';
-import Download from './components/Download';
-import FAQ from './components/FAQ';
-import OpenSourceSection from './components/OpenSourceSection';
-import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import DesktopPage, { metadata as desktop } from './products/desktop/page';
 
-// The 2026-08 rebuild, section by section. Hero first; the old HomeHero
-// (tabs + dream reel) stays in the tree until the switching story lands in
-// its own band, then gets deleted or absorbed.
+// THE HOME IS GLYPHH DESKTOP (his order, 2026-10-04): glyphh.ai is the desktop
+// page, the OS hero with the screenshots, the pitch, the planes, how it
+// works, quick start, works with. /products/desktop renders the same page
+// and points its canonical here. The company hero and the Products tiles
+// (CompanyHero, Products, HeroMap) stay in the tree, unmounted.
 
 // glyphh.ai/code and glyphh.ai/work are internally rewritten to this page with
 // a different hero (see ../middleware.js). Canonicalize every variant to the
 // root so search engines treat them as one page — no SEO fragmentation.
 export const metadata = {
+  title: desktop.title,
+  description: desktop.description,
   alternates: { canonical: '/' },
 };
 
 export default async function Home() {
   // The middleware tags campaign paths with a hero variant; bare glyphh.ai has
-  // no header and falls back to `default`.
+  // no header and falls back to `default`, which is the desktop page itself.
   const variant = (await headers()).get('x-hero-variant') || 'default';
+  if (variant === 'default') return <DesktopPage />;
   return (
     <div className="home-page">
       <Reveal />
       <Nav />
-      {/* THE HOME (his order, 2026-10-03): Glyphh Desktop is the home product
-          again, the Model Router second. The hero carries the desktop's words
-          and the two doors; the desktop's screenshots and sections live on
-          /products/desktop. Campaign variants (/code, /work) keep the desktop
-          stage hero. */}
-      {variant === 'default' ? <CompanyHero /> : <Hero variant={variant} stage />}
-      <div className="site-frame">
-        <Products />
-        {/* The One platform section is off the page (his order, 2026-10-01). Hidden, not deleted. */}
-        {false && <OneAccount />}
-        {/* The blog section is off the home page (his order, 2026-10-01); Blog is
-            in the header menu. Hidden, not deleted. */}
-        {false && <Latest />}
-      </div>
-      {/* EVERYTHING under the hero is OFF the page while the refactor works
-          down from the top (his order, 2026-09-22). Hidden, not deleted —
-          each band comes back restyled in site.md order. */}
-      {false && (
-        <>
-      {/* The connections scroller (his order, 2026-09-21): right under the
-          hero, before the callout. */}
-      <AppMarquee />
-      {/* THE CALLOUT (2026-09-18) is OFF the page (his order, 2026-09-21): its
-          stage now sits beside the hero and its four cards came off. Hidden,
-          not deleted. */}
-      {false && <Mcp />}
-      {/* Then each section is a direct attack: local co-work, MCP tools for
-          anything, skills that extend to tasks, semantic apps, plugins. */}
-      <StoryHeads />
-      {/* FeatureGrid ("One app, every surface of your work.") and
-          ReleaseStrip ("Build it. Ship it. Share it.") are OFF the page (his
-          call, 2026-08-28: they add nothing). The components stay in the
-          tree — hidden, not deleted — so either can be remounted here. */}
-      {/* The close: download → FAQ → the final CTA. Pricing lives on its
-          own page (his order, 2026-09-11) — the nav and FAQ link to it. */}
-      <Download />
-      <OpenSourceSection />
-      <FAQ />
-      <FinalCTA />
-        </>
-      )}
+      <Hero variant={variant} stage />
       <Footer />
     </div>
   );
