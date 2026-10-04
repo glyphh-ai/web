@@ -8,8 +8,9 @@
 // glyphh.ai/<key>. That's the whole change — no component edits, no deploy of
 // anything but this file.
 
-const PLATFORM_URL =
-  process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
+// Get started lands in the app at app.glyphh.ai (his order, 2026-10-04); the org
+// console (platform.glyphh.ai) is a link inside the app's Settings.
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://app.glyphh.ai';
 
 // Shared announcement pill — sits above the headline, links to the live
 // /models table. Announces the newest catalog addition.
@@ -37,7 +38,7 @@ export const heroes = {
     sub:
       'Put your whole AI stack behind one key. See who is driving spend, cap it ' +
       'before it runs away, and send every request to the model that should handle it.',
-    cta: { label: 'Get started free', href: PLATFORM_URL },
+    cta: { label: 'Get started free', href: APP_URL },
   },
 
   // /products/desktop — the open desktop client for frontier AI (his copy,
@@ -93,7 +94,7 @@ export const heroes = {
       'Start with an idea. Give it context. Let Glyphh reason, build, ' +
       'connect, and iterate — cloned apps, custom tools, live products, all ' +
       'inside your workspace.',
-    cta: { label: 'Start building free', href: PLATFORM_URL },
+    cta: { label: 'Start building free', href: APP_URL },
   },
 };
 

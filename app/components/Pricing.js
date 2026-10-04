@@ -1,6 +1,7 @@
 import PricingCards from './PricingCards';
 
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
+// Get started lands in the app (his order, 2026-10-04); the org console is a link inside its Settings.
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://app.glyphh.ai';
 const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
 
 // Dollars, always whole where they are whole: "$40", "$1", "$0.50".
@@ -182,7 +183,7 @@ export default async function Pricing() {
         </div>
       </div>
 
-      <PricingCards tiers={tiers} salesEmail={SALES_EMAIL} platformUrl={PLATFORM_URL} />
+      <PricingCards tiers={tiers} salesEmail={SALES_EMAIL} platformUrl={APP_URL} />
 
       <p className="pp-note">
         Each plan&rsquo;s budget is its monthly limit. Spend it and calls pause until you add funds or the month
