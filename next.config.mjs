@@ -54,6 +54,10 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // The site has no login of its own: /login and /signin land in the app,
+      // which signs you in first (his order, 2026-10-04).
+      { source: '/login', destination: process.env.NEXT_PUBLIC_APP_URL || 'https://app.glyphh.ai', permanent: false },
+      { source: '/signin', destination: process.env.NEXT_PUBLIC_APP_URL || 'https://app.glyphh.ai', permanent: false },
       // Products is a real section again (2026-08-16). The bare index lands on
       // the lead product (Design); retired product URLs fall through to 404.
       { source: '/products', destination: '/products/router', permanent: false },

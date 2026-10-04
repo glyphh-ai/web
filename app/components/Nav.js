@@ -5,6 +5,11 @@ import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
+// Log in and Sign up land in the app (his order, 2026-10-04): app.glyphh.ai is
+// the desktop in the browser and signs you in first. The org console
+// (platform.glyphh.ai) is reached from inside the app, Settings → Platform;
+// only the admin Dashboard link below still points there.
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://app.glyphh.ai';
 
 export default function Nav() {
   const pathname = usePathname() || '/';
@@ -66,9 +71,9 @@ export default function Nav() {
     };
   }, [ddOpen]);
 
-  // The platform (app-web) serves its login AT THE ROOT — no /auth path.
-  const loginHref = PLATFORM_URL;
-  const signupHref = PLATFORM_URL;
+  // The app serves its login AT THE ROOT — no /auth path.
+  const loginHref = APP_URL;
+  const signupHref = APP_URL;
   const dashHref = `${PLATFORM_URL}/dashboard`;
 
   return (

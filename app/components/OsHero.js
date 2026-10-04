@@ -1,4 +1,5 @@
 import HeroCTA from './HeroCTA';
+import { APP_URL } from './downloads';
 import HeroWaves from './HeroWaves';
 import HeroAscii from './HeroAscii';
 import HallLines from './HallLines';
@@ -27,19 +28,24 @@ export default function OsHero() {
           frame now, with no vanishing point to run to — off, not deleted. */}
       {false && <HallLines />}
       <div className="oshero-inner container">
-        <p className="oshero-eyebrow">Open Weights · Every frontier model · Programs you own</p>
+        {/* His copy, verbatim (2026-10-04): the headline and the sub-line are the
+            hero's only words. The eyebrow is off, not deleted. */}
+        {false && <p className="oshero-eyebrow">Open Weights · Every frontier model · Programs you own</p>}
 
         <h1 className="oshero-title">
-          Glyphh is the operating system for <em>frontier AI.</em>
+          Glyphh is the <em>vendor-neutral</em> alternative to frontier AI
         </h1>
 
         <p className="oshero-pitch">
-          The vendor neutral alternative to Claude Code, OpenAI Work, and Gemini Desktop.
+          Scale your business with practical AI that is designed to maximize your return on investment
+          and achieve real world results with semantic data, skills, and governance.
         </p>
 
+        {/* Get started lands in the app at app.glyphh.ai (his order, 2026-10-04); the
+            desktop download is the section below. */}
         <div className="oshero-actions">
-          <HeroCTA variant="default" href="#quick-start" label="Quick Start" className="os-cta os-cta-primary" />
-          <a href="https://docs.glyphh.ai" className="os-cta os-cta-ghost">Read the Docs</a>
+          <HeroCTA variant="default" href={APP_URL} label="Get started" className="os-cta os-cta-primary" />
+          <a href="#download" className="os-cta os-cta-ghost">Download the desktop</a>
         </div>
 
         <div className="oshero-shots">
