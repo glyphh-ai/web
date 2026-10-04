@@ -35,6 +35,18 @@ export function Code({ children, lang }) {
   return <pre className="dx-code" data-lang={lang}>{children}</pre>;
 }
 
+// A screenshot of the app. The files are under public/docs, served at /docs/<file>
+// on both hosts (middleware.js passes a path with an extension straight
+// through). They are taken at 2x, so `width` is the CSS width to show them at.
+export function Shot({ file, alt, width, caption }) {
+  return (
+    <figure className="dx-shot">
+      <img src={`/docs/${file}`} alt={alt} loading="lazy" style={width ? { maxWidth: width } : undefined} />
+      {caption && <figcaption>{caption}</figcaption>}
+    </figure>
+  );
+}
+
 const DOORS = [
   [`${DOCS}/install`, 'Glyphh Desktop', 'The agent, skills, tasks and tools on your machine, with every frontier model and open weights.', <><rect x="2" y="4" width="20" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></>],
   [`${DOCS}/gateway`, 'Model Router', 'One endpoint in front of every model, with your budgets, roles and published rates.', <><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4" /></>],
