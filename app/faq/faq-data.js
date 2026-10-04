@@ -1,0 +1,160 @@
+// The FAQ (his order, 2026-10-04), written from what the product does today.
+// Two or three sentences each, plain words, nothing that is not built. The
+// home page shows HOME_FAQ; /faq shows every group. Answers are strings or,
+// when they carry a link, { html }.
+
+const APP = 'https://app.glyphh.ai';
+
+export const FAQ_GROUPS = [
+  {
+    title: 'The app',
+    items: [
+      {
+        id: 'what-is-glyphh',
+        q: 'What is Glyphh?',
+        a: 'Glyphh is one app for every frontier model and every coding CLI, not tied to one vendor. It runs as a desktop on macOS, Windows and Linux, and as the same app in your browser at app.glyphh.ai, on one account.',
+      },
+      {
+        id: 'desktop-or-browser',
+        q: 'Desktop or app.glyphh.ai: which one do I use?',
+        a: { html: `Both are the same app. The desktop works in folders on your machine and can run the CLIs you already have installed; <a href="${APP}">app.glyphh.ai</a> needs no install and runs your sessions in the cloud, or on your own desktop when it is on and you have switched remote control on.` },
+      },
+      {
+        id: 'platforms',
+        q: 'Which platforms does the desktop run on?',
+        a: { html: 'macOS 12 and up on Apple Silicon and Intel, Windows 10 and up, and Linux x64 as an AppImage. Every build is in the <a href="/#download">Download section</a>; the app tells you when a new version is ready and installs it when you say so.' },
+      },
+      {
+        id: 'work-vs-code',
+        q: 'What is the difference between a Work session and a Code session?',
+        a: 'A Work session chats and acts with your apps, connections, memory and Glyphh’s own tools, with no file system or shell. A Code session has all of that plus files and a shell, confined to the folder it works in. A session is born one kind and stays it.',
+      },
+    ],
+  },
+  {
+    title: 'Sessions and files',
+    items: [
+      {
+        id: 'local-or-cloud',
+        q: 'Where do my files live: on my machine or in the cloud?',
+        a: 'You pick when the session starts: a folder on your desktop, or a cloud folder. A desktop session reads and writes only that folder on your machine; a cloud session works in a workspace stored under your org in Glyphh’s cloud, and stays a cloud session wherever you open it.',
+      },
+      {
+        id: 'cloud-session',
+        q: 'What runs a cloud session?',
+        a: 'A worker machine that starts for your session and stops when it goes idle. Your cloud folder is synced down to it at the start of a turn and back up at the end, so the workspace outlives the machine.',
+      },
+      {
+        id: 'remote-control',
+        q: 'Can app.glyphh.ai or my phone work on my desktop?',
+        a: 'Yes, when you turn remote control on for that machine, in the desktop’s Settings or with the glyphh CLI. Only the folders you grant are reachable, and switching it off ends it. It is off by default.',
+      },
+      {
+        id: 'history',
+        q: 'Do my chats follow me between the desktop and the browser?',
+        a: 'Yes. Every session is indexed under your account, so the left rail shows the same list on the desktop and at app.glyphh.ai, each marked local or cloud. Chats you start in the glyphh CLI appear there too.',
+      },
+    ],
+  },
+  {
+    title: 'CLIs and models',
+    items: [
+      {
+        id: 'which-clis',
+        q: 'Which CLIs ride along?',
+        a: 'Claude Code, Codex, Gemini, Copilot, Cursor and the Glyphh CLI, each in its own agent window beside the Glyphh agent. On the desktop they are the CLIs installed on your machine; in a cloud session they run on the worker.',
+      },
+      {
+        id: 'cli-gateway',
+        q: 'Do the CLIs go through Glyphh’s gateway?',
+        a: 'The Glyphh agent always does: every model call goes through your org’s Router on your own member key, so your org’s models, budgets and logs apply. Claude Code, Codex, Gemini and the Glyphh CLI can be pointed at the Router with a key from the console on a paid plan; Copilot and Cursor always use their own login.',
+      },
+      {
+        id: 'which-models',
+        q: 'Which models can I use?',
+        a: 'Every model your organization allows, frontier and open weights, from one list in the composer. Each model has a published rate on each plan, and every call is itemized in your usage.',
+      },
+      {
+        id: 'default-model',
+        q: 'What is the Default model?',
+        a: 'The model your team’s admin set as the team default on the console. Leave the picker on Default and your sessions follow that choice; the admin changes it once and everyone on the team moves with it.',
+      },
+      {
+        id: 'free-plan',
+        q: 'Is there a free plan?',
+        a: { html: 'Yes. Free runs a small set of models Glyphh marks for it, plus your own CLIs and your connections with $1 a month of connector budget. Paid plans run every model: a plan’s price is its monthly budget, spent at your plan’s published rate per model. See <a href="/pricing">pricing</a>.' },
+      },
+    ],
+  },
+  {
+    title: 'Apps, connections and memory',
+    items: [
+      {
+        id: 'apps',
+        q: 'What happens to the apps I build?',
+        a: 'An app is installed once in your organization and runs there, not on each person’s machine. The org decides who can open it, from only you to everyone, and it opens in a panel on the desktop and at app.glyphh.ai alike.',
+      },
+      {
+        id: 'connections',
+        q: 'What are connections?',
+        a: '3,500 services as tools: Gmail, Slack, Drive, Notion, Salesforce, GitHub and the rest, powered by Pipedream Connect. Sign in to a service once and any session, task or app can use it. An admin can share one account with the whole org, or each person connects their own.',
+      },
+      {
+        id: 'tool-approval',
+        q: 'Who approves what a connection does?',
+        a: 'Every tool on every connection has a mode: Ask, Always allow, or Never. A session obeys it with you in the room and a scheduled task obeys it unattended. One rule, both places.',
+      },
+      {
+        id: 'memory',
+        q: 'Does Glyphh remember?',
+        a: 'Yes. The agent keeps the facts it learns about you and your work, and you can browse and curate them on the Memory page. Memory runs through the Router, so it needs a plan that runs models.',
+      },
+    ],
+  },
+  {
+    title: 'Your organization',
+    items: [
+      {
+        id: 'console',
+        q: 'What is the platform console?',
+        a: 'platform.glyphh.ai is your organization’s console: members and teams, the models each team may use, budgets, keys, usage and logs. You reach it from inside the app, under Settings → Platform.',
+      },
+      {
+        id: 'teams',
+        q: 'Does it work for teams?',
+        a: 'Yes. One org, one bill, one set of rules: share connections, skills and apps across the org, set models and budgets per team, and see usage per member and per model. Enterprise adds SSO.',
+      },
+      {
+        id: 'pricing',
+        q: 'What does it cost?',
+        a: { html: 'Free is $0. Solo is $20 a month, Basic $40 a seat, Pro $150 a seat, each with its price as a monthly budget, dollar for dollar; Enterprise is custom. The rate for every model on every plan is on the <a href="/pricing">pricing page</a>.' },
+      },
+    ],
+  },
+  {
+    title: 'Data and security',
+    items: [
+      {
+        id: 'data',
+        q: 'Where is my data, and who can see it?',
+        a: 'Your org’s data is stored under your org’s own prefix, encrypted at rest, and a Router request for another org is refused. Cloud browser profiles are encrypted per member. On the desktop, local sessions never leave your folder.',
+      },
+      {
+        id: 'credentials',
+        q: 'What stays on my machine?',
+        a: 'Your Router credential, readable only by you and removed at logout, and the secrets of any custom MCP server you add. Connections are authorized through Glyphh’s server, so no service keys land on your machine.',
+      },
+      {
+        id: 'sign-in',
+        q: 'How do I sign in?',
+        a: { html: 'A magic link to your email, a Google account, or your organization’s SSO; the desktop signs in with a device flow you approve in the browser. Logging out signs out that device and no other. Found a problem? Write to <a href="mailto:security@glyphh.ai">security@glyphh.ai</a>.' },
+      },
+    ],
+  },
+];
+
+export const FAQ_ALL = FAQ_GROUPS.flatMap((g) => g.items);
+
+// The short list on the home page, in this order.
+const HOME_IDS = ['desktop-or-browser', 'local-or-cloud', 'which-clis', 'default-model', 'free-plan', 'apps', 'data'];
+export const HOME_FAQ = HOME_IDS.map((id) => FAQ_ALL.find((i) => i.id === id)).filter(Boolean);
