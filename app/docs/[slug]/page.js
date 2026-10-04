@@ -8,6 +8,8 @@ const LISTED = PAGES.filter((p) => p.slug !== 'introduction');
 // Pages the short docs dropped: an old address lands on the page that covers it now.
 const MOVED = {
   introduction: DOCS,
+  // The agent page became Work and Code; the folder and model pieces got their own pages (2026-10-04).
+  loops: `${DOCS}/work-and-code`, agent: `${DOCS}/work-and-code`,
   desktop: `${DOCS}/install`, panels: `${DOCS}/install`, sessions: `${DOCS}/install`, shortcuts: `${DOCS}/install`, artifacts: `${DOCS}/install`,
   router: `${DOCS}/gateway`, models: `${DOCS}/gateway`, 'model-catalog': `${DOCS}/gateway`, 'org-models': `${DOCS}/gateway`, rrotor: `${DOCS}/gateway`,
   connect: `${DOCS}/connections`, 'mcp-servers': `${DOCS}/mcp`,

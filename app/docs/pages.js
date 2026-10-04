@@ -1,4 +1,4 @@
-import { Note, Row, Code } from './ui';
+import { Note, Row, Code, Shot } from './ui';
 import { DOCS } from './base';
 
 // The docs, kept short. Each page is written from the source; when the product
@@ -7,66 +7,333 @@ import { DOCS } from './base';
 const desktop = [
   {
     slug: 'install',
-    title: 'Install and sign in',
-    lede: 'Get the desktop, sign in once, and let the app keep itself current.',
+    title: 'Sign in and install',
+    lede: 'One account for the web app, the desktop and the console.',
     body: (
       <>
-        <h2>Download</h2>
+        <h2>Sign in on the web</h2>
         <p>
-          Get the installer from the <a href="https://glyphh.ai/#download">download section</a> of glyphh.ai, or from the
-          Downloads page of your organization&rsquo;s console. Releases are published privately and served
-          through the console, so a download link is short-lived and made for you when you click it.
+          Open <a href="https://app.glyphh.ai">app.glyphh.ai</a>. Sign in with your email and the magic link it
+          sends, or with Google. That lands you in the command center: the same app the desktop runs.
         </p>
-        <h2>Sign in</h2>
+        <Shot file="sign-in.png" alt="The sign-in page at app.glyphh.ai: Continue with Google, or an email address for a magic link." width={760} caption="app.glyphh.ai. A magic link to your email, or Google." />
         <p>
-          The desktop signs you in with a device flow. It opens your browser on the sign-in page, you approve the
-          device, and the app picks up the session. Sign-in itself is a magic link to your email, Google, or your
-          organization&rsquo;s SSO. An organization that requires SSO refuses magic links for its domain.
+          The first person from a new email domain gets a new organization. Everyone invited after that joins
+          it. An organization that requires SSO refuses magic links for its domain.
+        </p>
+        <h2>Install the desktop</h2>
+        <p>
+          The desktop runs sessions on your own machine, in your own folders. Get it from the{' '}
+          <a href="https://glyphh.ai/#download">Download section</a> of glyphh.ai, or from the card on the
+          sign-in page. macOS, Windows and Linux.
         </p>
         <p>
-          The first person from a new email domain gets a new organization. Everyone invited after that joins it.
+          The desktop signs in with a device flow. It opens your browser on the sign-in page, you approve the
+          device, and the app picks up the session. It is the same account as the web app, so your sessions,
+          skills and settings are the same in both.
         </p>
         <p>Sign in once and stay signed in. Log out from the account menu and this device is signed out.</p>
+        <h2>The console</h2>
+        <p>
+          Your organization is run from the console at{' '}
+          <a href="https://platform.glyphh.ai">platform.glyphh.ai</a>: members, teams, models, budgets and
+          billing. Open it from <strong>Settings &rarr; Platform</strong> in the app.
+        </p>
         <h2>Updates</h2>
         <p>
-          When a new version is ready, a dot appears next to <strong>About</strong> in the account menu. Open
-          About to install it. Automatic download is a preference; it never installs while you are working.
+          When a new desktop version is ready, a dot appears next to <strong>About</strong> in the account menu.
+          Open About to install it. It never installs while you are working. The web app is always current.
+        </p>
+        <p>Next: <a href={`${DOCS}/where-a-session-works`}>where a session works</a>.</p>
+      </>
+    ),
+  },
+  {
+    slug: 'where-a-session-works',
+    title: 'Where a session works',
+    lede: 'Every session has a place: a folder on a desktop, or a folder in the cloud.',
+    body: (
+      <>
+        <p>
+          A session works in one folder. The folder chip on the composer names it. Click the chip and the
+          menu <strong>Where this session works</strong> opens.
+        </p>
+        <Shot file="session-place.png" alt="The folder chip's menu, titled Where this session works: a section for the attached desktop with its granted folders, and a section for the cloud with cloud folders and New cloud folder." width={340} caption="The folder chip. One section per place." />
+        <h2>The places</h2>
+        <Row k="On this desktop">A folder on the machine you are sitting at. The desktop app only</Row>
+        <Row k="On <your machine>">A folder on your desktop, reached from the web over remote control. The desktop lists the folders it granted</Row>
+        <Row k="In the cloud">A cloud folder: a workspace on a Glyphh worker, kept in your organization&rsquo;s storage. <strong>New cloud folder</strong> makes a fresh one</Row>
+        <p>
+          A desktop folder that is not granted shows a lock. Opening a session there shows a grant card instead
+          of running: grant the folder on the desktop under <strong>Settings &rarr; Remote control</strong> and
+          try again. See <a href={`${DOCS}/devices`}>Devices and remote control</a>.
+        </p>
+        <h2>The default</h2>
+        <p>
+          With a desktop attached, a new session starts in a folder on it: your last pick when it is still
+          granted, else your most recent folder, else the first granted one. With no desktop attached, a new
+          session starts in the cloud.
+        </p>
+        <h2>A place is fixed at birth</h2>
+        <p>
+          A session&rsquo;s place is set by its first turn and never changes. A cloud session stays in the
+          cloud. A desktop session stays on that desktop. The menu still lists the other place, but its rows say
+          why they cannot be picked.
+        </p>
+        <h2>In the rail</h2>
+        <p>
+          Recents groups cloud sessions under one <strong>Cloud</strong> heading and desktop sessions by folder.
+          The glyph at the start of a row says where it runs: a monitor for a desktop, a cloud for the cloud.
+        </p>
+        <Shot file="rail-recents.png" alt="The Recents list: a Cloud heading with one session, then two folder headings, web and sdk, each with a desktop session." width={275} caption="Recents: one Cloud group, then one group per desktop folder." />
+        <p>
+          The funnel beside the search box filters by loop and by place: <strong>All places</strong>,{' '}
+          <strong>This desktop</strong>, or <strong>Cloud</strong>. The same filter runs in the agent
+          panel&rsquo;s recents menu.
+        </p>
+        <Shot file="recents-filter.png" alt="The recents filter menu: All loops with the loops beneath it, then All places, This desktop and Cloud." width={460} caption="The recents filter: a loop, and a place." />
+        <Note kind="note" title="Terminals follow the place">
+          A cloud session&rsquo;s terminals and CLIs run on its worker. A desktop session&rsquo;s run on that
+          desktop. See <a href={`${DOCS}/cloud-terminals`}>Terminals and the CLIs in the cloud</a>.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'pick-a-model',
+    title: 'Pick a model',
+    lede: 'The model chip on the composer, and the effort dial beside it.',
+    body: (
+      <>
+        <p>
+          The chip reads <strong>Model: Default &middot; &lt;name&gt;</strong>. Click it and the models your
+          team allows are listed. Pick one and every turn of the session runs on it.
+        </p>
+        <Shot file="model-picker.png" alt="The model menu over the composer: a search box, Default with a check, then claude-sonnet-4-5, gemini-2.5-pro and gpt-5 with their providers." width={410} caption="The model chip. Default is your team's model." />
+        <h2>What Default means</h2>
+        <p>
+          Default is the model your team is flagged to. Without a team flag it is the organization&rsquo;s
+          default. Your admin sets both on the console&rsquo;s Models page. Pick a model yourself under{' '}
+          <strong>Settings &rarr; General &rarr; Default model</strong> and a new session opens on that instead.
+        </p>
+        <h2>Who sees what</h2>
+        <p>
+          The list is what your team allows. A team with no list of its own sees every model the organization
+          approved. On the Free plan the list is the models Glyphh flags for Free.
+        </p>
+        <h2>Effort</h2>
+        <p>
+          The chip beside the model is the effort dial, from <strong>Low</strong> to <strong>Ultra</strong>.
+          Higher effort means more thorough answers, but takes longer and uses your budget faster. It is one
+          preference for every turn, sent to the model as its reasoning effort. The chip dims when the model on
+          the chip takes one effort only.
+        </p>
+        <Shot file="effort.png" alt="The effort dial open over the composer: Effort Medium, a slider from Faster to Smarter." width={315} caption="The effort dial. Medium is the default." />
+        <h2>What it costs</h2>
+        <p>
+          Every turn is a model call paid from your organization&rsquo;s budget at your plan&rsquo;s rate for
+          that model. See <a href={`${DOCS}/gateway`}>The Router</a>.
         </p>
       </>
     ),
   },
   {
-    slug: 'loops',
-    title: 'The agent',
-    lede: 'One agent loop, two kinds of session, and the folder it works in.',
+    slug: 'work-and-code',
+    title: 'Work and Code',
+    lede: 'Two kinds of session. One agent loop.',
     body: (
       <>
         <p>
-          Glyphh runs one agent loop: the same engine in the desktop&rsquo;s agent panel and in the{' '}
-          <a href={`${DOCS}/cli`}>glyphh CLI</a>. It speaks the Messages API and MCP, calls every model through your
-          organization&rsquo;s <a href={`${DOCS}/gateway`}>Router</a>, and runs any model your team allows.
+          Glyphh runs one agent loop: the same engine in the desktop, on the web and in the{' '}
+          <a href={`${DOCS}/cli`}>glyphh CLI</a>. It speaks the Messages API and MCP, calls every model through
+          your organization&rsquo;s <a href={`${DOCS}/gateway`}>Router</a>, and runs any model your team allows.
+          The switch at the top of the rail picks the kind of session.
         </p>
-        <h2>Two kinds of session</h2>
-        <Row k="Work">Chat and act: your apps, connections, memory, and Glyphh&rsquo;s own tools. No file system or shell</Row>
-        <Row k="Code">Everything in Work, plus files and a shell, confined to the folder the session works in</Row>
+        <Row k="Work">The model, your tools and your memory. Connections, apps and Glyphh&rsquo;s own tools. No files, no shell</Row>
+        <Row k="Code">Everything in Work, plus a folder: files, terminals and the CLIs, confined to the folder the session works in</Row>
         <p>A session is born one kind and stays it: its transcript was written with that toolbelt.</p>
+        <Shot file="composer.png" alt="The composer: the folder chip reading web, No git, the prompt field Describe what to build or fix, Ask mode, the model chip and the effort chip." width={890} caption="The Code composer. The folder, the prompt, the model, the effort." />
         <h2>The folder is the sandbox</h2>
         <p>
           A Code session works in one folder and nowhere else. File tools refuse any path outside it, reads
-          included, and on macOS the shell runs under the system sandbox with writes allowed only inside that
-          folder, temp space, and package caches. Change the folder and the session keeps the new one.
+          included. On macOS the shell runs under the system sandbox with writes allowed only inside that folder,
+          temp space and package caches. In the cloud the folder is the worker&rsquo;s workspace.
         </p>
         <h2>Sub-agents</h2>
         <p>
-          The agent can hand work to sub-agents you define under Settings &rarr; Build &rarr; Agents: a name, a
-          brief, and a model of their own. They run the same loop in parallel and report back; the Agents panel
-          shows each one working.
+          The agent can hand work to sub-agents you define under <strong>Settings &rarr; Build &rarr; Agents</strong>:
+          a name, a brief and a model of their own. They run the same loop in parallel and report back. The
+          Agents panel shows each one working.
         </p>
         <h2>What it costs</h2>
         <p>
           Every turn is a model call paid from your organization&rsquo;s budget at your plan&rsquo;s rate for that
           model. Without a plan, everything works except model calls.
         </p>
+      </>
+    ),
+  },
+  {
+    slug: 'cloud-terminals',
+    title: 'Terminals and the CLIs in the cloud',
+    lede: 'A cloud session has a shell. It runs on the worker, in the session’s folder.',
+    body: (
+      <>
+        <h2>The terminal</h2>
+        <p>
+          Open the Terminal tile on a cloud session and you get a shell on the session&rsquo;s worker, in its
+          cloud folder. Tabs, resize and close work as they do for a local shell. On a desktop session the
+          terminal is that desktop&rsquo;s shell, reached over remote control from the web.
+        </p>
+        <h2>The CLIs</h2>
+        <p>The CLI tiles run on the worker too:</p>
+        <Row k="Claude Code">claude</Row>
+        <Row k="Codex">codex</Row>
+        <Row k="Gemini">gemini</Row>
+        <Row k="Copilot">copilot</Row>
+        <Row k="Cursor">cursor-agent</Row>
+        <Row k="Glyphh CLI">glyphh</Row>
+        <p>
+          Each one calls its models through your organization&rsquo;s Router on your own key, so the turns are
+          paid from the same budget and show in the same logs. Your skills are there, and the Glyphh tools are
+          there.
+        </p>
+        <Note kind="note" title="The honest card">
+          When there is nothing to run on, signed out, no worker, no desktop, the tile says so in one line
+          and offers a retry. It never pretends.
+        </Note>
+      </>
+    ),
+  },
+  {
+    slug: 'streamed-panels',
+    title: 'Streamed panels',
+    lede: 'On the web, a URL panel can be a real browser streamed from a worker. Off by default.',
+    body: (
+      <>
+        <p>
+          A URL app and the Browser panel open a web page. On the desktop that is a window of your own machine.
+          On <a href="https://app.glyphh.ai">app.glyphh.ai</a> there is no such window, so those panels can
+          instead run on a cloud browser and stream the page to you.
+        </p>
+        <h2>Turning it on</h2>
+        <p>
+          <strong>Settings &rarr; General &rarr; Streamed web panels</strong>. It is off by default. Turning
+          it on shows a warning first:
+        </p>
+        <Note kind="warn" title="Before it goes on">
+          Streams a real browser from a worker to this page. Experimental: slower, costs more, and some sites
+          block it. You can turn it off any time.
+        </Note>
+        <Shot file="settings-general.png" alt="Settings, General: the Default model row, the Streamed web panels switch, Default workspace and Interface sounds." width={900} caption="Settings → General. The switch is off until you turn it on." />
+        <p>Off, a URL panel shows a card that says why, with a link to the setting. Turning it off is immediate.</p>
+        <h2>Your logins stay yours</h2>
+        <p>
+          The cloud browser keeps a profile per member, encrypted. Sign in to a site once in a streamed panel and
+          you are still signed in next time. Nobody else in the organization shares it.
+        </p>
+      </>
+    ),
+  },
+  {
+    slug: 'devices',
+    title: 'Devices and remote control',
+    lede: 'Your desktops, attached to Glyphh. Turn it on there; manage it here.',
+    body: (
+      <>
+        <h2>On the desktop</h2>
+        <p>
+          <strong>Settings &rarr; Remote control</strong> on the desktop app. Turn on{' '}
+          <strong>Allow remote control on this computer</strong> and grant folders. A remote session can only
+          work inside those folders and the folders under them. Your approvals still apply. Nothing attaches
+          until you turn it on, and an org admin can turn it off for everyone.
+        </p>
+        <p>The CLI does the same: <code>glyphh remote-control</code>.</p>
+        <h2>On the web</h2>
+        <p>
+          <strong>Settings &rarr; Devices</strong> lists the computers attached to your account: the app and
+          version, when it attached, and the folders it granted.
+        </p>
+        <Shot file="settings-devices.png" alt="Settings, Devices: one computer, Christopher's Mac Studio, Glyphh Desktop 1.4.17, attached 2h ago, granting /Users/you/projects, with a Disconnect button." width={900} caption="Settings → Devices. One attached desktop and its granted folder." />
+        <Row k="Disconnect">Closes the connection now. The desktop stops reconnecting</Row>
+        <Row k="Allow">Lets a disconnected desktop attach again, once remote control is turned on there</Row>
+        <p>
+          With a desktop attached, the folder chip offers its folders and a new session starts in one of them.
+          See <a href={`${DOCS}/where-a-session-works`}>Where a session works</a>.
+        </p>
+      </>
+    ),
+  },
+  {
+    slug: 'library-sync',
+    title: 'Your library syncs',
+    lede: 'Drips, schedules, skills, tasks, agents, workspaces and tabs are one library, on every surface.',
+    body: (
+      <>
+        <p>
+          These are records in your member library. The server holds them. The desktop keeps a copy and syncs
+          it. The web reads and writes them through the server. Make one anywhere and it is on the other
+          surface within a sync interval.
+        </p>
+        <Row k="Drips">Effect recipes: the visual effects the agent can play, and the presets you build</Row>
+        <Row k="Schedules">Anything on a clock: a task or a skill, written in words or five-field cron</Row>
+        <Row k="Skills">A folder with a SKILL.md. See <a href={`${DOCS}/skills`}>Skills</a></Row>
+        <Row k="Tasks">A program with a task.json and a run.js. See <a href={`${DOCS}/tasks`}>Tasks</a></Row>
+        <Row k="Agents">Sub-agents: a name, a brief, a model</Row>
+        <Row k="Workspaces">A named arrangement of panels, with the loop and the model for each slot</Row>
+        <Row k="Tabs">The apps you keep as tabs on the rail. Their local settings stay on the machine</Row>
+        <h2>Where a schedule fires</h2>
+        <p>
+          A <strong>task</strong> schedule fires on the cloud clock, in UTC, and runs on your worker. A{' '}
+          <strong>skill</strong> schedule fires on your desktop, where its agent lives. Write the time the way
+          you mean it: a skill at <em>9am</em> is 9am on the desktop; a task at <em>9am</em> is 09:00 UTC.
+        </p>
+        <p>
+          <strong>Run now</strong> and the run history still come from the desktop. On the web the Schedules
+          page says so in one line.
+        </p>
+      </>
+    ),
+  },
+  {
+    slug: 'apps',
+    title: 'Apps',
+    lede: 'An app installs into your organization and opens from any surface.',
+    body: (
+      <>
+        <p>
+          An app is a skill bundle with an <code>app.json</code>: a page the agent can open as a work panel
+          and call as a tool. The app reads the type from the bundle, never from its name. See{' '}
+          <a href={`${DOCS}/skills`}>Skills</a> for what a bundle is.
+        </p>
+        <h2>Install</h2>
+        <p>Three doors, one result:</p>
+        <Row k="Settings → Build → Apps">Import a bundle</Row>
+        <Row k="Drop a .glyphh file">Onto the app</Row>
+        <Row k="Ask the agent">It calls <code>app_install</code></Row>
+        <p>
+          Each one uploads the bundle and creates an <strong>instance</strong> in your organization. Nothing
+          is installed on your machine.
+        </p>
+        <h2>What you see</h2>
+        <p>
+          The Apps list and the wall show the instances you may open: an org app for everyone, a restricted
+          one your role is granted, or your own isolated personal app. Your tabs are listed beside them.
+        </p>
+        <p>
+          An app you installed on this machine before the change shows once, with{' '}
+          <strong>Move to the cloud</strong> on its menu. The folder stays on disk.
+        </p>
+        <h2>Open it</h2>
+        <p>
+          An app panel loads from the organization&rsquo;s app host, on the desktop and on{' '}
+          <a href="https://app.glyphh.ai">app.glyphh.ai</a> alike. The agent&rsquo;s app tools,{' '}
+          <code>app_list_tools</code> and <code>app_call_tool</code>, reach the instance. Nothing runs on
+          your machine any more.
+        </p>
+        <Note kind="wire" title="Rollback">
+          The environment switch <code>GLYPHH_LOCAL_APPS=1</code> brings the old local host back on the desktop.
+        </Note>
       </>
     ),
   },
@@ -236,6 +503,11 @@ npm rm -g @glyphh-ai/cli          # remove`}</Code>
           skill. Write the schedule as five-field cron or in plain words, for example <em>weekdays at 9am</em>. A
           skill on a schedule needs an agent to run it in. Every row shows when it fires next and how the last run
           went, with the full run history behind it.
+        </p>
+        <p>
+          A task schedule fires on the cloud clock, in UTC, and runs on your worker. A skill schedule fires on
+          your desktop. Schedules are library records, the same on the desktop and the web: see{' '}
+          <a href={`${DOCS}/library-sync`}>Your library syncs</a>.
         </p>
       </>
     ),
@@ -535,7 +807,7 @@ const org = [
 ];
 
 export const PRODUCT_GROUPS = [
-  { title: 'Glyphh Desktop', pages: desktop },
+  { title: 'The app', pages: desktop },
   { title: 'Model Router', pages: router },
   { title: 'Organization', pages: org },
 ];
