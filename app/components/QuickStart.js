@@ -16,10 +16,10 @@ const DOCS = 'https://docs.glyphh.ai';
 
 // The guide behind each step. One place to re-point when the docs move.
 const GUIDES = {
-  signin: `${DOCS}/install`,
-  folder: `${DOCS}/loops`,
-  model: `${DOCS}/gateway`,
-  build: `${DOCS}/loops`,
+  signin: `${DOCS}/quick-start`,
+  folder: `${DOCS}/where-a-session-works`,
+  model: `${DOCS}/pick-a-model`,
+  build: `${DOCS}/work-and-code`,
 };
 
 const STEPS = [
@@ -33,7 +33,7 @@ const STEPS = [
       </>
     ),
     guide: GUIDES.signin,
-    shot: null,
+    shot: "/docs/sign-in.png",
   },
   {
     n: '02',
@@ -45,7 +45,7 @@ const STEPS = [
       </>
     ),
     guide: GUIDES.folder,
-    shot: null,
+    shot: "/docs/session-place.png",
   },
   {
     n: '03',
@@ -57,7 +57,7 @@ const STEPS = [
       </>
     ),
     guide: GUIDES.model,
-    shot: null,
+    shot: "/docs/model-picker.png",
   },
   {
     n: '04',
@@ -69,7 +69,7 @@ const STEPS = [
       </>
     ),
     guide: GUIDES.build,
-    shot: null,
+    shot: "/docs/composer.png",
   },
 ];
 

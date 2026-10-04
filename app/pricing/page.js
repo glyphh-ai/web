@@ -62,7 +62,7 @@ export default async function PricingPage() {
             itemized per call, nothing on by default. The bigger the plan, the better the rate.
           </p>
           <div className="ix-actions">
-            <a href="/#quick-start" className="os-cta os-cta-primary">Get started</a>
+            <a href="/products/desktop#quick-start" className="os-cta os-cta-primary">Get started</a>
             <a href={SALES} className="os-cta os-cta-ghost">Talk to us</a>
           </div>
         </section>
@@ -123,7 +123,7 @@ export default async function PricingPage() {
               <p>Solo from $20 a month. Team plans from $40 a seat. Dollar for dollar, every model on every plan.</p>
             </div>
             <div className="ix-actions">
-              <a href="/#quick-start" className="os-cta os-cta-primary">Quick Start</a>
+              <a href="/products/desktop#quick-start" className="os-cta os-cta-primary">Quick Start</a>
               <a href={SALES} className="os-cta os-cta-ghost">Talk to us</a>
             </div>
           </div>

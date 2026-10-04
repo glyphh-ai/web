@@ -16,7 +16,7 @@ const COLS = [
   {
     title: 'Product',
     links: [
-      ['Quick start', '/#quick-start'],
+      ['Quick start', '/products/desktop#quick-start'],
       ['Integrations', '/integrations'],
       ['Model catalog', '/integrations/models'],
       ['Pricing', '/pricing'],
