@@ -8,8 +8,9 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 
 // Homepage metadata — title carries the pitch; the description is the full
 // hero subline, verbatim.
-const HOME_TITLE = "Glyphh — the operating system for frontier AI";
-const HOME_DESCRIPTION = "Productivity doesn't come from prompting. It comes from using blended AI models to build predictable semantic applications that run on your data deterministically — validated, distributed, and governed by your teams at scale.";
+const HOME_TITLE = "Glyphh — the vendor-neutral alternative to frontier AI";
+const HOME_DESCRIPTION =
+  "Scale your business with practical AI that is designed to maximize your return on investment and achieve real world results with semantic data, skills, and governance.";
 
 export const metadata = {
   metadataBase: new URL('https://glyphh.ai'),
