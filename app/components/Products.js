@@ -1,26 +1,12 @@
 import LetterField from './LetterField';
 
 /**
- * Products: the home page's three doors (2026-10-01 mock). Ada, Glyphh
- * Desktop and the Model Router, each a tile in the How-it-works grammar that
- * opens its own page.
+ * Products: the home page's two doors (2026-10-01 mock; two doors since 2026-10-03).
+ * Glyphh Desktop first, then the Model Router, each a tile in the
+ * How-it-works grammar that opens its own page.
  */
 
 const PRODUCTS = [
-  {
-    href: '/products/ada',
-    title: 'Ada',
-    head: 'Typed models your agents build, feed and query',
-    body:
-      'Record what was tried and whether it worked. Ask what worked in situations like this one. Every answer is a fact tree that cites the records it stands on, and says when it does not know.',
-    more: 'Ada',
-    icon: (
-      <>
-        <path d="M12 3v6" /><path d="M12 9 6 15" /><path d="M12 9l6 6" />
-        <circle cx="12" cy="3" r="1.5" /><circle cx="6" cy="17" r="2" /><circle cx="18" cy="17" r="2" />
-      </>
-    ),
-  },
   {
     href: '/products/desktop',
     title: 'Glyphh Desktop',
@@ -58,7 +44,7 @@ export default function Products() {
         <span className="qs-kicker">Products</span>
         <a href="https://docs.glyphh.ai" className="qs-more">Read the docs &rarr;</a>
       </div>
-      <div className="hv-grid">
+      <div className="hv-grid hv-grid-2">
         {PRODUCTS.map((t, i) => (
           <a key={t.title} href={t.href} className="hv-tile">
             <LetterField seed={i + 1} />

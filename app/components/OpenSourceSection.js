@@ -2,18 +2,6 @@ const GITHUB_URL = 'https://github.com/glyphh-ai';
 
 const REPOS = [
   {
-    name: 'adaL',
-    meta: 'Python',
-    href: `${GITHUB_URL}/adaL`,
-    desc: 'AdaL — schema-on-write memory for LLMs. Exact, versioned recall with no model in the read path.',
-  },
-  {
-    name: 'ada',
-    meta: 'Python',
-    href: `${GITHUB_URL}/ada`,
-    desc: 'The Ada engine — ingest, query, and stream. Websocket listeners, glyph storage, and runtime analytics.',
-  },
-  {
     name: 'models',
     meta: 'Python',
     href: `${GITHUB_URL}/models`,

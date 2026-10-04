@@ -3,11 +3,8 @@ import Nav from './components/Nav';
 import Reveal from './components/Reveal';
 import Hero from './components/Hero';
 import CompanyHero from './components/CompanyHero';
-import AdaSpeaks from './components/AdaSpeaks';
 import Products from './components/Products';
-import Limits from './components/Limits';
 import OneAccount from './components/OneAccount';
-import WhyAda from './components/WhyAda';
 import Latest from './components/Latest';
 import StoryHeads from './components/StoryHeads';
 import Mcp from './components/Mcp';
@@ -37,22 +34,19 @@ export default async function Home() {
     <div className="home-page">
       <Reveal />
       <Nav />
-      {/* THE COMPANY HOME (his order, 2026-10-01): the hero is Glyphh the AI
-          company, and the page is three doors: Ada, Glyphh Desktop, the Model
-          Router. The desktop's hero and its sections moved to
+      {/* THE HOME (his order, 2026-10-03): Glyphh Desktop is the home product
+          again, the Model Router second. The hero carries the desktop's words
+          and the two doors; the desktop's screenshots and sections live on
           /products/desktop. Campaign variants (/code, /work) keep the desktop
           stage hero. */}
       {variant === 'default' ? <CompanyHero /> : <Hero variant={variant} stage />}
       <div className="site-frame">
-        <Limits />
-        <AdaSpeaks />
         <Products />
         {/* The One platform section is off the page (his order, 2026-10-01). Hidden, not deleted. */}
         {false && <OneAccount />}
         {/* The blog section is off the home page (his order, 2026-10-01); Blog is
             in the header menu. Hidden, not deleted. */}
         {false && <Latest />}
-        <WhyAda />
       </div>
       {/* EVERYTHING under the hero is OFF the page while the refactor works
           down from the top (his order, 2026-09-22). Hidden, not deleted —

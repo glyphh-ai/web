@@ -2,9 +2,11 @@ import HeroAscii from './HeroAscii';
 import HeroMap from './HeroMap';
 
 /**
- * CompanyHero: the home hero as of the 2026-10-01 mock. Glyphh as an AI
- * company, not the desktop: his line "The primitive of meaning: Ada" as the H1 (2026-10-01), and two doors (the products below, the docs). The
- * desktop's own hero (OsHero, with the screenshots) moved to /products/desktop.
+ * CompanyHero: the home hero. Glyphh Desktop is the home product again
+ * (his order, 2026-10-03): the eyebrow, the H1 and the pitch are the OS
+ * hero's words (OsHero.js, the home hero until 2026-10-01), over the same
+ * ASCII art, with the two products as doors below. The desktop's own page
+ * keeps the screenshots.
  */
 export default function CompanyHero() {
   return (
@@ -13,15 +15,18 @@ export default function CompanyHero() {
         <HeroAscii />
       </div>
       <div className="oshero-inner container">
-        <p className="oshero-eyebrow">Introducing Glyphh Ada...</p>
+        <p className="oshero-eyebrow">Open Weights &middot; Every frontier model &middot; Programs you own</p>
 
         <h1 className="oshero-title">
-          <span>The first Glyphh model:</span>
-          <span><em>Ada</em> is software&rsquo;s reasoning substrate.</span>
+          <span>Glyphh is the operating system for <em>frontier AI.</em></span>
         </h1>
 
+        <p className="oshero-pitch">
+          The vendor neutral alternative to Claude Code, OpenAI Work, and Gemini Desktop.
+        </p>
+
         <div className="oshero-actions">
-          <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Create an account</a>
+          <a href="/products/desktop" className="os-cta os-cta-primary">Get Glyphh Desktop</a>
           <a href="https://docs.glyphh.ai" className="os-cta os-cta-ghost">Read the Docs</a>
         </div>
 

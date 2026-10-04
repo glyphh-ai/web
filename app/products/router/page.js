@@ -7,7 +7,7 @@ import ModelCatalog from '../../components/ModelCatalog';
 import { ContractTabs, RolesMock, KeysMock, MetricsMock } from './mocks';
 
 // The Model Router (2026-10-02): the product page, in the home page's frame
-// grammar, like Ada's. The models are LIVE: the server's list at each plan's
+// grammar, like the desktop's. The models are LIVE: the server's list at each plan's
 // rate (ModelCatalog, /api/models). No BYOK, no subscriptions to burn down
 // (his order, 2026-09-29).
 
@@ -118,7 +118,7 @@ export default function RouterPage() {
             <span className="qs-kicker">The contract</span>
             <a href={`${DOCS}/gateway`} className="qs-more">The Router &rarr;</a>
           </div>
-          <div className="ada-split">
+          <div className="rt-split">
             <div>
               <h2 className="ix-h2 lt-h2">A key that carries its own rules.</h2>
               <p className="ix-desc">
@@ -136,7 +136,7 @@ export default function RouterPage() {
               <span className="qs-kicker">{c.name}</span>
               <a href={`${DOCS}/budgets`} className="qs-more">Roles and budgets &rarr;</a>
             </div>
-            <div className="ada-split">
+            <div className="rt-split">
               <div>
                 <h2 className="ix-h2 lt-h2">{c.title}</h2>
                 <p className="ix-desc">{c.desc}</p>
