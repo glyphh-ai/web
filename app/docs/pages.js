@@ -24,7 +24,7 @@ const desktop = [
         <h2>Install the desktop</h2>
         <p>
           The desktop runs sessions on your own machine, in your own folders. Get it from the{' '}
-          <a href="https://glyphh.ai/#quick-start">download section</a> of glyphh.ai, or from the card on the
+          <a href="https://glyphh.ai/#download">Download section</a> of glyphh.ai, or from the card on the
           sign-in page. macOS, Windows and Linux.
         </p>
         <p>
@@ -298,7 +298,7 @@ const desktop = [
   {
     slug: 'apps',
     title: 'Apps',
-    lede: 'A bundle with an app.json. It opens as a panel beside the agent.',
+    lede: 'An app installs into your organization and opens from any surface.',
     body: (
       <>
         <p>
@@ -306,15 +306,33 @@ const desktop = [
           and call as a tool. The app reads the type from the bundle, never from its name. See{' '}
           <a href={`${DOCS}/skills`}>Skills</a> for what a bundle is.
         </p>
-        <h2>Today</h2>
+        <h2>Install</h2>
+        <p>Three doors, one result:</p>
+        <Row k="Settings → Build → Apps">Import a bundle</Row>
+        <Row k="Drop a .glyphh file">Onto the app</Row>
+        <Row k="Ask the agent">It calls <code>app_install</code></Row>
         <p>
-          Apps are installed on the desktop. They live under your Glyphh home on that machine, and the Apps
-          page, the command palette and the agent&rsquo;s tool list all read the same rows. Open one and it is a
-          panel in the workbench.
+          Each one uploads the bundle and creates an <strong>instance</strong> in your organization. Nothing
+          is installed on your machine.
         </p>
-        <Note kind="note" title="Coming: apps in your organization">
-          Installing an app into your organization, so it opens from the desktop and from app.glyphh.ai alike,
-          is in progress. This page changes when it ships.
+        <h2>What you see</h2>
+        <p>
+          The Apps list and the wall show the instances you may open: an org app for everyone, a restricted
+          one your role is granted, or your own isolated personal app. Your tabs are listed beside them.
+        </p>
+        <p>
+          An app you installed on this machine before the change shows once, with{' '}
+          <strong>Move to the cloud</strong> on its menu. The folder stays on disk.
+        </p>
+        <h2>Open it</h2>
+        <p>
+          An app panel loads from the organization&rsquo;s app host, on the desktop and on{' '}
+          <a href="https://app.glyphh.ai">app.glyphh.ai</a> alike. The agent&rsquo;s app tools,{' '}
+          <code>app_list_tools</code> and <code>app_call_tool</code>, reach the instance. Nothing runs on
+          your machine any more.
+        </p>
+        <Note kind="wire" title="Rollback">
+          The environment switch <code>GLYPHH_LOCAL_APPS=1</code> brings the old local host back on the desktop.
         </Note>
       </>
     ),

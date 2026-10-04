@@ -12,7 +12,8 @@ const glyphh = [
         <h2>1. Sign in</h2>
         <p>
           Open <a href="https://app.glyphh.ai">app.glyphh.ai</a>. Sign in with your email and the magic link
-          it sends, or with Google. Or install the desktop and sign in there with the same account.
+          it sends, or with Google. Or <a href="https://glyphh.ai/#download">download the desktop</a> and
+          sign in there with the same account.
         </p>
         <Shot file="sign-in.png" alt="The sign-in page at app.glyphh.ai: Continue with Google, or an email address for a magic link." width={760} caption="app.glyphh.ai. The same account as the desktop." />
         <p>More: <a href={`${DOCS}/install`}>Sign in and install</a>.</p>
