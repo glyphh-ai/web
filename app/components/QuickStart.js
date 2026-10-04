@@ -1,90 +1,109 @@
-'use client';
+import { APP_URL } from './downloads';
 
-import { useEffect, useState } from 'react';
-
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
+const DOCS = 'https://docs.glyphh.ai';
 
 /**
- * QuickStart — get Glyphh, as a terminal (the deviation, 2026-09-22: tabs
- * were the reference's move; a prompt is ours). One block: the prompt line,
- * a "detected" line naming the visitor's platform, the highlighted target
- * with its command or artifact, then every other way to get it, one per
- * row, numbered. The rows are real links. Number keys and arrows move the
- * highlight; Enter follows it. The block never changes height.
+ * QuickStart — the real one (his order, 2026-10-04): the four steps a person
+ * actually takes, in order. Sign in at app.glyphh.ai or install the desktop;
+ * pick where the session works (a folder on your desktop, or a cloud folder);
+ * pick a model (Default is your team's); say what to build. Each step links
+ * to its guide on docs.glyphh.ai. A step may carry a screenshot (`shot`): the
+ * docs' guides ship them under /screen-shots and the same files ride here.
+ *
+ * The terminal that stood here (the 2026-09-22 deviation) listed six ways to
+ * get Glyphh; the downloads it carried are the Download section now.
  */
 
-const TARGETS = [
-  { id: 'mac-arm', key: '1', label: 'macOS · Apple Silicon', cmd: 'Glyphh-arm64.dmg', href: '/api/download?platform=mac&arch=arm64', verb: 'download' },
-  { id: 'mac-x64', key: '2', label: 'macOS · Intel', cmd: 'Glyphh-x64.dmg', href: '/api/download?platform=mac&arch=x64', verb: 'download' },
-  { id: 'win', key: '3', label: 'Windows · x64', cmd: 'Glyphh-Setup.exe', href: '/api/download?platform=win', verb: 'download' },
-  { id: 'linux', key: '4', label: 'Linux · x64', cmd: 'Glyphh-x64.AppImage', href: '/api/download?platform=linux', verb: 'download' },
-  { id: 'cli', key: '5', label: 'CLI · any OS', cmd: 'npm i -g @glyphh-ai/cli && glyphh', href: 'https://docs.glyphh.ai/cli', verb: 'install' },
-  { id: 'web', key: '6', label: 'Web · the platform', cmd: 'platform.glyphh.ai', href: PLATFORM_URL, verb: 'open' },
+// The guide behind each step. One place to re-point when the docs move.
+const GUIDES = {
+  signin: `${DOCS}/install`,
+  folder: `${DOCS}/loops`,
+  model: `${DOCS}/gateway`,
+  build: `${DOCS}/loops`,
+};
+
+const STEPS = [
+  {
+    n: '01',
+    title: 'Sign in',
+    body: (
+      <>
+        Open <a href={APP_URL}>app.glyphh.ai</a> and sign in with your email, Google, or your
+        org&rsquo;s SSO. Or <a href="#download">install the desktop</a> and sign in the same way.
+      </>
+    ),
+    guide: GUIDES.signin,
+    shot: null,
+  },
+  {
+    n: '02',
+    title: 'Pick where the session works',
+    body: (
+      <>
+        A folder on your desktop, or a cloud folder. A desktop session works in that folder on your
+        machine; a cloud session runs in your org&rsquo;s cloud workspace and stays there.
+      </>
+    ),
+    guide: GUIDES.folder,
+    shot: null,
+  },
+  {
+    n: '03',
+    title: 'Pick a model',
+    body: (
+      <>
+        Default is your team&rsquo;s model. Every model on the list runs through your org&rsquo;s
+        Router on your own key, frontier and open weights alike.
+      </>
+    ),
+    guide: GUIDES.model,
+    shot: null,
+  },
+  {
+    n: '04',
+    title: 'Say what to build',
+    body: (
+      <>
+        Type the job. A Work session chats and acts with your apps and connections; a Code session
+        adds files and a shell, confined to the folder you picked.
+      </>
+    ),
+    guide: GUIDES.build,
+    shot: null,
+  },
 ];
 
-function detect() {
-  if (typeof navigator === 'undefined') return { id: 'mac-arm', name: 'macOS (Apple Silicon)' };
-  const ua = navigator.userAgent || '';
-  if (/windows/i.test(ua)) return { id: 'win', name: 'Windows' };
-  if (/linux|x11|bsd/i.test(ua) && !/android/i.test(ua)) return { id: 'linux', name: 'Linux' };
-  if (/mac|darwin/i.test(ua)) return { id: 'mac-arm', name: 'macOS (Apple Silicon)' };
-  return { id: 'mac-arm', name: 'macOS (Apple Silicon)' };
-}
-
 export default function QuickStart() {
-  const [det, setDet] = useState({ id: 'mac-arm', name: 'macOS (Apple Silicon)' });
-  const [sel, setSel] = useState('mac-arm');
-  useEffect(() => { const d = detect(); setDet(d); setSel(d.id); }, []);
-
-  // keyboard: numbers pick, arrows move, Enter follows — only while the block has focus
-  const onKey = (e) => {
-    const idx = TARGETS.findIndex((t) => t.id === sel);
-    const byKey = TARGETS.find((t) => t.key === e.key);
-    if (byKey) { setSel(byKey.id); e.preventDefault(); return; }
-    if (e.key === 'ArrowDown' || e.key === 'j') { setSel(TARGETS[(idx + 1) % TARGETS.length].id); e.preventDefault(); }
-    if (e.key === 'ArrowUp' || e.key === 'k') { setSel(TARGETS[(idx - 1 + TARGETS.length) % TARGETS.length].id); e.preventDefault(); }
-    if (e.key === 'Enter') { const t = TARGETS[idx]; if (t) window.location.href = t.href; }
-  };
-
-  const current = TARGETS.find((t) => t.id === sel) || TARGETS[0];
-
   return (
     <section className="qs" id="quick-start">
       <div className="qs-head">
         <span className="qs-kicker">Quick start</span>
-        <a href="https://docs.glyphh.ai/install" className="qs-more">All download options &rarr;</a>
+        <a href={DOCS} className="qs-more">Read the docs &rarr;</a>
       </div>
 
-      <div className="term" tabIndex={0} onKeyDown={onKey} aria-label="Quick start: pick how to get Glyphh">
-        <div className="term-bar">
-          <span className="term-dot" /><span className="term-dot" /><span className="term-dot" />
-          <span className="term-title">glyphh — quick start</span>
-          <span className="term-hint">1–6 · ↑↓ · enter</span>
+      <div className="hv-panel qst">
+        <div className="qst-bar">
+          <span className="hv-tabs-label">Get started</span>
+          <span className="qst-meta">four steps &middot; one account &middot; desktop or browser</span>
         </div>
-        <div className="term-body">
-          <p className="term-line"><span className="term-prompt">$</span> glyphh quick-start</p>
-          <p className="term-line term-dim">detected: {det.name}</p>
-          <p className="term-line term-target">
-            <span className="term-arrow">&rarr;</span>
-            <a href={current.href} className="term-go">{current.verb} {current.cmd}</a>
-            <span className="term-enter">[enter]</span>
-          </p>
-          <ol className="term-list">
-            {TARGETS.map((t) => (
-              <li key={t.id} className={`term-row${t.id === sel ? ' sel' : ''}${t.id === det.id ? ' here' : ''}`}>
-                <a href={t.href} onMouseEnter={() => setSel(t.id)} onFocus={() => setSel(t.id)}>
-                  <span className="term-key">{t.key}</span>
-                  <span className="term-label">{t.label}</span>
-                  <span className="term-cmd">{t.cmd}</span>
-                  {t.id === det.id ? <span className="term-tag">this machine</span> : null}
+        <ol className="qst-steps">
+          {STEPS.map((s) => (
+            <li key={s.n} className="qst-step">
+              <span className="qst-n">{s.n}</span>
+              <h3 className="qst-title">{s.title}</h3>
+              <p className="qst-body">{s.body}</p>
+              {s.shot ? (
+                <a href={s.guide} className="qst-shot">
+                  <img src={s.shot} alt="" loading="lazy" decoding="async" />
                 </a>
-              </li>
-            ))}
-          </ol>
-          <p className="term-line term-dim">
-            free to install &middot; plans from $20 a month &middot; <a href="https://docs.glyphh.ai/install">docs/install</a>
-            <span className="term-cursor" aria-hidden="true" />
-          </p>
+              ) : null}
+              <a href={s.guide} className="qst-guide">Read the guide &rarr;</a>
+            </li>
+          ))}
+        </ol>
+        <div className="ww-foot qst-foot">
+          <a href={APP_URL}>Get started at app.glyphh.ai &rarr;</a>
+          <a href="#download">Download the desktop &rarr;</a>
         </div>
       </div>
     </section>

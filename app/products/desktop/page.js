@@ -6,7 +6,9 @@ import OsPitch from '../../components/OsPitch';
 import Planes from '../../components/Planes';
 import HowItWorks from '../../components/HowItWorks';
 import QuickStart from '../../components/QuickStart';
+import DownloadDesktop from '../../components/DownloadDesktop';
 import WorksWith from '../../components/WorksWith';
+import FaqSection from '../../components/FaqSection';
 import ExpandableShot from '../../components/ExpandableShot';
 import FinalCTA from '../../components/FinalCTA';
 
@@ -139,7 +141,11 @@ export default function DesktopPage() {
         <Planes />
         <HowItWorks />
         <QuickStart />
+        {/* The desktop download as its own section, then the FAQ after Works
+            with (his order, 2026-10-04). */}
+        <DownloadDesktop />
         <WorksWith />
+        <FaqSection />
       </div>
 
       {/* The workspace story (2026-09-19: the pillars, the screenshots, the
