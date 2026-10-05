@@ -8904,16 +8904,13 @@ p em, li em { font-family: inherit !important; font-style: italic; }
   .oshero-min { min-height: 720px; }
 }
 
-/* the journey (HeroJourney.js): one world, one camera, drawn by script every
-   frame — the stylesheet only sizes it, colours it, and flickers the rocket's
-   putter. The lines take the text colour; the dot takes the accent. */
-.hj { display: block; width: 100%; height: 100%; color: var(--text); }
-.hj-dot { fill: var(--accent); }
-.hj-putter { animation: hj-putter 0.5s steps(2, end) infinite; }
-@keyframes hj-putter {
-  0% { opacity: 1; transform: translate(0, 0); }
-  100% { opacity: 0.35; transform: translate(-4px, 0); }
-}
+/* the line (HeroLine.js): the dot draws the system in one stroke, then
+   parks as the headline's full stop. The lines take the text colour; the
+   dot and the stop take the accent. */
+.hl { display: block; width: 100%; height: 100%; color: var(--text); }
+.hl-dot { fill: var(--accent); }
+.hero-stop { display: inline-block; width: 0.17em; height: 0.17em; margin-left: 0.1em; border-radius: 50%; background: var(--accent); vertical-align: 0.02em; opacity: 0; transition: opacity 0.2s ease; }
+.hero-stop.on { opacity: 1; }
 .oshero-title em, .page-hero-title em, .page-hero-title .hero-accent, .hero-lab-h, .hero-lab-h em, .gh-brl { text-shadow: none; }
 .oshero-title em, .page-hero-title em, .ix-h2 em, .lt-h2 em, .section-title em, .hv-pitch .ix-h2 em, .hero-lab-h em { color: var(--text); }
 .oshero-title { text-shadow: none; }

@@ -1,6 +1,6 @@
 import HeroCTA from './HeroCTA';
 import { APP_URL } from './downloads';
-import HeroJourney from './HeroJourney';
+import HeroLine from './HeroLine';
 
 /**
  * OsHero — the home hero of the site refactor (site.md §1.1).
@@ -13,8 +13,8 @@ import HeroJourney from './HeroJourney';
  * frame (OsPitch.js); the demo + YouTube links went to the Latest section.
  *
  * The minimal cut (his order, 2026-10-05): the words, the two doors and the
- * journey behind them (HeroJourney.js: the door, the woods, the river, the
- * city, the stars). The
+ * line behind them (HeroLine.js: the dot draws the system in one stroke and
+ * parks as the headline's full stop). The
  * screenshots moved down to the Desktop section (DesktopSection.js); the
  * letter hall, the particle field and the hall lines came off.
  */
@@ -22,7 +22,7 @@ export default function OsHero() {
   return (
     <header className="oshero oshero-min">
       <div className="oshero-art" aria-hidden="true">
-        <HeroJourney />
+        <HeroLine />
       </div>
       <div className="oshero-inner container">
         {/* His copy, verbatim (2026-10-04): the headline and the sub-line are the
@@ -30,7 +30,7 @@ export default function OsHero() {
         {false && <p className="oshero-eyebrow">Open Weights · Every frontier model · Programs you own</p>}
 
         <h1 className="oshero-title">
-          Glyphh is the <em>vendor-neutral</em> alternative to frontier AI
+          Glyphh is the <em>vendor-neutral</em> alternative to frontier AI<span className="hero-stop" aria-hidden="true" />
         </h1>
 
         <p className="oshero-pitch">
