@@ -5,7 +5,7 @@ const DOCS = 'https://docs.glyphh.ai';
 /**
  * QuickStart — the real one (his order, 2026-10-04): the four steps a person
  * actually takes, in order. Sign in at app.glyphh.ai or install the desktop;
- * pick where the session works (a folder on your desktop, or a cloud folder);
+ * pick where the session works (a folder on your desktop; a chat when no desktop is online);
  * pick a model (Default is your team's); say what to build. Each step links
  * to its guide on docs.glyphh.ai. A step may carry a screenshot (`shot`): the
  * docs' guides ship them under /screen-shots and the same files ride here.
@@ -40,8 +40,8 @@ const STEPS = [
     title: 'Pick where the session works',
     body: (
       <>
-        A folder on your desktop, or a cloud folder. A desktop session works in that folder on your
-        machine; a cloud session runs in your org&rsquo;s cloud workspace and stays there.
+        A folder on your desktop, reached from the browser over remote control. The session works in that
+        folder and nowhere else. No desktop online? It runs as a chat with your connections and memory.
       </>
     ),
     guide: GUIDES.folder,

@@ -17,7 +17,7 @@ export const FAQ_GROUPS = [
       {
         id: 'desktop-or-browser',
         q: 'Desktop or app.glyphh.ai: which one do I use?',
-        a: { html: `Both are the same app. The desktop works in folders on your machine and can run the CLIs you already have installed; <a href="${APP}">app.glyphh.ai</a> needs no install and runs your sessions in the cloud, or on your own desktop when it is on and you have switched remote control on.` },
+        a: { html: `The desktop is where you build: your folders, your installed apps and skills, your CLIs. <a href="${APP}">app.glyphh.ai</a> is the same account in a browser, made to drive your desktop: your threads, files and apps, when it is on and remote control is switched on. With no desktop online it still runs a chat with your connections and memory.` },
       },
       {
         id: 'platforms',
@@ -27,7 +27,7 @@ export const FAQ_GROUPS = [
       {
         id: 'work-vs-code',
         q: 'What is the difference between a Work session and a Code session?',
-        a: 'A Work session chats and acts with your apps, connections, memory and Glyphh’s own tools, with no file system or shell. A Code session has all of that plus files and a shell, confined to the folder it works in. A session is born one kind and stays it.',
+        a: 'A Work session chats and acts with your connections, memory and Glyphh’s own tools, with no file system or shell, and runs anywhere, in the browser too. A Code session has all of that plus files, a shell and the CLIs, confined to a folder on your desktop; from app.glyphh.ai it drives that folder over remote control. A session is born one kind and stays it.',
       },
     ],
   },
@@ -37,12 +37,12 @@ export const FAQ_GROUPS = [
       {
         id: 'local-or-cloud',
         q: 'Where do my files live: on my machine or in the cloud?',
-        a: 'You pick when the session starts: a folder on your desktop, or a cloud folder. A desktop session reads and writes only that folder on your machine; a cloud session works in a workspace stored under your org in Glyphh’s cloud, and stays a cloud session wherever you open it.',
+        a: 'On your machine. A session works in a folder on your desktop and reads and writes only that folder; app.glyphh.ai reaches it over remote control. A chat started with no desktop online touches no files at all; its transcript is kept under your account so the desktop shows it later.',
       },
       {
         id: 'cloud-session',
-        q: 'What runs a cloud session?',
-        a: 'A worker machine that starts for your session and stops when it goes idle. Your cloud folder is synced down to it at the start of a turn and back up at the end, so the workspace outlives the machine.',
+        q: 'What runs a chat when my desktop is off?',
+        a: 'A shared worker in Glyphh’s cloud runs the model turn with your connections and memory. It holds no files and installs nothing; the transcript lands under your account, and the moment your desktop is back the same chat is there.',
       },
       {
         id: 'remote-control',
@@ -52,7 +52,7 @@ export const FAQ_GROUPS = [
       {
         id: 'history',
         q: 'Do my chats follow me between the desktop and the browser?',
-        a: 'Yes. Every session is indexed under your account, so the left rail shows the same list on the desktop and at app.glyphh.ai, each marked local or cloud. Chats you start in the glyphh CLI appear there too.',
+        a: 'Yes. Every session is indexed under your account, so the left rail shows the same list on the desktop and at app.glyphh.ai, each marked with where it runs. Chats you start in the glyphh CLI appear there too.',
       },
     ],
   },
@@ -92,7 +92,7 @@ export const FAQ_GROUPS = [
       {
         id: 'apps',
         q: 'What happens to the apps I build?',
-        a: 'An app is installed once in your organization and runs there, not on each person’s machine. The org decides who can open it, from only you to everyone, and it opens in a panel on the desktop and at app.glyphh.ai alike.',
+        a: 'You build and install apps on your desktop, and that is where they run, with their data on your machine. An organization can publish an app to its library with access by team, and members install it on their own desktops in one click. app.glyphh.ai opens your desktop’s apps on the desktop; it does not run them itself.',
       },
       {
         id: 'connections',
@@ -137,7 +137,7 @@ export const FAQ_GROUPS = [
       {
         id: 'data',
         q: 'Where is my data, and who can see it?',
-        a: 'Your org’s data is stored under your org’s own prefix, encrypted at rest, and a Router request for another org is refused. Cloud browser profiles are encrypted per member. On the desktop, local sessions never leave your folder.',
+        a: 'What Glyphh keeps in the cloud, your chats and your library, is stored under your org’s own prefix, encrypted at rest, and a Router request for another org is refused. On the desktop, a session never leaves its folder, and apps and their data stay on your machine.',
       },
       {
         id: 'credentials',
