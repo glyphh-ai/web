@@ -4,8 +4,9 @@ import Art from './Art';
  * Planes — the section above How it works. The minimal cut (his order,
  * 2026-10-05: "more minimalistic images then just a bunch of squares with
  * lights around them moving"): the deck's planes picture — four boxes on
- * one base, the loop drawn once, one purple dot — and his four texts in a
- * row beneath, each under its box. The particle pipeline, the letter fields
+ * one base, the loop drawn once, one purple dot — at half width in a panel,
+ * his four texts as hairline rows beside it (his note: the full-width picture
+ * read like the system map above it, and too big). The particle pipeline, the letter fields
  * and the desktop bus with the loop favicons stood here until this commit.
  */
 
@@ -24,18 +25,21 @@ export default function Planes() {
         <a href="#how-it-works" className="qs-more">How it works &darr;</a>
       </div>
 
-      <div className="pl-fig">
-        <Art name="planes" alt="The four planes in a loop: build, runtime, control, teams" />
-      </div>
-
-      <div className="pl-cols">
-        {PLANES.map((p) => (
-          <a key={p.n} href={p.href} className="pl-col">
-            <span className="pl-n">{p.n}</span>
-            <h3 className="pl-title">{p.title}</h3>
-            <p className="pl-body">{p.body}</p>
-          </a>
-        ))}
+      <div className="hv-panel pl-grid">
+        <div className="pl-fig">
+          <Art name="planes" alt="The four planes in a loop: build, runtime, control, teams" />
+        </div>
+        <div className="pl-rows">
+          {PLANES.map((p) => (
+            <a key={p.n} href={p.href} className="pl-row">
+              <span className="pl-n">{p.n}</span>
+              <span className="pl-copy">
+                <h3 className="pl-title">{p.title}</h3>
+                <p className="pl-body">{p.body}</p>
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );

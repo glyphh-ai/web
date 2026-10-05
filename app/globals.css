@@ -8945,14 +8945,21 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 @media (max-width: 900px) { .sys-parts { grid-template-columns: repeat(4, 1fr); row-gap: 0.9rem; } }
 @media (max-width: 540px) { .sys-parts { grid-template-columns: 1fr 1fr; } }
 
-/* the planes: the picture, then the four texts under their boxes */
-.pl-fig { margin: 0 0 0.25rem; }
-.pl-fig .art { margin: -4% 0 -6%; }
-.pl-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8.2%; margin: 0 6.6%; }
-.pl-col { display: block; text-decoration: none; color: inherit; }
-.pl-col:hover .pl-title { text-decoration: underline; text-underline-offset: 3px; }
+/* the planes: the picture at half width, the four planes as rows beside it */
+.pl-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.pl-fig { display: flex; align-items: center; justify-content: center; padding: 1.5rem; border-right: 1px solid var(--border); background: #000; }
+[data-theme="light"] .pl-fig { background: #fff; }
+.pl-fig .art { width: 100%; }
+.pl-rows { display: flex; flex-direction: column; }
+.pl-row { flex: 1; display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.75rem; align-items: start; padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: background 0.12s ease; }
+.pl-row:last-child { border-bottom: 0; }
+.pl-row:hover { background: var(--surface-2); }
+.pl-row .pl-n { margin: 0.15rem 0 0; }
+.pl-row .pl-title { margin: 0 0 0.3rem; }
+.pl-row .pl-body { font-size: 0.86rem; }
 @media (max-width: 760px) {
-  .pl-cols { grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin: 1rem 0 0; }
+  .pl-grid { grid-template-columns: 1fr; }
+  .pl-fig { border-right: 0; border-bottom: 1px solid var(--border); }
 }
 
 /* How it works: the deck's picture heads each tile */
