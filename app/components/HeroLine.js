@@ -9,7 +9,8 @@ import { useEffect, useRef } from 'react';
  * router, memory, connections, tasks — like a wire bent by hand, and when
  * the drawing is done it rolls off the end of the line, flies up, and
  * parks as the full stop at the end of the headline (OsHero.js puts a
- * `.hero-stop` span there). One line, never lifted.
+ * `.hero-stop` span there) — and as it rises, the seven names fall into
+ * place under their shapes, left to right. One line, never lifted.
  *
  * The deck's hand: 1px lines in the text colour, nothing filled, the one
  * purple dot. The stroke reveals by dash offset; the dot rides the pen tip
@@ -39,6 +40,8 @@ const STROKE = [
   'V560a30 30 0 1 1 0-60a30 30 0 1 1 0 60V530V510V530L1127 540L1115 530V560V620H1200',
 ].join('');
 
+// the names, under their shapes: they fall into place as the dot rises
+const LABELS = [[280, 'Desktop'], [410, 'Web'], [545, 'Apps'], [700, 'Router'], [855, 'Memory'], [985, 'Connections'], [1115, 'Tasks']];
 const ease = (u) => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
 const clamp = (u) => Math.max(0, Math.min(1, u));
 const DRAW_S = 9, REST_S = 0.5, FLY_S = 1.1;
@@ -51,6 +54,12 @@ export default function HeroLine() {
     if (!svg) return;
     const path = svg.querySelector('.hl-stroke'), dot = svg.querySelector('.hl-dot');
     const stop = document.querySelector('.hero-stop');
+    const labels = [...svg.querySelectorAll('.hl-label')];
+    const settle = (f) => labels.forEach((l, i) => {
+      const u = ease(clamp((f * 1.6 - i * 0.07) / 0.55));
+      l.setAttribute('transform', `translate(0 ${(-70 * (1 - u)).toFixed(1)})`);
+      l.setAttribute('opacity', u.toFixed(2));
+    });
     const len = path.getTotalLength();
     path.style.strokeDasharray = `${len}`;
     const end = path.getPointAtLength(len);
@@ -74,9 +83,11 @@ export default function HeroLine() {
         dot.setAttribute('cx', at.x.toFixed(1)); dot.setAttribute('cy', at.y.toFixed(1));
         dot.setAttribute('visibility', 'visible');
         stop?.classList.remove('on');
+        settle(0);
         return;
       }
       const f = clamp((t - DRAW_S - REST_S) / FLY_S);
+      settle(f);
       const to = target();
       if (!to) { dot.setAttribute('visibility', 'hidden'); return; }
       if (f >= 1) { dot.setAttribute('visibility', 'hidden'); stop.classList.add('on'); return; }
@@ -100,6 +111,7 @@ export default function HeroLine() {
     <svg ref={ref} className="hl" viewBox="0 0 1400 700" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <path className="hl-stroke" d={STROKE} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       <circle className="hl-dot" r="7" visibility="hidden" />
+      {LABELS.map(([x, name]) => <text key={name} className="hl-label" x={x} y="664" opacity="0">{name}</text>)}
     </svg>
   );
 }
