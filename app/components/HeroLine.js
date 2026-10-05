@@ -41,12 +41,16 @@ const STROKE = [
 ].join('');
 
 // the names, under their shapes: they fall into place as the dot rises
-const LABELS = [[280, 'Desktop'], [410, 'Web'], [545, 'Apps'], [700, 'Router'], [855, 'Memory'], [985, 'Connections'], [1115, 'Tasks']];
+const LABELS = [[280, 'Desktop'], [410, 'Web'], [545, 'Apps'], [700, 'Router'], [855, 'Memory'], [985, 'Connections'], [1115, 'Tasks']]
+  .map(([x, text]) => ({ x, y: 664, text }));
 const ease = (u) => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
 const clamp = (u) => Math.max(0, Math.min(1, u));
 const DRAW_S = 9, REST_S = 0.5, FLY_S = 1.1;
 
-export default function HeroLine() {
+/** `stroke` is one unbroken path; `labels` are `{ x, y, text, anchor? }`,
+ *  settling in order; `end` is where the dot leaves the line (its end by
+ *  default). A product page passes its own picture (products/router). */
+export default function HeroLine({ stroke = STROKE, labels = LABELS }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -109,9 +113,9 @@ export default function HeroLine() {
 
   return (
     <svg ref={ref} className="hl" viewBox="0 0 1400 700" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-      <path className="hl-stroke" d={STROKE} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path className="hl-stroke" d={stroke} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       <circle className="hl-dot" r="7" visibility="hidden" />
-      {LABELS.map(([x, name]) => <text key={name} className="hl-label" x={x} y="664" opacity="0">{name}</text>)}
+      {labels.map((l) => <text key={l.text} className="hl-label" x={l.x} y={l.y} opacity="0" style={l.anchor ? { textAnchor: l.anchor } : undefined}>{l.text}</text>)}
     </svg>
   );
 }

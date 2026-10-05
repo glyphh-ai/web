@@ -8917,7 +8917,7 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 .oshero-title { text-shadow: none; }
 
 /* purple turned down: the frame's small type reads in gray and white */
-.qs-kicker { color: var(--text-3); }
+.qs-kicker, .oshero-eyebrow { color: var(--text-3); }
 .hv-tile-title, .pl-title { color: var(--text); }
 .hv-tab.active { color: var(--text); border-color: var(--text); }
 .hv-card-here { border-color: var(--text); }

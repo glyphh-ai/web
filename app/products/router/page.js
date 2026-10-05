@@ -1,8 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
-import HeroAscii from '../../components/HeroAscii';
-import LetterField from '../../components/LetterField';
+import HeroLine from '../../components/HeroLine';
 import ModelCatalog from '../../components/ModelCatalog';
 import { ContractTabs, RolesMock, KeysMock, MetricsMock } from './mocks';
 
@@ -65,10 +64,30 @@ export ANTHROPIC_AUTH_TOKEN="sk-…"   # a virtual key from the console
 export OPENAI_BASE_URL="https://api.glyphh.ai"
 export OPENAI_API_KEY="sk-…"`;
 
+// THE ROUTER'S LINE (his order, 2026-10-05: "the router page needs a similar
+// effect for its product"): the dot draws every model fanning into one hub,
+// the hub, and the three things on the far side of it — teams, budgets, keys
+// — in one stroke, then parks as the headline's full stop.
+const RAYS = [440, 470, 500, 530, 560, 590, 620, 650, 680];
+const ROUTER_STROKE = [
+  `M230 440L650 560`,
+  ...RAYS.slice(1).map((y) => `L230 ${y}L650 560`),
+  'a50 50 0 1 1 100 0a50 50 0 1 1-100 0a50 50 0 0 0 100 0',
+  'L1000 470a24 24 0 1 1 48 0a24 24 0 1 1-48 0L750 560',
+  'L1000 560a24 24 0 1 1 48 0a24 24 0 1 1-48 0L750 560',
+  'L1000 650a24 24 0 1 1 48 0a24 24 0 1 1-48 0',
+].join('');
+const ROUTER_LABELS = [
+  { x: 300, y: 416, text: 'Every model, every vendor', anchor: 'start' },
+  { x: 700, y: 645, text: 'One endpoint' },
+  { x: 1072, y: 475, text: 'Teams', anchor: 'start' },
+  { x: 1072, y: 565, text: 'Budgets', anchor: 'start' },
+  { x: 1072, y: 655, text: 'Keys', anchor: 'start' },
+];
+
 function Tile({ t, i }) {
   return (
     <div className="hv-tile">
-      <LetterField seed={i + 1} />
       <h3 className="hv-tile-title">{t.tag}</h3>
       <p className="hv-tile-head">{t.title}</p>
       <p className="hv-tile-body">{t.desc}</p>
@@ -82,14 +101,14 @@ export default function RouterPage() {
       <Reveal />
       <Nav />
 
-      <header className="oshero company-hero">
+      <header className="oshero company-hero oshero-min">
         <div className="oshero-art" aria-hidden="true">
-          <HeroAscii />
+          <HeroLine stroke={ROUTER_STROKE} labels={ROUTER_LABELS} />
         </div>
         <div className="oshero-inner container">
           <p className="oshero-eyebrow">Model Router</p>
           <h1 className="oshero-title">
-            One endpoint. Every <em>model.</em>
+            One endpoint. Every <em>model</em><span className="hero-stop" aria-hidden="true" />
           </h1>
           <p className="oshero-pitch">
             Reduce your organization&rsquo;s token spend and harness the power of open models.
