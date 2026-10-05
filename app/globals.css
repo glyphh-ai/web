@@ -8894,9 +8894,9 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 .art { display: block; width: 100%; height: auto; }
 [data-theme="light"] .art { filter: invert(1) hue-rotate(180deg); }
 
-/* the hero: the words centred, the journey behind them */
-.oshero-min { padding: 0; min-height: 920px; display: flex; align-items: center; }
-.oshero-min .oshero-inner { padding: 4rem 0 0; }
+/* the hero: the words up top (as before), the journey below and behind them */
+.oshero-min { padding: 9rem 0 0; min-height: 920px; display: flex; align-items: flex-start; }
+.oshero-min .oshero-inner { padding: 0 0 24rem; }
 .oshero-min .oshero-art { align-items: flex-end; -webkit-mask-image: linear-gradient(#0000 0%, #000 10% 100%); mask-image: linear-gradient(#0000 0%, #000 10% 100%); }
 .oshero-min .oshero-pitch { max-width: 52rem; }
 .oshero-min .oshero-actions { margin-top: 1.4rem; }
@@ -8924,10 +8924,17 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 .hj-tree-r { animation-name: hj-tree-r; }
 .hj-plank { opacity: 0; transform: translate(700px, 540px) scale(0.05); animation: hj-plank 3.6s cubic-bezier(0.55, 0, 1, 0.7) 11s infinite; }
 .hj-rocket { transform: translate(-200px, -300px); opacity: 0; animation: hj-rocket 12s linear 29s infinite; }
+/* zoom to the door, hold while it opens, then walk through it */
 @keyframes hj-walk-in {
-  0%, 48% { transform: scale(1); opacity: 1; }
-  80% { opacity: 1; }
-  100% { transform: scale(5); opacity: 0; }
+  0% { transform: scale(1); opacity: 1; }
+  24%, 58% { transform: scale(1.7); opacity: 1; }
+  84% { opacity: 1; }
+  100% { transform: scale(7); opacity: 0; }
+}
+.hj-putter { animation: hj-putter 0.5s steps(2, end) infinite; }
+@keyframes hj-putter {
+  0% { opacity: 1; transform: translate(0, 0); }
+  100% { opacity: 0.35; transform: translate(-4px, 0); }
 }
 @keyframes hj-woods-fade {
   0%, 18% { opacity: 0; }   /* 5.4 s */

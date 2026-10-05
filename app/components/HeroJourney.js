@@ -45,20 +45,16 @@ export default function HeroJourney() {
       <g fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         {/* ── 1 · the door, and the walk through it ───────────────────────── */}
         <g className="hj-s hj-door">
-          {/* the floor running to the eye: the horizon, four lines to it */}
-          <path d={`M0 ${VP.y}H1400M0 700L${VP.x} ${VP.y}L1400 700M300 700L${VP.x} ${VP.y}L1100 700`} />
-          {/* the wall and its courses, the frame */}
-          <path d="M470 380H930V640H470ZM470 470H640M760 470H930M470 555H640M760 555H930" />
+          {/* the frame, the leaf hinged left swinging inward (its free edge runs toward the eye), the handle */}
           <path d="M640 640V460H760V640" />
-          {/* the leaf, hinged left, swinging inward: its free edge runs toward the eye */}
           <path d="M640 460H760V640H640Z">
-            <animate attributeName="d" begin="1.2s" dur="2.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.3 1"
+            <animate attributeName="d" begin="1.8s" dur="2.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.3 1"
               values="M640 460H760V640H640Z;M640 460L716 518L716 566L640 640Z" />
           </path>
           <circle cx="742" cy="550" r="6" className="hj-dot" stroke="none">
-            <animate attributeName="cx" begin="1.2s" dur="2.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.3 1" values="742;706" />
-            <animate attributeName="cy" begin="1.2s" dur="2.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.3 1" values="550;545" />
-            <animate attributeName="r" begin="1.2s" dur="2.2s" fill="freeze" values="6;3" />
+            <animate attributeName="cx" begin="1.8s" dur="2.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.3 1" values="742;706" />
+            <animate attributeName="cy" begin="1.8s" dur="2.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.3 1" values="550;545" />
+            <animate attributeName="r" begin="1.8s" dur="2.2s" fill="freeze" values="6;3" />
           </circle>
         </g>
 
@@ -107,8 +103,8 @@ export default function HeroJourney() {
               : <circle key={s.k} cx={s.x} cy={s.y} r="1.6" fill="currentColor" stroke="none" />)}
             <g className="hj-rocket">
               <g transform="rotate(-22)">
-                {/* the line coming out the back */}
-                <path d="M-16 0H-380" strokeWidth="1" />
+                {/* three angled lines puttering out the back */}
+                <g className="hj-putter"><path d="M-16-4l-22-9M-18 0h-30M-16 4l-22 9" /></g>
                 <path d="M0 0C10-9 30-9 44 0C30 9 10 9 0 0ZM10-4l-9-10h8M10 4l-9 10h8" />
                 <circle cx="26" cy="0" r="3" />
                 <circle cx="-8" cy="0" r="4" className="hj-dot" stroke="none" />
