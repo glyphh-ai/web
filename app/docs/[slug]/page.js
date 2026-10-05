@@ -10,6 +10,8 @@ const MOVED = {
   introduction: DOCS,
   // The agent page became Work and Code; the folder and model pieces got their own pages (2026-10-04).
   loops: `${DOCS}/work-and-code`, agent: `${DOCS}/work-and-code`,
+  // Cloud terminals and streamed panels left the product: terminals run on your desktop, the web is the agent (2026-10-05).
+  'cloud-terminals': `${DOCS}/terminals`, 'streamed-panels': `${DOCS}/web-app`,
   desktop: `${DOCS}/install`, panels: `${DOCS}/install`, sessions: `${DOCS}/install`, shortcuts: `${DOCS}/install`, artifacts: `${DOCS}/install`,
   router: `${DOCS}/gateway`, models: `${DOCS}/gateway`, 'model-catalog': `${DOCS}/gateway`, 'org-models': `${DOCS}/gateway`, rrotor: `${DOCS}/gateway`,
   connect: `${DOCS}/connections`, 'mcp-servers': `${DOCS}/mcp`,
