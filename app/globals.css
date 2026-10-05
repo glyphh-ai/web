@@ -8894,23 +8894,89 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 .art { display: block; width: 100%; height: auto; }
 [data-theme="light"] .art { filter: invert(1) hue-rotate(180deg); }
 
-/* the hero: the words over the deck's horizon */
-.oshero-min { padding: 9rem 0 0; min-height: 920px; display: flex; align-items: flex-start; }
-.oshero-min .oshero-inner { padding-bottom: 24rem; }
-/* the horizon sits under the buttons: the picture hangs from just below the
-   nav, its stars behind the words, its grid running out under the frame */
-.oshero-min .oshero-art { align-items: flex-start; padding-top: 120px; -webkit-mask-image: linear-gradient(#0000 0%, #000 12% 88%, #0000 100%); mask-image: linear-gradient(#0000 0%, #000 12% 88%, #0000 100%); }
-.oshero-min .oshero-art .art { width: max(100%, 1400px); max-width: none; height: auto; }
-@media (max-width: 760px) {
-  /* on a phone the picture hangs from the foot instead, smaller, so the
-     horizon still falls under the buttons and the dot off the words */
-  .oshero-min { min-height: 0; }
-  .oshero-min .oshero-inner { padding-bottom: 15rem; }
-  .oshero-min .oshero-art { align-items: flex-end; padding-top: 0; }
-  .oshero-min .oshero-art .art { width: 170%; }
-}
+/* the hero: the words centred, the journey behind them */
+.oshero-min { padding: 0; min-height: 920px; display: flex; align-items: center; }
+.oshero-min .oshero-inner { padding: 4rem 0 0; }
+.oshero-min .oshero-art { align-items: flex-end; -webkit-mask-image: linear-gradient(#0000 0%, #000 10% 100%); mask-image: linear-gradient(#0000 0%, #000 10% 100%); }
 .oshero-min .oshero-pitch { max-width: 52rem; }
 .oshero-min .oshero-actions { margin-top: 1.4rem; }
+@media (max-width: 760px) {
+  .oshero-min { min-height: 720px; }
+}
+
+/* the journey (HeroJourney.js), first person: the camera stands at the
+   vanishing point (700, 540) and walks. 0–7 s the door opens and the frame
+   grows past you; 6–14 s the trees stream out of the horizon and past the
+   edges; 13–20 s the planks of the footbridge come at you; 20 s the edge;
+   21–24 s the view tilts down to the city, 26–29 s up to the stars; from 29 s
+   the rocket keeps crossing. Every scene fades over the next. */
+.hj { display: block; width: 100%; height: 100%; color: var(--text); }
+.hj-dot { fill: var(--accent); }
+.hj .hj-s, .hj .hj-door, .hj .hj-tree, .hj .hj-plank, .hj .hj-tilt, .hj .hj-rocket { transform-box: view-box; }
+.hj-s { opacity: 0; animation-fill-mode: forwards; animation-timing-function: linear; }
+.hj-door { opacity: 1; transform-origin: 700px 540px; animation: hj-walk-in 7s linear forwards; }
+.hj-woods { animation: hj-fade 30s linear forwards; --in: 5.5s; }
+.hj-woods { animation-name: hj-woods-fade; }
+.hj-river { animation: hj-river-fade 30s linear forwards; }
+.hj-edge { animation: hj-edge-fade 30s linear forwards; }
+.hj-tilt { animation: hj-tilt 30s linear forwards; }
+.hj-tree { opacity: 0; transform: translate(700px, 540px) scale(0.04); animation: hj-tree-l 4.4s cubic-bezier(0.55, 0, 1, 0.7) 7.4s infinite; }
+.hj-tree-r { animation-name: hj-tree-r; }
+.hj-plank { opacity: 0; transform: translate(700px, 540px) scale(0.05); animation: hj-plank 3.6s cubic-bezier(0.55, 0, 1, 0.7) 11s infinite; }
+.hj-rocket { transform: translate(-200px, -300px); opacity: 0; animation: hj-rocket 12s linear 29s infinite; }
+@keyframes hj-walk-in {
+  0%, 48% { transform: scale(1); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: scale(5); opacity: 0; }
+}
+@keyframes hj-woods-fade {
+  0%, 18% { opacity: 0; }   /* 5.4 s */
+  24% { opacity: 1; }       /* 7.2 s */
+  43% { opacity: 1; }       /* 12.9 s */
+  48%, 100% { opacity: 0; } /* 14.4 s */
+}
+@keyframes hj-river-fade {
+  0%, 43% { opacity: 0; }   /* 12.9 s */
+  48% { opacity: 1; }       /* 14.4 s */
+  63% { opacity: 1; }       /* 18.9 s */
+  68%, 100% { opacity: 0; } /* 20.4 s */
+}
+@keyframes hj-edge-fade {
+  0%, 63% { opacity: 0; }   /* 18.9 s */
+  68%, 100% { opacity: 1; } /* 20.4 s */
+}
+@keyframes hj-tilt {
+  0%, 70% { transform: translate(0, 0); }          /* 21 s: at the edge */
+  80%, 86% { transform: translate(0, -380px); }    /* 24–26 s: down at the city */
+  96%, 100% { transform: translate(0, 700px); }    /* 29 s: up at the stars */
+}
+@keyframes hj-tree-l {
+  0% { transform: translate(700px, 540px) scale(0.04); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translate(-80px, 820px) scale(1.5); opacity: 1; }
+}
+@keyframes hj-tree-r {
+  0% { transform: translate(700px, 540px) scale(0.04); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translate(1480px, 820px) scale(1.5); opacity: 1; }
+}
+@keyframes hj-plank {
+  0% { transform: translate(700px, 540px) scale(0.05); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate(700px, 540px) scale(1.25); opacity: 1; }
+}
+@keyframes hj-rocket {
+  0% { transform: translate(-200px, -300px); opacity: 1; }
+  55% { transform: translate(1700px, -660px); opacity: 1; }
+  55.1%, 100% { transform: translate(-200px, -300px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hj .hj-s, .hj .hj-door, .hj .hj-tree, .hj .hj-plank, .hj .hj-tilt, .hj .hj-rocket { animation: none; }
+  .hj-door, .hj-woods, .hj-river { opacity: 0; }
+  .hj-edge { opacity: 1; }
+  .hj-tilt { transform: translate(0, 700px); }
+  .hj-rocket { transform: translate(760px, -520px); opacity: 1; }
+}
 .oshero-title em, .page-hero-title em, .page-hero-title .hero-accent, .hero-lab-h, .hero-lab-h em, .gh-brl { text-shadow: none; }
 .oshero-title em, .page-hero-title em, .ix-h2 em, .lt-h2 em, .section-title em, .hv-pitch .ix-h2 em, .hero-lab-h em { color: var(--text); }
 .oshero-title { text-shadow: none; }
