@@ -1,14 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import LetterField from './LetterField';
 import { APP_URL, DOWNLOADS, RELEASES_URL, byId, detectDownload } from './downloads';
 
 /**
  * DownloadDesktop — the Download section on the home page (his order,
  * 2026-10-04: the desktop download as a section and a CTA between the
  * others, in the frame's style). A kicker row, then a High Vis panel: the
- * visitor's own build as the big cell, with the letter hall behind it, the
+ * visitor's own build as the big cell, the
  * release tag read live from /api/version, and the four builds as hairline
  * rows beside it, the visitor's own outlined in the accent. The foot sends
  * the browser crowd to app.glyphh.ai. The builds come from ./downloads.js,
@@ -43,7 +42,6 @@ export default function DownloadDesktop() {
       <div className="hv-panel dls-panel">
         <div className="dls-main">
           <div className="dls-hero">
-            <LetterField seed={21} />
             <span className="dls-tag">{sel === here ? 'this machine' : 'selected'} &middot; {pick.os} {pick.arch}</span>
             <h3 className="dls-title">Glyphh Desktop</h3>
             <p className="dls-sub">

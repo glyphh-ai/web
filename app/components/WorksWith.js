@@ -50,7 +50,8 @@ export default function WorksWith() {
         {/* The tick rail between the rows came off (his order, 2026-09-22). Hidden, not deleted. */}
         {false && <div className="ww-rail" aria-hidden="true" />}
         {/* The model ticker (his order, 2026-09-22): a split-flap row of model names between the connection rows. */}
-        <ModelTicker />
+        {/* Off in the minimal cut (2026-10-05). Hidden, not deleted. */}
+        {false && <ModelTicker />}
         <Row apps={APPS_ROW2} direction="scroll-right" />
         <div className="ww-foot">
           <a href="/integrations/connect">Browse all connections &rarr;</a>

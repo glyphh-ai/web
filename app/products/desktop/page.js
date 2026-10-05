@@ -3,6 +3,8 @@ import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
 import OsHero from '../../components/OsHero';
 import OsPitch from '../../components/OsPitch';
+import DesktopSection from '../../components/DesktopSection';
+import TheSystem from '../../components/TheSystem';
 import Planes from '../../components/Planes';
 import HowItWorks from '../../components/HowItWorks';
 import QuickStart from '../../components/QuickStart';
@@ -137,7 +139,11 @@ export default function DesktopPage() {
           works with. The workspace story follows. */}
       <OsHero />
       <div className="site-frame">
+        {/* The minimal cut (his order, 2026-10-05): the screenshots open the
+            frame as the Desktop section; the system map follows the pitch. */}
+        <DesktopSection />
         <OsPitch />
+        <TheSystem />
         <Planes />
         <HowItWorks />
         <QuickStart />

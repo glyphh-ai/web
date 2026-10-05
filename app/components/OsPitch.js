@@ -1,5 +1,3 @@
-import HallLines from './HallLines';
-
 /**
  * OsPitch — the pitch, in the frame (his order, 2026-09-23: "switch the
  * sections", then "this section needs to match the others"). Same pattern
@@ -9,7 +7,8 @@ import HallLines from './HallLines';
  * the hero (his order, 2026-09-23: "keep the squares the way they were …
  * with the same effect") — separated boxes, and HallLines hosted by this
  * section: hover a card and lines shoot from its corners to a vanishing
- * point above, the flare building the longer the pointer stays.
+ * point above, the flare building the longer the pointer stays. The lines
+ * came off in the minimal cut (2026-10-05).
  */
 
 const POINTS = [
@@ -22,7 +21,6 @@ const POINTS = [
 export default function OsPitch() {
   return (
     <section className="hiw hv-pitch" id="pitch">
-      <HallLines />
       <div className="qs-head">
         <span className="qs-kicker">The inversion</span>
         <a href="https://docs.glyphh.ai" className="qs-more">Read the docs &rarr;</a>
