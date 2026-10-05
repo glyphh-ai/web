@@ -38,7 +38,7 @@ export default function OsHero() {
 
         <p className="oshero-pitch">
           Scale your business with practical AI that is designed to maximize your return on investment
-          and achieve real world results with semantic data, skills, and governance.
+          and achieve real world results with open weight models, semantic data pipelines, universal skills, a2a agents, scheduled tasks, and governance.
         </p>
 
         {/* Get started lands in the app at app.glyphh.ai (his order, 2026-10-04); the
