@@ -8884,3 +8884,79 @@ p em, li em { font-family: inherit !important; font-style: italic; }
   .fq-n { display: none; }
   .fq-a { padding-left: 1.4rem; }
 }
+
+/* ═══ THE MINIMAL CUT (his order, 2026-10-05) ═════════════════════════════════
+   "turn down the purple": the lines are white, the words are white, and purple
+   is ONE thing — the primary button and the single dot in each picture. The
+   kickers, tile titles, numbers, chevrons and active marks that wore it read in
+   the text colours now. The deck's line art (public/art) replaces the letter
+   fields, the ASCII hall, the hall lines and the particle pipeline. */
+.art { display: block; width: 100%; height: auto; }
+[data-theme="light"] .art { filter: invert(1) hue-rotate(180deg); }
+
+/* the hero: the words over the deck's horizon */
+.oshero-min { padding: 9rem 0 0; min-height: 920px; display: flex; align-items: flex-start; }
+.oshero-min .oshero-inner { padding-bottom: 24rem; }
+/* the horizon sits under the buttons: the picture hangs from just below the
+   nav, its stars behind the words, its grid running out under the frame */
+.oshero-min .oshero-art { align-items: flex-start; padding-top: 120px; -webkit-mask-image: linear-gradient(#0000 0%, #000 12% 88%, #0000 100%); mask-image: linear-gradient(#0000 0%, #000 12% 88%, #0000 100%); }
+.oshero-min .oshero-art .art { width: max(100%, 1400px); max-width: none; height: auto; }
+@media (max-width: 760px) {
+  /* on a phone the picture hangs from the foot instead, smaller, so the
+     horizon still falls under the buttons and the dot off the words */
+  .oshero-min { min-height: 0; }
+  .oshero-min .oshero-inner { padding-bottom: 15rem; }
+  .oshero-min .oshero-art { align-items: flex-end; padding-top: 0; }
+  .oshero-min .oshero-art .art { width: 170%; }
+}
+.oshero-min .oshero-pitch { max-width: 52rem; }
+.oshero-min .oshero-actions { margin-top: 1.4rem; }
+.oshero-title em, .page-hero-title em, .page-hero-title .hero-accent, .hero-lab-h, .hero-lab-h em, .gh-brl { text-shadow: none; }
+.oshero-title em, .page-hero-title em, .ix-h2 em, .lt-h2 em, .section-title em, .hv-pitch .ix-h2 em, .hero-lab-h em { color: var(--text); }
+.oshero-title { text-shadow: none; }
+
+/* purple turned down: the frame's small type reads in gray and white */
+.qs-kicker { color: var(--text-3); }
+.hv-tile-title, .pl-title { color: var(--text); }
+.hv-tab.active { color: var(--text); border-color: var(--text); }
+.hv-card-here { border-color: var(--text); }
+.hv-foot-link a, .hv-tile-more { color: var(--text-2); }
+.nav-dd-trigger.active { color: var(--text); text-decoration-color: var(--text); }
+.fq-item[open] .fq-n { color: var(--text); }
+.dls-go { color: var(--text-3); }
+.dls-tag { border-color: var(--border-2); color: var(--text-3); }
+.dls-row.here a { box-shadow: inset 2px 0 0 var(--text); }
+.section-label .accent { color: var(--text-3); }
+.oshero-points li span { color: var(--text); }
+
+/* the Desktop section: the screenshots in the white-ruled frame */
+.dsk-shots { max-width: none; margin: 0; }
+.dsk .dv-shot { display: block; width: 100%; margin: 0; border-radius: 0; border: 1px solid var(--rail); background: #000; }
+[data-theme="light"] .dsk .dv-shot { background: var(--surface); }
+.dsk .ds-bar { position: relative; z-index: 2; }
+
+/* the system map */
+.sys-panel { padding: 1.5rem 1.5rem 0.75rem; color: var(--text); }
+.sysmap { display: block; width: 100%; height: auto; }
+.sysmap-dot { fill: var(--accent); }
+.sysmap-labels text { font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.06em; fill: var(--text-3); }
+.sys-parts { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 0 1rem; font-size: 0.8rem; line-height: 1.45; color: var(--muted); }
+.sys-parts li span { display: block; margin-bottom: 0.2rem; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); }
+@media (max-width: 900px) { .sys-parts { grid-template-columns: repeat(4, 1fr); row-gap: 0.9rem; } }
+@media (max-width: 540px) { .sys-parts { grid-template-columns: 1fr 1fr; } }
+
+/* the planes: the picture, then the four texts under their boxes */
+.pl-fig { margin: 0 0 0.25rem; }
+.pl-fig .art { margin: -4% 0 -6%; }
+.pl-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8.2%; margin: 0 6.6%; }
+.pl-col { display: block; text-decoration: none; color: inherit; }
+.pl-col:hover .pl-title { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .pl-cols { grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin: 1rem 0 0; }
+}
+
+/* How it works: the deck's picture heads each tile */
+.hv-tile { position: relative; }
+.hv-tile-art { display: block; overflow: hidden; aspect-ratio: 2 / 1; margin: -1.3rem -1.4rem 1rem; border-bottom: 1px solid var(--border); background: #000; }
+[data-theme="light"] .hv-tile-art { background: #fff; }
+.hv-tile-art .art { width: 100%; height: 100%; object-fit: cover; transform: scale(1.35); }

@@ -1,9 +1,6 @@
 import HeroCTA from './HeroCTA';
 import { APP_URL } from './downloads';
-import HeroWaves from './HeroWaves';
-import HeroAscii from './HeroAscii';
-import HallLines from './HallLines';
-import DesktopShots from './DesktopShots';
+import Art from './Art';
 
 /**
  * OsHero — the home hero of the site refactor (site.md §1.1).
@@ -14,19 +11,18 @@ import DesktopShots from './DesktopShots';
  * in the white-ruled frame — over the same letter-hall backdrop. The
  * inversion line, the four points and the golden pitch moved down into the
  * frame (OsPitch.js); the demo + YouTube links went to the Latest section.
+ *
+ * The minimal cut (his order, 2026-10-05): the words, the two doors and the
+ * deck's horizon behind them — the grid, the stars, one purple dot. The
+ * screenshots moved down to the Desktop section (DesktopSection.js); the
+ * letter hall, the particle field and the hall lines came off.
  */
 export default function OsHero() {
   return (
-    <header className="oshero oshero-shots-hero">
-      {/* The canvas particle field is OFF (his call, 2026-09-22): the art is the
-          ASCII picture below, like the reference. Hidden, not deleted. */}
-      {false && <HeroWaves />}
+    <header className="oshero oshero-min">
       <div className="oshero-art" aria-hidden="true">
-        <HeroAscii />
+        <Art name="hero" />
       </div>
-      {/* The hall lines shot from the four point cards; the cards live in the
-          frame now, with no vanishing point to run to — off, not deleted. */}
-      {false && <HallLines />}
       <div className="oshero-inner container">
         {/* His copy, verbatim (2026-10-04): the headline and the sub-line are the
             hero's only words. The eyebrow is off, not deleted. */}
@@ -48,9 +44,6 @@ export default function OsHero() {
           <a href="#download" className="os-cta os-cta-ghost">Download the desktop</a>
         </div>
 
-        <div className="oshero-shots">
-          <DesktopShots />
-        </div>
       </div>
     </header>
   );

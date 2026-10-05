@@ -1,4 +1,4 @@
-import LetterField from './LetterField';
+import Art from './Art';
 
 /**
  * HowItWorks — the section above Quick Start (site refactor 2026-09-22):
@@ -6,12 +6,15 @@ import LetterField from './LetterField';
  * Tasks, Rrotor (his copy, 2026-09-22). A kicker row, then a 3 × 2 grid;
  * each tile is an icon, a mono title, a one-line headline, a paragraph, and
  * a link to that thing's docs page. Same frame and look as Quick Start.
+ * The minimal cut (2026-10-05): the deck's picture of each thing heads its
+ * tile; the letter field and the stroke icons came off.
  */
 
 const TILES = [
   {
     href: 'https://docs.glyphh.ai/install',
     title: 'Desktop',
+    art: 'desktop',
     head: 'A universal desktop harness',
     body:
       'Windows, Mac, Linux, and CLI — runs on your machine. Frontier models where they count, open weights through the router for the rest.',
@@ -25,6 +28,7 @@ const TILES = [
   {
     href: 'https://docs.glyphh.ai/gateway',
     title: 'Router',
+    art: 'router',
     head: 'Every model we run, governed by you',
     body:
       'Based on LiteLLM — extend your frontier harness with cross-vendor models or open weights. Teams, budgets, governance, and semantic routing maximize your AI spend.',
@@ -38,6 +42,7 @@ const TILES = [
   {
     href: 'https://docs.glyphh.ai/connections',
     title: 'Connect',
+    art: 'connect',
     head: '3,500+ MCP tools give you reach',
     body:
       'Pipedream Connect powers our connector framework, extended to your organization via the router. Govern who can connect to what, and what tools they can use.',
@@ -51,6 +56,7 @@ const TILES = [
   {
     href: 'https://docs.glyphh.ai/skills',
     title: 'Semantic Apps',
+    art: 'semantic',
     head: 'Stop using inference, use data',
     body:
       'The desktop ships with a database, vector DB, and semantic knowledge graph harness. Your build agents create deterministic apps your teams review, approve, and distribute.',
@@ -64,6 +70,7 @@ const TILES = [
   {
     href: 'https://docs.glyphh.ai/tasks',
     title: 'Tasks',
+    art: 'tasks',
     head: 'Multi-step process definition',
     body:
       'Use Connect to pull data into apps on a schedule — 95% deterministic, reasoning only if needed. Your team benefits instantly from data sources that don’t cost your org money to constantly query.',
@@ -77,6 +84,7 @@ const TILES = [
   {
     href: 'https://docs.glyphh.ai/gateway',
     title: 'Rrotor',
+    art: 'rrotor',
     head: 'Patent pending memory substrate',
     body:
       'Semantic memory and recursive model routing on the desktop — data is local and never leaves the machine. Memory extends to everything you do across every model or app you touch, governed at the org level.',
@@ -98,23 +106,9 @@ export default function HowItWorks() {
         <a href="https://docs.glyphh.ai" className="qs-more">Read the docs &rarr;</a>
       </div>
       <div className="hv-grid">
-        {TILES.map((t, i) => (
+        {TILES.map((t) => (
           <a key={t.title} href={t.href} className="hv-tile">
-            <LetterField seed={i + 1} />
-            <svg
-              className="hv-tile-icon"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              {t.icon}
-            </svg>
+            <span className="hv-tile-art"><Art name={t.art} /></span>
             <h3 className="hv-tile-title">{t.title}</h3>
             <p className="hv-tile-head">{t.head}</p>
             <p className="hv-tile-body">{t.body}</p>
