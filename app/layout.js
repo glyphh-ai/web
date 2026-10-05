@@ -10,7 +10,7 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 // hero subline, verbatim.
 const HOME_TITLE = "Glyphh — the vendor-neutral alternative to frontier AI";
 const HOME_DESCRIPTION =
-  "Scale your business with practical AI that is designed to maximize your return on investment and achieve real world results with semantic data, skills, and governance.";
+  "Scale your business with practical AI that is designed to maximize your return on investment and achieve real world results with open weight models, semantic data pipelines, universal skills, a2a agents, scheduled tasks, and governance.";
 
 export const metadata = {
   metadataBase: new URL('https://glyphh.ai'),
