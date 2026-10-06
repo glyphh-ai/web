@@ -54,7 +54,7 @@ const TILES = [
     ),
   },
   {
-    href: 'https://docs.glyphh.ai/skills',
+    href: 'https://docs.glyphh.ai/ada',
     title: 'Semantic Apps',
     art: 'semantic',
     head: 'Stop using inference, use data',
