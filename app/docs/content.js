@@ -3,8 +3,9 @@ import { PRODUCT_GROUPS, ada } from './pages';
 import { DOCS } from './base';
 import { adaLive } from '../lib/ada-live';
 
-// The introduction with Ada on (one switch: app/lib/ada-live.js) is the one the
-// cut took away, word for word; off, it is today's.
+// The introduction's Ada opening (cut 2026-10-04, back 2026-10-06 behind the
+// one switch): the search for a primitive, the glyph, the stack, build time
+// over runtime. With Ada off the page is today's, word for word.
 const ADA_INTRO = (
   <>
     <h2>A search for a cognitive primitive</h2>
@@ -32,23 +33,6 @@ const ADA_INTRO = (
       built. After that, the structure answers.
     </p>
     <BuildRun />
-    <ul>
-      <li><strong>Measured, not generated.</strong> The same input gives the same answer, with its reasons.</li>
-      <li><strong>Frontier where it counts.</strong> Spend frontier models on the hard turns and open weights on the rest.</li>
-      <li><strong>Governed by you.</strong> Approve models, set budgets, and gate tools by team. Every token is accounted for.</li>
-    </ul>
-    <h2>The products</h2>
-    <Doors />
-    <h2>Next steps</h2>
-    <ol>
-      <li><a href={`${DOCS}/ada-introduction`}>Ada</a>: the model, how it works, and the four steps.</li>
-      <li><a href={`${DOCS}/glyph`}>The glyph</a>: the primitive and the five operations that build it.</li>
-      <li><a href={`${DOCS}/install`}>Glyphh Desktop</a>: install it and sign in.</li>
-      <li><a href={`${DOCS}/own-cli`}>Model Router</a>: point Claude Code or Codex at one endpoint.</li>
-    </ol>
-    <p>
-      The code is at <a href="https://github.com/glyphh-ai">github.com/glyphh-ai</a>.
-    </p>
   </>
 );
 
@@ -56,11 +40,10 @@ const glyphh = [
   {
     slug: 'introduction',
     title: 'Introduction',
-    lede: adaLive()
-      ? 'Glyphh is an AI research company. We build a mathematical primitive for AI, and the products that run on it.'
-      : 'Glyphh Desktop is the vendor-neutral desktop for frontier AI. app.glyphh.ai is the same account in a browser, built to drive it. The Model Router puts every model behind one endpoint.',
-    body: adaLive() ? ADA_INTRO : (
+    lede: 'Glyphh Desktop is the vendor-neutral desktop for frontier AI. app.glyphh.ai is the same account in a browser, built to drive it. The Model Router puts every model behind one endpoint.',
+    body: (
       <>
+        {adaLive() && ADA_INTRO}
         <h2>Glyphh Desktop</h2>
         <p>
           Glyphh Desktop runs on Mac, Windows and Linux, with a CLI that shares its history. It is the open
@@ -99,6 +82,8 @@ const glyphh = [
         <Doors />
         <h2>Next steps</h2>
         <ol>
+          {adaLive() && <li><a href={`${DOCS}/ada-introduction`}>Ada</a>: the model, how it works, and the four steps.</li>}
+          {adaLive() && <li><a href={`${DOCS}/glyph`}>The glyph</a>: the primitive and the five operations that build it.</li>}
           <li><a href={`${DOCS}/quick-start`}>Quick start</a>: install, pick a folder, pick a model, build.</li>
           <li><a href={`${DOCS}/install`}>Sign in and install</a>: the desktop, the web app, the console.</li>
           <li><a href={`${DOCS}/web-app`}>app.glyphh.ai</a>: the web, built to reach your desktop.</li>

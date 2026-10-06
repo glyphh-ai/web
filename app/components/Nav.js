@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
-import { adaLive } from '../lib/ada-live';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
 // Log in and Sign up land in the app (his order, 2026-10-04): app.glyphh.ai is
@@ -88,25 +87,22 @@ export default function Nav() {
             <div className="nav-dd">
               <a href="/" className={`nav-dd-trigger${pathname === '/' ? ' active' : ''}`}>Home</a>
             </div>
-            {/* The Products dropdown is back (his order, 2026-10-02) with the three products the home page names, Ada only with Ada on. */}
+            {/* The Products dropdown is back (his order, 2026-10-02) with the three products the home page names. */}
             <div
                 className={`nav-dd ${prodOpen ? 'open' : ''}`}
                 ref={prodRef}
                 onMouseEnter={prodEnter}
                 onMouseLeave={prodLeave}
               >
-                <a href={adaLive() ? '/products/ada' : '/products/desktop'} className={`nav-dd-trigger${active('/products')}`}>
+                <a href="/products/ada" className={`nav-dd-trigger${active('/products')}`}>
                   Products
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </a>
                 <div className="nav-dd-panel">
-                  {/* Ada is listed only with Ada on (one switch: app/lib/ada-live.js). */}
-                  {adaLive() && (
-                    <a href="/products/ada" className="nav-dd-item">
-                      <span className="nav-dd-name">Ada</span>
-                      <span className="nav-dd-desc">Typed models your agents build, feed and query. Every answer a fact tree.</span>
-                    </a>
-                  )}
+                  <a href="/products/ada" className="nav-dd-item">
+                    <span className="nav-dd-name">Ada</span>
+                    <span className="nav-dd-desc">Typed models your agents build, feed and query. Every answer a fact tree.</span>
+                  </a>
                   <a href="/products/desktop" className="nav-dd-item">
                     <span className="nav-dd-name">Glyphh Desktop</span>
                     <span className="nav-dd-desc">The open desktop client for frontier AI. Every loop, every model, one app.</span>
@@ -186,7 +182,7 @@ export default function Nav() {
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
         <span className="mobile-menu-group">Products</span>
-        {adaLive() && <a href="/products/ada" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Ada</a>}
+        <a href="/products/ada" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Ada</a>
         <a href="/products/desktop" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Desktop</a>
         <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Model Router</a>
         <a href="/integrations" onClick={() => setMenuOpen(false)}>Integrations</a>

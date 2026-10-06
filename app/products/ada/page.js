@@ -3,22 +3,16 @@ import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
 import HeroAscii from '../../components/HeroAscii';
 import LetterField from '../../components/LetterField';
-import { notFound } from 'next/navigation';
-import { adaLive } from '../../lib/ada-live';
 
 // Ada (2026-10-01 mock): the product page, in the home page's frame grammar.
 // The facts are the server's (glyphh_auth/ada*.py): the tool names, the answer
 // fields, where records live. The example answer is illustrative.
 
-// The page exists only with Ada on (one switch: app/lib/ada-live.js); off, it is a 404.
-export function generateMetadata() {
-  if (!adaLive()) return {};
-  return {
-    title: 'Ada: typed models your agents build. Your software leverages it at runtime',
-    description:
-      'Seed Ada with data and she builds a lattice of algebraic meaning. Leverage our SDK or direct API to then make deterministic calls with no LLM in the middle.',
-  };
-}
+export const metadata = {
+  title: 'Ada: typed models your agents build. Your software leverages it at runtime',
+  description:
+    'Seed Ada with data and she builds a lattice of algebraic meaning. Leverage our SDK or direct API to then make deterministic calls with no LLM in the middle.',
+};
 
 const DOCS = "https://docs.glyphh.ai";
 
@@ -109,7 +103,6 @@ function Tile({ t, i }) {
 }
 
 export default function AdaPage() {
-  if (!adaLive()) notFound();
   return (
     <div className="home-page">
       <Reveal />

@@ -1,5 +1,4 @@
 import Art from './Art';
-import { adaLive } from '../lib/ada-live';
 
 /**
  * HowItWorks — the section above Quick Start (site refactor 2026-09-22):
@@ -55,8 +54,7 @@ const TILES = [
     ),
   },
   {
-    // The Ada docs with Ada on (one switch: app/lib/ada-live.js), else the skills page.
-    href: adaLive() ? 'https://docs.glyphh.ai/ada' : 'https://docs.glyphh.ai/skills',
+    href: 'https://docs.glyphh.ai/ada',
     title: 'Semantic Apps',
     art: 'semantic',
     head: 'Stop using inference, use data',
