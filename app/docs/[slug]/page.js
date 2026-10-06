@@ -2,6 +2,7 @@ import { notFound, permanentRedirect } from 'next/navigation';
 import DocArticle from '../DocArticle';
 import { PAGES } from '../content';
 import { DOCS } from '../base';
+import { adaLive } from '../../lib/ada-live';
 
 const LISTED = PAGES.filter((p) => p.slug !== 'introduction');
 
@@ -18,7 +19,8 @@ const MOVED = {
   seats: `${DOCS}/plans`, 'billing-admin': `${DOCS}/plans`,
   sso: `${DOCS}/security`, 'org-settings': `${DOCS}/security`, domain: `${DOCS}/security`,
   review: `${DOCS}/skills`, hub: `${DOCS}/skills`, 'ai-hub': `${DOCS}/skills`, 'org-agents': `${DOCS}/skills`,
-  'semantic-apps': `${DOCS}/install`, 'built-on': DOCS, brand: DOCS, console: DOCS, 'the-cast': DOCS,
+  // An old semantic-apps address lands on Ada when Ada is on, else on the desktop install page.
+  'semantic-apps': adaLive() ? `${DOCS}/ada` : `${DOCS}/install`, 'built-on': DOCS, brand: DOCS, console: DOCS, 'the-cast': DOCS,
 };
 
 export function generateStaticParams() {

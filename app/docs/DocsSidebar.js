@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { DOCS, SITE } from './base';
 
 const hrefOf = (p) => (p.slug === 'introduction' ? DOCS : `${DOCS}/${p.slug}`);
-// The page a path names, on either host: /docs/install and /install are both 'install'; the home is 'introduction'.
+// The page a path names, on either host: /docs/ada and /ada are both 'ada'; the home is 'introduction'.
 const slugOf = (path) => path.replace(/^\/docs(?=\/|$)/, '').replace(/^\//, '').replace(/\/$/, '') || 'introduction';
 
 // The rail: a way back to the site, the logo, a search over every page, then
