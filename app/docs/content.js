@@ -1,7 +1,6 @@
 import { Code, Row, Shot, GlyphFlow, GlyphDistance, GlyphTree, Traits, GlyphhStack, BuildRun, Doors, FactTreeFig, AnswerFig, LlmVsGlyphh } from './ui';
 import { PRODUCT_GROUPS, ada } from './pages';
 import { DOCS } from './base';
-import { adaLive } from '../lib/ada-live';
 
 // The introduction's Ada opening (cut 2026-10-04, back 2026-10-06 behind the
 // one switch): the search for a primitive, the glyph, the stack, build time
@@ -43,7 +42,7 @@ const glyphh = [
     lede: 'Glyphh Desktop is the vendor-neutral desktop for frontier AI. app.glyphh.ai is the same account in a browser, built to drive it. The Model Router puts every model behind one endpoint.',
     body: (
       <>
-        {adaLive() && ADA_INTRO}
+        {ADA_INTRO}
         <h2>Glyphh Desktop</h2>
         <p>
           Glyphh Desktop runs on Mac, Windows and Linux, with a CLI that shares its history. It is the open
@@ -82,8 +81,8 @@ const glyphh = [
         <Doors />
         <h2>Next steps</h2>
         <ol>
-          {adaLive() && <li><a href={`${DOCS}/ada-introduction`}>Ada</a>: the model, how it works, and the four steps.</li>}
-          {adaLive() && <li><a href={`${DOCS}/glyph`}>The glyph</a>: the primitive and the five operations that build it.</li>}
+          <li><a href={`${DOCS}/ada-introduction`}>Ada</a>: the model, how it works, and the four steps.</li>
+          <li><a href={`${DOCS}/glyph`}>The glyph</a>: the primitive and the five operations that build it.</li>
           <li><a href={`${DOCS}/quick-start`}>Quick start</a>: install, pick a folder, pick a model, build.</li>
           <li><a href={`${DOCS}/install`}>Sign in and install</a>: the desktop, the web app, the console.</li>
           <li><a href={`${DOCS}/web-app`}>app.glyphh.ai</a>: the web, built to reach your desktop.</li>
@@ -617,6 +616,6 @@ const byslug = Object.fromEntries([...start, ...ada].map((p) => [p.slug, p]));
 const ADA = ['ada-introduction', 'ada-install', 'quickstart', 'primer', 'glyph', 'fact-trees', 'patterns', 'ada', 'ada-act', 'ada-typed', 'ada-time', 'ada-edges', 'ada-graph', 'ada-gql', 'ada-procedures', 'ada-tools', 'ada-sdk', 'ada-guide-tickets', 'ada-guide-churn'].map((x) => byslug[x]);
 
 // The Ada group is listed only with Ada on; off, its pages are not pages (404).
-export const GROUPS = [{ title: 'Glyphh', pages: glyphh }, ...(adaLive() ? [{ title: 'Ada', pages: ADA }] : []), ...PRODUCT_GROUPS];
+export const GROUPS = [{ title: 'Glyphh', pages: glyphh }, { title: 'Ada', pages: ADA }, ...PRODUCT_GROUPS];
 export const PAGES = GROUPS.flatMap((g) => g.pages);
 export const hrefOf = (p) => (p.slug === 'introduction' ? DOCS : `${DOCS}/${p.slug}`);
