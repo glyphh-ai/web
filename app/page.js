@@ -4,6 +4,7 @@ import Reveal from './components/Reveal';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
 import DesktopPage, { metadata as desktop } from './products/desktop/page';
+import { HOME_TITLE } from './lib/home-meta';
 
 // THE HOME IS GLYPHH DESKTOP (his order, 2026-10-04): glyphh.ai is the desktop
 // page, the OS hero with the screenshots, the pitch, the planes, how it
@@ -14,8 +15,11 @@ import DesktopPage, { metadata as desktop } from './products/desktop/page';
 // glyphh.ai/code and glyphh.ai/work are internally rewritten to this page with
 // a different hero (see ../middleware.js). Canonicalize every variant to the
 // root so search engines treat them as one page — no SEO fragmentation.
+// The home carries the company's title (his order, 2026-10-06: "Glyphh — the
+// vendor-neutral alternative to frontier AI"), not the Desktop page's; the
+// description stays the desktop's, verbatim.
 export const metadata = {
-  title: desktop.title,
+  title: HOME_TITLE,
   description: desktop.description,
   alternates: { canonical: '/' },
 };
