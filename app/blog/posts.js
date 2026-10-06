@@ -7,6 +7,105 @@
 
 export const POSTS = [
   {
+    slug: 'ada-in-your-code',
+    title: 'Ada in Your Code — Tickets Routed, Churn Called',
+    summary: 'The Ada SDKs are out for TypeScript and Python. Instead of telling you what Ada is for the hundredth time, Timme shows you two things he built with them this week: a helpdesk that routes its own tickets, and a churn call that shows its work.',
+    date: '2026-10-02',
+    author: 'Chris "Timme"',
+    minutes: 6,
+    cover: '/blog/ada-sdk-hero.png',
+    coverAlt: 'Ask a model. Get a reason. Two answers from Ada: a ticket routed to platform, and an account called as churned.',
+    tags: ['Ada', 'SDK', 'Guides'],
+    related: [
+      ['Guide: route support tickets', 'https://docs.glyphh.ai/ada-guide-tickets'],
+      ['Guide: customer churn', 'https://docs.glyphh.ai/ada-guide-churn'],
+      ['The SDKs', 'https://docs.glyphh.ai/ada-sdk'],
+      ['Ada', '/products/ada'],
+    ],
+    sections: [
+      {
+        id: 'hi',
+        heading: null,
+        body: [
+          'Hi everyone, Chris here. Today we\'re shipping the Ada SDKs, one for TypeScript and one for Python, and instead of telling you what Ada is for the hundredth time I\'m going to show you two things I built with them this week. Both are in the docs as step by step guides and both were run for real, every number you see below came back from the server, not from my imagination.',
+          {
+            html: '<pre><code>npm install @glyphh-ai/ada\npip install glyphh-ada</code></pre>',
+          },
+          'Quick recap if you\'re new here. Glyphh\'s whole idea is use AI to build the thing, not to run it. Ada is the piece that makes that work when the thing has to reason. You (or your agent) build a model from your own records, and then your software calls it. No LLM in the middle, no tokens, no latency lottery, same answer every single time, and every answer tells you what it\'s standing on. That last part is very important to understand, and it\'s the part the examples are really about.',
+        ],
+      },
+      {
+        id: 'tickets',
+        heading: 'Example one, a helpdesk that routes its own tickets',
+        body: [
+          'Every support org I have ever been in has the same problem. Tickets come in, somebody has to look at them and figure out which team owns them, and that somebody is usually the most senior person on the floor because they\'re the only one who knows. Hold that thought.',
+          'I took 96 resolved tickets, which is nothing, you have thousands. I told Ada what a ticket is, a product, a component, a severity from 1 to 5, a plan, and a one line summary, every field with a type. Then I recorded each ticket with the team that actually fixed it. That\'s the whole setup. There is no training run, there\'s no fine tuning, there\'s no prompt. A record counts from the next question.',
+          'Then I asked about a new one:',
+          {
+            html: '<pre><code>answer = model.query(ticket("api", "webhooks", 4, "pro", "webhook delivery fails with a 500"))\n\n{ "act": true, "top": "platform", "confidence": 1.0, "count": 16 }</code></pre>',
+          },
+          {
+            html: '<code>act</code> is the only thing your code looks at. True, route it to platform, 16 tickets like it say so. Cool, sounds great. Here\'s the part I actually care about though. A ticket came in about SSO, and no ticket in the history had ever mentioned SSO:',
+          },
+          {
+            html: '<pre><code>{ "act": false, "reason": "unseen", "top": "platform", "unseen": ["ticket.issue.component=sso"] }</code></pre>',
+          },
+          'Ada says no, I\'m not going to act on this, here is my nearest guess, and here is exactly what I\'ve never seen before. That ticket goes to a person. The person routes it to the identity team, I record that, and after three of those Ada routes SSO tickets on its own. The senior person on the floor just got their afternoon back, and nothing was guessed in the process.',
+          'Same thing the other direction. A team bounces a ticket back? Record the failure. Ada stops making that call for that kind of ticket until a newer success says otherwise. Your helpdesk gets smarter because your business kept happening, not because somebody retrained something.',
+          'And when the manager asks why did this go to platform, you don\'t shrug:',
+          {
+            html: '<img src="/blog/ada-sdk-facts.png" alt="The fact tree for a routed ticket: component, plan and product the same, severity near at 0.75, summary a partial match at 0.4486." loading="lazy" />',
+          },
+          'That is the nearest ticket on record, field by field. Same component, same plan, same product, severity one step off, summary about half the same words. Every one of those numbers is arithmetic on two values. It is not an opinion and it does not change tomorrow.',
+        ],
+      },
+      {
+        id: 'churn',
+        heading: 'Example two, a churn call that shows its work',
+        body: [
+          'This one is for the folks who have sat in a renewal meeting looking at a dashboard that says "health score 62" with no idea where the 62 came from. I have been that guy. Here\'s the Ada version.',
+          'Sixty past accounts, three monthly snapshots each, seats, logins per seat, open tickets, features used, and how the term ended, renewed or churned. In Ada a record with the same account id is a new version of that account, so the model keeps the whole slide, not just the last photo. Then you ask about a live account, as it is today, no id:',
+          {
+            html: '<pre><code>const a = await model.query(snapshot(account));\n\n{ "act": true, "top": "churned", "confidence": 0.9443, "count": 47,\n  "outcomes": { "churned": 0.9443, "renewed": 0.0557 } }</code></pre>',
+          },
+          '94% of the vote of 47 past accounts says churned. Which ones? Ask:',
+          {
+            html: '<pre><code>FIND SIMILAR TO $account WHERE outcome = $outcome LIMIT 3\n\n[ { "account": "acct-03", "score": 0.8889 },\n  { "account": "acct-06", "score": 0.7861 },\n  { "account": "acct-12", "score": 0.7694 } ]</code></pre>',
+          },
+          'Now your success manager has three names, not a score. And because every version was kept, you can pull up acct-03 and watch exactly how it went:',
+          {
+            html: '<img src="/blog/ada-sdk-churn.png" alt="Account acct-03 over three months: logins per seat fall from 6 to 2 while open tickets rise from 3 to 7. Risk: high, 94% of the vote of 47 past accounts." loading="lazy" />',
+          },
+          {
+            html: 'Logins down, tickets up, drift measured, slope per day on every number. That\'s one GQL statement, Ada\'s query language, and it\'s the same statement whether you run it from TypeScript, Python, or an agent over MCP. Throw an account at it from an industry it has never seen and you get <code>unknown</code> with the reason, not a confident number pulled out of the air. I cannot stress enough how much I prefer that to the health score.',
+          },
+        ],
+      },
+      {
+        id: 'the-loop',
+        heading: 'Notice it\'s the same loop both times',
+        body: [
+          {
+            html: '<ol><li>Say what the thing is. Every field gets a type, and anything that doesn\'t fit gets refused before it\'s stored.</li><li>Record what happened.</li><li>Ask, and branch on <code>act</code>.</li><li>When Ada won\'t act, hand it to a person with the reason.</li><li>Record what the person decided.</li></ol>',
+          },
+          'That loop is the product. It\'s how software should use AI in my opinion, the agent builds the model at build time where frontier models are genuinely great, and at runtime it\'s just math on your data with a receipt. I\'ve spent almost 30 years building the data, logic and UI parts of software, and this is the first time the reasoning part has felt like software too, dependable, same answer every time, and explainable to the person who has to sign off on it.',
+        ],
+      },
+      {
+        id: 'go',
+        heading: 'Go build something',
+        body: [
+          {
+            html: 'Both guides are in the docs with every line of code and every output: <a href="https://docs.glyphh.ai/ada-guide-tickets">route support tickets</a> in Python and <a href="https://docs.glyphh.ai/ada-guide-churn">customer churn</a> in TypeScript. The programs are in <a href="https://github.com/glyphh-ai/ada/tree/main/examples">the Ada repo</a>. Grab a key from the console, run one, then point it at your own data and tell me what it found. I read every one of those emails.',
+          },
+          'Build with AI. Run without it.',
+          '— Timme',
+        ],
+      },
+    ],
+
+  },
+  {
     slug: 'glyphh-desktop-connections',
     title: 'Glyphh Desktop Connections — Your Apps, Wired to the Agent',
     summary: 'Connect Gmail and Slack to Glyphh Desktop in a couple of clicks, then ask the agent to read your email, send it to you in Slack, and open Slack right in your workspace. Timme walks through connections, tool permissions, and ask versus auto.',
@@ -96,7 +195,7 @@ export const POSTS = [
     video: 'ABXhO46Delw',
     tags: ['Desktop', 'Workspaces', 'Demo'],
     related: [
-      ['Glyphh Desktop', 'https://docs.glyphh.ai/install'],
+      ['Semantic Apps', 'https://docs.glyphh.ai/ada'],
       ['The Router', 'https://docs.glyphh.ai/gateway'],
       ['The Critical Inversion', '/blog/the-critical-inversion'],
     ],
@@ -236,7 +335,8 @@ export const POSTS = [
     coverAlt: 'The Glyphh mascot under a shower of glyph confetti: Glyphh AI is live — build with AI, run without it.',
     tags: ['Launch', 'Architecture', 'Research'],
     related: [
-      ['Glyphh Desktop', '/products/desktop'],
+      ['Ada', '/products/ada'],
+      ['Ada models', 'https://docs.glyphh.ai/ada'],
       ['The Router', 'https://docs.glyphh.ai/gateway'],
     ],
     sections: [
@@ -254,7 +354,8 @@ export const POSTS = [
         id: 'origins',
         heading: 'Where it came from',
         body: [
-          'Glyphh started as a memory substrate: a multi-dimensional HDC lattice, an attempt to harden semantic knowledge beyond RAG. It turned out to be excellent at storing temporal signal, and I kept building on top of it.',
+          { html: 'Glyphh started as a memory substrate called <a href="/products/ada">Ada</a>, named after Ada Lovelace. Ada is a multi-dimensional HDC lattice, an attempt to harden semantic knowledge beyond RAG. It turned out to be excellent at storing temporal signal, and I kept building on top of it.' },
+          { html: 'That path gave us what Ada is today: the first Glyphh model, software\'s reasoning substrate. Ada speaks in math. Seed her with data and she builds a lattice of algebraic meaning: hierarchical, weighted, typed and temporal. Send her a like glyph and she answers with a fact tree: what is near, how near, and why. Your agents build the typed models, and your software leverages them at runtime, with no LLM in the middle. Ada is a major part of this release, and she is what the apps you build stand on. More on <a href="/products/ada">the Ada page</a> and in <a href="https://docs.glyphh.ai/ada">the docs</a>.' },
           { html: 'Meanwhile my actual day got worse, not better. AI didn\'t simplify anything, it multiplied my context switching 10x, seemingly overnight. Around April my Ctrl+C / Ctrl+V usage hit an all-time high. I had a pile of model loops I was coding with, a pile of app layouts, and no way to combine them into something predictable. The first attempt was <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code</a>. It was missing something I couldn\'t name for a while, and then it hit me: I wanted model selection, routing, and semantic data in one place, producing real applications, not chat transcripts.' },
         ],
       },
@@ -271,7 +372,7 @@ export const POSTS = [
         id: 'what-it-looks-like',
         heading: 'What it looks like',
         body: [
-          'Say your ops team lives in three SaaS tools and a spreadsheet. In Glyphh you describe the app, pick your model (or let the Router pick), and it generates the data model, the connectors to those three tools, and the UI. You iterate with the AI until it\'s right. Then you hit run. From that point on the app is just an app: no tokens, no latency lottery, same answer every time. You publish it to your org, someone reviews and approves it, and your teammates install it and run it locally against their own connections.',
+          'Say your ops team lives in three SaaS tools and a spreadsheet. In Glyphh you describe the app, pick your model (or let the Router pick), and it generates the data model, the connectors to those three tools, and the UI. You iterate with the AI until it\'s right. Then you hit run. From that point on the app is just an app: no tokens, no latency lottery, same answer every time. When it needs to reason over your data, it asks Ada, not a model. You publish it to your org, someone reviews and approves it, and your teammates install it and run it locally against their own connections.',
         ],
       },
       {
@@ -285,7 +386,8 @@ export const POSTS = [
         id: 'semantic-data',
         heading: 'Semantic apps',
         body: [
-          { html: 'There are times when you\'ll want to extend your workspace itself and build apps that improve how you work. This is another critical insight from <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code v1</a>, now open source. With the Glyphh desktop runtime you get a database, a vector DB, and a knowledge graph built into the harness. Combine that with MCP tools and any loop you run can consume it all immediately. So build a new file browser that remembers everything you\'ve browsed, as a fun add, and watch that app get integrated into your harness and become part of how you work. Find an unlock, share it with your org or the world.' },
+          { html: 'This is where <a href="/products/ada">Ada</a> comes in, and it is kind of the whole point. Use AI to build the app, not to run it: at build time your agents build typed Ada models and seed them with your data. At runtime the app asks Ada. The answer is deterministic, it comes back as a fact tree, and it tells you what it stands on. That is what makes a semantic app an app and not a chat transcript.' },
+          { html: 'There are times when you\'ll want to extend your workspace itself and build apps that improve how you work. This is another critical insight from <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code v1</a>, now open source. With the Glyphh desktop runtime you get a database, a vector DB, a knowledge graph, and Ada built into the harness. Combine that with MCP tools and any loop you run can consume it all immediately. So build a new file browser that remembers everything you\'ve browsed, as a fun add, and watch that app get integrated into your harness and become part of how you work. Find an unlock, share it with your org or the world.' },
         ],
       },
       {
