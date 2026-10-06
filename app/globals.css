@@ -8631,6 +8631,11 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 .rt-split .hv-code { margin: 0; }
 .rt-split-label { margin: 0 0 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-4); }
 @media (max-width: 860px) { .rt-split, .hv-grid-2 { grid-template-columns: 1fr; } }
+/* The Ada product page's split (back 2026-10-06, shown only with Ada on). */
+.ada-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; margin-top: 1.25rem; }
+.ada-split .hv-code { margin: 0; }
+.ada-split-label { margin: 0 0 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-4); }
+@media (max-width: 860px) { .ada-split { grid-template-columns: 1fr; } }
 
 @media (min-width: 900px) { .hero-loud .oshero-title span { white-space: nowrap; } }
 

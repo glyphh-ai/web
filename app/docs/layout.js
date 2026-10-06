@@ -3,10 +3,13 @@ import { GROUPS } from './content';
 import DocsSidebar from './DocsSidebar';
 import { SITE } from './base';
 import DocsHtmlClass from './DocsHtmlClass';
+import { adaLive } from '../lib/ada-live';
 
 export const metadata = {
   title: { default: 'Glyphh Docs', template: '%s | Glyphh Docs' },
-  description: 'Glyphh documentation: the app on the web and the desktop, the Model Router and Connect.',
+  description: adaLive()
+    ? 'Glyphh documentation: Ada, Glyphh Desktop, the Model Router and Connect.'
+    : 'Glyphh documentation: the app on the web and the desktop, the Model Router and Connect.',
 };
 
 export default function DocsLayout({ children }) {
