@@ -6,6 +6,7 @@
  *   GET /api/download?platform=mac&arch=x64     → Intel DMG
  *   GET /api/download?platform=win              → Windows installer
  *   GET /api/download?platform=linux            → Linux AppImage (x64)
+ *   GET /api/download?platform=linux&arch=arm64 → Linux AppImage (arm64)
  *
  * Uses GITHUB_TOKEN to authenticate with the GitHub API, fetches the
  * latest release asset URL, and 302-redirects the user to a temporary
@@ -19,12 +20,14 @@ export const dynamic = 'force-dynamic';
 const REPO = process.env.RELEASES_REPO || 'glyphh-ai/releases';
 const API_BASE = process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
 
-function assetNameFor(platform, arch) {
+function assetNameFor(platform, arch, rawArch = '') {
   if (platform === 'win') return 'Glyphh-Setup.exe';
   // Linux ships as one x64 AppImage (app/electron-builder.yml); electron-builder
   // names the x64 AppImage x86_64, and that is the name every release carries
   // (his report, 2026-10-07: the Linux download answered "asset not found").
-  if (platform === 'linux') return 'Glyphh-x86_64.AppImage';
+  // arm64 ships beside it (his order, 2026-10-07) as Glyphh-arm64.AppImage.
+  // Linux defaults to x64; only an explicit arch=arm64 picks the arm64 file (the mac default is arm64).
+  if (platform === 'linux') return rawArch === 'arm64' ? 'Glyphh-arm64.AppImage' : 'Glyphh-x86_64.AppImage';
   // Mac is multi-arch — default to Apple Silicon.
   const a = arch === 'x64' ? 'x64' : 'arm64';
   return `Glyphh-${a}.dmg`;
@@ -33,8 +36,9 @@ function assetNameFor(platform, arch) {
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const platform = searchParams.get('platform') || 'mac';
-  const arch = searchParams.get('arch') || 'arm64';
-  const assetName = assetNameFor(platform, arch);
+  const rawArch = searchParams.get('arch') || '';
+  const arch = rawArch || 'arm64';
+  const assetName = assetNameFor(platform, arch, rawArch);
 
   const token = process.env.GITHUB_TOKEN;
 

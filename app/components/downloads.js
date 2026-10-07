@@ -13,6 +13,7 @@ export const DOWNLOADS = [
   { id: 'mac-x64', os: 'macOS', arch: 'Intel', asset: 'Glyphh-x64.dmg', href: '/api/download?platform=mac&arch=x64', requires: 'macOS 12+' },
   { id: 'win', os: 'Windows', arch: 'x64', asset: 'Glyphh-Setup.exe', href: '/api/download?platform=win', requires: 'Windows 10+' },
   { id: 'linux', os: 'Linux', arch: 'x64 AppImage', asset: 'Glyphh-x86_64.AppImage', href: '/api/download?platform=linux', requires: 'x64, glibc' },
+  { id: 'linux-arm64', os: 'Linux', arch: 'arm64 AppImage', asset: 'Glyphh-arm64.AppImage', href: '/api/download?platform=linux&arch=arm64', requires: 'arm64, glibc' },
 ];
 
 export const byId = (id) => DOWNLOADS.find((d) => d.id === id) || DOWNLOADS[0];
