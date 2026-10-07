@@ -21,8 +21,10 @@ const API_BASE = process.env.NEXT_PUBLIC_SERVER_URL || 'https://api.glyphh.ai';
 
 function assetNameFor(platform, arch) {
   if (platform === 'win') return 'Glyphh-Setup.exe';
-  // Linux ships as one x64 AppImage (app/electron-builder.yml).
-  if (platform === 'linux') return 'Glyphh-x64.AppImage';
+  // Linux ships as one x64 AppImage (app/electron-builder.yml); electron-builder
+  // names the x64 AppImage x86_64, and that is the name every release carries
+  // (his report, 2026-10-07: the Linux download answered "asset not found").
+  if (platform === 'linux') return 'Glyphh-x86_64.AppImage';
   // Mac is multi-arch — default to Apple Silicon.
   const a = arch === 'x64' ? 'x64' : 'arm64';
   return `Glyphh-${a}.dmg`;
