@@ -4,6 +4,7 @@ import Reveal from './components/Reveal';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
 import DesktopPage, { metadata as desktop } from './products/desktop/page';
+import UnderConstruction from './components/UnderConstruction';
 import { HOME_TITLE } from './lib/home-meta';
 
 // THE HOME IS GLYPHH DESKTOP (his order, 2026-10-04): glyphh.ai is the desktop
@@ -24,11 +25,15 @@ export const metadata = {
   alternates: { canonical: '/' },
 };
 
+const UNDER_CONSTRUCTION = true;
+
 export default async function Home() {
   // The middleware tags campaign paths with a hero variant; bare glyphh.ai has
   // no header and falls back to `default`, which is the desktop page itself.
   const variant = (await headers()).get('x-hero-variant') || 'default';
-  if (variant === 'default') return <DesktopPage />;
+  // UNDER CONSTRUCTION (his order, 2026-10-10): bare glyphh.ai shows the
+  // re-tooling screen; put <DesktopPage /> back here to bring the home back.
+  if (variant === 'default') return UNDER_CONSTRUCTION ? <UnderConstruction /> : <DesktopPage />;
   return (
     <div className="home-page">
       <Reveal />
