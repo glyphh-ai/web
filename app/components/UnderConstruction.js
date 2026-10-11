@@ -35,6 +35,11 @@ function Cat() {
   );
 }
 
+// The super powers that orbit into Glyphh (his order, 2026-10-11: "What if
+// you could combine every ai super power into one?").
+const POWERS = ['Claude Code', 'Codex', 'Gmail', 'Slack', '3,900 models', 'Browser', 'Schedules', 'Voice', 'Salesforce', 'Your folders', 'GitHub', 'Notion'];
+const SALES_URL = 'https://sales.glyphh.ai';
+
 const COMET_MS = 1500;
 const DUST = 96;
 
@@ -103,6 +108,16 @@ export default function UnderConstruction() {
 
   return (
     <main className="uc-page">
+      <div className="uc-glow" aria-hidden="true" />
+      <div className="uc-grid" aria-hidden="true" />
+      <div className="uc-stage">
+      <div className="uc-orbit" aria-hidden="true">
+        {POWERS.map((name, i) => (
+          <span key={name} className="uc-chip" style={{ '--a': `${(i * 360) / POWERS.length}deg`, '--d': `${i * -0.9}s` }}>
+            <span className="uc-chip-in">{name}</span>
+          </span>
+        ))}
+      </div>
       <div className="uc-hero" ref={heroRef}>
         <div className="uc-comet" ref={cometRef}>
           <span className="uc-comet-light" />
@@ -115,7 +130,13 @@ export default function UnderConstruction() {
           <div className="uc-face"><Cat /></div>
         </div>
       </div>
-      <h1 className="uc-line">We are re-tooling and will be back soon!</h1>
+      </div>
+      <div className="uc-copy">
+        <p className="uc-pill"><span className="uc-dot" />Private beta</p>
+        <h1 className="uc-line">What if you could combine every AI super power into <span className="uc-one">one</span>?</h1>
+        <p className="uc-sub">Every model, every connection, every agent, working as one.</p>
+        <a className="uc-cta" href={SALES_URL}>Sign up for the beta<span className="uc-arrow" aria-hidden="true">→</span></a>
+      </div>
     </main>
   );
 }
