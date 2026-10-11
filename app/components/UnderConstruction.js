@@ -38,7 +38,7 @@ function Cat() {
 // The super powers that orbit into Glyphh (his order, 2026-10-11: "What if
 // you could combine every ai super power into one?").
 const POWERS = ['Claude Code', 'Codex', 'Gmail', 'Slack', '3,900 models', 'Browser', 'Schedules', 'Voice', 'Salesforce', 'Your folders', 'GitHub', 'Notion'];
-const SALES_URL = 'https://sales.glyphh.ai';
+const SALES_URL = 'mailto:sales@glyphh.ai?subject=' + encodeURIComponent('Glyphh beta');
 
 const COMET_MS = 1500;
 const DUST = 96;
