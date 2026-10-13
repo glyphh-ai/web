@@ -4,6 +4,7 @@ import Reveal from './components/Reveal';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
 import DesktopPage, { metadata as desktop } from './products/desktop/page';
+import MinimalHome from './components/MinimalHome';
 import { HOME_TITLE } from './lib/home-meta';
 
 // THE HOME IS GLYPHH DESKTOP (his order, 2026-10-04): glyphh.ai is the desktop
@@ -24,11 +25,15 @@ export const metadata = {
   alternates: { canonical: '/' },
 };
 
+const MINIMAL_HOME = true;
+
 export default async function Home() {
   // The middleware tags campaign paths with a hero variant; bare glyphh.ai has
   // no header and falls back to `default`, which is the desktop page itself.
   const variant = (await headers()).get('x-hero-variant') || 'default';
-  if (variant === 'default') return <DesktopPage />;
+  // THE MINIMAL HOME (his order, 2026-10-13): bare glyphh.ai shows the logo
+  // and one line; set MINIMAL_HOME to false to bring the desktop page back.
+  if (variant === 'default') return MINIMAL_HOME ? <MinimalHome /> : <DesktopPage />;
   return (
     <div className="home-page">
       <Reveal />
