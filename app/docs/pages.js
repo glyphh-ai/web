@@ -1637,7 +1637,7 @@ const desktop = [
         <p>
           General, Appearance, Memory, Privacy, Devices, Artifacts, Usage, MCP Server, Connections, Billing and
           Support. The Build and Customize pages are the desktop&rsquo;s: skills, agents, apps, tasks, tabs,
-          workspaces, drips and schedules are made there.
+          workspaces and schedules are made there.
         </p>
         <Shot file="settings-general.png" alt="Settings on the web, General: the Default model row, Default workspace and Interface sounds. The rail lists General, Appearance, Memory, Privacy, Devices, Artifacts, Usage, MCP Server, Connections, Billing and Support." width={900} caption="Settings → General on the web. No Build, no Customize." />
         <Note kind="note" title="The desktop is the only door">
@@ -1855,7 +1855,7 @@ const desktop = [
   {
     slug: 'library-sync',
     title: 'Your library syncs',
-    lede: 'Drips, schedules, skills, tasks, agents, workspaces and tabs are one library, on every surface.',
+    lede: 'Schedules, skills, tasks, agents, workspaces and tabs are one library, on every surface.',
     body: (
       <>
         <p>
@@ -1863,7 +1863,6 @@ const desktop = [
           it. The web reads them through the server. Make one on the desktop and the web lists it within a sync
           interval.
         </p>
-        <Row k="Drips">Effect recipes: the visual effects the agent can play, and the presets you build</Row>
         <Row k="Schedules">Anything on a clock: a task or a skill, written in words or five-field cron</Row>
         <Row k="Skills">A folder with a SKILL.md. See <a href={`${DOCS}/skills`}>Skills</a></Row>
         <Row k="Tasks">A program with a task.json and a run.js. See <a href={`${DOCS}/tasks`}>Tasks</a></Row>
