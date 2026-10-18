@@ -26,7 +26,7 @@ const PRODUCTS = [
     title: 'Model Router',
     head: 'One endpoint, every model, governed by you',
     body:
-      'Point any client at one base URL. Auto-routers pick the model per request, roles decide who gets what, and every token is paid from one budget at a published rate.',
+      'Point any client at one base URL. Auto-routers pick the model per request, roles decide who gets what.',
     more: 'the Model Router',
     icon: (
       <>

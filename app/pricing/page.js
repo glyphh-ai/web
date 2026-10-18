@@ -1,54 +1,52 @@
 import Nav from '../components/Nav';
-import Pricing from '../components/Pricing';
-import ModelCatalog from '../components/ModelCatalog';
+import Pricing, { PLATFORM_URL, SALES_HREF } from '../components/Pricing';
+import HostingRates from '../components/HostingRates';
 import Footer from '../components/Footer';
 
 /**
- * /pricing — trust, in the frame (site.md §8; restyled 2026-09-22). Every plan
- * runs every model; a plan's price is its monthly budget; each model's rate on
- * each plan is published right here (his order, 2026-09-29: "The plans on the
- * web show our rates per model based on tiers by plan"). The plan numbers and
- * the rates are live (Pricing.js, ModelCatalog.js).
+ * /pricing — the open-core plans (the pricing contract, 2026-10-18): Free,
+ * Pro, Team and Enterprise; never per seat, per model or per install. The
+ * plans sell managed precedents, hosted machines and sync; running Ada on
+ * your own machines is free and unlimited. The hosted machine rates per plan
+ * are read from the server (HostingRates.js, app/lib/rates.js).
  */
 
 export const metadata = {
   title: 'Pricing — Glyphh',
   description:
-    'Dollar for dollar. A plan’s price is its monthly budget, spent on any model at your plan’s published rate. The bigger the plan, the better the rate. Solo from $20 a month.',
+    'Never per seat, per model or per install. Free on your own machines, without limit. Pro $99 a month, Team $299 a month, Enterprise from $10k a year.',
 };
 
-// Live plan numbers on every request.
-export const dynamic = 'force-dynamic';
+// The rates are read from the server at most once an hour.
+export const revalidate = 3600;
 
-const SALES = 'mailto:sales@glyphh.ai?subject=' + encodeURIComponent('Glyphh Enterprise');
-
+// The promise (the contract's rules): what Glyphh never charges for.
 const RULES = [
   {
-    title: 'Dollar for dollar',
-    desc: 'A plan’s price is its monthly budget. Solo’s $20 buys $20 of usage; $40 a seat buys $40 a seat, every month. Add funds any time.',
+    title: 'Never per seat',
+    desc: 'Ada runs in your code, not behind human logins. Every plan has unlimited members.',
   },
   {
-    title: 'Browsing is free',
-    desc: 'Installing, setting up, listing tools, browsing apps, and reading your own data never cost a cent. You pay for what runs: model calls at your plan’s rate and connector tools at their published price, metered on the tokens sent and returned.',
+    title: 'Never per model',
+    desc: 'Ada is in every plan, with no add-on. Build as many typed models with her as you like.',
   },
   {
-    title: 'Prepaid, itemized',
-    desc: 'Funds are prepaid, never billed in arrears. Purchased funds never expire. Every charge is itemized per call in your usage feed.',
+    title: 'Never per install',
+    desc: 'Install on every developer machine you have. Local and self-hosted runtimes are unlimited on every plan.',
   },
 ];
 
-// Objection handling (site.md §8.6).
 const FAQ = [
-  ['What does a model cost?', 'Each model has a published rate on each plan, per million tokens in and out. The bigger the plan, the better the rate. Every rate is on this page.'],
-  ['Is there a free plan?', 'Yes. Free is $0, no card required: the desktop and workspace, your own CLI (Claude Code, Codex, Gemini, Copilot, Cursor, Glyphh CLI) and connected services, with $1 a month for connections. Glyphh models and memory start with Solo at $20 a month.'],
-  ['Can we bring our own API keys?', 'No. Every call runs on Glyphh and is paid from your plan’s budget: one bill, one set of rates, one place to see it.'],
-  ['Do you store our prompts?', 'No. Usage telemetry, never transcripts.'],
-  ['Who owns the programs we build?', 'You do. No vendor, no seat license, no renewal.'],
-  ['Why open-weight models?', 'Accuracy, efficiency, and scale at runtime — the kernel routes the volume there so frontier credits go to build time.'],
-  ['What happens when the budget runs out?', 'Hard stop or top-up — your admin decides. Nothing is on by default.'],
+  ['What do the paid plans charge for?', 'Two things we run for you: managed precedents (the ones Ada keeps on a hosted runtime) and hosted machines. A plan is a flat monthly price; hosted machines are billed per second on top, at the published rates.'],
+  ['Is Free really unlimited?', 'Yes, on your own machines. Precedents on a local or self-hosted runtime have no limit on any plan. A single instance is free; syncing many is what Pro is for.'],
+  ['What is a managed precedent?', 'A precedent Ada keeps on a runtime we host. Pro includes 100,000, Team 1,000,000, Enterprise has no limit.'],
+  ['How are hosted machines billed?', 'By the second while a machine is started, and its disk by the GB-month whether it is started or stopped. The rates for Pro and Team are on this page; Enterprise rates are set in your contract.'],
+  ['Do you charge per seat?', 'No. Members and installs are unlimited on every plan.'],
+  ['Can we run Ada with no network at all?', 'Yes, on Enterprise: air-gapped, with an offline licence, or in your own cloud. Talk to us.'],
+  ['Can we change plan?', 'Any time, from the platform. Changes are prorated. To move to Free, delete your hosted machines first.'],
 ];
 
-export default async function PricingPage() {
+export default function PricingPage() {
   return (
     <div className="ix-page">
       <Nav />
@@ -56,24 +54,24 @@ export default async function PricingPage() {
         <section className="ix-head">
           <a href="/" className="ix-crumb">&larr; Home</a>
           <span className="qs-kicker">Pricing</span>
-          <h1 className="ix-title">Dollar for dollar.</h1>
+          <h1 className="ix-title">Never per seat, per model or per install.</h1>
           <p className="ix-lede">
-            A plan&rsquo;s price is its monthly budget, spent on any model at your plan&rsquo;s published rate &mdash;
-            itemized per call, nothing on by default. The bigger the plan, the better the rate.
+            Run Ada on your own machines for free, without limit. Pay a flat monthly price when you want us to keep
+            your precedents, host your machines and sync them across instances.
           </p>
           <div className="ix-actions">
-            <a href="/products/desktop#quick-start" className="os-cta os-cta-primary">Get started</a>
-            <a href={SALES} className="os-cta os-cta-ghost">Talk to us</a>
+            <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
+            <a href={SALES_HREF} className="os-cta os-cta-ghost">Talk to us</a>
           </div>
         </section>
 
-        <section className="ix-section" id="how">
+        <section className="ix-section" id="promise">
           <div className="ix-section-head">
             <div>
-              <span className="qs-kicker">How the dollars work</span>
-              <h2 className="ix-h2">When you can see every dollar, you don&rsquo;t need to trust us.</h2>
+              <span className="qs-kicker">The promise</span>
+              <h2 className="ix-h2">You pay for what we run, nothing else.</h2>
             </div>
-            <a href="#rates" className="qs-more">Model rates &rarr;</a>
+            <a href="#rates" className="qs-more">Machine rates &rarr;</a>
           </div>
           <div className="ix-grid ix-grid-3">
             {RULES.map((r) => (
@@ -90,12 +88,12 @@ export default async function PricingPage() {
         <section className="ix-section" id="rates">
           <div className="ix-section-head">
             <div>
-              <span className="qs-kicker">Rates</span>
-              <h2 className="ix-h2">Every model, on every plan.</h2>
-              <p className="ix-desc">Per million tokens, input and output. Enterprise rates are set per customer.</p>
+              <span className="qs-kicker">Hosted machines</span>
+              <h2 className="ix-h2">Per second, at a published rate.</h2>
+              <p className="ix-desc">What each hosted machine costs on Pro and Team, by the month and by the second. On Enterprise, rates are set in your contract.</p>
             </div>
           </div>
-          <ModelCatalog compact />
+          <HostingRates />
         </section>
 
         <section className="ix-section" id="faq">
@@ -119,12 +117,12 @@ export default async function PricingPage() {
           <div className="ix-cta pp-close">
             <div>
               <span className="qs-kicker">Get started</span>
-              <h3>Build your first program.</h3>
-              <p>Solo from $20 a month. Team plans from $40 a seat. Dollar for dollar, every model on every plan.</p>
+              <h3>Start free, on your own machines.</h3>
+              <p>Pro $99 a month. Team $299 a month. Enterprise from $10k a year. Never per seat, per model or per install.</p>
             </div>
             <div className="ix-actions">
-              <a href="/products/desktop#quick-start" className="os-cta os-cta-primary">Quick Start</a>
-              <a href={SALES} className="os-cta os-cta-ghost">Talk to us</a>
+              <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
+              <a href={SALES_HREF} className="os-cta os-cta-ghost">Talk to us</a>
             </div>
           </div>
         </section>

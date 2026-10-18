@@ -127,8 +127,8 @@ export default function IntegrationsPage() {
               <span className="qs-kicker">Every plan, every model</span>
               <h2 className="ix-h2">Models and providers</h2>
               <p className="ix-desc">
-                One Router in front of every model Glyphh runs, open weights included. Each model has a published rate
-                on each plan, and your admin turns models on or off for your organization.
+                One Router in front of every model Glyphh runs, open weights included. Glyphh never charges per
+                model, and your admin turns models on or off for your organization.
               </p>
             </div>
             <a href="/integrations/models" className="qs-more">Every model &rarr;</a>

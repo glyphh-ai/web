@@ -69,8 +69,8 @@ const glyphh = [
         <h2>The Model Router</h2>
         <p>
           Point any client at one base URL: Claude Code, Codex, Cursor, your own agents, or the desktop. The
-          Router carries every model your organization approved, with roles that decide who gets what and one
-          budget that every token is paid from, at a published rate per model per plan.
+          Router carries every model your organization approved, with roles that decide who gets what. Glyphh
+          never charges per model or per seat.
         </p>
         <ul>
           <li><strong>Any client.</strong> The desktop is one client, not a requirement.</li>
