@@ -216,7 +216,7 @@ Glyphh Desktop → Agent → Code → pick a folder`,
 npm i -g @glyphh-ai/cli
 glyphh                 # in any folder
 glyphh --continue      # pick up the last chat here`,
-  'claude code': `# Or point Claude Code at the router, paid from the org budget.
+  'claude code': `# Or point Claude Code at the router, on your org's key.
 export ANTHROPIC_BASE_URL="https://api.glyphh.ai"
 export ANTHROPIC_AUTH_TOKEN="sk-…"   # a virtual key
 claude`,
@@ -300,7 +300,7 @@ export function RelayMock() {
 /* ── The pillars — click one, see the one line that proves it ── */
 const PILLAR_DETAIL = {
   'your folder': 'write ../secrets.env → refused: outside this session\'s folder · the shell writes only here',
-  'every model': 'claude-fable-5-1 · Pro rate · paid from the org budget, itemized per call',
+  'every model': 'claude-fable-5-1 · on your org’s key, in your logs',
   'semantic routing': 'strategy: semantic · "design the migration" → claude-fable-5-1 · "rename usr" → qwen3-coder',
 };
 

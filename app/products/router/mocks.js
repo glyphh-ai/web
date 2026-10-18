@@ -170,7 +170,7 @@ export function MetricsMock() {
 /* ── The front door — click a way in, see the one line that changes ── */
 const WAY_DETAIL = {
   'one endpoint': 'base_url = "https://router.glyphh.ai"  # the only line that changes',
-  'one bill': 'claude-fable-5-1 · Pro rate · paid from the org budget, itemized per call',
+  'one bill': 'claude-fable-5-1 · on your org’s key, in your logs',
   'your call': 'gpt-5.6 turned off · 23 models on · teams narrow from here',
 };
 

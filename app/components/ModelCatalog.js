@@ -3,13 +3,11 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
 
 /**
- * ModelCatalog — the models Glyphh runs, at each plan's rate (his order,
- * 2026-09-29: "we just list the models we currently support. So the web only
- * pulls the models we have enabled… each model shows the rates by each plan…
- * the more they spend the better rates they get"). Reads /api/models, the
- * server's own list proxied same-origin: search, provider and mode filters,
- * and one row per model with its rate on every plan, opening into its limits
- * and a snippet that calls it.
+ * ModelCatalog — the models Glyphh runs (his order, 2026-09-29: "we just list
+ * the models we currently support"). Reads /api/models, the server's own list
+ * proxied same-origin: search, provider and mode filters, and one row per
+ * model, opening into its limits and a snippet that calls it. No rates: Glyphh
+ * never charges per model (the pricing contract, 2026-10-18).
  *
  * `compact` drops the stats strip (the docs page shows them in its own words).
  */
@@ -23,12 +21,7 @@ const fmtCtx = (n) => {
   if (n >= 1000) return `${Math.round(n / 1000)}K`;
   return String(n);
 };
-// dollars per million tokens, as the server publishes them
-const fmtPerM = (v) => (v == null ? '—' : `$${v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: v < 0.1 ? 4 : 2 })}`);
 const modeLabel = (m) => (m || 'chat').replace(/_/g, ' ');
-const rateLine = (r) => (r && (r.inputUsdPerMTok != null || r.outputUsdPerMTok != null)
-  ? `${fmtPerM(r.inputUsdPerMTok)} / ${fmtPerM(r.outputUsdPerMTok)}`
-  : '—');
 
 function Snippet({ model }) {
   const [tab, setTab] = useState('curl');
@@ -56,18 +49,10 @@ function Snippet({ model }) {
   );
 }
 
-function Detail({ m, plans }) {
+function Detail({ m }) {
   return (
     <div className="mc-detail">
       <div className="mc-detail-grid">
-        <div>
-          <h4 className="mc-kicker">Per 1M tokens, input / output</h4>
-          <div className="mc-cards">
-            {plans.map((p) => (
-              <div key={p.tier} className="mc-card"><span>{p.displayName}</span><b>{rateLine(m.rates?.[p.tier])}</b></div>
-            ))}
-          </div>
-        </div>
         <div>
           <h4 className="mc-kicker">Model info</h4>
           <dl className="mc-info">
@@ -98,7 +83,6 @@ export default function ModelCatalog({ compact = false }) {
   }, []);
 
   const models = data?.models ?? [];
-  const plans = data?.plans ?? [];
   const providers = useMemo(() => [...new Set(models.map((m) => m.provider))].sort(), [models]);
   const modes = useMemo(() => [...new Set(models.map((m) => m.modality))].sort(), [models]);
   const needle = q.trim().toLowerCase();
@@ -116,8 +100,8 @@ export default function ModelCatalog({ compact = false }) {
         <div className="ix-stats mc-stats">
           <div><b>{fmtN(models.length)}</b><span>Models</span></div>
           <div><b>{fmtN(providers.length)}</b><span>Providers</span></div>
-          <div><b>{fmtN(plans.length)}</b><span>Plans, one rate each</span></div>
           <div><b>{fmtN(modes.length)}</b><span>Modes</span></div>
+          <div><b>$0</b><span>Charged per model</span></div>
         </div>
       )}
 
@@ -135,7 +119,7 @@ export default function ModelCatalog({ compact = false }) {
           {modes.map((m) => <option key={m} value={m}>{modeLabel(m)}</option>)}
         </select>
       </div>
-      <p className="mc-count">{fmtN(shown.length)} models &middot; input / output per 1M tokens</p>
+      <p className="mc-count">{fmtN(shown.length)} models</p>
 
       <div className="mc-table-wrap">
         <table className="mc-table">
@@ -143,7 +127,8 @@ export default function ModelCatalog({ compact = false }) {
             <tr>
               <th className="mc-th-model">Model</th>
               <th>Context</th>
-              {plans.map((p) => <th key={p.tier}>{p.displayName}</th>)}
+              <th>Max output</th>
+              <th>Provider</th>
             </tr>
           </thead>
           <tbody>
@@ -159,10 +144,11 @@ export default function ModelCatalog({ compact = false }) {
                       {m.modality && m.modality !== 'chat' ? <span className="mc-chip mc-mode">{modeLabel(m.modality)}</span> : null}
                     </td>
                     <td><b>{fmtCtx(m.contextWindow)}</b></td>
-                    {plans.map((p) => <td key={p.tier}>{rateLine(m.rates?.[p.tier])}</td>)}
+                    <td>{m.maxOutputTokens != null ? fmtN(m.maxOutputTokens) : '—'}</td>
+                    <td>{m.provider || '—'}</td>
                   </tr>
                   {isOpen ? (
-                    <tr className="mc-row-detail"><td colSpan={2 + plans.length}><Detail m={m} plans={plans} /></td></tr>
+                    <tr className="mc-row-detail"><td colSpan={4}><Detail m={m} /></td></tr>
                   ) : null}
                 </Fragment>
               );
@@ -171,7 +157,8 @@ export default function ModelCatalog({ compact = false }) {
         </table>
       </div>
       <p className="mc-foot">
-        Every plan runs every model. The bigger the plan, the better the rate. Enterprise rates are set per customer.
+        Glyphh never charges per model, per seat or per install. What each plan includes is on the{' '}
+        <a href="/pricing">pricing page</a>.
       </p>
     </div>
   );

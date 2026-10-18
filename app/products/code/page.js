@@ -65,7 +65,7 @@ const PILLARS = [
   {
     tag: 'every model',
     title: 'Every model your team allows.',
-    desc: 'Frontier and open weights, through the Glyphh Router, on every plan. Each model has a published rate on your plan, paid from the org budget and itemized per call. The bigger the plan, the better the rate.',
+    desc: 'Frontier and open weights, through the Glyphh Router, on every plan.',
   },
   {
     tag: 'semantic routing',
@@ -215,15 +215,15 @@ export default function CodePage() {
           <h2 className="section-title reveal">A coding agent should not be a subscription with a terminal attached.</h2>
           <p className="section-subtitle reveal">
             Route each request to the model that earns it. Keep the loop, the skills, and the
-            folder through all of it, on your machine, from wherever you are. One budget, one rate
-            per model on your plan.
+            folder through all of it, on your machine, from wherever you are. Never per seat, per
+            model or per install.
           </p>
         </div>
       </section>
 
       <FinalCTA
         title={<h2>One loop<span className="dot">.</span> Every model<span className="dot">.</span> Your folder<span className="dot">.</span></h2>}
-        text={<p>Download <span className="compose-cmd">Glyphh</span>, or install the CLI and sign in to your org. Plans from $20 a month.</p>}
+        text={<p>Download <span className="compose-cmd">Glyphh</span>, or install the CLI and sign in to your org. Free on your own machines.</p>}
         primary={{ href: '/#download', label: 'Get Glyphh Desktop' }}
         secondary={{ href: '/products/router', label: 'See Glyphh Router' }}
       />

@@ -7906,6 +7906,7 @@ html.docs-html::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 .mc-snippet-note a:hover { color: var(--text); }
 .mc-more { display: flex; justify-content: center; padding: 1.25rem 0 0; }
 .mc-foot { margin: 1.25rem 0 0; font-family: var(--font-mono); font-size: 0.74rem; line-height: 1.6; color: var(--text-3); }
+.mc-foot a { color: var(--text-2); }
 @media (max-width: 900px) {
   .mc-stats { grid-template-columns: 1fr 1fr; }
   .mc-filters { grid-template-columns: 1fr; }

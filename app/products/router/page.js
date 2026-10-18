@@ -6,8 +6,8 @@ import ModelCatalog from '../../components/ModelCatalog';
 import { ContractTabs, RolesMock, KeysMock, MetricsMock } from './mocks';
 
 // The Model Router (2026-10-02): the product page, in the home page's frame
-// grammar, like the desktop's. The models are LIVE: the server's list at each plan's
-// rate (ModelCatalog, /api/models). No BYOK, no subscriptions to burn down
+// grammar, like the desktop's. The models are LIVE: the server's list (ModelCatalog,
+// /api/models). No BYOK, no subscriptions to burn down
 // (his order, 2026-09-29).
 
 export const metadata = {
@@ -27,8 +27,8 @@ const WAYS = [
   },
   {
     tag: 'one bill',
-    title: 'One rate per model, per plan.',
-    desc: 'No keys to bring. Every call is paid from your plan’s budget at a published rate, and the bigger the plan, the better the rate.',
+    title: 'Never per model.',
+    desc: 'Glyphh never charges per model, per seat or per install. What each plan includes is on the pricing page.',
   },
   {
     tag: 'your call',
@@ -168,12 +168,11 @@ export default function RouterPage() {
         <section className="hiw" id="models">
           <div className="qs-head">
             <span className="qs-kicker">The models</span>
-            <a href="/pricing" className="qs-more">Plans and rates &rarr;</a>
+            <a href="/pricing" className="qs-more">Plans &rarr;</a>
           </div>
           <h2 className="ix-h2 lt-h2">Every model behind the router.</h2>
           <p className="ix-desc">
-            Live from the server. Per million tokens, input and output, on every plan. The bigger the plan,
-            the better the rate.
+            Live from the server, with their context windows. Glyphh never charges per model.
           </p>
           <div style={{ marginTop: '1.5rem' }}><ModelCatalog compact /></div>
         </section>
@@ -185,8 +184,7 @@ export default function RouterPage() {
           </div>
           <h2 className="ix-h2 lt-h2">Change one line.</h2>
           <p className="ix-desc">
-            Claude Code, Codex and any OpenAI or Anthropic SDK take a base URL and a key. Every call is paid
-            from your plan&rsquo;s budget at a published rate.
+            Claude Code, Codex and any OpenAI or Anthropic SDK take a base URL and a key.
           </p>
           <pre className="hv-code" style={{ marginTop: '1.25rem' }}><code>{POINT}</code></pre>
         </section>

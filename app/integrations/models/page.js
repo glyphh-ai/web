@@ -4,13 +4,13 @@ import ModelCatalog from '../../components/ModelCatalog';
 
 /**
  * /integrations/models — the models Glyphh runs, full page (his order,
- * 2026-09-29: "we just list the models we currently support"), each with its
- * rate on every plan. The list is the server's (/api/models).
+ * 2026-09-29: "we just list the models we currently support"), with no rates:
+ * Glyphh never charges per model. The list is the server's (/api/models).
  */
 
 export const metadata = {
   title: 'Models — Glyphh Integrations',
-  description: 'Every model Glyphh runs, with its context window and its rate on every plan. Every plan runs every model; the bigger the plan, the better the rate.',
+  description: 'Every model Glyphh runs, with its context window. Glyphh never charges per model, per seat or per install.',
 };
 
 export default function ModelCatalogPage() {
@@ -23,11 +23,10 @@ export default function ModelCatalogPage() {
           <span className="qs-kicker">Every plan, every model</span>
           <h1 className="ix-title">The models</h1>
           <p className="ix-lede">
-            The models Glyphh runs today, with context windows and the rate you pay for each on every plan.
+            The models Glyphh runs today, with their context windows.
           </p>
           <p className="ix-sub">
-            One OpenAI-compatible endpoint in front of all of them. Every plan runs every model and pays per token out of
-            its monthly budget; the bigger the plan, the better the rate. Your admin turns models on or off for your
+            One OpenAI-compatible endpoint in front of all of them. Glyphh never charges per model. Your admin turns models on or off for your
             organization.
           </p>
           <div className="ix-actions">
