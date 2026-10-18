@@ -8,7 +8,8 @@
 export const RATES_URL = 'https://api.glyphh.ai/v1/rates';
 
 // The plans that carry hosted machines, in the order the table shows them.
-export const HOSTED_PLANS = ['Pro', 'Team', 'Enterprise'];
+// Enterprise's rates are set in each contract, so it has no published column.
+export const HOSTED_PLANS = ['Pro', 'Team'];
 
 const SECONDS_PER_30_DAYS = 2592000;
 
@@ -24,7 +25,7 @@ const FLY = {
 };
 
 // TBD: placeholders, as on the server (the plans table in the contract).
-const FACTOR = { Pro: 1.3, Team: 1.3, Enterprise: 1.2 };
+const FACTOR = { Pro: 1.3, Team: 1.3 };
 
 // Whole cents, from integer arithmetic so 0.15 × 1.3 is 0.20, not 0.19.
 const cents = (usd, factor) => Math.round(Math.round(usd * 100) * Math.round(factor * 100) / 100) / 100;

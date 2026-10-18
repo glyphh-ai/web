@@ -69,7 +69,7 @@ const TIERS = [
       'Role-based access control',
       'Audit logs',
       'An SLA',
-      'Lower hosted machine rates',
+      'Hosted machine rates set in your contract',
     ],
     cta: 'Talk to us',
   },

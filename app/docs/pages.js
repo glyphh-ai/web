@@ -2347,8 +2347,9 @@ const org = [
         <h2>Hosted machines</h2>
         <p>
           Hosted machines are on Pro, Team and Enterprise. Each is billed by the second while it is started, and
-          its disk by the GB-month whether it is started or stopped, on top of the plan. The rates for each plan
-          are on the <a href="https://glyphh.ai/pricing#rates">pricing page</a>. To move to Free, delete your
+          its disk by the GB-month whether it is started or stopped, on top of the plan. The rates for Pro and
+          Team are on the <a href="https://glyphh.ai/pricing#rates">pricing page</a>; Enterprise rates are set in
+          your contract. To move to Free, delete your
           hosted machines first.
         </p>
         <h2>Offline licences</h2>

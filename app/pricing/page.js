@@ -40,7 +40,7 @@ const FAQ = [
   ['What do the paid plans charge for?', 'Two things we run for you: managed precedents (the ones Ada keeps on a hosted runtime) and hosted machines. A plan is a flat monthly price; hosted machines are billed per second on top, at the published rates.'],
   ['Is Free really unlimited?', 'Yes, on your own machines. Precedents on a local or self-hosted runtime have no limit on any plan. A single instance is free; syncing many is what Pro is for.'],
   ['What is a managed precedent?', 'A precedent Ada keeps on a runtime we host. Pro includes 100,000, Team 1,000,000, Enterprise has no limit.'],
-  ['How are hosted machines billed?', 'By the second while a machine is started, and its disk by the GB-month whether it is started or stopped. The rates for each plan are on this page.'],
+  ['How are hosted machines billed?', 'By the second while a machine is started, and its disk by the GB-month whether it is started or stopped. The rates for Pro and Team are on this page; Enterprise rates are set in your contract.'],
   ['Do you charge per seat?', 'No. Members and installs are unlimited on every plan.'],
   ['Can we run Ada with no network at all?', 'Yes, on Enterprise: air-gapped, with an offline licence, or in your own cloud. Talk to us.'],
   ['Can we change plan?', 'Any time, from the platform. Changes are prorated. To move to Free, delete your hosted machines first.'],
@@ -90,7 +90,7 @@ export default function PricingPage() {
             <div>
               <span className="qs-kicker">Hosted machines</span>
               <h2 className="ix-h2">Per second, at a published rate.</h2>
-              <p className="ix-desc">What each hosted machine costs on each plan, by the month and by the second.</p>
+              <p className="ix-desc">What each hosted machine costs on Pro and Team, by the month and by the second. On Enterprise, rates are set in your contract.</p>
             </div>
           </div>
           <HostingRates />

@@ -2,7 +2,8 @@ import { HOSTED_PLANS, fetchRates } from '../lib/rates';
 
 // The hosted machine rates per plan (the pricing contract, 2026-10-18): each
 // size by the month and by the second, and the disk by the GB-month. Free has
-// no hosted machines, so it has no column. The figures come from
+// no hosted machines and Enterprise's rates are set in its contract, so
+// neither has a column. The figures come from
 // app/lib/rates.js (the server's, else the fallback).
 const usd = (n) => `$${n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const perSecond = (n) => `$${n.toPrecision(2)}`;
@@ -53,7 +54,7 @@ export default async function HostingRates() {
       </div>
       <p className="mc-foot">
         A machine is billed by the second while it is started, and stops when idle. A month is 30 days. Free has no
-        hosted machines: run Ada on your own for nothing.
+        hosted machines: run Ada on your own for nothing. Enterprise rates are set in your contract.
       </p>
     </>
   );
