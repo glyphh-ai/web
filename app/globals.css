@@ -8218,6 +8218,10 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 .pp-band-features { margin: 0; padding: 0; border-top: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem 1.5rem; }
 .pp-band-features .pp-lead { grid-column: 1 / -1; }
 .pp-band-cta { white-space: nowrap; align-self: center; }
+/* Hosted machine rates: the model table's frame, narrower, a size per row and a plan per column. */
+.mc-table.pp-rates { min-width: 640px; }
+.pp-rates td { vertical-align: top; }
+.pp-rates-spec { display: block; margin-top: 0.2rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.02em; color: var(--text-3); }
 @media (max-width: 900px) {
   .pp-grid.ix-grid-3 { grid-template-columns: 1fr; }
   .pp-grid.ix-grid-3 .ix-card { border-right: 0; border-bottom: 1px solid var(--border); }
