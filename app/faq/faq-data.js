@@ -67,12 +67,12 @@ export const FAQ_GROUPS = [
       {
         id: 'cli-gateway',
         q: 'Do the CLIs go through Glyphh’s gateway?',
-        a: 'The Glyphh agent always does: every model call goes through your org’s Router on your own member key, so your org’s models, budgets and logs apply. Claude Code, Codex, Gemini and the Glyphh CLI can be pointed at the Router with a key from the console on a paid plan; Copilot and Cursor always use their own login.',
+        a: 'The Glyphh agent always does: every model call goes through your org’s Router on your own member key, so your org’s models, budgets and logs apply. Claude Code, Codex, Gemini and the Glyphh CLI can be pointed at the Router with a key from the console; Copilot and Cursor always use their own login.',
       },
       {
         id: 'which-models',
         q: 'Which models can I use?',
-        a: 'Every model your organization allows, frontier and open weights, from one list in the composer. Each model has a published rate on each plan, and every call is itemized in your usage.',
+        a: 'Every model your organization allows, frontier and open weights, from one list in the composer. Glyphh never charges per model: no plan prices a model, and Ada is in every plan.',
       },
       {
         id: 'default-model',
@@ -82,7 +82,7 @@ export const FAQ_GROUPS = [
       {
         id: 'free-plan',
         q: 'Is there a free plan?',
-        a: { html: 'Yes. Free runs a small set of models Glyphh marks for it, plus your own CLIs and your connections with $1 a month of connector budget. Paid plans run every model: a plan’s price is its monthly budget, spent at your plan’s published rate per model. See <a href="/pricing">pricing</a>.' },
+        a: { html: 'Yes. Free is $0, for good: unlimited local and self-hosted runtimes, unlimited precedents on your own machines, Ada included, and unlimited members and installs. The paid plans add managed precedents, hosted machines and sync. See <a href="/pricing">pricing</a>.' },
       },
     ],
   },
@@ -107,7 +107,7 @@ export const FAQ_GROUPS = [
       {
         id: 'memory',
         q: 'Does Glyphh remember?',
-        a: 'Yes. The agent keeps the facts it learns about you and your work, and you can browse and curate them on the Memory page. Memory runs through the Router, so it needs a plan that runs models.',
+        a: 'Yes. The agent keeps the facts it learns about you and your work, and you can browse and curate them on the Memory page. Memory runs through the Router.',
       },
     ],
   },
@@ -127,7 +127,7 @@ export const FAQ_GROUPS = [
       {
         id: 'pricing',
         q: 'What does it cost?',
-        a: { html: 'Free is $0. Solo is $20 a month, Basic $40 a seat, Pro $150 a seat, each with its price as a monthly budget, dollar for dollar; Enterprise is custom. The rate for every model on every plan is on the <a href="/pricing">pricing page</a>.' },
+        a: { html: 'Free is $0. Pro is $99 a month and Team $299 a month, flat; Enterprise is from $10k a year, by contract. Never per seat, per model or per install: members and installs are unlimited on every plan. Hosted machines are billed per second on top, at the rates on the <a href="/pricing">pricing page</a>.' },
       },
     ],
   },

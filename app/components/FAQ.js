@@ -22,11 +22,11 @@ const faqs = [
   },
   {
     q: 'Which models can I use?',
-    a: 'Every model Glyphh runs, on every plan: frontier models like Claude, GPT and Gemini, and open-weight models like Kimi, Llama, Qwen and Mistral. An auto-router can pick per request, frontier where it counts and open weights for the rest. Each model has a published rate on each plan, and the bigger the plan, the better the rate.',
+    a: 'Every model Glyphh runs, on every plan: frontier models like Claude, GPT and Gemini, and open-weight models like Kimi, Llama, Qwen and Mistral. An auto-router can pick per request, frontier where it counts and open weights for the rest. Glyphh never charges per model.',
   },
   {
-    q: 'How does the budget work?',
-    a: 'Every plan includes a monthly budget in dollars, equal to its price: Solo’s $20 buys $20 of usage, and $40 a seat buys $40 a seat. Model calls and connector tools are paid from it at your plan’s published rates, metered on the tokens they send and return. Free is $0 and includes $1 a month for connector tools; it runs your own CLI and connected services, and Glyphh models start with Solo. Add funds any time, dollar for dollar; purchased funds never expire, and every charge is itemized in your usage feed.',
+    q: 'What does it cost?',
+    a: 'Free is $0, with unlimited local and self-hosted runtimes and Ada included. Pro is $99 a month and Team $299 a month, flat, for managed precedents, hosted machines and sync; Enterprise is from $10k a year, by contract. Never per seat, per model or per install. Hosted machines are billed per second on top, at the rates on the pricing page.',
   },
   {
     q: 'What are connected services?',
@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     q: 'Does it work for teams?',
-    a: 'Yes — that is the point. Share connections, skills, and agents across your org, govern them by role, and see usage per member and per model. Enterprise plans add SSO and provisioned pricing.',
+    a: 'Yes — that is the point. Share connections, skills, and agents across your org, govern them by role, and see usage per member and per model. Members are unlimited on every plan; Enterprise adds SSO with SAML, role-based access control and audit logs.',
   },
   {
     q: 'What platforms does it support?',
