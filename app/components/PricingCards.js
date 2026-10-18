@@ -1,13 +1,11 @@
 // The self-serve tiers as hairlined cells in the frame (restyled 2026-09-22):
-// the plan, what it is for, the seat price — which is also the budget it
-// carries, dollar for dollar — the door, then what the tier unlocks. A tier
-// sold through sales (Enterprise) has no figure to line up, so it sits in a
-// band UNDER the grid (his order, 2026-09-22) with its bullets across and the
-// door on the right. The numbers and copy arrive from Pricing.js.
-export default function PricingCards({ tiers, salesEmail, platformUrl }) {
+// the plan, what it is for, the flat monthly price, the door, then what the
+// tier includes. A tier sold through sales (Enterprise) has no figure to line
+// up, so it sits in a band UNDER the grid (his order, 2026-09-22) with its
+// bullets across and the door on the right. The copy arrives from Pricing.js.
+export default function PricingCards({ tiers, salesHref, platformUrl }) {
   const cards = tiers.filter((t) => !t.contactSales);
   const bands = tiers.filter((t) => t.contactSales);
-  const salesHref = `mailto:${salesEmail}?subject=${encodeURIComponent('Glyphh Enterprise')}`;
   return (
     <>
       <div className={`ix-grid ix-grid-${cards.length} pp-grid`}>
@@ -22,7 +20,7 @@ export default function PricingCards({ tiers, salesEmail, platformUrl }) {
               <b>{t.priceFigure}</b>
               <span>{t.priceSub}</span>
             </div>
-            <a href={t.href ?? platformUrl} className={`os-cta os-cta-wide ${t.popular ? 'os-cta-primary' : 'os-cta-ghost'}`}>
+            <a href={platformUrl} className={`os-cta os-cta-wide ${t.popular ? 'os-cta-primary' : 'os-cta-ghost'}`}>
               {t.cta}
             </a>
             <ul className="pp-features">
