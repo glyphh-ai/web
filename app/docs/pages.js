@@ -23,13 +23,13 @@ export const ada = [
           <table>
             <thead><tr><th>Model</th><th>Pricing</th><th>Situation size</th><th>Outcome label</th><th>Input</th></tr></thead>
             <tbody>
-              <tr><td><code>glyphh-ada-1.0</code></td><td>Per token, in and out</td><td>Up to 16 KB of JSON</td><td>Up to 200 characters</td><td>Typed JSON</td></tr>
+              <tr><td><code>glyphh-ada-1.0</code></td><td>In every plan</td><td>Up to 16 KB of JSON</td><td>Up to 200 characters</td><td>Typed JSON</td></tr>
             </tbody>
           </table>
         </div>
         <ul>
-          <li><strong>Pricing.</strong> Every Ada call is metered per input and output token on the <code>glyphh-ada-1.0</code> row and paid from your organization&rsquo;s monthly budget, at your plan&rsquo;s rate. The current rate is in the <a href="https://glyphh.ai/integrations/models">model catalog</a>.</li>
-          <li><strong>Budget.</strong> A call meets the same budget wall as any model call: without a plan, or over budget, it is refused before it runs.</li>
+          <li><strong>Pricing.</strong> Ada is in every plan, Free included, with no add-on and no charge per call, per model or per seat. See the <a href="https://glyphh.ai/pricing">pricing page</a>.</li>
+          <li><strong>Precedents.</strong> On a local or self-hosted runtime there is no limit. On a hosted runtime the plan&rsquo;s managed precedents are the limit: 100,000 on Pro, 1,000,000 on Team, none on Enterprise.</li>
           <li><strong>Situations.</strong> A model has a spec that gives every field a type, and a situation is data in that shape: anything else is refused. See <a href={`${DOCS}/ada-typed`}>Typed models</a>. A model created without a spec is flat: it takes JSON of any shape, with arrays treated as sets, and checks nothing.</li>
           <li><strong>One id per call.</strong> Every call names a <code>model_id</code> (<code>am_</code> and 12 hex digits). An organization can have many models.</li>
         </ul>
@@ -1493,8 +1493,8 @@ claude plugin install ada@glyphh-ai`}</Code>
         <p>
           The same door for a file. The body is NDJSON: the first line names the model, every other line is one
           record, <code>{'{"situation", "outcome", "store"?, "at"?}'}</code>. It is read as it arrives and written in
-          batches of 500, each batch metered and budgeted like a call to <code>ada_load</code>, so a budget that runs
-          out stops the load at a line it names.
+          batches of 500, each batch counted like a call to <code>ada_load</code>, so a hosted runtime that reaches its
+          plan&rsquo;s managed precedents stops the load at a line it names.
         </p>
         <Code lang="bash">{`curl https://api.glyphh.ai/ada/load \\
   -H "x-glyphh-api-key: Bearer $GLYPHH_API_KEY" \\
@@ -1738,8 +1738,7 @@ const desktop = [
         <Shot file="effort.png" alt="The effort dial open over the composer: Effort Medium, a slider from Faster to Smarter." width={315} caption="The effort dial. Medium is the default." />
         <h2>What it costs</h2>
         <p>
-          Every turn is a model call paid from your organization&rsquo;s budget at your plan&rsquo;s rate for
-          that model. See <a href={`${DOCS}/gateway`}>The Router</a>.
+          Glyphh never charges per model or per seat. See the <a href="https://glyphh.ai/pricing">pricing page</a>.
         </p>
       </>
     ),
@@ -1776,8 +1775,7 @@ const desktop = [
         </p>
         <h2>What it costs</h2>
         <p>
-          Every turn is a model call paid from your organization&rsquo;s budget at your plan&rsquo;s rate for that
-          model. Without a plan, everything works except model calls.
+          Glyphh never charges per model or per seat. See the <a href="https://glyphh.ai/pricing">pricing page</a>.
         </p>
       </>
     ),
@@ -1810,8 +1808,7 @@ const desktop = [
         </p>
         <p>
           Claude Code, Codex, Gemini and the Glyphh CLI can be pointed at your organization&rsquo;s Router with
-          a key from the console on a paid plan, so their turns are paid from the same budget and show in the
-          same logs. Copilot and Cursor always use their own login. See{' '}
+          a key from the console, so their turns show in the same logs. Copilot and Cursor always use their own login. See{' '}
           <a href={`${DOCS}/own-cli`}>Use your own CLI</a>.
         </p>
         <Note kind="note" title="The honest card">
@@ -1951,9 +1948,8 @@ glyphh`}</Code>
           terminal picks up the session. It lives in <code>~/.glyphh/session.json</code>, separate from the
           desktop&rsquo;s own login, so signing out of one does not sign out the other.
         </p>
-        <Note kind="wire" title="Model calls need a paid plan">
-          The CLI signs in and works on Free, but a model call is refused until an org admin chooses Solo, Basic or
-          Pro on Billing.
+        <Note kind="wire" title="On every plan">
+          The CLI signs in and works on every plan, Free included. Glyphh never charges per install.
         </Note>
         <h2>The first run in a folder</h2>
         <p>
@@ -2137,9 +2133,9 @@ npm rm -g @glyphh-ai/cli          # remove`}</Code>
           <strong> Never</strong>. The agent obeys it in a session and the task runner obeys it unattended. One rule,
           both places.
         </p>
-        <Note kind="admin" title="Connections are a paid feature">
-          Connections are available on paid plans. Each call is metered on the tokens it sends and returns and
-          billed against your plan&rsquo;s monthly budget in dollars.
+        <Note kind="admin" title="No charge per call">
+          Glyphh never charges per seat, per model or per install. See the{' '}
+          <a href="https://glyphh.ai/pricing">pricing page</a>.
         </Note>
       </>
     ),
@@ -2204,9 +2200,7 @@ const router = [
         </ol>
         <h2>What it costs</h2>
         <p>
-          Each call is paid from your organization&rsquo;s monthly budget at your plan&rsquo;s published rate for
-          that model. The bigger the plan, the better the rate. There are no provider keys to bring. Without a
-          plan, everything works except model calls. See the rates on the <a href="https://glyphh.ai/pricing#rates">pricing page</a>.
+          Glyphh never charges per model or per seat. See the <a href="https://glyphh.ai/pricing">pricing page</a>.
         </p>
         <h2>Auto-routers</h2>
         <p>
@@ -2296,20 +2290,16 @@ codex`}</Code>
     lede: 'Every org has a ceiling. Roles narrow it from there.',
     body: (
       <>
-        <h2>One budget</h2>
+        <h2>Limits</h2>
         <p>
-          Your organization&rsquo;s dollars are your plan&rsquo;s price each month, dollar for dollar, plus any
-          funds you add. Every model call and connector tool draws on them at your plan&rsquo;s published rates,
-          and stops when they run out.
-        </p>
-        <p>
-          An org admin may cap the month lower with a spend limit on the organization, never below the
-          plan&rsquo;s price, and set budgets per team or key beneath it.
+          An org admin may set budgets per team or key. They are limits you choose; Glyphh never charges per
+          seat, per model or per install. What a plan costs is on the{' '}
+          <a href="https://glyphh.ai/pricing">pricing page</a>.
         </p>
         <h2>Roles and keys</h2>
         <p>
           Inside the ceiling, a role decides what a key may do: its models, its rate limits, and its own budget.
-          Virtual keys are minted against a role. Roles are a Pro feature.
+          Virtual keys are minted against a role. Role-based access control is an Enterprise feature.
         </p>
         <h2>Rate limits at sign-in</h2>
         <p>
@@ -2329,47 +2319,43 @@ const org = [
   {
     slug: 'plans',
     title: 'Plans and pricing',
-    lede: 'What each tier includes, and what the budget pays for.',
+    lede: 'What each plan includes. Never per seat, per model or per install.',
     body: (
       <>
-        <h2>Tiers</h2>
+        <h2>Plans</h2>
         <div className="dx-table">
           <table>
-            <thead><tr><th>Tier</th><th>Price</th><th>Monthly budget</th><th>Seats</th><th>Governance</th><th>SSO</th></tr></thead>
+            <thead><tr><th>Plan</th><th>Price</th><th>Managed precedents</th><th>Hosted machines</th><th>Sync</th><th>Offline, HA, SSO/SAML, RBAC, audit logs</th></tr></thead>
             <tbody>
-              <tr><td>Free</td><td>$0</td><td>$1, for connections</td><td>1</td><td>no</td><td>no</td></tr>
-              <tr><td>Solo</td><td>$20 / month</td><td>$20</td><td>1</td><td>no</td><td>no</td></tr>
-              <tr><td>Basic</td><td>$40 / seat / month</td><td>$40 / seat</td><td>up to 25</td><td>no</td><td>no</td></tr>
-              <tr><td>Pro</td><td>$150 / seat / month</td><td>$150 / seat</td><td>up to 100</td><td>roles and budgets</td><td>no</td></tr>
-              <tr><td>Enterprise</td><td>custom</td><td>custom</td><td>unlimited</td><td>yes</td><td>yes</td></tr>
+              <tr><td>Free</td><td>$0</td><td>none (local and self-hosted are unlimited)</td><td>0</td><td>no</td><td>no</td></tr>
+              <tr><td>Pro</td><td>$99 / month, flat</td><td>100,000</td><td>3</td><td>yes</td><td>no</td></tr>
+              <tr><td>Team</td><td>$299 / month, flat</td><td>1,000,000</td><td>10</td><td>yes</td><td>no</td></tr>
+              <tr><td>Enterprise</td><td>from $10k / year, by contract</td><td>unlimited</td><td>unlimited</td><td>yes</td><td>yes</td></tr>
             </tbody>
           </table>
         </div>
         <p>
-          The live catalog is served from the same table the console edits, so this site&rsquo;s
-          <a href="https://glyphh.ai/pricing"> pricing page</a> and the desktop&rsquo;s Billing page always agree.
+          Members, installs and self-hosted runtimes are unlimited on every plan, and Ada is in every plan with no
+          add-on. Pro and Team are bought from Billing in the platform; for Enterprise, write to{' '}
+          <a href="mailto:sales@glyphh.ai">sales@glyphh.ai</a>.
         </p>
-        <h2>Budget</h2>
+        <h2>Precedents</h2>
         <p>
-          Plans are dollars per month, dollar for dollar: a paid plan includes its price as budget, per seat, every
-          month. Free is $0 and includes $1 a month for the organization, spent on connector tools; it runs your
-          own CLI and connected services, and makes no Glyphh model call. Every Glyphh product draws on that one
-          budget: model calls at your plan&rsquo;s published rate for each model, and connector tools at their
-          published per-token price. Plan-included budget resets each month.
+          A plan&rsquo;s managed precedents are the limit on a hosted runtime. On a local or self-hosted runtime
+          there is no limit on any plan: a single instance is free, and syncing many is what Pro and Team are for.
         </p>
+        <h2>Hosted machines</h2>
         <p>
-          Every plan runs every model; the bigger the plan, the better the rate. There are no provider keys to bring:
-          every call runs on Glyphh. On Free, everything works except Glyphh model calls, memory included. See the
-          rates on the{' '}
-          <a href="https://glyphh.ai/pricing#rates">pricing page</a>.
+          Hosted machines are on Pro, Team and Enterprise. Each is billed by the second while it is started, and
+          its disk by the GB-month whether it is started or stopped, on top of the plan. The rates for each plan
+          are on the <a href="https://glyphh.ai/pricing#rates">pricing page</a>. To move to Free, delete your
+          hosted machines first.
         </p>
-        <h2>Add funds</h2>
+        <h2>Offline licences</h2>
         <p>
-          Add dollars to the budget from the Billing page, dollar for dollar. There are no tiers and no discounts.
-          Purchased funds never expire.
+          Air-gapped runtimes, with an offline licence, are on Enterprise. Linked and heartbeat licences work on
+          every plan.
         </p>
-        <h2>Auto-reload</h2>
-        <p>Auto-reload can be configured from the Billing page: a threshold and an amount, both in dollars.</p>
       </>
     ),
   },

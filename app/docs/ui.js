@@ -267,7 +267,7 @@ export function Traits() {
 // the products that run on both, and what they share down the side.
 export function GlyphhStack() {
   return (
-    <figure className="dx-flow" role="img" aria-label="The glyph is the base. Ada is the first model built on it. Glyphh Desktop, the Model Router and Connect run on top, sharing one account, one budget and one set of rules.">
+    <figure className="dx-flow" role="img" aria-label="The glyph is the base. Ada is the first model built on it. Glyphh Desktop, the Model Router and Connect run on top, sharing one account, one plan and one set of rules.">
       <svg viewBox="0 0 920 330" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="dx-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -305,8 +305,8 @@ export function GlyphhStack() {
         <rect className="dx-flow-box" x="734" y="32" width="178" height="288" />
         <text className="dx-flow-title" x="823" y="92">one account</text>
         <text className="dx-flow-sub" x="823" y="112">your org, plan and role</text>
-        <text className="dx-flow-title" x="823" y="172">one budget</text>
-        <text className="dx-flow-sub" x="823" y="192">published rates per model</text>
+        <text className="dx-flow-title" x="823" y="172">one plan</text>
+        <text className="dx-flow-sub" x="823" y="192">never per seat or per model</text>
         <text className="dx-flow-title" x="823" y="252">one set of rules</text>
         <text className="dx-flow-sub" x="823" y="272">models, tools, teams</text>
       </svg>
@@ -359,7 +359,7 @@ export function BuildRun() {
 const DOORS = [
   [`${DOCS}/ada-introduction`, 'Ada', 'The first model on the glyph. Define a space, encode your data, and get answers as fact trees.', <><path d="M12 3v6" /><path d="M12 9 6 15" /><path d="M12 9l6 6" /><circle cx="12" cy="3" r="1.5" /><circle cx="6" cy="17" r="2" /><circle cx="18" cy="17" r="2" /></>],
   [`${DOCS}/install`, 'Glyphh Desktop', 'The agent, skills, tasks and tools on your machine, with every frontier model and open weights.', <><rect x="2" y="4" width="20" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></>],
-  [`${DOCS}/gateway`, 'Model Router', 'One endpoint in front of every model, with your budgets, roles and published rates.', <><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4" /></>],
+  [`${DOCS}/gateway`, 'Model Router', 'One endpoint in front of every model, with your budgets and roles.', <><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4" /></>],
   [`${DOCS}/connections`, 'Connect', 'Your apps as tools for any agent, over MCP, governed by team.', <><path d="M12 22v-5M9 8V2M15 8V2" /><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z" /></>],
 ];
 
