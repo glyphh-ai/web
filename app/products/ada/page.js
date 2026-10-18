@@ -41,7 +41,7 @@ const WHERE = [
   {
     title: 'Any MCP client',
     head: 'Claude Code, Claude, Cursor, Codex, your own agents',
-    body: 'Add one URL and sign in with your Glyphh account. The Claude Code plugin adds the skill that tells Claude when to reach for Ada.',
+    body: 'Add one URL and sign in with your Glyphh account. The Glyphh plugin for Claude Code adds the skill that tells Claude when to reach for Ada.',
   },
   {
     title: 'POST /ada',
@@ -81,10 +81,10 @@ const ANSWER = `{
   ]
 }`;
 
-const INSTALL = `claude plugin marketplace add glyphh-ai/ada
-claude plugin install ada@glyphh-ai
+const INSTALL = `claude plugin marketplace add glyphh-ai/glyphh
+claude plugin install glyphh@glyphh
 
-# then, in Claude Code:  /mcp  ->  ada  ->  Authenticate`;
+# then, in Claude Code:  "sign in to Glyphh"`;
 
 function Tile({ t, i }) {
   return (
@@ -181,7 +181,7 @@ export default function AdaPage() {
             No key to create. Every call is metered per token on your organization&rsquo;s plan, like any model.
           </p>
           <pre className="hv-code" style={{ marginTop: '1.25rem' }}><code>{INSTALL}</code></pre>
-          <p className="hv-foot-link"><a href="https://github.com/glyphh-ai/ada">github.com/glyphh-ai/ada</a></p>
+          <p className="hv-foot-link"><a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a></p>
         </section>
       </div>
 
