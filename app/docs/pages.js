@@ -861,7 +861,7 @@ PATH FROM glyph("web") TO glyph("db")`}</Code>
   {
     slug: 'ada-sdk',
     title: 'SDKs',
-    lede: 'Call a model from your software: @glyphh-ai/ada for TypeScript, glyphh-ada for Python.',
+    lede: 'Call a model from your software: @glyphh-ai/glyphh for TypeScript, glyphh for Python.',
     body: (
       <>
         <p>
@@ -869,13 +869,13 @@ PATH FROM glyph("web") TO glyph("db")`}</Code>
           <a href={`${DOCS}/ada-tools`}>POST /ada</a>: every answer is typed, and every refusal is one error type with
           a code. Neither has dependencies.
         </p>
-        <Code lang="bash">{`npm install @glyphh-ai/ada
-pip install glyphh-ada`}</Code>
+        <Code lang="bash">{`npm install @glyphh-ai/glyphh
+pip install glyphh`}</Code>
         <p>
           Create a key on the console&rsquo;s Virtual Keys page and set <code>GLYPHH_API_KEY</code>, or pass it in.
         </p>
         <h2>Ask and branch</h2>
-        <Code lang="ts">{`import { Ada } from "@glyphh-ai/ada";
+        <Code lang="ts">{`import { Ada } from "@glyphh-ai/glyphh";
 
 const ada = new Ada();
 const tickets = ada.model("am_0123456789ab");
@@ -884,7 +884,7 @@ const answer = await tickets.query({ ticket: { issue: { component: "kubelet", sy
 
 if (answer.act) route(answer.top);
 else if (answer.reason === "unseen") askSomeone(answer.unseen);`}</Code>
-        <Code lang="python">{`from glyphh_ada import Ada
+        <Code lang="python">{`from glyphh import Ada
 
 ada = Ada()
 tickets = ada.model("am_0123456789ab")
@@ -937,7 +937,7 @@ if (near.statement === "find") for (const m of near.matches) console.log(m.key, 
           type checker what is in it.
         </p>
         <h2>Errors</h2>
-        <Code lang="ts">{`import { AdaError } from "@glyphh-ai/ada";
+        <Code lang="ts">{`import { AdaError } from "@glyphh-ai/glyphh";
 
 try {
   await tickets.query({ ticket: { issue: { severity: "high" } } });
@@ -945,7 +945,7 @@ try {
   if (e instanceof AdaError && e.code === "E_VALIDATION") console.error(e.message);
   // situation: ticket.issue.severity: a numeric role takes a finite number
 }`}</Code>
-        <Code lang="python">{`from glyphh_ada import AdaError
+        <Code lang="python">{`from glyphh import AdaError
 
 try:
     tickets.query({"ticket": {"issue": {"severity": "high"}}})
@@ -964,7 +964,7 @@ except AdaError as e:
         <Note title="The contract">
           Both SDKs are tested against the same recorded requests and answers, and against the JSON Schema that{' '}
           <code>{'{"op": "contract"}'}</code> returns. The source is in{' '}
-          <a href="https://github.com/glyphh-ai/ada">glyphh-ai/ada</a>.
+          <a href="https://github.com/glyphh-ai/glyphh">glyphh-ai/glyphh</a>, under <code>sdk/</code>.
         </Note>
       </>
     ),
@@ -979,10 +979,10 @@ except AdaError as e:
           You have a helpdesk and a history of tickets, each resolved by some team. This guide builds an Ada model from that history and ends with one function, <code>route(ticket)</code>, that your helpdesk calls for every new ticket. It routes the ones it has ground for, and hands the rest to a person with a reason. No language model runs when a ticket is routed, and the same ticket always gets the same answer.
         </p>
         <p>
-          Everything below was run as written. The whole program is <a href="https://github.com/glyphh-ai/ada/blob/main/examples/support-tickets/tickets.py">tickets.py</a> in the Ada repository.
+          Everything below was run as written.
         </p>
         <h2>Before you start</h2>
-        <Code lang="bash">{`pip install glyphh-ada
+        <Code lang="bash">{`pip install glyphh
 export GLYPHH_API_KEY=sk-...`}</Code>
         <p>
           Create the key on the console&rsquo;s Virtual Keys page. Creating a model, and <code>learn</code> later on, need an org admin&rsquo;s key. Everything else works with any member&rsquo;s key. Every call is metered on your plan: this guide makes about 115.
@@ -991,7 +991,7 @@ export GLYPHH_API_KEY=sk-...`}</Code>
         <p>
           A typed model starts from a spec: every field of a ticket gets a type, and Ada compares each by its type. Two products are the same or they are not. Two severities are close when they are one step apart. Two summaries are close when they share words, even spelled a little differently.
         </p>
-        <Code lang="python">{`from glyphh_ada import Ada, AdaError
+        <Code lang="python">{`from glyphh import Ada, AdaError
 
 ada = Ada()
 
@@ -1142,16 +1142,16 @@ route(ticket("mobile", "widgets", 1, "free"))
           You have accounts, a few usage numbers for each, month by month, and you know how past terms ended. This guide builds an Ada model from the accounts that already renewed or churned, and ends with one function, <code>risk(account)</code>, that your success tooling calls for a live account. It also shows what Ada does with records that change over time: versions, trend and drift.
         </p>
         <p>
-          Everything below was run as written. The whole program is <a href="https://github.com/glyphh-ai/ada/blob/main/examples/churn/churn.ts">churn.ts</a> in the Ada repository.
+          Everything below was run as written.
         </p>
         <h2>Before you start</h2>
-        <Code lang="bash">{`npm install @glyphh-ai/ada
+        <Code lang="bash">{`npm install @glyphh-ai/glyphh
 export GLYPHH_API_KEY=sk-...`}</Code>
         <p>
           Create the key on the console&rsquo;s Virtual Keys page. Creating a model needs an org admin&rsquo;s key. Every call is metered on your plan: this guide makes about 200.
         </p>
         <h2>1. Say what an account is</h2>
-        <Code lang="ts">{`import { Ada, AdaError, type Answer, type Spec } from "@glyphh-ai/ada";
+        <Code lang="ts">{`import { Ada, AdaError, type Answer, type Spec } from "@glyphh-ai/glyphh";
 
 const ada = new Ada();
 
@@ -1317,12 +1317,12 @@ await risk({ ...healthy, industry: "gaming" });  // { risk: "unknown", because: 
     body: (
       <>
         <h2>Claude Code</h2>
-        <p>The plugin installs the Ada connection and the <code>ada</code> skill, which tells Claude when to reach for Ada.</p>
-        <Code lang="bash">{`claude plugin marketplace add glyphh-ai/ada
-claude plugin install ada@glyphh-ai`}</Code>
+        <p>The <code>glyphh</code> plugin brings your Glyphh account and the <code>ada</code> skill, which tells Claude when to reach for Ada.</p>
+        <Code lang="bash">{`claude plugin marketplace add glyphh-ai/glyphh
+claude plugin install glyphh@glyphh`}</Code>
         <p>
-          Then run <code>/mcp</code> in Claude Code, pick <code>ada</code> and choose <strong>Authenticate</strong>.
-          Your browser opens and you sign in with your Glyphh account. There is no key to create.
+          Then ask Claude to <strong>sign in to Glyphh</strong>: it gives you the sign-in card, and you sign in with
+          your Glyphh account. There is no key to create.
         </p>
         <h2>Claude and other clients that sign in</h2>
         <p>Add a custom connector or remote MCP server with this URL, and sign in with your Glyphh account when asked:</p>
@@ -1332,7 +1332,7 @@ claude plugin install ada@glyphh-ai`}</Code>
         </p>
         <h2>Other agents</h2>
         <p>Install the skill with skills.sh, then add the URL above as an MCP server in that agent.</p>
-        <Code lang="bash">{`npx skills add glyphh-ai/ada --skill ada`}</Code>
+        <Code lang="bash">{`npx skills add glyphh-ai/glyphh --skill ada`}</Code>
         <h2>API key</h2>
         <p>
           For CI, a headless agent, or a client that cannot open a browser, create a key on the console&rsquo;s

@@ -102,7 +102,7 @@ function Sample({ option }) {
               ))}
             </tbody>
           </table>
-          <pre className="fl-code">{`claude plugin install ada@glyphh-ai
+          <pre className="fl-code">{`claude plugin install glyphh@glyphh
 ada_query({ task: "deploy_service", env: "prod" })
 // => { top: "canary", act: true, confidence: 0.98 }`}</pre>
           <p className="fl-label">EP. 03 &middot; CONNECTIONS &middot; 4 MIN</p>

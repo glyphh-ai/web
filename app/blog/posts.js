@@ -29,7 +29,7 @@ export const POSTS = [
         body: [
           'Hi everyone, Chris here. Today we\'re shipping the Ada SDKs, one for TypeScript and one for Python, and instead of telling you what Ada is for the hundredth time I\'m going to show you two things I built with them this week. Both are in the docs as step by step guides and both were run for real, every number you see below came back from the server, not from my imagination.',
           {
-            html: '<pre><code>npm install @glyphh-ai/ada\npip install glyphh-ada</code></pre>',
+            html: '<pre><code>npm install @glyphh-ai/glyphh\npip install glyphh</code></pre>',
           },
           'Quick recap if you\'re new here. Glyphh\'s whole idea is use AI to build the thing, not to run it. Ada is the piece that makes that work when the thing has to reason. You (or your agent) build a model from your own records, and then your software calls it. No LLM in the middle, no tokens, no latency lottery, same answer every single time, and every answer tells you what it\'s standing on. That last part is very important to understand, and it\'s the part the examples are really about.',
         ],
@@ -96,7 +96,7 @@ export const POSTS = [
         heading: 'Go build something',
         body: [
           {
-            html: 'Both guides are in the docs with every line of code and every output: <a href="https://docs.glyphh.ai/ada-guide-tickets">route support tickets</a> in Python and <a href="https://docs.glyphh.ai/ada-guide-churn">customer churn</a> in TypeScript. The programs are in <a href="https://github.com/glyphh-ai/ada/tree/main/examples">the Ada repo</a>. Grab a key from the console, run one, then point it at your own data and tell me what it found. I read every one of those emails.',
+            html: 'Both guides are in the docs with every line of code and every output: <a href="https://docs.glyphh.ai/ada-guide-tickets">route support tickets</a> in Python and <a href="https://docs.glyphh.ai/ada-guide-churn">customer churn</a> in TypeScript. The SDKs are in <a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a>. Grab a key from the console, run one, then point it at your own data and tell me what it found. I read every one of those emails.',
           },
           'Build with AI. Run without it.',
           '— Timme',
