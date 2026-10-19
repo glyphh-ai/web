@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 /**
  * /pricing — the open-core plans (the pricing contract, 2026-10-18): Free,
  * Pro, Team and Enterprise; never per seat, per model or per install. The
- * plans sell managed precedents, hosted machines and sync; running Ada on
+ * plans sell managed precedents and hosted machines; running Ada on
  * your own machines is free and unlimited. The hosted machine rates per plan
  * are read from the server (HostingRates.js, app/lib/rates.js).
  */
@@ -38,7 +38,7 @@ const RULES = [
 
 const FAQ = [
   ['What do the paid plans charge for?', 'Two things we run for you: managed precedents (the ones Ada keeps on a hosted runtime) and hosted machines. A plan is a flat monthly price; hosted machines are billed per second on top, at the published rates.'],
-  ['Is Free really unlimited?', 'Yes, on your own machines. Precedents on a local or self-hosted runtime have no limit on any plan. A single instance is free; syncing many is what Pro is for.'],
+  ['Is Free really unlimited?', 'Yes, on your own machines. Precedents on a local or self-hosted runtime have no limit on any plan.'],
   ['What is a managed precedent?', 'A precedent Ada keeps on a runtime we host. Pro includes 100,000, Team 1,000,000, Enterprise has no limit.'],
   ['How are hosted machines billed?', 'By the second while a machine is started, and its disk by the GB-month whether it is started or stopped. The rates for Pro and Team are on this page; Enterprise rates are set in your contract.'],
   ['Do you charge per seat?', 'No. Members and installs are unlimited on every plan.'],
@@ -57,7 +57,7 @@ export default function PricingPage() {
           <h1 className="ix-title">Never per seat, per model or per install.</h1>
           <p className="ix-lede">
             Run Ada on your own machines for free, without limit. Pay a flat monthly price when you want us to keep
-            your precedents, host your machines and sync them across instances.
+            your precedents and host your machines.
           </p>
           <div className="ix-actions">
             <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>

@@ -7,8 +7,8 @@ export const SALES_HREF = 'mailto:sales@glyphh.ai?subject=' + encodeURIComponent
 // The plans, one version each (the pricing contract, 2026-10-18). Never per
 // seat, per model or per install: members, installs and self-hosted runtimes
 // are unlimited on every plan and Ada is in every plan. What a plan sells is
-// the managed precedent bucket (precedents on a hosted runtime), hosted
-// machines and sync across instances. Local and self-hosted precedents are
+// the managed precedent bucket (precedents on a hosted runtime) and hosted
+// machines. Local and self-hosted precedents are
 // unlimited everywhere. Enterprise is by contract, through sales.
 const TIERS = [
   {
@@ -31,13 +31,12 @@ const TIERS = [
     name: 'Pro',
     priceFigure: '$99',
     priceSub: 'A month, flat.',
-    desc: 'Hosted by us, synced across your instances.',
+    desc: 'Your runtimes hosted by us.',
     popular: true,
     lead: 'Everything in Free, plus:',
     featureList: [
       '100,000 managed precedents',
       'Up to 3 hosted machines, billed per second',
-      'Sync across instances',
     ],
     cta: 'Get started',
   },
@@ -64,10 +63,6 @@ const TIERS = [
     featureList: [
       'Unlimited managed precedents and hosted machines',
       'Your own cloud (BYOC), or air-gapped with offline licences',
-      'High availability',
-      'Single sign-on with SAML',
-      'Role-based access control',
-      'Audit logs',
       'An SLA',
       'Hosted machine rates set in your contract',
     ],
@@ -84,7 +79,7 @@ export default function Pricing() {
           <h2 className="ix-h2">Free on your own machines. Pay when we run them.</h2>
           <p className="ix-desc">
             Run Ada locally or on your own infrastructure for nothing, with no limit. The paid plans add managed
-            precedents, hosted machines and sync across instances, at a flat monthly price.
+            precedents and hosted machines, at a flat monthly price.
           </p>
         </div>
       </div>
