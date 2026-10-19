@@ -5,11 +5,7 @@ import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
-// Log in and Sign up land in the app (his order, 2026-10-04): app.glyphh.ai is
-// the desktop in the browser and signs you in first. The org console
-// (platform.glyphh.ai) is reached from inside the app, Settings → Platform;
-// only the admin Dashboard link below still points there.
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://app.glyphh.ai';
+// Log in and Sign up land on the platform, which signs you in first.
 
 export default function Nav() {
   const pathname = usePathname() || '/';
@@ -71,10 +67,9 @@ export default function Nav() {
     };
   }, [ddOpen]);
 
-  // The app serves its login AT THE ROOT — no /auth path.
-  const loginHref = APP_URL;
-  const signupHref = APP_URL;
-  const dashHref = `${PLATFORM_URL}/dashboard`;
+  const loginHref = PLATFORM_URL;
+  const signupHref = PLATFORM_URL;
+  const dashHref = PLATFORM_URL;
 
   return (
     <>
@@ -87,7 +82,6 @@ export default function Nav() {
             <div className="nav-dd">
               <a href="/" className={`nav-dd-trigger${pathname === '/' ? ' active' : ''}`}>Home</a>
             </div>
-            {/* The Products dropdown is back (his order, 2026-10-02) with the three products the home page names. */}
             <div
                 className={`nav-dd ${prodOpen ? 'open' : ''}`}
                 ref={prodRef}
@@ -101,42 +95,10 @@ export default function Nav() {
                 <div className="nav-dd-panel">
                   <a href="/products/ada" className="nav-dd-item">
                     <span className="nav-dd-name">Ada</span>
-                    <span className="nav-dd-desc">Typed models your agents build, feed and query. Every answer a fact tree.</span>
+                    <span className="nav-dd-desc">Decisions from precedent, in your own runtime. Every answer cites what it stands on.</span>
                   </a>
-                  <a href="/products/desktop" className="nav-dd-item">
-                    <span className="nav-dd-name">Glyphh Desktop</span>
-                    <span className="nav-dd-desc">The open desktop client for frontier AI. Every loop, every model, one app.</span>
-                  </a>
-                  <a href="/products/router" className="nav-dd-item">
-                    <span className="nav-dd-name">Model Router</span>
-                    <span className="nav-dd-desc">One endpoint, two ways to route. Roles and budgets.</span>
-                  </a>
-                  {/* Code, Connect, Skills and Semantic Apps keep their pages; they are off the menu. Hidden, not deleted. */}
-                  {false && (
-                    <>
-                      <a href="/products/code" className="nav-dd-item">
-                        <span className="nav-dd-name">Glyphh Code</span>
-                        <span className="nav-dd-desc">The coding agent and CLI. Your subscription or the router, one switch.</span>
-                      </a>
-                      <a href="/products/connect" className="nav-dd-item">
-                        <span className="nav-dd-name">Glyphh Connect</span>
-                        <span className="nav-dd-desc">3,500+ services as tools for any loop.</span>
-                      </a>
-                      <a href="/products/skills" className="nav-dd-item">
-                        <span className="nav-dd-name">Glyphh Skills</span>
-                        <span className="nav-dd-desc">Write it once. Apps, tasks, agents, every vendor.</span>
-                      </a>
-                      <a href="/products/semantic-apps" className="nav-dd-item">
-                        <span className="nav-dd-name">Glyphh Semantic Apps</span>
-                        <span className="nav-dd-desc">Apps that know your context, governed by the org.</span>
-                      </a>
-                    </>
-                  )}
                 </div>
               </div>
-            <div className="nav-dd">
-              <a href="/integrations" className={`nav-dd-trigger${active('/integrations')}`}>Integrations</a>
-            </div>
             <div
               className={`nav-dd ${ddOpen ? 'open' : ''}`}
               ref={ddRef}
@@ -183,9 +145,6 @@ export default function Nav() {
         <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
         <span className="mobile-menu-group">Products</span>
         <a href="/products/ada" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Ada</a>
-        <a href="/products/desktop" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Glyphh Desktop</a>
-        <a href="/products/router" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Model Router</a>
-        <a href="/integrations" onClick={() => setMenuOpen(false)}>Integrations</a>
         <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href="https://docs.glyphh.ai" onClick={() => setMenuOpen(false)}>Docs</a>

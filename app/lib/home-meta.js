@@ -3,4 +3,4 @@
 // only export its known fields, so these live here for layout.js and page.js.
 export const HOME_TITLE = "Glyphh — the vendor-neutral alternative to frontier AI";
 export const HOME_DESCRIPTION =
-  "Scale your business with practical AI that is designed to maximize your return on investment and achieve real world results with open weight models, semantic data pipelines, universal skills, a2a agents, scheduled tasks, and governance.";
+  "Ada: decisions from precedent, deterministic and explained, in a runtime of your own. Called from Claude and from your software. Free to self-host.";

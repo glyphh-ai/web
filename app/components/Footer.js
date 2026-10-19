@@ -16,20 +16,19 @@ const COLS = [
   {
     title: 'Product',
     links: [
-      ['Quick start', '/products/desktop#quick-start'],
-      ['Integrations', '/integrations'],
-      ['Model catalog', '/integrations/models'],
+      ['Ada', '/products/ada'],
       ['Pricing', '/pricing'],
-      ['Docs', 'https://docs.glyphh.ai'],
+      ['Platform', 'https://platform.glyphh.ai'],
+      ['FAQ', '/faq'],
     ],
   },
   {
     title: 'Resources',
     links: [
+      ['Docs', 'https://docs.glyphh.ai'],
+      ['Quick start', 'https://docs.glyphh.ai/quick-start'],
+      ['Self-hosting', 'https://github.com/glyphh-ai/rrotor/tree/main/docs/self-hosting'],
       ['Blog', '/blog'],
-      ['Install', 'https://docs.glyphh.ai/install'],
-      ['The CLI', 'https://docs.glyphh.ai/cli'],
-      ['Changelog', 'https://github.com/glyphh-ai/releases/releases'],
       ['GitHub', GITHUB_URL],
     ],
   },
