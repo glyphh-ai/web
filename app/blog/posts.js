@@ -17,8 +17,7 @@ export const POSTS = [
     coverAlt: 'Ask a model. Get a reason. Two answers from Ada: a ticket routed to platform, and an account called as churned.',
     tags: ['Ada', 'SDK', 'Guides'],
     related: [
-      ['Guide: route support tickets', 'https://docs.glyphh.ai/ada-guide-tickets'],
-      ['Guide: customer churn', 'https://docs.glyphh.ai/ada-guide-churn'],
+      ['Guide: remember incidents', 'https://docs.glyphh.ai/ada-guide-incidents'],
       ['The SDKs', 'https://docs.glyphh.ai/ada-sdk'],
       ['Ada', '/products/ada'],
     ],
@@ -117,9 +116,7 @@ export const POSTS = [
     video: 'RDdJxb0tbf4',
     tags: ['Desktop', 'Connections', 'Demo'],
     related: [
-      ['Connections', 'https://docs.glyphh.ai/connections'],
       ['Glyphh Desktop Workspaces', '/blog/glyphh-desktop-workspaces'],
-      ['Install Glyphh', 'https://docs.glyphh.ai/install'],
     ],
     sections: [
       {
@@ -195,8 +192,7 @@ export const POSTS = [
     video: 'ABXhO46Delw',
     tags: ['Desktop', 'Workspaces', 'Demo'],
     related: [
-      ['Semantic Apps', 'https://docs.glyphh.ai/ada'],
-      ['The Router', 'https://docs.glyphh.ai/gateway'],
+      ['What Ada is', 'https://docs.glyphh.ai/ada-introduction'],
       ['The Critical Inversion', '/blog/the-critical-inversion'],
     ],
     sections: [
@@ -269,8 +265,6 @@ export const POSTS = [
     coverAlt: 'One massive Big AI cube against a field of small open-weight cubes, routed by Glyphh: frontier where it counts, open weights for the rest.',
     tags: ['Strategy', 'Open Weights', 'The Router'],
     related: [
-      ['The Router', 'https://docs.glyphh.ai/gateway'],
-      ['Every model', '/integrations/models'],
       ['Welcome to Glyphh AI', '/blog/welcome-to-glyphh-ai'],
     ],
     sections: [
@@ -337,7 +331,6 @@ export const POSTS = [
     related: [
       ['Ada', '/products/ada'],
       ['Ada models', 'https://docs.glyphh.ai/ada'],
-      ['The Router', 'https://docs.glyphh.ai/gateway'],
     ],
     sections: [
       {
