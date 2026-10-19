@@ -1,4 +1,3 @@
-import { DOCS } from './base';
 // The docs' three building blocks: a callout, a key/value row, a code block.
 
 const KINDS = {
@@ -32,18 +31,6 @@ export function Row({ k, children }) {
 
 export function Code({ children, lang }) {
   return <pre className="dx-code" data-lang={lang}>{children}</pre>;
-}
-
-// A screenshot of the app. The files are under public/docs, served at /docs/<file>
-// on both hosts (middleware.js passes a path with an extension straight
-// through). They are taken at 2x, so `width` is the CSS width to show them at.
-export function Shot({ file, alt, width, caption }) {
-  return (
-    <figure className="dx-shot">
-      <img src={`/docs/${file}`} alt={alt} loading="lazy" style={width ? { maxWidth: width } : undefined} />
-      {caption && <figcaption>{caption}</figcaption>}
-    </figure>
-  );
 }
 
 // The four steps as one picture: define and encode on the way in, a like
@@ -245,7 +232,7 @@ const TRAITS = [
   ['Hierarchical', 'Meaning has parts, and the parts have parts. Compare two whole glyphs, one branch, or one role.', <><circle cx="12" cy="5" r="2" /><circle cx="6" cy="19" r="2" /><circle cx="18" cy="19" r="2" /><path d="M12 7v5M12 12l-6 5M12 12l6 5" /></>],
   ['Weighted', 'Every level carries a weight: its voice in the level above.', <><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0" /><circle cx="16" cy="6" r="2" /><circle cx="10" cy="12" r="2" /><circle cx="18" cy="18" r="2" /></>],
   ['Typed', 'A plain value, a set, text and a number are each encoded their own way, so near numbers score as near.', <><path d="M8 4c-2 0-3 1-3 3v2c0 1.5-1 3-2 3 1 0 2 1.5 2 3v2c0 2 1 3 3 3M16 4c2 0 3 1 3 3v2c0 1.5 1 3 2 3-1 0-2 1.5-2 3v2c0 2-1 3-3 3" /></>],
-  ['Temporal', 'Every glyph is stamped with its time, and a sequence folds into one glyph in which recent items count most.', <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>],
+  ['Temporal', 'Every precedent carries its time, from the role the spec names, beside its glyph.', <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>],
   ['Universal', 'One primitive for any state of any shape. What it stands for is yours to decide.', <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></>],
 ];
 
@@ -263,121 +250,6 @@ export function Traits() {
   );
 }
 
-// Glyphh in one picture: the primitive at the base, the first model on it,
-// the products that run on both, and what they share down the side.
-export function GlyphhStack() {
-  return (
-    <figure className="dx-flow" role="img" aria-label="The glyph is the base. Ada is the first model built on it. Glyphh Desktop, the Model Router and Connect run on top, sharing one account, one plan and one set of rules.">
-      <svg viewBox="0 0 920 330" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="dx-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0 0 10 5 0 10z" className="dx-flow-head" />
-          </marker>
-        </defs>
-        <text className="dx-flow-step dx-flow-l" x="8" y="20">PRODUCTS</text>
-        <rect className="dx-flow-box" x="8" y="32" width="222" height="76" />
-        <text className="dx-flow-title" x="119" y="64">Glyphh Desktop</text>
-        <text className="dx-flow-sub" x="119" y="86">agent, skills, tasks, apps</text>
-        <rect className="dx-flow-box" x="246" y="32" width="222" height="76" />
-        <text className="dx-flow-title" x="357" y="64">Model Router</text>
-        <text className="dx-flow-sub" x="357" y="86">one endpoint, every model</text>
-        <rect className="dx-flow-box" x="484" y="32" width="222" height="76" />
-        <text className="dx-flow-title" x="595" y="64">Connect</text>
-        <text className="dx-flow-sub" x="595" y="86">your apps as tools, over MCP</text>
-
-        <path className="dx-flow-line" d="M119 108 V134" markerEnd="url(#dx-arrow)" />
-        <path className="dx-flow-line" d="M357 108 V134" markerEnd="url(#dx-arrow)" />
-        <path className="dx-flow-line" d="M595 108 V134" markerEnd="url(#dx-arrow)" />
-
-        <text className="dx-flow-step dx-flow-l" x="8" y="130">MODEL</text>
-        <rect className="dx-flow-model" x="8" y="138" width="698" height="76" />
-        <text className="dx-flow-title" x="357" y="170">Ada</text>
-        <text className="dx-flow-sub" x="357" y="192">the first model on the glyph: define a space, encode data, send like glyphs, receive fact trees</text>
-
-        <path className="dx-flow-line" d="M357 214 V240" markerEnd="url(#dx-arrow)" />
-
-        <text className="dx-flow-step dx-flow-l" x="8" y="236">PRIMITIVE</text>
-        <rect className="dx-flow-base" x="8" y="244" width="698" height="76" />
-        <text className="dx-flow-title" x="357" y="276">the glyph</text>
-        <text className="dx-flow-sub" x="357" y="298">a mathematical structure that carries state: hierarchical, weighted, typed, temporal</text>
-
-        <text className="dx-flow-step dx-flow-l" x="734" y="20">SHARED</text>
-        <rect className="dx-flow-box" x="734" y="32" width="178" height="288" />
-        <text className="dx-flow-title" x="823" y="92">one account</text>
-        <text className="dx-flow-sub" x="823" y="112">your org, plan and role</text>
-        <text className="dx-flow-title" x="823" y="172">one plan</text>
-        <text className="dx-flow-sub" x="823" y="192">never per seat or per model</text>
-        <text className="dx-flow-title" x="823" y="252">one set of rules</text>
-        <text className="dx-flow-sub" x="823" y="272">models, tools, teams</text>
-      </svg>
-    </figure>
-  );
-}
-
-// "AI at build time, not runtime": the two lanes.
-export function BuildRun() {
-  return (
-    <figure className="dx-flow" role="img" aria-label="At build time, models read, write and plan, and produce a typed structure. At run time, your data and questions go through that structure and come back as measured answers, with no model in the path.">
-      <svg viewBox="0 0 920 236" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="dx-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0 0 10 5 0 10z" className="dx-flow-head" />
-          </marker>
-        </defs>
-        <text className="dx-flow-step dx-flow-l" x="8" y="20">BUILD TIME &middot; models do the thinking, once</text>
-        <rect className="dx-flow-box" x="8" y="32" width="200" height="64" />
-        <text className="dx-flow-title" x="108" y="60">models</text>
-        <text className="dx-flow-sub" x="108" y="79">frontier and open weights</text>
-        <path className="dx-flow-line" d="M208 64 H300" markerEnd="url(#dx-arrow)" />
-        <text className="dx-flow-step" x="254" y="54">read, write, plan</text>
-        <rect className="dx-flow-box" x="302" y="32" width="200" height="64" />
-        <text className="dx-flow-title" x="402" y="60">you review</text>
-        <text className="dx-flow-sub" x="402" y="79">validate, approve, distribute</text>
-        <path className="dx-flow-line" d="M502 64 H594" markerEnd="url(#dx-arrow)" />
-        <text className="dx-flow-step" x="548" y="54">produces</text>
-        <rect className="dx-flow-model" x="596" y="32" width="316" height="184" />
-        <text className="dx-flow-title" x="754" y="62">a typed structure</text>
-        <text className="dx-flow-sub" x="754" y="84">glyph spaces, skills, tasks, apps</text>
-        <rect className="dx-flow-box" x="620" y="104" width="268" height="88" />
-        <text className="dx-flow-title" x="754" y="134">measured, not generated</text>
-        <text className="dx-flow-sub" x="754" y="156">the same input, the same answer</text>
-        <text className="dx-flow-sub" x="754" y="174">with its reasons</text>
-
-        <text className="dx-flow-step dx-flow-l" x="8" y="140">RUN TIME &middot; no model in the path</text>
-        <rect className="dx-flow-box" x="8" y="152" width="200" height="64" />
-        <text className="dx-flow-title" x="108" y="180">your data</text>
-        <text className="dx-flow-sub" x="108" y="199">and your questions</text>
-        <path className="dx-flow-line" d="M208 172 H618" markerEnd="url(#dx-arrow)" />
-        <text className="dx-flow-step" x="413" y="164">in</text>
-        <path className="dx-flow-line" d="M618 196 H210" markerEnd="url(#dx-arrow)" />
-        <text className="dx-flow-step" x="413" y="212">answers, on your budget</text>
-      </svg>
-    </figure>
-  );
-}
-
-const DOORS = [
-  [`${DOCS}/ada-introduction`, 'Ada', 'The first model on the glyph. Define a space, encode your data, and get answers as fact trees.', <><path d="M12 3v6" /><path d="M12 9 6 15" /><path d="M12 9l6 6" /><circle cx="12" cy="3" r="1.5" /><circle cx="6" cy="17" r="2" /><circle cx="18" cy="17" r="2" /></>],
-  [`${DOCS}/install`, 'Glyphh Desktop', 'The agent, skills, tasks and tools on your machine, with every frontier model and open weights.', <><rect x="2" y="4" width="20" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></>],
-  [`${DOCS}/gateway`, 'Model Router', 'One endpoint in front of every model, with your budgets and roles.', <><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4" /></>],
-  [`${DOCS}/connections`, 'Connect', 'Your apps as tools for any agent, over MCP, governed by team.', <><path d="M12 22v-5M9 8V2M15 8V2" /><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z" /></>],
-];
-
-export function Doors() {
-  return (
-    <div className="dx-traits">
-      {DOORS.map(([href, name, text, icon]) => (
-        <a key={name} href={href} className="dx-trait dx-door">
-          <svg viewBox="0 0 24 24" aria-hidden="true">{icon}</svg>
-          <div className="dx-trait-name">{name}</div>
-          <p>{text}</p>
-          <span className="dx-door-go">Start here &rarr;</span>
-        </a>
-      ))}
-    </div>
-  );
-}
-
 // A fact tree, drawn: one record explained against the question. Every row is
 // a node; the bar is how well that part matched; the share is what it added.
 const FACTS = [
@@ -385,7 +257,7 @@ const FACTS = [
   { key: 'title', depth: 1, score: 0.8, weight: '1', share: '0.27', status: 'both' },
   { key: 'component', depth: 1, score: 1, weight: '1', share: '0.33', status: 'both' },
   { key: 'severity', depth: 1, score: 0.93, weight: '1', share: '0.31', status: 'both' },
-  { key: 'reporter', depth: 0, score: 0, weight: '0', share: '0.00', status: 'record only' },
+  { key: 'reporter', depth: 0, score: 0, weight: '0', share: '0.00', status: 'record_only' },
 ];
 
 export function FactTreeFig() {
@@ -424,7 +296,7 @@ export function FactTreeFig() {
   );
 }
 
-// The answer a query sums the records into, and the one line of code it feeds.
+// The answer a query sums the precedents into, and the line of code it feeds.
 export function AnswerFig() {
   return (
     <figure className="dx-ans">
@@ -433,18 +305,18 @@ export function AnswerFig() {
         <div className="dx-ans-top">route_to_platform</div>
         <div className="dx-ans-stats">
           <div><b>0.82</b><span>confidence</span></div>
-          <div><b>6</b><span>records</span></div>
-          <div><b>0.12</b><span>nearest failure</span></div>
+          <div><b>6</b><span>count</span></div>
+          <div><b>0.71</b><span>support</span></div>
         </div>
-        <div className="dx-ans-gauge" aria-hidden="true"><span style={{ width: '82%' }} /><i style={{ left: '50%' }} /></div>
-        <div className="dx-ans-scale" aria-hidden="true"><span>0</span><span>act at 0.5</span><span>1</span></div>
+        <div className="dx-ans-gauge" aria-hidden="true"><span style={{ width: '82%' }} /><i style={{ left: '60%' }} /></div>
+        <div className="dx-ans-scale" aria-hidden="true"><span>0</span><span>your bar, 0.6</span><span>1</span></div>
       </div>
       <div className="dx-ans-then" aria-hidden="true">&rarr;</div>
       <div className="dx-ans-card dx-ans-act">
-        <span className="dx-ft-label">act</span>
+        <span className="dx-ft-label">sufficient</span>
         <div className="dx-ans-true">true</div>
-        <p>sufficient, confident, and no recorded failure rules it out</p>
-        <pre>{`if (answer.act) route(answer.top)
+        <p>close enough to answer, confident, and more than a couple of precedents</p>
+        <pre>{`if (a.sufficient && a.confidence >= 0.6 && a.count > 2) route(a.top)
 else askAPerson()`}</pre>
       </div>
     </figure>

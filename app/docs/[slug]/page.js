@@ -5,21 +5,29 @@ import { DOCS } from '../base';
 
 const LISTED = PAGES.filter((p) => p.slug !== 'introduction');
 
-// Pages the short docs dropped: an old address lands on the page that covers it now.
+// Old addresses: each lands on the page that covers it, or on the docs home
+// when what it described is not part of Glyphh.
+const GONE = [
+  'install', 'web-app', 'where-a-session-works', 'pick-a-model', 'work-and-code', 'terminals', 'devices',
+  'library-sync', 'apps', 'cli', 'skills', 'tasks', 'connections', 'connect', 'loops', 'agent', 'cloud-terminals',
+  'streamed-panels', 'desktop', 'panels', 'sessions', 'shortcuts', 'artifacts', 'gateway', 'own-cli', 'budgets',
+  'router', 'models', 'model-catalog', 'org-models', 'review', 'hub', 'ai-hub', 'org-agents', 'built-on', 'brand',
+  'console', 'the-cast',
+];
 const MOVED = {
+  ...Object.fromEntries(GONE.map((slug) => [slug, DOCS])),
   introduction: DOCS,
-  // The agent page became Work and Code; the folder and model pieces got their own pages (2026-10-04).
-  loops: `${DOCS}/work-and-code`, agent: `${DOCS}/work-and-code`,
-  // Cloud terminals and streamed panels left the product: terminals run on your desktop, the web is the agent (2026-10-05).
-  'cloud-terminals': `${DOCS}/terminals`, 'streamed-panels': `${DOCS}/web-app`,
-  desktop: `${DOCS}/install`, panels: `${DOCS}/install`, sessions: `${DOCS}/install`, shortcuts: `${DOCS}/install`, artifacts: `${DOCS}/install`,
-  router: `${DOCS}/gateway`, models: `${DOCS}/gateway`, 'model-catalog': `${DOCS}/gateway`, 'org-models': `${DOCS}/gateway`, rrotor: `${DOCS}/gateway`,
-  connect: `${DOCS}/connections`, 'mcp-servers': `${DOCS}/mcp`,
+  quickstart: `${DOCS}/quick-start`,
+  primer: `${DOCS}/ada-introduction`,
+  'semantic-apps': `${DOCS}/ada-introduction`,
+  'ada-act': `${DOCS}/fact-trees`,
+  'ada-time': `${DOCS}/ada-typed`,
+  'ada-edges': `${DOCS}/ada`, 'ada-graph': `${DOCS}/ada`, 'ada-gql': `${DOCS}/ada`, 'ada-procedures': `${DOCS}/ada`,
+  'ada-guide-tickets': `${DOCS}/ada-guide-incidents`, 'ada-guide-churn': `${DOCS}/ada-guide-incidents`,
+  mcp: `${DOCS}/ada-tools`, 'mcp-servers': `${DOCS}/ada-tools`,
+  rrotor: `${DOCS}/runtimes`,
   seats: `${DOCS}/plans`, 'billing-admin': `${DOCS}/plans`,
   sso: `${DOCS}/security`, 'org-settings': `${DOCS}/security`, domain: `${DOCS}/security`,
-  review: `${DOCS}/skills`, hub: `${DOCS}/skills`, 'ai-hub': `${DOCS}/skills`, 'org-agents': `${DOCS}/skills`,
-  // An old semantic-apps address lands on Ada when Ada is on, else on the desktop install page.
-  'semantic-apps': `${DOCS}/ada`, 'built-on': DOCS, brand: DOCS, console: DOCS, 'the-cast': DOCS,
 };
 
 export function generateStaticParams() {

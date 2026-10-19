@@ -6,7 +6,7 @@ import DocsHtmlClass from './DocsHtmlClass';
 
 export const metadata = {
   title: { default: 'Glyphh Docs', template: '%s | Glyphh Docs' },
-  description: 'Glyphh documentation: Ada, Glyphh Desktop, the Model Router and Connect.',
+  description: 'Glyphh documentation: Ada, your runtime, and the platform.',
 };
 
 export default function DocsLayout({ children }) {
@@ -21,7 +21,7 @@ export default function DocsLayout({ children }) {
           <footer className="dx-foot dx-article">
             <span>&copy; Glyphh</span>
             <a href={SITE}>glyphh.ai</a>
-            <a href="https://platform.glyphh.ai">Console</a>
+            <a href="https://platform.glyphh.ai">Platform</a>
             <a href="https://github.com/glyphh-ai">GitHub</a>
             <a href="mailto:support@glyphh.ai">Support</a>
           </footer>
