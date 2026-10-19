@@ -5,7 +5,7 @@ import { join } from 'path';
 // Branded social-share image (Open Graph / Twitter card) — matches the
 // research-company theme: warm dark ground, Neon Orchid gradient accent,
 // faint punch-card dot lattice.
-export const alt = 'Glyphh — This isn’t three products. It’s one workspace.';
+export const alt = 'Glyphh — Ada: decisions from precedent, in your own runtime.';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -68,10 +68,10 @@ export default async function Image() {
         <img src={logoSrc} width={312} height={103} alt="Glyphh" style={{ marginBottom: '54px' }} />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', fontSize: '68px', fontWeight: 800, color: '#ffffff', letterSpacing: '-2px', lineHeight: 1.08 }}>
-            This isn&rsquo;t three products.
+            Decisions from precedent,
           </div>
           <div style={{ display: 'flex', fontSize: '68px', fontWeight: 800, color: '#ffffff', letterSpacing: '-2px', lineHeight: 1.08 }}>
-            It&rsquo;s&nbsp;
+            in your&nbsp;
             <span
               style={{
                 backgroundImage: 'linear-gradient(to top right, #c084fc, #f0abfc)',
@@ -79,19 +79,19 @@ export default async function Image() {
                 color: 'transparent',
               }}
             >
-              one workspace
+              own runtime
             </span>
             .
           </div>
         </div>
         <div style={{ display: 'flex', fontSize: '29px', color: '#b6b6b6', marginTop: '42px' }}>
-          A new class of desktop agent · Mac &amp; Windows
+          Ada · hosted or self-hosted · called from Claude and your code
         </div>
         <div style={{ display: 'flex', gap: '26px', marginTop: '34px', fontSize: '22px', color: '#b36bfb' }}>
-          <span>[ assistant ]</span>
-          <span>[ coding agent ]</span>
-          <span>[ autopilot ]</span>
-          <span>[ it ships ]</span>
+          <span>[ record ]</span>
+          <span>[ query ]</span>
+          <span>[ explain ]</span>
+          <span>[ decide ]</span>
         </div>
       </div>
     ),
