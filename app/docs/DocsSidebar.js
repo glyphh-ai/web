@@ -41,8 +41,8 @@ export default function DocsSidebar({ groups }) {
       <div className="dx-side-brand">
         <a href={SITE} className="dx-side-home-link">&larr; glyphh.ai</a>
         <a href={DOCS} className="dx-side-logo" aria-label="Glyphh Docs">
-          <img className="logo-dark" src="/glyphh-logo-black.png" alt="Glyphh" />
-          <img className="logo-light" src="/glyphh-logo-white.png" alt="Glyphh" />
+          <img className="logo-dark" src="/glyphh-logo-text-white.png" alt="Glyphh" />
+          <img className="logo-light" src="/glyphh-logo-text-black.png" alt="Glyphh" />
         </a>
         <label className="dx-side-search">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>

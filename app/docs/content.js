@@ -13,7 +13,7 @@ const architecture = [
   {
     slug: 'introduction',
     title: 'Architecture',
-    lede: 'The parts, how a call flows, and where the data lives.',
+    lede: 'Glyphh Ada is a classifier that improves as more data is classified. Here are its parts, how a call flows, and where the data lives.',
     body: (
       <>
         <Architecture />

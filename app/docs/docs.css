@@ -26,7 +26,7 @@
 .dx-side-home-link { font-size: 0.78rem; color: var(--text-3); text-decoration: none; }
 .dx-side-home-link:hover { color: var(--text); }
 .dx-side-logo { display: block; }
-.dx-side-logo img { width: 100%; height: auto; display: block; }
+.dx-side-logo img { width: 140px; max-width: 100%; height: auto; display: block; }
 .dx-side-search {
   display: flex; align-items: center; gap: 0.5rem;
   padding: 0 0.6rem 0 0.7rem; height: 2.3rem;
