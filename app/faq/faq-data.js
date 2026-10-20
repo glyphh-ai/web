@@ -16,7 +16,7 @@ export const FAQ_GROUPS = [
       {
         id: 'what-is-ada',
         q: 'What is Ada?',
-        a: { html: `A classifier that learns from precedent. You record graded cases; a new case is answered from the precedents nearest to it, with a calibrated probability for each outcome, and Ada asks when it is unsure. See <a href="${DOCS}/ada-introduction">What Ada is</a>.` },
+        a: { html: `A classifier that learns from precedent. You record graded cases; a new case is answered from the precedents nearest to it, with a calibrated probability for each outcome, and Ada asks when it is unsure. See <a href="${DOCS}">how Glyphh works</a>.` },
       },
       {
         id: 'learn',
@@ -31,12 +31,12 @@ export const FAQ_GROUPS = [
       {
         id: 'build',
         q: 'How do I build a model?',
-        a: { html: `Ask Claude. With the <code>glyphh</code> plugin it writes the model with you, pushes it to your GitHub repo, deploys the commit to your runtime and calls it. See the <a href="${DOCS}/quick-start">quick start</a>.` },
+        a: { html: `Ask Claude. With the <code>glyphh</code> plugin it writes the model with you, pushes it to your GitHub repo, deploys the commit to your runtime and calls it. See <a href="${DOCS}/ada-skill">the Ada skill</a>.` },
       },
       {
         id: 'call',
         q: 'How does my software call a model?',
-        a: { html: `With a runtime key, through the SDKs (<code>pip install glyphh</code>, <code>npm i @glyphh-ai/glyphh</code>) or <code>POST /v1/runs</code> at your runtime’s address. See <a href="${DOCS}/ada-sdk">SDKs</a>.` },
+        a: { html: `With a runtime key, through the SDKs (<code>pip install glyphh</code>, <code>npm i @glyphh-ai/glyphh</code>) or <code>POST /v1/runs</code> at your runtime’s address. See <a href="${DOCS}/sdks">the SDKs</a>.` },
       },
     ],
   },
@@ -46,7 +46,7 @@ export const FAQ_GROUPS = [
       {
         id: 'runtime',
         q: 'What is a runtime?',
-        a: { html: `rrotor, where your models live and run. You run it on your own infrastructure at an address of your own, <code>https://&lt;host&gt;</code>, and Claude adds it as a connector at that address plus <code>/mcp</code>. See <a href="${DOCS}/runtimes">Runtimes</a>.` },
+        a: { html: `rrotor, where your models live and run. You run it on your own infrastructure at an address of your own, <code>https://&lt;host&gt;</code>, and Claude adds it as a connector at that address plus <code>/mcp</code>. See <a href="${DOCS}/run-rrotor">Run rrotor</a>.` },
       },
       {
         id: 'self-host',
@@ -106,7 +106,7 @@ export const FAQ_GROUPS = [
       {
         id: 'clearance',
         q: 'Can different callers see different things?',
-        a: { html: `Yes. A spec can put layers behind a clearance; a caller below it gets the answer without them. See <a href="${DOCS}/ada-typed">The spec</a>.` },
+        a: { html: `Yes. A spec can put layers behind a clearance; a caller below it gets the answer without them. See <a href="${DOCS}/ada-skill">the Ada skill</a>.` },
       },
       {
         id: 'sign-in',

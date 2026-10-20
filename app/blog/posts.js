@@ -17,8 +17,8 @@ export const POSTS = [
     coverAlt: 'Ask a model. Get a reason. Two answers from Ada: a ticket routed to platform, and an account called as churned.',
     tags: ['Ada', 'SDK', 'Guides'],
     related: [
-      ['Guide: remember incidents', 'https://docs.glyphh.ai/ada-guide-incidents'],
-      ['The SDKs', 'https://docs.glyphh.ai/ada-sdk'],
+      ['The Ada skill', 'https://docs.glyphh.ai/ada-skill'],
+      ['The SDKs', 'https://docs.glyphh.ai/sdks'],
       ['Ada', '/products/ada'],
     ],
     sections: [
@@ -95,7 +95,7 @@ export const POSTS = [
         heading: 'Go build something',
         body: [
           {
-            html: 'Both guides are in the docs with every line of code and every output: <a href="https://docs.glyphh.ai/ada-guide-tickets">route support tickets</a> in Python and <a href="https://docs.glyphh.ai/ada-guide-churn">customer churn</a> in TypeScript. The SDKs are in <a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a>. Grab a key from the console, run one, then point it at your own data and tell me what it found. I read every one of those emails.',
+            html: 'Both guides are in the docs with every line of code and every output: <a href="https://docs.glyphh.ai/sdks">route support tickets</a> in Python and <a href="https://docs.glyphh.ai/sdks">customer churn</a> in TypeScript. The SDKs are in <a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a>. Grab a key from the console, run one, then point it at your own data and tell me what it found. I read every one of those emails.',
           },
           'Build with AI. Run without it.',
           '— Timme',
@@ -192,7 +192,7 @@ export const POSTS = [
     video: 'ABXhO46Delw',
     tags: ['Desktop', 'Workspaces', 'Demo'],
     related: [
-      ['What Ada is', 'https://docs.glyphh.ai/ada-introduction'],
+      ['How Glyphh works', 'https://docs.glyphh.ai'],
       ['The Critical Inversion', '/blog/the-critical-inversion'],
     ],
     sections: [
@@ -330,7 +330,7 @@ export const POSTS = [
     tags: ['Launch', 'Architecture', 'Research'],
     related: [
       ['Ada', '/products/ada'],
-      ['Ada models', 'https://docs.glyphh.ai/ada'],
+      ['Ada models', 'https://docs.glyphh.ai/ada-skill'],
     ],
     sections: [
       {
@@ -348,7 +348,7 @@ export const POSTS = [
         heading: 'Where it came from',
         body: [
           { html: 'Glyphh started as a memory substrate called <a href="/products/ada">Ada</a>, named after Ada Lovelace. Ada is a multi-dimensional HDC lattice, an attempt to harden semantic knowledge beyond RAG. It turned out to be excellent at storing temporal signal, and I kept building on top of it.' },
-          { html: 'That path gave us what Ada is today: the first Glyphh model, software\'s reasoning substrate. Ada speaks in math. Seed her with data and she builds a lattice of algebraic meaning: hierarchical, weighted, typed and temporal. Send her a like glyph and she answers with a fact tree: what is near, how near, and why. Your agents build the typed models, and your software leverages them at runtime, with no LLM in the middle. Ada is a major part of this release, and she is what the apps you build stand on. More on <a href="/products/ada">the Ada page</a> and in <a href="https://docs.glyphh.ai/ada">the docs</a>.' },
+          { html: 'That path gave us what Ada is today: the first Glyphh model, software\'s reasoning substrate. Ada speaks in math. Seed her with data and she builds a lattice of algebraic meaning: hierarchical, weighted, typed and temporal. Send her a like glyph and she answers with a fact tree: what is near, how near, and why. Your agents build the typed models, and your software leverages them at runtime, with no LLM in the middle. Ada is a major part of this release, and she is what the apps you build stand on. More on <a href="/products/ada">the Ada page</a> and in <a href="https://docs.glyphh.ai/ada-skill">the docs</a>.' },
           { html: 'Meanwhile my actual day got worse, not better. AI didn\'t simplify anything, it multiplied my context switching 10x, seemingly overnight. Around April my Ctrl+C / Ctrl+V usage hit an all-time high. I had a pile of model loops I was coding with, a pile of app layouts, and no way to combine them into something predictable. The first attempt was <a href="https://github.com/glyphh-ai/code" target="_blank" rel="noopener noreferrer">Glyphh Code</a>. It was missing something I couldn\'t name for a while, and then it hit me: I wanted model selection, routing, and semantic data in one place, producing real applications, not chat transcripts.' },
         ],
       },

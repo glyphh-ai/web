@@ -26,7 +26,7 @@ const COLS = [
     title: 'Resources',
     links: [
       ['Docs', 'https://docs.glyphh.ai'],
-      ['Quick start', 'https://docs.glyphh.ai/quick-start'],
+      ['Run rrotor', 'https://docs.glyphh.ai/run-rrotor'],
       ['Self-hosting', 'https://github.com/glyphh-ai/rrotor/tree/main/docs/self-hosting'],
       ['Blog', '/blog'],
       ['GitHub', GITHUB_URL],

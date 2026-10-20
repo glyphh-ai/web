@@ -27,7 +27,7 @@ export default function FaqPage() {
           </p>
           <div className="ix-actions">
             <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Get started</a>
-            <a href="https://docs.glyphh.ai/quick-start" className="os-cta os-cta-ghost">Quick start</a>
+            <a href="https://docs.glyphh.ai/run-rrotor" className="os-cta os-cta-ghost">Run rrotor</a>
           </div>
         </section>
 

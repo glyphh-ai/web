@@ -122,8 +122,8 @@ export default function AdaPage() {
             with no language model in the path.
           </p>
           <div className="oshero-actions">
-            <a href={`${DOCS}/quick-start`} className="os-cta os-cta-primary">Quick start</a>
-            <a href={`${DOCS}/ada`} className="os-cta os-cta-ghost">Read the Docs</a>
+            <a href={`${DOCS}/run-rrotor`} className="os-cta os-cta-primary">Run rrotor</a>
+            <a href={DOCS} className="os-cta os-cta-ghost">Read the Docs</a>
           </div>
         </div>
       </header>
@@ -132,7 +132,7 @@ export default function AdaPage() {
         <section className="hiw" id="how-it-works">
           <div className="qs-head">
             <span className="qs-kicker">How it works</span>
-            <a href={`${DOCS}/ada`} className="qs-more">A model &rarr;</a>
+            <a href={`${DOCS}/ada-skill`} className="qs-more">A model &rarr;</a>
           </div>
           <div className="hv-grid">
             {STEPS.map((t, i) => <Tile key={t.title} t={t} i={i} />)}
@@ -142,7 +142,7 @@ export default function AdaPage() {
         <section className="hiw" id="answer">
           <div className="qs-head">
             <span className="qs-kicker">The answer</span>
-            <a href={`${DOCS}/fact-trees`} className="qs-more">Answer fields &rarr;</a>
+            <a href={`${DOCS}/sdks`} className="qs-more">The SDKs &rarr;</a>
           </div>
           <h2 className="ix-h2 lt-h2">An answer you can check, not a guess you have to trust.</h2>
           <p className="ix-desc">
@@ -164,7 +164,7 @@ export default function AdaPage() {
         <section className="hiw" id="where">
           <div className="qs-head">
             <span className="qs-kicker">Where it runs</span>
-            <a href={`${DOCS}/runtimes`} className="qs-more">Runtimes &rarr;</a>
+            <a href={`${DOCS}/run-rrotor`} className="qs-more">Run rrotor &rarr;</a>
           </div>
           <div className="hv-grid hv-grid-2">
             {WHERE.map((t, i) => <Tile key={t.title} t={t} i={i + 3} />)}
@@ -174,7 +174,7 @@ export default function AdaPage() {
         <section className="hiw" id="install">
           <div className="qs-head">
             <span className="qs-kicker">Install</span>
-            <a href={`${DOCS}/ada-install`} className="qs-more">Connect Claude &rarr;</a>
+            <a href={`${DOCS}/plugin`} className="qs-more">Connect Claude &rarr;</a>
           </div>
           <h2 className="ix-h2 lt-h2">Two commands and a connector.</h2>
           <p className="ix-desc">
