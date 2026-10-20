@@ -1,4 +1,4 @@
-import { Code, Row } from './ui';
+import { Architecture, Code, Row } from './ui';
 import { PLUGIN_PAGES, SDK_PAGES } from './pages';
 import { DOCS } from './base';
 
@@ -16,6 +16,7 @@ const architecture = [
     lede: 'The parts, how a call flows, and where the data lives.',
     body: (
       <>
+        <Architecture />
         <h2>The parts</h2>
         <div className="dx-table">
           <table>
@@ -31,10 +32,6 @@ const architecture = [
           </table>
         </div>
         <h2>How a call flows</h2>
-        <Code>{`Claude ── MCP, Glyphh sign-in ──┐
-                                ├──>  rrotor at https://<host>  ──>  a sandbox per run
-Your app ── REST, runtime key ──┘          │
-                                           └── link, outbound only ──>  api.glyphh.ai`}</Code>
         <ol>
           <li><strong>Claude</strong> adds <code>https://&lt;host&gt;/mcp</code> as a custom connector. rrotor is an OAuth protected resource whose authorization server is <code>api.glyphh.ai</code>, so Claude signs in to Glyphh with one Allow click and no key; rrotor checks the token with the server and keeps the answer a minute.</li>
           <li><strong>Software</strong> sends <code>Authorization: Bearer &lt;runtime key&gt;</code>. rrotor holds only each key’s SHA-256.</li>
