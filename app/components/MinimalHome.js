@@ -27,10 +27,6 @@ export default function MinimalHome() {
         <li>Class and confidence</li>
         <li>Unsure: the LLM</li>
       </ol>
-      <p className="mh-sub">
-        In one experiment, routing 200 bank support messages to 77 queues, Ada then Claude was right on 97.5% with
-        Claude seeing 22% of them. <a href="/use-cases/support-routing#experiment">How it was measured</a>.
-      </p>
       <nav className="mh-links" aria-label="Glyphh">
         <a href="/" className="mh-mark" aria-label="Glyphh">
           <Image className="logo-dark" src="/glyphh-logo-text-white.png" alt="" width={417} height={130} priority />
