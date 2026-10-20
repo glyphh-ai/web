@@ -9,6 +9,12 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# One deploy at a time, newest wins: two merges in a row once let the older
+# image finish last and serve stale pages.
+concurrency:
+  group: deploy-glyphh-web
+  cancel-in-progress: true
+
 jobs:
   check:
     runs-on: ubuntu-latest
