@@ -262,3 +262,19 @@ html.docs-html::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 
 /* Headings sit closer to the text above them. */
 .dx-body h2 { margin: 1.5rem 0 0.7rem; padding-top: 0; }
+
+/* The architecture figure: black and white, the site's mono. */
+.dx-arch { margin: 1.4rem 0 1.6rem; overflow-x: auto; }
+.dx-arch svg { display: block; width: 100%; min-width: 640px; height: auto; }
+.dx-arch text { text-anchor: middle; font-family: var(--font-mono); }
+.dx-arch-zone { fill: none; stroke: var(--border); stroke-width: 1; stroke-dasharray: 4 5; }
+.dx-arch text.dx-arch-zone-label { text-anchor: start; fill: var(--text-3); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+.dx-arch-box { fill: var(--bg); stroke: var(--border); stroke-width: 1; }
+.dx-arch-strong { stroke: var(--text); stroke-width: 1.3; }
+.dx-arch-title { fill: var(--text); font-size: 13px; font-weight: 600; }
+.dx-arch-sub { fill: var(--text-3); font-size: 11px; }
+.dx-arch-note { fill: var(--text-3); font-size: 10.5px; }
+.dx-arch-line { stroke: var(--border-2); stroke-width: 1.2; }
+.dx-arch-dash { stroke: var(--text); stroke-width: 1.2; stroke-dasharray: 4 4; }
+.dx-arch-head { fill: var(--border-2); }
+.dx-arch figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-3); }
