@@ -50,7 +50,7 @@ export default function PricingPage() {
         <section className="ix-head">
           <a href="/" className="ix-crumb">&larr; Home</a>
           <span className="qs-kicker">Pricing</span>
-          <h1 className="ix-title">A flat monthly price, by the node.</h1>
+          <h1 className="ix-title">Pricing you can trust.</h1>
           <p className="ix-lede">
             Ada runs on your own infrastructure on every plan, with unlimited members and models. Start free on one
             node; upgrade for more nodes, more precedents and sync.
