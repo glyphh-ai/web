@@ -119,8 +119,8 @@ export default function AdaPage() {
             with no language model in the path.
           </p>
           <div className="oshero-actions">
-            <a href={`${DOCS}/run-rrotor`} className="os-cta os-cta-primary">Run rrotor</a>
-            <a href={DOCS} className="os-cta os-cta-ghost">Read the Docs</a>
+            <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
+            <a href="/use-cases/support-routing" className="os-cta os-cta-ghost">See ticket routing in action</a>
           </div>
           {/* Ada learning, as on the home page. */}
           <div className="mh-field ada-hero-field">
