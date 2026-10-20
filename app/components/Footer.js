@@ -28,7 +28,6 @@ const COLS = [
     links: [
       ['Docs', 'https://docs.glyphh.ai'],
       ['Run rrotor', 'https://docs.glyphh.ai/run-rrotor'],
-      ['Self-hosting', 'https://github.com/glyphh-ai/rrotor/tree/main/docs/self-hosting'],
       ['Plugin and SDKs', 'https://github.com/glyphh-ai/glyphh'],
       ['Blog', '/blog'],
       ['GitHub', GITHUB_URL],
