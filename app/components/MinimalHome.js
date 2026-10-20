@@ -8,7 +8,7 @@ export default function MinimalHome() {
   return (
     <main className="mh-page">
       <Image className="mh-logo" src="/glyphh-logo-black.png" alt="Glyphh" width={650} height={215} priority />
-      <h1 className="mh-line">Ada learns from every case you grade.</h1>
+      <h1 className="mh-line">Glyphh Ada is a classifier that learns the more data you classify.</h1>
       <div className="mh-field">
         <AdaField />
       </div>
