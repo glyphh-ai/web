@@ -10,8 +10,9 @@ export default function MinimalHome() {
     <main className="mh-page">
       <h1 className="mh-line">Stop paying an LLM to classify familiar requests.</h1>
       <p className="mh-what">
-        Glyphh Ada classifies new cases using your labelled examples, returns a confidence and the precedents behind
-        it, and lets your application send the uncertain ones to an LLM. Run it on your own infrastructure.
+        Glyphh Ada classifies anything you have labelled examples of — tickets, transactions, documents, events —
+        returns a confidence and the precedents behind it, and lets your application send the uncertain ones to an
+        LLM. Run it on your own infrastructure.
       </p>
       <div className="mh-actions">
         <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
@@ -22,7 +23,7 @@ export default function MinimalHome() {
       </div>
       <ol className="mh-flow" aria-label="How Ada works">
         <li>Labelled examples</li>
-        <li>A new case</li>
+        <li>A new item</li>
         <li>Class and confidence</li>
         <li>Unsure: the LLM</li>
       </ol>

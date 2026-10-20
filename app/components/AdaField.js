@@ -221,7 +221,7 @@ export default function AdaField() {
       const n = precs.length;
       let event = '';
       if (phase === 'reset') event = 'starting again';
-      else if (phase === 'arrive') event = `case ${idx + 1} arrives`;
+      else if (phase === 'arrive') event = `item ${idx + 1} arrives`;
       else if (phase === 'vote') event = `the nearest ${Math.min(K, n)} precedents vote`;
       else if (phase === 'answer') event = `answers ${ans.label}, p ${ans.conf.toFixed(2)}`;
       else if (phase === 'ask') event = `unsure (${ans.label} ${ans.conf.toFixed(2)}): asks`;
