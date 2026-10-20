@@ -1,8 +1,9 @@
+// Rewritten 2026-10-20 to match the product; counsel to review.
 import Footer from '../components/Footer';
 
 export const metadata = {
   title: 'Terms of Use — Glyphh',
-  description: 'Terms of Use for the Glyphh desktop application and hosted services by Glyphh AI LLC.',
+  description: 'Terms of Use for Glyphh: the platform, the rrotor runtime you run yourself, the Glyphh plugin and the SDKs, by Glyphh AI LLC.',
 };
 
 export default function TermsPage() {
@@ -14,105 +15,74 @@ export default function TermsPage() {
           <h1 className="policy-title">Terms of Use</h1>
 
           <p><strong>Effective Date:</strong> July 3, 2026</p>
-          <p><strong>Last Updated:</strong> August 17, 2026</p>
-          <p>These Terms of Use (&ldquo;Terms&rdquo;) govern your access to and use of Glyphh, including the desktop application, the hosted platform, the Glyphh relay that connects your own AI tools to your workspace, and the Glyphh Marketplace (collectively, the &ldquo;Service&rdquo;), provided by Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). By installing, accessing, or using the Service, you agree to be bound by these Terms. Use of the Marketplace is additionally governed by our <a href="/marketplace-terms">Marketplace Terms</a> and <a href="/code-of-conduct">Code of Conduct</a>; developers who publish apps also agree to the <a href="/developer-agreement">Developer Agreement</a>. Data handling is described in our <a href="/privacy">Privacy Policy</a>.</p>
+          <p><strong>Last Updated:</strong> October 20, 2026</p>
+          <p>These Terms of Use (&ldquo;Terms&rdquo;) govern your access to and use of Glyphh, provided by Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). Glyphh consists of (a) the hosted platform at platform.glyphh.ai and the API at api.glyphh.ai, which hold your account, your plan and your licence keys (the &ldquo;Service&rdquo;); and (b) software you install and run yourself: the rrotor runtime, in which Ada runs, and the Glyphh plugin for Claude Code (the &ldquo;Software&rdquo;). The SDKs are open source and governed by their own licence (Section 4.3). By creating an account, installing or running the Software, or otherwise using Glyphh, you agree to these Terms. If you accept them for an organisation, you confirm you may bind it. Data handling is described in our <a href="/privacy">Privacy Policy</a>. If you have a signed agreement with us (for example, an Enterprise order form), that agreement governs where it conflicts with these Terms.</p>
 
           <h2>1. Eligibility</h2>
-          <p>You must be at least 13 years old to use the Service. If you are under 18, you represent that your parent or legal guardian has reviewed and agreed to these Terms on your behalf.</p>
+          <p>You must be at least 13 years old to use Glyphh. If you are under 18, you represent that your parent or legal guardian has reviewed and agreed to these Terms on your behalf.</p>
 
-          <h2>2. Accounts</h2>
-          <p>Use of the Service requires a Glyphh account. You are responsible for keeping your credentials confidential and for all activity under your account. Each account is personal and non-transferable. You may activate the desktop application on up to two (2) machines simultaneously. Sharing, selling, leasing, transferring, or otherwise providing your account, credentials, or usage budget to any third party is prohibited and may result in immediate suspension or termination without refund.</p>
+          <h2>2. Accounts and Organisations</h2>
+          <p>You sign in with a Google or GitHub account. Your account belongs to an organisation, which may have several members; plans are never priced per member. You are responsible for all activity under your account and your organisation, and for keeping confidential the runtime keys and licence keys issued to you. Tell us promptly at <a href="mailto:security@glyphh.ai">security@glyphh.ai</a> if you believe a key or your account has been compromised.</p>
 
-          <h2>3. Acceptable Use</h2>
+          <h2>3. The Software You Run</h2>
+          <p><strong>Licence to rrotor.</strong> Subject to these Terms and your payment of any applicable fees, we grant you a limited, non-exclusive, non-transferable, non-sublicensable, revocable licence to install and run the rrotor runtime on infrastructure you control, for your own internal business purposes, within the limits of your plan.</p>
+          <p><strong>Plans and limits.</strong> Each plan sets the number of runtime nodes you may run, the number of precedents each node may hold, and whether nodes may synchronise, as published on our <a href="/pricing">pricing page</a> or in your order form. A node with no valid licence key runs at the limits of the Free plan.</p>
+          <p><strong>Licence keys.</strong> For each paid month we issue a licence key, signed by us, which the runtime checks on the node itself. A key expires at the end of the month it was issued for, and a new key is issued when the next month is paid. If your subscription is cancelled or not paid, we revoke your licence and issue no further keys; your nodes return to the Free plan&apos;s limits once the current key and any grace period built into the Software have expired. Enterprise keys, including air-gapped keys, run for the term set in your order form.</p>
+          <p><strong>You operate it.</strong> Glyphh does not host or operate your runtimes and has no access to them. You are responsible for the infrastructure the Software runs on, for its security, configuration, updates and backups, and for the models, cases and precedents you keep in it.</p>
+          <p><strong>Restrictions.</strong> You may not, and may not allow anyone else to: (a) circumvent, disable or interfere with licence-key verification or plan limits; (b) copy, modify, or create derivative works of the Software, except as these Terms or its licence allow; (c) reverse engineer, decompile or disassemble the Software, except to the extent applicable law expressly permits despite this restriction; (d) sell, resell, sublicense, distribute or rent the Software, or provide it to third parties as a hosted or managed service, without our written agreement; or (e) remove any proprietary notices.</p>
+
+          <h2>4. The Plugin and the SDKs</h2>
+          <p><strong>4.1 The Glyphh plugin.</strong> The Glyphh plugin for Claude Code is published at <a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a>. It is licensed to you for use under these Terms; you may not copy, modify, redistribute or resell it without our written permission.</p>
+          <p><strong>4.2 Claude.</strong> The plugin runs inside Claude Code, and you may connect your runtime to Claude as a connector. Claude is provided by Anthropic under its own terms; we are not its provider, and your use of it is governed by your agreement with Anthropic.</p>
+          <p><strong>4.3 The SDKs.</strong> The SDKs (<code>glyphh</code> on PyPI and <code>@glyphh-ai/glyphh</code> on npm) and the contract they share are open source under the MIT License, in the same repository. The MIT License, not Section 3, governs your use of them.</p>
+
+          <h2>5. Acceptable Use</h2>
           <p>You agree not to:</p>
           <ul>
-            <li>Reverse engineer, decompile, or disassemble the Service</li>
-            <li>Use the Service to violate any applicable law or regulation</li>
-            <li>Attempt to gain unauthorized access to the Service or its related systems</li>
-            <li>Use the Service to transmit malware, spam, or any harmful content</li>
-            <li>Interfere with the operation of the Service or other users&apos; use of the Service</li>
-            <li>Circumvent, disable, or interfere with usage metering, budget limits, rate limits, or any security or access controls</li>
+            <li>Use Glyphh to violate any applicable law or regulation, or the rights of others</li>
+            <li>Attempt to gain unauthorised access to the Service, to other customers&apos; accounts, or to our systems</li>
+            <li>Use Glyphh to transmit malware, or to attack, probe or overload any system</li>
+            <li>Interfere with the operation of the Service, or circumvent its rate limits, security or access controls</li>
+            <li>Share, sell or transfer licence keys outside your organisation</li>
           </ul>
+          <p>We may suspend or revoke access, accounts and licence keys that break these rules, and may report serious abuse to the relevant authorities.</p>
 
-          <h3>3.1 No Resale or Competing Services</h3>
-          <p>The Service provides you with a workspace and a relay that connect your own AI tools to your own apps and data. You may not, without our prior written permission:</p>
+          <h2>6. Your Models and Data</h2>
+          <p>You own your models, your cases, your precedents and everything else you keep in your runtime or your repositories. They stay on infrastructure you control; the Service does not receive a model&apos;s inputs or results. What the Service does receive is described in our <a href="/privacy">Privacy Policy</a>.</p>
+          <p>Ada answers from the precedents you record: an answer is an estimate based on your cases, and may be wrong. You are responsible for the decisions you make with it, and for reviewing answers before relying on them where the stakes call for it.</p>
+          <p><strong>Server-side logging.</strong> Your runtime keeps its logs. If you turn on server-side logging, it sends logs, metrics, traces and audit events to the Service so the platform can show them; we keep them for seven (7) days and then delete them. It is off unless you turn it on, and you can turn it off at any time.</p>
+
+          <h2>7. Plans, Billing and Cancellation</h2>
           <ul>
-            <li>Resell, sublicense, rent, lease, redistribute, or otherwise provide the Service, your account, or your usage budget to any third party</li>
-            <li>Use the Service to operate, or to provide to others, a hosted automation, workspace-control, or relay offering that exposes the Service&apos;s capabilities to third parties</li>
-            <li>Use the Service, or any output of the Service, to build, train, or improve a product that competes with the Service</li>
-            <li>Pool, aggregate, or share a single account or usage budget across multiple end users or organizations to avoid per-seat or per-plan terms</li>
+            <li><strong>Plans.</strong> The Free plan costs nothing. Pro and Team are flat monthly subscriptions, billed in advance in US dollars. Enterprise is sold by written agreement. Plans are never priced per seat, per model or per install.</li>
+            <li><strong>Payment.</strong> Payments are processed by Stripe. You authorise us and Stripe to charge your payment method each month until you cancel. Stated prices exclude taxes and duties, which you are responsible for where applicable.</li>
+            <li><strong>Cancellation.</strong> You may cancel at any time from the platform. Your plan continues to the end of the month you have paid for, and no further licence keys are issued after it. Refunds are covered by our <a href="/refund">Refund Policy</a>.</li>
+            <li><strong>Changes.</strong> We may change plans, their limits and their prices prospectively. We will give reasonable notice of material changes; continued use after a change takes effect constitutes acceptance.</li>
           </ul>
 
-          <h3>3.2 Automation and Relay Use</h3>
-          <p>The Service lets your connected AI tools drive your workspace and automate work across your apps. When you connect an AI client or run automations, you additionally agree not to:</p>
-          <ul>
-            <li>Use the Service to execute denial-of-service attacks, traffic floods, or any unsolicited high-volume requests against any third party or service</li>
-            <li>Use the Service to perform credential stuffing, password spraying, brute-force authentication, account takeover, or any unauthorized access against any system</li>
-            <li>Use the Service to perform vulnerability scanning, exploitation, lateral movement, privilege escalation, or other security-bypassing activities against systems you do not own or have explicit written authorization to test</li>
-            <li>Use the Service to scrape, harvest, or exfiltrate personal information, copyrighted material, or proprietary data at scale, in violation of the source&apos;s terms or applicable law</li>
-            <li>Use the Service for cryptocurrency mining, token farming, or any unauthorized resource extraction (&ldquo;cryptojacking&rdquo;)</li>
-            <li>Use the Service to mass-impersonate real persons, brands, or institutions, or to operate sock-puppet or coordinated inauthentic accounts</li>
-            <li>Use the Service to generate, store, or distribute child sexual abuse material (CSAM), instructions for synthesizing weapons capable of mass harm, or other content prohibited by law</li>
-            <li>Direct automations at private, internal, or loopback network addresses, or at the Service&apos;s own infrastructure, without authorization</li>
-            <li>Bypass, evade, or attempt to defeat the Service&apos;s injection firewall, capability scoping, rate limits, or any other safety controls</li>
-          </ul>
-          <p>The Service may refuse, throttle, or revoke connections and accounts that violate these rules. We may also report serious abuse to law enforcement and affected third parties.</p>
-
-          <h2>4. Your AI Tools and Connected Services</h2>
-          <p><strong>AI models.</strong> The Service gives you access to third-party artificial-intelligence models through Glyphh. Model usage is paid from your usage budget at the per-model rates we publish for your plan, which include our fee over the model provider&apos;s price. You do not supply your own model provider account or API key. Your prompts and model responses pass through the Service to the model provider for inference.</p>
-          <p><strong>Provider compliance.</strong> Your use of any AI model or connected service through the Service remains subject to that provider&apos;s usage policies and terms, as they may be updated, and you agree to comply with them. We may filter, throttle, suspend, or terminate requests or accounts to enforce those requirements or our own.</p>
-          <p><strong>Connected services and integrations.</strong> The Service lets you connect third-party applications (for example, through integration partners such as Pipedream) so your AI tools can act on your behalf. Those services are operated by third parties we do not control. Their availability, latency, rate limits, capabilities, and pricing may change, be limited, or be interrupted at any time. We are not responsible or liable for the acts, omissions, outages, changes, or content decisions of any third-party provider or integration, and any such event does not entitle you to any refund or credit (see our <a href="/refund">Refund Policy</a>).</p>
-
-          <h2>5. Usage Budget, Plans, and Billing</h2>
-          <ul>
-            <li><strong>What the budget pays for.</strong> Your usage budget is a prepaid, dollar-denominated allowance that the Service spends on your behalf for the metered operations it performs for you: AI model usage, and tool, connector, and integration calls. Metered operations are priced on the tokens they send and receive at the per-token rates we publish for your plan; browsing your workspace and listing your apps, tools, or connections are not metered. Without a plan, AI model usage is not available.</li>
-            <li><strong>Plan-included budget and added funds.</strong> Each plan includes a monthly usage budget in dollars, in the amount we publish for that plan, and you may add funds to the budget in dollars at any time, including through optional automatic reloads that you enable. The features and per-model rates available on each plan are determined by the plan and may change. We may reduce, withhold, or revoke promotional budget — and suspend associated accounts — where we reasonably determine it was obtained through multiple accounts, automation, or other abuse.</li>
-            <li><strong>Nature of the budget.</strong> The usage budget, including any funds you add to it, is a prepaid, limited right to use the Service. It is not money, currency, a deposit, or stored value, has no cash value, is non-transferable, and is not redeemable for cash.</li>
-            <li><strong>Included vs. purchased.</strong> Plan-included budget is granted for the applicable billing period and does not roll over to the next period. Purchased funds carry over until used and do not expire.</li>
-            <li><strong>Prepaid; no arrears.</strong> The Service operates on a prepaid basis. When your available budget reaches zero, metered operations may be declined until you add funds or your next plan-included budget is granted. We do not extend credit or bill in arrears for usage.</li>
-            <li><strong>Non-refundable.</strong> Purchased funds are non-refundable once purchased, except as set out in our <a href="/refund">Refund Policy</a> or required by law.</li>
-            <li><strong>Transparency.</strong> Each metered operation is recorded with the operation performed and the tokens it sent and received, and is itemized in your usage feed.</li>
-            <li><strong>Changes.</strong> We may change plans, prices, included budgets, and the per-token rates of metered operations prospectively. We will provide reasonable notice of material changes; continued use after a change takes effect constitutes acceptance.</li>
-            <li><strong>Payments and taxes.</strong> Payments are processed by Stripe. You authorize us and Stripe to charge your selected payment method for your plan and for any funds you add or automatic reloads you enable. Stated prices exclude taxes, which you are responsible for where applicable.</li>
-          </ul>
-
-          <h2>6. Marketplace</h2>
-          <p>The Glyphh Marketplace lets you browse and install apps published by third-party developers, including web apps (&ldquo;Glyphh apps&rdquo;) that run inside your organization&apos;s Glyphh environment and desktop work panel apps that install locally on your machine. Your use of the Marketplace is additionally governed by our <a href="/marketplace-terms">Marketplace Terms</a>; this section summarizes the core rules.</p>
-          <ul>
-            <li><strong>Access and installs.</strong> You choose which apps to install. Installs are tied to your account or organization, and continued access to a paid app depends on maintaining its subscription.</li>
-            <li><strong>Charged to your budget.</strong> Marketplace apps are priced in dollars and charged against your organization&apos;s usage budget. As stated in Section 5, the budget is a prepaid, limited license to use the Service — not money, currency, or stored value. Budget, whether plan-included or purchased, is never redeemable for cash, we never pay cash for it, and budget spent on Marketplace apps is non-refundable except as set out in our <a href="/refund">Refund Policy</a>. Revenue that Marketplace developers earn from app subscriptions is payable solely under the payout program in the <a href="/developer-agreement">Developer Agreement</a>; that program is the only means by which Marketplace activity results in a payment, and it does not make any budget redeemable for cash.</li>
-            <li><strong>Approval is not a warranty.</strong> Every app and every release is reviewed and approved by us before it appears on the Marketplace. Approval is a screening step, not a warranty, endorsement, or guarantee of any app&apos;s quality, safety, accuracy, or fitness for any purpose. Third-party apps are provided by their developers, not by us.</li>
-            <li><strong>Support is the developer&apos;s responsibility.</strong> The developer of a Marketplace app — not Glyphh — is responsible for supporting, maintaining, and fixing that app. Each listing identifies the developer&apos;s support contact. We do not provide support for third-party apps.</li>
-            <li><strong>Removal and suspension.</strong> We may remove, suspend, or delist any app, release, listing, or developer from the Marketplace at any time, with or without notice, including in response to reports of malicious or non-compliant apps.</li>
-            <li><strong>Reviews and comments.</strong> You may post ratings, reviews, and comments on apps and developers. You grant us a worldwide, non-exclusive, royalty-free license to host, display, reproduce, and moderate that content in connection with operating the Marketplace. All such content must comply with our <a href="/code-of-conduct">Code of Conduct</a>; we may remove content that does not.</li>
-          </ul>
-
-          <h2>7. Intellectual Property</h2>
-          <p>The Service, including all software, designs, trademarks, and content, is the intellectual property of Glyphh AI LLC. Your access grants a limited, non-exclusive, non-transferable, revocable right to use the Service for personal or internal business purposes only. As between you and us, outputs you generate through the Service are yours to use, subject to these Terms and to the terms of the applicable model provider.</p>
-
-          <h2>8. User Content and Outputs</h2>
-          <p>You retain ownership of all content you create, capture, submit, or process using the Service. We do not claim ownership over your data. You are solely responsible for the content you submit and for ensuring that your use, and any output you rely on, complies with applicable laws and third-party rights. AI outputs may be inaccurate, incomplete, or otherwise unsuitable; you are responsible for reviewing and verifying outputs before relying on them.</p>
+          <h2>8. Intellectual Property</h2>
+          <p>The Service and the Software, including all designs, trademarks and content, are the intellectual property of Glyphh AI LLC and its licensors. Except for the licences expressly granted in these Terms, and the open-source licences that govern the SDKs and any open-source components, no rights are granted to you.</p>
 
           <h2>9. Service Availability</h2>
-          <p>We strive to maintain continuous availability but do not guarantee uninterrupted access. The Service may be temporarily unavailable for maintenance, updates, or due to circumstances beyond our control, including outages or changes at the AI clients you connect or at third-party integrations and connected services. We reserve the right to modify, suspend, or discontinue any part of the Service at any time with reasonable notice. Unavailability, including unavailability caused by a third party, does not entitle you to a refund or credit except as expressly stated in our <a href="/refund">Refund Policy</a>.</p>
+          <p>We strive to keep the Service available but do not guarantee uninterrupted access. When the Service is unavailable, your runtimes keep running on the licence key they hold. We may modify, suspend or discontinue any part of the Service with reasonable notice.</p>
 
           <h2>10. Limitation of Liability</h2>
-          <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, GLYPHH AI LLC SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF DATA, PROFITS, OR REVENUE, ARISING OUT OF OR RELATED TO YOUR USE OF THE SERVICE OR THE ACTS OR OMISSIONS OF ANY THIRD-PARTY PROVIDER. OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.</p>
+          <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, GLYPHH AI LLC SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF DATA, PROFITS, OR REVENUE, ARISING OUT OF OR RELATED TO YOUR USE OF THE SERVICE OR THE SOFTWARE, ANY DECISION MADE USING THEIR OUTPUT, OR THE ACTS OR OMISSIONS OF ANY THIRD PARTY. OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.</p>
 
           <h2>11. Disclaimer of Warranties</h2>
-          <p>THE SERVICE AND ALL AI OUTPUTS ARE PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DISCLAIM ALL WARRANTIES INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT, AND WE MAKE NO WARRANTY REGARDING THE AVAILABILITY, ACCURACY, OR CONTINUITY OF ANY AI MODEL OR THIRD-PARTY PROVIDER.</p>
+          <p>THE SERVICE, THE SOFTWARE AND ALL OUTPUTS ARE PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DISCLAIM ALL WARRANTIES INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT, AND WE MAKE NO WARRANTY THAT ANY OUTPUT IS ACCURATE OR COMPLETE.</p>
 
           <h2>12. Termination</h2>
-          <p>We may terminate or suspend your access to the Service at any time for violation of these Terms, including for prohibited use under Sections 3 and 4. Upon termination, your right to use the Service is revoked, and any unused budget, including purchased funds, is forfeited where termination results from your breach. Sections 3.1, 4, 5, 6, 7, 8, 10, 11, and 13 survive termination.</p>
+          <p>You may stop using Glyphh at any time. We may suspend or terminate your access, and revoke your licence keys, if you breach these Terms. On termination for breach, your licence to the Software ends and you must stop running it. Sections 3 (Restrictions), 6, 8, 10, 11 and 13 survive termination.</p>
 
           <h2>13. Governing Law</h2>
           <p>These Terms are governed by the laws of the State of Delaware, without regard to conflict of law principles. Any disputes shall be resolved in the state or federal courts located in Delaware.</p>
 
           <h2>14. Changes to Terms</h2>
-          <p>We may update these Terms from time to time. Continued use of the Service after changes constitutes acceptance of the revised Terms. Material changes will be communicated through the application or via email.</p>
+          <p>We may update these Terms from time to time. Continued use of Glyphh after changes constitutes acceptance of the revised Terms. Material changes will be communicated through the platform or by email.</p>
 
           <h2>15. Third-Party Software and Services</h2>
-          <p>The Service is built on third-party software and services, which we name plainly. The Glyphh router is a fork of LiteLLM, an open-source proxy by Berri AI, used under the MIT License (Copyright (c) 2023 Berri AI); the MIT License text accompanies the software and its terms, including the copyright and permission notice, apply to that component. Connections to third-party applications are provided through Pipedream Connect, and your use of a connected application is also subject to that application&apos;s own terms. Payments are processed by Stripe. Third-party AI tools that Glyphh runs on your behalf (including Claude Code, Codex, Gemini, Copilot, and Cursor) and the AI model providers you use are provided by their respective vendors under their own terms; Glyphh does not modify them and is not their provider. Except as stated, no third party named here sponsors or endorses the Service.</p>
+          <p>The Software includes open-source components, each provided under its own licence, which applies to that component. Sign-in is provided through Google and GitHub, and payments are processed by Stripe; your use of those services is also subject to their terms. Except as stated, no third party named here sponsors or endorses Glyphh.</p>
 
           <h2>16. Contact</h2>
           <p>For questions about these Terms, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>

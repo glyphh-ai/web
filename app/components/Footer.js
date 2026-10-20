@@ -40,7 +40,6 @@ const COLS = [
       ['Terms of Use', '/terms'],
       ['Privacy Policy', '/privacy'],
       ['Refund Policy', '/refund'],
-      ['Code of Conduct', '/code-of-conduct'],
     ],
   },
 ];
