@@ -96,6 +96,10 @@ export default function AdaField() {
     const mono = style.fontFamily || 'monospace';
     const ink = (style.color.match(/\d+(\.\d+)?/g) || ['255', '255', '255']).slice(0, 3).join(', ');
     const rgba = (a) => `rgba(${ink}, ${Math.max(0, Math.min(1, a)).toFixed(3)})`;
+    // The flare: the site's purple on what Ada is sure of, its votes and each new precedent.
+    const hex = (style.getPropertyValue('--accent').trim().match(/^#([0-9a-f]{6})$/i) || [, 'b066ff'])[1];
+    const flare = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(', ');
+    const purple = (a) => `rgba(${flare}, ${Math.max(0, Math.min(1, a)).toFixed(3)})`;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const field = document.createElement('canvas');
@@ -155,7 +159,8 @@ export default function AdaField() {
           const d = target[k] - shown[k];
           if (Math.abs(d) > 0.004) { shown[k] += d * 0.18; moving = true; } else shown[k] = target[k];
           if (shown[k] < 0.03 || !letters[k]) continue;
-          fctx.fillStyle = rgba(shown[k]);
+          // where Ada is sure, the letters glow purple
+          fctx.fillStyle = shown[k] > 0.2 ? purple(Math.min(1, shown[k] * 2.2)) : rgba(shown[k]);
           fctx.fillText(letters[k], i * CW, j * CH);
         }
       }
@@ -246,7 +251,7 @@ export default function AdaField() {
         const [x, y] = toPx(ripple.u, ripple.v);
         const rad = 6 + ripple.t * 34;
         ctx.font = `${FONT + 2}px ${mono}`;
-        ctx.fillStyle = rgba(0.7 * (1 - ripple.t / 0.9));
+        ctx.fillStyle = purple(0.95 * (1 - ripple.t / 0.9));
         const nDots = 18;
         for (let n = 0; n < nDots; n++) {
           const a = (n / nDots) * Math.PI * 2;
@@ -280,7 +285,7 @@ export default function AdaField() {
             const steps = Math.floor(len / 7);
             for (let s = 1; s < steps; s++) {
               const f = (s * 7) / Math.hypot(px - x, py - y);
-              ctx.fillStyle = rgba(0.55);
+              ctx.fillStyle = purple(0.85);
               ctx.fillText('·', x + (px - x) * f, y + (py - y) * f);
             }
           }
@@ -299,7 +304,7 @@ export default function AdaField() {
           ctx.textAlign = right ? 'left' : 'right';
           const bw = ctx.measureText(tag).width + 10;
           const bx = right ? x + 12 : x - 12 - bw;
-          ctx.strokeStyle = rgba(0.7);
+          ctx.strokeStyle = phase === 'ask' ? rgba(0.7) : purple(0.95);
           ctx.lineWidth = 1;
           ctx.strokeRect(Math.round(bx) + 0.5, Math.round(y - 9) + 0.5, Math.round(bw), 18);
           ctx.fillStyle = rgba(0.95);
