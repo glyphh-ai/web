@@ -24,7 +24,7 @@ const architecture = [
               <tr><td><strong>Ada</strong></td><td>Typed models that learn from precedents. Record graded cases; a new case is answered from its nearest precedents with calibrated probabilities, a person is asked when it is unsure, and the model learns its own weights. A model is a GitHub repo; a version is a commit</td><td>Inside rrotor</td></tr>
               <tr><td><strong>rrotor</strong></td><td>The runtime: deploys a model by commit, runs each call in a sandbox, answers over REST and MCP. You run it; Glyphh does not host it</td><td><code>ghcr.io/glyphh-ai/rrotor</code>, at <code>https://&lt;host&gt;</code></td></tr>
               <tr><td><strong>The server</strong></td><td>Accounts, runtime keys and runtime tokens, the signed licence key, the Glyphh sign-in, the runtime’s link. Never on the data path</td><td><code>https://api.glyphh.ai</code></td></tr>
-              <tr><td><strong>The platform</strong></td><td>Sign in, register a runtime (Getting started), API Keys, Models, Settings (Licence, Logs)</td><td><a href="https://platform.glyphh.ai">platform.glyphh.ai</a></td></tr>
+              <tr><td><strong>The platform</strong></td><td>Sign in, Runtimes (add one, its token and licence), API Keys, Usage, Logs, Licence, Models</td><td><a href="https://platform.glyphh.ai">platform.glyphh.ai</a></td></tr>
               <tr><td><strong>The plugin</strong></td><td>For Claude Code: the account panel, the Ada skill, the file ledger</td><td><a href={`${DOCS}/plugin`}>The plugin</a></td></tr>
               <tr><td><strong>The SDKs</strong></td><td>Python (<code>glyphh</code>) and TypeScript (<code>@glyphh-ai/glyphh</code>), 3.1.0</td><td><a href={`${DOCS}/sdks`}>The SDKs</a></td></tr>
             </tbody>
