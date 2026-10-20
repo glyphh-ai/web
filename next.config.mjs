@@ -59,6 +59,8 @@ const nextConfig = {
       '/products/router', '/products/gateway', '/products/desktop', '/products/workspace', '/products/code',
       '/products/connect', '/products/skills', '/products/semantic-apps', '/products/cloud', '/products/office',
       '/products/design', '/integrations', '/integrations/:path*', '/chat', '/code', '/work', '/dream',
+      // The desktop was open-sourced (2026-10-20); its posts left the blog.
+      '/blog/glyphh-desktop-connections', '/blog/glyphh-desktop-workspaces', '/blog/welcome-to-glyphh-ai',
     ];
     return [
       // The site has no sign-in of its own: the platform signs you in.
