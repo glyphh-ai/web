@@ -4,7 +4,7 @@
 #   curl -fsSL https://glyphh.ai/install.sh | \
 #     RROTOR_RUNTIME_ID=... RROTOR_RUNTIME_TOKEN=... RROTOR_PUBLIC_HOST=rrotor.example.com sh
 #
-# The platform (https://platform.glyphh.ai, Getting started) shows this line filled in when you register a runtime.
+# The platform (https://platform.glyphh.ai, Runtimes, Add a runtime) shows this line filled in when you register a runtime.
 # Point the host's DNS at this machine first, so Caddy can get the certificate. Needs Docker with Compose.
 # It writes ./rrotor (docker-compose.yml, Caddyfile, .env) and starts it. Run it again to update the settings.
 # Docs: https://docs.glyphh.ai/docker-compose
@@ -15,8 +15,8 @@ DIR="${RROTOR_DIR:-rrotor}"
 
 fail() { echo "rrotor: $*" >&2; exit 1; }
 
-[ -n "${RROTOR_RUNTIME_ID:-}" ] || fail "set RROTOR_RUNTIME_ID (the platform's Getting started gives it)"
-[ -n "${RROTOR_RUNTIME_TOKEN:-}" ] || fail "set RROTOR_RUNTIME_TOKEN (the platform's Getting started gives it)"
+[ -n "${RROTOR_RUNTIME_ID:-}" ] || fail "set RROTOR_RUNTIME_ID (the platform gives it: Runtimes, Add a runtime)"
+[ -n "${RROTOR_RUNTIME_TOKEN:-}" ] || fail "set RROTOR_RUNTIME_TOKEN (the platform gives it: Runtimes, Add a runtime)"
 [ -n "${RROTOR_PUBLIC_HOST:-}" ] || fail "set RROTOR_PUBLIC_HOST, the host it answers at, such as rrotor.example.com"
 command -v docker >/dev/null 2>&1 || fail "Docker is not installed: https://docs.docker.com/engine/install/"
 docker compose version >/dev/null 2>&1 || fail "Docker Compose is not installed: https://docs.docker.com/compose/install/"

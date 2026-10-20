@@ -25,7 +25,7 @@ const hub = {
       </p>
       <h2>Start</h2>
       <ol>
-        <li><strong>Register the runtime</strong> on the platform’s Getting started: a name and the public host it will answer at, e.g. <code>rrotor.acme.com</code>. The platform shows the runtime id and token once, and the settings for the way you deploy.</li>
+        <li><strong>Register the runtime</strong> on the platform (Runtimes, Add a runtime): a name and the public host it will answer at, e.g. <code>rrotor.acme.com</code>. The platform shows the runtime id and token once, and the settings for the way you deploy.</li>
         <li><strong>Deploy</strong> with those settings, one of three ways (below).</li>
         <li><strong>Check it:</strong> <code>curl https://&lt;host&gt;/healthz</code>. Then add <code>https://&lt;host&gt;/mcp</code> as a connector in Claude (<a href={`${DOCS}/plugin`}>The plugin</a>), or make a runtime key for your software (<a href={`${DOCS}/api`}>API and MCP</a>).</li>
       </ol>
@@ -164,7 +164,7 @@ sudo sysctl --system`}</Code>
       </div>
       <h2>Start</h2>
       <p>
-        Register the runtime on the platform (Getting started, Docker): it shows this one line with your runtime id,
+        Register the runtime on the platform (Runtimes, Add a runtime, Docker): it shows this one line with your runtime id,
         token and host filled in, and the token only once. Run it on the machine.
       </p>
       <Code lang="bash">{`curl -fsSL https://glyphh.ai/install.sh | \\
@@ -293,7 +293,7 @@ securityContext:
       <Code lang="bash">{`kubectl create namespace rrotor
 kubectl label namespace rrotor pod-security.kubernetes.io/enforce=privileged`}</Code>
       <h2>Install</h2>
-      <p>Register the runtime on the platform (Getting started, Helm) for its id and token, then:</p>
+      <p>Register the runtime on the platform (Runtimes, Add a runtime, Helm) for its id and token, then:</p>
       <Code lang="bash">{`helm install rrotor ${CHART} -n rrotor \\
   --set publicHost=rrotor.acme.com \\
   --set runtime.id=<runtime id> \\
@@ -429,7 +429,7 @@ const terraform = {
       </div>
       <p><code>instance_type</code> (or <code>machine_type</code>) and <code>data_disk_gb</code> override the size’s.</p>
       <h2>Use</h2>
-      <p>Register the runtime on the platform (Getting started, Terraform) for its id and token, then, for AWS:</p>
+      <p>Register the runtime on the platform (Runtimes, Add a runtime, Terraform) for its id and token, then, for AWS:</p>
       <Code lang="hcl">{`module "rrotor" {
   source = "github.com/glyphh-ai/glyphh//deploy/terraform/aws"
 
