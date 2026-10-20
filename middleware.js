@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
-
 // Where a visitor came from (2026-10-02): the tags on the link they arrived on
 // (utm_*, and the ad platform's click id) are kept for 90 days in a first-party
 // cookie on .glyphh.ai, so sign-up on platform.glyphh.ai can read it and the
@@ -49,14 +47,6 @@ export function middleware(request) {
   // The docs moved to their own host: an old glyphh.ai/docs address follows them.
   if (SITE_HOSTS.includes(host) && (pathname === '/docs' || pathname.startsWith('/docs/'))) {
     return NextResponse.redirect(new URL((pathname.slice('/docs'.length) || '/') + request.nextUrl.search, `https://${DOCS_HOST}`), 308);
-  }
-
-  // Admin routes require server-side auth check
-  if (pathname.startsWith('/admin')) {
-    const loggedIn = request.cookies.get('yo_logged_in');
-    if (!loggedIn) {
-      return NextResponse.redirect(new URL('/auth/login', PLATFORM_URL));
-    }
   }
 
   const response = NextResponse.next();
