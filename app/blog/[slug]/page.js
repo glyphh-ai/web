@@ -3,6 +3,7 @@ import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import LetterField from '../../components/LetterField';
 import { POSTS, postBySlug, fmtDate } from '../posts';
+import './next-step.css';
 
 /**
  * /blog/[slug] — an article, in the frame: the title, the summary as the
@@ -60,6 +61,16 @@ export default async function BlogPost({ params }) {
                   )}
                 </section>
               ))}
+            </div>
+            <div className="ix-cta bl-next">
+              <div>
+                <span className="qs-kicker">Next step</span>
+                <p>Ada learns from your labelled cases, answers from its nearest precedents, and hands what it is unsure of to an LLM, on your own infrastructure.</p>
+              </div>
+              <div className="ix-actions">
+                <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
+                <a href="/use-cases/support-routing" className="os-cta os-cta-ghost">See ticket routing in action</a>
+              </div>
             </div>
             <div className="bl-share">
               <span className="qs-kicker">Share</span>

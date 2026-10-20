@@ -34,6 +34,37 @@ export const metadata = {
   },
 };
 
+// What search engines read about Glyphh (schema.org): the company, and Ada
+// with its plans (server docs/pricing.md). Only what exists.
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://glyphh.ai/#org',
+      name: 'Glyphh AI LLC',
+      url: 'https://glyphh.ai',
+      logo: 'https://glyphh.ai/glyphh-logo-white.png',
+      email: 'support@glyphh.ai',
+      sameAs: ['https://github.com/glyphh-ai', 'https://www.youtube.com/@glyphhai'],
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Glyphh Ada',
+      url: 'https://glyphh.ai/products/ada',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Linux (Docker, Kubernetes)',
+      description: HOME_DESCRIPTION,
+      publisher: { '@id': 'https://glyphh.ai/#org' },
+      offers: [
+        { '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD', description: '1 runtime node, 5,000 precedents per node.' },
+        { '@type': 'Offer', name: 'Pro', price: '99', priceCurrency: 'USD', description: 'A month: 3 runtime nodes, 50,000 precedents per node, sync.' },
+        { '@type': 'Offer', name: 'Team', price: '299', priceCurrency: 'USD', description: 'A month: 10 runtime nodes, 500,000 precedents per node, sync.' },
+      ],
+    },
+  ],
+};
+
 export const viewport = {
   themeColor: '#000000',
 };
@@ -69,6 +100,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
         {children}
         <AdPixels />
       </body>

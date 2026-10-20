@@ -17,6 +17,7 @@ const COLS = [
     title: 'Product',
     links: [
       ['Ada', '/products/ada'],
+      ['Support routing', '/use-cases/support-routing'],
       ['Pricing', '/pricing'],
       ['Platform', 'https://platform.glyphh.ai'],
       ['FAQ', '/faq'],
@@ -28,6 +29,7 @@ const COLS = [
       ['Docs', 'https://docs.glyphh.ai'],
       ['Run rrotor', 'https://docs.glyphh.ai/run-rrotor'],
       ['Self-hosting', 'https://github.com/glyphh-ai/rrotor/tree/main/docs/self-hosting'],
+      ['Plugin and SDKs', 'https://github.com/glyphh-ai/glyphh'],
       ['Blog', '/blog'],
       ['GitHub', GITHUB_URL],
     ],
@@ -58,7 +60,7 @@ export default function Footer() {
               <img className="logo-dark" src="/glyphh-logo-text-white.png" alt="Glyphh" />
               <img className="logo-light" src="/glyphh-logo-text-black.png" alt="" />
             </a>
-            <p className="ft-tagline">We put the human back in intelligence.</p>
+            <p className="ft-tagline">Ada, a self-hosted classifier that learns from precedent and hands the cases it is unsure of to an LLM.</p>
             <p className="ft-contact">
               <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>
             </p>

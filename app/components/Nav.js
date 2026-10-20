@@ -45,6 +45,18 @@ export default function Nav() {
   };
   useEffect(() => () => clearTimeout(prodCloseTimer.current), []);
 
+  const [ucOpen, setUcOpen] = useState(false);
+  const ucCloseTimer = useRef(null);
+  const ucEnter = () => {
+    clearTimeout(ucCloseTimer.current);
+    setUcOpen(true);
+  };
+  const ucLeave = () => {
+    clearTimeout(ucCloseTimer.current);
+    ucCloseTimer.current = setTimeout(() => setUcOpen(false), 260);
+  };
+  useEffect(() => () => clearTimeout(ucCloseTimer.current), []);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll);
@@ -96,7 +108,23 @@ export default function Nav() {
                 <div className="nav-dd-panel">
                   <a href="/products/ada" className="nav-dd-item">
                     <span className="nav-dd-name">Ada</span>
-                    <span className="nav-dd-desc">Decisions from precedent, in your own runtime. Every answer cites what it stands on.</span>
+                    <span className="nav-dd-desc">A self-hosted classifier that learns from precedent. Every answer cites what it stands on.</span>
+                  </a>
+                </div>
+              </div>
+            <div
+                className={`nav-dd ${ucOpen ? 'open' : ''}`}
+                onMouseEnter={ucEnter}
+                onMouseLeave={ucLeave}
+              >
+                <a href="/use-cases/support-routing" className={`nav-dd-trigger${active('/use-cases')}`}>
+                  Use cases
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+                <div className="nav-dd-panel">
+                  <a href="/use-cases/support-routing" className="nav-dd-item">
+                    <span className="nav-dd-name">Support routing</span>
+                    <span className="nav-dd-desc">Each ticket to the team that owns it, from the tickets you have already routed.</span>
                   </a>
                 </div>
               </div>
@@ -146,6 +174,8 @@ export default function Nav() {
         <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
         <span className="mobile-menu-group">Products</span>
         <a href="/products/ada" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Ada</a>
+        <span className="mobile-menu-group">Use cases</span>
+        <a href="/use-cases/support-routing" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Support routing</a>
         <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href="https://docs.glyphh.ai" onClick={() => setMenuOpen(false)}>Docs</a>

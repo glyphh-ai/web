@@ -16,7 +16,12 @@ export const FAQ_GROUPS = [
       {
         id: 'what-is-ada',
         q: 'What is Ada?',
-        a: { html: `A classifier that learns from precedent. You record graded cases; a new case is answered from the precedents nearest to it, with a calibrated probability for each outcome, and Ada asks when it is unsure. See <a href="${DOCS}">how Glyphh works</a>.` },
+        a: { html: `A self-hosted classifier that learns from labelled examples, its precedents. A new case is answered from the precedents nearest to it, with a calibrated confidence and the precedents the answer stands on. See <a href="${DOCS}">how Glyphh works</a>.` },
+      },
+      {
+        id: 'use-case',
+        q: 'What is it for?',
+        a: { html: 'Any decision you already make by hand and record: which team owns a support ticket, whether an account will churn, which queue a request belongs in. <a href="/use-cases/support-routing">See ticket routing in action</a>.' },
       },
       {
         id: 'learn',
@@ -26,12 +31,22 @@ export const FAQ_GROUPS = [
       {
         id: 'llm',
         q: 'Is there a language model in the answer?',
-        a: 'No. An answer is arithmetic on your cases: the same question always gets the same answer, and when nothing is close enough Ada says so. Claude helps you build the model; the model answers on its own.',
+        a: 'No. An answer is arithmetic on your precedents: the same question always gets the same answer, and when nothing is close enough Ada says so instead of guessing.',
+      },
+      {
+        id: 'hand-off',
+        q: 'What happens when Ada is unsure?',
+        a: 'Your application hands the case on, to an LLM or to a person, whichever you choose. The answer it gets back is recorded as a precedent, so the next case like it is Ada’s to answer, and the LLM is called less as Ada learns.',
       },
       {
         id: 'build',
         q: 'How do I build a model?',
         a: { html: `Ask Claude. With the <code>glyphh</code> plugin it writes the model with you, pushes it to your GitHub repo, deploys the commit to your runtime and calls it. See <a href="${DOCS}/ada-skill">the Ada skill</a>.` },
+      },
+      {
+        id: 'plugin',
+        q: 'How do I get the plugin?',
+        a: { html: 'In Claude Code: <code>/plugin marketplace add glyphh-ai/glyphh</code>, then <code>/plugin install glyphh@glyphh</code>. It brings your account panel, the Ada skill and the file ledger. The source is at <a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a>.' },
       },
       {
         id: 'call',
