@@ -10,7 +10,7 @@ import { POSTS, fmtDate } from './posts';
 
 export const metadata = {
   title: 'Blog — Glyphh',
-  description: 'What we’re building, fixing, and learning at Glyphh: launch notes, research write-ups, and the path from idea to program.',
+  description: 'What we’re building, fixing and learning at Glyphh: notes on Ada, the self-hosted classifier that learns from precedent, guides, and the story so far.',
 };
 
 export default function BlogIndex() {
@@ -24,7 +24,7 @@ export default function BlogIndex() {
           <a href="/" className="ix-crumb">&larr; Home</a>
           <span className="qs-kicker">Glyphh blog</span>
           <h1 className="ix-title">What we&rsquo;re building, fixing, and learning.</h1>
-          <p className="ix-lede">Launch notes, research write-ups, release context, and the path from an idea to a program you can run.</p>
+          <p className="ix-lede">Notes on Ada, guides to what you can build with it, and the story so far. Posts marked Archive describe products since retired.</p>
           <div className="bl-tags">
             <span className="bl-tag active">Latest</span>
             {tags.map((t) => <span key={t} className="bl-tag">{t}</span>)}

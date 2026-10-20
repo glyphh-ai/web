@@ -107,14 +107,14 @@ export const POSTS = [
   {
     slug: 'glyphh-desktop-connections',
     title: 'Glyphh Desktop Connections — Your Apps, Wired to the Agent',
-    summary: 'Connect Gmail and Slack to Glyphh Desktop in a couple of clicks, then ask the agent to read your email, send it to you in Slack, and open Slack right in your workspace. Timme walks through connections, tool permissions, and ask versus auto.',
+    summary: 'From the archive: a demo of connections in Glyphh Desktop, a product since retired. Glyphh today is Ada, a self-hosted classifier that learns from precedent.',
     date: '2026-10-02',
     author: 'Chris "Timme"',
     minutes: 3,
     cover: 'https://i.ytimg.com/vi/RDdJxb0tbf4/maxresdefault.jpg',
     coverAlt: 'Glyphh Desktop Connections, the demo video.',
     video: 'RDdJxb0tbf4',
-    tags: ['Desktop', 'Connections', 'Demo'],
+    tags: ['Archive', 'Demo'],
     related: [
       ['Glyphh Desktop Workspaces', '/blog/glyphh-desktop-workspaces'],
     ],
@@ -183,14 +183,14 @@ export const POSTS = [
   {
     slug: 'glyphh-desktop-workspaces',
     title: 'Glyphh Desktop Workspaces — Stop Losing the Thread',
-    summary: 'Context switching costs you 15 minutes and 40% of your brain power every single time, and AI made it 10x worse. Timme demos Glyphh workspaces: models, loops, apps and connectors in one place, and your session follows you through the day.',
+    summary: 'From the archive: a demo of workspaces in Glyphh Desktop, a product since retired. Glyphh today is Ada, a self-hosted classifier that learns from precedent.',
     date: '2026-10-01',
     author: 'Chris "Timme"',
     minutes: 4,
     cover: 'https://i.ytimg.com/vi/ABXhO46Delw/maxresdefault.jpg',
     coverAlt: 'Glyphh Desktop Workspaces, the demo video.',
     video: 'ABXhO46Delw',
-    tags: ['Desktop', 'Workspaces', 'Demo'],
+    tags: ['Archive', 'Demo'],
     related: [
       ['How Glyphh works', 'https://docs.glyphh.ai'],
       ['The Critical Inversion', '/blog/the-critical-inversion'],
@@ -263,7 +263,7 @@ export const POSTS = [
     minutes: 5,
     cover: '/blog/critical-inversion-hero.png',
     coverAlt: 'One massive Big AI cube against a field of small open-weight cubes, routed by Glyphh: frontier where it counts, open weights for the rest.',
-    tags: ['Strategy', 'Open Weights', 'The Router'],
+    tags: ['Strategy', 'Open Weights'],
     related: [
       ['Welcome to Glyphh AI', '/blog/welcome-to-glyphh-ai'],
     ],
@@ -321,7 +321,7 @@ export const POSTS = [
   {
     slug: 'welcome-to-glyphh-ai',
     title: 'Welcome to Glyphh AI',
-    summary: 'Chris, aka Timme, on the official launch of Glyphh AI. The whole idea in one breath: use AI to build the app, not to run it.',
+    summary: 'Chris, aka Timme, on the launch of Glyphh AI in September 2026. The desktop and router it describes have since been retired; the idea that lasted is Ada.',
     date: '2026-09-22',
     author: 'Chris "Timme"',
     minutes: 6,

@@ -9,7 +9,7 @@ import { FAQ_GROUPS } from './faq-data';
 export const metadata = {
   title: 'FAQ — Glyphh',
   description:
-    'Glyphh and Ada, the runtime you run yourself, plans, and where your data goes.',
+    'Ada, the self-hosted classifier that learns from precedent: how it answers, how it hands unsure cases to an LLM, rrotor on your own infrastructure, the plans, and where your data goes.',
   alternates: { canonical: '/faq' },
 };
 
@@ -23,10 +23,11 @@ export default function FaqPage() {
           <span className="qs-kicker">FAQ</span>
           <h1 className="ix-title">Questions, answered.</h1>
           <p className="ix-lede">
-            What Glyphh and Ada are, where your models run, what it costs, and where your data goes.
+            What Ada is, what it does when it is unsure, where it runs, what it costs, and where your data goes.
           </p>
           <div className="ix-actions">
-            <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Get started</a>
+            <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
+            <a href="/use-cases/support-routing" className="os-cta os-cta-ghost">See ticket routing in action</a>
             <a href="https://docs.glyphh.ai/run-rrotor" className="os-cta os-cta-ghost">Run rrotor</a>
           </div>
         </section>

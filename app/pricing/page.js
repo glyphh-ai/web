@@ -12,7 +12,7 @@ import Footer from '../components/Footer';
 export const metadata = {
   title: 'Pricing — Glyphh',
   description:
-    'A flat monthly price by the runtime node. Free: one node and 5,000 precedents. Pro $99 a month, Team $299 a month, Enterprise by contract.',
+    'Glyphh Ada runs on your own infrastructure, at a flat monthly price by the runtime node. Free $0: 1 node, 5,000 precedents per node. Pro $99 a month: 3 nodes, 50,000 per node, sync. Team $299 a month: 10 nodes, 500,000 per node, sync. Enterprise by contract. Never per seat, model or install.',
 };
 
 // The promise: what Glyphh never charges for.
