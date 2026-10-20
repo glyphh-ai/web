@@ -1,28 +1,27 @@
 import PricingCards from './PricingCards';
 
-// Start in the platform: the one door (the pricing contract, 2026-10-18).
+// Start in the platform: the one door.
 export const PLATFORM_URL = 'https://platform.glyphh.ai';
 export const SALES_HREF = 'mailto:sales@glyphh.ai?subject=' + encodeURIComponent('Glyphh Enterprise');
 
-// The plans, one version each (the pricing contract, 2026-10-18). Never per
-// seat, per model or per install: members, installs and self-hosted runtimes
-// are unlimited on every plan and Ada is in every plan. What a plan sells is
-// the managed precedent bucket (precedents on a hosted runtime), hosted
-// machines and sync across instances. Local and self-hosted precedents are
-// unlimited everywhere. Enterprise is by contract, through sales.
+// The plans (server docs/pricing.md, 2026-10-19). Never per seat, per model or
+// per install. Every plan runs on the customer's own infrastructure: a plan
+// sets how many runtime nodes may link, how many precedents each node may hold
+// (all its models together) and whether nodes sync. A paid month is a signed
+// licence key, checked on the node; with no key a node runs as Free.
 const TIERS = [
   {
     tier: 'free',
     name: 'Free',
     priceFigure: '$0',
     priceSub: 'Free, for good. No card.',
-    desc: 'Ada on your own machines, as far as you want to take her.',
+    desc: 'Ada on one runtime node of your own.',
     lead: null,
     featureList: [
-      'Unlimited local and self-hosted runtimes',
-      'Unlimited precedents on your own machines',
-      'Ada, included',
-      'Unlimited members and installs',
+      '1 runtime node',
+      '5,000 precedents per node',
+      'Ada, every feature of it',
+      'Unlimited members, models and installs',
     ],
     cta: 'Start free',
   },
@@ -31,13 +30,13 @@ const TIERS = [
     name: 'Pro',
     priceFigure: '$99',
     priceSub: 'A month, flat.',
-    desc: 'Hosted by us, synced across your instances.',
+    desc: 'A small cluster, kept in sync.',
     popular: true,
     lead: 'Everything in Free, plus:',
     featureList: [
-      '100,000 managed precedents',
-      'Up to 3 hosted machines, billed per second',
-      'Sync across instances',
+      '3 runtime nodes',
+      '50,000 precedents per node',
+      'Multi-node sync, with failover by command',
     ],
     cta: 'Get started',
   },
@@ -46,11 +45,11 @@ const TIERS = [
     name: 'Team',
     priceFigure: '$299',
     priceSub: 'A month, flat.',
-    desc: 'More precedents and more machines for a team in production.',
+    desc: 'More nodes and more precedents for a team in production.',
     lead: 'Everything in Pro, plus:',
     featureList: [
-      '1,000,000 managed precedents',
-      'Up to 10 hosted machines, billed per second',
+      '10 runtime nodes',
+      '500,000 precedents per node',
     ],
     cta: 'Get started',
   },
@@ -58,18 +57,14 @@ const TIERS = [
     tier: 'enterprise',
     name: 'Enterprise',
     contactSales: true,
-    desc: 'For organisations that run Ada in their own cloud, or with no network at all.',
-    priceSub: 'From $10k a year, flat, by contract.',
+    desc: 'For organisations that need high availability, or no network at all.',
+    priceSub: 'By contract, from $10k a year.',
     lead: 'Everything in Team, plus:',
     featureList: [
-      'Unlimited managed precedents and hosted machines',
-      'Your own cloud (BYOC), or air-gapped with offline licences',
-      'High availability',
-      'Single sign-on with SAML',
-      'Role-based access control',
-      'Audit logs',
-      'An SLA',
-      'Hosted machine rates set in your contract',
+      'Unlimited runtime nodes and precedents',
+      'High availability: the cluster elects its head',
+      'Air-gapped licence keys',
+      'An audit log',
     ],
     cta: 'Talk to us',
   },
@@ -81,10 +76,10 @@ export default function Pricing() {
       <div className="ix-section-head">
         <div>
           <span className="qs-kicker">Plans</span>
-          <h2 className="ix-h2">Free on your own machines. Pay when we run them.</h2>
+          <h2 className="ix-h2">You run it. The plan sets how far it goes.</h2>
           <p className="ix-desc">
-            Run Ada locally or on your own infrastructure for nothing, with no limit. The paid plans add managed
-            precedents, hosted machines and sync across instances, at a flat monthly price.
+            Ada runs in rrotor, on your own infrastructure. A plan sets how many runtime nodes you link, how many
+            precedents each node holds, and whether the nodes sync.
           </p>
         </div>
       </div>
@@ -92,9 +87,8 @@ export default function Pricing() {
       <PricingCards tiers={TIERS} salesHref={SALES_HREF} platformUrl={PLATFORM_URL} />
 
       <p className="pp-note">
-        Hosted machines are billed per second on top of the plan, at the <a href="#rates">rates below</a>. Change plan
-        or cancel at any time. See our <a href="/terms">Terms of Use</a>. Prices are in US dollars and exclude
-        applicable taxes and duties, including VAT and sales tax.
+        Change plan or cancel at any time. See our <a href="/terms">Terms of Use</a>. Prices are in US dollars and
+        exclude applicable taxes and duties, including VAT and sales tax.
       </p>
     </section>
   );

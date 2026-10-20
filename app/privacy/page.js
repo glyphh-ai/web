@@ -1,8 +1,9 @@
+// Rewritten 2026-10-20 to match the product; counsel to review.
 import Footer from '../components/Footer';
 
 export const metadata = {
   title: 'Privacy Policy — Glyphh',
-  description: 'Privacy Policy for the Glyphh desktop application and hosted services by Glyphh AI LLC.',
+  description: 'What Glyphh AI LLC collects, and what it never sees: your models, their inputs and their results stay in the runtime you run.',
 };
 
 export default function PrivacyPage() {
@@ -14,60 +15,56 @@ export default function PrivacyPage() {
           <h1 className="policy-title">Privacy Policy</h1>
 
           <p><strong>Effective Date:</strong> July 3, 2026</p>
-          <p><strong>Last Updated:</strong> August 18, 2026</p>
-          <p>This Privacy Policy describes how Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) collects, uses, and protects your information when you use Glyphh (the &ldquo;Service&rdquo;), including the desktop application, the hosted platform, the Glyphh relay that connects your own AI tools to your workspace, and the Glyphh Marketplace. Use of the Service is governed by our <a href="/terms">Terms of Use</a>; the Marketplace is additionally governed by our <a href="/marketplace-terms">Marketplace Terms</a>, <a href="/code-of-conduct">Code of Conduct</a>, and, for developers, the <a href="/developer-agreement">Developer Agreement</a>.</p>
+          <p><strong>Last Updated:</strong> October 20, 2026</p>
+          <p>This Privacy Policy describes how Glyphh AI LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) collects, uses and protects information when you use Glyphh: the platform at platform.glyphh.ai, the API at api.glyphh.ai, the website glyphh.ai, and the software you run yourself (the rrotor runtime and the Glyphh plugin for Claude Code). Use of Glyphh is governed by our <a href="/terms">Terms of Use</a>.</p>
+          <p><strong>In short:</strong> you run Ada in your own runtime, on infrastructure you control. Calls to your models go straight to it. We see your account, your plan and your licence keys, and a little about each runtime node that links to us; never a model&apos;s inputs or results, and never the addresses of the people or software calling your runtime.</p>
 
           <h2>1. Information We Collect</h2>
-          <p><strong>Account Information:</strong> When you register or subscribe, we collect your email address, name, organization name (if provided), and an encrypted (hashed) password. Payment information is processed by Stripe; we do not store your full payment card details.</p>
-          <p><strong>Billing and Usage Metadata:</strong> When the Service performs a billable operation for you — driving your workspace, controlling windows, or executing a tool or integration call — we record metadata about that operation so we can meter your usage budget, show your usage, and prevent abuse: the operation performed, the app or tool involved, whether it ran on your machine or through an integration, the tokens it sent and received, the amount charged to your budget, a request identifier, status, and a timestamp. This metadata does not include the content of your AI prompts or the models&apos; responses.</p>
-          <p><strong>Usage Data:</strong> We may collect anonymized, aggregated product analytics (e.g., feature usage, error reports) to improve the Service.</p>
-          <p><strong>Device Information:</strong> For activation and validation, we may generate a machine fingerprint (a one-way hash of hardware identifiers). This hash cannot be used to identify your specific hardware.</p>
+          <p><strong>Account and organisation.</strong> When you sign in with Google or GitHub, we receive your email address, your name and your account identifier at that provider. We keep your organisation, its members and their roles, and the email addresses of people you invite.</p>
+          <p><strong>Billing.</strong> Payments are processed by Stripe. We keep your Stripe customer and subscription identifiers, your plan and its status. We do not receive or store your full payment card details.</p>
+          <p><strong>Licence keys.</strong> We keep the licence keys we issue to your organisation, their terms (plan, limits and dates) and whether they are live or revoked.</p>
+          <p><strong>Runtime nodes.</strong> For each runtime you register, we keep the name and address you give it. When a node links to us or sends its daily heartbeat, we keep: a node identifier, its cluster identifier and role, the software version, its precedent count, the number of runs in progress, a one-way hash of its machine identifier, and when it last checked in. Through the link we also keep, so the platform can show them: the models deployed to it (their names, repositories, commits and versions), a record of each run&apos;s status and duration, and, for each runtime key, a one-way hash of the key, how many calls it made and when it was last used.</p>
+          <p><strong>Plugin installs.</strong> When you sign in from the Glyphh plugin, we record that install (its name and when it signed in) so you can see and sign it out.</p>
+          <p><strong>Server-side logs, if you turn them on.</strong> Off by default. If you turn on server-side logging, your runtime sends us its log records, metrics, traces and audit events so the platform can show them. We keep them for seven (7) days and then delete them. They do not include a model&apos;s inputs or results.</p>
+          <p><strong>The website.</strong> glyphh.ai uses Google Analytics to understand how the site is used, and a Reddit advertising pixel to measure our ads. If you arrive through a tagged link, a first-party cookie keeps the link&apos;s campaign tags for 90 days, and they are stored with your account if you sign up.</p>
 
-          <h2>2. AI Tools and the Glyphh Relay</h2>
-          <p><strong>Your AI runs under your own account.</strong> Glyphh does not resell, proxy, or run AI models. You connect AI clients you already license (for example, Claude, ChatGPT, or Gemini) to the Service, and all model inference happens between you and that provider under your own account and its privacy policy. Your prompts and the models&apos; responses are not routed through us for the purpose of inference, and we do not retain or store them.</p>
-          <p><strong>What the relay carries.</strong> When a connected AI client asks the Service to perform an action — open an app, arrange your windows, run a skill, or call a connected service — that request and its result pass through the relay so we can deliver it to your workspace. We process this transiently to route the request and screen it for abuse (an injection firewall), and we retain only the usage metadata described in Section 1, not the content of the underlying work. You may also run the Service&apos;s local server mode, in which these requests never leave your machine.</p>
-          <p><strong>Provider API keys.</strong> Where a feature calls a model directly, you may supply your own provider API key. If you store a key with us, it is encrypted at rest and used only to make requests you initiate to that provider; we never use it for our own purposes and never expose it back to any connected client.</p>
-
-          <h2>3. Information We Do Not Collect</h2>
+          <h2>2. What We Never Receive</h2>
           <ul>
-            <li>We do not store the content of your AI prompts or the models&apos; responses</li>
-            <li>We do not resell or proxy AI model access, and we do not see your model usage with your provider</li>
-            <li>We do not collect the content of the work your AI performs through the relay — only the usage metadata in Section 1</li>
-            <li>We do not track your browsing activity within the Service&apos;s embedded panels</li>
-            <li>We do not sell your personal information, or share it with third parties for advertising</li>
+            <li>The inputs you send to your models, or their results</li>
+            <li>Your cases and precedents, and the code of your models, which stay in your runtime and your own repositories</li>
+            <li>The IP addresses of the people or software calling your runtime; we do not keep the address a heartbeat comes from</li>
+            <li>Your runtime keys themselves, only their one-way hashes</li>
           </ul>
+          <p>We do not sell your personal information or share it with third parties for their advertising.</p>
 
-          <h2>4. Data Storage and Cloud Sync</h2>
-          <p>Your workspace library — apps, layouts, skills, and preferences — is stored in your organization&apos;s account so it can sync across your machines; sign in anywhere and it travels with you. Provider API keys you choose to store are encrypted at rest. Connections to third-party services are held by our integration partner (see Section 6) so your AI can act on them; you can disconnect any service at any time.</p>
-
-          <h2>5. How We Use Information</h2>
+          <h2>3. How We Use Information</h2>
           <ul>
-            <li>To provide, maintain, and improve the Service</li>
-            <li>To route relayed requests to your workspace and meter usage against your budget</li>
-            <li>To process payments and manage your subscription and usage budget</li>
-            <li>To detect, prevent, and respond to abuse, fraud, and policy violations</li>
-            <li>To communicate with you about the Service (updates, security alerts)</li>
+            <li>To provide the Service: sign-in, your organisation, the platform, and your runtimes&apos; links</li>
+            <li>To issue, deliver and revoke licence keys, and to count runtime nodes and precedents against your plan</li>
+            <li>To process payments and manage your subscription</li>
+            <li>To detect, prevent and respond to abuse, fraud and security incidents</li>
+            <li>To communicate with you about the Service (updates, security notices, billing)</li>
+            <li>To understand and improve the website and our marketing</li>
             <li>To comply with legal obligations</li>
           </ul>
 
-          <h2>6. Third-Party Services</h2>
-          <p>We use an integration partner (Pipedream) to connect third-party applications so your AI tools can act on them; connecting an app authorizes that partner to hold the resulting access on your behalf, subject to its privacy policy. We use Stripe for payment processing; Stripe&apos;s handling of your payment information is governed by <a href="https://stripe.com/privacy">Stripe&apos;s Privacy Policy</a>. AI model providers you connect process your prompts under their own privacy policies, not ours.</p>
+          <h2>4. Service Providers</h2>
+          <p>We use the following providers to run Glyphh. Each processes information only as needed to provide its service to us:</p>
+          <ul>
+            <li><strong>Stripe</strong>: payments and subscriptions (<a href="https://stripe.com/privacy">Stripe&apos;s Privacy Policy</a>)</li>
+            <li><strong>Fly.io</strong>: hosts our platform, API and website</li>
+            <li><strong>Cloudflare</strong>: DNS and network services for our domains</li>
+            <li><strong>Google</strong>: sign-in, and analytics on the website</li>
+            <li><strong>GitHub</strong>: sign-in, and access to the repositories you choose to connect</li>
+          </ul>
 
-          <h2>7. Marketplace Data</h2>
-          <p><strong>Marketplace apps run inside your Glyphh — your data stays in your plane.</strong> Every Marketplace app is a sandboxed bundle that executes in your own organization&apos;s environment, on your organization&apos;s chosen models. Anything you enter, upload, or create inside a Marketplace app is stored in your organization&apos;s data plane and covered by this Privacy Policy — it is not transmitted to the app&apos;s developer, and the developer operates no server that receives it. A capability sandbox limits each app to the capabilities its manifest declares, and apps run inside your existing signed-in session: there is no separate account, sign-in handoff, or identity token shared with the developer.</p>
-          <p><strong>External apps you connect yourself are different.</strong> Apps or services that you host, deploy, or connect on your own — outside the Marketplace — are third-party services. Data you provide to them is governed by their own privacy policies, not this one.</p>
-          <p><strong>Developer profiles are public by choice.</strong> If you create a developer profile on the Glyphh Marketplace, the information you put on it — handle, name, avatar, bio, links, and support contact — is published publicly with your listings. Publishing a profile is optional; do not include information you do not want public.</p>
-          <p><strong>Reviews, ratings, and comments are public and attributed.</strong> Ratings, reviews, and comments you post on apps or developers are displayed publicly and attributed to your account or organization. They remain visible until you edit or delete them or we remove them under our <a href="/code-of-conduct">Code of Conduct</a>.</p>
-          <p><strong>Developers receive aggregate statistics only.</strong> We share app-usage and install data with an app&apos;s developer only in aggregate form (for example, install counts and usage totals). We do not share your identity, your individual activity within an app, or your personal information with developers — and because Marketplace apps run inside your organization&apos;s environment under the capability sandbox, they cannot send it to their developers either.</p>
-          <p><strong>Reports.</strong> If you report an app, developer, review, or comment, we retain the report and related records for trust and safety purposes — to triage the report, enforce our policies, and maintain an audit trail — for as long as reasonably necessary for those purposes.</p>
+          <h2>5. Data Security</h2>
+          <p>We use industry-standard measures, including encryption in transit (TLS) and at rest. Licence keys are signed so that a node can check them without contacting us. No method of transmission or storage is 100% secure, and we cannot guarantee absolute security. The security of your own runtimes is in your hands.</p>
 
-          <h2>8. Data Security</h2>
-          <p>We implement industry-standard security measures, including encryption in transit (TLS) and at rest. However, no method of transmission or storage is 100% secure, and we cannot guarantee absolute security.</p>
+          <h2>6. Data Retention</h2>
+          <p>We keep account, organisation, billing, licence and runtime records for as long as your account exists and for a reasonable period after, and as required by law (for example, payment records). Server-side logs are deleted after seven (7) days. You may ask us to delete your account at any time.</p>
 
-          <h2>9. Data Retention</h2>
-          <p>We retain account, billing, and usage-metadata records for the duration of your account plus a reasonable period thereafter, and as required by law (for example, payment records). We do not retain the content of relayed requests beyond what is necessary to route them to your workspace. You may request deletion of your account data at any time by contacting us.</p>
-
-          <h2>10. Your Rights</h2>
+          <h2>7. Your Rights</h2>
           <p>Depending on your jurisdiction, you may have the right to:</p>
           <ul>
             <li>Access the personal data we hold about you</li>
@@ -78,17 +75,17 @@ export default function PrivacyPage() {
           </ul>
           <p>To exercise these rights, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
 
-          <h2>11. Children&apos;s Privacy</h2>
-          <p>The Service is not intended for children under 13. We do not knowingly collect personal information from children under 13. If we become aware that we have collected such information, we will take steps to delete it.</p>
+          <h2>8. Children&apos;s Privacy</h2>
+          <p>Glyphh is not intended for children under 13. We do not knowingly collect personal information from children under 13. If we become aware that we have, we will delete it.</p>
 
-          <h2>12. International Transfers</h2>
-          <p>If you are accessing the Service from outside the United States, your information may be transferred to and processed in the United States and in the locations where our providers operate. By using the Service, you consent to such transfer.</p>
+          <h2>9. International Transfers</h2>
+          <p>If you use Glyphh from outside the United States, information we collect may be transferred to and processed in the United States and in the locations where our providers operate. By using Glyphh, you consent to such transfer.</p>
 
-          <h2>13. Changes to This Policy</h2>
-          <p>We may update this Privacy Policy from time to time. We will notify you of material changes through the application or via email. Continued use of the Service after changes constitutes acceptance.</p>
+          <h2>10. Changes to This Policy</h2>
+          <p>We may update this Privacy Policy from time to time. We will notify you of material changes through the platform or by email. Continued use of Glyphh after changes constitutes acceptance.</p>
 
-          <h2>14. Contact</h2>
-          <p>For privacy-related questions or requests, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
+          <h2>11. Contact</h2>
+          <p>For privacy questions or requests, contact us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>
       <Footer />

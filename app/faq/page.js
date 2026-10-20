@@ -2,19 +2,14 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { FaqList } from '../components/FaqSection';
 import { FAQ_GROUPS } from './faq-data';
-import { APP_URL } from '../components/downloads';
 
-/**
- * /faq — the full list (his order, 2026-10-04), in the frame: a head like
- * the pricing page, then one section per group, each a High Vis panel of
- * questions. The answers live in ./faq-data.js; the home page shows a short
- * cut of the same list.
- */
+// /faq: a head like the pricing page, then one High Vis panel of questions
+// per group. The answers live in ./faq-data.js.
 
 export const metadata = {
   title: 'FAQ — Glyphh',
   description:
-    'Glyphh Desktop and app.glyphh.ai, local and cloud sessions, the CLIs that ride along, models and plans, apps, connections, memory, the platform console, and where your data lives.',
+    'Glyphh and Ada, the runtime you run yourself, plans, and where your data goes.',
   alternates: { canonical: '/faq' },
 };
 
@@ -28,12 +23,11 @@ export default function FaqPage() {
           <span className="qs-kicker">FAQ</span>
           <h1 className="ix-title">Questions, answered.</h1>
           <p className="ix-lede">
-            What Glyphh is and what it does today: the desktop and the browser, where sessions and files live,
-            the CLIs and models, your org, and your data.
+            What Glyphh and Ada are, where your models run, what it costs, and where your data goes.
           </p>
           <div className="ix-actions">
-            <a href={APP_URL} className="os-cta os-cta-primary">Get started</a>
-            <a href="/#download" className="os-cta os-cta-ghost">Download the desktop</a>
+            <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Get started</a>
+            <a href="https://docs.glyphh.ai/run-rrotor" className="os-cta os-cta-ghost">Run rrotor</a>
           </div>
         </section>
 

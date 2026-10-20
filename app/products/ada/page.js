@@ -4,14 +4,14 @@ import Footer from '../../components/Footer';
 import HeroAscii from '../../components/HeroAscii';
 import LetterField from '../../components/LetterField';
 
-// Ada (2026-10-01 mock): the product page, in the home page's frame grammar.
-// The facts are the server's (glyphh_auth/ada*.py): the tool names, the answer
-// fields, where records live. The example answer is illustrative.
+// Ada: the product page, in the home page's frame grammar. The facts are
+// rrotor's and the kernel's (the functions, the answer's fields, where it
+// runs); the example answer is illustrative.
 
 export const metadata = {
-  title: 'Ada: typed models your agents build. Your software leverages it at runtime',
+  title: 'Ada: a classifier that learns from precedent, in your own runtime',
   description:
-    'Seed Ada with data and she builds a lattice of algebraic meaning. Leverage our SDK or direct API to then make deterministic calls with no LLM in the middle.',
+    'Record graded cases; a new case is answered from its nearest precedents with a calibrated probability, and Ada asks when it is unsure. Built with Claude, called by your software, run on your own infrastructure.',
 };
 
 const DOCS = "https://docs.glyphh.ai";
@@ -19,72 +19,71 @@ const DOCS = "https://docs.glyphh.ai";
 const STEPS = [
   {
     title: 'Record',
-    head: 'What was tried, and whether it worked',
-    body: 'When the world has graded an outcome, the agent records it: a win with ada_record, a failure with ada_veto. A situation is JSON of any shape.',
+    head: 'Each case, with its outcome',
+    body: 'A case is typed JSON in the shape your spec gives it. Recorded with the outcome the world confirmed, it becomes a precedent, and counts from the next question.',
     icon: (<><path d="M12 5v14" /><path d="M5 12h14" /></>),
   },
   {
-    title: 'Query',
-    head: 'What worked in situations like this one',
-    body: 'Before repeating a decision, the agent asks. Ada returns the top outcome, its confidence, the records behind it, and act: true only when it is safe to go.',
+    title: 'Answer',
+    head: 'From the nearest precedents',
+    body: 'A calibrated probability for each outcome, how many precedents voted, and their receipts. When nothing is close enough, Ada says so and asks.',
     icon: (<><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></>),
   },
   {
-    title: 'Explain',
-    head: 'Why, part by part',
-    body: 'ada_facts explains each close record as a fact tree: per key its score, its weight and its share. The answer cites its records and says when it does not know.',
-    icon: (<><path d="M12 3v6" /><path d="M12 9 6 15" /><path d="M12 9l6 6" /><circle cx="6" cy="17" r="2" /><circle cx="18" cy="17" r="2" /></>),
+    title: 'Learn',
+    head: 'Sharper with every graded case',
+    body: 'Each graded case is a new precedent, and Ada learns its own weights from them: the parts of a case that predict the outcome count for more.',
+    icon: (<><path d="M4 18l5-5 4 4 7-8" /><path d="M15 9h5v5" /></>),
   },
 ];
 
 const WHERE = [
   {
-    title: 'Any MCP client',
-    head: 'Claude Code, Claude, Cursor, Codex, your own agents',
-    body: 'Add one URL and sign in with your Glyphh account. The Glyphh plugin for Claude Code adds the skill that tells Claude when to reach for Ada.',
+    title: 'Your runtime',
+    head: 'rrotor, on your own infrastructure',
+    body: 'Your models live and run in rrotor, which you run with Docker Compose, Helm or Terraform. Glyphh does not host it, and nothing of Glyphh’s is between your callers and it.',
   },
   {
-    title: 'POST /ada',
-    head: 'One endpoint, on a gateway key',
-    body: 'Every tool is an op on one endpoint. Call it from a service, a job or a script, with the same budget and the same answer.',
+    title: 'From Claude',
+    head: 'The runtime’s MCP connector',
+    body: 'Add <runtime>/mcp as a connector and click Allow. The glyphh plugin’s Ada skill writes the model with you, deploys a commit and calls it.',
   },
   {
-    title: 'A chat model',
-    head: 'glyphh-ada-1.0',
-    body: 'Pick it like any other model and talk to it in plain language or JSON. It answers only by calling Ada, and cites what it used.',
+    title: 'From your software',
+    head: 'The SDKs, or POST /v1/runs',
+    body: 'pip install glyphh or npm install @glyphh-ai/glyphh, with your runtime’s address and a runtime key.',
   },
   {
-    title: 'Your records, your place',
-    head: 'In the cloud, or on a device you registered',
-    body: 'A model keeps its records with Glyphh or on your own machine. Its configuration, weights and calibration always live on the server.',
+    title: 'Clearance',
+    head: 'Each caller sees what they may',
+    body: 'A spec can put layers behind a clearance. A status bot gets the fix; an engineer also gets the cause, the owner and the runbook.',
   },
 ];
 
-const ASK = `ada_query({
-  model_id: "am_0123456789ab",
-  situation: {
-    task: "deploy_service",
-    constraint: "canary_required"
+const ASK = `incidents.decide({
+  "error": {
+    "what": { "class": "TimeoutError",
+              "message": "payment gateway timed out",
+              "status": 504 }
   }
 })`;
 
 const ANSWER = `{
-  "top": "canary_then_full",
+  "fix": "raise circuit breaker",
   "confidence": 0.82,
-  "count": 6,
-  "act": true,
-  "reason": "sufficient, confident, not vetoed",
-  "veto_match": 0.12,
-  "receipts": [
-    { "id": "9f2c1a7b40de", "sim": 0.94, "outcome": "canary_then_full" },
-    { "id": "5b7e03c1a9f2", "sim": 0.91, "outcome": "canary_then_full" }
-  ]
+  "from": 6,
+  "last_time": {
+    "cause": "gateway rate limit hit on retry storm",
+    "owner": "payments",
+    "runbook": "RB-12 back off retries, raise circuit breaker"
+  }
 }`;
 
-const INSTALL = `claude plugin marketplace add glyphh-ai/glyphh
-claude plugin install glyphh@glyphh
+const INSTALL = `/plugin marketplace add glyphh-ai/glyphh
+/plugin install glyphh@glyphh
 
-# then, in Claude Code:  "sign in to Glyphh"`;
+# then add your runtime's connector, https://<host>/mcp,
+# and ask Claude to build a model with you`;
 
 function Tile({ t, i }) {
   return (
@@ -113,17 +112,18 @@ export default function AdaPage() {
           <HeroAscii />
         </div>
         <div className="oshero-inner container">
-          <p className="oshero-eyebrow">Ada · glyphh-ada-1.0</p>
+          <p className="oshero-eyebrow">Ada</p>
           <h1 className="oshero-title">
-            Typed models your agents build. Your software leverages it at <em>runtime.</em>
+            A classifier that learns from <em>precedent.</em>
           </h1>
           <p className="oshero-pitch">
-            Seed Ada with data and she builds a lattice of algebraic meaning. Leverage our SDK or direct API to
-            then make deterministic calls with no LLM in the middle.
+            Record graded cases. A new case is answered from the precedents nearest to it, with a calibrated
+            probability and the precedents it stands on; when it is unsure, Ada asks. It runs in your own runtime,
+            with no language model in the path.
           </p>
           <div className="oshero-actions">
-            <a href={`${DOCS}/ada-install`} className="os-cta os-cta-primary">Install Ada</a>
-            <a href={`${DOCS}/ada`} className="os-cta os-cta-ghost">Read the Docs</a>
+            <a href={`${DOCS}/run-rrotor`} className="os-cta os-cta-primary">Run rrotor</a>
+            <a href={DOCS} className="os-cta os-cta-ghost">Read the Docs</a>
           </div>
         </div>
       </header>
@@ -132,7 +132,7 @@ export default function AdaPage() {
         <section className="hiw" id="how-it-works">
           <div className="qs-head">
             <span className="qs-kicker">How it works</span>
-            <a href={`${DOCS}/ada-tools`} className="qs-more">Every tool &rarr;</a>
+            <a href={`${DOCS}/ada-skill`} className="qs-more">A model &rarr;</a>
           </div>
           <div className="hv-grid">
             {STEPS.map((t, i) => <Tile key={t.title} t={t} i={i} />)}
@@ -142,16 +142,16 @@ export default function AdaPage() {
         <section className="hiw" id="answer">
           <div className="qs-head">
             <span className="qs-kicker">The answer</span>
-            <a href={`${DOCS}/ada-tools`} className="qs-more">Answer fields &rarr;</a>
+            <a href={`${DOCS}/sdks`} className="qs-more">The SDKs &rarr;</a>
           </div>
           <h2 className="ix-h2 lt-h2">An answer you can check, not a guess you have to trust.</h2>
           <p className="ix-desc">
-            Ada does not generate. It finds the records closest to the situation, weighs them, and reports what
-            they say. A single record is not consensus, and the answer says how many stand behind it.
+            Ada does not generate. It finds the precedents closest to the case, weighs them, and reports what
+            they say. A single precedent is not consensus, and the answer says how many stand behind it.
           </p>
           <div className="ada-split">
             <div>
-              <p className="ada-split-label">The agent asks</p>
+              <p className="ada-split-label">Your software asks</p>
               <pre className="hv-code"><code>{ASK}</code></pre>
             </div>
             <div>
@@ -164,7 +164,7 @@ export default function AdaPage() {
         <section className="hiw" id="where">
           <div className="qs-head">
             <span className="qs-kicker">Where it runs</span>
-            <a href={`${DOCS}/ada`} className="qs-more">Ada models &rarr;</a>
+            <a href={`${DOCS}/run-rrotor`} className="qs-more">Run rrotor &rarr;</a>
           </div>
           <div className="hv-grid hv-grid-2">
             {WHERE.map((t, i) => <Tile key={t.title} t={t} i={i + 3} />)}
@@ -174,11 +174,12 @@ export default function AdaPage() {
         <section className="hiw" id="install">
           <div className="qs-head">
             <span className="qs-kicker">Install</span>
-            <a href={`${DOCS}/ada-install`} className="qs-more">Every client &rarr;</a>
+            <a href={`${DOCS}/plugin`} className="qs-more">Connect Claude &rarr;</a>
           </div>
-          <h2 className="ix-h2 lt-h2">Two commands and a sign-in.</h2>
+          <h2 className="ix-h2 lt-h2">Two commands and a connector.</h2>
           <p className="ix-desc">
-            No key to create. Every call is metered per token on your organization&rsquo;s plan, like any model.
+            Claude signs in with your Glyphh account: no key to type. Ada is in every plan, Free included, and
+            never priced per seat, per model or per call.
           </p>
           <pre className="hv-code" style={{ marginTop: '1.25rem' }}><code>{INSTALL}</code></pre>
           <p className="hv-foot-link"><a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a></p>

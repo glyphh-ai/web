@@ -53,25 +53,23 @@ const nextConfig = {
     };
   },
   async redirects() {
+    const PLATFORM = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
+    // Products that are not Glyphh's: their old addresses land on the home page.
+    const GONE = [
+      '/products/router', '/products/gateway', '/products/desktop', '/products/workspace', '/products/code',
+      '/products/connect', '/products/skills', '/products/semantic-apps', '/products/cloud', '/products/office',
+      '/products/design', '/integrations', '/integrations/:path*', '/chat', '/code', '/work', '/dream',
+    ];
     return [
-      // The site has no login of its own: /login and /signin land in the app,
-      // which signs you in first (his order, 2026-10-04).
-      { source: '/login', destination: process.env.NEXT_PUBLIC_APP_URL || 'https://app.glyphh.ai', permanent: false },
-      { source: '/signin', destination: process.env.NEXT_PUBLIC_APP_URL || 'https://app.glyphh.ai', permanent: false },
-      // Products is a real section again (2026-08-16). The bare index lands on
-      // the lead product (Design); retired product URLs fall through to 404.
-      { source: '/products', destination: '/products/router', permanent: false },
-      // Gateway became Router (his order, 2026-09-18); old links keep working.
-      { source: '/products/gateway', destination: '/products/router', permanent: true },
-      // Workspace became Desktop (his order, 2026-09-21); old links keep working.
-      { source: '/products/workspace', destination: '/products/desktop', permanent: true },
-      // 2026-09-11 (staying tight): Gateway is the one product page.
-      // The research page is off the site for now (his order, 2026-10-01). The
-      // page stays in the tree; the route lands on the home page until it returns.
+      // The site has no sign-in of its own: the platform signs you in.
+      { source: '/login', destination: PLATFORM, permanent: false },
+      { source: '/signin', destination: PLATFORM, permanent: false },
+      { source: '/products', destination: '/products/ada', permanent: false },
+      // The research page is off the site; the page stays in the tree.
       { source: '/research', destination: '/', permanent: false },
-      { source: '/products/cloud', destination: '/', permanent: false },
-      { source: '/products/office', destination: '/', permanent: false },
-      { source: '/products/design', destination: '/', permanent: false },
+      ...GONE.map((source) => ({ source, destination: '/', permanent: true })),
+      // There is no marketplace: its agreements and code of conduct are gone, and the Terms cover what remains.
+      ...['/developer-agreement', '/marketplace-terms', '/code-of-conduct'].map((source) => ({ source, destination: '/terms', permanent: true })),
     ];
   },
 };
