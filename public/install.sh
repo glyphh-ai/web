@@ -28,7 +28,8 @@ command -v curl >/dev/null 2>&1 || fail "curl is not installed"
 # Compose, just the image on port 7777. Claude's connector needs a public HTTPS host; the SDKs and REST work here.
 case "$RROTOR_PUBLIC_HOST" in
   localhost | 127.* ) local_only=1; bind=127.0.0.1: ;;
-  *[!0-9.:]* ) local_only=0; bind= ;;
+  *.*[!0-9.:]* | *[!0-9.:]*.* ) local_only=0; bind= ;;
+  # A name with no dot (my-mac) is this computer's too: no public certificate can be had for it.
   * ) local_only=1; bind= ;;
 esac
 if [ "$local_only" = 1 ]; then
