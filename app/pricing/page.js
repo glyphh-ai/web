@@ -12,7 +12,7 @@ import Footer from '../components/Footer';
 export const metadata = {
   title: 'Pricing — Glyphh',
   description:
-    'Never per seat, per model or per install. Free: one runtime node and 5,000 precedents. Pro $99 a month, Team $299 a month, Enterprise by contract.',
+    'A flat monthly price by the runtime node. Free: one node and 5,000 precedents. Pro $99 a month, Team $299 a month, Enterprise by contract.',
 };
 
 // The promise: what Glyphh never charges for.
@@ -50,10 +50,10 @@ export default function PricingPage() {
         <section className="ix-head">
           <a href="/" className="ix-crumb">&larr; Home</a>
           <span className="qs-kicker">Pricing</span>
-          <h1 className="ix-title">Never per seat, per model or per install.</h1>
+          <h1 className="ix-title">A flat monthly price, by the node.</h1>
           <p className="ix-lede">
-            Ada runs on your own infrastructure, on every plan. Start free on one node; pay a flat monthly price
-            for more nodes, more precedents and sync.
+            Ada runs on your own infrastructure on every plan, with unlimited members and models. Start free on one
+            node; upgrade for more nodes, more precedents and sync.
           </p>
           <div className="ix-actions">
             <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
@@ -102,7 +102,7 @@ export default function PricingPage() {
             <div>
               <span className="qs-kicker">Get started</span>
               <h3>Start free, on a node of your own.</h3>
-              <p>Pro $99 a month. Team $299 a month. Enterprise by contract. Never per seat, per model or per install.</p>
+              <p>Pro $99 a month. Team $299 a month. Enterprise by contract.</p>
             </div>
             <div className="ix-actions">
               <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
