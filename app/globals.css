@@ -8980,7 +8980,9 @@ p em, li em { font-family: inherit !important; font-style: italic; }
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
   background: var(--bg); color: var(--text); text-align: center;
 }
-.mh-logo { width: min(240px, 60vw); height: auto; }
+.mh-links { align-items: center; }
+.mh-links .mh-mark { display: inline-flex; margin-right: 8px; }
+.mh-links .mh-mark img { height: 20px; width: auto; }
 .mh-line {
   margin: 0; max-width: 22ch; font-family: var(--font-display); font-weight: 600;
   font-size: clamp(24px, 4vw, 44px); line-height: 1.12; letter-spacing: -0.02em; color: var(--text); text-wrap: balance;
