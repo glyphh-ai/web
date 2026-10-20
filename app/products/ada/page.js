@@ -9,9 +9,9 @@ import LetterField from '../../components/LetterField';
 // runs); the example answer is illustrative.
 
 export const metadata = {
-  title: 'Ada: decisions from precedent, in your own runtime',
+  title: 'Ada: a classifier that learns from precedent, in your own runtime',
   description:
-    'Record each case with its outcome; a new case is answered from the precedents closest to it, deterministically, with the precedents it stands on. Built with Claude, called by your software.',
+    'Record graded cases; a new case is answered from its nearest precedents with a calibrated probability, and Ada asks when it is unsure. Built with Claude, called by your software, run on your own infrastructure.',
 };
 
 const DOCS = "https://docs.glyphh.ai";
@@ -24,24 +24,24 @@ const STEPS = [
     icon: (<><path d="M12 5v14" /><path d="M5 12h14" /></>),
   },
   {
-    title: 'Query',
-    head: 'What the closest precedents say',
-    body: 'The leading outcome, its confidence, how many precedents voted, and their receipts. When nothing is close enough, sufficient is false.',
+    title: 'Answer',
+    head: 'From the nearest precedents',
+    body: 'A calibrated probability for each outcome, how many precedents voted, and their receipts. When nothing is close enough, Ada says so and asks.',
     icon: (<><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></>),
   },
   {
-    title: 'Explain',
-    head: 'Why, part by part',
-    body: 'facts explains each close precedent as a fact tree: per layer, segment and role its score, weight and share, cut to what the caller may see.',
-    icon: (<><path d="M12 3v6" /><path d="M12 9 6 15" /><path d="M12 9l6 6" /><circle cx="6" cy="17" r="2" /><circle cx="18" cy="17" r="2" /></>),
+    title: 'Learn',
+    head: 'Sharper with every graded case',
+    body: 'Each graded case is a new precedent, and Ada learns its own weights from them: the parts of a case that predict the outcome count for more.',
+    icon: (<><path d="M4 18l5-5 4 4 7-8" /><path d="M15 9h5v5" /></>),
   },
 ];
 
 const WHERE = [
   {
     title: 'Your runtime',
-    head: 'Hosted at <machine>.glyphh.app, or self-hosted',
-    body: 'Your models live and run in a runtime of your own. Nothing of Glyphh’s is between your callers and it. Self-hosting is free on every plan.',
+    head: 'rrotor, on your own infrastructure',
+    body: 'Your models live and run in rrotor, which you run with Docker Compose, Helm or Terraform. Glyphh does not host it, and nothing of Glyphh’s is between your callers and it.',
   },
   {
     title: 'From Claude',
@@ -82,7 +82,7 @@ const ANSWER = `{
 const INSTALL = `/plugin marketplace add glyphh-ai/glyphh
 /plugin install glyphh@glyphh
 
-# then add your runtime's connector, https://<machine>.glyphh.app/mcp,
+# then add your runtime's connector, https://<host>/mcp,
 # and ask Claude to build a model with you`;
 
 function Tile({ t, i }) {
@@ -114,11 +114,12 @@ export default function AdaPage() {
         <div className="oshero-inner container">
           <p className="oshero-eyebrow">Ada</p>
           <h1 className="oshero-title">
-            Decisions from precedent, in your own <em>runtime.</em>
+            A classifier that learns from <em>precedent.</em>
           </h1>
           <p className="oshero-pitch">
-            Record each case with its outcome. A new case is answered from the precedents closest to it: the same
-            answer every time, the precedents it stands on, and no language model in the path.
+            Record graded cases. A new case is answered from the precedents nearest to it, with a calibrated
+            probability and the precedents it stands on; when it is unsure, Ada asks. It runs in your own runtime,
+            with no language model in the path.
           </p>
           <div className="oshero-actions">
             <a href={`${DOCS}/quick-start`} className="os-cta os-cta-primary">Quick start</a>

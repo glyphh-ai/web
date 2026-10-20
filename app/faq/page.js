@@ -9,7 +9,7 @@ import { FAQ_GROUPS } from './faq-data';
 export const metadata = {
   title: 'FAQ — Glyphh',
   description:
-    'Glyphh and Ada, hosted and self-hosted runtimes, plans, and where your data goes.',
+    'Glyphh and Ada, the runtime you run yourself, plans, and where your data goes.',
   alternates: { canonical: '/faq' },
 };
 
