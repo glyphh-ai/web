@@ -14,7 +14,7 @@ export const metadata = {
 
 const PLATFORM_URL = 'https://platform.glyphh.ai';
 const DOCS = 'https://docs.glyphh.ai';
-const BENCH = 'https://github.com/glyphh-ai/rrotor/tree/main/benchmarks/credit';
+const BENCH = 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks/credit';
 
 const FLOW = [
   { n: '1', title: 'Past decisions', body: 'Record the applications you have decided, each with how it turned out. Each one becomes a precedent.' },

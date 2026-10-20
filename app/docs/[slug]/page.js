@@ -32,6 +32,7 @@ const MOVED = {
   'ada-tools': to('api'), mcp: to('api'), 'mcp-servers': to('api'),
   // Getting a runtime: running rrotor.
   'quick-start': to('run-rrotor'), quickstart: to('run-rrotor'), runtimes: to('run-rrotor'), rrotor: to('run-rrotor'),
+  'self-hosting': to('run-rrotor'), compose: to('docker-compose'), kubernetes: to('helm'),
   // Plans: licensing, which links to the prices.
   plans: to('licensing'), seats: to('licensing'), 'billing-admin': to('licensing'),
 };

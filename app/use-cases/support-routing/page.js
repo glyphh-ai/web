@@ -15,7 +15,7 @@ export const metadata = {
 
 const PLATFORM_URL = 'https://platform.glyphh.ai';
 const DOCS = 'https://docs.glyphh.ai';
-const BENCH = 'https://github.com/glyphh-ai/rrotor/tree/main/benchmarks/banking77';
+const BENCH = 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks/banking77';
 
 const FLOW = [
   { n: '1', title: 'Labelled examples', body: 'Record the tickets you have already routed, each with its queue. Each one becomes a precedent.' },

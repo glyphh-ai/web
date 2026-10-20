@@ -1,13 +1,12 @@
 import { Architecture, Code, Row } from './ui';
 import { PLUGIN_PAGES, SDK_PAGES } from './pages';
+import { RUN_HUB, RUN_PACKAGES } from './run';
 import { DOCS } from './base';
 
 // The docs explain the architecture and how to run rrotor, the plugin and the
 // SDKs: nothing else. Every fact is checked against rrotor's docs/architecture.md
 // and docs/self-hosting, the server's docs/architecture.md and pricing.md, and
 // glyphh-ai/glyphh (README, sdk/*/README.md, the Ada skill). Each fact once.
-
-const SELF_HOSTING = 'https://github.com/glyphh-ai/rrotor/tree/main/docs/self-hosting';
 
 const architecture = [
   {
@@ -48,7 +47,7 @@ const architecture = [
           that block WebSockets. With <code>RROTOR_LINK=off</code> (air-gapped) there is no link, no heartbeat and no
           Glyphh sign-in: runtime keys are the only way in.
         </p>
-        <h2>Where the data lives</h2>
+        <h2 id="where-the-data-lives">Where the data lives</h2>
         <p>Everything rrotor keeps is on its one volume, <code>/data</code>:</p>
         <Row k="models/<name>/versions/<commit>/">Each deployed version: the checkout and its venv, immutable</Row>
         <Row k="models/<name>/data/">The model’s data: an Ada model’s <code>precedents.sqlite</code>, which outlives every version</Row>
@@ -125,12 +124,63 @@ const architecture = [
         </p>
         <h2>The key</h2>
         <ul>
-          <li><code>&lt;payload&gt;.&lt;signature&gt;</code>, Ed25519, checked on the node with no network request. The payload carries <code>tier</code>, <code>max_nodes</code>, <code>max_precedents</code>, <code>cluster_sync_enabled</code>, <code>issued_at</code> and <code>expires_at</code>.</li>
-          <li>It expires at the end of the paid month; the next arrives over the link or the heartbeat. Past expiry it holds for 14 days’ grace, then the node runs as Community.</li>
-          <li>A bad key is logged and the node runs as Community. Nothing a licence does stops rrotor or refuses a run: the worst case is Community’s limits.</li>
-          <li><code>GET /v1/licence</code> (and <code>/v1/health</code>) shows the key held, its <code>state</code> (<code>live</code>, <code>grace</code>, <code>expired</code>, <code>bad</code>, <code>none</code>), the limits that apply and <code>precedents {'{held, cap, over}'}</code>.</li>
+          <li><code>&lt;payload&gt;.&lt;signature&gt;</code>, each base64url: a JSON payload and an Ed25519 signature over its exact bytes, made by the Glyphh server. rrotor checks it with Glyphh’s public key, which is in its code, not its environment: no network request, a key changed by one byte is refused, and no setting can make rrotor trust another signer.</li>
+          <li>The payload carries <code>license_id</code>, <code>tier</code>, <code>max_nodes</code>, <code>max_precedents</code>, <code>cluster_sync_enabled</code>, <code>issued_at</code>, <code>expires_at</code> and <code>customer_id</code> (the server’s id, no name or address). Nothing else.</li>
+          <li><code>GET /v1/licence</code> (and <code>/v1/health</code>) shows the key held, where it came from, its <code>state</code> (<code>live</code>, <code>grace</code>, <code>expired</code>, <code>bad</code>, <code>none</code>) with the days left, the limits that apply, <code>ha</code> (Enterprise) and <code>precedents {'{held, cap, over}'}</code>.</li>
         </ul>
-        <p>Giving a node its key: <a href={`${DOCS}/run-rrotor#the-licence-key`}>Run rrotor</a>.</p>
+        <p>To read a key you hold:</p>
+        <Code lang="bash">{`printf %s "$GLYPHH_LICENSE_KEY" | cut -d. -f1 | tr '_-' '/+' | base64 -d 2>/dev/null | python3 -m json.tool`}</Code>
+        <h2 id="where-the-key-goes">Where the key goes</h2>
+        <p>A linked rrotor needs nothing: each new key arrives over the link or the heartbeat. rrotor reads every source:</p>
+        <div className="dx-table">
+          <table>
+            <thead><tr><th>Source</th><th>Read</th></tr></thead>
+            <tbody>
+              <tr><td><code>GLYPHH_LICENSE_KEY</code> (or <code>RROTOR_LICENCE</code>)</td><td>At start</td></tr>
+              <tr><td>The file <code>/etc/rrotor/license.key</code> (or <code>/data/licence.token</code>)</td><td>At start, every hour and on <code>SIGHUP</code></td></tr>
+              <tr><td>The heartbeat’s answer</td><td>At boot and every 24 hours, with the link on</td></tr>
+              <tr><td>The link’s welcome</td><td>Each time the link connects</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Of the keys that check out, rrotor holds the one <strong>issued last</strong> that is not more than 14 days past its expiry, so a change of plan takes effect at the next payment and an older key left in a file cannot override a newer one. The key held is kept in <code>/data/licence.json</code>, so a restart keeps it.</li>
+          <li>A key that does not check out is logged at error, with its source, at every start and hourly re-read, and the node runs as Community. Nothing a licence does stops rrotor or refuses a run: the worst case is Community’s limits.</li>
+          <li><code>PUT /v1/licence</code> is refused on a self-hosted rrotor (403 <code>E_LOCAL_ONLY</code>), so a runtime key cannot hand it a key.</li>
+        </ul>
+        <h2 id="air-gapped">Air-gapped</h2>
+        <ol>
+          <li>Copy the key from the platform’s Settings → Licence.</li>
+          <li>Give it to rrotor in <code>GLYPHH_LICENSE_KEY</code> or the file <code>/etc/rrotor/license.key</code>, and set <code>RROTOR_LINK=off</code>: rrotor then makes no request to Glyphh at all, and callers use runtime keys.</li>
+          <li>Each month, put the next key in the file and send rrotor <code>SIGHUP</code> (<code>docker compose kill -s HUP rrotor</code>), or wait up to an hour. Nothing restarts.</li>
+        </ol>
+        <p>
+          Each package’s steps: <a href={`${DOCS}/docker-compose#air-gapped`}>Docker Compose</a>,{' '}
+          <a href={`${DOCS}/helm#air-gapped`}>Helm</a>; Terraform takes the key as <code>license_key</code>.
+        </p>
+        <h2>Grace</h2>
+        <ul>
+          <li><strong>Until <code>expires_at</code></strong> (the end of the paid month) a key is current. A new one comes with each payment, so a running subscription never lapses.</li>
+          <li><strong>For 14 days past it,</strong> everything runs on the key’s limits; the health says <code>grace</code> with the days left, and rrotor logs a warning daily.</li>
+          <li><strong>After that,</strong> Community’s limits: precedents past 5,000 stay and are served, and new ones are refused (below). Nothing is deleted, no model is refused, and a new key from any source lifts the limits at once.</li>
+          <li>A key cannot be called back once issued: it holds until <code>expires_at</code> plus 14 days.</li>
+        </ul>
+        <h2>The heartbeat</h2>
+        <p>
+          At boot and every 24 hours, with the link on: <code>POST https://api.glyphh.ai/v1/license/verify</code> with
+          the runtime token. The answer is the newest key for your subscription; if the call fails, rrotor keeps the key
+          it has and tries again. The body, whole:
+        </p>
+        <Row k="machine">SHA-256 of the runtime id and the host’s machine id (or a random id kept in /data): tells apart two machines running one runtime, and cannot be read back</Row>
+        <Row k="licence_id">The key held, or null</Row>
+        <Row k="version">rrotor’s version</Row>
+        <Row k="active_runs">How many runs are in progress, a number</Row>
+        <Row k="node_id, cluster_id, role">The node’s name, its cluster and its role (standalone, head or follower), to count nodes</Row>
+        <Row k="precedents">How many precedents the node holds, a number</Row>
+        <p>
+          Never sent: IP addresses, hostnames, prompts, model inputs or outputs, model code, files, secrets, anything
+          about your users. The server keeps the body and when it came, not the caller’s address.
+        </p>
         <h2>The caps</h2>
         <Row k="Precedents">Per node, across all its Ada models; in a cluster, held by the head on the synced store. A <code>record</code> past the cap indexes nothing and the run ends <code>done</code>, never <code>failed</code>, with data <code>{'{"status": "limit_exceeded", "indexed": false, "message", "precedents", "cap"}'}</code>. Earlier records stay. A store over the cap after a downgrade keeps every precedent and answers; only growth is refused</Row>
         <Row k="Nodes">Held by the head at join: a node past <code>max_nodes</code> is refused (<code>E_CLUSTER_FULL</code>), answers 503 and asks again every minute. A key with a smaller cap removes the nodes that joined last</Row>
@@ -144,7 +194,7 @@ const architecture = [
     body: (
       <>
         <Row k="Log lines">JSON on stdout, tokens masked; each names the node (and in a cluster <code>cluster_id</code> and <code>role</code>), the run and the trace. A run’s own <code>ctx.log</code> lines stay in its log, <code>GET /v1/runs/{'{id}'}/log</code></Row>
-        <Row k="Audit log">Enterprise: an event per call, deploy, key change, licence change, refusal (401, 403) and cluster change, with who did it. Kept in <code>/data/audit</code> (90 days, 1 GB), read with <code>GET /v1/audit</code> or <code>audit_query</code>; in a cluster, the head keeps every node’s. Below Enterprise the events are log lines and <code>GET /v1/audit</code> is 403 <code>E_NOT_IN_PLAN</code></Row>
+        <Row k="Audit log">Enterprise: an event per call, deploy, key change, licence change, refusal (401, 403) and cluster change, with who did it. Kept in <code>/data/audit</code>, a file a day, read with <code>GET /v1/audit</code> or <code>audit_query</code>; in a cluster, the head keeps every node’s. Below Enterprise the events are log lines and <code>GET /v1/audit</code> is 403 <code>E_NOT_IN_PLAN</code></Row>
         <Row k="A drain">Logs, metrics, traces and audit events by OpenTelemetry (OTLP over HTTP, protobuf) to your own collector, never through Glyphh. In a cluster the followers send theirs to the head, which exports for every node: one endpoint, one egress</Row>
         <Row k="Server-side logging">Opt-in: the same signals also go to Glyphh, shown on the platform’s Settings → Logs and kept 7 days. rrotor says so at every start. Not with the link off; in a cluster only the head sends</Row>
         <p>
@@ -157,105 +207,29 @@ const architecture = [
             <thead><tr><th>Variable</th><th>Default</th><th>Meaning</th></tr></thead>
             <tbody>
               <tr><td><code>OTEL_EXPORTER_OTLP_ENDPOINT</code></td><td></td><td>Your collector, e.g. <code>http://otel-collector:4318</code>. Unset: no drain. OpenTelemetry’s other <code>OTEL_EXPORTER_OTLP_*</code> variables mean what it says; <code>grpc</code> is refused at start (<code>E_CONFIG</code>)</td></tr>
+              <tr><td><code>OTEL_RESOURCE_ATTRIBUTES</code>, <code>OTEL_SERVICE_NAME</code></td><td>, <code>rrotor</code></td><td>Added to every signal, beside rrotor’s own (version, node id, runtime id, cluster id, role)</td></tr>
+              <tr><td><code>OTEL_TRACES_SAMPLER</code>, <code>OTEL_TRACES_SAMPLER_ARG</code></td><td><code>parentbased_always_on</code></td><td><code>always_on</code>, <code>always_off</code>, <code>traceidratio</code> or their <code>parentbased_</code> forms, and the ratio</td></tr>
               <tr><td><code>RROTOR_DRAIN_SIGNALS</code></td><td><code>logs,metrics,traces,audit</code></td><td>What the drain sends</td></tr>
+              <tr><td><code>RROTOR_DRAIN_BUFFER</code></td><td><code>10000</code></td><td>Records held per signal while the collector is down; past it the oldest are dropped and counted. Audit events are never dropped: the drain reads them from <code>/data/audit</code></td></tr>
               <tr><td><code>RROTOR_DRAIN_AT</code></td><td><code>head</code></td><td>In a cluster: by the head, or <code>node</code>, each node itself</td></tr>
               <tr><td><code>RROTOR_LOG_PAYLOADS</code></td><td><code>off</code></td><td><code>on</code>: inputs and results (4 KB each) in your drain only; never sent to Glyphh</td></tr>
               <tr><td><code>RROTOR_SERVER_LOGS</code></td><td><code>off</code></td><td><code>on</code>: server-side logging</td></tr>
+              <tr><td><code>RROTOR_AUDIT_RETENTION_DAYS</code></td><td><code>90</code></td><td>Days of audit log kept (Enterprise)</td></tr>
+              <tr><td><code>RROTOR_AUDIT_MAX_MB</code></td><td><code>1024</code></td><td>The most the audit log may take; past it the oldest day goes, never today’s</td></tr>
               <tr><td><code>RROTOR_LOG_LEVEL</code></td><td><code>INFO</code></td><td>The log level</td></tr>
             </tbody>
           </table>
         </div>
-        <p>
-          The full list, the metrics and the buffering:{' '}
-          <a href={`${SELF_HOSTING}#logs-audit-and-drains`}>rrotor’s self-hosting docs</a>.
-        </p>
+        <Row k="Metrics">rrotor.runs, rrotor.run.seconds, rrotor.precedents, rrotor.precedents.cap, rrotor.link.state, rrotor.drain.dropped; in a cluster rrotor.cluster.term and rrotor.cluster.lag</Row>
+        <Row k="Traces">A span per API request (your traceparent honoured), the sandbox’s start and the function under it; in a cluster, one trace across the forward to the head and the head’s work</Row>
       </>
     ),
   },
 ];
 
 const run = [
-  {
-    slug: 'run-rrotor',
-    title: 'Run rrotor',
-    lede: 'One image on your own machine, cluster or cloud, at your own address.',
-    body: (
-      <>
-        <h2>Start</h2>
-        <ol>
-          <li><strong>Register the runtime</strong> on the platform’s Getting started: a name and the public host it will answer at, e.g. <code>rrotor.acme.com</code>. The platform shows the runtime id and token once, and the settings for the way you deploy.</li>
-          <li><strong>Deploy</strong> one of three ways (below).</li>
-          <li><strong>Check it:</strong> <code>curl https://&lt;host&gt;/healthz</code>. Then add <code>https://&lt;host&gt;/mcp</code> as a connector in Claude (<a href={`${DOCS}/plugin`}>The plugin</a>), or make a runtime key for your software (<a href={`${DOCS}/api`}>API and MCP</a>).</li>
-        </ol>
-        <div className="dx-table">
-          <table>
-            <thead><tr><th>Way</th><th>What runs</th><th>Start</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Docker Compose</strong></td><td>rrotor and Caddy (HTTPS) on one Linux machine, files in <code>deploy/compose/</code></td><td><code>docker compose up -d</code></td></tr>
-              <tr><td><strong>Helm</strong></td><td>A StatefulSet, a Service and an Ingress on Kubernetes 1.33 or later, chart in <code>deploy/helm/rrotor/</code></td><td><code>helm install rrotor deploy/helm/rrotor -n rrotor --set publicHost=… --set existingSecret=…</code></td></tr>
-              <tr><td><strong>Terraform</strong></td><td>A VM on AWS or Google Cloud running the Compose package, <code>/data</code> on its own disk; modules <code>deploy/terraform/aws</code> and <code>deploy/terraform/gcp</code></td><td><code>terraform apply</code></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p>
-          Each guide, step by step, with sizes, backups and upgrades:{' '}
-          <a href={SELF_HOSTING}>rrotor <code>docs/self-hosting</code></a>.
-        </p>
-        <h2>Settings</h2>
-        <p>Each package sets these from the platform’s snippet.</p>
-        <div className="dx-table">
-          <table>
-            <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
-            <tbody>
-              <tr><td><code>RROTOR_MODE=self</code></td><td>A self-hosted rrotor. Required</td></tr>
-              <tr><td><code>RROTOR_RUNTIME_ID</code>, <code>RROTOR_RUNTIME_TOKEN</code></td><td>From registering the runtime. The token is its identity to Glyphh: keep it secret; rotate it on the platform if lost</td></tr>
-              <tr><td><code>RROTOR_PUBLIC_HOST</code></td><td>The exact host it answers at. Any other <code>Host</code> is 421 <code>E_HOST</code></td></tr>
-              <tr><td><code>RROTOR_SERVER</code></td><td>Default <code>https://api.glyphh.ai</code></td></tr>
-              <tr><td><code>GLYPHH_LICENSE_KEY</code></td><td>The licence key (below)</td></tr>
-              <tr><td><code>RROTOR_LINK</code></td><td>Default <code>on</code>; <code>off</code> for air-gapped</td></tr>
-              <tr><td><code>RROTOR_KEYS_SHA256</code></td><td>Air-gapped: the SHA-256 of each runtime key that may call it, comma-separated (<code>printf %s &quot;$KEY&quot; | sha256sum</code>). With the link on, keys come down the link</td></tr>
-              <tr><td><code>RROTOR_DATA</code></td><td>Default <code>/data</code>. One rrotor writes it, never two</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p>A setting missing or malformed stops rrotor at start with <code>E_CONFIG</code>, naming it.</p>
-        <h2>In front of it</h2>
-        <ul>
-          <li>rrotor listens on <strong>7777</strong>, plain HTTP. End TLS in front (Caddy, an Ingress, a load balancer) and pass the <code>Host</code> header through.</li>
-          <li>Open: <code>GET /healthz</code> (the process is up) and <code>GET /readyz</code> (this node may take traffic). <code>GET /v1/health</code>, authenticated, reports the link, each sandbox layer, the licence and the drains.</li>
-          <li>Outbound it reaches <code>api.glyphh.ai</code> (the link), <code>github.com</code> (deploys from git), <code>ghcr.io</code> (the image) and the hosts a model declares.</li>
-        </ul>
-        <h2>The container’s privileges</h2>
-        <p>
-          The sandbox makes namespaces and mounts its own <code>/proc</code>, which a container’s defaults forbid. The
-          packages set all of this.
-        </p>
-        <Row k="Docker">--security-opt seccomp=unconfined --security-opt apparmor=unconfined --security-opt systempaths=unconfined</Row>
-        <Row k="Kubernetes">seccompProfile: Unconfined, appArmorProfile: Unconfined, procMount: Unmasked with hostUsers: false</Row>
-        <Row k="Ubuntu 23.10+">The host’s kernel.apparmor_restrict_unprivileged_userns=0</Row>
-        <p>
-          No <code>--privileged</code>, no added capabilities, no host network. rrotor runs as uid 10001 on a read-only
-          root, and its own seccomp filter holds each run. If a layer cannot work, <code>/v1/health</code> names it and
-          the fix, and runs are refused (<code>E_SANDBOX_UNAVAILABLE</code>).
-        </p>
-        <h2 id="the-licence-key">The licence key</h2>
-        <p>
-          A linked rrotor gets its key over the link and the heartbeat: nothing to do. Air-gapped, or to set one by
-          hand, copy it from the platform’s Settings → Licence into <code>GLYPHH_LICENSE_KEY</code> (read at start) or
-          the file <code>/etc/rrotor/license.key</code> (read at start, every hour and on <code>SIGHUP</code>). Compose,
-          air-gapped:
-        </p>
-        <Code lang="bash">{`docker compose -f docker-compose.yml -f docker-compose.airgap.yml up -d`}</Code>
-        <p>What the key does: <a href={`${DOCS}/licensing`}>Licensing</a>.</p>
-        <h2>Upgrades and backups</h2>
-        <p>
-          A new version is a new image tag; <code>/data</code> carries over. Pin a version, back up <code>/data</code>{' '}
-          first, and upgrade when nothing is running. Everything rrotor keeps is on <code>/data</code>, including the
-          runtime token: keep a backup as you keep the token.
-        </p>
-      </>
-    ),
-  },
+  RUN_HUB,
+  ...RUN_PACKAGES,
   {
     slug: 'run-a-cluster',
     title: 'Run a cluster',
@@ -281,10 +255,10 @@ const run = [
           </table>
         </div>
         <h2>The packages</h2>
-        <Row k="Compose, to try">docker compose -f docker-compose.cluster.yml up -d: three nodes and Caddy on one machine</Row>
-        <Row k="Compose, per machine">docker compose -f docker-compose.node.yml up -d on each machine, behind your load balancer</Row>
-        <Row k="Helm">--set cluster.enabled=true --set replicas=3: the secret made on install and kept, or cluster.existingSecret</Row>
-        <Row k="Terraform">node_count: nodes across zones behind an AWS NLB or Google’s HTTPS load balancer, the secret in the cloud’s secret store</Row>
+        <p>Each sets these for you; you choose the number of nodes (at most the key’s <code>max_nodes</code>) and keep the secret.</p>
+        <Row k="Compose">Three nodes and Caddy on one machine to try it, or a node per machine behind your load balancer (<a href={`${DOCS}/docker-compose#a-cluster`}>Docker Compose</a>)</Row>
+        <Row k="Helm">cluster.enabled and replicas, found at the headless Service, the secret made on install and kept (<a href={`${DOCS}/helm#a-cluster`}>Helm</a>)</Row>
+        <Row k="Terraform">node_count, nodes across zones behind an AWS NLB or Google’s HTTPS load balancer, the secret in the cloud’s secret store (<a href={`${DOCS}/terraform#a-cluster`}>Terraform</a>)</Row>
         <ul>
           <li>Point the load balancer’s health check at <code>/readyz</code> (503 with <code>joining</code>, <code>catching_up</code>, <code>no_cluster</code>, <code>refused</code> or <code>unlicensed</code>) and liveness at <code>/healthz</code>.</li>
           <li>Every node runs the same image on the same CPU architecture (<code>E_CLUSTER_ARCH</code> otherwise).</li>
@@ -300,7 +274,9 @@ kubectl exec rrotor-1 -- rrotord cluster promote rrotor-1`}</Code>
         <Row k="promote refuses">E_CLUSTER_QUORUM: most members do not answer. E_CLUSTER_LAG: the node is behind another (--force promotes it and loses the writes it lacks; refused on Enterprise, E_CLUSTER_HA). E_CLUSTER_CONFIRM: the head does not answer (confirm at the terminal, or --yes). E_CLUSTER_VOTES: run it again</Row>
         <Row k="leave refuses">E_CLUSTER_HEAD: the head cannot leave; promote another node first</Row>
         <p>
-          A member unseen for 24 hours (<code>RROTOR_CLUSTER_EVICT_AFTER</code>) is removed and may join again. Run
+          A member unseen for 24 hours (<code>RROTOR_CLUSTER_EVICT_AFTER</code>) is removed and may join again. The head
+          keeps 1 GB of its log for catch-up (<code>RROTOR_CLUSTER_LOG_KEEP</code>); a node further behind takes a
+          snapshot. Run
           three or more nodes: with two, a membership change needs both.
         </p>
       </>

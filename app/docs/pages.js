@@ -55,7 +55,7 @@ that worked, then tell me the fix for this new error and why.`}</Code>
         <h2>What the skill does</h2>
         <ol>
           <li><strong>Agrees the case with you:</strong> its fields (exact, text, numbers on a scale, secret), the outcome, and who will call.</li>
-          <li><strong>Writes the model</strong> and its tests (on <code>rrotor.testing.Harness</code>), starting from rrotor’s <a href="https://github.com/glyphh-ai/rrotor/tree/main/examples/ada_incidents"><code>examples/ada_incidents</code></a>.</li>
+          <li><strong>Writes the model</strong> and its tests (on <code>rrotor.testing.Harness</code>), starting from rrotor’s <code>examples/ada_incidents</code>.</li>
           <li><strong>Commits and pushes</strong> to your GitHub repo, then <code>model_deploy {'{repo, commit, token?}'}</code> (a token for a private repo).</li>
           <li><strong>Records</strong> past cases with their outcomes (<code>model_call record</code>), then <code>learn</code>: it needs ten graded precedents of two outcomes.</li>
           <li><strong>Calls it:</strong> <code>query</code>, <code>decide</code> and <code>facts</code> for why. When <code>decide</code> asks (<code>needs_input</code>), your answer goes back with <code>model_continue</code> and is recorded as a new precedent.</li>

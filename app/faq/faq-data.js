@@ -2,7 +2,7 @@
 // built. Answers are strings or, when they carry a link, { html }.
 
 const DOCS = 'https://docs.glyphh.ai';
-const SELF_HOSTING = 'https://github.com/glyphh-ai/rrotor/tree/main/docs/self-hosting';
+const SELF_HOSTING = 'https://docs.glyphh.ai/run-rrotor';
 
 export const FAQ_GROUPS = [
   {
@@ -66,7 +66,7 @@ export const FAQ_GROUPS = [
       {
         id: 'self-host',
         q: 'How do I run it?',
-        a: { html: `With Docker Compose, Helm or Terraform, from the image <code>ghcr.io/glyphh-ai/rrotor</code>. See the <a href="${SELF_HOSTING}">self-hosting guides</a>.` },
+        a: { html: `With Docker Compose, Helm or Terraform, from the image <code>ghcr.io/glyphh-ai/rrotor</code>. See <a href="${SELF_HOSTING}">Run rrotor</a>.` },
       },
       {
         id: 'hosted',
