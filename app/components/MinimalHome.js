@@ -7,13 +7,13 @@ import AdaField from './AdaField';
 export default function MinimalHome() {
   return (
     <main className="mh-page">
-      <h1 className="mh-line">Glyphh Ada is a classifier that improves as more data is classified.</h1>
+      <h1 className="mh-line">Stop paying an LLM to answer the same question twice.</h1>
       <div className="mh-field">
         <AdaField />
       </div>
       <p className="mh-sub">
-        A classifier that answers from its nearest precedents, says how sure it is, and asks when it is not. In a
-        runtime you run yourself.
+        Glyphh Ada answers from the cases you have already graded, says how sure it is, and hands the LLM only what
+        it has not seen. Routing 200 support messages, Ada then Claude scored 97.5% with Claude seeing 22% of them.
       </p>
       <nav className="mh-links" aria-label="Glyphh">
         <a href="/" className="mh-mark" aria-label="Glyphh">

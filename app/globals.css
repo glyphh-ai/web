@@ -8982,6 +8982,7 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 }
 .mh-links { align-items: center; }
 .mh-links .mh-mark { display: inline-flex; margin-right: 8px; }
+.ada-hero-field { width: 100%; max-width: none; margin-top: 2.4rem; height: clamp(280px, 38vw, 420px); }
 .mh-links .mh-mark img { height: 20px; width: auto; }
 .mh-line {
   margin: 0; max-width: 22ch; font-family: var(--font-display); font-weight: 600;
@@ -8990,7 +8991,9 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 /* Ada learning (AdaField.js): a letter field in the page's text colour, framed by one hairline. */
 .mh-field {
   position: relative; width: min(760px, 100%); height: clamp(260px, 42vw, 360px);
-  border: 1px solid var(--border); background: var(--bg);
+  border: 1px solid var(--border);
+  background: radial-gradient(ellipse 70% 60% at 55% 55%, rgba(176, 102, 255, 0.16), transparent 70%), var(--bg);
+  box-shadow: 0 0 80px -20px rgba(176, 102, 255, 0.35);
 }
 .mh-field-canvas {
   position: absolute; inset: 0; width: 100%; height: 100%; display: block;

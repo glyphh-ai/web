@@ -1,7 +1,7 @@
 import Nav from '../../components/Nav';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
-import HeroAscii from '../../components/HeroAscii';
+import AdaField from '../../components/AdaField';
 import LetterField from '../../components/LetterField';
 
 // Ada: the product page, in the home page's frame grammar. The facts are
@@ -108,9 +108,6 @@ export default function AdaPage() {
       <Nav />
 
       <header className="oshero company-hero">
-        <div className="oshero-art" aria-hidden="true">
-          <HeroAscii />
-        </div>
         <div className="oshero-inner container">
           <p className="oshero-eyebrow">Ada</p>
           <h1 className="oshero-title">
@@ -124,6 +121,10 @@ export default function AdaPage() {
           <div className="oshero-actions">
             <a href={`${DOCS}/run-rrotor`} className="os-cta os-cta-primary">Run rrotor</a>
             <a href={DOCS} className="os-cta os-cta-ghost">Read the Docs</a>
+          </div>
+          {/* Ada learning, as on the home page. */}
+          <div className="mh-field ada-hero-field">
+            <AdaField />
           </div>
         </div>
       </header>
