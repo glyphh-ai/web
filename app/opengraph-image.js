@@ -85,13 +85,13 @@ export default async function Image() {
           </div>
         </div>
         <div style={{ display: 'flex', fontSize: '29px', color: '#b6b6b6', marginTop: '42px' }}>
-          Ada · hosted or self-hosted · called from Claude and your code
+          Ada · a classifier that learns · called from Claude and your code
         </div>
         <div style={{ display: 'flex', gap: '26px', marginTop: '34px', fontSize: '22px', color: '#b36bfb' }}>
           <span>[ record ]</span>
-          <span>[ query ]</span>
-          <span>[ explain ]</span>
-          <span>[ decide ]</span>
+          <span>[ answer ]</span>
+          <span>[ ask ]</span>
+          <span>[ learn ]</span>
         </div>
       </div>
     ),

@@ -8977,7 +8977,7 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 /* THE MINIMAL HOME (his order, 2026-10-13): the logo centred, one line under it. */
 .mh-page {
   min-height: 100vh; min-height: 100svh; box-sizing: border-box; padding: 24px 16px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
   background: var(--bg); color: var(--text); text-align: center;
 }
 .mh-logo { width: min(320px, 72vw); height: auto; }
@@ -8985,3 +8985,16 @@ p em, li em { font-family: inherit !important; font-style: italic; }
   margin: 0; max-width: 22ch; font-family: var(--font-display); font-weight: 700;
   font-size: clamp(24px, 4vw, 44px); line-height: 1.12; letter-spacing: -0.02em; color: var(--text); text-wrap: balance;
 }
+/* Ada learning (AdaField.js): a letter field in the page's text colour, framed by one hairline. */
+.mh-field {
+  position: relative; width: min(760px, 100%); height: clamp(260px, 42vw, 360px);
+  border: 1px solid var(--border); background: var(--bg);
+}
+.mh-field-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  font-family: var(--font-mono); color: var(--text);
+}
+.mh-sub { margin: 0; max-width: 56ch; font-size: 16px; line-height: 1.55; color: var(--muted); text-wrap: balance; }
+.mh-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+.mh-links a { color: var(--text-3); text-decoration: none; }
+.mh-links a:hover, .mh-links a:focus-visible { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
