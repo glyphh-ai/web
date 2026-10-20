@@ -6696,7 +6696,7 @@ body:has(.office-page) { background: #000; }
 .dx-side-home-link { font-size: 0.78rem; color: var(--text-3); text-decoration: none; }
 .dx-side-home-link:hover { color: var(--text); }
 .dx-side-logo { display: block; }
-.dx-side-logo img { width: 100%; height: auto; display: block; }
+.dx-side-logo img { width: 140px; max-width: 100%; height: auto; display: block; }
 .dx-side-search {
   display: flex; align-items: center; gap: 0.5rem;
   padding: 0 0.6rem 0 0.7rem; height: 2.3rem;
@@ -8980,7 +8980,7 @@ p em, li em { font-family: inherit !important; font-style: italic; }
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
   background: var(--bg); color: var(--text); text-align: center;
 }
-.mh-logo { width: min(320px, 72vw); height: auto; }
+.mh-logo { width: min(240px, 60vw); height: auto; }
 .mh-line {
   margin: 0; max-width: 22ch; font-family: var(--font-display); font-weight: 600;
   font-size: clamp(24px, 4vw, 44px); line-height: 1.12; letter-spacing: -0.02em; color: var(--text); text-wrap: balance;

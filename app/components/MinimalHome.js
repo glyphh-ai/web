@@ -7,8 +7,9 @@ import AdaField from './AdaField';
 export default function MinimalHome() {
   return (
     <main className="mh-page">
-      <Image className="mh-logo" src="/glyphh-logo-black.png" alt="Glyphh" width={650} height={215} priority />
-      <h1 className="mh-line">Glyphh Ada is a classifier that learns the more data you classify.</h1>
+      <Image className="mh-logo logo-dark" src="/glyphh-logo-text-white.png" alt="Glyphh" width={417} height={130} priority />
+      <Image className="mh-logo logo-light" src="/glyphh-logo-text-black.png" alt="" width={442} height={162} priority />
+      <h1 className="mh-line">Glyphh Ada is a classifier that improves as more data is classified.</h1>
       <div className="mh-field">
         <AdaField />
       </div>

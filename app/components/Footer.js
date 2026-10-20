@@ -55,7 +55,8 @@ export default function Footer() {
         <div className="ft-grid">
           <div className="ft-brand">
             <a href="/" className="ft-logo" aria-label="Glyphh">
-              <img src="/glyphh-logo-black.png" alt="Glyphh" />
+              <img className="logo-dark" src="/glyphh-logo-text-white.png" alt="Glyphh" />
+              <img className="logo-light" src="/glyphh-logo-text-black.png" alt="" />
             </a>
             <p className="ft-tagline">We put the human back in intelligence.</p>
             <p className="ft-contact">

@@ -76,7 +76,8 @@ export default function Nav() {
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
         <div className="nav-inner">
           <a href="/" className="nav-logo" aria-label="Glyphh">
-            <img src="/glyphh-logo-black.png" alt="Glyphh" />
+            <img className="logo-dark" src="/glyphh-logo-text-white.png" alt="Glyphh" />
+            <img className="logo-light" src="/glyphh-logo-text-black.png" alt="" />
           </a>
           <div className="nav-links">
             <div className="nav-dd">
