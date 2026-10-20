@@ -6,7 +6,7 @@ import DocsHtmlClass from './DocsHtmlClass';
 
 export const metadata = {
   title: { default: 'Glyphh Docs', template: '%s | Glyphh Docs' },
-  description: 'Glyphh documentation: Ada, your runtime, and the platform.',
+  description: 'Glyphh documentation: the architecture, running rrotor, the plugin and the SDKs.',
 };
 
 export default function DocsLayout({ children }) {

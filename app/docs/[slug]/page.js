@@ -14,20 +14,26 @@ const GONE = [
   'router', 'models', 'model-catalog', 'org-models', 'review', 'hub', 'ai-hub', 'org-agents', 'built-on', 'brand',
   'console', 'the-cast',
 ];
+const to = (slug) => `${DOCS}/${slug}`;
 const MOVED = {
   ...Object.fromEntries(GONE.map((slug) => [slug, DOCS])),
   introduction: DOCS,
-  quickstart: `${DOCS}/quick-start`,
-  primer: `${DOCS}/ada-introduction`,
-  'semantic-apps': `${DOCS}/ada-introduction`,
-  'ada-act': `${DOCS}/fact-trees`,
-  'ada-time': `${DOCS}/ada-typed`,
-  'ada-edges': `${DOCS}/ada`, 'ada-graph': `${DOCS}/ada`, 'ada-gql': `${DOCS}/ada`, 'ada-procedures': `${DOCS}/ada`,
-  'ada-guide-tickets': `${DOCS}/ada-guide-incidents`, 'ada-guide-churn': `${DOCS}/ada-guide-incidents`,
-  mcp: `${DOCS}/ada-tools`, 'mcp-servers': `${DOCS}/ada-tools`,
-  rrotor: `${DOCS}/runtimes`,
-  seats: `${DOCS}/plans`, 'billing-admin': `${DOCS}/plans`,
-  sso: `${DOCS}/security`, 'org-settings': `${DOCS}/security`, domain: `${DOCS}/security`,
+  // What Ada is, concepts, security: the architecture.
+  primer: DOCS, 'semantic-apps': DOCS, 'ada-introduction': DOCS, glyph: DOCS, patterns: DOCS, ada: DOCS,
+  'ada-edges': DOCS, 'ada-graph': DOCS, 'ada-gql': DOCS, 'ada-procedures': DOCS,
+  security: DOCS, sso: DOCS, 'org-settings': DOCS, domain: DOCS,
+  // Building a model: the Ada skill.
+  'ada-typed': to('ada-skill'), 'ada-time': to('ada-skill'), 'ada-tuning': to('ada-skill'),
+  'ada-guide-incidents': to('ada-skill'), 'ada-guide-tickets': to('ada-skill'), 'ada-guide-churn': to('ada-skill'),
+  // Connecting Claude: the plugin.
+  'ada-install': to('plugin'),
+  // Answers and calling from code: the SDKs and the API.
+  'fact-trees': to('sdks'), 'ada-act': to('sdks'), 'ada-sdk': to('sdks'),
+  'ada-tools': to('api'), mcp: to('api'), 'mcp-servers': to('api'),
+  // Getting a runtime: running rrotor.
+  'quick-start': to('run-rrotor'), quickstart: to('run-rrotor'), runtimes: to('run-rrotor'), rrotor: to('run-rrotor'),
+  // Plans: licensing, which links to the prices.
+  plans: to('licensing'), seats: to('licensing'), 'billing-admin': to('licensing'),
 };
 
 export function generateStaticParams() {
