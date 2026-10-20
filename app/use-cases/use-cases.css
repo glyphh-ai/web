@@ -1,4 +1,12 @@
-/* Support routing (/use-cases/support-routing): the flow, the experiment and the code. */
+/* The use cases (/use-cases and each one): the index cards, the flow, the experiment and the code. */
+.uc-grid { grid-template-columns: repeat(2, 1fr); }
+.uc-card { display: flex; flex-direction: column; gap: 0.5rem; text-decoration: none; color: inherit; }
+.uc-card h3 { margin: 0; font-size: 1.25rem; color: var(--text); }
+.uc-card p { margin: 0; flex: 1; }
+.uc-proof { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.02em; color: var(--accent-light); }
+.uc-more { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-3); }
+.uc-card:hover .uc-more { color: var(--text); }
+@media (max-width: 760px) { .uc-grid { grid-template-columns: 1fr; } }
 .rt-flow { list-style: none; margin: 0 0 1.6rem; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); }
 .rt-step { position: relative; padding: 1.3rem 1.2rem 1.4rem; border-right: 1px solid var(--border); }
 .rt-step:last-child { border-right: 0; }

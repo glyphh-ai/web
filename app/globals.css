@@ -7670,7 +7670,7 @@ html.docs-html::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 .ix-page { background: var(--bg); }
 .ix-frame { margin-top: 54px; border-top: 0; }
 .ix-frame > section { padding: 3rem 2.5rem 3rem; border-bottom: 1px solid var(--rail); }
-.ix-head { padding-top: 4rem !important; }
+.ix-head { padding-top: 1.5rem !important; }
 .ix-crumb {
   display: inline-block;
   margin-bottom: 1.25rem;
