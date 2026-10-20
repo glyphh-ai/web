@@ -6,7 +6,9 @@ import { DOCS } from './base';
 // glyphh-ai/glyphh under deploy/. Each fact once.
 
 const REPO = 'https://github.com/glyphh-ai/glyphh';
-const CLONE = 'git clone --depth 1 https://github.com/glyphh-ai/glyphh.git';
+// The Helm chart, packaged on a release of glyphh-ai/glyphh: helm installs it from its address.
+const CHART = 'https://github.com/glyphh-ai/glyphh/releases/download/rrotor-chart-0.2.0/rrotor-0.2.0.tgz';
+const RAW = 'https://raw.githubusercontent.com/glyphh-ai/glyphh/main/deploy/compose';
 
 const hub = {
   slug: 'run-rrotor',
@@ -32,7 +34,7 @@ const hub = {
         <table>
           <thead><tr><th>Way</th><th>What runs</th><th>What it needs</th></tr></thead>
           <tbody>
-            <tr><td><a href={`${DOCS}/docker-compose`}><strong>Docker Compose</strong></a></td><td>rrotor and Caddy (HTTPS) on one machine; or a cluster, a node per machine</td><td>A Linux machine with Docker and Compose v2, ports 80 and 443 reachable, a DNS name pointing at it</td></tr>
+            <tr><td><a href={`${DOCS}/docker-compose`}><strong>Docker</strong></a></td><td>One command: rrotor and Caddy (HTTPS) on one machine; or a cluster, a node per machine</td><td>A Linux machine with Docker and Compose v2, ports 80 and 443 reachable, a DNS name pointing at it</td></tr>
             <tr><td><a href={`${DOCS}/helm`}><strong>Helm</strong></a></td><td>A StatefulSet of one replica with its own volume, a Service and an Ingress; or a cluster of them</td><td>Kubernetes 1.33 or later that allows the sandbox’s privileges (below), an Ingress controller, a storage class; cert-manager if it is to issue the certificate</td></tr>
             <tr><td><a href={`${DOCS}/terraform`}><strong>Terraform</strong></a></td><td>A VM on AWS or Google Cloud running the Compose package, <code>/data</code> on its own disk; or several behind the cloud’s load balancer</td><td>An AWS account or a Google Cloud project, and a DNS zone (Route 53 or Cloud DNS) or a name you point yourself</td></tr>
           </tbody>
@@ -136,8 +138,8 @@ docker compose start rrotor`}</Code>
 
 const compose = {
   slug: 'docker-compose',
-  title: 'Docker Compose',
-  lede: 'rrotor and Caddy on one Linux machine. Caddy obtains and renews the HTTPS certificate by itself.',
+  title: 'Docker',
+  lede: 'One command on a Linux machine: the public image with Caddy in front, which obtains and renews the HTTPS certificate by itself.',
   body: (
     <>
       <h2>What you need</h2>
@@ -161,16 +163,33 @@ sudo sysctl --system`}</Code>
         </table>
       </div>
       <h2>Start</h2>
-      <ol>
-        <li>Register the runtime on the platform (Getting started, Docker Compose). Copy the <code>.env</code> it shows; the token is shown once.</li>
-        <li>Put the files on the machine and the settings in <code>.env</code> (<code>RROTOR_RUNTIME_ID</code>, <code>RROTOR_RUNTIME_TOKEN</code>, <code>RROTOR_PUBLIC_HOST</code>).</li>
-        <li>Start it.</li>
-        <li>Check it: <code>docker compose ps</code> shows rrotor <code>healthy</code>, <code>docker compose logs caddy</code> shows the certificate obtained, and <code>curl https://&lt;host&gt;/healthz</code> answers. Then add <code>https://&lt;host&gt;/mcp</code> as a connector in Claude.</li>
-      </ol>
-      <Code lang="bash">{`${CLONE} && cd glyphh/deploy/compose
-cp .env.example .env    # or paste the platform's
-chmod 600 .env
+      <p>
+        Register the runtime on the platform (Getting started, Docker): it shows this one line with your runtime id,
+        token and host filled in, and the token only once. Run it on the machine.
+      </p>
+      <Code lang="bash">{`curl -fsSL https://glyphh.ai/install.sh | \\
+  RROTOR_RUNTIME_ID=<id> RROTOR_RUNTIME_TOKEN=<token> RROTOR_PUBLIC_HOST=rrotor.acme.com sh`}</Code>
+      <p>
+        It puts <code>docker-compose.yml</code>, <code>Caddyfile</code> and <code>.env</code> in <code>./rrotor</code>,
+        pulls the image and starts it. <code>RROTOR_SIZE=medium</code> (or <code>large</code>) picks a size; run it again
+        to change a setting. Then check it: <code>curl https://&lt;host&gt;/healthz</code> answers, and add{' '}
+        <code>https://&lt;host&gt;/mcp</code> as a connector in Claude.
+      </p>
+      <p><strong>By hand</strong>, the same in four lines:</p>
+      <Code lang="bash">{`mkdir rrotor && cd rrotor
+curl -fsSLO ${RAW}/docker-compose.yml -fsSLO ${RAW}/Caddyfile
+printf 'RROTOR_RUNTIME_ID=<id>\\nRROTOR_RUNTIME_TOKEN=<token>\\nRROTOR_PUBLIC_HOST=rrotor.acme.com\\n' > .env && chmod 600 .env
 docker compose up -d`}</Code>
+      <h2 id="docker-run">HTTPS already in front</h2>
+      <p>
+        If a load balancer, an Ingress or a tunnel already ends TLS for the host and passes <code>Host</code> through,
+        run the image alone and point it at port 7777:
+      </p>
+      <Code lang="bash">{`docker run -d --name rrotor --restart unless-stopped \\
+  --security-opt seccomp=unconfined --security-opt apparmor=unconfined --security-opt systempaths=unconfined \\
+  --read-only --tmpfs /tmp:exec,mode=1777 -v rrotor-data:/data -p 7777:7777 \\
+  -e RROTOR_MODE=self -e RROTOR_RUNTIME_ID=<id> -e RROTOR_RUNTIME_TOKEN=<token> -e RROTOR_PUBLIC_HOST=rrotor.acme.com \\
+  ghcr.io/glyphh-ai/rrotor:latest`}</Code>
       <h2>The files</h2>
       <div className="dx-table">
         <table>
@@ -193,7 +212,7 @@ docker compose up -d`}</Code>
       <h2 id="air-gapped">Air-gapped</h2>
       <p>No route to Glyphh, Let’s Encrypt or a registry: rrotor runs on its licence key with the link off, and Caddy serves a certificate you supply.</p>
       <ol>
-        <li><strong>Bring the images in.</strong> On a machine with access, save them (below); carry the archive and <code>deploy/compose/</code> across, <code>docker load &lt; rrotor-images.tar.gz</code>, and set <code>RROTOR_VERSION=&lt;version&gt;</code> in <code>.env</code> (not <code>latest</code>).</li>
+        <li><strong>Bring the images in.</strong> On a machine with access, save them (below); carry the archive and the files in <code>./rrotor</code> across, <code>docker load &lt; rrotor-images.tar.gz</code>, and set <code>RROTOR_VERSION=&lt;version&gt;</code> in <code>.env</code> (not <code>latest</code>).</li>
         <li><strong>The licence key</strong> from the platform, in <code>.env</code> as <code>GLYPHH_LICENSE_KEY</code> (<a href={`${DOCS}/licensing#air-gapped`}>Licensing</a>).</li>
         <li><strong>The certificate</strong> for the public host: its full chain in <code>certs/tls.crt</code>, its key in <code>certs/tls.key</code>.</li>
         <li><strong>Start with the overlay</strong>, which sets <code>RROTOR_LINK=off</code> and points Caddy at <code>certs/</code>. Callers use runtime keys.</li>
@@ -275,8 +294,7 @@ securityContext:
 kubectl label namespace rrotor pod-security.kubernetes.io/enforce=privileged`}</Code>
       <h2>Install</h2>
       <p>Register the runtime on the platform (Getting started, Helm) for its id and token, then:</p>
-      <Code lang="bash">{`${CLONE}
-helm install rrotor glyphh/deploy/helm/rrotor -n rrotor \\
+      <Code lang="bash">{`helm install rrotor ${CHART} -n rrotor \\
   --set publicHost=rrotor.acme.com \\
   --set runtime.id=<runtime id> \\
   --set runtime.token=<runtime token> \\
@@ -285,7 +303,7 @@ helm install rrotor glyphh/deploy/helm/rrotor -n rrotor \\
       <p>The notes print the connector, <code>https://rrotor.acme.com/mcp</code>. Point the host’s DNS at the Ingress’s address. To keep the token out of Helm’s values, make the Secret yourself:</p>
       <Code lang="bash">{`kubectl -n rrotor create secret generic rrotor-runtime \\
   --from-literal=RROTOR_RUNTIME_ID=<runtime id> --from-literal=RROTOR_RUNTIME_TOKEN=<runtime token>
-helm install rrotor glyphh/deploy/helm/rrotor -n rrotor --set publicHost=rrotor.acme.com --set existingSecret=rrotor-runtime`}</Code>
+helm install rrotor ${CHART} -n rrotor --set publicHost=rrotor.acme.com --set existingSecret=rrotor-runtime`}</Code>
       <h2>Values</h2>
       <div className="dx-table">
         <table>
@@ -328,7 +346,7 @@ helm install rrotor glyphh/deploy/helm/rrotor -n rrotor --set publicHost=rrotor.
       </p>
       <h2 id="a-cluster">A cluster</h2>
       <p>For a licence key with sync. Settings and commands: <a href={`${DOCS}/run-a-cluster`}>Run a cluster</a>.</p>
-      <Code lang="bash">{`helm install rrotor glyphh/deploy/helm/rrotor -n rrotor --set publicHost=rrotor.acme.com \\
+      <Code lang="bash">{`helm install rrotor ${CHART} -n rrotor --set publicHost=rrotor.acme.com \\
   --set existingSecret=rrotor-runtime --set cluster.enabled=true --set replicas=3`}</Code>
       <ul>
         <li><strong>The pods</strong> <code>rrotor-0..2</code> start together, each with its own claim (<code>data-rrotor-&lt;n&gt;</code>), spread across machines and zones where the scheduler can. They find each other at the headless Service; <code>rrotor-0</code> makes the cluster and is its head.</li>
@@ -358,7 +376,7 @@ helm install rrotor glyphh/deploy/helm/rrotor -n rrotor --set publicHost=rrotor.
         the certificate from your own issuer or a TLS Secret you make (<code>ingress.tls.secretName</code>).
       </p>
       <h2>Upgrade, back up, remove</h2>
-      <Row k="Upgrade">helm upgrade rrotor glyphh/deploy/helm/rrotor -n rrotor --reuse-values --set image.tag=&lt;version&gt;. The pod is replaced and the volume stays; in a cluster, one pod at a time, the highest first</Row>
+      <Row k="Upgrade">helm upgrade rrotor {CHART} -n rrotor --reuse-values --set image.tag=&lt;version&gt;. The pod is replaced and the volume stays; in a cluster, one pod at a time, the highest first</Row>
       <Row k="From chart 0.1">Once, before upgrading: kubectl -n rrotor delete statefulset rrotor --cascade=orphan (the pod and volume stay; the upgrade adopts them)</Row>
       <Row k="Back up">A VolumeSnapshot of the claim data-rrotor-0, or scale to 0, copy the volume, and scale back to 1 (<a href={`${DOCS}/run-rrotor#backups`}>Backups</a>)</Row>
       <Row k="Remove">helm uninstall rrotor -n rrotor keeps the claim, and so /data; delete data-rrotor-0 to remove it. Then delete the runtime on the platform</Row>
