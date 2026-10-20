@@ -8655,16 +8655,16 @@ footer.ft::before, footer.ft::after { content: none; display: none; }
 .hero-lab-h span { display: block; white-space: nowrap; }
 .hero-lab-h em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent); text-shadow: 0 0 36px rgba(176, 102, 255, 0.9); }
 
-/* ── The display face, throughout (his pick, 2026-10-02): JetBrains Mono 700
-   on every heading, so a heading reads as the language. Body text stays
-   Geist; labels stay JetBrains Mono; the italic emphasis stays the serif. ── */
-:root { --font-display: var(--font-jetbrains), 'SF Mono', ui-monospace, monospace; }
+/* ── The display face, throughout (his order, 2026-10-20: the site matches the
+   platform): Geist 600 on every heading, as the platform's page titles. Body
+   text is Geist; labels and code stay JetBrains Mono. ── */
+:root { --font-display: var(--font-geist), -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
 h1, h2, h3, h4,
 .oshero-title, .page-hero-title, .section-title, .ix-h2, .lt-h2,
 .hv-tile-head, .nav-dd-name, .dx-card-title {
   font-family: var(--font-display) !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.04em;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
 }
 h1 em, h2 em, h3 em, .oshero-title em { font-family: var(--font-serif) !important; font-weight: 400 !important; }
 
@@ -8982,7 +8982,7 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 }
 .mh-logo { width: min(320px, 72vw); height: auto; }
 .mh-line {
-  margin: 0; max-width: 22ch; font-family: var(--font-display); font-weight: 700;
+  margin: 0; max-width: 22ch; font-family: var(--font-display); font-weight: 600;
   font-size: clamp(24px, 4vw, 44px); line-height: 1.12; letter-spacing: -0.02em; color: var(--text); text-wrap: balance;
 }
 /* Ada learning (AdaField.js): a letter field in the page's text colour, framed by one hairline. */
