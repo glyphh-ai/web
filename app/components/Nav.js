@@ -117,7 +117,7 @@ export default function Nav() {
                 onMouseEnter={ucEnter}
                 onMouseLeave={ucLeave}
               >
-                <a href="/use-cases/support-routing" className={`nav-dd-trigger${active('/use-cases')}`}>
+                <a href="/use-cases" className={`nav-dd-trigger${active('/use-cases')}`}>
                   Use cases
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </a>
@@ -125,6 +125,10 @@ export default function Nav() {
                   <a href="/use-cases/support-routing" className="nav-dd-item">
                     <span className="nav-dd-name">Support routing</span>
                     <span className="nav-dd-desc">Each ticket to the team that owns it, from the tickets you have already routed.</span>
+                  </a>
+                  <a href="/use-cases/loan-decisions" className="nav-dd-item">
+                    <span className="nav-dd-name">Loan decisions</span>
+                    <span className="nav-dd-desc">Approve or refuse from your past decisions, by what each mistake costs you.</span>
                   </a>
                 </div>
               </div>
@@ -176,6 +180,7 @@ export default function Nav() {
         <a href="/products/ada" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Ada</a>
         <span className="mobile-menu-group">Use cases</span>
         <a href="/use-cases/support-routing" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Support routing</a>
+        <a href="/use-cases/loan-decisions" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Loan decisions</a>
         <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href="https://docs.glyphh.ai" onClick={() => setMenuOpen(false)}>Docs</a>

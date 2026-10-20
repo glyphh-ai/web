@@ -1,7 +1,7 @@
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import AdaField from '../../components/AdaField';
-import './routing.css';
+import '../use-cases.css';
 
 // Support routing: Ada's flagship use case, and the proof behind the home page's
 // claim. Every figure is rrotor's benchmarks/banking77 (README and results/),
@@ -65,7 +65,7 @@ export default function SupportRoutingPage() {
       <Nav />
       <main className="site-frame ix-frame">
         <section className="ix-head">
-          <a href="/" className="ix-crumb">&larr; Home</a>
+          <a href="/use-cases" className="ix-crumb">&larr; Use cases</a>
           <span className="qs-kicker">Use case · Support routing</span>
           <h1 className="ix-title">Route support tickets without paying an LLM to read every one.</h1>
           <p className="ix-lede">

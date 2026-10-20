@@ -17,7 +17,7 @@ const COLS = [
     title: 'Product',
     links: [
       ['Ada', '/products/ada'],
-      ['Support routing', '/use-cases/support-routing'],
+      ['Use cases', '/use-cases'],
       ['Pricing', '/pricing'],
       ['Platform', 'https://platform.glyphh.ai'],
       ['FAQ', '/faq'],

@@ -33,7 +33,7 @@ export default function MinimalHome() {
           <Image className="logo-light" src="/glyphh-logo-text-black.png" alt="" width={442} height={162} priority />
         </a>
         <a href="/products/ada">Ada</a>
-        <a href="/use-cases/support-routing">Support routing</a>
+        <a href="/use-cases">Use cases</a>
         <a href="/pricing">Pricing</a>
         <a href="https://docs.glyphh.ai">Docs</a>
         <a href="https://platform.glyphh.ai">Sign in</a>
