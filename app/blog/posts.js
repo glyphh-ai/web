@@ -19,7 +19,7 @@ export const POSTS = [
     related: [
       ['The Ada skill', 'https://docs.glyphh.ai/ada-skill'],
       ['The SDKs', 'https://docs.glyphh.ai/sdks'],
-      ['Ada', '/products/ada'],
+      ['Ada', '/'],
     ],
     sections: [
       {
@@ -115,7 +115,7 @@ export const POSTS = [
     coverAlt: 'One massive Big AI cube against a field of small open-weight cubes, routed by Glyphh: frontier where it counts, open weights for the rest.',
     tags: ['Strategy', 'Open Weights'],
     related: [
-      ['Ada', '/products/ada'],
+      ['Ada', '/'],
     ],
     sections: [
       {

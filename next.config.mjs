@@ -66,7 +66,9 @@ const nextConfig = {
       // The site has no sign-in of its own: the platform signs you in.
       { source: '/login', destination: PLATFORM, permanent: false },
       { source: '/signin', destination: PLATFORM, permanent: false },
-      { source: '/products', destination: '/products/ada', permanent: false },
+      { source: '/products', destination: '/', permanent: false },
+      // Ada is the home page (2026-10-21).
+      { source: '/products/ada', destination: '/', permanent: true },
       // The research page is off the site; the page stays in the tree.
       { source: '/research', destination: '/', permanent: false },
       ...GONE.map((source) => ({ source, destination: '/', permanent: true })),
