@@ -10,6 +10,25 @@ export function Row({ k, children }) {
   );
 }
 
+// Early access (2026-10-21): the notice at the top of the docs home and the
+// Run rrotor pages. The plugin, the SDKs and rrotor are not public for now.
+export const EARLY_ACCESS_HREF = 'mailto:sales@glyphh.ai?subject=Glyphh%20early%20access';
+
+export function EarlyAccess({ children }) {
+  return (
+    <div className="dx-note">
+      <div className="dx-note-body">
+        <p className="dx-note-title">Early access</p>
+        <div className="dx-note-detail">
+          <p>
+            {children} <a href={EARLY_ACCESS_HREF}>Request early access</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Code({ children, lang }) {
   return <pre className="dx-code" data-lang={lang}>{children}</pre>;
 }

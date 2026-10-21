@@ -95,7 +95,7 @@ export const POSTS = [
         heading: 'Go build something',
         body: [
           {
-            html: 'Both guides are in the docs with every line of code and every output: <a href="https://docs.glyphh.ai/sdks">route support tickets</a> in Python and <a href="https://docs.glyphh.ai/sdks">customer churn</a> in TypeScript. The SDKs are in <a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a>. Grab a key from the console, run one, then point it at your own data and tell me what it found. I read every one of those emails.',
+            html: 'Both guides are in the docs with every line of code and every output: <a href="https://docs.glyphh.ai/sdks">route support tickets</a> in Python and <a href="https://docs.glyphh.ai/sdks">customer churn</a> in TypeScript. Glyphh is now in early access: <a href="mailto:sales@glyphh.ai?subject=Glyphh%20early%20access">request early access</a>, then point Ada at your own data and tell me what it found. I read every one of those emails.',
           },
           'Build with AI. Run without it.',
           '— Timme',

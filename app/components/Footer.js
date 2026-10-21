@@ -4,6 +4,7 @@
  * link columns with hairlines between, and a bottom bar. Contact is
  * support@glyphh.ai; Discord and Support are here for customers.
  */
+import { SALES_HREF, EARLY_ACCESS_LABEL } from './Pricing';
 
 // Discord and X: no URL is recorded anywhere in the repos, so neither is guessed.
 // Each link appears only when its env var is set.
@@ -28,8 +29,6 @@ const COLS = [
     links: [
       ['Docs', 'https://docs.glyphh.ai'],
       ['Run rrotor', 'https://docs.glyphh.ai/run-rrotor'],
-      ['Plugin and SDKs', 'https://github.com/glyphh-ai/glyphh'],
-      ['Benchmarks', 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks'],
       ['Blog', '/blog'],
       ['GitHub', GITHUB_URL],
     ],
@@ -37,6 +36,7 @@ const COLS = [
   {
     title: 'Company',
     links: [
+      [EARLY_ACCESS_LABEL, SALES_HREF],
       ['Support', 'mailto:support@glyphh.ai'],
       ...(DISCORD_URL ? [['Discord', DISCORD_URL]] : []),
       ['Terms of Use', '/terms'],

@@ -1,14 +1,19 @@
-import { Code, Row } from './ui';
+import { Code, EarlyAccess, Row } from './ui';
 import { DOCS } from './base';
 
 // Running rrotor: the hub, then a page per package. Checked against rrotor's
-// docs/self-hosting (README, compose, helm, terraform). The packages are in
-// glyphh-ai/glyphh under deploy/. Each fact once.
+// docs/self-hosting (README, compose, helm, terraform). Each fact once.
+// Early access (2026-10-21): the packages, the chart and the image are not
+// public, so Glyphh hands them over with the runtime; no link to them here.
 
-const REPO = 'https://github.com/glyphh-ai/glyphh';
-// The Helm chart, packaged on a release of glyphh-ai/glyphh: helm installs it from its address.
-const CHART = 'https://github.com/glyphh-ai/glyphh/releases/download/rrotor-chart-0.2.0/rrotor-0.2.0.tgz';
-const RAW = 'https://raw.githubusercontent.com/glyphh-ai/glyphh/main/deploy/compose';
+const CHART = '<chart>';
+
+const NOTE = (
+  <EarlyAccess>
+    During early access, self-hosting is by arrangement: we give you the image, the packages and your runtime’s
+    settings.
+  </EarlyAccess>
+);
 
 const hub = {
   slug: 'run-rrotor',
@@ -16,6 +21,7 @@ const hub = {
   lede: 'One image on your own machine, cluster or cloud, at your own address. Glyphh does not host it.',
   body: (
     <>
+      {NOTE}
       <p>
         rrotor is one image, <code>ghcr.io/glyphh-ai/rrotor:&lt;version&gt;</code> (and <code>:latest</code>), with Ada
         built in; the licence key, not the image, sets its limits. It is one box (one container, one{' '}
@@ -40,7 +46,6 @@ const hub = {
           </tbody>
         </table>
       </div>
-      <p>The packages are in <a href={`${REPO}/tree/main/deploy`}>glyphh-ai/glyphh, under <code>deploy/</code></a>.</p>
       <h2>Settings</h2>
       <p>Each package sets these from the platform’s settings.</p>
       <div className="dx-table">
@@ -142,6 +147,7 @@ const compose = {
   lede: 'One command on a Linux machine: the public image with Caddy in front, which obtains and renews the HTTPS certificate by itself.',
   body: (
     <>
+      {NOTE}
       <h2>What you need</h2>
       <ul>
         <li>A Linux machine (amd64 or arm64) with Docker Engine and Compose v2, of the size below.</li>
@@ -164,22 +170,17 @@ sudo sysctl --system`}</Code>
       </div>
       <h2>Start</h2>
       <p>
-        Register the runtime on the platform (Runtimes, Add a runtime, Docker): it shows this one line with your runtime id,
-        token and host filled in, and the token only once. Run it on the machine.
+        Register the runtime on the platform (Runtimes, Add a runtime, Docker) for its id and token; the token is shown
+        only once. Put the package’s <code>docker-compose.yml</code> and <code>Caddyfile</code> in <code>./rrotor</code>{' '}
+        on the machine, then:
       </p>
-      <Code lang="bash">{`curl -fsSL https://glyphh.ai/install.sh | \\
-  RROTOR_RUNTIME_ID=<id> RROTOR_RUNTIME_TOKEN=<token> RROTOR_PUBLIC_HOST=rrotor.acme.com sh`}</Code>
-      <p>
-        It puts <code>docker-compose.yml</code>, <code>Caddyfile</code> and <code>.env</code> in <code>./rrotor</code>,
-        pulls the image and starts it. <code>RROTOR_SIZE=medium</code> (or <code>large</code>) picks a size; run it again
-        to change a setting. Then check it: <code>curl https://&lt;host&gt;/healthz</code> answers, and add{' '}
-        <code>https://&lt;host&gt;/mcp</code> as a connector in Claude.
-      </p>
-      <p><strong>By hand</strong>, the same in four lines:</p>
-      <Code lang="bash">{`mkdir rrotor && cd rrotor
-curl -fsSLO ${RAW}/docker-compose.yml -fsSLO ${RAW}/Caddyfile
+      <Code lang="bash">{`cd rrotor
 printf 'RROTOR_RUNTIME_ID=<id>\\nRROTOR_RUNTIME_TOKEN=<token>\\nRROTOR_PUBLIC_HOST=rrotor.acme.com\\n' > .env && chmod 600 .env
 docker compose up -d`}</Code>
+      <p>
+        Then check it: <code>curl https://&lt;host&gt;/healthz</code> answers, and add{' '}
+        <code>https://&lt;host&gt;/mcp</code> as a connector in Claude.
+      </p>
       <h2 id="docker-run">HTTPS already in front</h2>
       <p>
         If a load balancer, an Ingress or a tunnel already ends TLS for the host and passes <code>Host</code> through,
@@ -262,6 +263,7 @@ const helm = {
   lede: 'One rrotor per release: a StatefulSet of one replica with its own volume, a Service, an Ingress at your public host and a Secret for the token.',
   body: (
     <>
+      {NOTE}
       <p>
         The chart refuses more replicas unless you make it a <a href="#a-cluster">cluster</a>. There is no
         autoscaling. For a second rrotor, register a second runtime and install a second release.
@@ -390,6 +392,7 @@ const terraform = {
   lede: 'One VM on AWS or Google Cloud running the Compose package, /data on a disk of its own; or a cluster of them behind the cloud’s load balancer.',
   body: (
     <>
+      {NOTE}
       <p>
         The modules are <code>deploy/terraform/aws</code> and <code>deploy/terraform/gcp</code>, each with examples in{' '}
         <code>examples/basic/</code> and <code>examples/cluster/</code>.
@@ -431,7 +434,7 @@ const terraform = {
       <h2>Use</h2>
       <p>Register the runtime on the platform (Runtimes, Add a runtime, Terraform) for its id and token, then, for AWS:</p>
       <Code lang="hcl">{`module "rrotor" {
-  source = "github.com/glyphh-ai/glyphh//deploy/terraform/aws"
+  source = "./deploy/terraform/aws"
 
   public_host     = "rrotor.acme.com"
   runtime_id      = var.runtime_id
@@ -443,9 +446,8 @@ const terraform = {
 
 output "connector_url" { value = module.rrotor.connector_url }`}</Code>
       <p>
-        For Google Cloud, the same with <code>//deploy/terraform/gcp</code>, <code>project</code>, <code>region</code>,{' '}
-        <code>zone</code> and, optionally, <code>dns_managed_zone</code>. Add <code>?ref=&lt;commit&gt;</code> to the
-        source to pin it. The modules read <code>deploy/compose/</code> and <code>deploy/terraform/shared/</code> by
+        For Google Cloud, the same with <code>./deploy/terraform/gcp</code>, <code>project</code>, <code>region</code>,{' '}
+        <code>zone</code> and, optionally, <code>dns_managed_zone</code>. The modules read <code>deploy/compose/</code> and <code>deploy/terraform/shared/</code> by
         relative path, so use them from the repo, not copied out alone.
       </p>
       <p>

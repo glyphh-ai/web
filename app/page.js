@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import AdaField from './components/AdaField';
 import LetterField from './components/LetterField';
 import { HOME_TITLE, HOME_DESCRIPTION } from './lib/home-meta';
+import { SALES_HREF, EARLY_ACCESS_LABEL } from './components/Pricing';
 
 // THE HOME PAGE is Ada (his order, 2026-10-21): the promise, Ada learning and
 // the next steps as the hero, then the Ada page as it was at /products/ada.
@@ -43,7 +44,7 @@ const WHERE = [
   {
     title: 'Your runtime',
     head: 'rrotor, on your own infrastructure',
-    body: 'Your models live and run in rrotor, which you run with Docker Compose, Helm or Terraform. Glyphh does not host it, and nothing of Glyphh’s is between your callers and it.',
+    body: 'Your models live and run in rrotor, on infrastructure you control. Nothing of Glyphh’s is between your callers and it.',
   },
   {
     title: 'From Claude',
@@ -53,7 +54,7 @@ const WHERE = [
   {
     title: 'From your software',
     head: 'The SDKs, or POST /v1/runs',
-    body: 'pip install glyphh or npm install @glyphh-ai/glyphh, with your runtime’s address and a runtime key.',
+    body: 'Python and TypeScript, with your runtime’s address and a runtime key.',
   },
   {
     title: 'Clearance',
@@ -80,12 +81,6 @@ const ANSWER = `{
     "runbook": "RB-12 back off retries, raise circuit breaker"
   }
 }`;
-
-const INSTALL = `/plugin marketplace add glyphh-ai/glyphh
-/plugin install glyphh@glyphh
-
-# then add your runtime's connector, https://<host>/mcp,
-# and ask Claude to build a model with you`;
 
 function Tile({ t, i }) {
   return (
@@ -119,7 +114,7 @@ export default function Home() {
             LLM. Run it on your own infrastructure.
           </p>
           <div className="mh-actions">
-            <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
+            <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
             <a href="/use-cases/support-routing" className="os-cta os-cta-ghost">See ticket routing in action</a>
           </div>
           <div className="mh-field">
@@ -169,18 +164,18 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="hiw" id="install">
+        <section className="hiw" id="early-access">
           <div className="qs-head">
-            <span className="qs-kicker">Install</span>
-            <a href={`${DOCS}/plugin`} className="qs-more">Connect Claude &rarr;</a>
+            <span className="qs-kicker">Early access</span>
           </div>
-          <h2 className="ix-h2 lt-h2">Two commands and a connector.</h2>
+          <h2 className="ix-h2 lt-h2">Glyphh is in early access.</h2>
           <p className="ix-desc">
-            Claude signs in with your Glyphh account: no key to type. Ada is in every plan, Free included, and
-            never priced per seat, per model or per call.
+            We are working with a small number of teams while we get Ada Cloud right, so the plugin, the SDKs and
+            rrotor are not public for now. Write to us and we will set you up.
           </p>
-          <pre className="hv-code" style={{ marginTop: '1.25rem' }}><code>{INSTALL}</code></pre>
-          <p className="hv-foot-link"><a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a></p>
+          <div className="mh-actions" style={{ marginTop: '1.25rem' }}>
+            <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
+          </div>
         </section>
       </div>
 

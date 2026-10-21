@@ -1,5 +1,6 @@
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
+import { SALES_HREF, EARLY_ACCESS_LABEL } from '../../components/Pricing';
 import '../use-cases.css';
 
 // Loan decisions: Ada on typed fields, priced in the lender's own costs. Every
@@ -12,9 +13,7 @@ export const metadata = {
     'Approve or refuse applications from your own past decisions, priced in what a wrong answer costs you, on your own infrastructure. On German Credit, Ada cost the bank 100 against 110 and 114 for Claude.',
 };
 
-const PLATFORM_URL = 'https://platform.glyphh.ai';
 const DOCS = 'https://docs.glyphh.ai';
-const BENCH = 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks/credit';
 
 const FLOW = [
   { n: '1', title: 'Past decisions', body: 'Record the applications you have decided, each with how it turned out. Each one becomes a precedent.' },
@@ -68,7 +67,7 @@ export default function LoanDecisionsPage() {
             infrastructure.
           </p>
           <div className="ix-actions">
-            <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
+            <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
             <a href="#experiment" className="os-cta os-cta-ghost">See the experiment</a>
           </div>
         </section>
@@ -97,11 +96,9 @@ export default function LoanDecisionsPage() {
               <span className="qs-kicker">The experiment</span>
               <h2 className="ix-h2">200 loan applications, approve or refuse.</h2>
               <p className="ix-desc">
-                One experiment on one public dataset, not a guarantee for your book. The method, the data and every run
-                are in the repository, so you can rerun it.
+                One experiment on one public dataset, not a guarantee for your book.
               </p>
             </div>
-            <a href={BENCH} className="qs-more">Reproduce it &rarr;</a>
           </div>
 
           <dl className="rt-facts">
@@ -167,12 +164,12 @@ export default function LoanDecisionsPage() {
         <section className="ix-section">
           <div className="ix-cta">
             <div>
-              <span className="qs-kicker">Get started</span>
-              <h3>Free on one node, 5,000 precedents.</h3>
-              <p>Upgrade for more nodes, more precedents and sync.</p>
+              <span className="qs-kicker">Early access</span>
+              <h3>Glyphh is in early access.</h3>
+              <p>We are working with a small number of teams. Write to us and we will set you up.</p>
             </div>
             <div className="ix-actions">
-              <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
+              <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
               <a href="/pricing" className="os-cta os-cta-ghost">Pricing</a>
             </div>
           </div>
