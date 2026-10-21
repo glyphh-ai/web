@@ -7691,6 +7691,11 @@ html.docs-html::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 }
 .ix-lede { margin: 0 0 0.75rem; font-size: 1.15rem; line-height: 1.5; color: var(--text-2); max-width: 46rem; }
 .ix-sub { margin: 0 0 1.75rem; font-size: 0.95rem; line-height: 1.65; color: var(--muted); max-width: 46rem; }
+/* A link inside running text: the text's own white, underlined, as on the home page. Never the browser's blue. */
+.ix-lede a, .ix-sub a, .ix-desc a, .ix-card p a, .pp-faq dd a {
+  color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;
+}
+.ix-lede a:hover, .ix-sub a:hover, .ix-desc a:hover, .ix-card p a:hover, .pp-faq dd a:hover { text-decoration-thickness: 2px; }
 .ix-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .ix-stats {
   display: grid;
