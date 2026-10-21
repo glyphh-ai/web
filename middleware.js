@@ -40,13 +40,21 @@ function docsHost(request) {
 
 const SITE_HOSTS = ['glyphh.ai', 'www.glyphh.ai'];
 
+// The private beta (his order, 2026-10-21): the site is one page while Ada Cloud is built. Every page but the home
+// page and the legal ones comes home, and the docs host goes to the site; temporary (302), so nothing is forgotten
+// by search engines for good. docsHost() and the pages stay in the tree for the launch.
+const BETA_OPEN = new Set(['/', '/terms', '/privacy', '/refund']);
+
 export function middleware(request) {
   const host = hostOf(request);
-  if (host === DOCS_HOST) return docsHost(request);
   const { pathname } = request.nextUrl;
-  // The docs moved to their own host: an old glyphh.ai/docs address follows them.
-  if (SITE_HOSTS.includes(host) && (pathname === '/docs' || pathname.startsWith('/docs/'))) {
-    return NextResponse.redirect(new URL((pathname.slice('/docs'.length) || '/') + request.nextUrl.search, `https://${DOCS_HOST}`), 308);
+  if (host === DOCS_HOST) {
+    if (isFile(pathname)) return NextResponse.next();
+    return NextResponse.redirect('https://glyphh.ai/', 302);
+  }
+  // Behind the proxy nextUrl names the machine, so home is the site's own address.
+  if (SITE_HOSTS.includes(host) && !isFile(pathname) && !BETA_OPEN.has(pathname)) {
+    return NextResponse.redirect(`https://${host}/`, 302);
   }
 
   const response = NextResponse.next();
