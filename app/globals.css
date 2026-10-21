@@ -9008,8 +9008,8 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 /* What Ada is, and the two next steps, right under the promise. */
 .mh-page { padding-top: 64px; padding-bottom: 40px; }
 /* The home page's hero (Ada is the home page, 2026-10-21): the same column, under the nav, above the Ada sections. */
-.mh-hero {
-  box-sizing: border-box; padding: 72px 16px 64px;
+.site-frame > section.mh-hero {
+  box-sizing: border-box; padding: 72px 2.5rem 64px;
   display: flex; flex-direction: column; align-items: center; gap: 28px;
   background: var(--bg); color: var(--text); text-align: center;
 }
