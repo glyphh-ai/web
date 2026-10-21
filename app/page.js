@@ -34,7 +34,6 @@ export default function Home() {
       <nav className="mh-links" aria-label="Glyphh">
         <a href="/terms">Terms</a>
         <a href="/privacy">Privacy</a>
-        <a href="https://platform.glyphh.ai">Log in</a>
       </nav>
     </main>
   );
