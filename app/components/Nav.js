@@ -3,9 +3,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
+import { SALES_HREF, EARLY_ACCESS_LABEL } from './Pricing';
 
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
-// Log in and Sign up land on the platform, which signs you in first.
+// Log in lands on the platform, which signs you in first. In early access there
+// is no public sign-up: the primary link asks for access by email.
 
 export default function Nav() {
   const pathname = usePathname() || '/';
@@ -67,7 +69,7 @@ export default function Nav() {
   }, [ddOpen]);
 
   const loginHref = PLATFORM_URL;
-  const signupHref = PLATFORM_URL;
+  const signupHref = SALES_HREF;
   const dashHref = PLATFORM_URL;
 
   return (
@@ -125,7 +127,7 @@ export default function Nav() {
             ) : (
               <>
                 <a href={loginHref} className="nav-auth-link">Log in</a>
-                <a href={signupHref} className="nav-auth-link nav-auth-primary">Sign up</a>
+                <a href={signupHref} className="nav-auth-link nav-auth-primary">{EARLY_ACCESS_LABEL}</a>
               </>
             )}
             <ThemeToggle />
@@ -157,7 +159,7 @@ export default function Nav() {
         ) : (
           <>
             <a href={loginHref} className="os-cta os-cta-ghost os-cta-sm" onClick={() => setMenuOpen(false)}>Log in</a>
-            <a href={signupHref} className="os-cta os-cta-primary os-cta-sm" onClick={() => setMenuOpen(false)}>Sign up</a>
+            <a href={signupHref} className="os-cta os-cta-primary os-cta-sm" onClick={() => setMenuOpen(false)}>{EARLY_ACCESS_LABEL}</a>
           </>
         )}
       </div>

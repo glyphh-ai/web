@@ -1,4 +1,4 @@
-import { Architecture, Code, Row } from './ui';
+import { Architecture, Code, EarlyAccess, Row } from './ui';
 import { PLUGIN_PAGES, SDK_PAGES } from './pages';
 import { RUN_HUB, RUN_PACKAGES } from './run';
 import { DOCS } from './base';
@@ -15,6 +15,10 @@ const architecture = [
     lede: 'Glyphh Ada answers from the cases you have already graded, and asks when it is unsure. Here are its parts, how a call flows, and where the data lives.',
     body: (
       <>
+        <EarlyAccess>
+          Glyphh is in early access while we get Ada Cloud right. The plugin, the SDKs and rrotor are not public for
+          now, and self-hosting is by arrangement.
+        </EarlyAccess>
         <Architecture />
         <h2>The parts</h2>
         <div className="dx-table">

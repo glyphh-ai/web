@@ -1,5 +1,6 @@
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
+import { SALES_HREF, EARLY_ACCESS_LABEL } from '../../components/Pricing';
 import AdaField from '../../components/AdaField';
 import '../use-cases.css';
 
@@ -13,9 +14,7 @@ export const metadata = {
     'Route support tickets from your labelled history on your own infrastructure, and hand only the uncertain ones to an LLM. On Banking77, Ada then Claude routed 97.5% right with Claude seeing 22% of messages.',
 };
 
-const PLATFORM_URL = 'https://platform.glyphh.ai';
 const DOCS = 'https://docs.glyphh.ai';
-const BENCH = 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks/banking77';
 
 const FLOW = [
   { n: '1', title: 'Labelled examples', body: 'Record the tickets you have already routed, each with its queue. Each one becomes a precedent.' },
@@ -73,7 +72,7 @@ export default function SupportRoutingPage() {
             leaves the uncertain ones to your LLM. It runs on your own infrastructure.
           </p>
           <div className="ix-actions">
-            <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
+            <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
             <a href="#experiment" className="os-cta os-cta-ghost">See the experiment</a>
           </div>
         </section>
@@ -109,11 +108,9 @@ export default function SupportRoutingPage() {
               <span className="qs-kicker">The experiment</span>
               <h2 className="ix-h2">200 bank messages, 77 queues.</h2>
               <p className="ix-desc">
-                One experiment on one public dataset, not a guarantee for your tickets. The method, the data and every
-                run are in the repository, so you can rerun it.
+                One experiment on one public dataset, not a guarantee for your tickets.
               </p>
             </div>
-            <a href={BENCH} className="qs-more">Reproduce it &rarr;</a>
           </div>
 
           <dl className="rt-facts">
@@ -179,12 +176,12 @@ export default function SupportRoutingPage() {
         <section className="ix-section">
           <div className="ix-cta">
             <div>
-              <span className="qs-kicker">Get started</span>
-              <h3>Free on one node, 5,000 precedents.</h3>
-              <p>Enough to route a real queue. Upgrade for more nodes, more precedents and sync.</p>
+              <span className="qs-kicker">Early access</span>
+              <h3>Glyphh is in early access.</h3>
+              <p>We are working with a small number of teams. Write to us and we will set you up.</p>
             </div>
             <div className="ix-actions">
-              <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
+              <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
               <a href="/pricing" className="os-cta os-cta-ghost">Pricing</a>
             </div>
           </div>

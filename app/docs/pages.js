@@ -1,4 +1,4 @@
-import { Code, Row } from './ui';
+import { Code, EarlyAccess, Row } from './ui';
 import { DOCS } from './base';
 
 // The plugin and the SDKs, from glyphh-ai/glyphh (README.md,
@@ -12,6 +12,7 @@ export const PLUGIN_PAGES = [
     lede: 'The glyphh plugin for Claude Code: the account panel, the Ada skill and the file ledger.',
     body: (
       <>
+        <EarlyAccess>During early access the plugin is not public: we set it up with you.</EarlyAccess>
         <Code>{`/plugin marketplace add glyphh-ai/glyphh
 /plugin install glyphh@glyphh`}</Code>
         <p>
@@ -83,11 +84,11 @@ export const SDK_PAGES = [
     lede: 'Call your runtime from software, at its address, with a runtime key.',
     body: (
       <>
+        <EarlyAccess>During early access the SDKs come with your runtime.</EarlyAccess>
         <Row k="Python 3.9+">pip install glyphh, then from glyphh import Ada. Pin glyphh&gt;=3: versions up to 2.6.7 are a different library</Row>
         <Row k="Node 18+">npm i @glyphh-ai/glyphh, then import {'{ Ada }'} from &quot;@glyphh-ai/glyphh&quot;</Row>
         <p>
-          Both are 3.1.0, MIT, with no dependencies, in{' '}
-          <a href="https://github.com/glyphh-ai/glyphh/tree/main/sdk">glyphh-ai/glyphh <code>sdk/</code></a>.
+          Both are 3.1.0, MIT, with no dependencies.
         </p>
         <h2>A client</h2>
         <p>
@@ -123,8 +124,6 @@ if (r.status === "needs_input") r = await incidents.resume(r.run_id, await askSo
           <code>status</code> is <code>done</code>, <code>needs_input</code>, <code>needs_approval</code>,{' '}
           <code>failed</code>, <code>expired</code> (no continue within 15 minutes) or <code>cancelled</code>. A{' '}
           <code>query</code>’s data is <code>{'{sufficient, confidence, support, count, top, outcomes, receipts}'}</code>.
-          The JSON Schemas are in{' '}
-          <a href="https://github.com/glyphh-ai/glyphh/tree/main/contract"><code>contract/</code></a>.
         </p>
         <h2>The precedent cap</h2>
         <p>

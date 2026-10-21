@@ -1,5 +1,5 @@
 import Nav from '../components/Nav';
-import Pricing, { PLATFORM_URL, SALES_HREF } from '../components/Pricing';
+import Pricing, { EARLY_ACCESS_LABEL, SALES_HREF } from '../components/Pricing';
 import Footer from '../components/Footer';
 
 /**
@@ -27,7 +27,7 @@ const RULES = [
   },
   {
     title: 'Never per install',
-    desc: 'Install the plugin and the SDKs on every machine you have. A plan counts runtime nodes, nothing else.',
+    desc: 'Use Ada on every machine you have. A plan counts runtime nodes, nothing else.',
   },
 ];
 
@@ -52,12 +52,11 @@ export default function PricingPage() {
           <span className="qs-kicker">Pricing</span>
           <h1 className="ix-title">Pricing you can trust.</h1>
           <p className="ix-lede">
-            Ada runs on your own infrastructure on every plan, with unlimited members and models. Start free on one
-            node; upgrade for more nodes, more precedents and sync.
+            Ada runs on your own infrastructure on every plan, with unlimited members and models. Glyphh is in
+            early access: these plans apply at launch.
           </p>
           <div className="ix-actions">
-            <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
-            <a href={SALES_HREF} className="os-cta os-cta-ghost">Talk to us</a>
+            <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
           </div>
         </section>
 
@@ -100,13 +99,12 @@ export default function PricingPage() {
         <section className="ix-section">
           <div className="ix-cta pp-close">
             <div>
-              <span className="qs-kicker">Get started</span>
-              <h3>Start free, on a node of your own.</h3>
-              <p>Pro $99 a month. Team $299 a month. Enterprise by contract.</p>
+              <span className="qs-kicker">Early access</span>
+              <h3>Glyphh is in early access.</h3>
+              <p>At launch: Free on one node, Pro $99 a month, Team $299 a month, Enterprise by contract.</p>
             </div>
             <div className="ix-actions">
-              <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
-              <a href={SALES_HREF} className="os-cta os-cta-ghost">Talk to us</a>
+              <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
             </div>
           </div>
         </section>
