@@ -109,29 +109,24 @@ export default function Home() {
       <Reveal />
       <Nav />
 
-      <header className="mh-hero">
-        <h1 className="mh-line">Stop paying an LLM to classify familiar requests.</h1>
-        <p className="mh-what">
-          Glyphh Ada classifies anything you have labelled examples of — tickets, transactions, documents, events —
-          returns a confidence and the precedents behind it, and lets your application send the uncertain ones to an
-          LLM. Run it on your own infrastructure.
-        </p>
-        <div className="mh-actions">
-          <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
-          <a href="/use-cases/support-routing" className="os-cta os-cta-ghost">See ticket routing in action</a>
-        </div>
-        <div className="mh-field">
-          <AdaField />
-        </div>
-        <ol className="mh-flow" aria-label="How Ada works">
-          <li>Labelled examples</li>
-          <li>A new item</li>
-          <li>Class and confidence</li>
-          <li>Unsure: the LLM</li>
-        </ol>
-      </header>
-
       <div className="site-frame">
+        {/* The hero sits in the frame, so its rails and the line under it run on into the sections. */}
+        <section className="mh-hero">
+          <h1 className="mh-line">Stop paying an LLM to classify familiar requests.</h1>
+          <p className="mh-what">
+            Glyphh Ada classifies anything you have labelled examples of — tickets, transactions, documents, events —
+            returns a confidence and the precedents behind it, and lets your application send the uncertain ones to an
+            LLM. Run it on your own infrastructure.
+          </p>
+          <div className="mh-actions">
+            <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
+            <a href="/use-cases/support-routing" className="os-cta os-cta-ghost">See ticket routing in action</a>
+          </div>
+          <div className="mh-field">
+            <AdaField />
+          </div>
+        </section>
+
         <section className="hiw" id="how-it-works">
           <div className="qs-head">
             <span className="qs-kicker">How it works</span>
