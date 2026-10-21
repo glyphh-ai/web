@@ -51,7 +51,7 @@ const JSON_LD = {
     {
       '@type': 'SoftwareApplication',
       name: 'Glyphh Ada',
-      url: 'https://glyphh.ai/products/ada',
+      url: 'https://glyphh.ai/',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Linux (Docker, Kubernetes)',
       description: HOME_DESCRIPTION,

@@ -18,7 +18,7 @@ export const metadata = {
 
 // The stack: each a real repo.
 const STACK = [
-  { tag: 'classifier', name: 'Ada', title: 'Answers from precedent', desc: 'Typed models that learn from labelled examples and answer with a calibrated confidence and the precedents behind it.', href: '/products/ada', internal: true },
+  { tag: 'classifier', name: 'Ada', title: 'Answers from precedent', desc: 'Typed models that learn from labelled examples and answer with a calibrated confidence and the precedents behind it.', href: '/', internal: true },
   { tag: 'runtime', name: 'rrotor', title: 'The runtime you run yourself', desc: 'Where your models live: Docker Compose, Helm or Terraform, on your own infrastructure.', href: `${GITHUB_URL}/rrotor` },
   { tag: 'developer', name: 'glyphh', title: 'The plugin and the SDKs', desc: 'The Claude plugin with the Ada skill, and the Python and TypeScript SDKs your software calls Ada with.', href: `${GITHUB_URL}/glyphh` },
 ];

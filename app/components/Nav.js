@@ -15,12 +15,9 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [ddOpen, setDdOpen] = useState(false);
-  const [prodOpen, setProdOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const ddRef = useRef(null);
   const ddCloseTimer = useRef(null);
-  const prodRef = useRef(null);
-  const prodCloseTimer = useRef(null);
 
   // Hover open/close with a grace period: closing instantly on mouseleave
   // makes the panel vanish while the pointer travels from the trigger to a
@@ -34,16 +31,6 @@ export default function Nav() {
     ddCloseTimer.current = setTimeout(() => setDdOpen(false), 260);
   };
   useEffect(() => () => clearTimeout(ddCloseTimer.current), []);
-
-  const prodEnter = () => {
-    clearTimeout(prodCloseTimer.current);
-    setProdOpen(true);
-  };
-  const prodLeave = () => {
-    clearTimeout(prodCloseTimer.current);
-    prodCloseTimer.current = setTimeout(() => setProdOpen(false), 260);
-  };
-  useEffect(() => () => clearTimeout(prodCloseTimer.current), []);
 
   const [ucOpen, setUcOpen] = useState(false);
   const ucCloseTimer = useRef(null);
@@ -95,23 +82,6 @@ export default function Nav() {
             <div className="nav-dd">
               <a href="/" className={`nav-dd-trigger${pathname === '/' ? ' active' : ''}`}>Home</a>
             </div>
-            <div
-                className={`nav-dd ${prodOpen ? 'open' : ''}`}
-                ref={prodRef}
-                onMouseEnter={prodEnter}
-                onMouseLeave={prodLeave}
-              >
-                <a href="/products/ada" className={`nav-dd-trigger${active('/products')}`}>
-                  Products
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </a>
-                <div className="nav-dd-panel">
-                  <a href="/products/ada" className="nav-dd-item">
-                    <span className="nav-dd-name">Ada</span>
-                    <span className="nav-dd-desc">A self-hosted classifier that learns from precedent. Every answer cites what it stands on.</span>
-                  </a>
-                </div>
-              </div>
             <div
                 className={`nav-dd ${ucOpen ? 'open' : ''}`}
                 onMouseEnter={ucEnter}
@@ -176,8 +146,6 @@ export default function Nav() {
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
-        <span className="mobile-menu-group">Products</span>
-        <a href="/products/ada" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Ada</a>
         <span className="mobile-menu-group">Use cases</span>
         <a href="/use-cases/support-routing" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Support routing</a>
         <a href="/use-cases/loan-decisions" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Loan decisions</a>
