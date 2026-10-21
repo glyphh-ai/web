@@ -18,8 +18,6 @@ export const metadata = {
 export default function Home() {
   return (
     <main className="mh-page">
-      <Image className="beta-logo logo-dark" src="/glyphh-logo-text-white.png" alt="Glyphh" width={417} height={130} priority />
-      <Image className="beta-logo logo-light" src="/glyphh-logo-text-black.png" alt="" width={442} height={162} priority />
       <h1 className="mh-line">Stop paying an LLM to classify familiar requests.</h1>
       <p className="mh-what">
         Glyphh Ada classifies anything you have labelled examples of, returns a confidence and the precedents behind
@@ -31,7 +29,12 @@ export default function Home() {
       <div className="mh-field">
         <AdaField />
       </div>
+      {/* The wordmark lives in this bottom row, never at the top of the page (his order, 2026-10-20). */}
       <nav className="mh-links" aria-label="Glyphh">
+        <a href="/" className="mh-mark" aria-label="Glyphh">
+          <Image className="logo-dark" src="/glyphh-logo-text-white.png" alt="" width={417} height={130} priority />
+          <Image className="logo-light" src="/glyphh-logo-text-black.png" alt="" width={442} height={162} priority />
+        </a>
         <a href="/terms">Terms</a>
         <a href="/privacy">Privacy</a>
       </nav>
