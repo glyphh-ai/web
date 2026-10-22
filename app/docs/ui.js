@@ -10,27 +10,21 @@ export function Row({ k, children }) {
   );
 }
 
-// Early access (2026-10-21): the notice at the top of the docs home and the
-// Run rrotor pages. The plugin, the SDKs and rrotor are not public for now.
-export const EARLY_ACCESS_HREF = 'mailto:sales@glyphh.ai?subject=Glyphh%20early%20access';
-
-export function EarlyAccess({ children }) {
-  return (
-    <div className="dx-note">
-      <div className="dx-note-body">
-        <p className="dx-note-title">Early access</p>
-        <div className="dx-note-detail">
-          <p>
-            {children} <a href={EARLY_ACCESS_HREF}>Request early access</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function Code({ children, lang }) {
   return <pre className="dx-code" data-lang={lang}>{children}</pre>;
+}
+
+export function Table({ head, rows }) {
+  return (
+    <div className="dx-table">
+      <table>
+        <thead><tr>{head.map((h) => <th key={h}>{h}</th>)}</tr></thead>
+        <tbody>
+          {rows.map((r, i) => <tr key={i}>{r.map((c, j) => <td key={j}>{c}</td>)}</tr>)}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 function Box({ x, y, w, h, title, sub }) {
@@ -43,51 +37,56 @@ function Box({ x, y, w, h, title, sub }) {
   );
 }
 
-// Who calls rrotor, what runs inside it, and its one line out to Glyphh.
+// Ada Cloud (server docs/specs/ada-cloud.md section 3): callers, the API, the queue, the workers, the database.
 export function Architecture() {
   return (
-    <figure className="dx-arch" role="img" aria-label="Claude over MCP with the Glyphh sign-in, and your software over REST or an SDK with a runtime key, call rrotor in your infrastructure. rrotor deploys models by commit, runs each call in its own sandbox and keeps everything on its /data volume; followers replicate from the head and logs drain to your collector. rrotor's only line to Glyphh is an outbound link to api.glyphh.ai, which the platform uses.">
-      <svg viewBox="0 0 920 400" xmlns="http://www.w3.org/2000/svg">
+    <figure className="dx-arch" role="img" aria-label="Claude through the Glyphh connector with a Glyphh sign-in, and your software through the SDKs or REST with an API key, call Glyphh's API. The API checks the caller and the plan, and puts each call on a queue. Ada workers take calls from the queue and answer them from your organisation's own schema in Postgres, where precedents are indexed with pgvector. The platform uses the same API.">
+      <svg viewBox="0 0 920 360" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="dx-arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0 0L10 5L0 10z" className="dx-arch-head" />
           </marker>
         </defs>
 
-        <rect className="dx-arch-zone" x="196" y="16" width="452" height="368" rx="10" />
-        <text className="dx-arch-zone-label" x="214" y="40">Your infrastructure</text>
-        <rect className="dx-arch-zone" x="680" y="16" width="224" height="368" rx="10" />
-        <text className="dx-arch-zone-label" x="698" y="40">Glyphh</text>
+        <rect className="dx-arch-zone" x="196" y="16" width="708" height="328" rx="10" />
+        <text className="dx-arch-zone-label" x="214" y="40">Glyphh · Fly.io iad</text>
 
-        <Box x={16} y={78} w={150} h={64} title="Claude" sub="MCP · Glyphh sign-in" />
-        <Box x={16} y={218} w={150} h={64} title="Your software" sub="REST or SDK · key" />
+        <Box x={16} y={56} w={150} h={64} title="Claude" sub="connector · sign-in" />
+        <Box x={16} y={148} w={150} h={64} title="Your software" sub="SDK or REST · key" />
+        <Box x={16} y={240} w={150} h={64} title="You" sub="platform.glyphh.ai" />
 
-        <rect className="dx-arch-box dx-arch-strong" x="226" y="60" width="392" height="232" rx="8" />
-        <text className="dx-arch-title" x="422" y="88">rrotor</text>
-        <text className="dx-arch-sub" x="422" y="106">https://&lt;host&gt; · REST and /mcp</text>
-        <Box x={244} y={130} w={110} h={64} title="Models" sub="repo @ commit" />
-        <Box x={367} y={130} w={110} h={64} title="Sandbox" sub="one per run" />
-        <Box x={490} y={130} w={110} h={64} title="/data" sub="precedents" />
-        <text className="dx-arch-sub" x="422" y="226">Ada answers from the nearest precedents</text>
-        <text className="dx-arch-sub" x="422" y="244">and learns from each graded case</text>
-        <text className="dx-arch-note" x="422" y="272">the head node: in a cluster, the one writer</text>
+        <rect className="dx-arch-box dx-arch-strong" x="226" y="70" width="200" height="220" rx="8" />
+        <text className="dx-arch-title" x="326" y="100">The API</text>
+        <text className="dx-arch-sub" x="326" y="120">ada.glyphh.ai</text>
+        <text className="dx-arch-sub" x="326" y="138">api.glyphh.ai/mcp</text>
+        <text className="dx-arch-note" x="326" y="180">who is calling, which org</text>
+        <text className="dx-arch-note" x="326" y="198">plan limits and rate</text>
+        <text className="dx-arch-note" x="326" y="216">counts reads</text>
 
-        <Box x={226} y={312} w={186} h={52} title="Followers" sub="replicate from the head" />
-        <Box x={432} y={312} w={186} h={52} title="Your collector" sub="OpenTelemetry logs" />
+        <Box x={460} y={130} w={110} h={100} title="Queue" sub="Redis" />
 
-        <Box x={706} y={96} w={172} h={76} title="api.glyphh.ai" sub="accounts · keys · licence" />
-        <Box x={706} y={232} w={172} h={64} title="platform.glyphh.ai" sub="sign in · keys · models" />
+        <rect className="dx-arch-box dx-arch-strong" x="604" y="60" width="130" height="110" rx="8" />
+        <text className="dx-arch-title" x="669" y="100">Ada workers</text>
+        <text className="dx-arch-sub" x="669" y="120">reads, writes</text>
+        <Box x={604} y={190} w={130} h={100} title="Job workers" sub="import · learn" />
 
-        <line className="dx-arch-line" x1="166" y1="110" x2="224" y2="130" markerEnd="url(#dx-arch-arrow)" />
-        <line className="dx-arch-line" x1="166" y1="250" x2="224" y2="230" markerEnd="url(#dx-arch-arrow)" />
-        <line className="dx-arch-line" x1="319" y1="294" x2="319" y2="310" markerEnd="url(#dx-arch-arrow)" />
-        <line className="dx-arch-line" x1="525" y1="294" x2="525" y2="310" markerEnd="url(#dx-arch-arrow)" />
-        <line className="dx-arch-dash" x1="620" y1="134" x2="704" y2="134" markerEnd="url(#dx-arch-arrow)" />
-        <text className="dx-arch-note" x="662" y="124">link</text>
-        <text className="dx-arch-note" x="662" y="152">outbound</text>
-        <line className="dx-arch-line" x1="792" y1="230" x2="792" y2="174" markerEnd="url(#dx-arch-arrow)" />
+        <rect className="dx-arch-box dx-arch-strong" x="764" y="100" width="124" height="160" rx="8" />
+        <text className="dx-arch-title" x="826" y="146">Postgres</text>
+        <text className="dx-arch-sub" x="826" y="166">a schema per org</text>
+        <text className="dx-arch-sub" x="826" y="184">pgvector</text>
+        <text className="dx-arch-note" x="826" y="216">specs, precedents,</text>
+        <text className="dx-arch-note" x="826" y="232">what was learned</text>
+
+        <line className="dx-arch-line" x1="166" y1="88" x2="224" y2="120" markerEnd="url(#dx-arch-arrow)" />
+        <line className="dx-arch-line" x1="166" y1="180" x2="224" y2="180" markerEnd="url(#dx-arch-arrow)" />
+        <line className="dx-arch-line" x1="166" y1="272" x2="224" y2="240" markerEnd="url(#dx-arch-arrow)" />
+        <line className="dx-arch-line" x1="426" y1="180" x2="458" y2="180" markerEnd="url(#dx-arch-arrow)" />
+        <line className="dx-arch-line" x1="570" y1="160" x2="602" y2="120" markerEnd="url(#dx-arch-arrow)" />
+        <line className="dx-arch-line" x1="570" y1="200" x2="602" y2="240" markerEnd="url(#dx-arch-arrow)" />
+        <line className="dx-arch-line" x1="734" y1="115" x2="762" y2="140" markerEnd="url(#dx-arch-arrow)" />
+        <line className="dx-arch-line" x1="734" y1="240" x2="762" y2="220" markerEnd="url(#dx-arch-arrow)" />
       </svg>
-      <figcaption>Calls go from the caller to rrotor and back. Only the outbound link reaches Glyphh, and it never carries a call’s inputs or answers.</figcaption>
+      <figcaption>Every call goes through the API, which checks it and queues it; workers answer from your organisation’s own schema. No language model is in the path.</figcaption>
     </figure>
   );
 }
