@@ -112,11 +112,10 @@ export default function Home() {
       {/* The hero runs the full width, with a full-width line at its base; the frame's rails start there and never
           rise into the hero (his order, 2026-10-22). */}
       <section className="mh-hero">
-          <h1 className="mh-line">Stop paying an LLM to classify familiar requests.</h1>
+          <h1 className="mh-line">Give your code the ability to reason without an LLM.</h1>
           <p className="mh-what">
-            Glyphh Ada classifies anything you have labelled examples of — tickets, transactions, documents, events —
-            returns a confidence and the precedents behind it, and lets your application send the uncertain ones to an
-            LLM.
+            Glyphh Ada classifies anything you have labelled examples of — tickets, transactions, documents, events,
+            etc. — returns a confidence, probability gates, and the precedents behind them for auditability.
           </p>
           <div className="mh-actions">
             <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
