@@ -81,12 +81,12 @@ export const FAQ_GROUPS = [
       {
         id: 'free-plan',
         q: 'What is in the free plan?',
-        a: 'Ada, every feature of it, with up to 5,000 precedents and 10,000 reads a month, and unlimited members, models and keys.',
+        a: 'Ada, every feature of it, with up to 1,000 precedents and 5,000 reads a month, and unlimited members, models and keys.',
       },
       {
         id: 'precedents',
         q: 'How are precedents and reads counted?',
-        a: 'Precedents across all your organisation’s models: 5,000 on Free, 10,000 on Basic, 100,000 on Pro, 1,000,000 on Team. Reads a month: 10,000, 50,000, 1,000,000 and 5,000,000.',
+        a: 'Precedents across all your organisation’s models: 1,000 on Free, 10,000 on Basic, 100,000 on Pro, 1,000,000 on Team. Reads a month: 5,000, 50,000, 1,000,000 and 5,000,000.',
       },
       {
         id: 'overage',

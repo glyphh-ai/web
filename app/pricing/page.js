@@ -11,7 +11,7 @@ import Footer from '../components/Footer';
 export const metadata = {
   title: 'Pricing — Glyphh',
   description:
-    'Glyphh Ada Cloud at a flat monthly price. Free $0: 5,000 precedents, 10,000 reads a month. Basic $20 a month: 10,000 precedents, 50,000 reads. Pro $99 a month: 100,000 precedents, 1,000,000 reads. Team $299 a month: 1,000,000 precedents, 5,000,000 reads. Reads past the month $1 per 10,000. Enterprise by contract. Never per seat, model or install.',
+    'Glyphh Ada Cloud at a flat monthly price. Free $0: 1,000 precedents, 5,000 reads a month. Basic $20 a month: 10,000 precedents, 50,000 reads. Pro $99 a month: 100,000 precedents, 1,000,000 reads. Team $299 a month: 1,000,000 precedents, 5,000,000 reads. Reads past the month $1 per 10,000. Enterprise by contract. Never per seat, model or install.',
 };
 
 // The promise: what Glyphh never charges for.
@@ -31,7 +31,7 @@ const RULES = [
 ];
 
 const FAQ = [
-  ['What counts as a precedent?', 'A case recorded with its outcome, across all your organisation’s models: 5,000 on Free, 10,000 on Basic, 100,000 on Pro, 1,000,000 on Team. A write past the limit is refused; nothing is deleted for you.'],
+  ['What counts as a precedent?', 'A case recorded with its outcome, across all your organisation’s models: 1,000 on Free, 10,000 on Basic, 100,000 on Pro, 1,000,000 on Team. A write past the limit is refused; nothing is deleted for you.'],
   ['What counts as a read?', 'Each decide, query, probabilities or facts call. Writes, imports, exports, learning and backtests are not reads. The month is the calendar month, UTC.'],
   ['What happens past the month’s reads?', 'On Basic, Pro and Team, reads go on and the ones past the allowance are billed at $1 per 10,000 on a later invoice. On Free they are refused until the month turns.'],
   ['What happens if I cancel?', 'Your plan runs to the end of the month you paid for, then your organisation moves to Free. Your models and precedents are kept, and you can export them at any time.'],
@@ -99,7 +99,7 @@ export default function PricingPage() {
           <div className="ix-cta pp-close">
             <div>
               <span className="qs-kicker">Get started</span>
-              <h3>Start free, with 5,000 precedents.</h3>
+              <h3>Start free, with 1,000 precedents.</h3>
               <p>Basic $20 a month. Pro $99 a month. Team $299 a month. Enterprise by contract.</p>
             </div>
             <div className="ix-actions">

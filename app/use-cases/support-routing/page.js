@@ -179,7 +179,7 @@ export default function SupportRoutingPage() {
           <div className="ix-cta">
             <div>
               <span className="qs-kicker">Get started</span>
-              <h3>Free: 5,000 precedents, 10,000 reads a month.</h3>
+              <h3>Free: 1,000 precedents, 5,000 reads a month.</h3>
               <p>Enough to route a real queue. Upgrade for more precedents and more reads.</p>
             </div>
             <div className="ix-actions">

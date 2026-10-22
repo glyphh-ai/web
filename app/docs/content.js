@@ -384,7 +384,7 @@ const plans = [
         <Table
           head={['', 'Price', 'Precedents', 'Reads a month', 'Past the month', 'Calls a second']}
           rows={[
-            ['Free', '$0', '5,000', '10,000', 'Refused until the month turns', '5'],
+            ['Free', '$0', '1,000', '5,000', 'Refused until the month turns', '5'],
             ['Basic', '$20 a month', '10,000', '50,000', '$1 per 10,000', '10'],
             ['Pro', '$99 a month', '100,000', '1,000,000', '$1 per 10,000', '50'],
             ['Team', '$299 a month', '1,000,000', '5,000,000', '$1 per 10,000', '200'],

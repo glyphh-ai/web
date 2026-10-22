@@ -55,7 +55,7 @@ export default function TermsPage() {
           <h2>6. Plans, Limits and Metering</h2>
           <p>Each plan sets how many precedents your organisation may hold across all its models, how many reads it may make each calendar month (UTC), and how many calls a second it may make:</p>
           <ul>
-            <li><strong>Free:</strong> $0. 5,000 precedents, 10,000 reads a month, 5 calls a second.</li>
+            <li><strong>Free:</strong> $0. 1,000 precedents, 5,000 reads a month, 5 calls a second.</li>
             <li><strong>Basic:</strong> $20 a month. 10,000 precedents, 50,000 reads a month, 10 calls a second.</li>
             <li><strong>Pro:</strong> $99 a month. 100,000 precedents, 1,000,000 reads a month, 50 calls a second.</li>
             <li><strong>Team:</strong> $299 a month. 1,000,000 precedents, 5,000,000 reads a month, 200 calls a second.</li>

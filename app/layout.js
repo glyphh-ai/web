@@ -57,7 +57,7 @@ const JSON_LD = {
       description: HOME_DESCRIPTION,
       publisher: { '@id': 'https://glyphh.ai/#org' },
       offers: [
-        { '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD', description: '5,000 precedents, 10,000 reads a month.' },
+        { '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD', description: '1,000 precedents, 5,000 reads a month.' },
         { '@type': 'Offer', name: 'Basic', price: '20', priceCurrency: 'USD', description: 'A month: 10,000 precedents, 50,000 reads a month.' },
         { '@type': 'Offer', name: 'Pro', price: '99', priceCurrency: 'USD', description: 'A month: 100,000 precedents, 1,000,000 reads a month.' },
         { '@type': 'Offer', name: 'Team', price: '299', priceCurrency: 'USD', description: 'A month: 1,000,000 precedents, 5,000,000 reads a month.' },
