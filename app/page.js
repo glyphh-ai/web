@@ -109,9 +109,9 @@ export default function Home() {
       <Reveal />
       <Nav />
 
-      <div className="site-frame">
-        {/* The hero sits in the frame, so its rails and the line under it run on into the sections. */}
-        <section className="mh-hero">
+      {/* The hero runs the full width, with a full-width line at its base; the frame's rails start there and never
+          rise into the hero (his order, 2026-10-22). */}
+      <section className="mh-hero">
           <h1 className="mh-line">Stop paying an LLM to classify familiar requests.</h1>
           <p className="mh-what">
             Glyphh Ada classifies anything you have labelled examples of — tickets, transactions, documents, events —
@@ -125,8 +125,9 @@ export default function Home() {
           <div className="mh-field">
             <AdaField />
           </div>
-        </section>
+      </section>
 
+      <div className="site-frame">
         <section className="hiw" id="how-it-works">
           <div className="qs-head">
             <span className="qs-kicker">How it works</span>
