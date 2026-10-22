@@ -1,298 +1,416 @@
-import { Architecture, Code, EarlyAccess, Row } from './ui';
+import { Architecture, Code, Row, Table } from './ui';
 import { PLUGIN_PAGES, SDK_PAGES } from './pages';
-import { RUN_HUB, RUN_PACKAGES } from './run';
 import { DOCS } from './base';
 
-// The docs explain the architecture and how to run rrotor, the plugin and the
-// SDKs: nothing else. Every fact is checked against rrotor's docs/architecture.md
-// and docs/self-hosting, the server's docs/architecture.md and pricing.md, and
-// glyphh-ai/glyphh (README, sdk/*/README.md, the Ada skill). Each fact once.
+// The docs explain Ada Cloud: what it is, getting started, the API, tuning, data in and out, the plugin, the SDKs and
+// the plans. Every fact is checked against the server's docs/specs/ada-cloud.md, docs/architecture.md and
+// src/glyphh_ada (origin/main, 2026-10-22), and glyphh-ai/glyphh (sdk/*/README.md, plugins/glyphh/skills/ada).
+// Each fact once.
 
-const architecture = [
+const API = 'https://ada.glyphh.ai';
+
+const cloud = [
   {
     slug: 'introduction',
     title: 'Architecture',
-    lede: 'Glyphh Ada answers from the cases you have already graded, and asks when it is unsure. Here are its parts, how a call flows, and where the data lives.',
+    lede: 'Ada answers new cases from the cases you have already decided, and says when a person should decide instead. Glyphh runs it for you, at one address.',
     body: (
       <>
-        <EarlyAccess>
-          Glyphh is in early access while we get Ada Cloud right. The plugin, the SDKs and rrotor are not public for
-          now, and self-hosting is by arrangement.
-        </EarlyAccess>
         <Architecture />
         <h2>The parts</h2>
-        <div className="dx-table">
-          <table>
-            <thead><tr><th>Part</th><th>What it is</th><th>Where</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Ada</strong></td><td>Typed models that learn from precedents. Record graded cases; a new case is answered from its nearest precedents with calibrated probabilities, a person is asked when it is unsure, and the model learns its own weights. A model is a GitHub repo; a version is a commit</td><td>Inside rrotor</td></tr>
-              <tr><td><strong>rrotor</strong></td><td>The runtime: deploys a model by commit, runs each call in a sandbox, answers over REST and MCP. You run it; Glyphh does not host it</td><td><code>ghcr.io/glyphh-ai/rrotor</code>, at <code>https://&lt;host&gt;</code></td></tr>
-              <tr><td><strong>The server</strong></td><td>Accounts, runtime keys and runtime tokens, the signed licence key, the Glyphh sign-in, the runtime’s link. Never on the data path</td><td><code>https://api.glyphh.ai</code></td></tr>
-              <tr><td><strong>The platform</strong></td><td>Sign in, Runtimes (add one, its token and licence), API Keys, Usage, Logs, Licence, Models</td><td><a href="https://platform.glyphh.ai">platform.glyphh.ai</a></td></tr>
-              <tr><td><strong>The plugin</strong></td><td>For Claude Code: the account panel, the Ada skill, the file ledger</td><td><a href={`${DOCS}/plugin`}>The plugin</a></td></tr>
-              <tr><td><strong>The SDKs</strong></td><td>Python (<code>glyphh</code>) and TypeScript (<code>@glyphh-ai/glyphh</code>), 3.1.0</td><td><a href={`${DOCS}/sdks`}>The SDKs</a></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <h2>How a call flows</h2>
+        <Table
+          head={['Part', 'What it is', 'Where']}
+          rows={[
+            [<strong key="a">Ada Cloud</strong>, 'Ada as an API: make a model from a spec, load its precedents, ask', <code key="b">{API}</code>],
+            [<strong key="a">The platform</strong>, 'Sign in; Models (spec, settings, import, try it, backtest, export), API Keys, Usage, Billing', <a key="b" href="https://platform.glyphh.ai">platform.glyphh.ai</a>],
+            [<strong key="a">The connector</strong>, 'Claude’s way in: one URL, a Glyphh sign-in, the ada_* tools', <code key="b">https://api.glyphh.ai/mcp</code>],
+            [<strong key="a">The plugin</strong>, 'For Claude Code: sign-in and the Ada skill', <a key="b" href={`${DOCS}/plugin`}>The plugin</a>],
+            [<strong key="a">The SDKs</strong>, 'Python (glyphh) and TypeScript (@glyphh-ai/glyphh), 3.2', <a key="b" href={`${DOCS}/sdks`}>The SDKs</a>],
+          ]}
+        />
+        <p>There is nothing to install, deploy or host, and no code to write for a model.</p>
+
+        <h2>A model is a spec</h2>
+        <p>
+          A model is a JSON spec plus its precedents. The spec says what a case looks like (layers of segments of roles),
+          what the outcomes are, and what each mistake costs. Glyphh stores it and versions it; no customer code runs.
+          The format is on <a href={`${DOCS}/getting-started#the-spec`}>Getting started</a>.
+        </p>
+        <h2>Precedents</h2>
+        <p>
+          A precedent is a past case with its outcome. Ada stores each one as it reads it (a number’s bin, a text’s
+          words, an id made from its key parts) with an encoded form for search. It never keeps the raw request it came
+          in, which is why a role’s reading cannot be changed later (<code>E_SPEC_READING</code>).
+        </p>
+        <h2>How a read works</h2>
         <ol>
-          <li><strong>Claude</strong> adds <code>https://&lt;host&gt;/mcp</code> as a custom connector. rrotor is an OAuth protected resource whose authorization server is <code>api.glyphh.ai</code>, so Claude signs in to Glyphh with one Allow click and no key; rrotor checks the token with the server and keeps the answer a minute.</li>
-          <li><strong>Software</strong> sends <code>Authorization: Bearer &lt;runtime key&gt;</code>. rrotor holds only each key’s SHA-256.</li>
-          <li><strong>A deploy</strong> (<code>{'{repo, commit, token?}'}</code>) fetches exactly that commit from GitHub, checks its manifest, installs its pinned dependencies and makes it the active version.</li>
-          <li><strong>A call</strong> opens a run in its own sandbox (bubblewrap, Landlock, seccomp; no network but the hosts its manifest declares): <code>load</code>, the function, <code>end</code>. It answers a Result. A run that asks (<code>needs_input</code>, <code>needs_approval</code>) waits up to 15 minutes for a continue.</li>
+          <li><strong>The API</strong> resolves your key or sign-in to your organisation, checks the plan’s rate and monthly reads, counts the read, and queues the call.</li>
+          <li><strong>A worker</strong> takes it and opens the model: its active spec and what it learned.</li>
+          <li><strong>Under 1,000 precedents</strong> the worker reads every precedent and scores them exactly.</li>
+          <li><strong>Above that</strong>, Postgres shortlists the 1,000 nearest (pgvector, by Hamming distance), and Ada re-ranks the shortlist exactly with the spec’s weights and your clearance. The setting <code>shortlist</code> changes the 1,000 (0 reads every precedent).</li>
+          <li><strong>Over 100,000 precedents</strong>, a question that gives fewer than half the roles that vote is refused (<code>422 E_FEW_ROLES</code>) rather than answered from a poor shortlist.</li>
+          <li><strong>The answer</strong> is the outcome of least expected cost, calibrated probabilities, whether to ask a person, and the precedents it stands on. The same question gets the same answer.</li>
         </ol>
-        <p>The call goes from the caller to rrotor and back. Nothing of Glyphh’s sees its inputs or its answer.</p>
-        <h2>The link</h2>
-        <p>
-          rrotor connects out to <code>api.glyphh.ai</code> over a WebSocket; the server never connects in. Down it
-          come the licence key, the runtime keys’ hashes and deploys. Up it go each deploy (model, version, commit) and,
-          at most once a minute, each key’s call count and the runtime’s precedent total: never a call’s inputs or
-          outputs. A daily heartbeat (<code>POST /v1/license/verify</code>) fetches the newest licence key for networks
-          that block WebSockets. With <code>RROTOR_LINK=off</code> (air-gapped) there is no link, no heartbeat and no
-          Glyphh sign-in: runtime keys are the only way in.
-        </p>
-        <h2 id="where-the-data-lives">Where the data lives</h2>
-        <p>Everything rrotor keeps is on its one volume, <code>/data</code>:</p>
-        <Row k="models/<name>/versions/<commit>/">Each deployed version: the checkout and its venv, immutable</Row>
-        <Row k="models/<name>/data/">The model’s data: an Ada model’s <code>precedents.sqlite</code>, which outlives every version</Row>
-        <Row k="runs/<run_id>/">Each run’s record and its log</Row>
-        <Row k="runtime.json, access.json">The runtime’s id and token; the runtime keys’ SHA-256s</Row>
-        <Row k="licence.json">The licence key held</Row>
-        <Row k="audit/">The audit log (Enterprise)</Row>
-        <p>
-          Glyphh keeps your account, your keys, the record of each model and version (by commit), each key’s call
-          count, the precedent total and the heartbeat. Never a model’s code, its precedents, its inputs or its answers.
-        </p>
+        <p>Reads time out at 10 seconds (<code>504 E_TIMEOUT</code>). Learning, calibration, imports, exports, backtests and re-encodes run as jobs.</p>
+        <h2>Tenancy</h2>
+        <ul>
+          <li>Each organisation’s data is its own Postgres schema. Every table in it has row-level security that fails closed: a session not set to your organisation sees none of its rows.</li>
+          <li>The organisation comes from the key or the sign-in, never from the request body.</li>
+          <li>A model learns only from its own precedents. Nothing is shared between organisations except fixed public word lists (WordNet 3.0, Moby), read-only.</li>
+          <li>No language model is in the path. Ada Cloud does not send your data to one.</li>
+          <li>It runs in Fly.io’s <code>iad</code> region (United States).</li>
+        </ul>
       </>
     ),
   },
   {
-    slug: 'clusters',
-    title: 'Clusters',
-    lede: 'Several rrotors as one runtime: a head, followers, and failover by plan.',
+    slug: 'getting-started',
+    title: 'Getting started',
+    lede: 'Sign in, make a key, create a model, load your history, ask, and connect Claude.',
     body: (
       <>
+        <h2>1. Sign in</h2>
+        <p>Go to <a href="https://platform.glyphh.ai">platform.glyphh.ai</a> and sign in with Google or GitHub. Your account belongs to an organisation; invite others from Settings.</p>
+        <h2>2. Make an API key</h2>
         <p>
-          A cluster is several self-hosted rrotors of one runtime, each with its own <code>/data</code>, behind your
-          load balancer. One is the <strong>head</strong>; the rest join it as <strong>followers</strong>, up to the
-          licence key’s <code>max_nodes</code>.
+          On the <strong>API Keys</strong> page: a name, an expiry (1 to 365 days, or never) and a clearance (0 to 1,
+          default 1). The key (<code>glyphh_ak_…</code>) is shown once; keep it as a secret, for example in{' '}
+          <code>GLYPHH_API_KEY</code>. Send it as <code>Authorization: Bearer &lt;key&gt;</code>. A revoked key stops
+          working within 10 seconds.
         </p>
-        <ul>
-          <li><strong>The head is the only writer</strong> of what syncs: each Ada model’s precedent store, the deployed versions, the runtime keys and the licence key, shipped to every follower as one ordered log.</li>
-          <li><strong>Followers serve reads</strong> from their own copy and forward writes to the head: a function marked <code>{'"writes": true'}</code>, a deploy, and anything about a run another node holds (a run id is <code>&lt;node id&gt;~&lt;uuid&gt;</code>).</li>
-          <li><strong>The head also</strong> holds the runtime’s link, exports the cluster’s logs and keeps its audit log, and holds the precedent cap on the synced store: a Pro cluster holds 50,000 precedents across its nodes, not on each.</li>
-          <li><strong>Read-your-writes:</strong> every answer carries <code>Rrotor-Cluster-Seq</code>; a request with <code>Rrotor-Min-Seq</code> is answered from a node at least that far, and a follower that forwarded a write answers once it has applied it (up to 2 seconds). The SDKs do this for you.</li>
-        </ul>
-        <h2>By plan</h2>
-        <div className="dx-table">
-          <table>
-            <thead><tr><th></th><th>Nodes</th><th>Sync</th><th>When the head is lost</th></tr></thead>
-            <tbody>
-              <tr><td>Free (no key)</td><td>1</td><td>No</td><td>One node, no cluster</td></tr>
-              <tr><td>Pro</td><td>3</td><td>Yes</td><td>Failover by command: the head restarts, or you promote a node</td></tr>
-              <tr><td>Team</td><td>10</td><td>Yes</td><td>Failover by command</td></tr>
-              <tr><td>Enterprise</td><td>Unlimited</td><td>Yes</td><td>High availability: a new head is elected in 1.5 to 3 seconds</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <ul>
-          <li><strong>While there is no head,</strong> reads go on and writes answer 503 <code>E_NO_HEAD</code> with <code>Retry-After: 2</code>.</li>
-          <li><strong>Failover by command</strong> (Pro, Team): <code>rrotord cluster promote &lt;node&gt;</code> makes a node head once most members answer, it is not behind another member, and the old head answers or you confirm it is down. Terms fence the old head: when it comes back it steps down and takes the new head’s copy.</li>
-          <li><strong>Elected heads</strong> (Enterprise): the first five members vote, the rest are learners. A write is answered once most voters hold it, so no acknowledged write is lost; not within 5 seconds, it answers 503 <code>E_NOT_COMMITTED</code> and is kept. In a partition the side without a majority serves reads and refuses writes. Run three or more voters, an odd number: two nodes behave like Pro.</li>
-          <li><strong>Without a key that allows sync,</strong> the nodes never connect, so exactly one serves rather than letting the load balancer spread callers across separate stores. The others answer 503 <code>E_LICENCE_CLUSTER</code> (and <code>/readyz</code> <code>unlicensed</code>) until a key with sync arrives; they then cluster within seconds.</li>
-        </ul>
-        <p>Running one: <a href={`${DOCS}/run-a-cluster`}>Run a cluster</a>.</p>
-      </>
-    ),
-  },
-  {
-    slug: 'licensing',
-    title: 'Licensing',
-    lede: 'A signed key per paid month sets a node’s limits. With no key, rrotor runs as Community.',
-    body: (
-      <>
-        <div className="dx-table">
-          <table>
-            <thead><tr><th>Key</th><th>Nodes in a cluster</th><th>Precedents per node</th><th>Sync</th></tr></thead>
-            <tbody>
-              <tr><td>None (Community, Free)</td><td>1</td><td>5,000</td><td>No</td></tr>
-              <tr><td>Pro</td><td>3</td><td>50,000</td><td>Yes</td></tr>
-              <tr><td>Team</td><td>10</td><td>500,000</td><td>Yes</td></tr>
-              <tr><td>Enterprise</td><td>Unlimited</td><td>Unlimited</td><td>Yes, with high availability</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <h2>3. Create a model</h2>
+        <p>On the platform: <strong>Models → New</strong>, starting from an example. Or by API:</p>
+        <Code lang="bash">{`curl ${API}/v1/models \\
+  -H "Authorization: Bearer $GLYPHH_API_KEY" -H "content-type: application/json" \\
+  -d @- <<'EOF'
+{"name": "tickets", "spec": {
+  "name": "tickets",
+  "layers": [{"name": "ticket", "segments": [{"name": "what", "roles": [
+    {"name": "plan"},
+    {"name": "age_days", "numeric_config": {"min_value": 0, "max_value": 30, "bin_width": 3}},
+    {"name": "text", "text_encoding": "bag_of_words"},
+    {"name": "ref", "key_part": true, "similarity_weight": 0}
+  ]}]}],
+  "output": {"costs": {"refund": {"keep": 3}, "keep": {"refund": 1}}, "ask_below": 0.6}
+}}
+EOF`}</Code>
+        <p>A model name is lower-case letters, digits and <code>_ . -</code>, starting with a letter or digit, at most 63 characters.</p>
+
+        <h3 id="the-spec">The spec</h3>
+        <Table
+          head={['A role is', 'Write', 'Reads']}
+          rows={[
+            ['An exact value', <code key="c">{'{"name": "plan"}'}</code>, 'Equal or not; a list is a set of values'],
+            ['Free text', <code key="c">{'{"name": "text", "text_encoding": "bag_of_words"}'}</code>, 'Its words, through the lexicon; learning weighs the telling words'],
+            ['A number on a scale', <code key="c">{'{"numeric_config": {"min_value", "max_value", "bin_width"}}'}</code>, 'Its bin: near numbers are near'],
+            ['An id', <code key="c">{'{"key_part": true, "similarity_weight": 0}'}</code>, 'Not compared: makes the case’s id, so the same id replaces its precedent'],
+          ]}
+        />
+        <Row k="similarity_weight">A role’s, segment’s or layer’s voice, 0 to 1. Learning sets the real weights</Row>
+        <Row k="security_weight">The clearance a reader needs to see it, 0 to 1</Row>
+        <Row k="output.costs">{'{decided: {true outcome: cost}}'}: what each mistake costs. Unset, every mistake costs 1</Row>
+        <Row k="output.ask, ask_below">Ask a person when every choice costs more than asking, or when the top probability is under the bar</Row>
+        <Row k="output.report">The paths a fact tree shows, each still cut by clearance</Row>
+        <Row k="outputs">Named outputs, when one case answers several questions: {'{"team": {"values": [...], "costs": {...}}}'}</Row>
+        <Row k="interactions">Pairs of roles always read together (learning also finds them)</Row>
+        <Row k="seed, dimension">The encoding: default 42 and 4,096, at most 8,192</Row>
         <p>
-          Enterprise also keeps the audit log and has air-gapped keys. Plans and prices:{' '}
-          <a href="https://glyphh.ai/pricing">glyphh.ai/pricing</a>.
+          A case is sent in the same shape: <code>{'{"ticket": {"what": {"plan": "pro", "text": "charged twice"}}}'}</code>. A
+          role it leaves out weighs nothing. A path names a role as <code>layer.segment.role</code>.{' '}
+          <strong>Choose each role’s reading once:</strong> whether it is exact, text, a number (and its bins) or a key
+          part cannot change once cases are stored.
         </p>
-        <h2>The key</h2>
-        <ul>
-          <li><code>&lt;payload&gt;.&lt;signature&gt;</code>, each base64url: a JSON payload and an Ed25519 signature over its exact bytes, made by the Glyphh server. rrotor checks it with Glyphh’s public key, which is in its code, not its environment: no network request, a key changed by one byte is refused, and no setting can make rrotor trust another signer.</li>
-          <li>The payload carries <code>license_id</code>, <code>tier</code>, <code>max_nodes</code>, <code>max_precedents</code>, <code>cluster_sync_enabled</code>, <code>issued_at</code>, <code>expires_at</code> and <code>customer_id</code> (the server’s id, no name or address). Nothing else.</li>
-          <li><code>GET /v1/licence</code> (and <code>/v1/health</code>) shows the key held, where it came from, its <code>state</code> (<code>live</code>, <code>grace</code>, <code>expired</code>, <code>bad</code>, <code>none</code>) with the days left, the limits that apply, <code>ha</code> (Enterprise) and <code>precedents {'{held, cap, over}'}</code>.</li>
-        </ul>
-        <p>To read a key you hold:</p>
-        <Code lang="bash">{`printf %s "$GLYPHH_LICENSE_KEY" | cut -d. -f1 | tr '_-' '/+' | base64 -d 2>/dev/null | python3 -m json.tool`}</Code>
-        <h2 id="where-the-key-goes">Where the key goes</h2>
-        <p>A linked rrotor needs nothing: each new key arrives over the link or the heartbeat. rrotor reads every source:</p>
-        <div className="dx-table">
-          <table>
-            <thead><tr><th>Source</th><th>Read</th></tr></thead>
-            <tbody>
-              <tr><td><code>GLYPHH_LICENSE_KEY</code> (or <code>RROTOR_LICENCE</code>)</td><td>At start</td></tr>
-              <tr><td>The file <code>/etc/rrotor/license.key</code> (or <code>/data/licence.token</code>)</td><td>At start, every hour and on <code>SIGHUP</code></td></tr>
-              <tr><td>The heartbeat’s answer</td><td>At boot and every 24 hours, with the link on</td></tr>
-              <tr><td>The link’s welcome</td><td>Each time the link connects</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <ul>
-          <li>Of the keys that check out, rrotor holds the one <strong>issued last</strong> that is not more than 14 days past its expiry, so a change of plan takes effect at the next payment and an older key left in a file cannot override a newer one. The key held is kept in <code>/data/licence.json</code>, so a restart keeps it.</li>
-          <li>A key that does not check out is logged at error, with its source, at every start and hourly re-read, and the node runs as Community. Nothing a licence does stops rrotor or refuses a run: the worst case is Community’s limits.</li>
-          <li><code>PUT /v1/licence</code> is refused on a self-hosted rrotor (403 <code>E_LOCAL_ONLY</code>), so a runtime key cannot hand it a key.</li>
-        </ul>
-        <h2 id="air-gapped">Air-gapped</h2>
+
+        <h2>4. Load your history</h2>
+        <p>A CSV or JSON Lines file, as an import: on the platform’s <strong>Import</strong> tab, or by API.</p>
+        <Code lang="bash">{`# Start the import: answers the job, with a one-hour upload link
+curl ${API}/v1/models/tickets/imports \\
+  -H "Authorization: Bearer $GLYPHH_API_KEY" -H "content-type: application/json" \\
+  -d '{"format": "csv", "mapping": {"Plan": "ticket.what.plan", "Result": "outcome", "Notes": null}}'
+
+# Send the file to the upload link (no key: the link is the credential)
+curl -sS -T history.csv "<upload link>"
+
+# Follow the job until it is done
+curl ${API}/v1/jobs/<job id> -H "Authorization: Bearer $GLYPHH_API_KEY"`}</Code>
+        <p>The import learns and calibrates at its end. Smaller loads can use <code>record_many</code> (<a href={`${DOCS}/data`}>Data in and out</a>).</p>
+
+        <h2>5. Decide</h2>
+        <Code lang="bash">{`curl ${API}/v1/decide \\
+  -H "Authorization: Bearer $GLYPHH_API_KEY" -H "content-type: application/json" \\
+  -d '{"model": "tickets", "data": {"ticket": {"what": {"plan": "pro", "text": "charged twice"}}}}'`}</Code>
+        <Code lang="json">{`{"outcome": "refund",
+ "probabilities": {"refund": 0.82, "keep": 0.18},
+ "expected_cost": 0.54,
+ "ask": false,
+ "receipts": [{"id": "T-0881", "sim": 0.71, "outcome": "refund", "hash": "…", "author": "…"}],
+ "model": "tickets", "version": 1}`}</Code>
+        <p>
+          When <code>ask</code> is true, a person should decide: <code>outcome</code> is only the best guess. Record
+          their answer (<code>POST /v1/models/tickets/record</code>) and the next case learns from it.
+        </p>
+
+        <h2>6. Connect Claude</h2>
         <ol>
-          <li>Copy the key from the platform’s Settings → Licence.</li>
-          <li>Give it to rrotor in <code>GLYPHH_LICENSE_KEY</code> or the file <code>/etc/rrotor/license.key</code>, and set <code>RROTOR_LINK=off</code>: rrotor then makes no request to Glyphh at all, and callers use runtime keys.</li>
-          <li>Each month, put the next key in the file and send rrotor <code>SIGHUP</code> (<code>docker compose kill -s HUP rrotor</code>), or wait up to an hour. Nothing restarts.</li>
+          <li>In Claude, <strong>Settings → Connectors</strong>, add a custom connector: <code>https://api.glyphh.ai/mcp</code>.</li>
+          <li>Sign in with your Glyphh account and click Allow. No key is typed.</li>
+          <li>In Claude Code, install the plugin for the Ada skill (<a href={`${DOCS}/plugin`}>The plugin</a>), then ask in plain words.</li>
         </ol>
-        <p>
-          Each package’s steps: <a href={`${DOCS}/docker-compose#air-gapped`}>Docker Compose</a>,{' '}
-          <a href={`${DOCS}/helm#air-gapped`}>Helm</a>; Terraform takes the key as <code>license_key</code>.
-        </p>
-        <h2>Grace</h2>
-        <ul>
-          <li><strong>Until <code>expires_at</code></strong> (the end of the paid month) a key is current. A new one comes with each payment, so a running subscription never lapses.</li>
-          <li><strong>For 14 days past it,</strong> everything runs on the key’s limits; the health says <code>grace</code> with the days left, and rrotor logs a warning daily.</li>
-          <li><strong>After that,</strong> Community’s limits: precedents past 5,000 stay and are served, and new ones are refused (below). Nothing is deleted, no model is refused, and a new key from any source lifts the limits at once.</li>
-          <li>A key cannot be called back once issued: it holds until <code>expires_at</code> plus 14 days.</li>
-        </ul>
-        <h2>The heartbeat</h2>
-        <p>
-          At boot and every 24 hours, with the link on: <code>POST https://api.glyphh.ai/v1/license/verify</code> with
-          the runtime token. The answer is the newest key for your subscription; if the call fails, rrotor keeps the key
-          it has and tries again. The body, whole:
-        </p>
-        <Row k="machine">SHA-256 of the runtime id and the host’s machine id (or a random id kept in /data): tells apart two machines running one runtime, and cannot be read back</Row>
-        <Row k="licence_id">The key held, or null</Row>
-        <Row k="version">rrotor’s version</Row>
-        <Row k="active_runs">How many runs are in progress, a number</Row>
-        <Row k="node_id, cluster_id, role">The node’s name, its cluster and its role (standalone, head or follower), to count nodes</Row>
-        <Row k="precedents">How many precedents the node holds, a number</Row>
-        <p>
-          Never sent: IP addresses, hostnames, prompts, model inputs or outputs, model code, files, secrets, anything
-          about your users. The server keeps the body and when it came, not the caller’s address.
-        </p>
-        <h2>The caps</h2>
-        <Row k="Precedents">Per node, across all its Ada models; in a cluster, held by the head on the synced store. A <code>record</code> past the cap indexes nothing and the run ends <code>done</code>, never <code>failed</code>, with data <code>{'{"status": "limit_exceeded", "indexed": false, "message", "precedents", "cap"}'}</code>. Earlier records stay. A store over the cap after a downgrade keeps every precedent and answers; only growth is refused</Row>
-        <Row k="Nodes">Held by the head at join: a node past <code>max_nodes</code> is refused (<code>E_CLUSTER_FULL</code>), answers 503 and asks again every minute. A key with a smaller cap removes the nodes that joined last</Row>
-      </>
-    ),
-  },
-  {
-    slug: 'logs',
-    title: 'Logs and drains',
-    lede: 'Everything stays on rrotor unless you send it somewhere.',
-    body: (
-      <>
-        <Row k="Log lines">JSON on stdout, tokens masked; each names the node (and in a cluster <code>cluster_id</code> and <code>role</code>), the run and the trace. A run’s own <code>ctx.log</code> lines stay in its log, <code>GET /v1/runs/{'{id}'}/log</code></Row>
-        <Row k="Audit log">Enterprise: an event per call, deploy, key change, licence change, refusal (401, 403) and cluster change, with who did it. Kept in <code>/data/audit</code>, a file a day, read with <code>GET /v1/audit</code> or <code>audit_query</code>; in a cluster, the head keeps every node’s. Below Enterprise the events are log lines and <code>GET /v1/audit</code> is 403 <code>E_NOT_IN_PLAN</code></Row>
-        <Row k="A drain">Logs, metrics, traces and audit events by OpenTelemetry (OTLP over HTTP, protobuf) to your own collector, never through Glyphh. In a cluster the followers send theirs to the head, which exports for every node: one endpoint, one egress</Row>
-        <Row k="Server-side logging">Opt-in: the same signals also go to Glyphh, shown on the platform’s Settings → Logs and kept 7 days. rrotor says so at every start. Not with the link off; in a cluster only the head sends</Row>
-        <p>
-          Never logged or sent anywhere: a model’s inputs and outputs, <code>ctx.log</code>’s fields, secrets, tokens,
-          keys, request bodies. The link’s usage and the heartbeat are licensing, with fixed fields.
-        </p>
-        <h2>Settings</h2>
-        <div className="dx-table">
-          <table>
-            <thead><tr><th>Variable</th><th>Default</th><th>Meaning</th></tr></thead>
-            <tbody>
-              <tr><td><code>OTEL_EXPORTER_OTLP_ENDPOINT</code></td><td></td><td>Your collector, e.g. <code>http://otel-collector:4318</code>. Unset: no drain. OpenTelemetry’s other <code>OTEL_EXPORTER_OTLP_*</code> variables mean what it says; <code>grpc</code> is refused at start (<code>E_CONFIG</code>)</td></tr>
-              <tr><td><code>OTEL_RESOURCE_ATTRIBUTES</code>, <code>OTEL_SERVICE_NAME</code></td><td>, <code>rrotor</code></td><td>Added to every signal, beside rrotor’s own (version, node id, runtime id, cluster id, role)</td></tr>
-              <tr><td><code>OTEL_TRACES_SAMPLER</code>, <code>OTEL_TRACES_SAMPLER_ARG</code></td><td><code>parentbased_always_on</code></td><td><code>always_on</code>, <code>always_off</code>, <code>traceidratio</code> or their <code>parentbased_</code> forms, and the ratio</td></tr>
-              <tr><td><code>RROTOR_DRAIN_SIGNALS</code></td><td><code>logs,metrics,traces,audit</code></td><td>What the drain sends</td></tr>
-              <tr><td><code>RROTOR_DRAIN_BUFFER</code></td><td><code>10000</code></td><td>Records held per signal while the collector is down; past it the oldest are dropped and counted. Audit events are never dropped: the drain reads them from <code>/data/audit</code></td></tr>
-              <tr><td><code>RROTOR_DRAIN_AT</code></td><td><code>head</code></td><td>In a cluster: by the head, or <code>node</code>, each node itself</td></tr>
-              <tr><td><code>RROTOR_LOG_PAYLOADS</code></td><td><code>off</code></td><td><code>on</code>: inputs and results (4 KB each) in your drain only; never sent to Glyphh</td></tr>
-              <tr><td><code>RROTOR_SERVER_LOGS</code></td><td><code>off</code></td><td><code>on</code>: server-side logging</td></tr>
-              <tr><td><code>RROTOR_AUDIT_RETENTION_DAYS</code></td><td><code>90</code></td><td>Days of audit log kept (Enterprise)</td></tr>
-              <tr><td><code>RROTOR_AUDIT_MAX_MB</code></td><td><code>1024</code></td><td>The most the audit log may take; past it the oldest day goes, never today’s</td></tr>
-              <tr><td><code>RROTOR_LOG_LEVEL</code></td><td><code>INFO</code></td><td>The log level</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <Row k="Metrics">rrotor.runs, rrotor.run.seconds, rrotor.precedents, rrotor.precedents.cap, rrotor.link.state, rrotor.drain.dropped; in a cluster rrotor.cluster.term and rrotor.cluster.lag</Row>
-        <Row k="Traces">A span per API request (your traceparent honoured), the sandbox’s start and the function under it; in a cluster, one trace across the forward to the head and the head’s work</Row>
       </>
     ),
   },
 ];
 
-const run = [
-  RUN_HUB,
-  ...RUN_PACKAGES,
+const build = [
   {
-    slug: 'run-a-cluster',
-    title: 'Run a cluster',
-    lede: 'The settings, the packages and the commands.',
+    slug: 'api',
+    title: 'The API',
+    lede: `Every call, at ${API}, with an API key or a Glyphh sign-in.`,
     body: (
       <>
-        <p>How a cluster works: <a href={`${DOCS}/clusters`}>Clusters</a>. It needs a licence key with sync on every node.</p>
-        <h2>Settings</h2>
-        <div className="dx-table">
-          <table>
-            <thead><tr><th>Variable</th><th>Default</th><th>Meaning</th></tr></thead>
-            <tbody>
-              <tr><td><code>RROTOR_CLUSTER</code></td><td><code>off</code></td><td><code>on</code>: join or make a cluster</td></tr>
-              <tr><td><code>RROTOR_NODE_ID</code></td><td>The hostname</td><td>This node’s name, <code>[a-z0-9-]{'{1,63}'}</code></td></tr>
-              <tr><td><code>RROTOR_CLUSTER_PEERS</code></td><td></td><td><code>host:port,…</code> of every node, the same on each. Or:</td></tr>
-              <tr><td><code>RROTOR_CLUSTER_DNS</code></td><td></td><td>A name whose records are the nodes (a headless Service)</td></tr>
-              <tr><td><code>RROTOR_CLUSTER_PORT</code></td><td><code>7778</code></td><td>Node to node only: open it between the nodes and never behind the public load balancer</td></tr>
-              <tr><td><code>RROTOR_CLUSTER_SECRET</code></td><td></td><td>Required: <code>openssl rand -base64 32</code>, the same on every node. The nodes derive mutual TLS from it; anyone with it can join</td></tr>
-              <tr><td><code>RROTOR_CLUSTER_SECRET_PREVIOUS</code></td><td></td><td>Trusted too while a new secret rolls out</td></tr>
-              <tr><td><code>RROTOR_CLUSTER_HEAD</code></td><td>The lowest node id</td><td>The node that makes the cluster the first time</td></tr>
-              <tr><td><code>RROTOR_CLUSTER_ADVERTISE</code></td><td><code>&lt;node id&gt;:&lt;port&gt;</code></td><td>How the other nodes reach this one</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <h2>The packages</h2>
-        <p>Each sets these for you; you choose the number of nodes (at most the key’s <code>max_nodes</code>) and keep the secret.</p>
-        <Row k="Compose">Three nodes and Caddy on one machine to try it, or a node per machine behind your load balancer (<a href={`${DOCS}/docker-compose#a-cluster`}>Docker Compose</a>)</Row>
-        <Row k="Helm">cluster.enabled and replicas, found at the headless Service, the secret made on install and kept (<a href={`${DOCS}/helm#a-cluster`}>Helm</a>)</Row>
-        <Row k="Terraform">node_count, nodes across zones behind an AWS NLB or Google’s HTTPS load balancer, the secret in the cloud’s secret store (<a href={`${DOCS}/terraform#a-cluster`}>Terraform</a>)</Row>
+        <h2>Auth</h2>
         <ul>
-          <li>Point the load balancer’s health check at <code>/readyz</code> (503 with <code>joining</code>, <code>catching_up</code>, <code>no_cluster</code>, <code>refused</code> or <code>unlicensed</code>) and liveness at <code>/healthz</code>.</li>
-          <li>Every node runs the same image on the same CPU architecture (<code>E_CLUSTER_ARCH</code> otherwise).</li>
-          <li>Mark each function that only reads <code>{'"writes": false'}</code> in its manifest (an Ada model’s <code>query</code>, <code>facts</code>, <code>probabilities</code>) so every node answers it; the rest run on the head. One marked <code>false</code> that writes fails <code>E_READ_ONLY</code>.</li>
-          <li><code>GET /v1/cluster</code> or the MCP tool <code>cluster_status</code>: the head, every member and its lag, the nodes refused.</li>
+          <li><code>Authorization: Bearer glyphh_ak_…</code>: an API key, acting in its organisation with the clearance it was made with.</li>
+          <li>A Glyphh sign-in (the platform, the connector) acts with full clearance.</li>
+          <li>A request may send <code>clearance</code> lower than the caller’s, never higher. Roles above it are cut from what it reads and do not vote.</li>
+          <li>Keys are made, listed and revoked by a signed-in person, not by a key: <code>POST /v1/keys {'{name, expires_in_days?, clearance?}'}</code>, <code>GET /v1/keys</code>, <code>DELETE /v1/keys/{'{id}'}</code>.</li>
         </ul>
-        <h2>The commands</h2>
-        <p>Run on a node, authenticated by the cluster secret. Not on the API: no runtime key can change the cluster.</p>
-        <Code lang="bash">{`docker compose exec rrotor rrotord cluster promote rrotor-1   # make rrotor-1 head
-docker compose exec rrotor rrotord cluster leave rrotor-2     # remove a node
-docker compose exec rrotor rrotord cluster join               # on a removed node: ask to join again
-kubectl exec rrotor-1 -- rrotord cluster promote rrotor-1`}</Code>
-        <Row k="promote refuses">E_CLUSTER_QUORUM: most members do not answer. E_CLUSTER_LAG: the node is behind another (--force promotes it and loses the writes it lacks; refused on Enterprise, E_CLUSTER_HA). E_CLUSTER_CONFIRM: the head does not answer (confirm at the terminal, or --yes). E_CLUSTER_VOTES: run it again</Row>
-        <Row k="leave refuses">E_CLUSTER_HEAD: the head cannot leave; promote another node first</Row>
+        <h2>Models</h2>
+        <Table
+          head={['Call', 'Does']}
+          rows={[
+            [<code key="c">GET /v1/models</code>, 'Every model: name, active version, precedents held'],
+            [<code key="c">POST /v1/models {'{name, spec}'}</code>, '201: a model at version 1, empty'],
+            [<code key="c">GET /v1/models/{'{name}'}</code>, 'Its active spec and version, and precedents held'],
+            [<code key="c">DELETE /v1/models/{'{name}'}?confirm={'{name}'}</code>, 'Deletes it and everything it holds, at once. Not undone'],
+          ]}
+        />
+        <h2>Cases</h2>
+        <Table
+          head={['Call', 'Does']}
+          rows={[
+            [<code key="c">POST …/{'{name}'}/record {'{data, outcome?, outcomes?, ts?}'}</code>, 'One case: {id, precedents}'],
+            [<code key="c">POST …/{'{name}'}/record_many {'{cases}'}</code>, 'Up to 1,000 in one transaction, all or none: {ids, added, replaced, precedents}'],
+            [<code key="c">POST …/{'{name}'}/grade {'{id, value, output?}'}</code>, 'An outcome on a case already recorded (null takes it away)'],
+            [<code key="c">DELETE …/{'{name}'}/precedents/{'{id}'}</code>, 'Forget one case and its outcomes'],
+          ]}
+        />
         <p>
-          A member unseen for 24 hours (<code>RROTOR_CLUSTER_EVICT_AFTER</code>) is removed and may join again. The head
-          keeps 1 GB of its log for catch-up (<code>RROTOR_CLUSTER_LOG_KEEP</code>); a node further behind takes a
-          snapshot. Run
-          three or more nodes: with two, a membership change needs both.
+          <code>…</code> is <code>/v1/models</code>. Every write takes an <code>Idempotency-Key</code> header: the same
+          key and body answer the first answer and write nothing again (another body: <code>409 E_IDEMPOTENCY</code>).
         </p>
+        <h2>Reads</h2>
+        <Table
+          head={['Call', 'Answers']}
+          rows={[
+            [<code key="c">POST /v1/decide {'{model, data, output?, outputs?, include?, clearance?}'}</code>, '{outcome, probabilities, expected_cost, ask, receipts, model, version}; include: ["facts"] adds the nearest fact tree; outputs decides several at once'],
+            [<code key="c">POST …/{'{name}'}/decide</code>, 'The same, the model in the path'],
+            [<code key="c">POST …/{'{name}'}/query</code>, 'The raw vote: {sufficient, confidence, support, count, top, outcomes, receipts}'],
+            [<code key="c">POST …/{'{name}'}/probabilities</code>, 'Calibrated probabilities per outcome'],
+            [<code key="c">POST …/{'{name}'}/facts {'{data, top?, min_score?}'}</code>, 'The nearest fact trees (top at most 50)'],
+          ]}
+        />
+        <p>Each takes <code>{'{data, output?, clearance?}'}</code>. A read is what your plan counts; <code>decide</code> with <code>outputs</code> counts once per output.</p>
+        <h2>Jobs</h2>
+        <Table
+          head={['Call', 'Does']}
+          rows={[
+            [<code key="c">POST …/{'{name}'}/learn</code>, 'Weights from the precedents, then calibration'],
+            [<code key="c">POST …/{'{name}'}/calibrate</code>, 'The temperature alone'],
+            [<code key="c">POST …/{'{name}'}/backtest</code>, <a key="a" href={`${DOCS}/tuning#backtest`}>Tuning</a>],
+            [<code key="c">POST …/{'{name}'}/imports</code>, <a key="a" href={`${DOCS}/data`}>Data in and out</a>],
+            [<code key="c">POST …/{'{name}'}/export {'{format}'}</code>, <a key="a" href={`${DOCS}/data#export`}>Data in and out</a>],
+            [<code key="c">GET /v1/jobs/{'{id}'}</code>, '{id, model, kind, state, percent, result, error, download, upload}; state is awaiting, queued, running, done or failed'],
+          ]}
+        />
+        <p>A job answers <code>202</code> with the job; poll it until <code>done</code> or <code>failed</code>.</p>
+        <h2>Tuning</h2>
+        <Row k="PUT …/{name}/spec">{'{spec, note?, backtest?}'}: a new version: {'{version, active, job}'}</Row>
+        <Row k="GET, PATCH …/{name}/settings">Every lever; {'{changes, note?, backtest?}'} makes a new version</Row>
+        <Row k="GET …/{name}/versions">Every version, who made it and why</Row>
+        <Row k="POST …/{name}/versions/{n}/activate">Roll back (or forward)</Row>
+        <h2>Usage</h2>
+        <p><code>GET /v1/usage</code>: <code>{'{plan, month, resets_at, models, precedents: {used, max}, requests: {used, max, over, overage}, requests_per_second}'}</code>. A <code>max</code> of null means no cap (by contract).</p>
+        <h2>Compatibility</h2>
+        <p><code>POST /v1/runs {'{model, function, inputs, clearance?}'}</code> answers SDK 3.0’s call shape for <code>record</code>, <code>query</code>, <code>facts</code>, <code>probabilities</code>, <code>decide</code>, <code>learn</code> and <code>settings</code>. New code should use the routes above.</p>
+
+        <h2 id="limits">Limits per request</h2>
+        <Row k="Body">1 MB; record_many 5 MB; an import with its file in the body 5 MB of file</Row>
+        <Row k="Timeouts">Reads 10 s; record_many, making and deleting a model 30 s (send again with the same Idempotency-Key)</Row>
+        <Row k="Spec">64 KB of JSON, 64 roles, 20 named outputs, 200 values an output, k at most 200, dimension at most 8,192</Row>
+        <Row k="Strings">No string may hold NUL (\u0000): 400 E_INVALID</Row>
+
+        <h2 id="errors">Errors</h2>
+        <p>Every refusal is <code>{'{"error": {"code", "message", "trace_id", ...}}'}</code> with a stable code. Say what it means and what to do; never retry a refusal unchanged.</p>
+        <Table
+          head={['Code', 'Status', 'Means']}
+          rows={[
+            ['E_AUTH', '401', 'No key, or one that is unknown, expired or revoked'],
+            ['E_FORBIDDEN', '403', 'Needs a signed-in person (making keys)'],
+            ['E_LIMIT', '403', 'Past the plan: reason precedents (a write or import would pass the cap) or requests (Free past its month), with used, max, plan, upgrade and resets_at. 413 with reason cases: over 1,000 in record_many'],
+            ['E_RATE', '429', 'More calls a second than the plan allows; wait as Retry-After says'],
+            ['E_INVALID', '400, 422', 'The request is malformed'],
+            ['E_TOO_LARGE', '413', 'The body is over its bound'],
+            ['E_SPEC', '422', 'The spec, or a case, does not fit: path says where'],
+            ['E_SPEC_LIMIT', '413, 422', 'The spec is past a cloud bound: limit and max'],
+            ['E_SPEC_READING', '422', 'A new spec reads a role differently (exact, text, number bins, key part). Make a new model and import'],
+            ['E_FEW_ROLES', '422', 'Over 100,000 precedents and under half the voting roles given: names the roles given and those it could take. Ask with more of the case'],
+            ['E_MAPPING', '422', 'An import’s header the spec cannot take'],
+            ['E_MODEL_MISSING, E_PRECEDENT_MISSING, E_JOB_MISSING, E_VERSION_MISSING', '404', 'Not there'],
+            ['E_BUSY', '409', 'An import or re-encode is already running on the model'],
+            ['E_NOT_READY', '409', 'That version is still being made'],
+            ['E_NO_CHANGE', '409', 'The change changes nothing'],
+            ['E_IDEMPOTENCY', '409', 'The same Idempotency-Key with another body'],
+            ['E_VERSION_GONE', '410', 'That version’s store was dropped (7 days unused)'],
+            ['E_TIMEOUT', '504', 'Not answered in time; a write is made once, so send it again with the same key'],
+            ['E_UNAVAILABLE', '503', 'The service cannot take it for a moment'],
+            ['E_INTERNAL', '500', 'Our fault; trace_id helps us find it'],
+          ]}
+        />
+      </>
+    ),
+  },
+  {
+    slug: 'tuning',
+    title: 'Tuning',
+    lede: 'Every lever is a setting or part of the spec, every change is a version, and a backtest tells you before it goes live.',
+    body: (
+      <>
+        <h2>Settings</h2>
+        <Table
+          head={['Setting', 'Default', 'What it does', 'A change is']}
+          rows={[
+            ['k', '15', 'Nearest precedents a vote is over (at most 200)', 'Live'],
+            ['min_sim', '0.10', 'Similarity a precedent needs to vote: higher says nothing rather than guess', 'Live'],
+            ['word_evidence', '2', 'How much a case’s words weigh on the vote (0 to 5)', 'Live'],
+            ['word_weights', 'true', 'Learn a weight per word of a text role', 'Re-encoded'],
+            ['word_floor', '0.35', 'The least a learned word weighs', 'Re-encoded'],
+            ['interactions, max_interactions', 'true, 5', 'Learn pairs of roles that tell more together (0 to 50)', 'Re-encoded'],
+            ['rare', '5', 'Values, words and pairs seen fewer times are not learned from', 'Re-encoded'],
+            ['word_pairs, max_word_pairs', 'false, 20', 'Learn pairs of words, for intents that are phrases (0 to 200)', 'Re-encoded'],
+            ['lexicon', 'true', 'Read words through WordNet and Moby, so related words correlate', 'Re-encoded'],
+            ['calibrate_by', 'loss', 'loss: probabilities that mean what they say; cost: that decide best by the costs', 'Live, then recalibrated'],
+            ['calibrate_sample', '200', 'The newest precedents a calibration holds out', 'Live'],
+            ['refresh_every', 'none', 'Learn again every so many precedents, as a job', 'Live'],
+            ['shortlist', '1,000', 'Candidates a big model’s read re-ranks exactly (0: every precedent; else 100 to 10,000)', 'Live'],
+          ]}
+        />
+        <p>
+          In the spec, weights, security weights, costs, <code>ask</code>, <code>ask_below</code> and <code>report</code>{' '}
+          are live; roles added or taken away, declared interactions, <code>seed</code> and <code>dimension</code> are
+          re-encoded; a role’s reading cannot change (<code>E_SPEC_READING</code>).
+        </p>
+        <p>
+          <strong>Live</strong> is active at once on the same precedents. <strong>Re-encoded</strong> is a job: the
+          precedents are restated for the new version into a store of its own, which learns before it goes live, while
+          the old version answers. One import or re-encode runs at a time on a model (<code>E_BUSY</code>).
+        </p>
+        <h2>Versions</h2>
+        <ul>
+          <li>Every spec or settings change is a new version, kept with who made it, the note and the backtest that chose it.</li>
+          <li><code>POST …/versions/{'{n}'}/activate</code> rolls back, with what that version had learned. To a version on the same store it is at once; to one on another store it is a job that brings that store up to date, so no write is lost.</li>
+          <li>A store no version has read for 7 days is dropped; its versions can no longer be activated (<code>410 E_VERSION_GONE</code>).</li>
+        </ul>
+        <h2 id="backtest">Backtest</h2>
+        <Code lang="json">{`POST /v1/models/tickets/backtest
+{"candidates": [{"settings": {"word_evidence": 0}, "name": "no word evidence"},
+                {"spec_version": 2},
+                {"spec": {"...": "..."}}],
+ "holdout": {"newest": 200},
+ "output": "default"}`}</Code>
+        <ul>
+          <li>Up to 10 candidates. The live version is always scored too, as <code>active</code>.</li>
+          <li><code>holdout</code>: the newest <code>n</code> graded precedents (default 200), or <code>{'{"fraction": 0.2, "seed": 7}'}</code>.</li>
+          <li>Each learns and calibrates on the rest, then decides every held-out case. The live model is never touched.</li>
+          <li>The answer, per candidate: <code>accuracy</code>, <code>top_accuracy</code> (the plain vote), <code>log_loss</code>, <code>cost</code> and <code>cost_mean</code>, <code>ask_rate</code> and <code>accuracy_answered</code>, <code>coverage</code>, <code>calibration_error</code>, <code>mistakes</code> and, for a candidate, <code>change</code> against <code>active</code>.</li>
+          <li>Pass the job’s id as <code>backtest</code> when you apply the change, so the version records why.</li>
+        </ul>
+        <h2>What usually helps</h2>
+        <ul>
+          <li>Text decides the case: <code>word_evidence</code> up (2 to 3), <code>word_pairs</code> on for phrase-like intents.</li>
+          <li>Few, noisy precedents: <code>rare</code> up, <code>k</code> up.</li>
+          <li>It guesses where it should not: <code>min_sim</code> up, or <code>ask_below</code> up.</li>
+          <li>Costs matter more than being right: <code>calibrate_by: cost</code>.</li>
+        </ul>
+        <p>One change at a time, each backtested. What needs code is not a lever: a derived field (a ratio, a weekday) is computed by the caller and sent as a role; a business rule is applied around the answer.</p>
+      </>
+    ),
+  },
+  {
+    slug: 'data',
+    title: 'Data in and out',
+    lede: 'Load history in bulk, get everything back at any time, and delete what you want gone.',
+    body: (
+      <>
+        <h2>Three ways in</h2>
+        <Row k="record_many">Up to 1,000 cases a request, 5 MB, one transaction. A spec with key parts is idempotent by itself: the same id replaces its precedent</Row>
+        <Row k="An import">A file, as a job: CSV, JSON Lines, a model’s own export, or an Ada SQLite store. Up to 200 MB</Row>
+        <Row k="From Claude">The Ada skill maps your file to the spec with you, then sends it in chunks or as an import</Row>
+        <h2>Imports</h2>
+        <p><code>POST /v1/models/{'{name}'}/imports {'{format, mapping?, partial?, learn?, content?, content_base64?}'}</code></p>
+        <ul>
+          <li><code>format</code>: <code>csv</code>, <code>jsonl</code> or <code>ada_sqlite</code>.</li>
+          <li>Without the file, it answers the job waiting for it and a one-hour upload link: <code>PUT</code> the file there (<code>curl -T</code>). The link is its own credential.</li>
+          <li>With the file in the body (<code>content</code> as text, or <code>content_base64</code>), up to 5 MB, it is queued at once.</li>
+          <li><strong>JSON Lines:</strong> one <code>{'{data, outcome?, outcomes?, ts?, id?}'}</code> a line.</li>
+          <li><strong>CSV:</strong> a header names a role by its path (<code>ticket.what.plan</code>), or <code>mapping</code> maps it; <code>outcome</code> (or <code>outcome.&lt;output&gt;</code>) names the outcome; <code>null</code> skips a column. An empty cell is nothing; a bad number refuses its row; a header the spec cannot take refuses the import (<code>E_MAPPING</code>).</li>
+          <li>The job checks every row and counts the new ids against your plan’s cap first. Past it, the import is refused whole (<code>E_LIMIT</code>), unless <code>partial: true</code>, which records up to the cap.</li>
+          <li>Refused rows are named (the first 100) and the rest go in. Then the model learns and calibrates once (<code>learn: false</code> skips it).</li>
+          <li><code>GET /v1/models/{'{name}'}/imports/{'{id}'}</code> or <code>GET /v1/jobs/{'{id}'}</code>: <code>state</code>, <code>percent</code>, and the result: rows, recorded, added, replaced, refused.</li>
+          <li>The uploaded file is kept only until its import ends.</li>
+        </ul>
+        <h2 id="export">Export</h2>
+        <p><code>POST /v1/models/{'{name}'}/export {'{format}'}</code>, a job, on every plan. When done, the job carries a one-hour download link.</p>
+        <Row k="jsonl">A zip: the precedents as stored ({'{id, situation, outcome, outcomes, ts, author}'}), every spec version and what was learned. Imported into a model of the same spec, it answers exactly as the original</Row>
+        <Row k="ada_sqlite">An Ada SQLite store, with its encoded precedents, outcomes, learned weights and calibration</Row>
+        <p>An export holds cases as Ada read them, not as you sent them. To change how a role reads, import your original file into a new model.</p>
+        <h2>Deletion</h2>
+        <Row k="One case">DELETE /v1/models/{'{name}'}/precedents/{'{id}'}: gone from the store at once; what was learned from it stays until the next learn</Row>
+        <Row k="A model">DELETE /v1/models/{'{name}'}?confirm={'{name}'}: every store, version, learned weight, job and file, at once, in one transaction</Row>
+        <Row k="An organisation">Ask support@glyphh.ai: its whole schema is dropped</Row>
+        <p>Deleted data leaves the database’s backups when they age out (<a href="https://glyphh.ai/privacy">Privacy Policy</a>).</p>
+      </>
+    ),
+  },
+];
+
+const plans = [
+  {
+    slug: 'plans',
+    title: 'Plans and limits',
+    lede: 'Plans sell precedents held and reads a month. Never seats, models or keys.',
+    body: (
+      <>
+        <Table
+          head={['', 'Price', 'Precedents', 'Reads a month', 'Past the month', 'Calls a second']}
+          rows={[
+            ['Free', '$0', '5,000', '10,000', 'Refused until the month turns', '5'],
+            ['Basic', '$20 a month', '10,000', '50,000', '$1 per 10,000', '10'],
+            ['Pro', '$99 a month', '100,000', '1,000,000', '$1 per 10,000', '50'],
+            ['Team', '$299 a month', '1,000,000', '5,000,000', '$1 per 10,000', '200'],
+            ['Enterprise', 'By contract', 'By contract', 'By contract', 'By contract', 'By contract'],
+          ]}
+        />
+        <p>Models, members and keys are unlimited on every plan. Backtests, versions and export are on every plan.</p>
+        <h2>What counts</h2>
+        <ul>
+          <li><strong>Precedents</strong>: the organisation’s total across its models’ live stores. A store kept only for rollback does not count. A write or import past the cap is refused whole (<code>E_LIMIT</code> <code>precedents</code>); an import with <code>partial</code> records up to it.</li>
+          <li><strong>Reads</strong>: each <code>decide</code>, <code>query</code>, <code>probabilities</code> and <code>facts</code>; a <code>decide</code> with <code>outputs</code> once per output. Counted when received. The month is the calendar month, UTC.</li>
+          <li><strong>Not counted as reads</strong>: writes, imports, exports, learning, backtests. They are bounded by the cap and the rate.</li>
+          <li><strong>Rate</strong>: every call, job polls included, against the plan’s calls a second (<code>429 E_RATE</code>, <code>Retry-After</code>).</li>
+          <li><strong>Past the month</strong>: Free is refused (<code>403 E_LIMIT</code> <code>requests</code>, naming the plan that lifts it and when the month turns); Basic, Pro and Team go on, and the reads past are billed at $1 per 10,000 on a later invoice.</li>
+        </ul>
+        <p>See your use on the platform’s Usage page, with <code>GET /v1/usage</code>, or from the SDKs’ <code>usage()</code>. Billing and cancellation: <a href="https://glyphh.ai/terms">Terms</a> and <a href="https://glyphh.ai/refund">Refund Policy</a>.</p>
       </>
     ),
   },
 ];
 
 export const GROUPS = [
-  { title: 'Architecture', pages: architecture },
-  { title: 'Run rrotor', pages: run },
-  { title: 'The plugin', pages: PLUGIN_PAGES },
-  { title: 'The SDKs', pages: SDK_PAGES },
+  { title: 'Ada Cloud', pages: cloud },
+  { title: 'Building models', pages: build },
+  { title: 'Claude and code', pages: [...PLUGIN_PAGES, ...SDK_PAGES] },
+  { title: 'Plans', pages: plans },
 ];
 export const PAGES = GROUPS.flatMap((g) => g.pages);
 export const hrefOf = (p) => (p.slug === 'introduction' ? DOCS : `${DOCS}/${p.slug}`);

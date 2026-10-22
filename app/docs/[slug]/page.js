@@ -22,19 +22,23 @@ const MOVED = {
   primer: DOCS, 'semantic-apps': DOCS, 'ada-introduction': DOCS, glyph: DOCS, patterns: DOCS, ada: DOCS,
   'ada-edges': DOCS, 'ada-graph': DOCS, 'ada-gql': DOCS, 'ada-procedures': DOCS,
   security: DOCS, sso: DOCS, 'org-settings': DOCS, domain: DOCS,
-  // Building a model: the Ada skill.
-  'ada-typed': to('ada-skill'), 'ada-time': to('ada-skill'), 'ada-tuning': to('ada-skill'),
-  'ada-guide-incidents': to('ada-skill'), 'ada-guide-tickets': to('ada-skill'), 'ada-guide-churn': to('ada-skill'),
-  // Connecting Claude: the plugin.
-  'ada-install': to('plugin'),
+  // Building a model: getting started (the spec) and tuning.
+  'ada-typed': to('getting-started'), 'ada-time': to('getting-started'), 'ada-tuning': to('tuning'),
+  'ada-guide-incidents': to('getting-started'), 'ada-guide-tickets': to('getting-started'),
+  'ada-guide-churn': to('getting-started'),
+  // Connecting Claude: the plugin, which now carries the Ada skill.
+  'ada-install': to('plugin'), 'ada-skill': to('plugin'),
   // Answers and calling from code: the SDKs and the API.
-  'fact-trees': to('sdks'), 'ada-act': to('sdks'), 'ada-sdk': to('sdks'),
-  'ada-tools': to('api'), mcp: to('api'), 'mcp-servers': to('api'),
-  // Getting a runtime: running rrotor.
-  'quick-start': to('run-rrotor'), quickstart: to('run-rrotor'), runtimes: to('run-rrotor'), rrotor: to('run-rrotor'),
-  'self-hosting': to('run-rrotor'), compose: to('docker-compose'), kubernetes: to('helm'),
-  // Plans: licensing, which links to the prices.
-  plans: to('licensing'), seats: to('licensing'), 'billing-admin': to('licensing'),
+  'fact-trees': to('api'), 'ada-act': to('sdks'), 'ada-sdk': to('sdks'),
+  'ada-tools': to('plugin'), mcp: to('plugin'), 'mcp-servers': to('plugin'),
+  // Ada Cloud replaced rrotor (2026-10-22): its pages land on the nearest cloud page.
+  'quick-start': to('getting-started'), quickstart: to('getting-started'), runtimes: to('getting-started'),
+  rrotor: to('getting-started'), 'self-hosting': to('getting-started'), 'run-rrotor': to('getting-started'),
+  compose: to('getting-started'), 'docker-compose': to('getting-started'), kubernetes: to('getting-started'),
+  helm: to('getting-started'), terraform: to('getting-started'),
+  clusters: DOCS, 'run-a-cluster': DOCS,
+  licensing: to('plans'), seats: to('plans'), 'billing-admin': to('plans'),
+  logs: to('data'),
 };
 
 export function generateStaticParams() {
