@@ -114,8 +114,9 @@ export default function Home() {
       <section className="mh-hero">
           <h1 className="mh-line">Give your code the ability to reason without an LLM.</h1>
           <p className="mh-what">
-            Glyphh Ada classifies anything you have labelled examples of — tickets, transactions, documents, events,
-            etc. — returns a confidence, probability gates, and the precedents behind them for auditability.
+            Glyphh Ada classifies anything you have labelled examples of — tickets, transactions, documents, events and
+            more — returns a confidence, probability gates, and the precedents behind each answer, so every decision can
+            be audited.
           </p>
           <div className="mh-actions">
             <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
