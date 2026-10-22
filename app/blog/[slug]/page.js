@@ -65,7 +65,7 @@ export default async function BlogPost({ params }) {
             <div className="ix-cta bl-next">
               <div>
                 <span className="qs-kicker">Next step</span>
-                <p>Ada learns from your labelled cases, answers from its nearest precedents, and hands what it is unsure of to an LLM, on your own infrastructure.</p>
+                <p>Ada learns from your labelled cases, answers from its nearest precedents, and hands what it is unsure of to an LLM. Start free on Ada Cloud.</p>
               </div>
               <div className="ix-actions">
                 <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>

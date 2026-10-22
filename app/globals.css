@@ -9002,8 +9002,6 @@ p em, li em { font-family: inherit !important; font-style: italic; }
 .mh-links { align-items: center; }
 .mh-links .mh-mark { display: inline-flex; margin-right: 8px; }
 .mh-links .mh-mark img { height: 20px; width: auto; }
-/* The beta page's wordmark, above the line (2026-10-21). */
-.beta-logo { width: min(200px, 50vw); height: auto; }
 .mh-line {
   margin: 0; max-width: 22ch; font-family: var(--font-display); font-weight: 600;
   font-size: clamp(24px, 4vw, 44px); line-height: 1.12; letter-spacing: -0.02em; color: var(--text); text-wrap: balance;

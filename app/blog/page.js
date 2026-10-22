@@ -10,7 +10,7 @@ import { POSTS, fmtDate } from './posts';
 
 export const metadata = {
   title: 'Blog — Glyphh',
-  description: 'What we’re building, fixing and learning at Glyphh: notes on Ada, the self-hosted classifier that learns from precedent, guides, and the story so far.',
+  description: 'What we’re building, fixing and learning at Glyphh: notes on Ada, the classifier that learns from precedent, guides, and the story so far.',
 };
 
 export default function BlogIndex() {

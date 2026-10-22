@@ -2,12 +2,12 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import './use-cases.css';
 
-// The use cases: each one an experiment you can rerun (rrotor's benchmarks/).
+// The use cases: each one an experiment you can rerun (glyphh-ai/glyphh's benchmarks/).
 
 export const metadata = {
   title: 'Use cases — Glyphh',
   description:
-    'What Glyphh Ada classifies, each with the experiment behind it: support ticket routing and loan decisions, on your own infrastructure.',
+    'What Glyphh Ada classifies, each with the experiment behind it: support ticket routing and loan decisions.',
 };
 
 const USE_CASES = [

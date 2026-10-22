@@ -7,8 +7,8 @@ import { HOME_TITLE, HOME_DESCRIPTION } from './lib/home-meta';
 
 // THE HOME PAGE is Ada (his order, 2026-10-21): the promise, Ada learning and
 // the next steps as the hero, then the Ada page as it was at /products/ada.
-// The facts are rrotor's and the kernel's (the functions, the answer's fields,
-// where it runs); the example answer is illustrative.
+// The facts are Ada Cloud's and the kernel's (the functions, where it runs; live
+// 2026-10-22); the example answer is illustrative.
 
 export const metadata = {
   title: HOME_TITLE,
@@ -41,19 +41,19 @@ const STEPS = [
 
 const WHERE = [
   {
-    title: 'Your runtime',
-    head: 'rrotor, on your own infrastructure',
-    body: 'Your models live and run in rrotor, which you run with Docker Compose, Helm or Terraform. Glyphh does not host it, and nothing of Glyphh’s is between your callers and it.',
+    title: 'Ada Cloud',
+    head: 'Your models, in Glyphh’s cloud',
+    body: 'Your models live and run in Glyphh’s cloud, isolated per organisation. Nothing to install or run. We never train on your data.',
   },
   {
     title: 'From Claude',
-    head: 'The runtime’s MCP connector',
-    body: 'Add <runtime>/mcp as a connector and click Allow. The glyphh plugin’s Ada skill writes the model with you, deploys a commit and calls it.',
+    head: 'The Glyphh connector',
+    body: 'Add https://api.glyphh.ai/mcp as a connector, sign in and click Allow. The glyphh plugin’s Ada skill builds the model with you and asks it.',
   },
   {
     title: 'From your software',
-    head: 'The SDKs, or POST /v1/runs',
-    body: 'pip install glyphh or npm install @glyphh-ai/glyphh, with your runtime’s address and a runtime key.',
+    head: 'The SDKs, or the API',
+    body: 'pip install glyphh or npm install @glyphh-ai/glyphh, with an API key from the platform, calling https://ada.glyphh.ai.',
   },
   {
     title: 'Clearance',
@@ -84,7 +84,7 @@ const ANSWER = `{
 const INSTALL = `/plugin marketplace add glyphh-ai/glyphh
 /plugin install glyphh@glyphh
 
-# then add your runtime's connector, https://<host>/mcp,
+# then add the Glyphh connector, https://api.glyphh.ai/mcp,
 # and ask Claude to build a model with you`;
 
 function Tile({ t, i }) {
@@ -116,7 +116,7 @@ export default function Home() {
           <p className="mh-what">
             Glyphh Ada classifies anything you have labelled examples of — tickets, transactions, documents, events —
             returns a confidence and the precedents behind it, and lets your application send the uncertain ones to an
-            LLM. Run it on your own infrastructure.
+            LLM.
           </p>
           <div className="mh-actions">
             <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
@@ -130,7 +130,7 @@ export default function Home() {
         <section className="hiw" id="how-it-works">
           <div className="qs-head">
             <span className="qs-kicker">How it works</span>
-            <a href={`${DOCS}/ada-skill`} className="qs-more">A model &rarr;</a>
+            <a href={`${DOCS}/plugin`} className="qs-more">A model &rarr;</a>
           </div>
           <div className="hv-grid">
             {STEPS.map((t, i) => <Tile key={t.title} t={t} i={i} />)}
@@ -162,7 +162,7 @@ export default function Home() {
         <section className="hiw" id="where">
           <div className="qs-head">
             <span className="qs-kicker">Where it runs</span>
-            <a href={`${DOCS}/run-rrotor`} className="qs-more">Run rrotor &rarr;</a>
+            <a href={`${DOCS}/getting-started`} className="qs-more">Getting started &rarr;</a>
           </div>
           <div className="hv-grid hv-grid-2">
             {WHERE.map((t, i) => <Tile key={t.title} t={t} i={i + 3} />)}
