@@ -12,7 +12,7 @@ primary_region = "iad"
 
 [build]
   [build.args]
-    NEXT_PUBLIC_PLATFORM_URL = "https://platform.glyphh.ai/ui"
+    NEXT_PUBLIC_PLATFORM_URL = "https://platform.glyphh.ai"
     NEXT_PUBLIC_SERVER_URL = "https://api.glyphh.ai"
 
 [http_service]
