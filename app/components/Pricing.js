@@ -28,6 +28,23 @@ const TIERS = [
     ],
     cta: EARLY_ACCESS_LABEL,
   },
+  // Basic (Chris, 2026-10-22; server db/seed.py): Ada Cloud's step up from
+  // Free. Self-serve, never per seat; no sync, HA, offline or SSO, and no
+  // licence key, so a self-hosted node on it runs as Free's.
+  {
+    tier: 'basic',
+    name: 'Basic',
+    priceFigure: '$20',
+    priceSub: 'A month, flat.',
+    desc: 'Ada in Glyphh’s cloud, past Free’s month.',
+    lead: 'Everything in Free, plus:',
+    featureList: [
+      'Ada Cloud: 10,000 precedents',
+      '50,000 requests a month, then $1 per 10,000',
+      '10 requests a second',
+    ],
+    cta: EARLY_ACCESS_LABEL,
+  },
   {
     tier: 'pro',
     name: 'Pro',
@@ -35,7 +52,7 @@ const TIERS = [
     priceSub: 'A month, flat.',
     desc: 'A small cluster, kept in sync.',
     popular: true,
-    lead: 'Everything in Free, plus:',
+    lead: 'Everything in Basic, plus:',
     featureList: [
       '3 runtime nodes',
       '50,000 precedents per node',
