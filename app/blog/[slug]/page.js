@@ -3,7 +3,6 @@ import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import LetterField from '../../components/LetterField';
 import { POSTS, postBySlug, fmtDate } from '../posts';
-import { SALES_HREF, EARLY_ACCESS_LABEL } from '../../components/Pricing';
 import './next-step.css';
 
 /**
@@ -66,10 +65,10 @@ export default async function BlogPost({ params }) {
             <div className="ix-cta bl-next">
               <div>
                 <span className="qs-kicker">Next step</span>
-                <p>Ada learns from your labelled cases, answers from its nearest precedents, and hands what it is unsure of to an LLM, on your own infrastructure.</p>
+                <p>Ada learns from your labelled cases, answers from its nearest precedents, and hands what it is unsure of to an LLM. Start free on Ada Cloud.</p>
               </div>
               <div className="ix-actions">
-                <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
+                <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
                 <a href="/use-cases/support-routing" className="os-cta os-cta-ghost">See ticket routing in action</a>
               </div>
             </div>

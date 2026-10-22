@@ -1,8 +1,8 @@
 // The FAQ: two or three sentences each, plain words, nothing that is not
 // built. Answers are strings or, when they carry a link, { html }.
+// Ada Cloud (live 2026-10-22): no runtimes, nodes or licence keys.
 
 const DOCS = 'https://docs.glyphh.ai';
-const EARLY_ACCESS = 'mailto:sales@glyphh.ai?subject=Glyphh%20early%20access';
 
 export const FAQ_GROUPS = [
   {
@@ -11,17 +11,12 @@ export const FAQ_GROUPS = [
       {
         id: 'what-is-glyphh',
         q: 'What is Glyphh?',
-        a: { html: `The company behind Ada. You sign in on <a href="https://platform.glyphh.ai">platform.glyphh.ai</a>, run Ada in rrotor on your own infrastructure, and call your models from Claude and from your software.` },
-      },
-      {
-        id: 'early-access',
-        q: 'Can I use it today?',
-        a: { html: `Glyphh is in early access while we get Ada Cloud right, so the plugin, the SDKs and rrotor are not public for now. <a href="${EARLY_ACCESS}">Request early access</a> and we will set you up.` },
+        a: { html: `The company behind Ada. You sign up on <a href="https://platform.glyphh.ai">platform.glyphh.ai</a>, your models run in Ada Cloud, and you call them from Claude and from your software.` },
       },
       {
         id: 'what-is-ada',
         q: 'What is Ada?',
-        a: { html: `A self-hosted classifier that learns from labelled examples, its precedents. A new case is answered from the precedents nearest to it, with a calibrated confidence and the precedents the answer stands on. See <a href="${DOCS}">how Glyphh works</a>.` },
+        a: { html: `A classifier that learns from labelled examples, its precedents. A new case is answered from the precedents nearest to it, with a calibrated confidence and the precedents the answer stands on. See <a href="${DOCS}">how Glyphh works</a>.` },
       },
       {
         id: 'use-case',
@@ -46,42 +41,32 @@ export const FAQ_GROUPS = [
       {
         id: 'build',
         q: 'How do I build a model?',
-        a: { html: `Ask Claude. With the <code>glyphh</code> plugin it writes the model with you, pushes it to your GitHub repo, deploys the commit to your runtime and calls it. See <a href="${DOCS}/ada-skill">the Ada skill</a>.` },
+        a: { html: `Ask Claude. With the <code>glyphh</code> plugin and the Glyphh connector it writes the model with you, loads your history, backtests it and asks it. Or start from an example on the platform. See <a href="${DOCS}/getting-started">Getting started</a>.` },
       },
       {
         id: 'plugin',
         q: 'How do I get the plugin?',
-        a: { html: `During early access we set it up with you. It brings your account panel, the Ada skill and the file ledger to Claude Code. <a href="${EARLY_ACCESS}">Request early access</a>.` },
+        a: { html: 'In Claude Code: <code>/plugin marketplace add glyphh-ai/glyphh</code>, then <code>/plugin install glyphh@glyphh</code>, and add the connector <code>https://api.glyphh.ai/mcp</code> in Claude. The source is at <a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a>.' },
       },
       {
         id: 'call',
         q: 'How does my software call a model?',
-        a: { html: `With a runtime key, through the SDKs for Python and TypeScript or <code>POST /v1/runs</code> at your runtime’s address. See <a href="${DOCS}/sdks">the SDKs</a>.` },
+        a: { html: `With an API key from the platform, through the SDKs (<code>pip install glyphh</code>, <code>npm i @glyphh-ai/glyphh</code>) or the API at <code>https://ada.glyphh.ai</code>. See <a href="${DOCS}/sdks">the SDKs</a>.` },
       },
     ],
   },
   {
-    title: 'Runtimes',
+    title: 'Ada Cloud',
     items: [
       {
-        id: 'runtime',
-        q: 'What is a runtime?',
-        a: { html: `rrotor, where your models live and run. You run it on your own infrastructure at an address of your own, <code>https://&lt;host&gt;</code>, and Claude adds it as a connector at that address plus <code>/mcp</code>. See <a href="${DOCS}/run-rrotor">Run rrotor</a>.` },
+        id: 'where',
+        q: 'Where does it run?',
+        a: 'In Glyphh’s cloud, in the United States. There is nothing to install or run: sign up, make an API key, and call it.',
       },
       {
-        id: 'self-host',
-        q: 'How do I run it?',
-        a: { html: `With Docker Compose, Helm or Terraform. During early access self-hosting is by arrangement: <a href="${EARLY_ACCESS}">request early access</a>.` },
-      },
-      {
-        id: 'hosted',
-        q: 'Does Glyphh host runtimes?',
-        a: 'No. Every runtime is yours, on your own machines or in your own cloud. Glyphh is never between your callers and your runtime.',
-      },
-      {
-        id: 'cluster',
-        q: 'Can I run more than one node?',
-        a: 'Yes, on Pro, Team and Enterprise. The nodes of a cluster sync: one is the head and the rest follow it. On Pro and Team you move the head by command; on Enterprise the cluster elects a new one on its own.',
+        id: 'isolation',
+        q: 'Is our data kept apart from other customers’?',
+        a: 'Yes. Each organisation’s data lives in its own database schema, behind row-level security that fails closed, and a model learns only from its own precedents.',
       },
     ],
   },
@@ -91,22 +76,22 @@ export const FAQ_GROUPS = [
       {
         id: 'pricing',
         q: 'What does it cost?',
-        a: { html: 'At launch, Free is $0. Pro is $99 a month and Team $299 a month, flat; Enterprise is by contract. Never per seat, per model or per install. See <a href="/pricing">pricing</a>.' },
+        a: { html: 'Free is $0. Basic is $20 a month, Pro $99 a month and Team $299 a month, flat; Enterprise is by contract. Never per seat, per model or per install. See <a href="/pricing">pricing</a>.' },
       },
       {
         id: 'free-plan',
         q: 'What is in the free plan?',
-        a: 'Ada, every feature of it, on one runtime node with up to 5,000 precedents, and unlimited members, installs and models.',
+        a: 'Ada, every feature of it, with up to 5,000 precedents and 10,000 reads a month, and unlimited members, models and keys.',
       },
       {
         id: 'precedents',
-        q: 'How are precedents counted?',
-        a: 'Per runtime node, all its models together: 5,000 on Free, 50,000 on Pro, 500,000 on Team, unlimited on Enterprise. Past the limit a new case is not indexed, and the answer says so.',
+        q: 'How are precedents and reads counted?',
+        a: 'Precedents across all your organisation’s models: 5,000 on Free, 10,000 on Basic, 100,000 on Pro, 1,000,000 on Team. Reads a month: 10,000, 50,000, 1,000,000 and 5,000,000.',
       },
       {
-        id: 'key',
-        q: 'How is a plan enforced?',
-        a: 'With a licence key signed by Glyphh and checked on the node, with no call home. A new key comes with each paid month; with no key, a node runs as Free.',
+        id: 'overage',
+        q: 'What happens past the month’s reads?',
+        a: 'On Basic, Pro and Team, reads go on and the ones past the allowance are billed at $1 per 10,000. On Free they are refused until the month turns.',
       },
     ],
   },
@@ -115,23 +100,23 @@ export const FAQ_GROUPS = [
     items: [
       {
         id: 'data',
-        q: 'Does Glyphh see my data?',
-        a: 'No. Calls go straight to your runtime. Glyphh sees your account, your plan, your licence keys and, for each node that links, its id, version and precedent count: never a model’s inputs or results, and never a caller’s address.',
+        q: 'Do you train on my data?',
+        a: { html: 'No. Glyphh never uses your data to train models and never sells it, and no language model is in Ada Cloud’s path. See the <a href="/privacy">Privacy Policy</a>.' },
       },
       {
-        id: 'logs',
-        q: 'Where do the logs go?',
-        a: 'They stay on your runtime. You can drain them over OpenTelemetry to your own collector, or opt in to send them to Glyphh, where they are kept for 7 days so the platform can show them.',
+        id: 'export',
+        q: 'Can I take my data out?',
+        a: 'Yes, any model at any time, on every plan, and you can delete any model or precedent at any time.',
       },
       {
         id: 'clearance',
         q: 'Can different callers see different things?',
-        a: { html: `Yes. A spec can put layers behind a clearance; a caller below it gets the answer without them. See <a href="${DOCS}/ada-skill">the Ada skill</a>.` },
+        a: { html: `Yes. A spec can put layers behind a clearance; a caller below it gets the answer without them. See <a href="${DOCS}/api">the API</a>.` },
       },
       {
         id: 'sign-in',
         q: 'How do I sign in?',
-        a: { html: 'With Google or GitHub on the platform. A connector in Claude signs you in for that runtime with one Allow click. Found a problem? Write to <a href="mailto:security@glyphh.ai">security@glyphh.ai</a>.' },
+        a: { html: 'With Google or GitHub on the platform. The connector in Claude signs you in with one Allow click. Found a problem? Write to <a href="mailto:security@glyphh.ai">security@glyphh.ai</a>.' },
       },
     ],
   },

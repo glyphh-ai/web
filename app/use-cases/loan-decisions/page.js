@@ -1,19 +1,20 @@
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
-import { SALES_HREF, EARLY_ACCESS_LABEL } from '../../components/Pricing';
 import '../use-cases.css';
 
 // Loan decisions: Ada on typed fields, priced in the lender's own costs. Every
-// figure is rrotor's benchmarks/credit (README and results/), labelled as the
+// figure is glyphh-ai/glyphh's benchmarks/credit (README and results/), labelled as the
 // experiment it is, with what it does not prove beside it.
 
 export const metadata = {
   title: 'Loan decisions with Ada — Glyphh',
   description:
-    'Approve or refuse applications from your own past decisions, priced in what a wrong answer costs you, on your own infrastructure. On German Credit, Ada cost the bank 100 against 110 and 114 for Claude.',
+    'Approve or refuse applications from your own past decisions, priced in what a wrong answer costs you. On German Credit, Ada cost the bank 100 against 110 and 114 for Claude.',
 };
 
+const PLATFORM_URL = 'https://platform.glyphh.ai';
 const DOCS = 'https://docs.glyphh.ai';
+const BENCH = 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks/credit';
 
 const FLOW = [
   { n: '1', title: 'Past decisions', body: 'Record the applications you have decided, each with how it turned out. Each one becomes a precedent.' },
@@ -32,24 +33,25 @@ const RESULTS = [
 
 const CODE = `from glyphh import Ada
 
-loans = Ada().model("loans")   # GLYPHH_RUNTIME_URL, GLYPHH_RUNTIME_KEY
+loans = Ada().model("loans")   # GLYPHH_API_KEY
 
 # once: the applications you have decided, with how each turned out
 for a in history:
-    loans.record(a.fields, outcome=a.outcome)   # "good" or "bad"
+    loans.record(a.fields, a.outcome)   # "good" or "bad"
 
 # each new application
 r = loans.decide(application.fields)
-if r.done:
-    act(application, r.data)          # approve or refuse, with its precedents
-elif r.waiting:                       # every answer is dear: ask a person
-    r = loans.resume(r.run_id, ask_underwriter(r.prompt))`;
+if not r.ask:
+    act(application, r.outcome)       # approve or refuse, with r.receipts
+else:                                 # every answer is dear: ask a person
+    outcome = ask_underwriter(application, r.receipts)
+    loans.record(application.fields, outcome)`;
 
 const NEED = [
   ['Past decisions', 'Typed fields with the outcome each had. The experiment used 800; start with what you have.'],
   ['Your costs', 'What each kind of mistake costs you, in your own units, in the model’s spec.'],
-  ['One node', 'rrotor on a machine you run, with Docker Compose, Helm or Terraform. Applications never pass through Glyphh.'],
-  ['Your side', 'The machine, its volume and its backups, and upgrading the image. Glyphh issues the licence key and the sign-in.'],
+  ['An API key', 'Made on the platform; your app calls https://ada.glyphh.ai with it, through the SDK or the API.'],
+  ['Nothing to run', 'Your model runs in Glyphh’s cloud, isolated per organisation. We never train on your data.'],
 ];
 
 export default function LoanDecisionsPage() {
@@ -63,11 +65,10 @@ export default function LoanDecisionsPage() {
           <h1 className="ix-title">Decide loans by what a wrong answer costs you.</h1>
           <p className="ix-lede">
             Glyphh Ada decides each application from your past decisions, weighs a bad loan approved against a good one
-            refused, shows the precedents behind it, and asks a person when every answer is dear. It runs on your own
-            infrastructure.
+            refused, shows the precedents behind it, and asks a person when every answer is dear.
           </p>
           <div className="ix-actions">
-            <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
+            <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
             <a href="#experiment" className="os-cta os-cta-ghost">See the experiment</a>
           </div>
         </section>
@@ -96,9 +97,11 @@ export default function LoanDecisionsPage() {
               <span className="qs-kicker">The experiment</span>
               <h2 className="ix-h2">200 loan applications, approve or refuse.</h2>
               <p className="ix-desc">
-                One experiment on one public dataset, not a guarantee for your book.
+                One experiment on one public dataset, not a guarantee for your book. The method, the data and every run
+                are in the repository, so you can rerun it.
               </p>
             </div>
+            <a href={BENCH} className="qs-more">Reproduce it &rarr;</a>
           </div>
 
           <dl className="rt-facts">
@@ -147,9 +150,9 @@ export default function LoanDecisionsPage() {
           <div className="ix-section-head">
             <div>
               <span className="qs-kicker">What it takes</span>
-              <h2 className="ix-h2">Your history, your costs and one node.</h2>
+              <h2 className="ix-h2">Your history, your costs and an API key.</h2>
             </div>
-            <a href={`${DOCS}/run-rrotor`} className="qs-more">Run rrotor &rarr;</a>
+            <a href={`${DOCS}/getting-started`} className="qs-more">Getting started &rarr;</a>
           </div>
           <div className="ix-grid ix-grid-4">
             {NEED.map(([t, d]) => (
@@ -164,12 +167,12 @@ export default function LoanDecisionsPage() {
         <section className="ix-section">
           <div className="ix-cta">
             <div>
-              <span className="qs-kicker">Early access</span>
-              <h3>Glyphh is in early access.</h3>
-              <p>We are working with a small number of teams. Write to us and we will set you up.</p>
+              <span className="qs-kicker">Get started</span>
+              <h3>Free: 5,000 precedents, 10,000 reads a month.</h3>
+              <p>Upgrade for more precedents and more reads.</p>
             </div>
             <div className="ix-actions">
-              <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
+              <a href={PLATFORM_URL} className="os-cta os-cta-primary">Start free</a>
               <a href="/pricing" className="os-cta os-cta-ghost">Pricing</a>
             </div>
           </div>

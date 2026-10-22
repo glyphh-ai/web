@@ -4,7 +4,6 @@
  * link columns with hairlines between, and a bottom bar. Contact is
  * support@glyphh.ai; Discord and Support are here for customers.
  */
-import { SALES_HREF, EARLY_ACCESS_LABEL } from './Pricing';
 
 // Discord and X: no URL is recorded anywhere in the repos, so neither is guessed.
 // Each link appears only when its env var is set.
@@ -29,6 +28,8 @@ const COLS = [
     links: [
       ['Docs', 'https://docs.glyphh.ai'],
       ['Getting started', 'https://docs.glyphh.ai/getting-started'],
+      ['Plugin and SDKs', 'https://github.com/glyphh-ai/glyphh'],
+      ['Benchmarks', 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks'],
       ['Blog', '/blog'],
       ['GitHub', GITHUB_URL],
     ],
@@ -36,7 +37,6 @@ const COLS = [
   {
     title: 'Company',
     links: [
-      [EARLY_ACCESS_LABEL, SALES_HREF],
       ['Support', 'mailto:support@glyphh.ai'],
       ...(DISCORD_URL ? [['Discord', DISCORD_URL]] : []),
       ['Terms of Use', '/terms'],
@@ -60,7 +60,7 @@ export default function Footer() {
               <img className="logo-dark" src="/glyphh-logo-text-white.png" alt="Glyphh" />
               <img className="logo-light" src="/glyphh-logo-text-black.png" alt="" />
             </a>
-            <p className="ft-tagline">Ada, a self-hosted classifier that learns from precedent and hands the cases it is unsure of to an LLM.</p>
+            <p className="ft-tagline">Ada, a classifier that learns from precedent and hands the cases it is unsure of to an LLM.</p>
             <p className="ft-contact">
               <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>
             </p>
