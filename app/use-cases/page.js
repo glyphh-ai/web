@@ -2,7 +2,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import './use-cases.css';
 
-// The use cases: each one written up with the experiment behind it.
+// The use cases: each one an experiment you can rerun (rrotor's benchmarks/).
 
 export const metadata = {
   title: 'Use cases — Glyphh',
@@ -38,7 +38,8 @@ export default function UseCasesPage() {
           <h1 className="ix-title">Anything you have labelled examples of.</h1>
           <p className="ix-lede">
             Glyphh Ada classifies from your own history, says how sure it is, and hands on what it is unsure of. Each use
-            case here comes with the experiment behind it.
+            case here comes with an experiment you can rerun; every one, with its data and scripts, is in{' '}
+            <a href="https://github.com/glyphh-ai/glyphh/tree/main/benchmarks">the public benchmarks</a>.
           </p>
         </section>
 

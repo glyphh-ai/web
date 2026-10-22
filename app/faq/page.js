@@ -2,7 +2,6 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { FaqList } from '../components/FaqSection';
 import { FAQ_GROUPS } from './faq-data';
-import { SALES_HREF, EARLY_ACCESS_LABEL } from '../components/Pricing';
 
 // /faq: a head like the pricing page, then one High Vis panel of questions
 // per group. The answers live in ./faq-data.js.
@@ -27,8 +26,9 @@ export default function FaqPage() {
             What Ada is, what it does when it is unsure, where it runs, what it costs, and where your data goes.
           </p>
           <div className="ix-actions">
-            <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
+            <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
             <a href="/use-cases/support-routing" className="os-cta os-cta-ghost">See ticket routing in action</a>
+            <a href="https://docs.glyphh.ai/run-rrotor" className="os-cta os-cta-ghost">Run rrotor</a>
           </div>
         </section>
 

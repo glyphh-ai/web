@@ -1,7 +1,6 @@
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import LetterField from '../components/LetterField';
-import { SALES_HREF, EARLY_ACCESS_LABEL } from '../components/Pricing';
 
 /**
  * /research — the thinking under Ada, in the frame. Off the site for now
@@ -17,11 +16,11 @@ export const metadata = {
     'The thinking under Ada: answers from the nearest precedents, calibrated confidence, weights learnt from your own cases, and an LLM only for the cases Ada has not seen.',
 };
 
-// The stack: each part, with its docs (the repos are private in early access).
+// The stack: each a real repo.
 const STACK = [
   { tag: 'classifier', name: 'Ada', title: 'Answers from precedent', desc: 'Typed models that learn from labelled examples and answer with a calibrated confidence and the precedents behind it.', href: '/', internal: true },
-  { tag: 'runtime', name: 'rrotor', title: 'The runtime you run yourself', desc: 'Where your models live: Docker Compose, Helm or Terraform, on your own infrastructure.', href: 'https://docs.glyphh.ai/run-rrotor' },
-  { tag: 'developer', name: 'glyphh', title: 'The plugin and the SDKs', desc: 'The Claude plugin with the Ada skill, and the Python and TypeScript SDKs your software calls Ada with.', href: 'https://docs.glyphh.ai/sdks' },
+  { tag: 'runtime', name: 'rrotor', title: 'The runtime you run yourself', desc: 'Where your models live: Docker Compose, Helm or Terraform, on your own infrastructure.', href: `${GITHUB_URL}/rrotor` },
+  { tag: 'developer', name: 'glyphh', title: 'The plugin and the SDKs', desc: 'The Claude plugin with the Ada skill, and the Python and TypeScript SDKs your software calls Ada with.', href: `${GITHUB_URL}/glyphh` },
 ];
 
 export default function ResearchPage() {
@@ -38,7 +37,7 @@ export default function ResearchPage() {
             seen yet.
           </p>
           <div className="ix-actions">
-            <a href={SALES_HREF} className="os-cta os-cta-primary">{EARLY_ACCESS_LABEL}</a>
+            <a href="https://platform.glyphh.ai" className="os-cta os-cta-primary">Start free</a>
             <a href="/use-cases/support-routing" className="os-cta os-cta-ghost">See ticket routing in action</a>
           </div>
         </section>

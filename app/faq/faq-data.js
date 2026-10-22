@@ -2,7 +2,7 @@
 // built. Answers are strings or, when they carry a link, { html }.
 
 const DOCS = 'https://docs.glyphh.ai';
-const EARLY_ACCESS = 'mailto:sales@glyphh.ai?subject=Glyphh%20early%20access';
+const SELF_HOSTING = 'https://docs.glyphh.ai/run-rrotor';
 
 export const FAQ_GROUPS = [
   {
@@ -12,11 +12,6 @@ export const FAQ_GROUPS = [
         id: 'what-is-glyphh',
         q: 'What is Glyphh?',
         a: { html: `The company behind Ada. You sign in on <a href="https://platform.glyphh.ai">platform.glyphh.ai</a>, run Ada in rrotor on your own infrastructure, and call your models from Claude and from your software.` },
-      },
-      {
-        id: 'early-access',
-        q: 'Can I use it today?',
-        a: { html: `Glyphh is in early access while we get Ada Cloud right, so the plugin, the SDKs and rrotor are not public for now. <a href="${EARLY_ACCESS}">Request early access</a> and we will set you up.` },
       },
       {
         id: 'what-is-ada',
@@ -51,12 +46,12 @@ export const FAQ_GROUPS = [
       {
         id: 'plugin',
         q: 'How do I get the plugin?',
-        a: { html: `During early access we set it up with you. It brings your account panel, the Ada skill and the file ledger to Claude Code. <a href="${EARLY_ACCESS}">Request early access</a>.` },
+        a: { html: 'In Claude Code: <code>/plugin marketplace add glyphh-ai/glyphh</code>, then <code>/plugin install glyphh@glyphh</code>. It brings your account panel, the Ada skill and the file ledger. The source is at <a href="https://github.com/glyphh-ai/glyphh">github.com/glyphh-ai/glyphh</a>.' },
       },
       {
         id: 'call',
         q: 'How does my software call a model?',
-        a: { html: `With a runtime key, through the SDKs for Python and TypeScript or <code>POST /v1/runs</code> at your runtime’s address. See <a href="${DOCS}/sdks">the SDKs</a>.` },
+        a: { html: `With a runtime key, through the SDKs (<code>pip install glyphh</code>, <code>npm i @glyphh-ai/glyphh</code>) or <code>POST /v1/runs</code> at your runtime’s address. See <a href="${DOCS}/sdks">the SDKs</a>.` },
       },
     ],
   },
@@ -71,7 +66,7 @@ export const FAQ_GROUPS = [
       {
         id: 'self-host',
         q: 'How do I run it?',
-        a: { html: `With Docker Compose, Helm or Terraform. During early access self-hosting is by arrangement: <a href="${EARLY_ACCESS}">request early access</a>.` },
+        a: { html: `With Docker Compose, Helm or Terraform, from the image <code>ghcr.io/glyphh-ai/rrotor</code>. See <a href="${SELF_HOSTING}">Run rrotor</a>.` },
       },
       {
         id: 'hosted',
@@ -91,7 +86,7 @@ export const FAQ_GROUPS = [
       {
         id: 'pricing',
         q: 'What does it cost?',
-        a: { html: 'At launch, Free is $0. Pro is $99 a month and Team $299 a month, flat; Enterprise is by contract. Never per seat, per model or per install. See <a href="/pricing">pricing</a>.' },
+        a: { html: 'Free is $0. Pro is $99 a month and Team $299 a month, flat; Enterprise is by contract. Never per seat, per model or per install. See <a href="/pricing">pricing</a>.' },
       },
       {
         id: 'free-plan',

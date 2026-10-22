@@ -1,11 +1,8 @@
 import PricingCards from './PricingCards';
 
-// The platform, for existing users' Log in.
+// Start in the platform: the one door.
 export const PLATFORM_URL = 'https://platform.glyphh.ai';
-// Early access (2026-10-21): no public sign-up until Ada Cloud is ready, so
-// every call to action on the site asks sales for access by email.
-export const SALES_HREF = 'mailto:sales@glyphh.ai?subject=' + encodeURIComponent('Glyphh early access');
-export const EARLY_ACCESS_LABEL = 'Request early access';
+export const SALES_HREF = 'mailto:sales@glyphh.ai?subject=' + encodeURIComponent('Glyphh Enterprise');
 
 // The plans (server docs/pricing.md, 2026-10-19). Never per seat, per model or
 // per install. Every plan runs on the customer's own infrastructure: a plan
@@ -26,7 +23,7 @@ const TIERS = [
       'Ada, every feature of it',
       'Unlimited members, models and installs',
     ],
-    cta: EARLY_ACCESS_LABEL,
+    cta: 'Start free',
   },
   {
     tier: 'pro',
@@ -41,7 +38,7 @@ const TIERS = [
       '50,000 precedents per node',
       'Multi-node sync, with failover by command',
     ],
-    cta: EARLY_ACCESS_LABEL,
+    cta: 'Get started',
   },
   {
     tier: 'team',
@@ -54,7 +51,7 @@ const TIERS = [
       '10 runtime nodes',
       '500,000 precedents per node',
     ],
-    cta: EARLY_ACCESS_LABEL,
+    cta: 'Get started',
   },
   {
     tier: 'enterprise',
@@ -69,7 +66,7 @@ const TIERS = [
       'Air-gapped licence keys',
       'An audit log',
     ],
-    cta: EARLY_ACCESS_LABEL,
+    cta: 'Talk to us',
   },
 ];
 
@@ -82,13 +79,12 @@ export default function Pricing() {
           <h2 className="ix-h2">You run it. The plan sets how far it goes.</h2>
           <p className="ix-desc">
             Ada runs in rrotor, on your own infrastructure. A plan sets how many runtime nodes you link, how many
-            precedents each node holds, and whether the nodes sync. Glyphh is in early access: these plans apply at
-            launch.
+            precedents each node holds, and whether the nodes sync.
           </p>
         </div>
       </div>
 
-      <PricingCards tiers={TIERS} salesHref={SALES_HREF} platformUrl={SALES_HREF} />
+      <PricingCards tiers={TIERS} salesHref={SALES_HREF} platformUrl={PLATFORM_URL} />
 
       <p className="pp-note">
         Change plan or cancel at any time. See our <a href="/terms">Terms of Use</a>. Prices are in US dollars and
