@@ -18,8 +18,8 @@ const TIERS = [
     desc: 'Ada in Glyphh’s cloud, to start.',
     lead: null,
     featureList: [
-      '5,000 precedents',
-      '10,000 reads a month',
+      '1,000 precedents',
+      '5,000 reads a month',
       'Ada, every feature of it',
       'Unlimited members, models and keys',
     ],
