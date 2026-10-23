@@ -8114,7 +8114,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--border-2) var(--bg); }
 }
 .ft-brand, .ft-col { padding: 2.5rem 2rem 2.25rem; border-right: 1px solid var(--border); }
 .ft-col:last-child { border-right: 0; }
-.ft-logo img { height: 34px; width: auto; display: block; }
+.ft-logo img { height: 44px; width: auto; display: block; }
 .ft-tagline { margin: 1.1rem 0 0.6rem; max-width: 30ch; font-size: 0.92rem; line-height: 1.6; color: var(--muted); }
 .ft-contact { margin: 0 0 1.75rem; font-family: var(--font-mono); font-size: 0.8rem; }
 .ft-contact a { color: var(--text-2); text-decoration: none; }
