@@ -63,6 +63,7 @@ export default function PrivacyPage() {
             <li><strong>In transit.</strong> The platform, the API and the connector are served over HTTPS only. The database is encrypted in transit by our hosting provider, and our internal traffic runs on its private network.</li>
             <li><strong>At rest.</strong> The database and its backups are encrypted at rest by our hosting provider (Fly.io Managed Postgres). Requests in flight pass through a queue that holds them for seconds, and answers for at most 60 seconds.</li>
             <li><strong>Keys and links.</strong> API keys are stored only as hashes. Upload and download links are signed, single-purpose and expire after one hour.</li>
+            <li><strong>Staff access.</strong> Glyphh staff can see account, billing and usage metadata (names, emails, plans, counts and times) to run and support the service. Staff cannot see your precedents, specs, case contents or uploaded files, and every staff access is logged.</li>
           </ul>
           <p>No system is perfectly secure. If we learn of a breach affecting your data, we will tell you without undue delay and as the law requires. Report security issues to <a href="mailto:security@glyphh.ai">security@glyphh.ai</a>.</p>
 
