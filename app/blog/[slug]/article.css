@@ -1,0 +1,117 @@
+/* What a research post carries inside .bl-body: charts (blog/charts.js), a
+   headline stat row, data tables and caveat notes. Colours come from the
+   site's tokens, so all of it follows the light theme. */
+
+/* Charts */
+.bl-body .ch { margin: 2rem 0; }
+.bl-body .ch figcaption { display: flex; flex-direction: column; gap: 0.2rem; margin-bottom: 0.9rem; }
+.bl-body .ch-title { font-size: 0.98rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+.bl-body .ch-sub { font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.5; color: var(--text-4); }
+.bl-body .ch { overflow-x: auto; }
+.bl-body .ch svg { display: block; width: 100%; min-width: 34rem; height: auto; }
+.bl-body .ch text { font-family: var(--font-mono); font-size: 11px; fill: var(--text-4); }
+.bl-body .ch .ch-lab { font-size: 12px; fill: var(--text-2); }
+.bl-body .ch .ch-val { fill: var(--text-2); }
+.bl-body .ch .ada { fill: var(--accent-light); }
+.bl-body .ch .ch-grid { stroke: var(--border); stroke-opacity: 0.45; stroke-width: 1; }
+.bl-body .ch .ch-ref { stroke: var(--text-3); stroke-dasharray: 3 3; stroke-width: 1; }
+.bl-body .ch .ch-bar { fill: var(--text-4); }
+.bl-body .ch .ch-bar.base { fill: var(--border); }
+.bl-body .ch .ch-bar.ada { fill: var(--accent); }
+.bl-body .ch .ch-dot { fill: var(--text-3); }
+.bl-body .ch .ch-dot.ada { fill: var(--accent); }
+.bl-body .ch .ch-span { stroke: var(--text-4); stroke-width: 3; stroke-linecap: round; }
+.bl-body .ch .ch-line { fill: none; stroke: var(--text-4); stroke-width: 2; }
+.bl-body .ch .ch-line.ada { stroke: var(--accent); }
+
+/* Headline numbers */
+.bl-body .bl-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px;
+  margin: 2rem 0; background: var(--border); border: 1px solid var(--border);
+}
+.bl-body .bl-stat { background: var(--bg); padding: 1rem 1rem 1.1rem; }
+.bl-body .bl-stat b {
+  display: block; white-space: nowrap; font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  font-size: 2.1rem; line-height: 1; color: var(--accent-light); font-variant-numeric: lining-nums;
+}
+.bl-body .bl-stat span { display: block; margin-top: 0.55rem; font-size: 0.88rem; line-height: 1.4; color: var(--text-2); }
+.bl-body .bl-stat small { display: block; margin-top: 0.35rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-4); }
+
+/* Tables */
+.bl-body .bl-table { overflow-x: auto; margin: 1.5rem 0; }
+.bl-body .bl-table table { width: 100%; min-width: 30rem; border-collapse: collapse; font-size: 0.9rem; line-height: 1.5; }
+.bl-body .bl-table th, .bl-body .bl-table td { padding: 0.6rem 0.7rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+.bl-body .bl-table thead th {
+  font-family: var(--font-mono); font-weight: 400; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-4); border-bottom-color: var(--text-3);
+}
+.bl-body .bl-table tbody th { font-weight: 600; color: var(--text); }
+.bl-body .bl-table td { color: var(--text-2); }
+.bl-body .bl-table td.dim { color: var(--text-4); }
+.bl-body .bl-table .n { text-align: right; font-family: var(--font-mono); font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+.bl-body .bl-table tr.ada th, .bl-body .bl-table tr.ada td { color: var(--accent-light); }
+
+/* Caveats */
+.bl-body .bl-caveat { margin: 1.75rem 0; padding: 0.95rem 1.1rem; border-left: 1px solid var(--accent); background: var(--surface); }
+.bl-body .bl-caveat .qs-kicker { display: block; margin-bottom: 0.45rem; }
+.bl-body .bl-caveat ul { margin: 0; padding-left: 1.1rem; font-size: 0.92rem; line-height: 1.6; }
+.bl-body .bl-caveat li { margin: 0 0 0.4rem; }
+.bl-body .bl-caveat li:last-child { margin-bottom: 0; }
+.bl-body .bl-caveat li::marker { color: var(--text-4); }
+
+/* A section's emphasis, in the site's italic serif */
+.bl-body em.bl-serif { font-family: var(--font-serif); font-style: italic; color: var(--text); }
+
+/* ── Feature posts (layout: 'feature'): one centred reading column, an
+   editorial head, the cover full width, wide blocks breaking out. The
+   site's type: Geist, the emphasis in Sentient italic, mono for the small
+   print. ── */
+.ft-article { padding: 0 2.5rem 3rem; }
+/* .ft-article raises these over globals' .bl-body margins, which would undo the centring */
+.ft-head, .ft-tail, .ft-article .ft-body.bl-body > section > * { max-width: 42rem; margin-left: auto; margin-right: auto; }
+.ft-article .ft-body.bl-body > section > .ft-wide { max-width: 56rem; }
+.ft-head { padding: 4.5rem 0 1rem; }
+.ft-head .ix-crumb { display: inline-block; }
+.ft-head .qs-kicker { display: block; margin-bottom: 1rem; color: var(--accent-light); }
+.ft-title {
+  margin: 0 0 1.1rem; font-size: clamp(2.8rem, 7vw, 4.6rem); font-weight: 600; letter-spacing: -0.04em;
+  line-height: 1; color: var(--text); text-wrap: balance;
+}
+.ft-title em { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; color: var(--accent); }
+.ft-dek { margin: 0 0 1.4rem; font-size: 1.3rem; line-height: 1.45; color: var(--text-3); text-wrap: balance; }
+.ft-byline { margin: 0; font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.03em; color: var(--text-4); }
+
+.ft-cover { max-width: 56rem; margin: 2.25rem auto 2.75rem; }
+.ft-cover img { display: block; width: 100%; height: auto; border: 1px solid var(--border); }
+.ft-hero { padding: 1.5rem; border: 1px solid var(--border); }
+.ft-glyph { display: block; width: 100%; height: auto; }
+.ft-glyph .on { fill: var(--text-2); }
+.ft-glyph .off { fill: var(--text-4); opacity: 0.22; }
+.ft-cover figcaption { margin-top: 0.7rem; font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.55; color: var(--text-4); }
+
+.ft-body { max-width: none; }
+.ft-body p, .ft-body .bl-html { font-size: 1.08rem; line-height: 1.72; }
+.ft-body > section:first-child > p:first-child::first-letter {
+  float: left; padding: 0.38rem 0.55rem 0 0; font-family: var(--font-serif); font-style: italic; font-size: 4.4rem;
+  line-height: 0.8; color: var(--accent);
+}
+.ft-article .ft-body.bl-body h2 { margin-top: 3.5rem; margin-bottom: 0.9rem; font-size: clamp(1.7rem, 3.4vw, 2.2rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; text-wrap: balance; }
+.ft-body .bl-stats { margin: 2.5rem 0; border-inline: 0; }
+.ft-body .bl-stat { padding: 1.2rem 1.1rem; }
+.ft-body .bl-stat b { font-size: 2.5rem; }
+
+/* The closing line, and the FAQ as disclosures */
+.ft-body .ft-close { margin: 3rem 0 0.5rem; padding-top: 1.5rem; border-top: 1px solid var(--text-3); font-family: var(--font-serif); font-style: italic; font-size: 1.65rem; line-height: 1.3; color: var(--text); }
+.ft-body .bl-faq details { border-top: 1px solid var(--border); padding: 0.85rem 0; }
+.ft-body .bl-faq details:last-child { border-bottom: 1px solid var(--border); }
+.ft-body .bl-faq summary { display: flex; gap: 0.75rem; cursor: pointer; list-style: none; font-weight: 600; color: var(--text); }
+.ft-body .bl-faq summary::-webkit-details-marker { display: none; }
+.ft-body .bl-faq summary::before { content: "+"; width: 1ch; font-family: var(--font-mono); color: var(--accent-light); }
+.ft-body .bl-faq details[open] summary::before { content: "\2013"; }
+.ft-body .bl-faq summary:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+.ft-body .bl-faq p { margin: 0.55rem 0 0.2rem 1.75rem; font-size: 1rem; }
+
+@media (max-width: 900px) {
+  .ft-article { padding: 0 1.25rem 2rem; }
+  .ft-head { padding-top: 3rem; }
+}
