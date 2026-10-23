@@ -2,7 +2,7 @@ import { Architecture, Code, Row, Table } from './ui';
 import { PLUGIN_PAGES, SDK_PAGES } from './pages';
 import { DOCS } from './base';
 
-// The docs explain Ada Cloud: what it is, getting started, the API, tuning, data in and out, the plugin, the SDKs and
+// The docs explain Ada Cloud: what it is, getting started, the API, tuning, Ada versions, data in and out, the plugin, the SDKs and
 // the plans. Every fact is checked against the server's docs/specs/ada-cloud.md, docs/architecture.md and
 // src/glyphh_ada (origin/main, 2026-10-22), and glyphh-ai/glyphh (sdk/*/README.md, plugins/glyphh/skills/ada).
 // Each fact once.
@@ -333,6 +333,61 @@ const build = [
           <li>Costs matter more than being right: <code>calibrate_by: cost</code>.</li>
         </ul>
         <p>One change at a time, each backtested. What needs code is not a lever: a derived field (a ratio, a weekday) is computed by the caller and sent as a role; a business rule is applied around the answer.</p>
+      </>
+    ),
+  },
+  {
+    slug: 'ada-versions',
+    title: 'Ada versions',
+    lede: 'Every model version is answered by the Ada it was made with; moving to another is your choice, backtested first.',
+    body: (
+      <>
+        <h2>What a version is</h2>
+        <p>
+          A change to Ada’s maths can change what a model answers. So Ada versions have names, like{' '}
+          <code>ada-1-0</code> or <code>ada-1-1-beta</code>, and each model version carries the Ada it was made and
+          learned with. It is always answered by that Ada, never another.
+        </p>
+        <Table
+          head={['Version', 'Status', 'What changes']}
+          rows={[
+            ['ada-1-0', 'Stable, the default', 'The launch version'],
+            ['ada-1-1-beta', 'Beta', 'A pair of roles’ value the model never learned no longer votes, so the roles’ own weights decide. Within noise of ada-1-0 on German Credit'],
+          ]}
+        />
+        <p>Release notes for each version are on the platform’s <strong>Ada</strong> page.</p>
+        <h2>Stable and beta</h2>
+        <ul>
+          <li><strong>Stable</strong>: the latest stable is the default. With no <code>ada</code> given, a new model, an upgrade or a backtest uses it.</li>
+          <li><strong>Beta</strong>: opt in by name, never the default, and labelled Beta everywhere.</li>
+          <li>An unknown or retired name is refused, naming the latest stable as the fix (<code>422 E_ADA_UNKNOWN</code>, <code>410 E_ADA_RETIRED</code>). It is never silently swapped for another.</li>
+        </ul>
+        <h2>Which version a model runs</h2>
+        <Row k="Platform">The model’s header, and an Ada column on its Versions tab</Row>
+        <Row k="API">ada on GET /v1/models/{'{name}'} and on each of its versions</Row>
+        <Row k="Every answer">The Glyphh-Ada header</Row>
+        <h2>Upgrade</h2>
+        <p>Backtest against the new version first, then upgrade:</p>
+        <Code lang="json">{`POST /v1/models/tickets/backtest
+{"ada": "ada-1-1-beta"}
+
+POST /v1/models/tickets/upgrade
+{"ada": "ada-1-1-beta"}`}</Code>
+        <Code lang="python">{`tickets.backtest(ada="ada-1-1-beta")
+tickets.upgrade(ada="ada-1-1-beta")`}</Code>
+        <p>Or ask Claude through the connector: “backtest tickets on ada-1-1-beta, and upgrade it if it does better”.</p>
+        <ul>
+          <li>An upgrade makes a new model version on a store of its own, as a job; the old version answers until the job ends and the new one goes live.</li>
+          <li>Any supported version can be chosen, an older one included (a downgrade).</li>
+          <li>To roll back, activate the previous version (<a href={`${DOCS}/tuning`}>Tuning</a>).</li>
+        </ul>
+        <h2>Support policy</h2>
+        <ul>
+          <li>At most three versions are kept: the latest stable, the stable before it while it is deprecated, and one beta.</li>
+          <li>A new stable deprecates the one before it, which ends 180 days later. A beta superseded by another ends 30 days later.</li>
+          <li>A deprecated version keeps answering, with a notice (the <code>Glyphh-Ada-Notice</code> header, and warnings on the platform, the SDKs and the plugin). It cannot be chosen for a new model or an upgrade.</li>
+          <li>At its end date, every model on it is moved to the latest stable automatically, with a note on the new version. No model is left unanswerable. Versions on a retired Ada stay listed but cannot be made live again.</li>
+        </ul>
       </>
     ),
   },
