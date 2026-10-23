@@ -5,7 +5,315 @@
  * page" from them. Copy is his; spelling and grammar cleaned, voice left alone.
  */
 
+import { bars, pairs, scatter, lines, punchCard } from './charts';
+
 export const POSTS = [
+  {
+    slug: 'introducing-ada',
+    layout: 'feature',
+    kicker: 'Launch · Ada beta',
+    title: 'Introducing Ada',
+    titleHtml: 'Introducing <em>Ada</em>',
+    summary: 'A decision model that learns from your own precedents, answers in milliseconds, shows the cases behind every answer, and runs without a transformer.',
+    date: '2026-10-23',
+    author: 'Chris "Timme"',
+    minutes: 9,
+    cover: '/blog/introducing-ada-hero.png',
+    coverAlt: 'Introducing Ada: decisions from your own precedent, beside a punched-card pattern.',
+    // The cover carries the title for the index and the home page; the article itself shows the bare card.
+    heroHtml: punchCard(120, 24, 'A punched-card pattern, after the cards of Babbage\'s Analytical Engine.'),
+    coverCaption: 'Ada is named after Ada Lovelace, who wrote the first program for a machine that ran on punched cards.',
+    tags: ['Ada', 'Research', 'Benchmarks'],
+    related: [
+      ['The benchmarks', 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks'],
+      ['The SDKs', 'https://docs.glyphh.ai/sdks'],
+      ['Ada', '/'],
+    ],
+    sections: [
+      {
+        id: 'third-way',
+        heading: null,
+        body: [
+          'Most of the decisions a business makes are not new. Approve this loan or don\'t. Route this message to that team. Escalate this alert, close that one. Each has been made hundreds of times before, and the outcome of each is on record. Today those decisions go one of two ways: a person makes them, or an app sends the whole case to a frontier language model and pays for it to reason from scratch, every time, with a different answer on a bad day.',
+          {
+            html: 'Ada takes a third way. She\'s a <strong>precedent classifier</strong>: you record the decisions you\'ve already made, and she answers a new case from the ones it resembles. She\'s built on hyperdimensional computing, not a transformer. There\'s no training run, a new decision counts the moment it\'s recorded, and the same question always gets the same answer. Every answer comes with the precedents it stands on, and when nothing on record is close enough, she says so instead of guessing.',
+          },
+          'Ada also works well in front of a language model. She decides the cases she\'s sure of and hands the rest over, so the model sees a fifth of the traffic and every hand-off becomes a precedent for next time.',
+          {
+            html: 'We think the claims below are strong, so here are the receipts. Every result is published, with each contestant\'s answers, in <a href="https://github.com/glyphh-ai/glyphh/tree/main/benchmarks">our benchmarks</a>, and each one below has its caveats under it.',
+          },
+          {
+            wide: true,
+            html:
+              '<div class="bl-stats">' +
+              '<div class="bl-stat"><b>97.5%</b><span>of bank messages routed right, with Ada in front of Claude Fable</span><small>Fable alone: 96.5%</small></div>' +
+              '<div class="bl-stat"><b>$0.22</b><span>for those 200 messages, against $300 for Fable alone</span><small>at list prices</small></div>' +
+              '<div class="bl-stat"><b>100</b><span>the bank\'s cost on 200 loans, lowest on the table</span><small>LLM: 110 and 114</small></div>' +
+              '<div class="bl-stat"><b>0 / 200</b><span>answers changed on a rerun. Two LLM runs disagreed on 12.</span><small>deterministic</small></div>' +
+              '</div>',
+          },
+        ],
+      },
+      {
+        id: 'different-kind',
+        heading: 'A different kind of model',
+        body: [
+          'A language model is optimized to continue text. Ada is optimized to repeat a decision the way your own history made it. That one difference changes almost everything else.',
+          {
+            wide: true,
+            html:
+              '<div class="bl-table"><table><thead><tr><th></th><th>Frontier LLM</th><th>Ada</th></tr></thead><tbody>' +
+              '<tr><th>Learns from</th><td class="dim">Pretraining, plus examples pasted into every prompt</td><td>Your own decisions, recorded once. A new one counts the moment it\'s recorded.</td></tr>' +
+              '<tr><th>Inputs</th><td class="dim">Tokens</td><td>Your cases as they are: categories, numbers, text</td></tr>' +
+              '<tr><th>Outputs</th><td class="dim">Text, parsed back into a decision</td><td>A decision, a calibrated confidence, and the precedents it stands on</td></tr>' +
+              '<tr><th>Same input, same answer?</th><td class="dim">Usually</td><td>Always</td></tr>' +
+              '<tr><th>When it doesn\'t know</th><td class="dim">Answers anyway</td><td>Says so, and hands the case to a person or a model</td></tr>' +
+              '<tr><th>Cost per decision</th><td class="dim">$0.004–$1.50, depending on how many examples ride along</td><td>About $0.00000003</td></tr>' +
+              '<tr><th>Speed</th><td class="dim">0.5–3 s</td><td>About 6 ms</td></tr>' +
+              '<tr><th>Explains itself</th><td class="dim">In prose, after the fact</td><td>Which precedents, which fields matched, and how much each counted</td></tr>' +
+              '<tr><th>Good for</th><td class="dim">Open-ended work, new problems, writing</td><td>Repeated decisions with a track record</td></tr>' +
+              '</tbody></table></div>',
+          },
+        ],
+      },
+      {
+        id: 'banking77',
+        heading: 'Benchmark one, routing bank messages',
+        body: [
+          'Banking77 (PolyAI) is 13,083 real messages from a bank\'s customers, each labelled with one of 77 intents: card arrival, lost or stolen card, exchange rate, top-up failed and so on. They\'re short, informal and often ambiguous between neighbouring intents. It\'s free text, which is where a developer reaches for a language model today.',
+          'Every system learned from the same 10,003 messages and was scored on the same 200 held-out ones, each routed as its own call, the way a chatbot makes them. The Claude models read the training file and routed by judgement. Nothing was tuned on the 200.',
+          {
+            wide: true,
+            html: pairs('Each model alone, and with Ada in front', 'Share of 200 held-out messages routed to the right intent. With Ada in front, the model sees only the 22% she isn\'t sure of.', [
+              ['Claude Fable 5.1', 97.5, 96.5, 'ada'],
+              ['Claude Opus 5.5', 97.0, 96.0, 'ada'],
+              ['Claude Sonnet 5.5', 94.0, 86.0, 'ada'],
+              ['Claude Haiku 4.5', 91.5, 81.0, 'ada'],
+            ], ['with Ada in front', 'model alone'], { fmt: (v) => `${v}%` }),
+          },
+          {
+            html: '<strong>With Ada in front, every model does better than it does alone.</strong> Ada keeps the 156 messages she\'s sure of and gets 98.7% of them right. The other 44 go to the model with Ada\'s three nearest precedents in the prompt, instead of the whole training file. For the two largest models the pair beats the model alone; for the two smaller ones it adds eight to ten points, because the small model only has to handle the hard fifth. Alone, Ada routes 90.0%.',
+          },
+          {
+            wide: true,
+            html:
+              '<div class="bl-table"><table><thead><tr><th></th><th class="n">Accuracy</th><th class="n">Cost for the 200</th><th class="n">Per 1,000 messages</th></tr></thead><tbody>' +
+              '<tr><th>Claude Fable 5.1 alone</th><td class="n">96.5%</td><td class="n">$300</td><td class="n">$1,500</td></tr>' +
+              '<tr class="ada"><th>Ada, then Fable for 22%</th><td class="n">97.5%</td><td class="n">$0.22</td><td class="n">$1.10</td></tr>' +
+              '<tr><th>Claude Opus 5.5 alone</th><td class="n">96.0%</td><td class="n">$120</td><td class="n">$600</td></tr>' +
+              '<tr class="ada"><th>Ada, then Opus for 22%</th><td class="n">97.0%</td><td class="n">$0.09</td><td class="n">$0.44</td></tr>' +
+              '<tr class="ada"><th>Ada alone</th><td class="n">90.0%</td><td class="n">$0.000006</td><td class="n">$0.00003</td></tr>' +
+              '</tbody></table></div>',
+          },
+          'A thousand times cheaper and more accurate than the best model alone. And because every hand-off is recorded, the model\'s share keeps falling.',
+          {
+            wide: true,
+            html:
+              '<aside class="bl-caveat"><span class="qs-kicker">Caveats</span><ul>' +
+              '<li>200 messages means a point or two of noise either way. Alone, Ada is two points under a tuned classic text model (92.0% on the same 200) and six under the best LLM.</li>' +
+              '<li>The sample was reissued once. The first round\'s ids leaked the label (the test file is sorted by intent), so every judge was rerun on shuffled, opaque ids. Both rounds are published.</li>' +
+              '<li>Costs are at list prices, with each message its own call and the examples sent each time, as a chatbot does it. Batched, the LLM is cheaper per message.</li>' +
+              '</ul></aside>',
+          },
+        ],
+      },
+      {
+        id: 'credit',
+        heading: 'Benchmark two, credit decisions',
+        body: [
+          'German Credit (UCI Statlog) is 1,000 real loan applications with 20 fields each and the bank\'s actual outcome. Every contestant learned from the same 800 and was scored on the same 200 held out. In this dataset\'s own cost matrix, approving a loan that goes bad costs five times as much as refusing a good one, so the number a bank cares about is the cost, not the accuracy.',
+          {
+            wide: true,
+            html: bars('The bank\'s cost on 200 held-out loans', '5 per bad loan approved, plus 1 per good loan refused. Lower is better.', [
+              ['Ada, calibrated', 100, 'ada'],
+              ['Logistic regression', 103],
+              ['LLM, run 1', 110],
+              ['LLM, run 2', 114],
+              ['Jev, all 800', 118],
+              ['Jev, 300', 123],
+              ['Ada, first run, untuned', 210, 'ada'],
+              ['Always approve', 325, 'base'],
+            ], { max: 350, ticks: [0, 100, 200, 300] }),
+          },
+          {
+            html: '<strong>Ada costs the bank the least: 100, against 110 and 114 for two runs of Claude Fable, 103 for a cost-aware logistic regression, and 118 at best for TypeSafe\'s Jev.</strong> Every setting was chosen on the 800 before the 200 were opened. Ada gets there by refusing more: 70.0% of her decisions match the bank\'s, against 77–79% for the LLM, because a refused good loan is the cheap mistake.',
+          },
+          {
+            wide: true,
+            html:
+              '<div class="bl-table"><table><thead><tr><th></th><th class="n">Accuracy</th><th class="n">Bank\'s cost</th><th class="n">Same answer twice?</th></tr></thead><tbody>' +
+              '<tr><th>Always approve</th><td class="n">67.5%</td><td class="n">325</td><td class="n">—</td></tr>' +
+              '<tr><th>Claude Fable 5.1, two runs</th><td class="n">77.0% / 79.0%</td><td class="n">110 / 114</td><td class="n">188 of 200</td></tr>' +
+              '<tr><th>Jev, 300 / all 800 precedents</th><td class="n">71.0% / 70.5%</td><td class="n">123 / 118 cost-aware</td><td class="n">not tested</td></tr>' +
+              '<tr><th>Logistic regression, cost-aware</th><td class="n">68.5%</td><td class="n">103</td><td class="n">yes</td></tr>' +
+              '<tr class="ada"><th>Ada, plain vote</th><td class="n">78.5%</td><td class="n">171</td><td class="n">yes</td></tr>' +
+              '<tr class="ada"><th>Ada, calibrated</th><td class="n">70.0%</td><td class="n">100</td><td class="n">yes</td></tr>' +
+              '<tr class="ada"><th>Ada, asking a person when every answer is dear</th><td class="n">81.1% of 111</td><td class="n">45 on those</td><td class="n">yes</td></tr>' +
+              '</tbody></table></div>',
+          },
+          'The last row is the dial again. Priced so that asking a person costs half a refused good loan, Ada decides 111 of the 200 herself at a cost of 45 and sends the other 89 to a person.',
+        ],
+      },
+      {
+        id: 'speed-and-cost',
+        heading: 'Speed and cost',
+        body: [
+          'Here\'s what each credit decision takes. The LLM and Jev keep nothing between calls, so the precedents are paid for on every request. Ada pays for them once, when they\'re recorded.',
+          {
+            wide: true,
+            html: scatter('Cost and time per decision', 'Both axes are logarithmic. Bars are ranges: the LLM\'s price is bracketed by two public rates.', [
+              ['Ada', 0.005, 0.005, 2.6e-8, 2.6e-8, 'ada', 'right'],
+              ['Jev, no precedents', 0.21, 0.21, 3.5e-5, 3.5e-5, null, 'right'],
+              ['Jev, 300 precedents', 0.47, 0.47, 1.25e-3, 1.25e-3, null, 'left'],
+              ['Jev, all 800', 1.03, 1.03, 3.25e-3, 3.25e-3, null, 'right'],
+              ['LLM, batched', 0.7, 0.7, 0.004, 0.012, null, 'left'],
+              ['LLM, as apps call it', 1, 3, 0.5, 1.5, null, 'left'],
+            ],
+            { min: 0.001, max: 10, title: 'time per decision', ticks: [[0.001, '1 ms'], [0.01, '10 ms'], [0.1, '100 ms'], [1, '1 s'], [10, '10 s']] },
+            { min: 1e-9, max: 10, title: 'cost per decision', ticks: [[1e-9, '$1e-9'], [1e-7, '$1e-7'], [1e-5, '$1e-5'], [1e-3, '$0.001'], [1e-1, '$0.10'], [10, '$10']] }),
+          },
+          'At roughly $0.00000003 and a few milliseconds a decision, Ada is about five orders of magnitude cheaper than a batched LLM call and 100 to 600 times faster.',
+        ],
+      },
+      {
+        id: 'typesafe-yardstick',
+        heading: 'On TypeSafe\'s own yardstick',
+        body: [
+          'TypeSafe\'s published workflow evals have no ground truth. They score a contestant by agreement with the average of two frontier models. We built that reference for the 200 loans (Claude Fable 5.1 and Claude Opus 5.5, averaged) and scored the first-run contestants against it as well as against what really happened.',
+          {
+            wide: true,
+            html:
+              '<div class="bl-table"><table><thead><tr><th>Contestant</th><th class="n">vs real outcomes</th><th class="n">vs model consensus</th></tr></thead><tbody>' +
+              '<tr class="ada"><th>Ada, first run</th><td class="n">77.0%</td><td class="n">88.5%</td></tr>' +
+              '<tr><th>Jev, all 800 precedents</th><td class="n">70.5%</td><td class="n">79.0%</td></tr>' +
+              '<tr><th>LLM, run 2</th><td class="n">79.0%</td><td class="n">78.5%</td></tr>' +
+              '<tr><th>LLM, run 1</th><td class="n">77.0%</td><td class="n">74.5%</td></tr>' +
+              '<tr><th>Jev, 300 precedents</th><td class="n">71.0%</td><td class="n">72.5%</td></tr>' +
+              '<tr><th>Jev, no precedents</th><td class="n">49.5%</td><td class="n">44.0%</td></tr>' +
+              '</tbody></table></div>',
+          },
+          'On TypeSafe\'s measure Ada leads Jev by 9.5 points. But the consensus itself matches the real outcomes only 74.5% of the time, and it calls 28 loans bad where 65 were. Agreement with other models measures how model-like a contestant is. We\'d rather be scored on what happened.',
+          {
+            wide: true,
+            html:
+              '<aside class="bl-caveat"><span class="qs-kicker">Caveats</span><ul>' +
+              '<li>200 held-out loans means roughly ±6 points of noise on each accuracy, so read the ranking, not the third digit. Cross-validated accuracy inside the 800 was 71.8%, so this hold-out runs a little easy for everyone.</li>' +
+              '<li>On purely structured data, a classic model with a threshold is hard to beat on numbers: logistic regression is three points behind Ada on cost. Ada\'s case is the receipts, the hand-off and learning one case at a time.</li>' +
+              '<li>The LLM\'s per-token price is bracketed by two public rates. Neither LLM run read all 800 cases (430 and about 140).</li>' +
+              '<li>German Credit is a small, well-known dataset that frontier models may have seen in training. One reference model said it leaned on that.</li>' +
+              '</ul></aside>',
+          },
+        ],
+      },
+      {
+        id: 'kubernetes',
+        heading: 'Benchmark three, routing Kubernetes issues',
+        body: [
+          {
+            html: 'We built an Ada memory from a year of <code>kubernetes/kubernetes</code> issues (1,527 to learn from) and asked her about 104 issues opened after the cutoff. The question: which SIG (special interest group) should own each one? We stripped every line where the reporter named a SIG, so she had to route from what the issue says: its template, the components it mentions, and the code paths it cites.',
+          },
+          {
+            wide: true,
+            html: pairs('Routing 104 held-out Kubernetes issues', 'Share routed to the right SIG on the first guess, and within three guesses.', [
+              ['Most common SIG, always', 35, 62],
+              ['Ada, untuned', 61, 79, 'ada'],
+              ['Ada, tuned', 66, 86, 'ada'],
+              ['Ada, tuned, calibrated', 66, 89, 'ada'],
+            ], ['top 1', 'top 3']),
+          },
+          {
+            html: 'Tuned on a validation slice, Ada routed <strong>66%</strong> right on the first try and <strong>86–89%</strong> within three, against 35% and 62% for always guessing the most common SIG. What makes this usable is that her confidence means something.',
+          },
+          {
+            wide: true,
+            html: pairs('When Ada is confident, she\'s right', 'For each confidence bar: the share of issues that cleared it, and how many of those she routed correctly.', [
+              ['confidence ≥ 0.5', 86, 54, 'ada'],
+              ['confidence ≥ 0.7', 94, 32, 'ada'],
+              ['confidence ≥ 0.9', 100, 11, 'ada'],
+            ], ['of those, right', 'share of issues answered']),
+          },
+          'Above 0.7 confidence she answered a third of all issues and got 94% of them right. Above 0.9, 100%. Let Ada take the cases she\'s sure of, and send the rest to a person.',
+        ],
+      },
+      {
+        id: 'finding-the-fix',
+        heading: 'Finding the fix',
+        body: [
+          'Because every answer cites its precedents, Ada can do more than classify. For 56 held-out issues whose fix is known, we checked whether any of her three nearest solved precedents had been fixed in a directory the real fix also touched.',
+          {
+            wide: true,
+            html: bars('Do the nearest precedents point at the code that fixed it?', 'Hit rate on 56 held-out issues with a known fix.', [
+              ['Ada, 3 nearest precedents', 77, 'ada'],
+              ['3 most-fixed directories', 34],
+              ['3 random precedents', 23, 'base'],
+            ], { max: 100, ticks: [0, 25, 50, 75, 100], tickFmt: (t) => `${t}%`, fmt: (v) => `${v}%` }),
+          },
+          '77% of the time, the cited precedent pointed at the right part of the codebase. Here\'s the start of one answer:',
+          {
+            html: '<pre><code>#141993 Memory Manager accepts an incomplete pod-level checkpoint\n        as a restored allocation after kubelet restart\n  -&gt; sig/node via #141069 Memory Manager pod-scope restore\n     compares container blocks…\n     fixed by PR 141070 in pkg/kubelet</code></pre>',
+          },
+          'That\'s the explanation: which earlier issue, and where it was fixed. No prose to trust or doubt.',
+          {
+            wide: true,
+            html:
+              '<aside class="bl-caveat"><span class="qs-kicker">Caveats</span><ul>' +
+              '<li>104 test cases means about ±9 points on each percentage.</li>' +
+              '<li>The issue fields come from a simple keyword extractor. A better one would likely move every number here.</li>' +
+              '<li>Fix directories are coarse: <code>pkg/kubelet</code> is a big target.</li>' +
+              '</ul></aside>',
+          },
+        ],
+      },
+      {
+        id: 'scale',
+        heading: 'Does it scale?',
+        body: [
+          'A precedent memory is only useful if it can hold your whole history. Ada Cloud records about 7,800 precedents a second, so a million take about two minutes, and answers stay quick as the memory grows.',
+          {
+            wide: true,
+            html: lines('Query time as the memory grows', 'p50 in milliseconds, both axes logarithmic. Comparing a query against every precedent, against Ada Cloud.', [
+              ['every precedent: 12.9 s', [[5000, 280.1], [20000, 3039.3], [50000, 12909.7]]],
+              ['Ada Cloud: 170 ms', [[5000, 53.6], [20000, 65.2], [50000, 142.8], [100000, 149.1], [1000000, 170.2]], 'ada'],
+            ],
+            { min: 3000, max: 1300000, title: 'precedents in memory', ticks: [[5000, '5k'], [20000, '20k'], [50000, '50k'], [100000, '100k'], [1000000, '1M']] },
+            { min: 10, max: 20000, ticks: [[10, '10 ms'], [100, '100 ms'], [1000, '1 s'], [10000, '10 s']] }),
+          },
+          {
+            html: 'Comparing against every precedent grows with the memory: 280 ms at 5,000, 12.9 s at 50,000. Ada Cloud stays between 54 and 170 ms all the way to a million. On Banking77 it gave the same answer as the exhaustive comparison on every one of 500 test messages, at 39 ms instead of 334. All of it was measured on one 12-CPU machine.',
+          },
+        ],
+      },
+      {
+        id: 'what-ada-isnt',
+        heading: 'What Ada isn\'t',
+        body: [
+          'Ada doesn\'t write, summarize, plan or chat. She can\'t decide something nobody has decided before; when nothing on record is close enough she says so and hands it back. If your problem is new every time, use a language model. If you\'ve made the same decision a thousand times, you already have what Ada needs.',
+        ],
+      },
+      {
+        id: 'next',
+        heading: 'What\'s next',
+        body: [
+          'Ada is in beta today. Next are more public benchmarks, including TypeSafe\'s security-incident workflow end to end, and models that answer every question about a case at once.',
+          {
+            html:
+              '<div class="bl-faq">' +
+              '<details><summary>Why name it after Ada Lovelace?</summary><p>She wrote the first published program, for Babbage\'s Analytical Engine, a machine fed by punched cards. She also wrote that the engine "has no pretensions whatever to originate anything." For a decision model, that\'s a feature.</p></details>' +
+              '<details><summary>Is there a neural network in it?</summary><p>No. There\'s no transformer, no GPU and no training run.</p></details>' +
+              '<details><summary>How does Ada learn something new?</summary><p>You record the case with its outcome, and the next question can use it. There\'s nothing to retrain and nothing to redeploy.</p></details>' +
+              '<details><summary>Can I see why it decided something?</summary><p>Every answer lists the precedents it stands on, and which of their fields matched.</p></details>' +
+              '<details><summary>Where does my data live?</summary><p>Your models run in Glyphh\'s cloud, isolated per organisation. We never train on your data.</p></details>' +
+              '</div>',
+          },
+          {
+            html: '<p class="ft-close">If you make the same decision a thousand times a day, I\'d like to hear what it is.</p>',
+          },
+          'Build with AI. Run without it.',
+          '— Timme',
+        ],
+      },
+    ],
+  },
   {
     slug: 'ada-in-your-code',
     title: 'Ada in Your Code — Tickets Routed, Churn Called',

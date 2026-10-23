@@ -1,6 +1,5 @@
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
-import AdaField from '../../components/AdaField';
 import '../use-cases.css';
 
 // Support routing: Ada's flagship use case, and the proof behind the home page's
@@ -93,13 +92,6 @@ export default function SupportRoutingPage() {
               </li>
             ))}
           </ol>
-          <div className="mh-field rt-field">
-            <AdaField />
-          </div>
-          <p className="rt-note">
-            Above: cases arrive, the nearest precedents vote, Ada answers with its confidence or asks, and every graded
-            case becomes a precedent.
-          </p>
         </section>
 
         <section className="ix-section" id="experiment">
