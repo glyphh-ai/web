@@ -84,9 +84,9 @@
 .ft-cover { max-width: 56rem; margin: 2.25rem auto 2.75rem; }
 .ft-cover img { display: block; width: 100%; height: auto; border: 1px solid var(--border); }
 .ft-hero { padding: 1.5rem; border: 1px solid var(--border); }
-.ft-glyph { display: block; width: 100%; height: auto; }
-.ft-glyph .on { fill: var(--text-2); }
-.ft-glyph .off { fill: var(--text-4); opacity: 0.22; }
+.ft-punch { display: block; width: 100%; height: auto; }
+.ft-punch .on { fill: var(--text-2); }
+.ft-punch .off { fill: var(--text-4); opacity: 0.22; }
 .ft-cover figcaption { margin-top: 0.7rem; font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.55; color: var(--text-4); }
 
 .ft-body { max-width: none; }

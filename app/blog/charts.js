@@ -127,17 +127,18 @@ export function lines(title, sub, series, ax, ay) {
 }
 
 /**
- * A glyph drawn as a punched card: `bits` (base64, one bit per value, most
- * significant first) laid out `cols` wide. Set values are holes in the text
- * colour, the rest faint, so it follows the theme.
+ * A punched card, for decoration: a fixed pseudo-random pattern of holes
+ * (not any model's output), `cols` by `rows`, holes in the text colour and
+ * the rest faint, so it follows the theme.
  */
-export function glyphCard(bits, cols, label) {
-  const bytes = Buffer.from(bits, 'base64');
-  const n = bytes.length * 8, rows = Math.ceil(n / cols), c = 5;
+export function punchCard(cols, rows, label) {
+  let seed = 0x2545f491;
+  const next = () => { seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5; return (seed >>> 0) / 4294967296; };
+  const c = 5;
   let on = '', off = '';
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < cols * rows; i++) {
     const cell = `M${(i % cols) * c} ${Math.floor(i / cols) * c}h4v4h-4z`;
-    if ((bytes[i >> 3] >> (7 - (i & 7))) & 1) on += cell; else off += cell;
+    if (next() < 0.5) on += cell; else off += cell;
   }
-  return `<svg class="ft-glyph" viewBox="0 0 ${cols * c - 1} ${rows * c - 1}" role="img" aria-label="${esc(label)}"><path class="off" d="${off}"/><path class="on" d="${on}"/></svg>`;
+  return `<svg class="ft-punch" viewBox="0 0 ${cols * c - 1} ${rows * c - 1}" role="img" aria-label="${esc(label)}"><path class="off" d="${off}"/><path class="on" d="${on}"/></svg>`;
 }
