@@ -2,9 +2,13 @@ import { NextResponse } from 'next/server';
 
 // Where a visitor came from (2026-10-02): the tags on the link they arrived on
 // (utm_*, and the ad platform's click id) are kept for 90 days in a first-party
-// cookie on .glyphh.ai, so sign-up on platform.glyphh.ai can read it and the
-// server can store it on the new account (glyphh_auth/attribution.py). The
-// latest tagged link wins. HttpOnly: only the server ever reads it.
+// cookie on .glyphh.ai, so sign-up on platform.glyphh.ai can read it: the
+// platform's sign-in callback (its server/app.ts) sends it to the server's
+// POST /v1/me/source, which stores it on an account made within the last day
+// and the org it made (server: glyphh_server/ops/attribution.py); staff see
+// sign-ups and paid conversions by source at platform.glyphh.ai/admin/marketing.
+// The latest tagged link wins. HttpOnly: only the platform's and the API's
+// servers ever read it.
 const SOURCE_COOKIE = 'glyphh_src';
 const SOURCE_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'rdt_cid', 'gclid'];
 const SOURCE_DAYS = 90;
