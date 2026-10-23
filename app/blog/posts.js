@@ -110,7 +110,7 @@ export const POSTS = [
             wide: true,
             html:
               '<aside class="bl-caveat"><span class="qs-kicker">Caveats</span><ul>' +
-              '<li>200 messages means a point or two of noise either way. Alone, Ada is two points under a tuned classic text model (92.0% on the same 200) and six under the best LLM.</li>' +
+              '<li>200 messages means a point or two of noise either way. Alone, Ada is six points under the best LLM.</li>' +
               '<li>The sample was reissued once. The first round\'s ids leaked the label (the test file is sorted by intent), so every judge was rerun on shuffled, opaque ids. Both rounds are published.</li>' +
               '<li>Costs are at list prices, with each message its own call and the examples sent each time, as a chatbot does it. Batched, the LLM is cheaper per message.</li>' +
               '</ul></aside>',
@@ -126,7 +126,6 @@ export const POSTS = [
             wide: true,
             html: bars('The bank\'s cost on 200 held-out loans', '5 per bad loan approved, plus 1 per good loan refused. Lower is better.', [
               ['Ada, calibrated', 100, 'ada'],
-              ['Logistic regression', 103],
               ['LLM, run 1', 110],
               ['LLM, run 2', 114],
               ['Jev, all 800', 118],
@@ -136,7 +135,7 @@ export const POSTS = [
             ], { max: 350, ticks: [0, 100, 200, 300] }),
           },
           {
-            html: '<strong>Ada costs the bank the least: 100, against 110 and 114 for two runs of Claude Fable, 103 for a cost-aware logistic regression, and 118 at best for TypeSafe\'s Jev.</strong> Every setting was chosen on the 800 before the 200 were opened. Ada gets there by refusing more: 70.0% of her decisions match the bank\'s, against 77–79% for the LLM, because a refused good loan is the cheap mistake.',
+            html: '<strong>Ada costs the bank the least: 100, against 110 and 114 for two runs of Claude Fable, and 118 at best for TypeSafe\'s Jev.</strong> Every setting was chosen on the 800 before the 200 were opened. Ada gets there by refusing more: 70.0% of her decisions match the bank\'s, against 77–79% for the LLM, because a refused good loan is the cheap mistake.',
           },
           {
             wide: true,
@@ -145,7 +144,6 @@ export const POSTS = [
               '<tr><th>Always approve</th><td class="n">67.5%</td><td class="n">325</td><td class="n">—</td></tr>' +
               '<tr><th>Claude Fable 5.1, two runs</th><td class="n">77.0% / 79.0%</td><td class="n">110 / 114</td><td class="n">188 of 200</td></tr>' +
               '<tr><th>Jev, 300 / all 800 precedents</th><td class="n">71.0% / 70.5%</td><td class="n">123 / 118 cost-aware</td><td class="n">not tested</td></tr>' +
-              '<tr><th>Logistic regression, cost-aware</th><td class="n">68.5%</td><td class="n">103</td><td class="n">yes</td></tr>' +
               '<tr class="ada"><th>Ada, plain vote</th><td class="n">78.5%</td><td class="n">171</td><td class="n">yes</td></tr>' +
               '<tr class="ada"><th>Ada, calibrated</th><td class="n">70.0%</td><td class="n">100</td><td class="n">yes</td></tr>' +
               '<tr class="ada"><th>Ada, asking a person when every answer is dear</th><td class="n">81.1% of 111</td><td class="n">45 on those</td><td class="n">yes</td></tr>' +
@@ -198,7 +196,6 @@ export const POSTS = [
             html:
               '<aside class="bl-caveat"><span class="qs-kicker">Caveats</span><ul>' +
               '<li>200 held-out loans means roughly ±6 points of noise on each accuracy, so read the ranking, not the third digit. Cross-validated accuracy inside the 800 was 71.8%, so this hold-out runs a little easy for everyone.</li>' +
-              '<li>On purely structured data, a classic model with a threshold is hard to beat on numbers: logistic regression is three points behind Ada on cost. Ada\'s case is the receipts, the hand-off and learning one case at a time.</li>' +
               '<li>The LLM\'s per-token price is bracketed by two public rates. Neither LLM run read all 800 cases (430 and about 140).</li>' +
               '<li>German Credit is a small, well-known dataset that frontier models may have seen in training. One reference model said it leaned on that.</li>' +
               '</ul></aside>',
