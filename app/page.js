@@ -25,8 +25,8 @@ const PLATFORM = 'https://platform.glyphh.ai';
 const ROUTING = '/use-cases/support-routing';
 
 const STATS = [
-  { n: '97.5%', k: 'Routed right', c: 'Ada, then Claude for the 22% it was unsure of. Claude alone: 96.5%.', href: ROUTING },
-  { n: '$0.22', k: 'Cost for the 200', c: 'Against $300 for the same messages with Claude alone.', href: ROUTING },
+  { n: '97.5%', k: 'Routed right', c: 'Ada, then Claude Fable for the 22% it was unsure of. Claude Fable alone: 96.5%.', href: ROUTING },
+  { n: '$0.22', k: 'Cost for the 200', c: 'Against $300 for the same messages with Claude Fable alone.', href: ROUTING },
   { n: '156 of 200', k: 'Answered without a model', c: 'Right on 98.7% of the cases Ada kept.', href: ROUTING },
   { n: '54 to 170 ms', k: 'Time to answer', c: 'In Ada Cloud, up to a million precedents.', href: '/blog/introducing-ada' },
 ];
@@ -34,15 +34,15 @@ const STATS = [
 const REASONS = [
   {
     title: 'Same answer twice',
-    body: 'There is no language model in the path. Ask the same question next quarter and you get the same outcome, the same probability and the same precedents. On German Credit’s 200 held-out loans, Ada’s cost to the bank was 100 against 110 and 114 for Claude.',
+    body: 'There is no language model in the path, so the same case gets the same answer every time. On German Credit’s 200 held-out loans, Ada’s cost to the bank was 100 against 110 and 114 for Claude.',
   },
   {
-    title: 'Every answer shows its precedents',
-    body: 'Each answer carries a calibrated probability, how many precedents voted and which ones. An auditor can open the cases a decision stood on, in your own records.',
+    title: 'Every decision can be audited',
+    body: 'Each answer carries a calibrated probability, how many precedents voted and which ones. An auditor can open the cases a decision stood on.',
   },
   {
     title: 'It asks when it is unsure',
-    body: 'Below the bar you set, the answer is ask. Your software hands the case to a model or a person, records the result, and Ada has one more precedent.',
+    body: 'Below the bar you set, the answer is ask, and the case goes to a model or a person. Their answer, once recorded, is one more precedent.',
   },
 ];
 
@@ -61,7 +61,7 @@ const WAYS = [
   },
   {
     title: 'From the platform',
-    head: 'Models, keys and usage',
+    head: 'Your models and keys in one place',
     body: 'Sign in to see your models, make keys for your code and follow your usage against your plan.',
     href: PLATFORM,
   },
@@ -71,7 +71,7 @@ function Tile({ title, head, body, href, i }) {
   const inner = (
     <>
       <LetterField seed={i + 1} />
-      <h3 className="hv-tile-title">{title}</h3>
+      <h3 className="hv-tile-title">{title}{href ? <span className="hv-tile-go" aria-hidden="true">&rarr;</span> : null}</h3>
       {head ? <p className="hv-tile-head">{head}</p> : null}
       <p className="hv-tile-body">{body}</p>
     </>
@@ -113,8 +113,8 @@ export default function Home() {
           </div>
           <h2 className="ix-h2 hs-h2">Most cases never need the language model.</h2>
           <p className="ix-desc hs-lede">
-            On 200 bank messages, Ada answered the ones it was sure of and handed the rest to Claude. Together they beat
-            Claude alone, for a fraction of the cost.
+            On 200 bank messages, Ada answered the ones it was sure of and handed the rest to Claude Fable. Together they
+            were more accurate than Claude Fable alone, and cost cents instead of hundreds of dollars.
           </p>
           <div className="hv-panel st-panel">
             <div className="st-row">
@@ -141,7 +141,7 @@ export default function Home() {
           <h2 className="ix-h2 hs-h2">Every answer comes with its receipts.</h2>
           <p className="ix-desc hs-lede">
             Ada finds the precedents nearest the case, weighs them and reports what they say: a typed outcome, how sure
-            it is, and the precedents that voted. One precedent is a thin vote, and the answer says so.
+            it is, and the precedents that voted. When nothing is close enough, it says so and asks.
           </p>
           <Receipt />
           <AdaStills />
@@ -158,9 +158,8 @@ export default function Home() {
           </div>
           <h2 className="ix-h2 hs-h2">Reach Ada from Claude or from your own code.</h2>
           <p className="ix-desc hs-lede">
-            Your models live in Ada Cloud, isolated per organisation, with nothing to install. A model is a JSON spec
-            and its precedents, and none of your code runs there. We never train on your data. Ada is in every plan,
-            Free included.
+            Your models live in Ada Cloud, isolated per organisation, with nothing to install or run. We never train on
+            your data. Ada is in every plan, Free included.
           </p>
           <div className="hv-grid hv-grid-3">
             {WAYS.map((t, i) => <Tile key={t.title} {...t} i={i + 3} />)}

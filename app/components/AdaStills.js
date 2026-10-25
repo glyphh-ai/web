@@ -73,8 +73,8 @@ export default function AdaStills() {
         <figure key={n} className="still">
           <div className="still-field"><Still n={n} /></div>
           <figcaption className="still-cap">
-            <span>precedents {n}</span>
-            <span>weights u 1.00 v {learnedWv(n).toFixed(2)}</span>
+            <span>{n} precedents</span>
+            <span>{n === 3 ? 'nothing learned yet' : n === 12 ? 'two regions' : 'a sharp boundary'}</span>
           </figcaption>
         </figure>
       ))}

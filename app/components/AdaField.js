@@ -37,8 +37,8 @@ import { K, UNSURE, SEEDED, hash, truth, makeCycle, learnedWv, answer, inks } fr
 
 const FPS = 24;
 const CAPTION_H = 26;               // px kept for the caption under the field
-const FEATHER = 150;                // px over which the clear zone's mask fades back in
-const MASK_IN = 0.22;               // the letters' strength inside the clear zone
+const FEATHER = 80;                 // px over which the clear zone's mask fades back in
+const MASK_IN = 0.3;                // the letters' strength inside the clear zone
 
 // The phases of one case, in seconds.
 const T = { arrive: 1.0, vote: 0.8, answer: 1.3, ask: 1.4, record: 0.8, reset: 1.6 };
@@ -68,8 +68,8 @@ export default function AdaField({ fill = false, interactive = false }) {
     // the simulation
     let cycle = 0, cases = makeCycle(1), precs = [], idx = 0;
     let phase = 'arrive', since = 0, wv = 1, fieldWv = 1, current = null, ans = null, origin = null, ripple = null;
-    // the visitor's own case
-    let hover = null, hoverAns = null, hoverFade = 0;
+    // the visitor's own case; the last one lingers while it fades out
+    let hover = null, hoverAns = null, hoverFade = 0, lastHover = null, lastAns = null;
 
     const inset = () => (fill ? (w >= 1200 ? (w - 1200) / 2 + 48 : w > 720 ? 48 : 20) : 10);
     // where cases and precedents live: inside the frame's inner edges, under the nav
@@ -82,7 +82,7 @@ export default function AdaField({ fill = false, interactive = false }) {
       const el = fill ? host.querySelector('[data-clear]') : null;
       if (!el) { clear = null; return; }
       const hr = host.getBoundingClientRect(), r = el.getBoundingClientRect();
-      clear = { x: r.left - hr.left - 48, y: r.top - hr.top - 36, w: r.width + 96, h: r.height + 72 };
+      clear = { x: r.left - hr.left - 20, y: r.top - hr.top - 12, w: r.width + 40, h: r.height - 32 };
     };
     const inClear = (x, y, pad = 0) => !!clear && x > clear.x - pad && x < clear.x + clear.w + pad && y > clear.y - pad && y < clear.y + clear.h + pad;
     // how much of the field shows at (x, y): a whisper inside the zone, full strength FEATHER px out
@@ -100,7 +100,7 @@ export default function AdaField({ fill = false, interactive = false }) {
       if (!inClear(x, y, 24)) return c;
       const a = area();
       const top = (clear.y - 30 - a.y) / a.h, bottom = (clear.y + clear.h + 30 - a.y) / a.h;
-      const v = c.v < 0.5 ? Math.max(0.04, c.v * Math.max(0.05, top)) : Math.min(0.96, bottom + (c.v - 0.5) * 2 * Math.max(0.05, 1 - bottom));
+      const v = c.v < 0.5 ? Math.max(0.04, c.v * 2 * Math.max(0.05, top)) : Math.min(0.96, bottom + (c.v - 0.5) * 2 * Math.max(0.05, 1 - bottom));
       return { ...c, v, label: truth(c.u, v) };
     };
 
@@ -226,7 +226,7 @@ export default function AdaField({ fill = false, interactive = false }) {
       else if (phase === 'answer') event = `answers ${ans.label}, p ${ans.conf.toFixed(2)}`;
       else if (phase === 'ask') event = `unsure (${ans.label} ${ans.conf.toFixed(2)}): asks`;
       else if (phase === 'record') event = `graded ${current.label}: a precedent`;
-      return [`precedents ${n}`, event, `weights  u 1.00  v ${wv.toFixed(2)}`];
+      return [`precedents ${n}`, event];
     };
 
     // the votes, the mark and the tag for one case at (x, y)
@@ -241,6 +241,7 @@ export default function AdaField({ fill = false, interactive = false }) {
           for (let s = 1; s < steps; s++) {
             const f = (s * 7) / len;
             const lx = x + (px - x) * f, ly = y + (py - y) * f;
+            if (inClear(lx, ly)) continue;                 // never over the words
             ctx.fillStyle = purple(0.85 * maskAt(lx, ly));
             ctx.fillText('·', lx, ly);
           }
@@ -327,8 +328,10 @@ export default function AdaField({ fill = false, interactive = false }) {
             const steps = Math.floor(len / 7);
             for (let s = 1; s < steps; s++) {
               const f = (s * 7) / full;
-              ctx.fillStyle = purple(0.85);
-              ctx.fillText('·', x + (px - x) * f, y + (py - y) * f);
+              const lx = x + (px - x) * f, ly = y + (py - y) * f;
+              if (inClear(lx, ly)) continue;               // never over the words
+              ctx.fillStyle = purple(0.85 * maskAt(lx, ly));
+              ctx.fillText('·', lx, ly);
             }
           }
           ctx.font = `700 15px ${mono}`;
@@ -339,19 +342,18 @@ export default function AdaField({ fill = false, interactive = false }) {
         }
       }
 
-      // the visitor's own case
-      if (hoverFade > 0.02 && hover && hoverAns) drawCase(hover.x, hover.y, hoverAns, '?', hoverFade, rgba(0.9));
+      // the visitor's own case, fading in while it is there and out when it leaves
+      if (hoverFade > 0.02 && lastHover && lastAns) drawCase(lastHover.x, lastHover.y, lastAns, '?', hoverFade, rgba(0.9));
 
-      // the caption on the base line
+      // the caption on the base line: the count left, what is happening right
       ctx.globalAlpha = 1;
-      const [left, mid, rightText] = caption();
+      const [left, mid] = caption();
       const cy = h - CAPTION_H / 2 - (fill ? 6 : 0);
       const ix = inset();
       ctx.font = `11px ${mono}`;
       ctx.fillStyle = rgba(0.72);
       ctx.textAlign = 'left'; ctx.fillText(left, ix, cy);
-      if (w > 640) { ctx.textAlign = 'right'; ctx.fillText(rightText, w - ix, cy); }
-      ctx.textAlign = w > 640 ? 'center' : 'right'; ctx.fillStyle = rgba(0.95); ctx.fillText(mid, w > 640 ? w / 2 : w - ix, cy);
+      ctx.textAlign = 'right'; ctx.fillStyle = rgba(0.95); ctx.fillText(mid, w - ix, cy);
       ctx.textAlign = 'start';
     };
 
@@ -366,29 +368,31 @@ export default function AdaField({ fill = false, interactive = false }) {
     const onMove = (e) => {
       if (coarse) return;
       hover = pointAt(e);
-      if (hover && precs.length) { const [u, v] = toUv(hover.x, hover.y); hoverAns = answer(precs, u, v, wv); } else hoverAns = null;
-      if (reduced) paint();
+      if (hover && precs.length) { const [u, v] = toUv(hover.x, hover.y); hoverAns = answer(precs, u, v, wv); lastHover = hover; lastAns = hoverAns; } else hoverAns = null;
+      if (reduced) { hoverFade = hover ? 1 : 0; paint(); }
     };
-    const onLeave = () => { hover = null; hoverAns = null; if (reduced) paint(); };
+    const onLeave = () => { hover = null; hoverAns = null; if (reduced) { hoverFade = 0; paint(); } };
     const onClick = (e) => {
       if (e.target.closest('a, button')) return;
       const at = pointAt(e);
       if (!at) return;
       const [u, v] = toUv(at.x, at.y);
       record({ u, v, label: truth(u, v) });
-      hover = null; hoverAns = null;
-      if (reduced) { for (let n = 0; n < 60 && easing; n++) drawField(); paint(); }
+      hover = null; hoverAns = null; hoverFade = 0;
+      if (reduced) { settle(); paint(); }
     };
+
+    // the field drawn to rest at once, for the still frames
+    const settle = () => { easing = true; for (let n = 0; n < 80 && easing; n++) drawField(); };
 
     measure();
     startCycle();
-    const ro = new ResizeObserver(() => { measure(); paint(); });
+    const ro = new ResizeObserver(() => { measure(); if (reduced) settle(); paint(); });
     ro.observe(host);
     // the theme toggle flips the page's colours under the canvas: read them again and redraw
     const mo = new MutationObserver(() => {
       ({ rgba, purple } = inks(getComputedStyle(canvas)));
-      easing = true;
-      for (let n = 0; n < 60 && easing; n++) drawField();
+      settle();
       paint();
     });
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -413,7 +417,7 @@ export default function AdaField({ fill = false, interactive = false }) {
       wv = learnedWv(precs.length);
       idx = 20; current = cases[idx]; ans = answer(precs, current.u, current.v, wv); phase = 'answer';
       retarget();
-      for (let n = 0; n < 60 && easing; n++) drawField();
+      settle();
       paint();
       return off;
     }

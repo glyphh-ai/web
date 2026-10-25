@@ -42,7 +42,7 @@ export default function Receipt() {
             <div><dt>Owner</dt><dd>payments</dd></div>
             <div><dt>Runbook</dt><dd>RB-12, back off retries and raise the circuit breaker</dd></div>
           </dl>
-          <p className="rc-note">Layers behind a clearance show only to callers who may see them.</p>
+          <p className="rc-note">A spec can put layers behind a clearance: a status bot gets the fix, an engineer also gets the cause, the owner and the runbook.</p>
         </div>
       </div>
       <div className="rc-foot">

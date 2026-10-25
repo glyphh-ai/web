@@ -46,6 +46,7 @@ export default function Nav() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();   // a page restored mid-scroll gets the bar at once
     window.addEventListener('scroll', onScroll);
     setLoggedIn(document.cookie.includes('yo_logged_in=1'));
     return () => window.removeEventListener('scroll', onScroll);
