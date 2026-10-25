@@ -186,9 +186,9 @@ export async function observe(request, waitUntil, { now = Date.now(), log = cons
   }
   const setCookie = cookie ? null : crypto.randomUUID().replace(/-/g, '');
   if (setCookie) {
-    // the rest of this visit arrives under the cookie: move the session there
-    sessions.delete(key);
-    sessions.set(`c:${setCookie}`, { ...s, cookie: true });
+    // the rest of this visit arrives under the cookie: the same session answers to both keys, so a visitor that
+    // keeps the cookie continues under it and one that drops it (a scraper) still accumulates under its address
+    sessions.set(`c:${setCookie}`, s);
   }
   return {
     blocked: m === 'enforce' && s.verdict === 'block',
