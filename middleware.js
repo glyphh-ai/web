@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { observe, COOKIE_NAME, SESSION_IDLE_MS } from './app/lib/gate.js';
 
 // Where a visitor came from (2026-10-02): the tags on the link they arrived on
 // (utm_*, and the ad platform's click id) are kept for 90 days in a first-party
@@ -44,8 +45,30 @@ function docsHost(request) {
 
 const SITE_HOSTS = ['glyphh.ai', 'www.glyphh.ai'];
 
-export function middleware(request) {
+// The Ada gate (2026-10-25, app/lib/gate.js): every request is kept against its
+// session, and at its 5th, 20th and 60th request Ada Cloud is asked whether the
+// session behaves like a person or a robot. Off without GLYPHH_API_KEY; shadow
+// (log and an x-ada-gate header, enforce nothing) by default; ADA_GATE=enforce
+// answers 403 to a session Ada has decided is a bot, from its next request.
+export async function middleware(request, event) {
   const host = hostOf(request);
+  const gate = await observe(request, (promise) => event?.waitUntil?.(promise));
+  if (gate.blocked) return new NextResponse('Blocked.', { status: 403, headers: { 'x-ada-gate': 'block' } });
+  const response = route(request, host);
+  if (gate.setCookie) {
+    response.cookies.set(COOKIE_NAME, gate.setCookie, {
+      path: '/',
+      maxAge: SESSION_IDLE_MS / 1000,
+      sameSite: 'lax',
+      httpOnly: true,
+      secure: host !== 'localhost',
+    });
+  }
+  if (gate.header) response.headers.set('x-ada-gate', gate.header);
+  return response;
+}
+
+function route(request, host) {
   if (host === DOCS_HOST) return docsHost(request);
   const { pathname } = request.nextUrl;
   // The docs moved to their own host: an old glyphh.ai/docs address follows them.
