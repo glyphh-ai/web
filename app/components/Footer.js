@@ -57,8 +57,8 @@ export default function Footer() {
         <div className="ft-grid">
           <div className="ft-brand">
             <a href="/" className="ft-logo" aria-label="Glyphh">
-              <img className="logo-dark" src="/glyphh-logo-white-outline.png" alt="Glyphh" />
-              <img className="logo-light" src="/glyphh-logo-white.png" alt="" />
+              <img className="logo-dark" src="/glyphh-logo-text-white.png" alt="Glyphh" />
+              <img className="logo-light" src="/glyphh-logo-text-black.png" alt="" />
             </a>
             <p className="ft-tagline">Ada, a classifier that learns from precedent and hands the cases it is unsure of to an LLM.</p>
             <p className="ft-contact">

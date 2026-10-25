@@ -44,7 +44,7 @@ const JSON_LD = {
       '@id': 'https://glyphh.ai/#org',
       name: 'Glyphh AI LLC',
       url: 'https://glyphh.ai',
-      logo: 'https://glyphh.ai/glyphh-logo-white.png',
+      logo: 'https://glyphh.ai/glyphh-logo-text-white.png',
       email: 'support@glyphh.ai',
       sameAs: ['https://github.com/glyphh-ai', 'https://www.youtube.com/@glyphhai'],
     },
