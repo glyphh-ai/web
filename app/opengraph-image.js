@@ -10,7 +10,8 @@ export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 export default async function Image() {
-  const logo = readFileSync(join(process.cwd(), 'public', 'glyphh-logo-white.png'));
+  // The wordmark alone (his order, 2026-10-25): the cat is the mascot, not the logo.
+  const logo = readFileSync(join(process.cwd(), 'public', 'glyphh-logo-text-white.png'));
   const logoSrc = `data:image/png;base64,${logo.toString('base64')}`;
 
   return new ImageResponse(
@@ -65,7 +66,7 @@ export default async function Image() {
           }}
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logoSrc} width={312} height={103} alt="Glyphh" style={{ marginBottom: '54px' }} />
+        <img src={logoSrc} width={289} height={90} alt="Glyphh" style={{ marginBottom: '54px' }} />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', fontSize: '68px', fontWeight: 800, color: '#ffffff', letterSpacing: '-2px', lineHeight: 1.08 }}>
             Decisions from precedent,
