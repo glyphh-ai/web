@@ -31,7 +31,7 @@ The silence after "Go." is on purpose: Ada's badge lands in it. Keep the pause b
 ## Caption
 
 ```
-Same question. Claude alone: 13.3 s. Glyphh Ada: 326 ms.
+Same question. Claude alone: 13.3 s. Glyphh Ada: 0.3 s.
 
 Both had the same 40 past expense decisions. Both said reject.
 Claude alone: 19,752 tokens in, $0.28 at list price.
