@@ -161,8 +161,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* WHY ADA (his order, 2026-10-26): the same question with and without Glyphh, as two real terminals
-            replaying runs measured that day, then the Banking77 numbers for the same thing at scale. */}
+        {/* WHY ADA (his orders, 2026-10-26): the same question with and without Glyphh. Claude alone, recorded in a
+            real terminal, reading every past decision; Ada alone, no language model. Then the Banking77 numbers for
+            the same thing at scale. */}
         <section className="hs reveal" id="why">
           <div className="qs-head">
             <span className="qs-kicker">Why Ada</span>
@@ -176,9 +177,9 @@ export default function Home() {
           </p>
           <WhyTerminals />
           <p className="wt-note">
-            Measured on 26 October 2026: Claude Fable 5.1 in Claude Code with only the Read tool, and Ada Cloud&rsquo;s
-            answer to the same claim. Through the Glyphh connector, with Claude still in the loop, the same question
-            took 13,754 tokens. The saving comes from leaving the model out of the cases Ada is sure of.
+            Left: a screen recording of Claude Code on 26 October 2026, Claude Fable 5.1 with nothing but the file of
+            past decisions, played in real time. Its tokens come from the session’s own transcript, priced at Anthropic’s
+            list price. Right: Ada Cloud’s answer to the same claim that day, with no language model at all.
           </p>
           <h3 className="hs-h3">Most cases never need the language model.</h3>
           <p className="ix-desc hs-lede">

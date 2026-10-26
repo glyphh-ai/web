@@ -9225,8 +9225,10 @@ a.hv-tile:hover .hv-tile-go { color: var(--text); transform: translateX(3px); }
 
 /* Why Ada (2026-10-26): two real terminals side by side, then the numbers at scale. The terminals stay black in
    both themes; ours carries the white rule on top, as in What Glyphh is. */
-.wt { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.wt-pane { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--border); border-radius: var(--radius-panel); overflow: hidden; background: #000; color: #fff; }
+/* The recording is 84 columns, the Ada pane's longest line 66: at 1.25 to 1 both terminals set their type at about
+   11px. Each pane spans three rows of a subgrid, so the bars, the screens and the meters line up across the two. */
+.wt { display: grid; grid-template-columns: 1.25fr 1fr; grid-template-rows: auto auto auto auto; gap: 0 1rem; }
+.wt-pane { grid-row: span 3; display: grid; grid-template-rows: subgrid; row-gap: 0; min-width: 0; border: 1px solid var(--border); border-radius: var(--radius-panel); overflow: hidden; background: #000; color: #fff; }
 .wt-ours { box-shadow: inset 0 2px 0 #fff; }
 [data-theme="light"] .wt-pane { border-color: #000; }
 .wt-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 1rem; border-bottom: 1px solid #2a2a2a; font-family: var(--font-mono); font-size: 0.72rem; color: #c8c8c8; }
@@ -9235,20 +9237,22 @@ a.hv-tile:hover .hv-tile-go { color: var(--text); transform: translateX(3px); }
 .wt-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .wt-time { font-variant-numeric: tabular-nums; color: #fff; }
 .wt-screen {
-  flex: 1; margin: 0; padding: 1.1rem 1.1rem 1.25rem; min-height: 22rem;
-  font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6; color: #eaeaea;
+  margin: 0; padding: 1rem 1rem 1.1rem;
+  font-family: var(--font-mono); font-size: 0.7rem; line-height: 1.55; color: #eaeaea;
   white-space: pre-wrap; word-break: break-word; overflow: hidden;
 }
 .wt-code { white-space: pre; word-break: normal; overflow-x: auto; scrollbar-width: thin; }
+/* The recording, edge to edge in its pane: black on black, so the frame is the pane's own. */
+.wt-video { display: block; width: 100%; height: auto; aspect-ratio: 1120 / 1062; object-fit: contain; object-position: top; background: #000; }
 .wt-dim { color: #9a9a9a; }
 .wt-hi { color: #fff; }
 .wt-meter { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #2a2a2a; }
-.wt-meter > div { display: flex; flex-direction: column; gap: 0.25rem; padding: 0.8rem 1rem 0.9rem; border-right: 1px solid #2a2a2a; min-width: 0; }
+.wt-meter > div { display: flex; flex-direction: column; gap: 0.25rem; padding: 0.8rem 0.85rem 0.9rem; border-right: 1px solid #2a2a2a; min-width: 0; }
 .wt-meter > div:last-child { border-right: 0; }
-.wt-meter b { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; color: #fff; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.wt-meter b { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; color: #fff; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .wt-meter span { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: #9a9a9a; }
 .wt-again {
-  grid-column: 1 / -1; justify-self: start; margin-top: 0.25rem; padding: 0; border: 0; background: none; cursor: pointer;
+  grid-column: 1 / -1; justify-self: start; margin-top: 1.25rem; padding: 0; border: 0; background: none; cursor: pointer;
   font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-3);
 }
 .wt-again:hover { color: var(--text); }
@@ -9256,8 +9260,10 @@ a.hv-tile:hover .hv-tile-go { color: var(--text); transform: translateX(3px); }
 .wt-note { margin: 1rem 0 0; max-width: 72ch; font-family: var(--font-mono); font-size: 0.74rem; line-height: 1.6; color: var(--text-3); }
 .hs-h3 { margin: 3.5rem 0 0.75rem; font-size: clamp(1.4rem, 2.4vw, 1.8rem); line-height: 1.15; letter-spacing: -0.03em; text-wrap: balance; }
 @media (max-width: 900px) {
-  .wt { grid-template-columns: 1fr; }
-  .wt-screen { min-height: 0; font-size: 0.74rem; }
+  .wt { grid-template-columns: 1fr; grid-template-rows: none; gap: 1rem; }
+  .wt-pane { grid-row: auto; display: flex; flex-direction: column; }
+  .wt-again { margin-top: 0.25rem; }
+  .wt-screen { min-height: 0; font-size: 0.7rem; }
   .wt-meter { grid-template-columns: 1fr 1fr; }
   .wt-meter > div:nth-child(2n) { border-right: 0; }
   .wt-meter > div:nth-child(-n + 2) { border-bottom: 1px solid #2a2a2a; }
