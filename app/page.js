@@ -9,8 +9,8 @@ import { HOME_TITLE, HOME_DESCRIPTION } from './lib/home-meta';
 
 // THE HOME PAGE is Ada (his order, 2026-10-21). The clean-up (his order,
 // 2026-10-25): the hero's words stay word for word and the field becomes the
-// whole hero; the value proposition is the first section, with the published
-// numbers; no code anywhere on the page; three sections, each fact once.
+// whole hero; no code anywhere on the page; each fact once. Section 2 says
+// what Glyphh is before any proof (his order, 2026-10-26); the numbers follow.
 // Every number here is the launch post's and the use-case page's
 // (benchmarks/banking77, benchmarks/german-credit in glyphh-ai/glyphh).
 
@@ -31,18 +31,41 @@ const STATS = [
   { n: '54 to 170 ms', k: 'Time to answer', c: 'In Ada Cloud, up to a million precedents.', href: '/blog/introducing-ada' },
 ];
 
-const REASONS = [
+// SECTION 2, WHAT GLYPHH IS (his order, 2026-10-26: "explain what glyphh is and
+// why it matters in ai ... what outcome users want from classifiers and what
+// approach we took that is different"), in the shape typesafe.ai uses: the
+// outcome, the status quo and its cost, the approach, the contrast in one line,
+// then three outcomes. The words are the launch post's (blog/introducing-ada).
+const FRAME = [
+  {
+    k: 'What you want',
+    body: 'A decision your software can act on: the right call where a mistake costs money, a confidence you can set a bar on, the same answer every time, and a reason you can show.',
+  },
+  {
+    k: 'What you get today',
+    body: 'A frontier model reasons from scratch on every call. It pays for every token, can answer differently on a rerun, and answers anyway when it doesn’t know. Training your own means a dataset, a pipeline and a retrain for every change.',
+  },
+  {
+    k: 'The approach we took',
+    body: 'Precedent. Ada answers a new case from the decisions you have already made, the way case law does. It runs on hyperdimensional computing, not a transformer: no training run, no language model in the path, and a decision counts the moment it’s recorded.',
+  },
+];
+
+const PILLARS = [
+  {
+    title: 'Typed decisions',
+    head: 'An outcome, not a paragraph',
+    body: 'Ada answers with one of the outcomes your spec allows and a calibrated probability for each. Your software acts on it with nothing to parse.',
+  },
+  {
+    title: 'Calibrated confidence',
+    head: 'It knows when to ask',
+    body: 'Set the bar. Above it your software acts; below it the case goes to a person or a model, and their answer becomes the next precedent.',
+  },
   {
     title: 'Same answer twice',
-    body: 'There is no language model in the path, so the same case gets the same answer every time. On German Credit’s 200 held-out loans, Ada’s cost to the bank was 100 against 110 and 114 for Claude.',
-  },
-  {
-    title: 'Every decision can be audited',
-    body: 'Each answer carries a calibrated probability, how many precedents voted and which ones. An auditor can open the cases a decision stood on.',
-  },
-  {
-    title: 'It asks when it is unsure',
-    body: 'Below the bar you set, the answer is ask, and the case goes to a model or a person. Their answer, once recorded, is one more precedent.',
+    head: 'As reliable as code',
+    body: 'No language model in the path, so the same case gets the same answer, in milliseconds. On 200 loans, a rerun changed none of Ada’s answers; two runs of the same LLM disagreed on 12.',
   },
 ];
 
@@ -106,9 +129,37 @@ export default function Home() {
       </section>
 
       <div className="site-frame">
+        <section className="hs reveal" id="what">
+          <div className="qs-head">
+            <span className="qs-kicker">What Glyphh is</span>
+            <a href="/blog/introducing-ada" className="qs-more">The launch post &rarr;</a>
+          </div>
+          <h2 className="ix-h2 hs-h2">Most decisions your business makes aren’t new.</h2>
+          <p className="ix-desc hs-lede">
+            Approve the loan or refuse it. Route the ticket to the team that owns it. Escalate the alert or close it.
+            Each one has been made hundreds of times, and the outcome is on record. Glyphh Ada decides the next one
+            from that record.
+          </p>
+          <div className="hv-panel wg-panel">
+            {FRAME.map((f, i) => (
+              <div key={f.k} className={`wg-cell${i === FRAME.length - 1 ? ' wg-ours' : ''}`}>
+                <span className="wg-k">{f.k}</span>
+                <p className="wg-body">{f.body}</p>
+              </div>
+            ))}
+          </div>
+          <p className="wg-line">
+            <span className="wg-them">A language model is built to continue text.</span>{' '}
+            <span className="wg-us">Ada is built to repeat a decision the way your own history made it.</span>
+          </p>
+          <div className="hv-grid hv-grid-3">
+            {PILLARS.map((p, i) => <Tile key={p.title} title={p.title} head={p.head} body={p.body} i={i} />)}
+          </div>
+        </section>
+
         <section className="hs reveal" id="why">
           <div className="qs-head">
-            <span className="qs-kicker">Why Ada</span>
+            <span className="qs-kicker">The results</span>
             <a href={ROUTING} className="qs-more">The experiment &rarr;</a>
           </div>
           <h2 className="ix-h2 hs-h2">Most cases never need the language model.</h2>
@@ -127,9 +178,6 @@ export default function Home() {
               ))}
             </div>
             <p className="st-foot">Banking77, 200 held-out messages, 77 intents. The experiment and every run are public.</p>
-          </div>
-          <div className="hv-grid hv-grid-3">
-            {REASONS.map((r, i) => <Tile key={r.title} title={r.title} body={r.body} i={i} />)}
           </div>
         </section>
 

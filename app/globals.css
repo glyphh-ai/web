@@ -9199,6 +9199,30 @@ a.hv-tile:hover .hv-tile-go { color: var(--text); transform: translateX(3px); }
   .mh-fill .mh-actions .os-cta { justify-content: center; }
 }
 
+/* What Glyphh is (2026-10-26): the outcome, the status quo, the approach, then
+   the contrast in one line, in the shape typesafe.ai uses. Ours is the bright cell. */
+.wg-panel { display: grid; grid-template-columns: repeat(3, 1fr); }
+.wg-cell { display: flex; flex-direction: column; gap: 0.9rem; padding: 1.75rem 1.6rem 1.9rem; border-right: 1px solid var(--border); }
+.wg-cell:last-child { border-right: 0; }
+.wg-k { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); }
+.wg-body { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--muted); }
+.wg-ours { background: var(--surface-2); box-shadow: inset 0 2px 0 var(--text); }
+.wg-ours .wg-k { color: var(--text); }
+.wg-ours .wg-body { color: var(--text-2); }
+.wg-line {
+  margin: 3.5rem 0 3rem; max-width: 30ch;
+  font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 600;
+  line-height: 1.15; letter-spacing: -0.03em; text-wrap: balance;
+}
+.wg-them { color: var(--text-4); }
+.wg-us { color: var(--text); }
+@media (max-width: 860px) {
+  .wg-panel { grid-template-columns: 1fr; }
+  .wg-cell { border-right: 0; border-bottom: 1px solid var(--border); }
+  .wg-cell:last-child { border-bottom: 0; }
+  .wg-line { margin: 2.5rem 0 2rem; }
+}
+
 /* Why Ada: the numbers in one row */
 .st-panel { margin-bottom: 1rem; }
 .st-row { display: grid; grid-template-columns: repeat(4, 1fr); }
