@@ -9223,11 +9223,12 @@ a.hv-tile:hover .hv-tile-go { color: var(--text); transform: translateX(3px); }
   .wg-line { margin: 2.5rem 0 2rem; }
 }
 
-/* Why Ada (2026-10-26): two real terminals side by side, then the numbers at scale. The terminals stay black in
-   both themes; ours carries the white rule on top, as in What Glyphh is. */
-/* The recording is 84 columns, the Ada pane's longest line 66: at 1.25 to 1 both terminals set their type at about
-   11px. Each pane spans three rows of a subgrid, so the bars, the screens and the meters line up across the two. */
-.wt { display: grid; grid-template-columns: 1.25fr 1fr; grid-template-rows: auto auto auto auto; gap: 0 1rem; }
+/* Why Ada (2026-10-26): two terminal recordings side by side, then the numbers at scale. The terminals stay black
+   in both themes; ours carries the white rule on top, as in What Glyphh is. The recordings are 84 and 67 columns
+   by 32 rows in the same type, 1120 and 902 pixels wide at the same height, so the columns take those widths and
+   both set their type at the same size. Each pane spans three rows of a subgrid, so the bars, the screens and the
+   meters line up across the two. */
+.wt { display: grid; grid-template-columns: 1120fr 902fr; grid-template-rows: auto auto auto auto; gap: 0 1rem; }
 .wt-pane { grid-row: span 3; display: grid; grid-template-rows: subgrid; row-gap: 0; min-width: 0; border: 1px solid var(--border); border-radius: var(--radius-panel); overflow: hidden; background: #000; color: #fff; }
 .wt-ours { box-shadow: inset 0 2px 0 #fff; }
 [data-theme="light"] .wt-pane { border-color: #000; }
@@ -9235,17 +9236,12 @@ a.hv-tile:hover .hv-tile-go { color: var(--text); transform: translateX(3px); }
 .wt-dots { display: inline-flex; gap: 6px; }
 .wt-dots i { display: block; width: 9px; height: 9px; border-radius: 50%; background: #3a3a3a; }
 .wt-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* "without Glyphh" / "with Glyphh" lead the title, so a narrow screen cuts the rest, never the comparison. */
+.wt-side { color: #fff; }
 .wt-time { font-variant-numeric: tabular-nums; color: #fff; }
-.wt-screen {
-  margin: 0; padding: 1rem 1rem 1.1rem;
-  font-family: var(--font-mono); font-size: 0.7rem; line-height: 1.55; color: #eaeaea;
-  white-space: pre-wrap; word-break: break-word; overflow: hidden;
-}
-.wt-code { white-space: pre; word-break: normal; overflow-x: auto; scrollbar-width: thin; }
-/* The recording, edge to edge in its pane: black on black, so the frame is the pane's own. */
-.wt-video { display: block; width: 100%; height: auto; aspect-ratio: 1120 / 1062; object-fit: contain; object-position: top; background: #000; }
-.wt-dim { color: #9a9a9a; }
-.wt-hi { color: #fff; }
+/* A recording, edge to edge in its pane: black on black, so the frame is the pane's own. Its width and height
+   attributes give it its shape. */
+.wt-video { display: block; width: 100%; height: auto; object-fit: contain; object-position: top; background: #000; }
 .wt-meter { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #2a2a2a; }
 .wt-meter > div { display: flex; flex-direction: column; gap: 0.25rem; padding: 0.8rem 0.85rem 0.9rem; border-right: 1px solid #2a2a2a; min-width: 0; }
 .wt-meter > div:last-child { border-right: 0; }
@@ -9259,14 +9255,16 @@ a.hv-tile:hover .hv-tile-go { color: var(--text); transform: translateX(3px); }
 .wt-again:disabled { opacity: 0.4; cursor: default; }
 .wt-note { margin: 1rem 0 0; max-width: 72ch; font-family: var(--font-mono); font-size: 0.74rem; line-height: 1.6; color: var(--text-3); }
 .hs-h3 { margin: 3.5rem 0 0.75rem; font-size: clamp(1.4rem, 2.4vw, 1.8rem); line-height: 1.15; letter-spacing: -0.03em; text-wrap: balance; }
+/* Below 1024px the four meter cells are too narrow for "$0.0001": two by two, side by side or stacked. */
+@media (max-width: 1023px) {
+  .wt-meter { grid-template-columns: 1fr 1fr; }
+  .wt-meter > div:nth-child(2n) { border-right: 0; }
+  .wt-meter > div:nth-child(-n + 2) { border-bottom: 1px solid #2a2a2a; }
+}
 @media (max-width: 900px) {
   .wt { grid-template-columns: 1fr; grid-template-rows: none; gap: 1rem; }
   .wt-pane { grid-row: auto; display: flex; flex-direction: column; }
   .wt-again { margin-top: 0.25rem; }
-  .wt-screen { min-height: 0; font-size: 0.7rem; }
-  .wt-meter { grid-template-columns: 1fr 1fr; }
-  .wt-meter > div:nth-child(2n) { border-right: 0; }
-  .wt-meter > div:nth-child(-n + 2) { border-bottom: 1px solid #2a2a2a; }
 }
 
 /* The question (2026-10-26): a question as Ada holds it, beside the other questions with an experiment. */

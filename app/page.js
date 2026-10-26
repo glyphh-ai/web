@@ -161,9 +161,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* WHY ADA (his orders, 2026-10-26): the same question with and without Glyphh. Claude alone, recorded in a
-            real terminal, reading every past decision; Ada alone, no language model. Then the Banking77 numbers for
-            the same thing at scale. */}
+        {/* WHY ADA (his orders, 2026-10-26): the same question with and without Glyphh, both recorded in real
+            terminals. Claude alone, reading every past decision; Ada alone, no language model. Then the Banking77
+            numbers for the same thing at scale. */}
         <section className="hs reveal" id="why">
           <div className="qs-head">
             <span className="qs-kicker">Why Ada</span>
@@ -171,15 +171,17 @@ export default function Home() {
           </div>
           <h2 className="ix-h2 hs-h2">The same question, with and without Glyphh.</h2>
           <p className="ix-desc hs-lede">
-            An expense claim: business class to London, $2,400, over the limit and not pre-approved. On the left,
-            Claude reads the 40 past decisions and answers. On the right, your software asks Ada, which learned from
-            the same 40.
+            An expense claim: business class to London, $2,400, over the limit and not pre-approved. Without Glyphh,
+            Claude reads the 40 past decisions and answers. With Glyphh, your software asks Ada, which learned from the
+            same 40.
           </p>
           <WhyTerminals />
           <p className="wt-note">
-            Left: a screen recording of Claude Code on 26 October 2026, Claude Fable 5.1 with nothing but the file of
-            past decisions, played in real time. Its tokens come from the session’s own transcript, priced at Anthropic’s
-            list price. Right: Ada Cloud’s answer to the same claim that day, with no language model at all.
+            Both are terminal recordings from one laptop on 26 October 2026. They play in real time, lined up so the
+            two questions go in together, and the Claude one ends by scrolling up to the start of its answer. Claude
+            Code ran Claude Fable 5.1 with nothing but the file of past decisions. Its tokens come from the session’s
+            own transcript, priced at Anthropic’s list price. Your code asked Ada Cloud through the Glyphh SDK, with no
+            language model. The 326 ms is the whole round trip from a fresh process, connection setup included.
           </p>
           <h3 className="hs-h3">Most cases never need the language model.</h3>
           <p className="ix-desc hs-lede">

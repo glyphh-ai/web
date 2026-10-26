@@ -7,133 +7,149 @@ import { useEffect, useRef, useState } from 'react';
  * actual Claude cli terminals side by side ... One using Claude without ada at all then using ada. Claude would have
  * to load allllllll the data. Ada can answer without Claude in ms with no LLM").
  *
- *  - Left: a screen recording, not a replay. Claude Code v2.1.304 with Claude Fable 5.1, run in a folder holding
- *    only history.json (the 40 past expenses), with the Read tool alone, no connectors and no Glyphh, recorded from
- *    a real terminal (84 x 32) on 2026-10-26 and rendered frame by frame from the recording. The video starts a
- *    second before the question is typed and runs in real time to the answer; at the end the view scrolls up to the
- *    answer's first line, as a reader would. Nothing is sped up, cut or reordered inside the run.
- *    Its usage, from the session's own transcript (two API calls):
+ * Both panes are terminal recordings, made on 2026-10-26 on the same laptop: a pty recorder captured each program's
+ * output with its timing (asciicast), and each was drawn frame by frame in xterm.js with the site's JetBrains Mono.
+ * Neither is a replay; nothing inside either run is sped up, cut or reordered. One character in the Claude capture
+ * (a '─' in a rule, split across two reads by the recorder at the moment of Enter) was decoded as three replacement
+ * characters, which threw Claude Code's redraws off by a row; its bytes were joined back before drawing.
+ *
+ *  - Left (84 x 32): Claude Code v2.1.304 with Claude Fable 5.1, in a folder holding only history.json (the 40 past
+ *    expenses), the Read tool alone, no connectors and no Glyphh. The clip starts a second before the question is
+ *    typed and runs to the answer in real time; then the view scrolls up to the answer's first line and holds.
+ *    Usage, from the session's own transcript, for the two calls that produced the answer:
  *      call 1: 2 input + 7,691 cache-write (1 h) tokens in, 90 out
  *      call 2: 32 input + 4,336 cache-write (1 h) + 7,691 cache-read tokens in, 588 out
  *      total 19,752 in, 678 out; at Claude Fable 5.1 list price ($10 in, $20 1 h cache write, $0.25 cache read,
- *      $50 out, per million) $0.2767. The turn took 13.3 s (13:10:17.861Z to 13:10:31.178Z).
- *  - Right: Ada Cloud's answer to the same claim on the model launch-demo-expenses (the same 40 expenses), asked the
- *    same day and asked again before this was published, with the same result. No language model is called. Ada
- *    Cloud answers in 54 to 170 ms (the launch post's figure); this call's own time was not recorded, so none is
- *    claimed. Its question goes in at the moment Claude's does.
+ *      $50 out, per million) $0.2767. The turn took 13.3 s (13:10:17.861Z to 13:10:31.178Z). Claude Code also made
+ *      a session-title call (Claude Haiku, $0.0002) and, after the answer, a prompt-suggestion call ($0.021); neither
+ *      is part of answering, so neither is counted.
+ *  - Right (67 x 32): bash, then node 24 with the public SDK (@glyphh-ai/glyphh 3.3.0) asking Ada Cloud to decide the
+ *    same claim on the model launch-demo-expenses (the same 40 expenses). No language model anywhere. The call's
+ *    own clock printed '326 ms': the whole round trip from the laptop, a fresh process's first call, so connection
+ *    setup (DNS, TLS) is included. The clip starts with the setup already typed, so that its Enter on the call
+ *    lands at the moment Claude's question goes in.
  *
- * The meters follow the video's clock. Reduced motion, no script, or a blocked autoplay: both runs shown finished.
+ * The left video is the clock: the meters and the right video follow it. Autoplay starts when the left video is
+ * half in view (or half a screen of it); reduced motion skips autoplay but 'Replay both' still plays. With no script, a blocked autoplay or a
+ * failed load: both posters (each run's last frame) and the meters finished.
  */
 
-const VIDEO = '/media/why-claude-code.mp4';
-const POSTER = '/media/why-claude-code-poster.jpg';
+const LEFT = { src: '/media/why-claude-code.mp4', poster: '/media/why-claude-code-poster.jpg', w: 1120, h: 1062 };
+const RIGHT = { src: '/media/why-ada.mp4', poster: '/media/why-ada-poster.jpg', w: 902, h: 1062 };
 
-// The video's clock, in seconds (the recording's clock less 30.0 s).
-const TYPE_FROM = 1.04;     // the question starts to be typed
-const TYPE_TO = 4.7;
-const SUBMIT = 7.01;        // Enter: call 1 goes out
-const CALL2 = 9.99;         // the file is read; call 2 goes out with it
-const DONE = 20.28;         // the answer is on screen
-const RUN = 13.3;           // the turn, from the transcript
-const END = 27.13;          // the video's length
+// The clock, in seconds of the left video (the Claude recording's clock less 30.0 s).
+const SUBMIT = 7.01;        // Enter on both sides: Claude's call 1 goes out, and so does Ada's decide
+const CALL2 = 9.99;         // Claude has read the file; call 2 goes out with it
+const DONE = 20.28;         // Claude's answer is on screen
+const RUN = 13.3;           // Claude's turn, from the transcript
+const ADA_MS = 326;         // Ada's call, as its own clock printed it
+const ADA_AT = SUBMIT + 0.329;   // Ada's answer on screen (19.449 s less 19.120 s in its recording)
+const END = 27.13;          // the left video's length
 
-const CALL1 = { tin: 7693, tout: 90, cost: 0.15384 + 0.0045 };
+const CALL1_IN = 7693, CALL1_IN_COST = 0.00002 + 0.15382;
+const CALL1_OUT = 90, CALL1_OUT_COST = 0.0045;
 const CALL2_IN = 12059, CALL2_IN_COST = 0.00032 + 0.08672 + 0.00192;
 const TOTAL = { tin: 19752, tout: 678, cost: 0.2767 };
-
-const CALL = [
-  "> const { Ada } = await import('@glyphh-ai/glyphh')",
-  "> await new Ada().decide('launch-demo-expenses', {",
-  '    expense: { claim: {',
-  "      department: 'marketing', category: 'airfare',",
-  "      amount: 2400, receipt: 'yes',",
-  "      policy: 'over limit, not pre-approved',",
-  "      description: 'Business class to London for a conference',",
-  '    } } })',
-].join('\n');
-
-const ADA_ANSWER = [
-  '{',
-  "  outcome: 'reject',",
-  '  probabilities: { reject: 0.7896, approve: 0.2104 },',
-  '  ask: false,',
-  '  receipts: [',
-  "    { id: 'e8a049c108fb', sim: 0.7808, outcome: 'reject' },",
-  "    { id: '0fe7cd2add09', sim: 0.5779, outcome: 'reject' },",
-  "    { id: '83a145a23772', sim: 0.5696, outcome: 'reject' },",
-  '    … 12 more',
-  '  ]',
-  '}',
-  '// e8a049c108fb: E-2056, business class to New York, rejected',
-].join('\n');
-
-const ADA_AT = SUBMIT + 0.12;
 
 const clamp = (u) => Math.max(0, Math.min(1, u));
 const fmt = (n) => Math.round(n).toLocaleString('en-US');
 
 function claudeAt(t) {
   if (t < SUBMIT) return { tin: 0, tout: 0, cost: 0 };
-  if (t < CALL2) return { tin: CALL1.tin, tout: 0, cost: CALL1.cost - 0.0045 };
-  if (t < DONE) return { tin: CALL1.tin + CALL2_IN, tout: CALL1.tout, cost: CALL1.cost + CALL2_IN_COST };
+  if (t < CALL2) return { tin: CALL1_IN, tout: 0, cost: CALL1_IN_COST };
+  if (t < DONE) return { tin: CALL1_IN + CALL2_IN, tout: CALL1_OUT, cost: CALL1_IN_COST + CALL1_OUT_COST + CALL2_IN_COST };
   return TOTAL;
 }
 
 export default function WhyTerminals() {
-  const ref = useRef(null);
-  const video = useRef(null);
-  const [t, setT] = useState(END);       // the server, reduced motion and a blocked autoplay show both runs finished
+  const left = useRef(null);
+  const right = useRef(null);
+  const raf = useRef(0);
+  const stopped = useRef(false);
+  const [t, setT] = useState(END);       // the server and every fallback show both runs finished
   const [playing, setPlaying] = useState(false);
 
-  const play = () => {
-    const v = video.current;
-    if (!v) return;
-    v.currentTime = 0;
-    v.play().then(() => setPlaying(true)).catch(() => { setPlaying(false); setT(END); });
+  // Back to the finished state: the meters at their ends, and each video showing its poster again.
+  const finish = () => {
+    stopped.current = true;
+    cancelAnimationFrame(raf.current);
+    const a = left.current, b = right.current;
+    // play() hides the poster even when it fails, so reload whichever has not finished to bring its poster back.
+    for (const v of [a, b]) if (v) { v.pause(); if (!v.ended) v.load(); }
+    setPlaying(false);
+    setT(END);
+  };
+
+  const playBoth = (fromStart) => {
+    const a = left.current, b = right.current;
+    if (!a || !b) return;
+    stopped.current = false;
+    if (fromStart) { a.currentTime = 0; b.currentTime = 0; }
+    Promise.all([a.play(), b.play()]).then(() => setPlaying(true)).catch(finish);
   };
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
-    const v = video.current;
-    let raf = 0, seen = false;
+    const a = left.current, b = right.current;
     const tick = () => {
-      setT(v.ended ? END : v.currentTime);
-      if (!v.paused && !v.ended) raf = requestAnimationFrame(tick);
+      if (stopped.current) return;
+      // The right video follows the left one's clock so the two Enters stay together; not while the left one is
+      // waiting for data, or the right one would be pulled back over and over.
+      if (a.readyState >= 3 && !b.ended && b.duration && a.currentTime < b.duration
+        && Math.abs(b.currentTime - a.currentTime) > 0.25) b.currentTime = a.currentTime;
+      setT(a.ended ? END : a.currentTime);
+      if (!a.paused && !a.ended) raf.current = requestAnimationFrame(tick);
     };
-    const onPlay = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); };
-    const onEnd = () => { setT(END); setPlaying(false); };
-    v.addEventListener('play', onPlay);
-    v.addEventListener('ended', onEnd);
-    const io = new IntersectionObserver(([en]) => {
-      if (en.isIntersecting && !seen) { seen = true; play(); }
-    }, { threshold: 0.4 });
-    io.observe(ref.current);
-    return () => { cancelAnimationFrame(raf); io.disconnect(); v.removeEventListener('play', onPlay); v.removeEventListener('ended', onEnd); };
+    const onPlay = () => { cancelAnimationFrame(raf.current); raf.current = requestAnimationFrame(tick); };
+    const onEnd = () => { cancelAnimationFrame(raf.current); setT(END); setPlaying(false); };
+    // Paused before the end (the browser or the system stopped it): stop the other one too, and free the button.
+    const onPause = () => { if (!a.ended) { b.pause(); setPlaying(false); } };
+    a.addEventListener('play', onPlay);
+    a.addEventListener('ended', onEnd);
+    a.addEventListener('pause', onPause);
+
+    // Start when half of the left video is in view, or half the screen's height of it where it is taller than the
+    // screen (stacked on a phone held sideways).
+    let io = null;
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      io = new IntersectionObserver(([en]) => {
+        const room = Math.min(en.boundingClientRect.height, en.rootBounds ? en.rootBounds.height : Infinity);
+        if (en.isIntersecting && en.intersectionRect.height >= room * 0.5) { io.disconnect(); playBoth(false); }
+      }, { threshold: Array.from({ length: 21 }, (_, i) => i / 20) });
+      io.observe(a);
+    }
+    return () => {
+      cancelAnimationFrame(raf.current);
+      if (io) io.disconnect();
+      a.removeEventListener('play', onPlay);
+      a.removeEventListener('ended', onEnd);
+      a.removeEventListener('pause', onPause);
+    };
   }, []);
 
   const c = claudeAt(t);
   const elapsed = clamp((t - SUBMIT) / RUN) * RUN;
-  const typedR = CALL.slice(0, Math.floor(CALL.length * clamp((t - TYPE_FROM) / (TYPE_TO - TYPE_FROM))));
+  const adaDone = t >= ADA_AT;
+  const adaMs = adaDone ? ADA_MS : Math.round(clamp((t - SUBMIT) / (ADA_AT - SUBMIT)) * ADA_MS);
 
   return (
-    <div className="wt" ref={ref}>
+    <div className="wt">
       <div className="wt-pane">
         <div className="wt-bar">
           <span className="wt-dots" aria-hidden="true"><i /><i /><i /></span>
-          <span className="wt-title">claude · Claude Fable 5.1 · without Glyphh</span>
+          <span className="wt-title"><span className="wt-side">without Glyphh</span> · claude · Claude Fable 5.1</span>
           <span className="wt-time">{elapsed.toFixed(1)} s</span>
         </div>
         <video
-          ref={video}
+          ref={left}
           className="wt-video"
-          src={VIDEO}
-          poster={POSTER}
+          src={LEFT.src}
+          poster={LEFT.poster}
+          width={LEFT.w}
+          height={LEFT.h}
           muted
           playsInline
           preload="metadata"
-          width={1120}
-          height={1062}
-          aria-label="Screen recording: Claude Code reads history.json, the 40 past expenses, and after 13 seconds recommends rejecting the claim"
+          aria-label="Terminal recording: Claude Code reads history.json, the 40 past expenses, and after 13 seconds recommends rejecting the claim"
         />
         <div className="wt-meter">
           <div><b>{fmt(c.tin)}</b><span>tokens in</span></div>
@@ -146,24 +162,31 @@ export default function WhyTerminals() {
       <div className="wt-pane wt-ours">
         <div className="wt-bar">
           <span className="wt-dots" aria-hidden="true"><i /><i /><i /></span>
-          <span className="wt-title">node · your app · with Glyphh</span>
-          <span className="wt-time">{t >= ADA_AT ? 'answered' : ''}</span>
+          <span className="wt-title"><span className="wt-side">with Glyphh</span> · node · your code</span>
+          <span className="wt-time">{adaMs} ms</span>
         </div>
-        <pre className="wt-screen wt-code" aria-label="Your software asks Ada the same question">
-          <span className="wt-dim">$ node</span>{'\n'}
-          {typedR}
-          {t >= ADA_AT ? <>{'\n'}<span className="wt-hi">{ADA_ANSWER}</span></> : null}
-        </pre>
+        <video
+          ref={right}
+          className="wt-video"
+          src={RIGHT.src}
+          poster={RIGHT.poster}
+          width={RIGHT.w}
+          height={RIGHT.h}
+          muted
+          playsInline
+          preload="metadata"
+          aria-label="Terminal recording: Node asks Ada Cloud the same claim through the Glyphh SDK and gets reject, 79% sure, in 326 milliseconds"
+        />
         <div className="wt-meter">
           <div><b>0</b><span>LLM tokens</span></div>
-          <div><b>1</b><span>Ada read</span></div>
-          <div><b>$0.0001</b><span>at most, past your plan</span></div>
-          <div><b>54–170 ms</b><span>in Ada Cloud</span></div>
+          <div><b>{adaDone ? 1 : 0}</b><span>Ada read</span></div>
+          <div><b>{adaDone ? '$0.0001' : '$0'}</b><span>at most, past your plan</span></div>
+          <div><b>{adaMs} ms</b><span>to answer</span></div>
         </div>
       </div>
 
-      <button type="button" className="wt-again" onClick={play} disabled={playing}>
-        Run both again ↻
+      <button type="button" className="wt-again" onClick={() => playBoth(true)} disabled={playing}>
+        Replay both ↻
       </button>
     </div>
   );
