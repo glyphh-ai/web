@@ -9223,6 +9223,72 @@ a.hv-tile:hover .hv-tile-go { color: var(--text); transform: translateX(3px); }
   .wg-line { margin: 2.5rem 0 2rem; }
 }
 
+/* Why Ada (2026-10-26): two real terminals side by side, then the numbers at scale. The terminals stay black in
+   both themes; ours carries the white rule on top, as in What Glyphh is. */
+.wt { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.wt-pane { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--border); border-radius: var(--radius-panel); overflow: hidden; background: #000; color: #fff; }
+.wt-ours { box-shadow: inset 0 2px 0 #fff; }
+[data-theme="light"] .wt-pane { border-color: #000; }
+.wt-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 1rem; border-bottom: 1px solid #2a2a2a; font-family: var(--font-mono); font-size: 0.72rem; color: #c8c8c8; }
+.wt-dots { display: inline-flex; gap: 6px; }
+.wt-dots i { display: block; width: 9px; height: 9px; border-radius: 50%; background: #3a3a3a; }
+.wt-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wt-time { font-variant-numeric: tabular-nums; color: #fff; }
+.wt-screen {
+  flex: 1; margin: 0; padding: 1.1rem 1.1rem 1.25rem; min-height: 22rem;
+  font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6; color: #eaeaea;
+  white-space: pre-wrap; word-break: break-word; overflow: hidden;
+}
+.wt-code { white-space: pre; word-break: normal; overflow-x: auto; scrollbar-width: thin; }
+.wt-dim { color: #9a9a9a; }
+.wt-hi { color: #fff; }
+.wt-meter { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #2a2a2a; }
+.wt-meter > div { display: flex; flex-direction: column; gap: 0.25rem; padding: 0.8rem 1rem 0.9rem; border-right: 1px solid #2a2a2a; min-width: 0; }
+.wt-meter > div:last-child { border-right: 0; }
+.wt-meter b { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; color: #fff; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.wt-meter span { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: #9a9a9a; }
+.wt-again {
+  grid-column: 1 / -1; justify-self: start; margin-top: 0.25rem; padding: 0; border: 0; background: none; cursor: pointer;
+  font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-3);
+}
+.wt-again:hover { color: var(--text); }
+.wt-again:disabled { opacity: 0.4; cursor: default; }
+.wt-note { margin: 1rem 0 0; max-width: 72ch; font-family: var(--font-mono); font-size: 0.74rem; line-height: 1.6; color: var(--text-3); }
+.hs-h3 { margin: 3.5rem 0 0.75rem; font-size: clamp(1.4rem, 2.4vw, 1.8rem); line-height: 1.15; letter-spacing: -0.03em; text-wrap: balance; }
+@media (max-width: 900px) {
+  .wt { grid-template-columns: 1fr; }
+  .wt-screen { min-height: 0; font-size: 0.74rem; }
+  .wt-meter { grid-template-columns: 1fr 1fr; }
+  .wt-meter > div:nth-child(2n) { border-right: 0; }
+  .wt-meter > div:nth-child(-n + 2) { border-bottom: 1px solid #2a2a2a; }
+}
+
+/* The question (2026-10-26): a question as Ada holds it, beside the other questions with an experiment. */
+.qn { display: grid; grid-template-columns: 1.15fr 1fr; gap: 1rem; align-items: stretch; }
+.qn-card { padding: 1.75rem 1.75rem 1.5rem; box-shadow: inset 0 2px 0 var(--text); }
+.qn-k { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); }
+.qn-q { margin: 0.75rem 0 1.25rem; font-family: var(--font-display); font-size: clamp(1.5rem, 2.4vw, 1.9rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; color: var(--text); }
+.qn-rows { margin: 0; display: flex; flex-direction: column; }
+.qn-rows > div { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; align-items: baseline; padding: 0.75rem 0; border-top: 1px solid var(--border); }
+.qn-rows dt { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.04em; color: var(--text-3); }
+.qn-rows dd { margin: 0; font-size: 0.98rem; color: var(--text); }
+.qn-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.qn-chips span { padding: 0.15rem 0.6rem; border: 1px solid var(--border-2); border-radius: 999px; font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-2); }
+.qn-chips span.on { border-color: var(--text); color: var(--text); }
+.qn-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.qn-list li { flex: 1; display: flex; border-bottom: 1px solid var(--border); }
+.qn-list li:last-child { border-bottom: 0; }
+.qn-list a { flex: 1; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; column-gap: 1rem; row-gap: 0.35rem; align-content: center; padding: 1.25rem 1.5rem; text-decoration: none; color: inherit; transition: background 0.15s ease; }
+.qn-list a:hover { background: var(--surface-2); }
+.qn-lq { grid-column: 1; font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; letter-spacing: -0.01em; color: var(--text); }
+.qn-lf { grid-column: 1; font-size: 0.9rem; color: var(--muted); }
+.qn-go { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--text-3); transition: transform 0.15s ease, color 0.15s ease; }
+.qn-list a:hover .qn-go { color: var(--text); transform: translateX(3px); }
+@media (max-width: 900px) {
+  .qn { grid-template-columns: 1fr; }
+  .qn-rows > div { grid-template-columns: 1fr; gap: 0.4rem; }
+}
+
 /* Why Ada: the numbers in one row */
 .st-panel { margin-bottom: 1rem; }
 .st-row { display: grid; grid-template-columns: repeat(4, 1fr); }

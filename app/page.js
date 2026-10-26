@@ -5,12 +5,16 @@ import AdaField from './components/AdaField';
 import AdaStills from './components/AdaStills';
 import LetterField from './components/LetterField';
 import Receipt from './components/Receipt';
+import WhyTerminals from './components/WhyTerminals';
+import QuestionCard from './components/QuestionCard';
 import { HOME_TITLE, HOME_DESCRIPTION } from './lib/home-meta';
 
 // THE HOME PAGE is Ada (his order, 2026-10-21). The clean-up (his order,
 // 2026-10-25): the hero's words stay word for word and the field becomes the
-// whole hero; no code anywhere on the page; each fact once. Section 2 says
-// what Glyphh is before any proof (his order, 2026-10-26); the numbers follow.
+// whole hero; each fact once. The order (his orders, 2026-10-26): what Glyphh
+// is, then why Ada (the same question with and without Glyphh, in two real
+// terminals, then the numbers at scale), then the question and the answer,
+// then where it runs.
 // Every number here is the launch post's and the use-case page's
 // (benchmarks/banking77, benchmarks/german-credit in glyphh-ai/glyphh).
 
@@ -157,15 +161,30 @@ export default function Home() {
           </div>
         </section>
 
+        {/* WHY ADA (his order, 2026-10-26): the same question with and without Glyphh, as two real terminals
+            replaying runs measured that day, then the Banking77 numbers for the same thing at scale. */}
         <section className="hs reveal" id="why">
           <div className="qs-head">
-            <span className="qs-kicker">The results</span>
+            <span className="qs-kicker">Why Ada</span>
             <a href={ROUTING} className="qs-more">The experiment &rarr;</a>
           </div>
-          <h2 className="ix-h2 hs-h2">Most cases never need the language model.</h2>
+          <h2 className="ix-h2 hs-h2">The same question, with and without Glyphh.</h2>
           <p className="ix-desc hs-lede">
-            On 200 bank messages, Ada answered the ones it was sure of and handed the rest to Claude Fable. Together they
-            were more accurate than Claude Fable alone, and cost cents instead of hundreds of dollars.
+            An expense claim: business class to London, $2,400, over the limit and not pre-approved. On the left,
+            Claude reads the 40 past decisions and answers. On the right, your software asks Ada, which learned from
+            the same 40.
+          </p>
+          <WhyTerminals />
+          <p className="wt-note">
+            Measured on 26 October 2026: Claude Fable 5.1 in Claude Code with only the Read tool, and Ada Cloud&rsquo;s
+            answer to the same claim. Through the Glyphh connector, with Claude still in the loop, the same question
+            took 13,754 tokens. The saving comes from leaving the model out of the cases Ada is sure of.
+          </p>
+          <h3 className="hs-h3">Most cases never need the language model.</h3>
+          <p className="ix-desc hs-lede">
+            Claude reads every past decision on every question, so its bill grows with your history. On 200 bank
+            messages with 10,003 past ones, Ada answered the ones it was sure of and handed the rest to Claude Fable.
+            Together they were more accurate than Claude Fable alone, and cost cents instead of hundreds of dollars.
           </p>
           <div className="hv-panel st-panel">
             <div className="st-row">
@@ -179,6 +198,21 @@ export default function Home() {
             </div>
             <p className="st-foot">Banking77, 200 held-out messages, 77 intents. The experiment and every run are public.</p>
           </div>
+        </section>
+
+        {/* THE QUESTION (his order, 2026-10-26), the pair to The answer: a question as Ada holds it, from the real
+            expenses model, and the other questions the site has an experiment or an example for. */}
+        <section className="hs reveal" id="question">
+          <div className="qs-head">
+            <span className="qs-kicker">The question</span>
+            <a href={`${DOCS}/getting-started`} className="qs-more">Make a model &rarr;</a>
+          </div>
+          <h2 className="ix-h2 hs-h2">Ask the questions you already answer every day.</h2>
+          <p className="ix-desc hs-lede">
+            A question is the fields a case has and the outcomes it can lead to. Describe it once, record the decisions
+            you have already made, and ask. Claude can write it with you.
+          </p>
+          <QuestionCard />
         </section>
 
         <section className="hs reveal" id="answer">
