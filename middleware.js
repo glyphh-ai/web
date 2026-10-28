@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { observe, COOKIE_NAME, SESSION_IDLE_MS } from './app/lib/gate.js';
+import { observe, COOKIE_NAME, SESSION_IDLE_MS, PASS_COOKIE, PASS_MS, PROOF_COOKIE } from './app/lib/gate.js';
 
 // Where a visitor came from (2026-10-02): the tags on the link they arrived on
 // (utm_*, and the ad platform's click id) are kept for 90 days in a first-party
@@ -49,21 +49,27 @@ const SITE_HOSTS = ['glyphh.ai', 'www.glyphh.ai'];
 // session, and at its 5th, 20th and 60th request Ada Cloud is asked whether the
 // session behaves like a person or a robot. Off without GLYPHH_API_KEY; shadow
 // (log and an x-ada-gate header, enforce nothing) by default; ADA_GATE=enforce
-// answers 403 to a session Ada has decided is a bot, from its next request.
+// answers 403 to a session Ada has decided is a bot, from its next request, and
+// shows a session she is unsure of the challenge page (a proof of browser,
+// signed with ADA_GATE_SECRET) on its next page.
 export async function middleware(request, event) {
   const host = hostOf(request);
   const gate = await observe(request, (promise) => event?.waitUntil?.(promise));
-  if (gate.blocked) return new NextResponse('Blocked.', { status: 403, headers: { 'x-ada-gate': 'block' } });
-  const response = route(request, host);
-  if (gate.setCookie) {
-    response.cookies.set(COOKIE_NAME, gate.setCookie, {
-      path: '/',
-      maxAge: SESSION_IDLE_MS / 1000,
-      sameSite: 'lax',
-      httpOnly: true,
-      secure: host !== 'localhost',
+  let response;
+  if (gate.blocked) {
+    response = new NextResponse('Blocked.', { status: 403, headers: { 'x-ada-gate': 'block', 'cache-control': 'no-store' } });
+  } else if (gate.challenge) {
+    response = new NextResponse(request.method === 'HEAD' ? null : gate.challenge, {
+      status: 403,
+      headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' },
     });
+  } else {
+    response = route(request, host);
   }
+  const cookie = { path: '/', sameSite: 'lax', httpOnly: true, secure: host !== 'localhost' };
+  if (gate.setCookie) response.cookies.set(COOKIE_NAME, gate.setCookie, { ...cookie, maxAge: SESSION_IDLE_MS / 1000 });
+  if (gate.setPass) response.cookies.set(PASS_COOKIE, gate.setPass, { ...cookie, maxAge: PASS_MS / 1000 });
+  if (gate.clearProof) response.cookies.set(PROOF_COOKIE, '', { path: '/', maxAge: 0 });
   if (gate.header) response.headers.set('x-ada-gate', gate.header);
   return response;
 }

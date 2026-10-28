@@ -5,16 +5,19 @@
 // into the same facts (app/lib/gate.js), and sent to Ada Cloud's bots-edge model. Prints the verdicts.
 //
 //   GLYPHH_API_KEY=... node scripts/probe.mjs [https://glyphh.ai] [--pages 12]
+//   node scripts/probe.mjs --facts                 # no key: each session's facts, to decide or record elsewhere
+//   PROBE_CHANNEL=chrome node scripts/probe.mjs    # the installed Chrome, where Playwright's own is not installed
 //
 // Low volume by design: under 60 requests a session. The person is still a script; it says so in its row.
 
 import { chromium } from 'playwright';
-import { facts, measures, decide } from '../app/lib/gate.js';
+import { facts, measures, decide, DECIDE_AT } from '../app/lib/gate.js';
 
 const BASE = process.argv.find((a) => a.startsWith('http')) || 'https://glyphh.ai';
 const PAGES = Number(process.argv[process.argv.indexOf('--pages') + 1]) || 12;
 const host = new URL(BASE).host;
 const matcher = (path) => !path.startsWith('/_next/static') && !path.startsWith('/_next/image') && path !== '/favicon.svg';
+const FACTS_ONLY = process.argv.includes('--facts');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function linksIn(html, from) {
@@ -44,7 +47,7 @@ async function scraper() {
 }
 
 async function browse(kind) {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(process.env.PROBE_CHANNEL ? { channel: process.env.PROBE_CHANNEL } : {});
   const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const page = await context.newPage();
   const events = [];
@@ -106,8 +109,10 @@ const out = [];
 for (const [name, run] of runs) {
   const events = await run();
   const data = facts(events);
-  const d = await decide(data);
-  out.push({ ...row(name, events, d), facts: data });
+  const d = FACTS_ONLY ? {} : await decide(data);
+  // what the gate itself asks Ada: the session so far at each of its decision points
+  const gate = Object.fromEntries(DECIDE_AT.filter((n) => n <= events.length).map((n) => [n, facts(events.slice(0, n))]));
+  out.push({ ...row(name, events, d), facts: data, gate });
   console.error(`${name}: ${events.length} requests → ${d.verdict} (bot ${(d.probabilities?.bot ?? 0).toFixed(2)}, ${d.ms} ms)`);
 }
 console.log(JSON.stringify({ base: BASE, at: new Date().toISOString(), sessions: out }, null, 1));

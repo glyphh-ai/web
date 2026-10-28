@@ -147,18 +147,132 @@ async function digest(text) {
   return Array.from(new Uint8Array(hash)).slice(0, 8).map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
+// ── the challenge: a proof of browser ────────────────────────────────────────────────────────────────────────
+//
+// A session Ada answers `challenge` for gets, on its next page (not on its assets), a small page whose script does
+// a little work (a SHA-256 search, about a tenth of a second in a browser) over a nonce the gate signed, leaves
+// the answer in a cookie and reloads. The gate checks the signature, the age and the work, and answers with a
+// pass: an HttpOnly cookie signed with ADA_GATE_SECRET, bound to the visitor's user agent, good for 12 hours.
+// A session holding a pass is a browser that runs scripts; it is no longer asked of Ada (its line in the log,
+// `passed`, is a label for the model). A plain scraper (fetch, curl, requests) never runs the script, so every
+// page it asks for is the challenge. A headless browser does run it: the challenge stops scrapers, not agents
+// driving a real browser; those are Ada's to block on behaviour.
+
+export const PASS_COOKIE = 'glyphh_pass';
+export const PROOF_COOKIE = 'glyphh_proof';
+export const PASS_MS = 12 * 60 * 60 * 1000;
+const NONCE_MS = 5 * 60 * 1000;
+export const WORK_BITS = 14; // leading zero bits of SHA-256(nonce + answer): 16,384 tries on average
+
+// Health checks and the crawlers that say who they are (search, AI search, link previews) are not gated: they are
+// welcome, and robots.txt is their rule. A user agent can lie; one that claims to be Googlebot passes here, and
+// telling the real one from a liar needs its address checked (reverse DNS, or Cloudflare's verified-bot rule).
+const UNGATED_UA = /^Consul Health Check|Googlebot|bingbot|Applebot|DuckDuckBot|YandexBot|Claude-SearchBot|OAI-SearchBot|PerplexityBot|LinkedInBot|Twitterbot|facebookexternalhit|Slackbot|Discordbot|WhatsApp|TelegramBot/i;
+
+export const secret = () => process.env.ADA_GATE_SECRET || '';
+
+const hex = (buf) => Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+
+async function hmac(text, key = secret()) {
+  const k = await crypto.subtle.importKey('raw', new TextEncoder().encode(key), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  return hex(await crypto.subtle.sign('HMAC', k, new TextEncoder().encode(text))).slice(0, 32);
+}
+
+async function sha256(text) {
+  return hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
+}
+
+/** Does this hex digest start with `bits` zero bits? */
+export function leadingZeros(digestHex, bits = WORK_BITS) {
+  const full = Math.floor(bits / 4);
+  if (!/^0*$/.test(digestHex.slice(0, full))) return false;
+  const rest = bits % 4;
+  return rest === 0 || parseInt(digestHex[full], 16) < 1 << (4 - rest);
+}
+
+/** A pass for this user agent, until `until` (ms). */
+export async function makePass(ua, now = Date.now()) {
+  const until = now + PASS_MS;
+  const uah = (await sha256(ua)).slice(0, 16);
+  return `${until}.${await hmac(`pass|${until}|${uah}`)}`;
+}
+
+export async function validPass(value, ua, now = Date.now()) {
+  if (!secret() || !value) return false;
+  const [until, sig] = value.split('.');
+  if (!(Number(until) > now) || !sig) return false;
+  const uah = (await sha256(ua)).slice(0, 16);
+  return sig === (await hmac(`pass|${until}|${uah}`));
+}
+
+/** A signed nonce for the challenge page: `issued.random.sig`. */
+export async function makeNonce(now = Date.now()) {
+  const random = crypto.randomUUID().replace(/-/g, '').slice(0, 16);
+  return `${now}.${random}.${await hmac(`nonce|${now}|${random}`)}`;
+}
+
+/** The proof cookie, `nonce:answer`: signed by us, fresh, and the work done. */
+export async function validProof(value, now = Date.now()) {
+  if (!secret() || !value) return false;
+  const at = value.lastIndexOf(':');
+  if (at < 0) return false;
+  const nonce = value.slice(0, at);
+  const answer = value.slice(at + 1);
+  const [issued, random, sig] = nonce.split('.');
+  if (!issued || !random || !sig || !/^\d{1,12}$/.test(answer)) return false;
+  const age = now - Number(issued);
+  if (!(age >= 0 && age < NONCE_MS)) return false;
+  if (sig !== (await hmac(`nonce|${issued}|${random}`))) return false;
+  return leadingZeros(await sha256(nonce + answer));
+}
+
+/** The challenge page: no assets of its own (the proxy would gate them too), works without the site's code. */
+export function challengePage(nonce) {
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>One moment · Glyphh</title><style>html,body{height:100%;margin:0;background:#000;color:#fff;font:16px/1.5 system-ui,-apple-system,sans-serif}main{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:24px}p{margin:0;color:#999}</style></head><body><main><div>Checking your browser…</div><p>This takes a moment and happens once.</p><noscript><p>Glyphh needs JavaScript to let you in.</p></noscript></main><script>
+(async()=>{const n=${JSON.stringify(nonce)},b=${WORK_BITS},e=new TextEncoder();
+const ok=(h)=>{let z=0;for(const x of h){if(x===0){z+=8;continue}z+=Math.clz32(x)-24;break}return z>=b};
+for(let i=0;;i++){const h=new Uint8Array(await crypto.subtle.digest('SHA-256',e.encode(n+i)));if(ok(h)){document.cookie='${PROOF_COOKIE}='+n+':'+i+'; path=/; max-age=300; samesite=lax'+(location.protocol==='https:'?'; secure':'');location.reload();return}}})();
+</script></body></html>`;
+}
+
+/** An asset or a background request (files, Next's RSC fetches and prefetches): never answered with the page. */
+export function isPage(request, url = new URL(request.url)) {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return false;
+  if (FILE.test(url.pathname) || url.pathname.startsWith('/_next/') || url.pathname.startsWith('/api/')) return false;
+  if (url.searchParams.has('_rsc') || request.headers.get('rsc') === '1' || request.headers.get('next-router-prefetch')) return false;
+  return true;
+}
+
 /**
  * One request seen: kept against its session; Ada asked when it is time. Returns what the proxy does with it:
- * {blocked, header, setCookie: sid | null}. `log` and `fetcher` are the tests' hooks.
+ * {blocked, challenge: html | null, header, setCookie: sid | null, setPass: value | null, clearProof}.
+ * `log` and `fetcher` are the tests' hooks.
  */
 export async function observe(request, waitUntil, { now = Date.now(), log = console.log, fetcher } = {}) {
   const m = mode();
-  if (m === 'off') return { blocked: false, header: null, setCookie: null };
+  const none = { blocked: false, challenge: null, header: null, setCookie: null, setPass: null, clearProof: false };
+  if (m === 'off') return none;
   const url = new URL(request.url);
   const cookie = request.cookies?.get?.(COOKIE)?.value || null;
   const ua = (request.headers.get('user-agent') || '').slice(0, 160);
+  if (UNGATED_UA.test(ua)) return none;
+
   const ip = request.headers.get('cf-connecting-ip') || (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
   const key = cookie ? `c:${cookie}` : `a:${await digest(`${ip}|${ua}`)}`;
+
+  // a browser that has proved itself: a fresh proof becomes a pass (and its session's facts a labelled line in the
+  // log); a pass is never challenged again, but Ada still watches it, and a session she decides is a robot is
+  // still refused (a headless browser runs the challenge's script too)
+  const proof = request.cookies?.get?.(PROOF_COOKIE)?.value || null;
+  let setPass = null;
+  let passed = await validPass(request.cookies?.get?.(PASS_COOKIE)?.value, ua, now);
+  if (!passed && (await validProof(proof, now))) {
+    setPass = await makePass(ua, now);
+    passed = true;
+    const held = sessions.get(key) || sessions.get(`a:${await digest(`${ip}|${ua}`)}`);
+    log(JSON.stringify({ ada_gate: { mode: m, key, ua, passed: true, verdict: held?.verdict ?? null, n: held?.events.length ?? 0, data: held ? facts(held.events) : null } }));
+  }
+
   let s = sessions.get(key);
   if (!s) {
     s = { events: [], verdict: null, decided: new Set(), cookie: Boolean(cookie) };
@@ -178,7 +292,7 @@ export async function observe(request, waitUntil, { now = Date.now(), log = cons
       const asked = decide(data, { fetcher })
         .then((d) => {
           s.verdict = d.verdict;
-          log(JSON.stringify({ ada_gate: { mode: m, key, n, ua, cookie: s.cookie, verdict: d.verdict, outcome: d.outcome, ask: d.ask, probabilities: d.probabilities, expected_cost: d.expected_cost, version: d.version, ms: d.ms, data } }));
+          log(JSON.stringify({ ada_gate: { mode: m, key, n, ua, cookie: s.cookie, passed, verdict: d.verdict, outcome: d.outcome, ask: d.ask, probabilities: d.probabilities, expected_cost: d.expected_cost, version: d.version, ms: d.ms, data } }));
         })
         .catch((e) => log(JSON.stringify({ ada_gate: { mode: m, key, n, error: String(e).slice(0, 200) } })));
       if (waitUntil) waitUntil(asked);
@@ -190,10 +304,20 @@ export async function observe(request, waitUntil, { now = Date.now(), log = cons
     // keeps the cookie continues under it and one that drops it (a scraper) still accumulates under its address
     sessions.set(`c:${setCookie}`, s);
   }
+  // Enforce: a robot's session is refused; a doubtful one is shown the challenge on its pages (its assets and
+  // background fetches pass, so a person mid-load is not broken). Without ADA_GATE_SECRET there is no challenge
+  // to sign, and a doubtful session passes. No verdict (not yet asked, the day's budget spent, Ada unreachable)
+  // is never a block.
+  const enforce = m === 'enforce';
+  const challenge = enforce && !passed && s.verdict === 'challenge' && Boolean(secret()) && isPage(request, url) ? challengePage(await makeNonce(now)) : null;
   return {
-    blocked: m === 'enforce' && s.verdict === 'block',
-    header: m === 'shadow' ? `shadow:${s.verdict || 'pending'}` : null,
+    ...none,
+    blocked: enforce && s.verdict === 'block',
+    challenge,
+    header: m === 'shadow' ? `shadow:${s.verdict || 'pending'}${passed ? ':passed' : ''}` : challenge ? 'challenge' : null,
     setCookie,
+    setPass,
+    clearProof: Boolean(proof),
   };
 }
 
