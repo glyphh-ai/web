@@ -47,8 +47,9 @@ export default function ContactPage() {
                 </address>
               </div>
               <div className="ct-block">
-                <span className="qs-kicker">Email</span>
+                <span className="qs-kicker">Phone and email</span>
                 <ul className="ct-links">
+                  <li><span>Phone</span><a href="tel:+15124896516">(512) 489-6516</a></li>
                   <li><span>Support</span><a href="mailto:support@glyphh.ai">support@glyphh.ai</a></li>
                   <li><span>Security</span><a href="mailto:security@glyphh.ai">security@glyphh.ai</a></li>
                 </ul>

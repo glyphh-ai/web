@@ -8119,6 +8119,7 @@ html { scrollbar-width: thin; scrollbar-color: var(--border-2) var(--bg); }
 .ft-contact { margin: 0 0 1.75rem; font-family: var(--font-mono); font-size: 0.8rem; }
 .ft-contact a { color: var(--text-2); text-decoration: none; }
 .ft-contact a:hover { color: var(--accent-light); }
+.ft-contact span { color: var(--text-2); }
 .ft-social { display: flex; gap: 1rem; }
 .ft-social a { color: var(--text-3); display: inline-flex; }
 .ft-social a:hover { color: var(--text); }
