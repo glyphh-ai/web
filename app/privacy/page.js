@@ -65,7 +65,7 @@ export default function PrivacyPage() {
             <li><strong>Keys and links.</strong> API keys are stored only as hashes. Upload and download links are signed, single-purpose and expire after one hour.</li>
             <li><strong>Staff access.</strong> Glyphh staff can see account, billing and usage metadata (names, emails, plans, counts and times) to run and support the service. Staff cannot see your precedents, specs, case contents or uploaded files, and every staff access is logged.</li>
           </ul>
-          <p>No system is perfectly secure. If we learn of a breach affecting your data, we will tell you without undue delay and as the law requires. Report security issues to <a href="mailto:security@glyphh.ai">security@glyphh.ai</a>.</p>
+          <p>No system is perfectly secure. If we learn of a breach affecting your data, we will tell you without undue delay and as the law requires. Report security issues to <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
 
           <h2>5. Where Your Data Is</h2>
           <p>Ada Cloud runs in the United States, in Fly.io&apos;s Ashburn, Virginia region (<code>iad</code>). If you use Glyphh from outside the United States, your data is transferred to and processed there, and where our subprocessors operate.</p>
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
           <p>We may update this policy. We will tell you about material changes on the platform or by email before they take effect.</p>
 
           <h2>11. Contact</h2>
-          <p>Privacy questions and requests: <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>. Security: <a href="mailto:security@glyphh.ai">security@glyphh.ai</a>.</p>
+          <p>Privacy and security questions and requests: <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>
       <Footer />

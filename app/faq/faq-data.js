@@ -116,7 +116,7 @@ export const FAQ_GROUPS = [
       {
         id: 'sign-in',
         q: 'How do I sign in?',
-        a: { html: 'With Google or GitHub on the platform. The connector in Claude signs you in with one Allow click. Found a problem? Write to <a href="mailto:security@glyphh.ai">security@glyphh.ai</a>.' },
+        a: { html: 'With Google or GitHub on the platform. The connector in Claude signs you in with one Allow click. Found a problem? Write to <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.' },
       },
     ],
   },
