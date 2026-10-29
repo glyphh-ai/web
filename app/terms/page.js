@@ -26,7 +26,7 @@ export default function TermsPage() {
           <p>You must be at least 13 years old to use Glyphh. If you are under 18, you confirm that a parent or legal guardian has agreed to these Terms for you.</p>
 
           <h2>2. Accounts, Organisations and API Keys</h2>
-          <p>You sign in with a Google or GitHub account. Your account belongs to an organisation, which may have several members; plans are never priced per member. You are responsible for activity under your account and your organisation, including every call made with your API keys. Keep your keys secret: anyone holding one can act in your organisation with that key&apos;s access. Revoke a key on the platform if you think it has leaked, and tell us at <a href="mailto:security@glyphh.ai">security@glyphh.ai</a> if you believe your account has been compromised.</p>
+          <p>You sign in with a Google or GitHub account. Your account belongs to an organisation, which may have several members; plans are never priced per member. You are responsible for activity under your account and your organisation, including every call made with your API keys. Keep your keys secret: anyone holding one can act in your organisation with that key&apos;s access. Revoke a key on the platform if you think it has leaked, and tell us at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a> if you believe your account has been compromised.</p>
 
           <h2>3. What the Service Does</h2>
           <p>Ada answers new cases from the past cases you give it (&ldquo;precedents&rdquo;). You describe a model as a specification (a &ldquo;spec&rdquo;), load your precedents, and ask. Ada runs no code of yours and no language model: it compares cases and reports the outcome the precedents support, its probabilities, its expected cost, whether a person should decide instead, and the precedents it relied on.</p>
@@ -103,7 +103,7 @@ export default function TermsPage() {
           <p>Ada reads words through WordNet 3.0 (Princeton University) and the Moby word lists, used under their licences. Sign-in uses Google and GitHub, and payments use Stripe, each also under its own terms.</p>
 
           <h2>17. Contact</h2>
-          <p>Questions about these Terms: <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>. Security: <a href="mailto:security@glyphh.ai">security@glyphh.ai</a>.</p>
+          <p>Questions about these Terms, and security reports: <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>
       <Footer />
