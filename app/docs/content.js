@@ -291,6 +291,7 @@ const build = [
             ['rare', '5', 'Values, words and pairs seen fewer times are not learned from', 'Re-encoded'],
             ['word_pairs, max_word_pairs', 'false, 20', 'Learn pairs of words, for intents that are phrases (0 to 200)', 'Re-encoded'],
             ['lexicon', 'true', 'Read words through WordNet and Moby, so related words correlate', 'Re-encoded'],
+            ['word_reach', '1', 'On ada-1-2-beta, 2 or 3 reads words further: plain forms ("charged" as "charge") and related words past direct synonyms. Backtest it on plain-English text', 'Re-encoded'],
             ['calibrate_by', 'loss', 'loss: probabilities that mean what they say; cost: that decide best by the costs', 'Live, then recalibrated'],
             ['calibrate_sample', '200', 'The newest precedents a calibration holds out', 'Live'],
             ['refresh_every', 'none', 'Learn again every so many precedents, as a job', 'Live'],
