@@ -9,6 +9,106 @@ import { bars, pairs, scatter, lines, punchCard } from './charts';
 
 export const POSTS = [
   {
+    slug: 'typed-answers',
+    title: 'Typed Answers — Scores, Yes or No, Numbers, Labels and Unions',
+    summary: 'One case, recorded once, and every question about it answered in its own type: an ordered level, a yes or no, an amount, a set of labels, and questions that are only asked when they apply.',
+    date: '2026-10-29',
+    author: 'Chris "Timme"',
+    minutes: 5,
+    cover: '/blog/typed-outputs-cover.png',
+    coverAlt: 'One case. Every answer typed. A bug ticket answered with a critical severity, urgent and two tags; a billing ticket answered with a refund of 281.9.',
+    tags: ['Ada', 'Guides'],
+    related: [
+      ['The spec', 'https://docs.glyphh.ai/getting-started#the-spec'],
+      ['Ada versions', 'https://docs.glyphh.ai/ada-versions'],
+      ['The SDKs', 'https://docs.glyphh.ai/sdks'],
+    ],
+    sections: [
+      {
+        id: 'hi',
+        heading: null,
+        body: [
+          'Hi everyone, Chris here. Until today every question you asked Ada had the same shape: pick one of these. Route to billing or platform. Approve or reject. That covers a lot, but it\'s not how real questions come. How bad is this bug is a level, and being one level off is not the same mistake as being three off. Is it urgent is a yes or no. How much should we refund is an amount. Which products does it touch can be more than one. And how much to refund only makes sense if it\'s a billing ticket in the first place.',
+          {
+            html: 'So now each of a model\'s named outputs says what its answer <em>is</em>, with a <code>kind</code>, and an output can say when it applies, with <code>when</code>. You still record a case once, with every answer it has, and you still ask once. Each answer just comes back in its own type.',
+          },
+          {
+            html: '<img src="/blog/typed-outputs-kinds.png" alt="The five kinds: choice, score, noul, number and many, what each takes in the spec, what a case records, and what its answer adds." loading="lazy" />',
+          },
+        ],
+      },
+      {
+        id: 'the-spec',
+        heading: 'One spec, five kinds',
+        body: [
+          'Here\'s a support model with one of each. A ticket is its plan, its channel, the amount on it and what the customer wrote. Then the questions:',
+          {
+            html: '<pre><code>"outputs": {\n  "kind":     {"values": ["bug", "billing"]},\n  "severity": {"kind": "score", "values": ["low", "medium", "high", "critical"],\n               "when": {"output": "kind", "in": ["bug"]}},\n  "refund":   {"kind": "number", "number": {"min": 0, "max": 500, "step": 25},\n               "when": {"output": "kind", "in": ["billing"]}},\n  "urgent":   {"kind": "noul"},\n  "tags":     {"kind": "many", "values": ["mobile", "web", "api", "enterprise"]}\n}</code></pre>',
+          },
+          {
+            html: '<ul><li><strong>choice</strong> is the default, one of its values, the way it always worked.</li><li><strong>score</strong> is ordered levels. A mistake costs how many levels it\'s off, so Ada picks the answer that\'s least wrong on average, not just the most likely one, and tells you the expected <code>level</code>.</li><li><strong>noul</strong> is yes or no. You record <code>true</code> or <code>false</code> and get back <code>p</code>, the chance it\'s yes.</li><li><strong>number</strong> is an amount between a min and a max. You record the number itself, Ada learns it in steps, and you get back the expected <code>value</code>.</li><li><strong>many</strong> is any of its values at once. You record a list and get a list back, with the chance of each value on its own.</li></ul>',
+          },
+        ],
+      },
+      {
+        id: 'recording',
+        heading: 'Recording is the same, just typed',
+        body: [
+          'A case carries every answer it has, each in its own type. No mapping booleans to strings, no bucketing amounts yourself:',
+          {
+            html: '<pre><code>tickets.record(data, outcomes={\n    "kind": "billing", "refund": 276.40, "urgent": False, "tags": ["web"],\n})</code></pre>',
+          },
+          {
+            html: 'Anything that doesn\'t fit is refused before it\'s stored, same as before: a tag that isn\'t in the list, a severity that isn\'t a level, and now a refund on a bug ticket. A case can\'t grade a branch its own answers leave out (<code>E_OUTPUT_WHEN</code>).',
+          },
+        ],
+      },
+      {
+        id: 'unions',
+        heading: 'Unions, or asking only what applies',
+        body: [
+          {
+            html: '<code>when</code> makes an output one branch of a discriminated union. Severity hangs on <code>kind</code> being bug, refund on it being billing. When you ask about every output at once, Ada decides <code>kind</code> first, then only the branch it lands on.',
+          },
+          {
+            html: '<img src="/blog/typed-outputs-union.png" alt="A bug ticket: kind is bug, so severity is asked and answers critical with applies true; refund is not asked and answers applies false with a null outcome." loading="lazy" />',
+          },
+          {
+            html: 'The branch not taken doesn\'t get a guess. It answers <code>{"outcome": null, "applies": false}</code>, so your code never sees a refund amount on a crash report, and nobody has to remember to ignore one. A branch can hang on a choice, a score or a yes or no, branches can chain, and Ada refuses a spec whose branches go round in a circle.',
+          },
+        ],
+      },
+      {
+        id: 'asking',
+        heading: 'What comes back',
+        body: [
+          'I recorded 400 tickets, 217 bugs and 183 billing, and asked about two new ones. An enterprise customer on mobile, "app crashes on launch after update":',
+          {
+            html: '<pre><code>"severity": {"outcome": "critical", "level": 2.997, "applies": true},\n"urgent":   {"outcome": "true", "p": 0.9985},\n"tags":     {"outcome": ["mobile", "enterprise"]},\n"refund":   {"outcome": null, "applies": false}</code></pre>',
+          },
+          'And a pro customer on the web with a $299 invoice, "I was charged twice this month":',
+          {
+            html: '<pre><code>"refund":   {"outcome": "287.5", "value": 281.9, "applies": true},\n"urgent":   {"outcome": "false", "p": 0.003},\n"tags":     {"outcome": ["web"]},\n"severity": {"outcome": null, "applies": false}</code></pre>',
+          },
+          {
+            html: 'The refund\'s <code>outcome</code> is the middle of its most likely step, $275 to $300, and <code>value</code> is the amount weighed over every step. Every answer still has its probabilities, its expected cost and the precedents it stands on, and <code>ask</code> still tells you when a person should look instead.',
+          },
+        ],
+      },
+      {
+        id: 'go',
+        heading: 'Try it',
+        body: [
+          {
+            html: 'Typed outputs are in <code>ada-1-2-beta</code>. Make a model on it with <code>"ada": "ada-1-2-beta"</code>, or backtest an existing one there first. A spec without a <code>kind</code> or a <code>when</code> answers exactly as it did, so nothing you have changes. The SDKs (<code>pip install glyphh</code>, <code>npm install @glyphh-ai/glyphh</code>) read every kind, and the Ada skill in Claude writes them for you when you describe your case.',
+          },
+          'Build with AI. Run without it.',
+          '— Timme',
+        ],
+      },
+    ],
+  },
+  {
     slug: 'introducing-ada',
     layout: 'feature',
     kicker: 'Launch · Ada beta',
