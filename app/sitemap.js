@@ -13,6 +13,7 @@ export default function sitemap() {
     ['/pricing', 0.8],
     ['/faq', 0.7],
     ['/blog', 0.6],
+    ['/contact', 0.5],
     ['/terms', 0.2],
     ['/privacy', 0.2],
     ['/refund', 0.2],
