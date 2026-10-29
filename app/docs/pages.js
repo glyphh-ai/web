@@ -56,6 +56,12 @@ is refund or keep. Then tell me what it decides for this new ticket, and why.`}<
           ]}
         />
         <p>The tools act as the person signed in, with full clearance; a tool may ask for less. Refusals carry the API’s codes (<a href={`${DOCS}/api#errors`}>Errors</a>).</p>
+        <h2>The glyphh-cli skill</h2>
+        <p>
+          Without the connector, or when a file or a script suits a shell command better, Claude does the same work with
+          the <a href={`${DOCS}/cli`}>glyphh command</a>. It asks you to run <code>! glyphh login</code> and paste an API
+          key yourself; no key goes through the chat.
+        </p>
       </>
     ),
   },
@@ -70,7 +76,7 @@ export const SDK_PAGES = [
       <>
         <Row k="Python 3.9+">pip install glyphh. Pin glyphh&gt;=3: versions up to 2.6.7 are a different library</Row>
         <Row k="Node 18+">npm install @glyphh-ai/glyphh (or any runtime with fetch)</Row>
-        <p>Both are 3.2, MIT, with no dependencies. They read the key from <code>GLYPHH_API_KEY</code> and call <code>https://ada.glyphh.ai</code>.</p>
+        <p>Both are 3.5, MIT, with no dependencies. They read the key from <code>GLYPHH_API_KEY</code> and call <code>https://ada.glyphh.ai</code>. The Python package also installs the <a href={`${DOCS}/cli`}>glyphh command</a>, and with no key set reads the one <code>glyphh login</code> kept.</p>
         <h2>Decide</h2>
         <Code lang="python">{`from glyphh import Ada
 
@@ -126,6 +132,71 @@ tickets.export(to="tickets.zip")                     # everything, as a zip`}</C
         </p>
         <h2>Upgrading from 3.0</h2>
         <p>3.0’s calls still work: <code>record</code>, <code>query</code>, <code>facts</code>, <code>probabilities</code>, <code>learn</code> and <code>call(function, inputs)</code> go through <code>POST /v1/runs</code>. <code>GLYPHH_RUNTIME_URL</code> and <code>GLYPHH_RUNTIME_KEY</code> are still read. A decision never waits for input: it says <code>ask</code>.</p>
+      </>
+    ),
+  },
+  {
+    slug: 'cli',
+    title: 'The command',
+    lede: 'glyphh: Ada Cloud from a terminal, for you, your scripts and CI, and agents with a shell such as Claude Code.',
+    body: (
+      <>
+        <h2>Install</h2>
+        <Code lang="bash">{`pipx install glyphh             # or: uv tool install glyphh, pip install glyphh
+glyphh --version`}</Code>
+        <p>It comes with the Python SDK (3.5 or later, Python 3.9+); <code>python -m glyphh</code> runs it too.</p>
+        <h2>Log in with an API key</h2>
+        <Code lang="bash">{`glyphh login                    # paste the key: checked against Ada, then kept for this machine
+glyphh whoami                   # which key, from where, and the organisation's plan`}</Code>
+        <p>
+          The key is an ordinary API key (<code>glyphh_ak_…</code>) from the platform’s <strong>API Keys</strong> page,
+          or made by Claude through the connector (<code>create_api_key</code>). It acts in your organisation with the
+          clearance it was made with.
+        </p>
+        <Row k="glyphh login">Asks for the key without echoing it, checks it, and keeps it in ~/.glyphh/credentials.json (mode 0600). A key Ada refuses is never kept</Row>
+        <Row k="--key-stdin">Reads the key from a pipe instead: <code>op read … | glyphh login --key-stdin</code></Row>
+        <Row k="GLYPHH_API_KEY">Wins over the kept key when set: the way for CI and servers</Row>
+        <Row k="glyphh logout">Forgets the kept key. The key stays live until you revoke it on the API Keys page</Row>
+        <h2>From nothing to a decision</h2>
+        <Code lang="bash">{`glyphh create tickets --spec @spec.json
+glyphh import tickets history.csv --mapping '{"Plan": "ticket.what.plan", "Result": "outcome"}'
+glyphh decide tickets '{"ticket": {"what": {"plan": "pro", "text": "charged twice"}}}'
+glyphh record tickets @case.json --outcome refund        # a confirmed outcome: the next case learns from it
+glyphh backtest tickets --candidates '[{"settings": {"word_evidence": 0}}]' --holdout '{"newest": 200}'
+glyphh settings tickets --changes '{"word_evidence": 0}' --note "cost 8% less" --backtest <job id>
+glyphh activate tickets 1                                 # and back
+glyphh export tickets --to tickets.zip`}</Code>
+        <h2>Commands</h2>
+        <Table
+          head={['Command', 'Does']}
+          rows={[
+            ['login, logout, whoami', 'The API key this machine uses'],
+            ['usage, releases', 'The plan’s use this month; every Ada version'],
+            ['models, model NAME', 'The organisation’s models; one with its version, size, settings and Ada version'],
+            ['create NAME --spec, spec NAME [--set]', 'Make a model from its spec; read it, or a new version of it'],
+            ['delete NAME --confirm NAME', 'Delete a model and every precedent it holds'],
+            ['record, record-many, grade, forget', 'One case; a JSON Lines file of them, 1,000 a request; an outcome later; forget one'],
+            ['import NAME FILE [--mapping]', 'A CSV, JSON Lines, SQLite store or a model’s own export, as a job'],
+            ['decide, query, probabilities, facts', 'Ask: --output, --outputs a,b, --facts, --clearance'],
+            ['learn, calibrate, backtest, settings', 'Learn; calibrate; score candidates on held-out cases; every lever'],
+            ['versions, activate, upgrade', 'Versions and who made them; roll back; move to another Ada version'],
+            ['export, job ID [--wait]', 'Everything out, to a file; any job'],
+          ]}
+        />
+        <p><code>glyphh &lt;command&gt; --help</code> gives every option.</p>
+        <h2>Input and output</h2>
+        <ul>
+          <li>A JSON argument is the JSON itself, <code>@file</code> for a file’s, or <code>-</code> for stdin’s.</li>
+          <li>Every answer is the API’s own JSON on stdout, so it pipes into <code>jq</code>: <code>glyphh decide tickets @case.json | jq -r .outcome</code>.</li>
+          <li>A refusal is <code>{'{"error": {"code", "message", …}}'}</code> on stderr with exit code 1, its code one of the <a href={`${DOCS}/api#errors`}>API’s</a>; a usage mistake exits 2.</li>
+          <li>Jobs (import, learn, backtest, settings, spec, upgrade, export) are waited for, with progress on stderr: <code>-q</code> hides it, <code>--no-wait</code> answers the job at once.</li>
+        </ul>
+        <h2>With Claude Code</h2>
+        <p>
+          The plugin’s glyphh-cli skill teaches Claude the command, for when the connector’s <code>ada_*</code> tools
+          are not there or a file suits a command better. Claude asks you to run <code>! glyphh login</code> and paste
+          the key yourself; it never asks for a key in the chat.
+        </p>
       </>
     ),
   },

@@ -76,7 +76,8 @@ const cloud = [
           On the <strong>API Keys</strong> page: a name, an expiry (1 to 365 days, or never) and a clearance (0 to 1,
           default 1). The key (<code>glyphh_ak_…</code>) is shown once; keep it as a secret, for example in{' '}
           <code>GLYPHH_API_KEY</code>. Send it as <code>Authorization: Bearer &lt;key&gt;</code>. A revoked key stops
-          working within 10 seconds.
+          working within 10 seconds. From a terminal, <code>glyphh login</code> keeps it for the machine (
+          <a href={`${DOCS}/cli`}>The command</a>), and every step below is one <code>glyphh</code> command too.
         </p>
         <h2>3. Create a model</h2>
         <p>On the platform: <strong>Models → New</strong>, starting from an example. Or by API:</p>
