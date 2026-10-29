@@ -112,6 +112,8 @@ EOF`}</Code>
         <Row k="output.ask, ask_below">Ask a person when every choice costs more than asking, or when the top probability is under the bar</Row>
         <Row k="output.report">The paths a fact tree shows, each still cut by clearance</Row>
         <Row k="outputs">Named outputs, when one case answers several questions: {'{"team": {"values": [...], "costs": {...}}}'}</Row>
+        <Row k="outputs.kind">On ada-1-2-beta, what the answer is: choice (the default), score (ordered levels: the answer adds level), noul (yes or no: p), number ({'{"number": {"min", "max", "step"}}'}: value) or many (a list of values)</Row>
+        <Row k="outputs.when">On ada-1-2-beta, a discriminated union: {'{"when": {"output": "kind", "in": ["bug"]}}'} asks the output only on that branch; deciding every output answers a branch not taken {'{"outcome": null, "applies": false}'}</Row>
         <Row k="interactions">Pairs of roles always read together (learning also finds them)</Row>
         <Row k="seed, dimension">The encoding: default 42 and 4,096, at most 8,192</Row>
         <p>
@@ -352,7 +354,8 @@ const build = [
           head={['Version', 'Status', 'What changes']}
           rows={[
             ['ada-1-0', 'Stable, the default', 'The launch version'],
-            ['ada-1-1-beta', 'Beta', 'A pair of roles’ value the model never learned no longer votes, so the roles’ own weights decide. Within noise of ada-1-0 on German Credit'],
+            ['ada-1-2-beta', 'Beta', 'Time can weigh: a model whose answers drift gives its newer precedents more say. Typed outputs and unions (outputs.kind and outputs.when in the spec). Includes ada-1-1-beta’s change'],
+            ['ada-1-1-beta', 'Deprecated, ends 2026-11-24', 'A pair of roles’ value the model never learned no longer votes, so the roles’ own weights decide. Within noise of ada-1-0 on German Credit'],
           ]}
         />
         <p>Release notes for each version are on the platform’s <strong>Ada</strong> page.</p>
@@ -369,13 +372,13 @@ const build = [
         <h2>Upgrade</h2>
         <p>Backtest against the new version first, then upgrade:</p>
         <Code lang="json">{`POST /v1/models/tickets/backtest
-{"ada": "ada-1-1-beta"}
+{"ada": "ada-1-2-beta"}
 
 POST /v1/models/tickets/upgrade
-{"ada": "ada-1-1-beta"}`}</Code>
-        <Code lang="python">{`tickets.backtest(ada="ada-1-1-beta")
-tickets.upgrade(ada="ada-1-1-beta")`}</Code>
-        <p>Or ask Claude through the connector: “backtest tickets on ada-1-1-beta, and upgrade it if it does better”.</p>
+{"ada": "ada-1-2-beta"}`}</Code>
+        <Code lang="python">{`tickets.backtest(ada="ada-1-2-beta")
+tickets.upgrade(ada="ada-1-2-beta")`}</Code>
+        <p>Or ask Claude through the connector: “backtest tickets on ada-1-2-beta, and upgrade it if it does better”.</p>
         <ul>
           <li>An upgrade makes a new model version on a store of its own, as a job; the old version answers until the job ends and the new one goes live.</li>
           <li>Any supported version can be chosen, an older one included (a downgrade).</li>
