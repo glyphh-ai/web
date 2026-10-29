@@ -64,6 +64,10 @@ export default function Footer() {
             <p className="ft-tagline">Ada, a classifier that learns from precedent and hands the cases it is unsure of to an LLM.</p>
             <p className="ft-contact">
               <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>
+              <br />
+              <a href="tel:+15124896516">(512) 489-6516</a>
+              <br />
+              <span>Georgetown, TX</span>
             </p>
             <div className="ft-social" aria-label="Glyphh elsewhere">
               {X_URL ? <a href={X_URL} aria-label="X" {...Ext(X_URL)}>
