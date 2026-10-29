@@ -8,7 +8,7 @@ import './contact.css';
 // (app/api/contact/route.js); the visitor's address is the reply-to.
 
 // The company's mailing address, one line each.
-const ADDRESS = ['Glyphh AI LLC', 'ADDRESS LINE 1', 'CITY, STATE ZIP', 'United States'];
+const ADDRESS = ['Glyphh AI LLC', '1105 Naranjo Dr', 'Georgetown, TX 78628', 'United States'];
 
 export const metadata = {
   title: 'Contact — Glyphh',
