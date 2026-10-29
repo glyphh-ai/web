@@ -37,6 +37,7 @@ const COLS = [
   {
     title: 'Company',
     links: [
+      ['Contact', '/contact'],
       ['Support', 'mailto:support@glyphh.ai'],
       ...(DISCORD_URL ? [['Discord', DISCORD_URL]] : []),
       ['Terms of Use', '/terms'],
