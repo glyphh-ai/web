@@ -45,6 +45,11 @@ function docsHost(request) {
 
 const SITE_HOSTS = ['glyphh.ai', 'www.glyphh.ai'];
 
+// The pages a press release may show in a frame, and the sites it is shown on: EIN Presswire's own pages and the
+// news sites it syndicates to through them (the frame sits on einpresswire.com). Every other page stays DENY.
+const FRAMED_BY_PRESS = new Set(['/blog/introducing-ada']);
+const PRESS_FRAMERS = 'https://www.einpresswire.com https://*.einpresswire.com';
+
 // The Ada gate (2026-10-25, app/lib/gate.js): every request is kept against its
 // session, and at its 5th, 20th and 60th request Ada Cloud is asked whether the
 // session behaves like a person or a robot. Off without GLYPHH_API_KEY; shadow
@@ -94,7 +99,12 @@ function route(request, host) {
 
   // Security headers
   response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('X-Frame-Options', 'DENY');
+  if (FRAMED_BY_PRESS.has(request.nextUrl.pathname)) {
+    // a press release on EIN Presswire embeds the launch post under it (2026-10-30); every other site still may not
+    response.headers.set('Content-Security-Policy', `frame-ancestors 'self' ${PRESS_FRAMERS}`);
+  } else {
+    response.headers.set('X-Frame-Options', 'DENY');
+  }
   response.headers.set('X-XSS-Protection', '1; mode=block');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
