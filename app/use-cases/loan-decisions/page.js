@@ -27,7 +27,6 @@ const RESULTS = [
   ['Always approve', '67.5%', '325'],
   ['Claude Fable 5.1, run 1', '77.0%', '110'],
   ['Claude Fable 5.1, run 2', '79.0%', '114'],
-  ['Logistic regression, cost-aware', '68.5%', '103'],
   ['Ada, learned and calibrated, decide', '70.0%', '100'],
 ];
 
@@ -107,7 +106,7 @@ export default function LoanDecisionsPage() {
           <dl className="rt-facts">
             <div><dt>Dataset</dt><dd>German Credit (UCI Statlog): 1,000 real loan applications, 20 typed fields each (checking account, credit history, purpose, amount, duration, savings, employment, …) and the bank’s outcome, good or bad.</dd></div>
             <div><dt>Split</dt><dd>One shuffle (seed 7): 800 to learn from, 200 held out, the same for every system. Ada’s weights and calibration came from the 800 alone.</dd></div>
-            <div><dt>Baselines</dt><dd>Claude Fable 5.1, two independent runs, each given the 800 and told the costs; a logistic regression with a cost threshold; and always approving.</dd></div>
+            <div><dt>Baselines</dt><dd>Claude Fable 5.1, two independent runs, each given the 800 and told the costs; and always approving.</dd></div>
             <div><dt>The cost</dt><dd>The dataset’s own: approving a bad loan costs 5, refusing a good one costs 1. Lower is better.</dd></div>
             <div><dt>Asking</dt><dd>With asking a person priced at half a refused good loan, Ada decided 111 of the 200 itself, right on 81.1% of them, at a cost of 45 on those, and asked on 89.</dd></div>
           </dl>
@@ -130,7 +129,7 @@ export default function LoanDecisionsPage() {
             <ul>
               <li>Higher accuracy. Ada trades accuracy for the bank’s cost: it refuses more good loans to approve fewer bad ones, which is what the costs ask for.</li>
               <li>Your book. 200 applications from one bank; the hold-out ran a little easy for every system, so read the ranking, not the third digit.</li>
-              <li>A wide margin over a classic model. On purely typed data a tuned logistic regression is close (103 against 100). Ada adds the precedents behind each decision, asking, and learning one case at a time without retraining.</li>
+              <li>A wide margin. 100 against 110 is a win, not a rout. What Ada adds is the precedents behind each decision, asking where every answer is dear, and learning one case at a time without retraining.</li>
             </ul>
           </div>
         </section>
