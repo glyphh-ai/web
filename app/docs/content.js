@@ -1,11 +1,13 @@
 import { Architecture, Code, Row, Table } from './ui';
 import { PLUGIN_PAGES, SDK_PAGES } from './pages';
+import { RUNTIME_PAGES } from './runtime';
 import { DOCS } from './base';
 
-// The docs explain Ada Cloud: what it is, getting started, the API, tuning, Ada versions, data in and out, the plugin, the SDKs and
-// the plans. Every fact is checked against the server's docs/specs/ada-cloud.md, docs/architecture.md and
-// src/glyphh_ada (origin/main, 2026-10-22), and glyphh-ai/glyphh (sdk/*/README.md, plugins/glyphh/skills/ada).
-// Each fact once.
+// The docs explain Glyphh's two products. Ada Cloud: what it is, getting started, the API, tuning, Ada versions, data in
+// and out, the plugin, the SDKs and the plans, checked against the server's docs/specs/ada-cloud.md,
+// docs/architecture.md and src/glyphh_ada (origin/main, 2026-10-22), and glyphh-ai/glyphh (sdk/*/README.md,
+// plugins/glyphh/skills/ada). rrotor, the runtime you run yourself, with its programs and CLIs: runtime.js
+// (glyphh-ai/rrotor and glyphh-ai/glyphh, 2026-10-31). Each fact once.
 
 const API = 'https://ada.glyphh.ai';
 
@@ -25,10 +27,15 @@ const cloud = [
             [<strong key="a">The platform</strong>, 'Sign in; Models (spec, settings, import, try it, backtest, export), API Keys, Usage, Billing', <a key="b" href="https://platform.glyphh.ai">platform.glyphh.ai</a>],
             [<strong key="a">The connector</strong>, 'Claude’s way in: one URL, a Glyphh sign-in, the ada_* tools', <code key="b">https://api.glyphh.ai/mcp</code>],
             [<strong key="a">The plugin</strong>, 'For Claude Code: sign-in and the Ada skill', <a key="b" href={`${DOCS}/plugin`}>The plugin</a>],
-            [<strong key="a">The SDKs</strong>, 'Python (glyphh) and TypeScript (@glyphh-ai/glyphh), 3.2', <a key="b" href={`${DOCS}/sdks`}>The SDKs</a>],
+            [<strong key="a">The SDKs</strong>, 'Python (glyphh) and TypeScript (@glyphh-ai/glyphh), 3.6', <a key="b" href={`${DOCS}/sdks`}>The SDKs</a>],
           ]}
         />
-        <p>There is nothing to install, deploy or host, and no code to write for a model.</p>
+        <p>For Ada there is nothing to install, deploy or host, and no code to write for a model.</p>
+        <p>
+          Glyphh’s other product is <a href={`${DOCS}/runtime`}>rrotor</a>, a runtime you run yourself on your own
+          machine or servers, which hosts your programs and CLIs. It is separate from Ada Cloud: programs are not Ada
+          models, rrotor runs no Ada, and nothing of a program goes through Glyphh.
+        </p>
 
         <h2>A model is a spec</h2>
         <p>
@@ -470,6 +477,7 @@ export const GROUPS = [
   { title: 'Ada Cloud', pages: cloud },
   { title: 'Building models', pages: build },
   { title: 'Claude and code', pages: [...PLUGIN_PAGES, ...SDK_PAGES] },
+  { title: 'rrotor', pages: RUNTIME_PAGES },
   { title: 'Plans', pages: plans },
 ];
 export const PAGES = GROUPS.flatMap((g) => g.pages);

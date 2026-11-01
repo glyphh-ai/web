@@ -1,6 +1,7 @@
 // The FAQ: two or three sentences each, plain words, nothing that is not
 // built. Answers are strings or, when they carry a link, { html }.
-// Ada Cloud (live 2026-10-22): no runtimes, nodes or licence keys.
+// Ada Cloud (live 2026-10-22) has no runtimes, nodes or licence keys; rrotor, the runtime you run yourself
+// (programs and CLIs), is a separate product.
 
 const DOCS = 'https://docs.glyphh.ai';
 
@@ -11,7 +12,12 @@ export const FAQ_GROUPS = [
       {
         id: 'what-is-glyphh',
         q: 'What is Glyphh?',
-        a: { html: `The company behind Ada. You sign up on <a href="https://platform.glyphh.ai">platform.glyphh.ai</a>, your models run in Ada Cloud, and you call them from Claude and from your software.` },
+        a: { html: `The company behind Ada. You sign up on <a href="https://platform.glyphh.ai">platform.glyphh.ai</a>, your models run in Ada Cloud, and you call them from Claude and from your software. Glyphh also makes <a href="${DOCS}/runtime">rrotor</a>, a runtime you run yourself for your programs and CLIs.` },
+      },
+      {
+        id: 'rrotor',
+        q: 'What is rrotor?',
+        a: { html: `A runtime you install on your own machine or servers, from Claude with the <code>glyphh</code> plugin (“install rrotor”) or with Docker. It runs your programs and command-line tools in a sandbox, with their secrets, schedules and approvals kept on it. It is separate from Ada Cloud, and nothing of a program goes through Glyphh. See <a href="${DOCS}/runtime">the runtime</a>.` },
       },
       {
         id: 'what-is-ada',
