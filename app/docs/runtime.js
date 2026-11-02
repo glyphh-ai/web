@@ -67,16 +67,17 @@ export const RUNTIME_PAGES = [
   {
     slug: 'runtime',
     title: 'The runtime',
-    lede: 'rrotor is a runtime you run yourself, a container on your machine or your servers, driven from Claude. It hosts your programs and your CLIs, each in a sandbox.',
+    lede: 'rrotor is a runtime you run yourself, a container on your machine or your servers, driven from Claude. It hosts your apps, your CLIs and your programs, each in a sandbox.',
     body: (
       <>
         <h2>What it is</h2>
         <p>
           One locked-down Linux image, <code>ghcr.io/glyphh-ai/rrotor</code>, with everything it keeps on one volume. It
-          hosts two things:
+          hosts three things, under one contract:
         </p>
-        <Row k="Programs">A folder with a glyphh.json manifest and program.py, deployed by commit, with a local secrets vault, cron schedules the runtime fires itself, a SQLite database and approvals that wait for a person (<a href={`${DOCS}/programs`}>Programs</a>)</Row>
+        <Row k="Apps">A kind of program (&quot;kind&quot;: &quot;app&quot;): a page Claude wrote, published from Claude to your organisation’s rrotor, approved by a reviewer and served to your people at /apps/&lt;name&gt;/ (<a href={`${DOCS}/apps`}>Apps</a>)</Row>
         <Row k="CLIs">A kind of program (&quot;kind&quot;: &quot;cli&quot;): a pinned command-line tool such as gh or the glyphh command, run one command at a time (<a href={`${DOCS}/clis`}>CLIs</a>)</Row>
+        <Row k="Programs">A folder with a glyphh.json manifest and program.py, deployed by commit, with a local secrets vault, cron schedules the runtime fires itself, a SQLite database and approvals that wait for a person (<a href={`${DOCS}/programs`}>Programs</a>)</Row>
         <p>
           Claude reaches it over MCP, with rrotor’s own tools; your software through REST or the SDKs’{' '}
           <a href={`${DOCS}/runtime-sdk`}>Runtime client</a>.
@@ -360,6 +361,71 @@ program_continue {"run_id": "…", "answer": {"approved": true}}
   "limits": { "seconds": 120, "memory_mb": 256 }
 }`}</Code>
         <p>Claude then calls Ada Cloud through <a href={`${DOCS}/cli`}>the glyphh command</a> in the sandbox, its API key kept in the runtime’s vault.</p>
+      </>
+    ),
+  },
+  {
+    slug: 'apps',
+    title: 'Apps',
+    lede: 'An app is a page Claude wrote, published from Claude to your organisation’s rrotor, approved by a reviewer and opened by your people at your own host, by role.',
+    body: (
+      <>
+        <h2>What an app is</h2>
+        <p>
+          A Claude Code artifact: one self-contained <code>.html</code> or <code>.md</code> file (styles and scripts
+          inline, libraries from the five CDN hosts artifacts use, fonts from Google Fonts) and any files beside it.
+          Claude Code’s own publish puts it on claude.ai; <strong>this</strong> publish puts it on your rrotor instead,
+          as a program of <code>&quot;kind&quot;: &quot;app&quot;</code>: the same deploy, versions, sandbox, vault,
+          hosts, CLIs and audit as any program. The page never passes through Glyphh’s server: it goes from the
+          session to the rrotor, and the server keeps only the catalogue entry (title, description, version, roles,
+          who published it, its review state).
+        </p>
+        <h2>Publish it from Claude</h2>
+        <p>With the <a href={`${DOCS}/plugin`}>glyphh plugin</a> and your rrotor connected, say:</p>
+        <Code>{`publish this to my org`}</Code>
+        <p>The plugin’s publish skill:</p>
+        <ol>
+          <li>Finds the page: the session’s latest artifact, or the file you name.</li>
+          <li>Agrees the name (kebab-case, the address <code>/apps/&lt;name&gt;/</code>; a new version of the same name replaces the old), a title, a one-line description and the roles that may open it (default: everyone in the organisation).</li>
+          <li>Replaces what cannot run on rrotor: a section that pulled live data through a claude.ai connector becomes a function in <code>program.py</code> the page calls, using <code>ctx.http</code> to the hosts the manifest declares, or a CLI the manifest names.</li>
+          <li>Calls <code>app_publish</code> with the files. rrotor writes the manifest, commits the files in a scratch repo (the commit is the version), deploys the version and answers its address and state.</li>
+        </ol>
+        <h2>Review</h2>
+        <ul>
+          <li>A new version is a <strong>draft</strong> until a reviewer approves it: the organisation’s admin, or a member of a reviewer group (platform, Settings → Auth). The approved version keeps serving until the next one is approved; a rejected one is never served.</li>
+          <li>Reviewers see the ones awaiting review, with Approve and Reject, on the platform’s Apps page and in Claude through the Glyphh connector (<code>artifacts</code>, <code>artifact_approve</code>, <code>artifact_reject</code>, <code>artifact_retire</code>). A reviewer can open any version of any app at the rrotor, to review a draft.</li>
+          <li>Your people find the approved ones in the same list, with Open, and open each at the rrotor it lives on.</li>
+          <li>Air-gapped (the link off), there is no catalogue: the deploy is the approval and the manifest’s roles decide.</li>
+        </ul>
+        <h2>Who opens it</h2>
+        <ul>
+          <li>A browser at <code>https://&lt;host&gt;/apps/&lt;name&gt;/</code> is sent to the Glyphh sign-in (rrotor is an OAuth client of the Glyphh server) and comes back with a session cookie; rrotor checks it with the server as it checks a bearer.</li>
+          <li><strong>Roles</strong> are your identity provider’s groups, read at every single sign-on (Okta or Entra ID over OIDC), plus Glyphh’s <code>admin</code> and <code>member</code>. An app with no roles opens to everyone in the organisation. Google and GitHub sign-ins have no groups.</li>
+          <li>A local rrotor (<code>127.0.0.1:7777</code>) serves its apps to the browser on its own machine with no sign-in: they are yours.</li>
+          <li>A runtime key is never served a page: keys call programs, not pages.</li>
+        </ul>
+        <h2>A page that calls the runtime</h2>
+        <p>
+          A page calls <code>POST /apps/&lt;name&gt;/call/&lt;function&gt;</code> with the inputs as JSON, and gets a
+          Result back as any run does (<code>done</code>, <code>needs_input</code>, <code>needs_approval</code>,
+          <code>failed</code>); a waiting run continues at <code>POST /apps/&lt;name&gt;/runs/&lt;run_id&gt;/continue</code>.
+          The run is the viewer’s: its CLIs run in their own signed-in home, and the audit names them.
+        </p>
+        <Code lang="js">{`const r = await fetch("/apps/deploy-failures/call/failures", {
+  method: "POST", headers: { "content-type": "application/json" },
+  body: JSON.stringify({ days: 7 }),
+}).then((x) => x.json());
+if (r.status === "done") render(r.data);`}</Code>
+        <h2>Routes and tools</h2>
+        <Table
+          head={['Route', 'MCP tool', 'Does']}
+          rows={[
+            ['POST /v1/apps', 'app_publish', 'Publish a version: {name, title, description?, roles?, files, entry?, functions?, program?, hosts?, secrets?, clis?, limits?}'],
+            ['GET /v1/apps', 'apps_list', 'Each app: name, title, description, version, active, roles, functions, state, url'],
+            ['GET /apps/{name}/', '', 'The page, to a signed-in viewer whose roles allow it, once approved'],
+            ['POST /apps/{name}/call/{function}', '', 'A run of one of the app’s functions, as the viewer'],
+          ]}
+        />
       </>
     ),
   },
