@@ -36,9 +36,7 @@ const FAQ = [
   ['What happens past the month’s reads?', 'On Basic, Pro and Team, reads go on and the ones past the allowance are billed at $1 per 10,000 on a later invoice. On Free they are refused until the month turns.'],
   ['What happens if I cancel?', 'Your plan runs to the end of the month you paid for, then your organisation moves to Free. Your models and precedents are kept, and you can export them at any time.'],
   ['Do you train on our data?', 'No. Your models run in Glyphh’s cloud, isolated per organisation, and we never train on your data or sell it.'],
-  ['Do you charge per seat?', 'No. Members, models and keys are unlimited on every plan.'],
-  ['Does a plan cover rrotor?', 'rrotor, the runtime you run yourself, is free on one node with no key at all. A plan’s licence key lifts the node cap, Pro to 3 and Team to 10; Enterprise is unlimited, with a cluster that elects its own head and the kept audit log. Nothing a licence does refuses a run.'],
-  ['Can we change plan?', 'Any time, from the platform.'],
+  ['Do you charge per seat?', 'No. Members, models and keys are unlimited on every plan.'],  ['Can we change plan?', 'Any time, from the platform.'],
 ];
 
 export default function PricingPage() {

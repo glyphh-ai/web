@@ -32,13 +32,13 @@ const MOVED = {
   'fact-trees': to('api'), 'ada-act': to('sdks'), 'ada-sdk': to('sdks'),
   'ada-tools': to('plugin'), mcp: to('plugin'), 'mcp-servers': to('plugin'),
   'quick-start': to('getting-started'), quickstart: to('getting-started'),
-  // rrotor is the runtime you run yourself (2026-10-31): its old addresses land on its pages.
-  runtimes: to('runtime'), rrotor: to('runtime'), 'self-hosting': to('runtime'), 'run-rrotor': to('runtime'),
-  compose: to('runtime'), 'docker-compose': to('runtime'), kubernetes: to('runtime'),
-  helm: to('runtime'), terraform: to('runtime'), clusters: to('runtime'), 'run-a-cluster': to('runtime'),
-  'own-cli': to('clis'),
-  // Apps (2026-11-02): pages Claude publishes to the org's rrotor; the old Artifacts name lands there.
-  artifacts: to('apps'),
+  // rrotor is shelved (his ruling, 2026-11-02): its pages (runtime.js) stay in the tree, unlisted, and every
+  // rrotor address lands on the docs home.
+  ...Object.fromEntries([
+    'runtime', 'programs', 'clis', 'apps', 'runtime-sdk', 'artifacts', 'own-cli',
+    'runtimes', 'rrotor', 'self-hosting', 'run-rrotor', 'compose', 'docker-compose', 'kubernetes', 'helm',
+    'terraform', 'clusters', 'run-a-cluster',
+  ].map((slug) => [slug, DOCS])),
   licensing: to('plans'), seats: to('plans'), 'billing-admin': to('plans'),
   logs: to('data'),
 };
