@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Geist;font-weight:100 900;src:url(assets/geist.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:100 800;src:url(assets/jbmono.woff2) format("woff2")}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1200px;height:1500px;background:#000;color:#fff;font-family:Geist,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+.page{position:relative;width:1200px;height:1500px;padding:64px 72px 56px;display:flex;flex-direction:column}
+.mono{font-family:"JetBrains Mono",monospace}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#b0b0b0}
+h1{font-size:44px;line-height:1.1;font-weight:500;letter-spacing:-.02em;margin-top:12px;max-width:1040px}
+h1 em{font-style:normal;color:#c8c8c8}
+.rule{height:1px;background:#5a5a5a}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:28px;border-top:1px solid #5a5a5a;border-bottom:1px solid #5a5a5a}
+.col{padding:22px 32px 22px 0}
+.col+.col{border-left:1px solid #5a5a5a;padding-left:32px;padding-right:0}
+.tag{display:inline-flex;align-items:center;gap:10px;font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#b0b0b0}
+.tag i{width:9px;height:9px;border-radius:50%;background:#fff;display:inline-block}
+.tag.ada i{background:#b066ff}
+.name{font-size:32px;font-weight:500;letter-spacing:-.02em;margin-top:12px}
+.name span{font-size:18px;color:#999;font-weight:400;letter-spacing:0;margin-left:10px}
+.one{font-size:18px;line-height:1.4;color:#eaeaea;margin-top:6px;min-height:50px}
+ul{list-style:none;margin-top:12px}
+li{display:flex;gap:14px;font-size:16px;line-height:1.4;color:#c8c8c8;padding:7px 0;border-top:1px solid #2a2a2a}
+li b{color:#fff;font-weight:500}
+li .k{font-family:"JetBrains Mono",monospace;font-size:12px;color:#999;min-width:28px;padding-top:5px}
+.strip{display:grid;grid-template-columns:340px 1fr;gap:40px;align-items:center;padding:20px 0;border-bottom:1px solid #5a5a5a}
+.strip h3{font-size:22px;font-weight:500;letter-spacing:-.01em;line-height:1.25}
+.strip p{font-size:14px;color:#999;margin-top:8px;line-height:1.4}
+.bars{display:grid;gap:10px}
+.bar{display:grid;grid-template-columns:230px 1fr 92px;align-items:center;gap:16px;font-size:15px;color:#c8c8c8}
+.bar .t{height:16px;background:#1a1a1a;position:relative}
+.bar .t i{position:absolute;left:0;top:0;bottom:0;background:#5a5a5a}
+.bar.win .t i{background:#fff}
+.bar .v{font-family:"JetBrains Mono",monospace;font-size:14px;color:#fff;text-align:right}
+.sec{margin-top:26px}
+.sechead{display:flex;align-items:baseline;justify-content:space-between;gap:24px}
+.sechead h2{font-size:30px;font-weight:500;letter-spacing:-.02em;line-height:1.15;display:flex;align-items:center;gap:14px;white-space:nowrap}
+.sechead h2 img{height:34px;width:auto;display:block;position:relative;top:1px}
+.sechead p{font-size:15px;color:#999;max-width:330px;line-height:1.4;text-align:right}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:20px;border:1px solid #5a5a5a}
+.node{padding:18px 20px 18px;border-left:1px solid #5a5a5a;position:relative;display:flex;flex-direction:column}
+.node:first-child{border-left:0}
+.node .n{font-family:"JetBrains Mono",monospace;font-size:12px;color:#999;letter-spacing:.1em}
+.node h4{font-size:19px;font-weight:500;margin-top:8px;line-height:1.2;letter-spacing:-.01em}
+.node p{font-size:14px;line-height:1.4;color:#c8c8c8;margin-top:8px}
+.node .who{margin-top:auto;padding-top:16px;font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#999;display:flex;align-items:center;gap:8px}
+.node .who img{height:14px;width:auto;display:block}
+.node .who i{width:8px;height:8px;border-radius:50%;background:#b066ff;display:inline-block}
+.node.ada{background:#0d0d0d}
+.node.ada h4{color:#fff}
+.node .arrow{position:absolute;right:-9px;top:50%;width:16px;height:16px;background:#000;border:1px solid #5a5a5a;border-left:0;border-bottom:0;transform:translateY(-50%) rotate(45deg);z-index:2}
+.node.ada .arrow{background:#0d0d0d}
+.split{margin-top:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.why{padding:16px 0 0;border-top:1px solid #5a5a5a}
+.why b{display:block;font-size:16px;font-weight:500;line-height:1.3}
+.why p{font-size:14px;color:#999;line-height:1.45;margin-top:6px}
+.foot{margin-top:auto;padding-top:16px;border-top:1px solid #5a5a5a;display:flex;justify-content:space-between;align-items:baseline;font-family:"JetBrains Mono",monospace;font-size:13px;color:#999}
+.foot b{color:#fff;font-weight:500}
+</style></head><body><div class="page">
+
+<div class="eyebrow">Two classifiers, one integration platform</div>
+<h1>Ada decides what your history has already decided. Jev answers from pretraining. <em>Boomi moves the case between them.</em></h1>
+
+<div class="cols">
+  <div class="col">
+    <div class="tag ada"><i></i>Glyphh</div>
+    <div class="name">Ada <span>a classifier that learns from precedent</span></div>
+    <div class="one">A new case is answered from the nearest decisions you already made, the way case law works.</div>
+    <ul>
+      <li><span class="k">01</span><span><b>Learns from your record.</b> Record a case and its outcome; it counts the moment it is written. No dataset, no training run, no retrain.</span></li>
+      <li><span class="k">02</span><span><b>Typed answer, calibrated confidence.</b> One of the outcomes your spec allows, a probability for each, and the precedents it stands on.</span></li>
+      <li><span class="k">03</span><span><b>No language model in the path.</b> Hyperdimensional computing: the same case gets the same answer, in milliseconds.</span></li>
+      <li><span class="k">04</span><span><b>Knows when to ask.</b> Below your bar the case goes to a person or an LLM, and their answer becomes the next precedent.</span></li>
+    </ul>
+  </div>
+  <div class="col">
+    <div class="tag"><i></i>TypeSafe AI</div>
+    <div class="name">Jev <span>a typed-output model</span></div>
+    <div class="one">Ask any number of typed questions about one state in one request; it answers from what it learned in pretraining.</div>
+    <ul>
+      <li><span class="k">01</span><span><b>Typed outputs, not prose.</b> A choice, a number, a yes or no, with a probability, so software can act on it directly.</span></li>
+      <li><span class="k">02</span><span><b>Many questions per call.</b> One state in, fourteen answers out, as in TypeSafe's security workflow.</span></li>
+      <li><span class="k">03</span><span><b>Keeps nothing between calls.</b> Your examples travel inside each request and are paid for every time, up to its context limit.</span></li>
+      <li><span class="k">04</span><span><b>Fast and cheap per call.</b> Around a fifth of a second and fractions of a cent, starting from general knowledge rather than your record.</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="strip">
+  <div>
+    <h3>Alone they tie. Ada first, then Jev, wins.</h3>
+    <p>TypeSafe's Security Incidents workflow, 50 held-out alerts. Ada triages what it has seen; Jev handles containment for the ones Ada acts on.</p>
+  </div>
+  <div class="bars">
+    <div class="bar"><span>Jev alone</span><div class="t"><i style="width:54%"></i></div><span class="v">27 / 50</span></div>
+    <div class="bar"><span>Ada alone</span><div class="t"><i style="width:54%"></i></div><span class="v">27 / 50</span></div>
+    <div class="bar win"><span>Ada triage + Jev containment</span><div class="t"><i style="width:62%"></i></div><span class="v">31 / 50</span></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sechead">
+    <h2>Ada as a decision step in a <img src="assets/boomi-white.svg" alt="Boomi"> process</h2>
+    <p>One HTTP Client connector to Ada Cloud. No model, no retrain, no new system of record.</p>
+  </div>
+  <div class="flow">
+    <div class="node"><div class="n">01</div><h4>A case arrives</h4><p>A ticket, a claim, an order exception or an alert lands through any Boomi connector: Salesforce, ServiceNow, NetSuite, SAP, email.</p><div class="who"><img src="assets/boomi-white.svg" alt="Boomi"></div><div class="arrow"></div></div>
+    <div class="node"><div class="n">02</div><h4>Map the fields</h4><p>A Boomi map turns the record into the fields Ada's question asks about: department, amount, category, the text itself.</p><div class="who"><img src="assets/boomi-white.svg" alt="Boomi"></div><div class="arrow"></div></div>
+    <div class="node ada"><div class="n">03</div><h4>Ada decides</h4><p>The HTTP Client connector calls Ada Cloud. Back come the outcome, a calibrated confidence and the precedents behind it, in about 100 ms.</p><div class="who"><i></i>Ada Cloud</div><div class="arrow"></div></div>
+    <div class="node"><div class="n">04</div><h4>Decision shape</h4><p>Above your bar, the process acts: assign the team, approve the claim, update the system of record. Below it, a Boomi Flow task for a person, or an LLM step.</p><div class="who"><img src="assets/boomi-white.svg" alt="Boomi"></div><div class="arrow"></div></div>
+    <div class="node"><div class="n">05</div><h4>Record the outcome</h4><p>Whoever decided, the final outcome is recorded back to Ada. The next similar case is answered from it, with no retrain.</p><div class="who"><img src="assets/boomi-white.svg" alt="Boomi"> <span>→</span> <i></i>Ada</div></div>
+  </div>
+  <div class="split">
+    <div class="why"><b>Most cases never reach a model.</b><p>Ada keeps the ones it is sure of; Boomi hands only the rest to a person or an LLM, so the token bill stops growing with your history.</p></div>
+    <div class="why"><b>Every automated step is auditable.</b><p>The confidence and the precedents ride along in the Boomi process, into the ticket, the approval record, the log.</p></div>
+    <div class="why"><b>It gets better from your own work.</b><p>Each decision Boomi records is the next precedent. The integration does not change; Ada's answers do.</p></div>
+  </div>
+</div>
+
+<div class="foot"><span><b>glyphh.ai</b> · Ada Cloud, free to start · github.com/glyphh-ai/benchmarks</span><span>Boomi is a trademark of Boomi, LP. Jev is TypeSafe AI's model.</span></div>
+</div></body></html>
