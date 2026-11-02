@@ -19,14 +19,14 @@
  "sourceBin": [
   {
    "id": 1,
-   "src": "./media/1793613226.472346/rrotor-reel-graphic.mp4",
+   "src": "./media/1793628142.653414/rrotor-reel-graphic.mp4",
    "rect": [
     0,
     0,
     1920,
     1080
    ],
-   "lastMod": "20261102T035346",
+   "lastMod": "20261102T080222",
    "loudnessNormalization": true,
    "sourceTracks": [
     {
@@ -53,19 +53,19 @@
     }
    ],
    "metadata": {
-    "timeAdded": "20261102T035346"
+    "timeAdded": "20261102T080222"
    }
   },
   {
    "id": 2,
-   "src": "./media/1793613226.472346/01-hook.mp4",
+   "src": "./media/1793628142.653414/01-hook.mp4",
    "rect": [
     0,
     0,
     1920,
     1080
    ],
-   "lastMod": "20261102T035346",
+   "lastMod": "20261102T080222",
    "loudnessNormalization": true,
    "sourceTracks": [
     {
@@ -92,19 +92,19 @@
     }
    ],
    "metadata": {
-    "timeAdded": "20261102T035346"
+    "timeAdded": "20261102T080222"
    }
   },
   {
    "id": 3,
-   "src": "./media/1793613226.472346/02-session.mp4",
+   "src": "./media/1793628142.653414/02-session.mp4",
    "rect": [
     0,
     0,
     1920,
     1080
    ],
-   "lastMod": "20261102T035346",
+   "lastMod": "20261102T080222",
    "loudnessNormalization": true,
    "sourceTracks": [
     {
@@ -131,19 +131,19 @@
     }
    ],
    "metadata": {
-    "timeAdded": "20261102T035346"
+    "timeAdded": "20261102T080222"
    }
   },
   {
    "id": 4,
-   "src": "./media/1793613226.472346/03-race.mp4",
+   "src": "./media/1793628142.653414/03-race.mp4",
    "rect": [
     0,
     0,
     1920,
     1080
    ],
-   "lastMod": "20261102T035346",
+   "lastMod": "20261102T080222",
    "loudnessNormalization": true,
    "sourceTracks": [
     {
@@ -170,19 +170,19 @@
     }
    ],
    "metadata": {
-    "timeAdded": "20261102T035346"
+    "timeAdded": "20261102T080222"
    }
   },
   {
    "id": 5,
-   "src": "./media/1793613226.472346/04-apps.mp4",
+   "src": "./media/1793628142.653414/04-apps.mp4",
    "rect": [
     0,
     0,
     1920,
     1080
    ],
-   "lastMod": "20261102T035346",
+   "lastMod": "20261102T080222",
    "loudnessNormalization": true,
    "sourceTracks": [
     {
@@ -209,19 +209,19 @@
     }
    ],
    "metadata": {
-    "timeAdded": "20261102T035346"
+    "timeAdded": "20261102T080222"
    }
   },
   {
    "id": 6,
-   "src": "./media/1793613226.472346/05-clis.mp4",
+   "src": "./media/1793628142.653414/05-clis.mp4",
    "rect": [
     0,
     0,
     1920,
     1080
    ],
-   "lastMod": "20261102T035346",
+   "lastMod": "20261102T080222",
    "loudnessNormalization": true,
    "sourceTracks": [
     {
@@ -248,19 +248,19 @@
     }
    ],
    "metadata": {
-    "timeAdded": "20261102T035346"
+    "timeAdded": "20261102T080222"
    }
   },
   {
    "id": 7,
-   "src": "./media/1793613226.472346/06-programs.mp4",
+   "src": "./media/1793628142.653414/06-programs.mp4",
    "rect": [
     0,
     0,
     1920,
     1080
    ],
-   "lastMod": "20261102T035346",
+   "lastMod": "20261102T080222",
    "loudnessNormalization": true,
    "sourceTracks": [
     {
@@ -287,19 +287,19 @@
     }
    ],
    "metadata": {
-    "timeAdded": "20261102T035346"
+    "timeAdded": "20261102T080222"
    }
   },
   {
    "id": 8,
-   "src": "./media/1793613226.472346/07-end.mp4",
+   "src": "./media/1793628142.653414/07-end.mp4",
    "rect": [
     0,
     0,
     1920,
     1080
    ],
-   "lastMod": "20261102T035346",
+   "lastMod": "20261102T080222",
    "loudnessNormalization": true,
    "sourceTracks": [
     {
@@ -326,7 +326,7 @@
     }
    ],
    "metadata": {
-    "timeAdded": "20261102T035346"
+    "timeAdded": "20261102T080222"
    }
   }
  ],
@@ -471,13 +471,13 @@
      {
       "endTime": 211680000,
       "time": 211680000,
-      "value": "Claude builds you a dashboard, a tool, a job. Then what?",
+      "value": "Your teams make pages, tools and jobs with AI. Then what?",
       "duration": 0
      },
      {
       "endTime": 1975680000,
       "time": 1975680000,
-      "value": "rrotor is where it goes to run.",
+      "value": "rrotor is where that content lives, and is governed.",
       "duration": 0
      },
      {

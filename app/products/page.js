@@ -8,7 +8,7 @@ import './products.css';
 export const metadata = {
   title: 'Products — Glyphh',
   description:
-    'Glyphh makes two things: Ada, decisions from your own precedents, run by Glyphh; and rrotor, the runtime you run yourself for the apps, CLIs and programs Claude builds with you.',
+    'Glyphh makes two things: Ada, decisions from your own precedents, run by Glyphh; and rrotor, the secure runtime you run yourself where the AI content your teams create lives and is governed.',
   alternates: { canonical: '/products' },
 };
 
@@ -23,7 +23,7 @@ const PRODUCTS = [
     href: '/products/rrotor',
     who: 'You run it',
     title: 'rrotor',
-    body: 'Where what Claude builds goes to run: the apps, command-line tools and programs from your Claude sessions, each in a sandbox, approved by a person and on record, at your own host.',
+    body: 'A secure runtime where the AI content your teams create lives and is governed: pages, tools and jobs made with any agent, reviewed by a person, opened by role, on record, at your own host.',
   },
 ];
 
@@ -37,8 +37,8 @@ export default function ProductsPage() {
           <span className="qs-kicker">Products</span>
           <h1 className="ix-title">Two products. One runs at Glyphh, one runs at yours.</h1>
           <p className="ix-lede">
-            Ada decides from precedent, and Glyphh runs it for you. rrotor runs what Claude builds with you, on your own
-            machine or your own servers, and nothing of it passes through Glyphh.
+            Ada decides from precedent, and Glyphh runs it for you. rrotor governs the AI content your teams create,
+            on your own machine or your own servers, and nothing of it passes through Glyphh.
           </p>
         </section>
 

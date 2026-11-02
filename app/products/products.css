@@ -18,6 +18,9 @@
 .pr-kind-more { font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-3); text-decoration: none; }
 .pr-kind-more:hover { color: var(--text); }
 
+/* A diagram per kind: boxes and arrows, white and grey on black. */
+.pr-diagram { display: block; width: 100%; height: auto; margin: 0 0 0.75rem; border: 1px solid var(--border); background: var(--bg); padding: 0.9rem; box-sizing: border-box; }
+
 /* An exchange with the runtime, as a transcript: who spoke, then what. */
 .pr-chat { margin: 0; padding: 1rem 1.1rem; border: 1px solid var(--border); background: var(--bg); font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.75; color: var(--text-2); overflow-x: auto; }
 .pr-chat > div { display: grid; grid-template-columns: 4.4rem 1fr; gap: 0.8rem; white-space: pre-wrap; }

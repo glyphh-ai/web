@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import '../products.css';
+import { AppDiagram, CliDiagram, ProgramDiagram } from './Diagrams';
 
 // rrotor, the product page (his order, 2026-11-02): where what Claude builds goes to run. Apps first, then CLIs,
 // then programs, each with one real exchange; then how it gets there, what stays yours, how to get it, and Ada
@@ -8,9 +9,9 @@ import '../products.css';
 // glyphh-ai/server docs/specs/apps.md and glyphh-ai/glyphh (README.md, plugins/glyphh/skills) on 2026-11-02.
 
 export const metadata = {
-  title: 'rrotor, where what Claude builds goes to run — Glyphh',
+  title: 'rrotor: govern the AI content your teams create — Glyphh',
   description:
-    'rrotor is a runtime you run yourself. The apps, command-line tools and programs Claude makes with you land on it under one contract: sandboxed, approved by a person, on record, at your own host. Nothing passes through Glyphh.',
+    'Glyphh rrotor is a secure runtime you run yourself, where the pages, dashboards, documents, tools and jobs your teams make with Claude, Codex, Gemini, Cursor, Grok or Copilot live and are governed: reviewed by a person, opened by role, on record, at your own host.',
   alternates: { canonical: '/products/rrotor' },
 };
 
@@ -18,16 +19,16 @@ const DOCS = 'https://docs.glyphh.ai';
 const REPO = 'https://github.com/glyphh-ai/glyphh';
 
 const FLOW = [
-  { n: '1', title: 'Claude writes it', body: 'In your session, with the glyphh plugin: a page, a CLI’s manifest, or a glyphh.json and a program.py with its tests.' },
+  { n: '1', title: 'Your team makes it', body: 'In a session with Claude, Codex or any agent: a page or a dashboard, a CLI’s manifest, or a glyphh.json and a program.py with its tests.' },
   { n: '2', title: 'Deployed by commit', body: 'rrotor fetches that one commit, checks its SHA and reads the manifest. A page is committed for you; the same files again are the same version.' },
   { n: '3', title: 'A person says yes', body: 'A reviewer approves an app before anyone opens it. A command or a step that matches an approval pattern waits for you.' },
-  { n: '4', title: 'It runs at your host', body: 'Your people in a browser, Claude over MCP, your software over REST or the SDKs. Every call is a run on record.' },
+  { n: '4', title: 'It runs at your host', body: 'Your people in a browser, an agent over MCP, your software over REST or the SDKs. Every call is a run on record.' },
 ];
 
 const YOURS = [
   ['Your host', <>rrotor runs where you put it: <code>127.0.0.1:7777</code> on a laptop, or your own address on your servers, your DNS, your TLS. No Glyphh name on it.</>],
   ['The sandbox', <>Every run in bubblewrap, seccomp and Landlock, with no network but the hosts its manifest names, through the runtime’s own egress proxy.</>],
-  ['The vault', <>Secrets encrypted on the runtime with its own key, read by a program as <code>ctx.secrets</code>, never shown back, not even to Claude.</>],
+  ['The vault', <>Secrets encrypted on the runtime with its own key, read by a program as <code>ctx.secrets</code>, never shown back, not even to the agent.</>],
   ['Approvals', <>A step, a command or a page waits for a named person. The record says who said yes.</>],
   ['Roles', <>Your identity provider’s groups, read at sign-in (Okta or Entra ID over OIDC), decide who opens an app and who reviews. Nothing new to administer.</>],
   ['Each person', <>A CLI runs as the person who asked, in their own signed-in home on the runtime, so what Claude does with it is what they could do.</>],
@@ -83,11 +84,12 @@ export default function RrotorPage() {
         <section className="ix-head">
           <a href="/products" className="ix-crumb">&larr; Products</a>
           <span className="qs-kicker">rrotor</span>
-          <h1 className="ix-title">Where what Claude builds goes to run.</h1>
+          <h1 className="ix-title">Govern the AI content your teams create, in one place.</h1>
           <p className="ix-lede">
-            rrotor is a runtime you run yourself: one container on your machine or your servers, driven from Claude.
-            The apps, command-line tools and programs Claude makes with you land on it under one contract, each in a
-            sandbox, approved by a person and on record, at your own host. Nothing of them passes through Glyphh.
+            Glyphh rrotor, recursive reasoning on top of reasoning, is a secure runtime you run yourself, where your
+            teams’ AI content lives and is governed. The pages, dashboards, documents, tools and jobs people make with
+            Claude, Codex, Gemini, Cursor, Grok or Copilot land on it under one contract: reviewed by a person, opened
+            by role, on record, at your own host. Nothing of it passes through Glyphh.
           </p>
           <div className="ix-actions">
             <a href={`${DOCS}/runtime`} className="os-cta os-cta-primary">Install from Claude</a>
@@ -101,9 +103,9 @@ export default function RrotorPage() {
               <span className="qs-kicker">What runs on it</span>
               <h2 className="ix-h2">Apps, CLIs and programs. One contract.</h2>
               <p className="ix-desc">
-                Each is a folder with a glyphh.json manifest, deployed by commit and run in a sandbox that reaches
-                only the hosts the manifest names, with its secrets in the runtime’s vault, approvals that wait for a
-                person, and every call on record.
+                AI content comes in three kinds here. Each is a folder with a glyphh.json manifest, deployed by commit
+                and run in a sandbox that reaches only the hosts the manifest names, with its secrets in the runtime’s
+                vault, approvals that wait for a person, and every call on record.
               </p>
             </div>
             <a href={`${DOCS}/programs`} className="qs-more">The contract &rarr;</a>
@@ -113,18 +115,20 @@ export default function RrotorPage() {
             <article className="pr-kind">
               <div>
                 <span className="qs-kicker">Apps</span>
-                <h3>A page Claude made, published to your people.</h3>
+                <h3>A page your team made with AI, published to your people.</h3>
                 <p>
-                  Ask Claude to publish the dashboard it just wrote to your org. It lands on your rrotor as a draft,
-                  a reviewer approves it, and your people open it at your host, signed in to Glyphh, only the roles
-                  you named. A page can call functions that run on the runtime, as the person viewing it.
+                  Ask Claude to publish the dashboard it just wrote to your org, or send any page, document, diagram
+                  or deck over the runtime’s API. It lands on your rrotor as a draft, a reviewer approves it, and your
+                  people open it at your host, signed in to Glyphh, only the roles you named. A page can call
+                  functions that run on the runtime, as the person viewing it.
                 </p>
                 <a href={`${DOCS}/apps`} className="pr-kind-more">Apps in the docs &rarr;</a>
               </div>
               <div>
+                <AppDiagram />
                 <div className="pr-chat">
                   <Line who="you" cls="pr-you">publish this to my org, engineering only</Line>
-                  <Line who="claude" cls="pr-claude">app_publish deploy-failures  roles: [&quot;engineering&quot;]</Line>
+                  <Line who="agent" cls="pr-claude">app_publish deploy-failures  roles: [&quot;engineering&quot;]</Line>
                   <Line who="rrotor" cls="pr-rrotor">version 3  <em>draft</em>  …/apps/deploy-failures/</Line>
                   <Line who="admin" cls="pr-you">approve</Line>
                   <Line who="rrotor" cls="pr-rrotor"><em>approved</em>  serving version 3 to engineering</Line>
@@ -135,7 +139,7 @@ export default function RrotorPage() {
             <article className="pr-kind">
               <div>
                 <span className="qs-kicker">CLIs</span>
-                <h3>A tool Claude drives without touching your machine.</h3>
+                <h3>A tool an agent drives without touching your machine.</h3>
                 <p>
                   A pinned command-line tool, gh, stripe, your own, installed from a checksummed release and run one
                   command at a time, its arguments checked against the patterns you allow and the ones that need a
@@ -145,8 +149,9 @@ export default function RrotorPage() {
                 <a href={`${DOCS}/clis`} className="pr-kind-more">CLIs in the docs &rarr;</a>
               </div>
               <div>
+                <CliDiagram />
                 <div className="pr-chat">
-                  <Line who="claude" cls="pr-claude">cli_run github  pr merge 42</Line>
+                  <Line who="agent" cls="pr-claude">cli_run github  pr merge 42</Line>
                   <Line who="rrotor" cls="pr-rrotor"><em>needs_approval</em>  &quot;pr merge *&quot; waits for you</Line>
                   <Line who="you" cls="pr-you">approve</Line>
                   <Line who="rrotor" cls="pr-rrotor"><em>done</em>  exit 0  <i>as you, in your own home</i></Line>
@@ -161,7 +166,8 @@ export default function RrotorPage() {
                 <span className="qs-kicker">Programs</span>
                 <h3>A job with its secrets, its schedule and its approvals.</h3>
                 <p>
-                  A glyphh.json and a program.py Claude writes with you, pushed to your repo and deployed by commit.
+                  A glyphh.json and a program.py written with whichever agent you use, pushed to your repo and
+                  deployed by commit.
                   It runs with a vault the runtime encrypts, a SQLite database, cron schedules the runtime fires
                   itself, and approvals that stop a step until a person says yes. Every call answers the same way:
                   done, needs input, needs approval or failed, with its data.
@@ -169,6 +175,7 @@ export default function RrotorPage() {
                 <a href={`${DOCS}/programs`} className="pr-kind-more">Programs in the docs &rarr;</a>
               </div>
               <div>
+                <ProgramDiagram />
                 <pre className="pr-code">{`{
   "name": "daily_sales",
   "functions": { "start": { "approvals": ["write"], "writes": true } },
@@ -193,7 +200,7 @@ export default function RrotorPage() {
           <div className="ix-section-head">
             <div>
               <span className="qs-kicker">How it gets there</span>
-              <h2 className="ix-h2">From a Claude session to your host, in four steps.</h2>
+              <h2 className="ix-h2">From an AI session to your host, in four steps.</h2>
             </div>
             <a href={`${DOCS}/runtime`} className="qs-more">The runtime &rarr;</a>
           </div>
