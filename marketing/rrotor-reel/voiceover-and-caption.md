@@ -10,8 +10,8 @@ thing is laid out for Camtasia in `rrotor-reel.cmproj` (below).
 
 | Start | End | Say |
 | --- | --- | --- |
-| 0:00.3 | 0:02.6 | Claude builds you a dashboard, a tool, a job. Then what? |
-| 0:02.8 | 0:05.0 | rrotor is where it goes to run. |
+| 0:00.3 | 0:02.6 | Your teams make pages, tools and jobs with AI. Then what? |
+| 0:02.8 | 0:05.0 | rrotor is where that content lives, and is governed. |
 | 0:05.4 | 0:08.6 | One session: a page, a command-line tool, a scheduled program. |
 | 0:08.9 | 0:12.7 | Three things. One contract. |
 | 0:13.3 | 0:16.2 | Each one is deployed by commit. |
@@ -29,13 +29,13 @@ thing is laid out for Camtasia in `rrotor-reel.cmproj` (below).
 
 ## What is on screen
 
-- **0:00 to 0:05, the hook:** "What Claude builds has nowhere to run." becomes "rrotor: where what Claude builds goes to run."
+- **0:00 to 0:05, the hook:** "What your teams make with AI has nowhere to live." becomes "rrotor: the secure runtime where it lives, and is governed."
 - **0:05 to 0:13, one session:** a Claude Code card where three asks go in (a dashboard, a PR merge with gh, a morning job) and three cards come out: App `deploy-failures`, CLI `github`, Program `daily_sales`; then the line "one contract: glyphh.json · deploy by commit · sandbox · vault · approvals · audit".
 - **0:13 to 0:27, the race:** three lanes run through four gates on one clock: Deploy by commit (a SHA chip), Sandbox (the hosts each may reach), Approval (chris ✓, as reviewer, for "pr merge *", for "write") and Your host (`/apps/deploy-failures/`, `exit 0, as chris`, `ledger written`). The meter "Through Glyphh" stays at 0 bytes while "On your rrotor" counts 3 versions, 3 runs, 3 approvals at `rrotor.acme.internal`.
 - **0:27 to 0:35, apps:** a browser at `https://rrotor.acme.internal/apps/deploy-failures/` says "409 not reviewed yet"; the catalogue card (version 3, draft, published by claude for chris) gets Approve pressed at 0:30.4, turns "approved · engineering", and the page appears, signed in as chris.
 - **0:35 to 0:43, CLIs:** `cli_run github pr merge 42` → `needs_approval` → chris approves → `done exit 0, as chris, in chris's own home`; then the built-in row: Claude Code, Codex, Gemini, Cursor, Grok, Copilot, glyphh.
 - **0:43 to 0:50, programs:** 06:15 UTC, the schedule fires `daily_sales.start`, it asks to write $4,812 to the ledger, chris approves, done; then the chips: vault, schedule, SQLite, hosts, audit.
-- **0:50 to 0:56.5, the end card:** the wordmark, "rrotor", "Where what Claude builds goes to run.", and "Free on one node · ask Claude: “install rrotor” · glyphh.ai/products/rrotor".
+- **0:50 to 0:56.5, the end card:** the wordmark, "rrotor", "Govern the AI content your teams create, in one place.", and "Free on one node · ask Claude: “install rrotor” · glyphh.ai/products/rrotor".
 
 ## Camtasia
 
@@ -56,9 +56,9 @@ Suggested cuts:
 ## Caption
 
 ```
-Claude builds you a dashboard, a tool, a job. Then what?
+Your teams make pages, tools and jobs with AI. Then what?
 
-rrotor is where it goes to run: the apps, command-line tools and programs from your Claude sessions, each deployed by commit, run in a sandbox, approved by a person and on record, at your own host. Through Glyphh: nothing.
+rrotor is the secure runtime where that content lives and is governed: pages, tools and jobs made with Claude, Codex, Gemini, Cursor, Grok or Copilot, each deployed by commit, run in a sandbox, reviewed by a person, opened by role and on record, at your own host. Through Glyphh: nothing.
 Free on one node. Ask Claude to install rrotor. glyphh.ai/products/rrotor
 
 #buildinpublic #devtools #claudecode #agents #AI #startups

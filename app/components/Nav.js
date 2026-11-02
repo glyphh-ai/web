@@ -109,11 +109,11 @@ export default function Nav() {
                 <div className="nav-dd-panel">
                   <a href="/" className="nav-dd-item">
                     <span className="nav-dd-name">Ada</span>
-                    <span className="nav-dd-desc">Decisions from your own precedents, with no language model in the path. Glyphh runs it.</span>
+                    <span className="nav-dd-desc">Decisions from your precedents. Glyphh runs it.</span>
                   </a>
                   <a href="/products/rrotor" className="nav-dd-item">
                     <span className="nav-dd-name">rrotor</span>
-                    <span className="nav-dd-desc">Where what Claude builds goes to run: apps, CLIs and programs at your own host. You run it.</span>
+                    <span className="nav-dd-desc">Govern your teams’ AI content. You run it.</span>
                   </a>
                 </div>
               </div>
@@ -129,11 +129,11 @@ export default function Nav() {
                 <div className="nav-dd-panel">
                   <a href="/use-cases/support-routing" className="nav-dd-item">
                     <span className="nav-dd-name">Support routing</span>
-                    <span className="nav-dd-desc">Each ticket to the team that owns it, from the tickets you have already routed.</span>
+                    <span className="nav-dd-desc">Each ticket to the team that owns it.</span>
                   </a>
                   <a href="/use-cases/loan-decisions" className="nav-dd-item">
                     <span className="nav-dd-name">Loan decisions</span>
-                    <span className="nav-dd-desc">Approve or refuse from your past decisions, by what each mistake costs you.</span>
+                    <span className="nav-dd-desc">Approve or refuse from your past decisions.</span>
                   </a>
                 </div>
               </div>
