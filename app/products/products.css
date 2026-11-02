@@ -1,0 +1,58 @@
+/* The products (/products and each one): the index cards, and the rrotor page's kinds, flow, facts and tiles. */
+.pr-grid { grid-template-columns: repeat(2, 1fr); }
+.pr-card { display: flex; flex-direction: column; gap: 0.5rem; text-decoration: none; color: inherit; }
+.pr-card h3 { margin: 0; font-size: 1.25rem; color: var(--text); }
+.pr-card p { margin: 0; flex: 1; }
+.pr-more { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-3); }
+.pr-card:hover .pr-more { color: var(--text); }
+@media (max-width: 760px) { .pr-grid { grid-template-columns: 1fr; } }
+
+/* One kind of thing on the runtime: the words on the left, what it looks like on the right. */
+.pr-kinds { display: flex; flex-direction: column; border: 1px solid var(--border); background: var(--surface); }
+.pr-kind { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 2rem; padding: 1.6rem 1.5rem 1.7rem; border-bottom: 1px solid var(--border); }
+.pr-kind:last-child { border-bottom: 0; }
+.pr-kind .qs-kicker { display: block; margin-bottom: 0.6rem; }
+.pr-kind h3 { margin: 0 0 0.6rem; font-size: 1.2rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; color: var(--text); }
+.pr-kind p { margin: 0 0 0.8rem; font-size: 0.93rem; line-height: 1.6; color: var(--muted); }
+.pr-kind p a { color: var(--text); }
+.pr-kind-more { font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-3); text-decoration: none; }
+.pr-kind-more:hover { color: var(--text); }
+
+/* An exchange with the runtime, as a transcript: who spoke, then what. */
+.pr-chat { margin: 0; padding: 1rem 1.1rem; border: 1px solid var(--border); background: var(--bg); font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.75; color: var(--text-2); overflow-x: auto; }
+.pr-chat > div { display: grid; grid-template-columns: 4.4rem 1fr; gap: 0.8rem; white-space: pre-wrap; }
+.pr-chat b { font-weight: 600; color: var(--text-3); }
+.pr-chat .pr-you b { color: var(--text); }
+.pr-chat .pr-rrotor b { color: var(--accent-light); }
+.pr-chat em { font-style: normal; color: var(--accent-light); }
+.pr-chat i { font-style: normal; color: var(--text-4); }
+.pr-code { margin: 0.75rem 0 0; padding: 1rem 1.1rem; border: 1px solid var(--border); background: var(--bg); overflow-x: auto; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6; color: var(--text-2); }
+.pr-code em { font-style: normal; color: var(--accent-light); }
+
+.pr-flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); background: var(--surface); }
+.pr-step { position: relative; padding: 1.3rem 1.2rem 1.4rem; border-right: 1px solid var(--border); }
+.pr-step:last-child { border-right: 0; }
+.pr-step:not(:last-child)::after { content: '→'; position: absolute; right: -0.5rem; top: 1.15rem; background: var(--surface); color: var(--accent-light); font-family: var(--font-mono); font-size: 0.9rem; padding: 0 2px; }
+.pr-n { display: inline-block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--accent-light); margin-bottom: 0.6rem; }
+.pr-step h3 { margin: 0 0 0.4rem; font-size: 1rem; color: var(--text); }
+.pr-step p { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--muted); }
+
+.pr-facts { margin: 0; border-top: 1px solid var(--border); }
+.pr-facts > div { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--border); }
+.pr-facts dt { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); padding-top: 0.15rem; }
+.pr-facts dd { margin: 0; font-size: 0.93rem; line-height: 1.6; color: var(--text-2); }
+.pr-facts a { color: var(--text); }
+
+.pr-ada { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; padding: 1.4rem 1.5rem; border: 1px solid var(--border); background: var(--surface); }
+.pr-ada p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted); }
+.pr-ada p a { color: var(--text); }
+
+@media (max-width: 860px) {
+  .pr-kind { grid-template-columns: 1fr; gap: 1.2rem; }
+  .pr-flow { grid-template-columns: 1fr 1fr; }
+  .pr-step:nth-child(2) { border-right: 0; }
+  .pr-step:nth-child(-n + 2) { border-bottom: 1px solid var(--border); }
+  .pr-step::after { display: none; }
+  .pr-facts > div { grid-template-columns: 1fr; gap: 0.3rem; }
+  .pr-ada { grid-template-columns: 1fr; }
+}

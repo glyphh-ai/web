@@ -1,0 +1,637 @@
+{
+ "title": "rrotor reel",
+ "description": "",
+ "author": "",
+ "targetLoudness": -18.0,
+ "shouldApplyLoudnessNormalization": true,
+ "videoFormatFrameRate": 30,
+ "audioFormatSampleRate": 44100,
+ "allowSubFrameEditing": false,
+ "width": 1920.0,
+ "height": 1080.0,
+ "version": "10.0",
+ "editRate": 705600000,
+ "authoringClientName": {
+  "name": "Camtasia",
+  "platform": "Mac",
+  "version": "2026.2.0"
+ },
+ "sourceBin": [
+  {
+   "id": 1,
+   "src": "./media/1793613226.472346/rrotor-reel-graphic.mp4",
+   "rect": [
+    0,
+    0,
+    1920,
+    1080
+   ],
+   "lastMod": "20261102T035346",
+   "loudnessNormalization": true,
+   "sourceTracks": [
+    {
+     "range": [
+      0,
+      56500
+     ],
+     "type": 0,
+     "editRate": 1000,
+     "trackRect": [
+      0,
+      0,
+      1920,
+      1080
+     ],
+     "sampleRate": 30,
+     "bitDepth": 24,
+     "numChannels": 0,
+     "integratedLUFS": 100.0,
+     "peakLevel": -1.0,
+     "tag": 0,
+     "metaData": "rrotor-reel-graphic.mp4;",
+     "parameters": {}
+    }
+   ],
+   "metadata": {
+    "timeAdded": "20261102T035346"
+   }
+  },
+  {
+   "id": 2,
+   "src": "./media/1793613226.472346/01-hook.mp4",
+   "rect": [
+    0,
+    0,
+    1920,
+    1080
+   ],
+   "lastMod": "20261102T035346",
+   "loudnessNormalization": true,
+   "sourceTracks": [
+    {
+     "range": [
+      0,
+      5000
+     ],
+     "type": 0,
+     "editRate": 1000,
+     "trackRect": [
+      0,
+      0,
+      1920,
+      1080
+     ],
+     "sampleRate": 30,
+     "bitDepth": 24,
+     "numChannels": 0,
+     "integratedLUFS": 100.0,
+     "peakLevel": -1.0,
+     "tag": 0,
+     "metaData": "01-hook.mp4;",
+     "parameters": {}
+    }
+   ],
+   "metadata": {
+    "timeAdded": "20261102T035346"
+   }
+  },
+  {
+   "id": 3,
+   "src": "./media/1793613226.472346/02-session.mp4",
+   "rect": [
+    0,
+    0,
+    1920,
+    1080
+   ],
+   "lastMod": "20261102T035346",
+   "loudnessNormalization": true,
+   "sourceTracks": [
+    {
+     "range": [
+      0,
+      8000
+     ],
+     "type": 0,
+     "editRate": 1000,
+     "trackRect": [
+      0,
+      0,
+      1920,
+      1080
+     ],
+     "sampleRate": 30,
+     "bitDepth": 24,
+     "numChannels": 0,
+     "integratedLUFS": 100.0,
+     "peakLevel": -1.0,
+     "tag": 0,
+     "metaData": "02-session.mp4;",
+     "parameters": {}
+    }
+   ],
+   "metadata": {
+    "timeAdded": "20261102T035346"
+   }
+  },
+  {
+   "id": 4,
+   "src": "./media/1793613226.472346/03-race.mp4",
+   "rect": [
+    0,
+    0,
+    1920,
+    1080
+   ],
+   "lastMod": "20261102T035346",
+   "loudnessNormalization": true,
+   "sourceTracks": [
+    {
+     "range": [
+      0,
+      14000
+     ],
+     "type": 0,
+     "editRate": 1000,
+     "trackRect": [
+      0,
+      0,
+      1920,
+      1080
+     ],
+     "sampleRate": 30,
+     "bitDepth": 24,
+     "numChannels": 0,
+     "integratedLUFS": 100.0,
+     "peakLevel": -1.0,
+     "tag": 0,
+     "metaData": "03-race.mp4;",
+     "parameters": {}
+    }
+   ],
+   "metadata": {
+    "timeAdded": "20261102T035346"
+   }
+  },
+  {
+   "id": 5,
+   "src": "./media/1793613226.472346/04-apps.mp4",
+   "rect": [
+    0,
+    0,
+    1920,
+    1080
+   ],
+   "lastMod": "20261102T035346",
+   "loudnessNormalization": true,
+   "sourceTracks": [
+    {
+     "range": [
+      0,
+      8000
+     ],
+     "type": 0,
+     "editRate": 1000,
+     "trackRect": [
+      0,
+      0,
+      1920,
+      1080
+     ],
+     "sampleRate": 30,
+     "bitDepth": 24,
+     "numChannels": 0,
+     "integratedLUFS": 100.0,
+     "peakLevel": -1.0,
+     "tag": 0,
+     "metaData": "04-apps.mp4;",
+     "parameters": {}
+    }
+   ],
+   "metadata": {
+    "timeAdded": "20261102T035346"
+   }
+  },
+  {
+   "id": 6,
+   "src": "./media/1793613226.472346/05-clis.mp4",
+   "rect": [
+    0,
+    0,
+    1920,
+    1080
+   ],
+   "lastMod": "20261102T035346",
+   "loudnessNormalization": true,
+   "sourceTracks": [
+    {
+     "range": [
+      0,
+      8000
+     ],
+     "type": 0,
+     "editRate": 1000,
+     "trackRect": [
+      0,
+      0,
+      1920,
+      1080
+     ],
+     "sampleRate": 30,
+     "bitDepth": 24,
+     "numChannels": 0,
+     "integratedLUFS": 100.0,
+     "peakLevel": -1.0,
+     "tag": 0,
+     "metaData": "05-clis.mp4;",
+     "parameters": {}
+    }
+   ],
+   "metadata": {
+    "timeAdded": "20261102T035346"
+   }
+  },
+  {
+   "id": 7,
+   "src": "./media/1793613226.472346/06-programs.mp4",
+   "rect": [
+    0,
+    0,
+    1920,
+    1080
+   ],
+   "lastMod": "20261102T035346",
+   "loudnessNormalization": true,
+   "sourceTracks": [
+    {
+     "range": [
+      0,
+      7000
+     ],
+     "type": 0,
+     "editRate": 1000,
+     "trackRect": [
+      0,
+      0,
+      1920,
+      1080
+     ],
+     "sampleRate": 30,
+     "bitDepth": 24,
+     "numChannels": 0,
+     "integratedLUFS": 100.0,
+     "peakLevel": -1.0,
+     "tag": 0,
+     "metaData": "06-programs.mp4;",
+     "parameters": {}
+    }
+   ],
+   "metadata": {
+    "timeAdded": "20261102T035346"
+   }
+  },
+  {
+   "id": 8,
+   "src": "./media/1793613226.472346/07-end.mp4",
+   "rect": [
+    0,
+    0,
+    1920,
+    1080
+   ],
+   "lastMod": "20261102T035346",
+   "loudnessNormalization": true,
+   "sourceTracks": [
+    {
+     "range": [
+      0,
+      6500
+     ],
+     "type": 0,
+     "editRate": 1000,
+     "trackRect": [
+      0,
+      0,
+      1920,
+      1080
+     ],
+     "sampleRate": 30,
+     "bitDepth": 24,
+     "numChannels": 0,
+     "integratedLUFS": 100.0,
+     "peakLevel": -1.0,
+     "tag": 0,
+     "metaData": "07-end.mp4;",
+     "parameters": {}
+    }
+   ],
+   "metadata": {
+    "timeAdded": "20261102T035346"
+   }
+  }
+ ],
+ "timeline": {
+  "id": 9,
+  "sceneTrack": {
+   "scenes": [
+    {
+     "csml": {
+      "tracks": [
+       {
+        "trackIndex": 0,
+        "medias": [
+         {
+          "id": 10,
+          "_type": "VMFile",
+          "src": 1,
+          "trackNumber": 0,
+          "attributes": {
+           "ident": "rrotor-reel-graphic"
+          },
+          "parameters": {
+           "geometryCrop0": 0.0,
+           "geometryCrop1": 0.0,
+           "geometryCrop2": 0.0,
+           "geometryCrop3": 0.0
+          },
+          "effects": [],
+          "start": 0,
+          "duration": 39866400000,
+          "mediaStart": 0,
+          "mediaDuration": 39866400000,
+          "scalar": 1,
+          "metadata": {
+           "clipSpeedAttribute": {
+            "type": "bool",
+            "value": false
+           },
+           "effectApplied": "none"
+          },
+          "animationTracks": {}
+         }
+        ],
+        "transitions": [],
+        "parameters": {},
+        "ident": "Graphic",
+        "audioMuted": false,
+        "videoHidden": false,
+        "magnetic": false,
+        "matte": 0,
+        "solo": false,
+        "metadata": {
+         "IsLocked": "False",
+         "trackHeight": "78"
+        }
+       },
+       {
+        "trackIndex": 1,
+        "medias": [],
+        "transitions": [],
+        "parameters": {},
+        "ident": "Screen recording",
+        "audioMuted": false,
+        "videoHidden": false,
+        "magnetic": false,
+        "matte": 0,
+        "solo": false,
+        "metadata": {
+         "IsLocked": "False",
+         "trackHeight": "78"
+        }
+       },
+       {
+        "trackIndex": 2,
+        "medias": [],
+        "transitions": [],
+        "parameters": {},
+        "ident": "Voice-over",
+        "audioMuted": false,
+        "videoHidden": false,
+        "magnetic": false,
+        "matte": 0,
+        "solo": false,
+        "metadata": {
+         "IsLocked": "False",
+         "trackHeight": "78"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  "trackAttributes": [
+   {
+    "ident": "Graphic",
+    "audioMuted": false,
+    "videoHidden": false,
+    "magnetic": false,
+    "matte": 0,
+    "solo": false,
+    "metadata": {
+     "IsLocked": "False",
+     "trackHeight": "78"
+    }
+   },
+   {
+    "ident": "Screen recording",
+    "audioMuted": false,
+    "videoHidden": false,
+    "magnetic": false,
+    "matte": 0,
+    "solo": false,
+    "metadata": {
+     "IsLocked": "False",
+     "trackHeight": "78"
+    }
+   },
+   {
+    "ident": "Voice-over",
+    "audioMuted": false,
+    "videoHidden": false,
+    "magnetic": false,
+    "matte": 0,
+    "solo": false,
+    "metadata": {
+     "IsLocked": "False",
+     "trackHeight": "78"
+    }
+   }
+  ],
+  "parameters": {
+   "toc": {
+    "type": "string",
+    "keyframes": [
+     {
+      "endTime": 0,
+      "time": 0,
+      "value": "Scene hook",
+      "duration": 0
+     },
+     {
+      "endTime": 211680000,
+      "time": 211680000,
+      "value": "Claude builds you a dashboard, a tool, a job. Then what?",
+      "duration": 0
+     },
+     {
+      "endTime": 1975680000,
+      "time": 1975680000,
+      "value": "rrotor is where it goes to run.",
+      "duration": 0
+     },
+     {
+      "endTime": 3528000000,
+      "time": 3528000000,
+      "value": "Scene session",
+      "duration": 0
+     },
+     {
+      "endTime": 3810240000,
+      "time": 3810240000,
+      "value": "One session: a page, a command-line tool, a scheduled program.",
+      "duration": 0
+     },
+     {
+      "endTime": 6279840000,
+      "time": 6279840000,
+      "value": "Three things. One contract.",
+      "duration": 0
+     },
+     {
+      "endTime": 9172800000,
+      "time": 9172800000,
+      "value": "Scene race",
+      "duration": 0
+     },
+     {
+      "endTime": 9384480000,
+      "time": 9384480000,
+      "value": "Each one is deployed by commit.",
+      "duration": 0
+     },
+     {
+      "endTime": 11571840000,
+      "time": 11571840000,
+      "value": "Runs in a sandbox that reaches only the hosts it names.",
+      "duration": 0
+     },
+     {
+      "endTime": 13970880000,
+      "time": 13970880000,
+      "value": "Waits for a person, where you said so.",
+      "duration": 0
+     },
+     {
+      "endTime": 16369920000,
+      "time": 16369920000,
+      "value": "And lands at your own host. Through Glyphh: nothing.",
+      "duration": 0
+     },
+     {
+      "endTime": 19051200000,
+      "time": 19051200000,
+      "value": "Scene apps",
+      "duration": 0
+     },
+     {
+      "endTime": 19262880000,
+      "time": 19262880000,
+      "value": "An app: the page Claude wrote, published to your people.",
+      "duration": 0
+     },
+     {
+      "endTime": 21661920000,
+      "time": 21661920000,
+      "value": "A reviewer approves it. Only the roles you named can open it.",
+      "duration": 0
+     },
+     {
+      "endTime": 24696000000,
+      "time": 24696000000,
+      "value": "Scene clis",
+      "duration": 0
+     },
+     {
+      "endTime": 24907680000,
+      "time": 24907680000,
+      "value": "A CLI: a tool Claude drives without touching your machine, as the person who asked.",
+      "duration": 0
+     },
+     {
+      "endTime": 27659520000,
+      "time": 27659520000,
+      "value": "Claude Code, Codex, Gemini, Cursor, Grok and Copilot come built in.",
+      "duration": 0
+     },
+     {
+      "endTime": 30340800000,
+      "time": 30340800000,
+      "value": "Scene programs",
+      "duration": 0
+     },
+     {
+      "endTime": 30552480000,
+      "time": 30552480000,
+      "value": "A program: its secrets in the vault, its schedule fired by the runtime.",
+      "duration": 0
+     },
+     {
+      "endTime": 32880960000,
+      "time": 32880960000,
+      "value": "Its approvals, yours.",
+      "duration": 0
+     },
+     {
+      "endTime": 35280000000,
+      "time": 35280000000,
+      "value": "Scene end",
+      "duration": 0
+     },
+     {
+      "endTime": 35562240000,
+      "time": 35562240000,
+      "value": "Free on one node. Ask Claude to install rrotor.",
+      "duration": 0
+     },
+     {
+      "endTime": 37537920000,
+      "time": 37537920000,
+      "value": "glyphh dot ai, slash products, slash rrotor.",
+      "duration": 0
+     }
+    ]
+   }
+  },
+  "captionAttributes": {
+   "enabled": true,
+   "fontName": "Arial",
+   "fontSize": 32,
+   "backgroundColor": [
+    0,
+    0,
+    0,
+    204
+   ],
+   "foregroundColor": [
+    255,
+    255,
+    255,
+    255
+   ],
+   "lang": "en",
+   "alignment": 0,
+   "defaultFontSize": true,
+   "opacity": 0.5
+  },
+  "gain": 1.0,
+  "legacyAttenuateAudioMix": false,
+  "backgroundColor": [
+   0,
+   0,
+   0,
+   255
+  ]
+ },
+ "metadata": {}
+}

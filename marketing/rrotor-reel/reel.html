@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>rrotor reel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+  /* The site's cut: white on black, grey hairlines, Geist and JetBrains Mono, no accent colour. Every element's
+     state is a pure function of the clock (window.seek), so each frame renders the same wherever it is drawn. */
+  html, body { margin: 0; background: #000; }
+  body { width: 1920px; height: 1080px; overflow: hidden; position: relative; color: #fff; font-family: 'Geist', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .scene { position: absolute; inset: 0; opacity: 0; }
+  .el { position: absolute; opacity: 0; will-change: transform, opacity; }
+  .kicker { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #c8c8c8; }
+  .h1 { font-size: 92px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.06; }
+  .h2 { font-size: 56px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.12; }
+  .muted { color: #b0b0b0; }
+  .dim { color: #909090; }
+  .hair { position: absolute; background: #5a5a5a; }
+  .card { position: absolute; border: 1px solid #5a5a5a; background: #0d0d0d; }
+  .chip { display: inline-block; padding: 8px 14px; border: 1px solid #5a5a5a; background: #000; font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #eaeaea; white-space: nowrap; }
+  #s2 .chip { font-size: 20px; padding: 7px 12px; }
+  #s1 .line { font-size: 24px; }
+  #s2count { font-size: 48px; margin-top: 12px; }
+  .chip.on { background: #fff; color: #000; border-color: #fff; }
+  .line { font-family: 'JetBrains Mono', monospace; font-size: 27px; line-height: 1.5; white-space: pre; color: #eaeaea; }
+  .line b { font-weight: 600; color: #909090; display: inline-block; width: 150px; }
+  .line.you b { color: #fff; }
+  .line.rr b { color: #c8c8c8; }
+  .line i { font-style: normal; color: #fff; font-weight: 600; }
+  .line u { text-decoration: none; color: #909090; }
+  .cap { position: absolute; left: 160px; right: 160px; bottom: 74px; text-align: center; font-size: 40px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; color: #fff; opacity: 0; }
+  .capline { position: absolute; left: 160px; right: 160px; bottom: 150px; height: 1px; background: #5a5a5a; }
+  .clock { position: absolute; right: 120px; top: 92px; font-family: 'JetBrains Mono', monospace; font-size: 30px; color: #c8c8c8; letter-spacing: 0.04em; }
+  .brand { position: absolute; left: 120px; top: 92px; height: 34px; }
+  .lane-label { position: absolute; left: 120px; width: 230px; font-family: 'JetBrains Mono', monospace; font-size: 22px; line-height: 1.35; color: #eaeaea; }
+  .lane-label small { display: block; font-size: 18px; color: #909090; }
+  .runner { position: absolute; width: 26px; height: 26px; background: #fff; }
+  .gate-label { position: absolute; top: 214px; width: 300px; margin-left: -150px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase; color: #c8c8c8; }
+  .meter { position: absolute; bottom: 196px; font-family: 'JetBrains Mono', monospace; }
+  .meter .k { font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase; color: #909090; }
+  .meter .n { font-size: 60px; font-weight: 600; letter-spacing: -0.02em; color: #fff; margin-top: 6px; }
+  .bar { position: absolute; height: 22px; background: #fff; }
+  .btn { display: inline-block; padding: 12px 26px; background: #fff; color: #000; font-weight: 600; font-size: 24px; border-radius: 6px; }
+  .url { font-family: 'JetBrains Mono', monospace; font-size: 24px; color: #eaeaea; }
+  .fine { font-size: 22px; color: #909090; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<!-- S0: the hook -->
+<div class="scene" id="s0">
+  <img class="brand el" id="s0brand" src="../../public/glyphh-logo-text-white.png" alt="">
+  <div class="el h1" id="s0a" style="left:120px; top:400px; width:1500px;">What Claude builds has nowhere to run.</div>
+  <div class="el h1" id="s0b" style="left:120px; top:400px; width:1600px;">rrotor: where what Claude builds goes to run.</div>
+  <div class="el kicker" id="s0k" style="left:120px; top:340px;">Products / rrotor</div>
+</div>
+
+<!-- S1: one session, three things -->
+<div class="scene" id="s1">
+  <img class="brand" src="../../public/glyphh-logo-text-white.png" alt="">
+  <div class="kicker" style="position:absolute; left:120px; top:180px;">One session</div>
+  <div class="card" style="left:120px; top:240px; width:820px; height:560px; overflow:hidden;">
+    <div class="hair" style="left:0; right:0; top:62px; height:1px;"></div>
+    <div class="mono" style="position:absolute; left:26px; top:18px; font-size:22px; color:#909090;">claude code</div>
+    <div class="el line you" id="s1q1" style="left:26px; top:92px;"><b>you</b>a dashboard of this week's deploy failures</div>
+    <div class="el line you" id="s1q2" style="left:26px; top:252px;"><b>you</b>merge PR 42 with gh, once I approve</div>
+    <div class="el line you" id="s1q3" style="left:26px; top:412px;"><b>you</b>each morning, post sales to the ledger</div>
+    <div class="el line" id="s1r1" style="left:26px; top:134px;"><b>claude</b>wrote <i>deploy-failures</i>  index.html</div>
+    <div class="el line" id="s1r2" style="left:26px; top:294px;"><b>claude</b>wrote <i>github</i>  a CLI manifest for gh</div>
+    <div class="el line" id="s1r3" style="left:26px; top:454px;"><b>claude</b>wrote <i>daily_sales</i>  glyphh.json, program.py</div>
+  </div>
+  <div class="el card" id="s1c1" style="left:1000px; top:240px; width:800px; height:160px;">
+    <div class="kicker" style="position:absolute; left:28px; top:26px;">App</div>
+    <div style="position:absolute; left:28px; top:62px; font-size:34px; font-weight:600; letter-spacing:-0.02em;">deploy-failures</div>
+    <div class="mono dim" style="position:absolute; left:28px; top:110px; font-size:20px;">a page, served to your people at /apps/deploy-failures/</div>
+  </div>
+  <div class="el card" id="s1c2" style="left:1000px; top:440px; width:800px; height:160px;">
+    <div class="kicker" style="position:absolute; left:28px; top:26px;">CLI</div>
+    <div style="position:absolute; left:28px; top:62px; font-size:34px; font-weight:600; letter-spacing:-0.02em;">github</div>
+    <div class="mono dim" style="position:absolute; left:28px; top:110px; font-size:20px;">gh 2.62.0 · allow "pr *" · approvals "pr merge *"</div>
+  </div>
+  <div class="el card" id="s1c3" style="left:1000px; top:640px; width:800px; height:160px;">
+    <div class="kicker" style="position:absolute; left:28px; top:26px;">Program</div>
+    <div style="position:absolute; left:28px; top:62px; font-size:34px; font-weight:600; letter-spacing:-0.02em;">daily_sales</div>
+    <div class="mono dim" style="position:absolute; left:28px; top:110px; font-size:20px;">start · approvals "write" · 15 6 * * * UTC</div>
+  </div>
+  <div class="el" id="s1one" style="left:120px; top:834px; width:1680px;">
+    <div class="hair" style="left:0; right:0; top:0; height:1px;"></div>
+    <div class="mono" style="position:absolute; left:0; top:20px; font-size:22px; color:#c8c8c8; letter-spacing:0.04em;">one contract &nbsp;·&nbsp; glyphh.json &nbsp;·&nbsp; deploy by commit &nbsp;·&nbsp; sandbox &nbsp;·&nbsp; vault &nbsp;·&nbsp; approvals &nbsp;·&nbsp; audit</div>
+  </div>
+</div>
+
+<!-- S2: the race through the gates -->
+<div class="scene" id="s2">
+  <img class="brand" src="../../public/glyphh-logo-text-white.png" alt="">
+  <div class="clock" id="s2clock">00:00.0</div>
+  <div class="kicker" style="position:absolute; left:120px; top:180px;">Three things, one contract</div>
+  <div class="gate-label" style="left:720px;">Deploy by commit</div>
+  <div class="gate-label" style="left:1050px;">Sandbox</div>
+  <div class="gate-label" style="left:1380px;">Approval</div>
+  <div class="gate-label" style="left:1710px;">Your host</div>
+  <div class="hair" style="left:720px; top:260px; width:1px; height:460px;"></div>
+  <div class="hair" style="left:1050px; top:260px; width:1px; height:460px;"></div>
+  <div class="hair" style="left:1380px; top:260px; width:1px; height:460px;"></div>
+  <div class="hair" style="left:1710px; top:260px; width:1px; height:460px;"></div>
+  <div class="hair" style="left:380px; top:330px; width:1330px; height:1px;"></div>
+  <div class="hair" style="left:380px; top:490px; width:1330px; height:1px;"></div>
+  <div class="hair" style="left:380px; top:650px; width:1330px; height:1px;"></div>
+  <div class="lane-label" style="top:300px;">APP<small>deploy-failures</small></div>
+  <div class="lane-label" style="top:460px;">CLI<small>github</small></div>
+  <div class="lane-label" style="top:620px;">PROGRAM<small>daily_sales</small></div>
+  <div class="runner" id="r0" style="top:317px;"></div>
+  <div class="runner" id="r1" style="top:477px;"></div>
+  <div class="runner" id="r2" style="top:637px;"></div>
+  <!-- the chips each runner leaves at a gate -->
+  <div class="el chip" id="g00" style="left:580px; top:350px;">commit a3f9c1e</div>
+  <div class="el chip" id="g10" style="left:580px; top:510px;">commit 7b2d0ff</div>
+  <div class="el chip" id="g20" style="left:580px; top:670px;">commit e41c88a</div>
+  <div class="el chip" id="g01" style="left:870px; top:350px;">hosts: none</div>
+  <div class="el chip" id="g11" style="left:870px; top:510px;">hosts: api.github.com</div>
+  <div class="el chip" id="g21" style="left:870px; top:670px;">hosts: api.frankfurter.dev</div>
+  <div class="el chip" id="g02" style="left:1230px; top:350px;">chris ✓ reviewer</div>
+  <div class="el chip" id="g12" style="left:1230px; top:510px;">chris ✓ "pr merge *"</div>
+  <div class="el chip" id="g22" style="left:1230px; top:670px;">chris ✓ "write"</div>
+  <div class="el chip on" id="g03" style="left:1520px; top:350px;">/apps/deploy-failures/</div>
+  <div class="el chip on" id="g13" style="left:1520px; top:510px;">exit 0, as chris</div>
+  <div class="el chip on" id="g23" style="left:1520px; top:670px;">ledger written</div>
+  <div class="meter" style="left:120px;">
+    <div class="k">Through Glyphh</div>
+    <div class="n">0 bytes</div>
+  </div>
+  <div class="meter" style="left:700px;">
+    <div class="k">On your rrotor &nbsp;·&nbsp; rrotor.acme.internal</div>
+    <div class="n" id="s2count">0 versions · 0 approvals · 0 runs</div>
+  </div>
+</div>
+
+<!-- S3: apps -->
+<div class="scene" id="s3">
+  <img class="brand" src="../../public/glyphh-logo-text-white.png" alt="">
+  <div class="kicker" style="position:absolute; left:120px; top:180px;">Apps</div>
+  <div class="h2" style="position:absolute; left:120px; top:222px; width:900px;">A page Claude made, published to your people.</div>
+  <!-- the browser -->
+  <div class="card" style="left:120px; top:380px; width:1000px; height:440px;">
+    <div class="hair" style="left:0; right:0; top:60px; height:1px;"></div>
+    <div class="url" style="position:absolute; left:26px; top:16px;">https://rrotor.acme.internal/apps/deploy-failures/</div>
+    <div class="el" id="s3wait" style="left:26px; top:100px; width:940px;">
+      <div class="mono" style="font-size:24px; color:#909090;">409 &nbsp;not reviewed yet</div>
+      <div class="fine" style="margin-top:10px;">An app is served only once a reviewer has approved the version.</div>
+    </div>
+    <div class="el" id="s3page" style="left:26px; top:92px; width:940px;">
+      <div style="font-size:30px; font-weight:600; letter-spacing:-0.02em;">Deploy failures, this week</div>
+      <div class="mono dim" style="font-size:18px; margin-top:4px;">signed in as chris · engineering</div>
+      <div class="bar" style="left:0; top:96px; width:620px;"></div>
+      <div class="bar" style="left:0; top:136px; width:410px;"></div>
+      <div class="bar" style="left:0; top:176px; width:250px;"></div>
+      <div class="bar" style="left:0; top:216px; width:120px;"></div>
+      <div class="mono dim" style="position:absolute; left:640px; top:92px; font-size:20px;">api · 31</div>
+      <div class="mono dim" style="position:absolute; left:430px; top:132px; font-size:20px;">web · 20</div>
+      <div class="mono dim" style="position:absolute; left:270px; top:172px; font-size:20px;">worker · 12</div>
+      <div class="mono dim" style="position:absolute; left:140px; top:212px; font-size:20px;">cron · 6</div>
+      <div class="mono dim" style="position:absolute; left:0; top:280px; font-size:18px;">the page calls POST /apps/deploy-failures/call/failures, a run as the viewer</div>
+    </div>
+  </div>
+  <!-- the catalogue card -->
+  <div class="el card" id="s3cat" style="left:1180px; top:380px; width:620px; height:300px;">
+    <div class="kicker" style="position:absolute; left:28px; top:24px;">Catalogue · Glyphh</div>
+    <div style="position:absolute; left:28px; top:60px; font-size:34px; font-weight:600; letter-spacing:-0.02em;">Deploy failures</div>
+    <div class="mono dim" style="position:absolute; left:28px; top:112px; font-size:20px;">version 3 · published by claude, for chris</div>
+    <div class="el chip" id="s3draft" style="left:28px; top:160px;">draft</div>
+    <div class="el chip on" id="s3ok" style="left:28px; top:160px;">approved · engineering</div>
+    <div class="el btn" id="s3btn" style="left:28px; top:222px;">Approve</div>
+    <div class="el mono dim" id="s3who" style="left:28px; top:232px; font-size:20px;">reviewed by chris · roles: engineering (an Okta group)</div>
+  </div>
+  <div class="el fine" id="s3fine" style="left:1180px; top:712px; width:620px;">The catalogue is a title, a version and a state. The page itself never passes through Glyphh.</div>
+</div>
+
+<!-- S4: CLIs -->
+<div class="scene" id="s4">
+  <img class="brand" src="../../public/glyphh-logo-text-white.png" alt="">
+  <div class="kicker" style="position:absolute; left:120px; top:180px;">CLIs</div>
+  <div class="h2" style="position:absolute; left:120px; top:222px; width:1100px;">A tool Claude drives without touching your machine.</div>
+  <div class="card" style="left:120px; top:380px; width:1680px; height:290px;">
+    <div class="el line" id="s4l1" style="left:30px; top:28px;"><b>claude</b>cli_run github  pr merge 42</div>
+    <div class="el line rr" id="s4l2" style="left:30px; top:86px;"><b>rrotor</b><i>needs_approval</i>  "pr merge *" waits for chris</div>
+    <div class="el line you" id="s4l3" style="left:30px; top:144px;"><b>chris</b>approve</div>
+    <div class="el line rr" id="s4l4" style="left:30px; top:202px;"><b>rrotor</b><i>done</i>  exit 0  <u>as chris, in chris's own home</u></div>
+  </div>
+  <div class="el" id="s4built" style="left:120px; top:720px; width:1680px;">
+    <div class="kicker" style="margin-bottom:18px;">Built in, signed in from your phone</div>
+    <span class="chip">Claude Code</span>&nbsp;&nbsp;<span class="chip">Codex</span>&nbsp;&nbsp;<span class="chip">Gemini</span>&nbsp;&nbsp;<span class="chip">Cursor</span>&nbsp;&nbsp;<span class="chip">Grok</span>&nbsp;&nbsp;<span class="chip">Copilot</span>&nbsp;&nbsp;<span class="chip">glyphh</span>
+  </div>
+</div>
+
+<!-- S5: programs -->
+<div class="scene" id="s5">
+  <img class="brand" src="../../public/glyphh-logo-text-white.png" alt="">
+  <div class="clock">06:15 UTC</div>
+  <div class="kicker" style="position:absolute; left:120px; top:180px;">Programs</div>
+  <div class="h2" style="position:absolute; left:120px; top:222px; width:1200px;">A job with its secrets, its schedule and its approvals.</div>
+  <div class="card" style="left:120px; top:380px; width:1680px; height:290px;">
+    <div class="el line rr" id="s5l1" style="left:30px; top:28px;"><b>rrotor</b>schedule each_morning  →  daily_sales.start</div>
+    <div class="el line rr" id="s5l2" style="left:30px; top:86px;"><b>rrotor</b><i>needs_approval</i>  Write 2026-11-01's total, $4,812, to the ledger?</div>
+    <div class="el line you" id="s5l3" style="left:30px; top:144px;"><b>chris</b>approve</div>
+    <div class="el line rr" id="s5l4" style="left:30px; top:202px;"><b>rrotor</b><i>done</i>  {"day": "2026-11-01", "written": true}</div>
+  </div>
+  <div class="el" id="s5chips" style="left:120px; top:720px; width:1680px;">
+    <div class="kicker" style="margin-bottom:18px;">Kept on the runtime</div>
+    <span class="chip">vault: LEDGER_TOKEN</span>&nbsp;&nbsp;<span class="chip">schedule: 15 6 * * *</span>&nbsp;&nbsp;<span class="chip">db: sqlite</span>&nbsp;&nbsp;<span class="chip">hosts: api.frankfurter.dev</span>&nbsp;&nbsp;<span class="chip">audit: run.call, run.continue, run.end</span>
+  </div>
+</div>
+
+<!-- S6: the end card -->
+<div class="scene" id="s6">
+  <img class="el" id="s6brand" src="../../public/glyphh-logo-text-white.png" alt="" style="left:120px; top:300px; height:44px;">
+  <div class="el h1" id="s6a" style="left:120px; top:380px; width:1600px; font-size:120px;">rrotor</div>
+  <div class="el h2" id="s6b" style="left:120px; top:530px; width:1600px; color:#eaeaea; font-weight:500;">Where what Claude builds goes to run.</div>
+  <div class="el" id="s6c" style="left:120px; top:660px; width:1600px;">
+    <div class="hair" style="left:0; width:1680px; top:0; height:1px;"></div>
+    <div class="mono" style="position:absolute; left:0; top:28px; font-size:28px; color:#eaeaea;">Free on one node &nbsp;·&nbsp; ask Claude: “install rrotor” &nbsp;·&nbsp; glyphh.ai/products/rrotor</div>
+  </div>
+</div>
+
+<div class="capline" id="capline" style="opacity:0;"></div>
+<div class="cap" id="cap"></div>
+
+<script>
+  // Everything below is a pure function of t (seconds).
+  const $ = (id) => document.getElementById(id);
+  const clamp = (x) => Math.max(0, Math.min(1, x));
+  const eo = (u) => 1 - Math.pow(1 - clamp(u), 3);                  // ease-out cubic
+  const inAt = (t, a, d = 0.45) => eo((t - a) / d);                 // 0 → 1 from a over d seconds
+  const between = (t, a, b, d = 0.4) => Math.min(inAt(t, a, d), 1 - inAt(t, b - d, d));
+  const SCENES = [[0, 5], [5, 13], [13, 27], [27, 35], [35, 43], [43, 50], [50, 56.5]];
+  const CAPS = [
+    [0.3, 2.6, 'Claude builds you a dashboard, a tool, a job. Then what?'],
+    [2.8, 5.0, 'rrotor is where it goes to run.'],
+    [5.4, 8.6, 'One session: a page, a command-line tool, a scheduled program.'],
+    [8.9, 12.7, 'Three things. One contract.'],
+    [13.3, 16.2, 'Each one is deployed by commit.'],
+    [16.4, 19.6, 'Runs in a sandbox that reaches only the hosts it names.'],
+    [19.8, 23.0, 'Waits for a person, where you said so.'],
+    [23.2, 26.7, 'And lands at your own host. Through Glyphh: nothing.'],
+    [27.3, 30.5, 'An app: the page Claude wrote, published to your people.'],
+    [30.7, 34.7, 'A reviewer approves it. Only the roles you named can open it.'],
+    [35.3, 39.0, 'A CLI: a tool Claude drives without touching your machine, as the person who asked.'],
+    [39.2, 42.7, 'Claude Code, Codex, Gemini, Cursor, Grok and Copilot come built in.'],
+    [43.3, 46.4, 'A program: its secrets in the vault, its schedule fired by the runtime.'],
+    [46.6, 49.7, 'Its approvals, yours.'],
+    [50.4, 53.0, 'Free on one node. Ask Claude to install rrotor.'],
+    [53.2, 56.2, 'glyphh.ai / products / rrotor'],
+  ];
+  const show = (id, a, dy = 14) => { const el = $(id); el.style.opacity = a; el.style.transform = `translateY(${(1 - a) * dy}px)`; };
+  const pad = (n, w) => String(n).padStart(w, '0');
+
+  window.seek = (t) => {
+    SCENES.forEach(([a, b], i) => { $('s' + i).style.opacity = between(t, a, b); });
+
+    // captions
+    let cap = '', ca = 0;
+    for (const [a, b, s] of CAPS) { const v = between(t, a, b, 0.25); if (v > ca) { ca = v; cap = s; } }
+    $('cap').textContent = cap; $('cap').style.opacity = ca;
+    $('capline').style.opacity = t > 0.2 ? 1 : 0;
+
+    // S0
+    show('s0brand', inAt(t, 0.1, 0.6));
+    show('s0k', inAt(t, 0.2));
+    show('s0a', between(t, 0.3, 2.9, 0.35), 24);
+    show('s0b', inAt(t, 2.8, 0.5), 24);
+
+    // S1
+    const u1 = t - 5;
+    show('s1q1', inAt(u1, 0.3)); show('s1r1', inAt(u1, 0.9)); show('s1c1', inAt(u1, 1.2), 20);
+    show('s1q2', inAt(u1, 2.3)); show('s1r2', inAt(u1, 2.9)); show('s1c2', inAt(u1, 3.2), 20);
+    show('s1q3', inAt(u1, 4.3)); show('s1r3', inAt(u1, 4.9)); show('s1c3', inAt(u1, 5.2), 20);
+    show('s1one', inAt(u1, 6.3, 0.6), 0);
+
+    // S2: the race. Each runner leaves 380 at u=0.6 and reaches the gates at 720, 1050, 1380, 1710 on the same clock.
+    const u2 = t - 13;
+    const GATES = [[0.6, 380], [3.0, 720], [6.0, 1050], [9.6, 1380], [12.6, 1710]];
+    const xAt = (u) => {
+      if (u <= GATES[0][0]) return GATES[0][1];
+      for (let i = 0; i < GATES.length - 1; i++) {
+        const [ta, xa] = GATES[i], [tb, xb] = GATES[i + 1];
+        if (u <= tb) { const p = (u - ta) / (tb - ta); const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; return xa + (xb - xa) * e; }
+      }
+      return GATES[GATES.length - 1][1];
+    };
+    const stagger = [0, 0.15, 0.3];
+    for (let r = 0; r < 3; r++) {
+      const x = xAt(u2 - stagger[r]);
+      $('r' + r).style.left = (x - 13) + 'px';
+      for (let g = 0; g < 4; g++) show(`g${r}${g}`, inAt(u2 - stagger[r], GATES[g + 1][0] + 0.05, 0.35), 8);
+    }
+    const passed = (g) => (u2 - 0.3 >= GATES[g + 1][0]) ? 3 : (u2 - 0.15 >= GATES[g + 1][0]) ? 2 : (u2 >= GATES[g + 1][0]) ? 1 : 0;
+    $('s2count').textContent = `${passed(0)} versions · ${passed(2)} approvals · ${passed(3)} runs`;
+    const cs = clamp(u2 / 13) * 13;
+    $('s2clock').textContent = `00:${pad(Math.floor(cs), 2)}.${Math.floor((cs % 1) * 10)}`;
+
+    // S3: apps
+    const u3 = t - 27;
+    show('s3cat', inAt(u3, 0.4), 20);
+    show('s3draft', u3 < 3.9 ? inAt(u3, 0.9, 0.3) : 0, 6);
+    show('s3btn', u3 < 3.9 ? inAt(u3, 1.4, 0.3) : 0, 6);
+    $('s3btn').style.transform += ` scale(${u3 > 3.4 && u3 < 3.9 ? 0.94 : 1})`;
+    show('s3ok', inAt(u3, 3.9, 0.3), 6);
+    show('s3who', inAt(u3, 4.2, 0.3), 6);
+    show('s3wait', u3 < 4.4 ? inAt(u3, 0.2, 0.3) : 1 - inAt(u3, 4.4, 0.3), 0);
+    show('s3page', inAt(u3, 4.7, 0.5), 10);
+    show('s3fine', inAt(u3, 5.6, 0.5), 10);
+
+    // S4: CLIs
+    const u4 = t - 35;
+    show('s4l1', inAt(u4, 0.3)); show('s4l2', inAt(u4, 1.4)); show('s4l3', inAt(u4, 3.0)); show('s4l4', inAt(u4, 3.9));
+    show('s4built', inAt(u4, 4.5, 0.5), 16);
+
+    // S5: programs
+    const u5 = t - 43;
+    show('s5l1', inAt(u5, 0.3)); show('s5l2', inAt(u5, 1.3)); show('s5l3', inAt(u5, 3.1)); show('s5l4', inAt(u5, 3.9));
+    show('s5chips', inAt(u5, 4.6, 0.5), 16);
+
+    // S6: the end card
+    const u6 = t - 50;
+    show('s6brand', inAt(u6, 0.2, 0.6), 10);
+    show('s6a', inAt(u6, 0.4, 0.6), 24);
+    show('s6b', inAt(u6, 0.9, 0.6), 18);
+    show('s6c', inAt(u6, 1.6, 0.6), 0);
+  };
+  window.seek(0);
+</script>
+</body>
+</html>
