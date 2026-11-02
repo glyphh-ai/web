@@ -71,6 +71,8 @@ const nextConfig = {
       { source: '/products/ada', destination: '/', permanent: true },
       // The research page is off the site; the page stays in the tree.
       { source: '/research', destination: '/', permanent: false },
+      // rrotor is shelved (his ruling, 2026-11-02): its product page stays in the tree, off the site.
+      { source: '/products/rrotor', destination: '/', permanent: false },
       ...GONE.map((source) => ({ source, destination: '/', permanent: true })),
       // There is no marketplace: its agreements and code of conduct are gone, and the Terms cover what remains.
       ...['/developer-agreement', '/marketplace-terms', '/code-of-conduct'].map((source) => ({ source, destination: '/terms', permanent: true })),
