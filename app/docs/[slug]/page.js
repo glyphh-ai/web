@@ -9,8 +9,8 @@ const LISTED = PAGES.filter((p) => p.slug !== 'introduction');
 // when what it described is not part of Glyphh.
 const GONE = [
   'install', 'web-app', 'where-a-session-works', 'pick-a-model', 'work-and-code', 'terminals', 'devices',
-  'library-sync', 'apps', 'skills', 'tasks', 'connections', 'connect', 'loops', 'agent', 'cloud-terminals',
-  'streamed-panels', 'desktop', 'panels', 'sessions', 'shortcuts', 'artifacts', 'gateway', 'own-cli', 'budgets',
+  'library-sync', 'skills', 'tasks', 'connections', 'connect', 'loops', 'agent', 'cloud-terminals',
+  'streamed-panels', 'desktop', 'panels', 'sessions', 'shortcuts', 'gateway', 'own-cli', 'budgets',
   'router', 'models', 'model-catalog', 'org-models', 'review', 'hub', 'ai-hub', 'org-agents', 'built-on', 'brand',
   'console', 'the-cast',
 ];
@@ -37,6 +37,8 @@ const MOVED = {
   compose: to('runtime'), 'docker-compose': to('runtime'), kubernetes: to('runtime'),
   helm: to('runtime'), terraform: to('runtime'), clusters: to('runtime'), 'run-a-cluster': to('runtime'),
   'own-cli': to('clis'),
+  // Apps (2026-11-02): pages Claude publishes to the org's rrotor; the old Artifacts name lands there.
+  artifacts: to('apps'),
   licensing: to('plans'), seats: to('plans'), 'billing-admin': to('plans'),
   logs: to('data'),
 };
