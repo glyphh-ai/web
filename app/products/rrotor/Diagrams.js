@@ -70,6 +70,40 @@ export function CliDiagram() {
   );
 }
 
+export function AuthDiagram() {
+  return (
+    <Svg h={250} label="Sign-in: a browser or Claude reaches rrotor, which sends it to the Glyphh server to sign in with PKCE; the server signs the person in through the organisation's identity provider and vouches for them with their role and groups">
+      <Box x={L} y={30} w={LW} h={62} title="Browser" lines={['GET /apps/<name>/', 'no session yet']} />
+      <Arrow x1={LW + 1} y1={61} x2={M - 2} y2={61} />
+      <Box x={L} y={130} w={LW} h={62} title="Claude, MCP clients" lines={['POST /mcp', 'one Allow click, no key']} />
+      <Arrow x1={LW + 1} y1={161} x2={M - 2} y2={161} />
+      <Box x={M} y={30} w={MW} h={162} title="rrotor" light lines={['OAuth protected resource', '/apps  →  session cookie (PKCE)', '/mcp, /v1  →  bearer token', 'introspect: sub · role · groups', 'roles decide who opens what']} />
+      <Box x={R} y={30} w={RW} h={70} title="Glyphh server" lines={['the authorization server', 'PKCE · OIDC per org', 'vouches: role, groups']} />
+      <Arrow x1={M + MW + 1} y1={65} x2={R - 2} y2={65} label="signs in" />
+      <Box x={R} y={130} w={RW} h={62} title="Okta · Entra ID" lines={['your identity provider', 'groups claim = roles']} />
+      <Arrow x1={R + RW / 2} y1={101} x2={R + RW / 2} y2={128} label="" />
+    </Svg>
+  );
+}
+
+export function AgentDiagram() {
+  return (
+    <Svg h={250} label="Any agent as the person: the person signs an agent CLI in once from their phone into their own home on rrotor; an app's function runs as the viewer and so uses that sign-in; the admin sets the app's own keys once in the vault">
+      <Box x={L} y={30} w={LW} h={62} title="Person, once" lines={['cli_login claude', 'device code, on the phone']} />
+      <Arrow x1={LW + 1} y1={61} x2={M - 2} y2={61} />
+      <Box x={L} y={130} w={LW} h={62} title="Admin, once" lines={['secret_set, for this app', 'ANTHROPIC_API_KEY']} />
+      <Arrow x1={LW + 1} y1={161} x2={M - 2} y2={161} />
+      <Box x={M} y={18} w={MW} h={185} title="rrotor · the app" light lines={['/homes/chris  claude signed in', '/homes/dana   codex signed in', 'a call runs as the viewer', "ctx.cli('claude', ['-p', …])", 'vault  ANTHROPIC_API_KEY', 'audit  who, which agent, when']} />
+      <Box x={R} y={18} w={RW} h={62} title="Viewer, in the app" lines={['chris, signed in', 'presses Summarise']} />
+      <Arrow x1={R - 1} y1={49} x2={M + MW + 2} y2={49} label="calls" />
+      <Box x={R} y={100} w={RW} h={50} title="api.anthropic.com" lines={['the host the app declared']} />
+      <Arrow x1={M + MW + 1} y1={125} x2={R - 2} y2={125} />
+      <Box x={R} y={160} w={RW} h={50} title="Result" lines={['as chris, on his account']} />
+      <Arrow x1={M + MW + 1} y1={185} x2={R - 2} y2={185} />
+    </Svg>
+  );
+}
+
 export function ProgramDiagram() {
   return (
     <Svg h={250} label="A program: a commit of glyphh.json and program.py deployed to rrotor, which keeps its vault, schedule, database and audit; a person approves the write; the declared host is the only network; every call answers a Result">

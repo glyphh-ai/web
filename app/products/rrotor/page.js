@@ -1,7 +1,7 @@
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import '../products.css';
-import { AppDiagram, CliDiagram, ProgramDiagram } from './Diagrams';
+import { AppDiagram, CliDiagram, ProgramDiagram, AuthDiagram, AgentDiagram } from './Diagrams';
 
 // rrotor, the product page (his order, 2026-11-02): where what Claude builds goes to run. Apps first, then CLIs,
 // then programs, each with one real exchange; then how it gets there, what stays yours, how to get it, and Ada
@@ -34,6 +34,26 @@ const YOURS = [
   ['Each person', <>A CLI runs as the person who asked, in their own signed-in home on the runtime, so what Claude does with it is what they could do.</>],
   ['The record', <>Every call, deploy, approval and refusal is an audit event naming the actor. Enterprise keeps them, queryable; any plan can drain them to your own collector over OpenTelemetry.</>],
   ['Glyphh’s part', <>The server signs the licence and keeps the catalogue: a title, a version, a state. Never the page, the code, a run, a secret or a result.</>],
+];
+
+// Sign-in and roles: rrotor docs/architecture.md 2.1 (the connector), 5.8 (the viewer's sign-in), 7 (keys) and
+// 13 (audit); server docs/specs/apps.md 2 (roles, reviewers, introspection) and ops/sso.py (OIDC per org).
+const AUTH = [
+  ['Claude, MCP clients', <>The runtime is added as a connector. It is an OAuth protected resource (RFC 9728) whose authorization server is the Glyphh server, so Claude signs the person in with one Allow click and no key, over OAuth 2.1 with PKCE; the token is bound to this runtime alone.</>],
+  ['A browser', <>A page under <code>/apps/</code> sends the browser to the Glyphh sign-in with PKCE and comes back to a session cookie (HttpOnly, Secure, 30 days) that rrotor checks with the server exactly as it checks a bearer, refreshes, and drops when the server no longer vouches.</>],
+  ['Single sign-on', <>Per organisation: Okta or Entra ID over OIDC, set at the platform’s Settings → Auth, with your sign-in domains and enforcement. Google and GitHub sign-ins for everyone else.</>],
+  ['Roles (RBAC)', <>A role is a group from your identity provider, read at every sign-in, or Glyphh’s <code>admin</code> and <code>member</code>. An app names the roles that may open it; none means everyone in the organisation. Reviewers are the admin and the groups you name.</>],
+  ['Software', <>A runtime key, made on the platform and held on the runtime as its SHA-256, calls programs and CLIs over REST or the SDKs. A key has no person: it is never served a page and never publishes one.</>],
+  ['Each person', <>Every call carries who: the subject, role and groups the server vouched for. A CLI runs in that person’s own home on the runtime, and the audit names them; a 401 or 403 is on record with its code.</>],
+];
+
+// Any agent, as the person: rrotor docs/architecture.md 5.7 (built-in CLIs, cli_login, the per-person HOME,
+// ctx.cli), 5.8 (an app's calls run as the viewer) and 5.5 (secrets).
+const AGENT = [
+  { n: '1', title: 'The person signs in once', body: 'From Claude, cli_login names the agent. rrotor answers the vendor’s address and a device code; the person opens it on their phone, and the sign-in is kept in their own home on the runtime, never on their machine.' },
+  { n: '2', title: 'The app calls as the viewer', body: 'A page’s call runs the app’s function as the person viewing it, so ctx.cli runs the agent in that person’s signed-in home: their account, their connectors, their limits, their name in the record.' },
+  { n: '3', title: 'Not signed in, not pretended', body: 'clis_list says signed_in per caller. A run for someone who has not signed in answers the CLI’s own refusal, and the app asks them to sign in from Claude. No shared account stands in for a person.' },
+  { n: '4', title: 'Keys the app needs, set once', body: 'An app, a CLI or a program declares the secrets it needs in its manifest. An admin sets each value on the runtime with secret_set: encrypted under the runtime’s own key, read only by that program’s runs, never shown back. A declared secret not set stops the run before it loads and names what is missing.' },
 ];
 
 const GET = [
@@ -218,6 +238,31 @@ export default function RrotorPage() {
         <section className="ix-section">
           <div className="ix-section-head">
             <div>
+              <span className="qs-kicker">Sign-in and roles</span>
+              <h2 className="ix-h2">Your identity provider, your groups, your rules.</h2>
+              <p className="ix-desc">
+                rrotor has no accounts of its own and nothing to log into. Every door into it is a sign-in you
+                already run, and every answer carries who asked.
+              </p>
+            </div>
+            <a href={`${DOCS}/apps`} className="qs-more">Who opens an app &rarr;</a>
+          </div>
+          <div className="pr-wide">
+            <AuthDiagram />
+          </div>
+          <dl className="pr-facts">
+            {AUTH.map(([k, v]) => (
+              <div key={k}>
+                <dt>{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        <section className="ix-section">
+          <div className="ix-section-head">
+            <div>
               <span className="qs-kicker">What stays yours</span>
               <h2 className="ix-h2">Everything, except the licence.</h2>
               <p className="ix-desc">
@@ -252,6 +297,32 @@ export default function RrotorPage() {
           <div className="hv-grid hv-grid-3">
             {GET.map((t) => <Tile key={t.title} {...t} />)}
           </div>
+        </section>
+
+        <section className="ix-section">
+          <div className="ix-section-head">
+            <div>
+              <span className="qs-kicker">Any agent, as the person</span>
+              <h2 className="ix-h2">An app can use any agent, as the person using it.</h2>
+              <p className="ix-desc">
+                Claude Code, Codex, Gemini, Cursor, Grok and Copilot come built in, pinned and checksummed, each in
+                its one-shot form. A page’s function runs one with <code>ctx.cli</code>, and the run is the viewer’s.
+              </p>
+            </div>
+            <a href={`${DOCS}/clis`} className="qs-more">The built-in CLIs &rarr;</a>
+          </div>
+          <div className="pr-wide">
+            <AgentDiagram />
+          </div>
+          <ol className="pr-flow">
+            {AGENT.map((s) => (
+              <li key={s.n} className="pr-step">
+                <span className="pr-n">{s.n}</span>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </li>
+            ))}
+          </ol>
         </section>
 
         <section className="ix-section">
