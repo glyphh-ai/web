@@ -15,6 +15,7 @@ export const metadata = {
 
 const PLATFORM_URL = 'https://platform.glyphh.ai';
 const DOCS = 'https://docs.glyphh.ai';
+const BENCH = 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks/claude-bots';
 
 const FLOW = [
   { n: '1', title: 'The program', body: 'Code runs the loop: what the bot does next, in what order, and when it is done. Nothing about the loop is left to a prompt.' },
@@ -143,6 +144,7 @@ export default function ClaudeBotsPage() {
                 language, and a multi-file job queue with retries and dead letters.
               </p>
             </div>
+            <a href={BENCH} className="qs-more">Reproduce it &rarr;</a>
           </div>
 
           <div className="rt-table">
