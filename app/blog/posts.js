@@ -18,7 +18,6 @@ export const POSTS = [
     tags: ['Ada', 'Research', 'Benchmarks'],
     related: [
       ['Claude bots, the use case', '/use-cases/claude-bots'],
-      ['The benchmarks', 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks'],
       ['The SDKs', 'https://docs.glyphh.ai/sdks'],
     ],
     sections: [
