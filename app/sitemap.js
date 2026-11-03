@@ -10,6 +10,7 @@ export default function sitemap() {
     ['/use-cases', 0.9],
     ['/use-cases/support-routing', 0.9],
     ['/use-cases/loan-decisions', 0.9],
+    ['/use-cases/claude-bots', 0.9],
     ['/pricing', 0.8],
     ['/faq', 0.7],
     ['/blog', 0.6],

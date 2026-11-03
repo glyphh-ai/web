@@ -102,6 +102,10 @@ export default function Nav() {
                     <span className="nav-dd-name">Loan decisions</span>
                     <span className="nav-dd-desc">Approve or refuse from your past decisions.</span>
                   </a>
+                  <a href="/use-cases/claude-bots" className="nav-dd-item">
+                    <span className="nav-dd-name">Claude bots</span>
+                    <span className="nav-dd-desc">A Claude agent that learns its job.</span>
+                  </a>
                 </div>
               </div>
             <div
@@ -151,6 +155,7 @@ export default function Nav() {
         <span className="mobile-menu-group">Use cases</span>
         <a href="/use-cases/support-routing" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Support routing</a>
         <a href="/use-cases/loan-decisions" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Loan decisions</a>
+        <a href="/use-cases/claude-bots" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Claude bots</a>
         <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href="https://docs.glyphh.ai" onClick={() => setMenuOpen(false)}>Docs</a>
