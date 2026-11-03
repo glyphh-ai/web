@@ -9,6 +9,128 @@ import { bars, pairs, scatter, lines, punchCard } from './charts';
 
 export const POSTS = [
   {
+    slug: 'a-bot-that-learned-its-job',
+    title: 'A bot that learned its job, then did it for a twentieth of the cost',
+    summary: 'A lab of Claude bots ran 103 coding trials for $3.97 and found Haiku passed everything Sonnet and Opus did. A coder bot taught by that lab then passed 10 of 10 new tasks for 5% of what always-Opus cost.',
+    date: '2026-11-03',
+    author: 'Chris "Timme"',
+    minutes: 6,
+    tags: ['Ada', 'Research', 'Benchmarks'],
+    related: [
+      ['Claude bots, the use case', '/use-cases/claude-bots'],
+      ['The benchmarks', 'https://github.com/glyphh-ai/glyphh/tree/main/benchmarks'],
+      ['The SDKs', 'https://docs.glyphh.ai/sdks'],
+    ],
+    sections: [
+      {
+        id: 'hi',
+        heading: null,
+        body: [
+          'Hi everyone, Chris here. Most agents today are a prompt and a hope. You tell the model the rules, you tell it the budget, and you trust it to remember both. Then you pay for the biggest model on every step, because you don\'t know which steps need it.',
+          'So I tried something else, and ran it on my Mac today. Here\'s what a Glyphh bot is, what a lab of them found out about Claude, and what it saved when a bot used what the lab learned.',
+          {
+            wide: true,
+            html:
+              '<div class="bl-stats">' +
+              '<div class="bl-stat"><b>10 / 10</b><span>new coding tasks passed by the coder bot</span><small>always Sonnet: 9 / 10</small></div>' +
+              '<div class="bl-stat"><b>0.05×</b><span>what always-Opus cost for the same 10</span><small>$0.050 against $1.057</small></div>' +
+              '<div class="bl-stat"><b>103</b><span>trials the lab ran to learn it</span><small>$3.97 in all</small></div>' +
+              '</div>',
+          },
+        ],
+      },
+      {
+        id: 'what-a-bot-is',
+        heading: 'What a bot is',
+        body: [
+          'A Glyphh bot is a Claude agent with a program around it. Four parts:',
+          {
+            html: '<ul><li><strong>The program</strong> runs the loop. What happens next, in what order, and when it\'s done is code, not a prompt.</li><li><strong>Hard gates</strong> are rules in that code: the budget, what the bot may do, what needs a person to approve. A step that breaks one is refused. Every time.</li><li><strong>Ada gates</strong> make the judgment calls between steps, like which model a task needs. Each one is an Ada model. It learns from real outcomes and from the answers a person gives.</li><li><strong>Claude</strong> is called only for the steps that need it.</li></ul>',
+          },
+          'And bots are made by a bot. The orchestrator is a bot like any other, with its own program and gates, and it learns from every bot it makes.',
+        ],
+      },
+      {
+        id: 'the-lab',
+        heading: 'The lab',
+        body: [
+          'I pointed the orchestrator at one question: how does Claude do coding work best? Each generation it proposed experiments. Haiku against Sonnet against Opus. A plain prompt against tests first, plan first, or edge cases first. Its hard rules refused any proposal outside those arms, and any that changed more than one thing at once. For each proposal left, it made an experiment bot.',
+          {
+            html: 'A trial was <code>claude -p</code> in a fresh temporary folder on one of 12 small Python tasks: bugfixes, from-scratch builds and multi-file changes. A cron next-run, an expression evaluator, a bank ledger bug, CSV quoting, money rounding. Each was judged by hidden tests Claude never saw. Each experiment bot\'s Ada gate learned which cells, a task and an arm, were already known, and only sent trials where the outcome wasn\'t.',
+          },
+          'Here\'s what it found:',
+          {
+            html: '<ul><li><strong>Haiku passed every task Sonnet and Opus did</strong>, at about a tenth of Sonnet\'s cost and a 25th of Opus\'s, six trials an arm per experiment.</li><li><strong>Tests first and edge cases first cost more and gained nothing.</strong></li><li><strong>Haiku was slower</strong>, two to three times on the hardest tasks.</li></ul>',
+          },
+          {
+            html: 'The part I like most is what the lab learned about itself. After its first three findings, its own <code>promising</code> gate rated two model-against-model proposals at P(decisive) 1.00 and 0.95, and a prompting proposal at 0.17. It ran them in that order. The orchestrator had learned which experiments pay off.',
+          },
+          'The whole lab was 103 trials and $3.97 of Claude usage. Per trial, on average: Haiku $0.0039, Sonnet $0.0395, Opus $0.1011.',
+        ],
+      },
+      {
+        id: 'the-proof',
+        heading: 'The proof',
+        body: [
+          {
+            html: 'A finding is only worth something if it carries over. So I made a <code>coder</code> bot and handed it what the lab learned: its Ada <code>route</code> gate was seeded from the lab\'s trials, each task\'s cheapest model that passed every time. Then I gave it five tasks the lab never saw: a slugify bugfix, a token-bucket rate limiter bugfix, a topological sort that reports cycles, a small template language, and a multi-file job queue with retries and dead letters. Twice each, against always Opus and always Sonnet, which is Claude Code\'s default.',
+          },
+          {
+            wide: true,
+            html: bars('What 10 held-out coding tasks cost', 'Total Claude usage for 5 new tasks, twice each, as Claude Code reports it.', [
+              ['Always Opus, 10 of 10', 1.057],
+              ['Always Sonnet, 9 of 10', 0.487],
+              ['Routed by the bot, 10 of 10', 0.05, 'ada'],
+            ], { max: 1.2, ticks: [0, 0.25, 0.5, 0.75, 1], fmt: (v) => `$${v.toFixed(3)}`, tickFmt: (v) => `$${v.toFixed(2)}` }),
+          },
+          {
+            wide: true,
+            html:
+              '<div class="bl-table"><table><thead><tr><th></th><th class="n">Tasks</th><th class="n">Passed</th><th class="n">Total $</th><th class="n">vs always Opus</th><th class="n">Total s</th></tr></thead><tbody>' +
+              '<tr><th>Always Opus</th><td class="n">10</td><td class="n">10</td><td class="n">1.057</td><td class="n">1.00×</td><td class="n">315</td></tr>' +
+              '<tr><th>Always Sonnet (Claude Code\'s default)</th><td class="n">10</td><td class="n">9</td><td class="n">0.487</td><td class="n">0.46×</td><td class="n">280</td></tr>' +
+              '<tr class="ada"><th>Routed by the coder bot</th><td class="n">10</td><td class="n">10</td><td class="n">0.050</td><td class="n">0.05×</td><td class="n">351</td></tr>' +
+              '</tbody></table></div>',
+          },
+          {
+            html: '<strong>The bot passed all ten, like always Opus, for a twentieth of the cost.</strong> It picked Haiku for every task at P 1.00, and never needed its escalation ladder, Haiku to Sonnet to Opus on a failure. Always Sonnet missed one and cost ten times as much.',
+          },
+        ],
+      },
+      {
+        id: 'what-it-leaves-out',
+        heading: 'What it leaves out',
+        body: [
+          'Here\'s what this test doesn\'t show, so you can weigh the rest:',
+          {
+            wide: true,
+            html:
+              '<aside class="bl-caveat"><span class="qs-kicker">Caveats</span><ul>' +
+              '<li>The tasks are small, written for the test, and Python only. Your codebase is bigger and messier.</li>' +
+              '<li>Five held-out tasks, twice each, is a small sample. Read the cost gap, not the pass counts.</li>' +
+              '<li>The hidden tests stand in for a project\'s own tests. A bot is only as good as the outcome it learns from.</li>' +
+              '<li>The route collapsed to one model, so the escalation ladder went untested.</li>' +
+              '<li>Haiku was slower: 351 seconds in all, against 315 for Opus and 280 for Sonnet.</li>' +
+              '<li>Costs are what Claude Code reports for each run, not an invoice.</li>' +
+              '</ul></aside>',
+          },
+        ],
+      },
+      {
+        id: 'next',
+        heading: 'What\'s next',
+        body: [
+          'The point isn\'t that Haiku is always enough. It won\'t be, on harder work. The point is that a bot doesn\'t have to guess. It can find out what a job needs, remember it, and pay for that and no more. When a task does need Opus, the gate learns that too.',
+          {
+            html: 'The whole write-up, with the table and how a bot is put together, is on <a href="/use-cases/claude-bots">the Claude bots use case</a>.',
+          },
+          'Build with AI. Run without it.',
+          '— Timme',
+        ],
+      },
+    ],
+  },
+  {
     slug: 'typed-answers',
     title: 'Typed Answers — Scores, Yes or No, Numbers, Labels and Unions',
     summary: 'One case, recorded once, and every question about it answered in its own type: an ordered level, a yes or no, an amount, a set of labels, and questions that are only asked when they apply.',
