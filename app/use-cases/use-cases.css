@@ -1,5 +1,6 @@
 /* The use cases (/use-cases and each one): the index cards, the flow, the experiment and the code. */
-.uc-grid { grid-template-columns: repeat(2, 1fr); }
+.uc-grid { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 1020px) { .uc-grid { grid-template-columns: repeat(2, 1fr); } }
 .uc-card { display: flex; flex-direction: column; gap: 0.5rem; text-decoration: none; color: inherit; }
 .uc-card h3 { margin: 0; font-size: 1.25rem; color: var(--text); }
 .uc-card p { margin: 0; flex: 1; }
