@@ -117,6 +117,9 @@ export default function Nav() {
               <a href="/blog" className={`nav-dd-trigger${active('/blog')}`}>Blog</a>
             </div>
             <div className="nav-dd">
+              <a href="https://demo.glyphh.ai" className="nav-dd-trigger">Demos</a>
+            </div>
+            <div className="nav-dd">
               <a href="/pricing" className={`nav-dd-trigger${active('/pricing')}`}>Pricing</a>
             </div>
             <div className="nav-dd">
@@ -157,6 +160,7 @@ export default function Nav() {
         <a href="/use-cases/loan-decisions" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Loan decisions</a>
         <a href="/use-cases/claude-bots" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Claude bots</a>
         <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
+        <a href="https://demo.glyphh.ai" onClick={() => setMenuOpen(false)}>Demos</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href="https://docs.glyphh.ai" onClick={() => setMenuOpen(false)}>Docs</a>
         {loggedIn ? (
