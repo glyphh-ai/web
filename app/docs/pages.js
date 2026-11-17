@@ -8,7 +8,7 @@ export const PLUGIN_PAGES = [
   {
     slug: 'plugin',
     title: 'The plugin',
-    lede: 'The glyphh plugin for Claude Code: sign in, the Ada skill, which builds, loads, tunes and asks your models with you.',
+    lede: 'The glyphh plugin for Claude Code: sign in, the Ada skill, which builds, loads, tunes and asks your models with you, and the rrotor skills, which install your runtime and write its programs and CLIs.',
     body: (
       <>
         <h2>Install</h2>
@@ -62,6 +62,14 @@ is refund or keep. Then tell me what it decides for this new ticket, and why.`}<
           the <a href={`${DOCS}/cli`}>glyphh command</a>. It asks you to run <code>! glyphh login</code> and paste an API
           key yourself; no key goes through the chat.
         </p>
+        <h2>The rrotor skills</h2>
+        <p>
+          For <a href={`${DOCS}/runtime`}>rrotor</a>, the runtime you run yourself, not for Ada. Ask “install rrotor”:
+          the rrotor skill runs the container on <code>127.0.0.1:7777</code>, makes its local token and adds rrotor’s
+          MCP server to Claude Code, then drives it (deploy, call, approvals, secrets, schedules, CLIs). The
+          rrotor-programs skill writes a <a href={`${DOCS}/programs`}>program</a> or a{' '}
+          <a href={`${DOCS}/clis`}>CLI</a> manifest with you before it is deployed. Neither needs the Glyphh connector.
+        </p>
       </>
     ),
   },
@@ -71,12 +79,12 @@ export const SDK_PAGES = [
   {
     slug: 'sdks',
     title: 'The SDKs',
-    lede: 'Python and TypeScript clients for Ada Cloud, called with an API key.',
+    lede: 'Python and TypeScript clients for Ada Cloud, called with an API key; the same packages carry the Runtime client for your rrotor.',
     body: (
       <>
         <Row k="Python 3.9+">pip install glyphh. Pin glyphh&gt;=3: versions up to 2.6.7 are a different library</Row>
         <Row k="Node 18+">npm install @glyphh-ai/glyphh (or any runtime with fetch)</Row>
-        <p>Both are 3.6, MIT, with no dependencies. They read the key from <code>GLYPHH_API_KEY</code> and call <code>https://ada.glyphh.ai</code>. The Python package also installs the <a href={`${DOCS}/cli`}>glyphh command</a>, and with no key set reads the one <code>glyphh login</code> kept.</p>
+        <p>Both are 3.6, MIT, with no dependencies. They read the key from <code>GLYPHH_API_KEY</code> and call <code>https://ada.glyphh.ai</code>. The Python package also installs the <a href={`${DOCS}/cli`}>glyphh command</a>, and with no key set reads the one <code>glyphh login</code> kept. <code>Runtime</code>, a client for rrotor that shares nothing with Ada Cloud, is on <a href={`${DOCS}/runtime-sdk`}>The Runtime client</a>.</p>
         <h2>Decide</h2>
         <Code lang="python">{`from glyphh import Ada
 
