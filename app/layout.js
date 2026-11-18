@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
         />
-        <link rel="stylesheet" href="/games.css" />
+        <link rel="stylesheet" href="/games.css?v=5" />
       </head>
       <body>
         <header className="head">

@@ -1,5 +1,5 @@
 // glyphh.ai's front page: a card per game (games.js), the hero's three videos, and the slow reveal on scroll.
-import { GAMES } from '/games.js';
+import { GAMES } from '/games.js?v=5';
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
 
@@ -30,6 +30,9 @@ if ('IntersectionObserver' in window) {
       seen.unobserve(entry.target);
     }
   }, { rootMargin: '0px 0px -8% 0px' });
+  // What is already on screen stays as it is; only from here on is anything hidden to be revealed (home.css).
+  for (const part of parts) if (part.getBoundingClientRect().top < innerHeight) part.classList.add('in');
+  document.documentElement.classList.add('reveal');
   parts.forEach((part) => seen.observe(part));
 } else {
   parts.forEach((part) => part.classList.add('in'));
