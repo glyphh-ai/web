@@ -1,26 +1,19 @@
-# glyphh-web on Fly — marketing site (glyphh.ai), sits behind Cloudflare.
+# glyphh-web on Fly — the games site (glyphh.ai), sits behind Cloudflare.
 #
 # Deploys go through GitHub Actions (.github/workflows/deploy.yml) — never a
-# local `fly deploy` push once the pipeline is live. NEXT_PUBLIC_* build args are
-# public URLs baked into the client bundle (same values Heroku's buildpack bakes
-# from its config vars).
+# local `fly deploy` push once the pipeline is live.
 
 # Naming convention (Chris, 2026-08-03): Fly apps are <org-slug>-<folder> —
 # glyphh-ai-web, glyphh-ai-server, … mirroring the GitHub repos (glyphh-ai/web).
 app = "glyphh-ai-web"
 primary_region = "iad"
 
-[build]
-  [build.args]
-    NEXT_PUBLIC_PLATFORM_URL = "https://platform.glyphh.ai"
-    NEXT_PUBLIC_SERVER_URL = "https://api.glyphh.ai"
-
 [http_service]
   internal_port = 3000
   force_https = true
   auto_stop_machines = "stop"
   auto_start_machines = true
-  # Marketing front door: keep one machine warm — no cold starts on first paint.
+  # The front door: keep one machine warm — no cold starts on first paint.
   min_machines_running = 1
 
 [[vm]]
