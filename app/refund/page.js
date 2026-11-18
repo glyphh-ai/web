@@ -1,10 +1,11 @@
 // Rewritten 2026-10-22 for Ada Cloud's plans (server docs/pricing.md, docs/specs/ada-cloud.md section 7); counsel to review.
 // Updated 2026-11-10 for the Hosted Model prepaid balance (matches Terms of Use sections 7 and 8); counsel to review.
-import Footer from '../components/Footer';
+// 2026-11-18: glyphh.ai is the games site. The text below still describes the earlier products and is to be rewritten.
 
 export const metadata = {
   title: 'Refund Policy — Glyphh',
-  description: 'Cancelling a Glyphh plan, metered reads, the Hosted Model prepaid balance, and refunds, by Glyphh AI LLC.',
+  description: 'Refund Policy for Glyphh, by Glyphh AI LLC.',
+  alternates: { canonical: '/refund' },
 };
 
 export default function RefundPage() {
@@ -59,7 +60,6 @@ export default function RefundPage() {
           <p>Billing questions: <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

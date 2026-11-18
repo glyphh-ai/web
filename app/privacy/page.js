@@ -1,11 +1,12 @@
 // Rewritten 2026-10-22 for Ada Cloud (server docs/specs/ada-cloud.md section 8, docs/architecture.md, src/glyphh_ada);
 // counsel to review. Backup window: Fly Managed Postgres keeps backups ten days (fly.io/mpg, read 2026-10-22).
 // Updated 2026-11-10 for Glyphh-hosted language models and token billing (the hosted-model token contract); counsel to review.
-import Footer from '../components/Footer';
+// 2026-11-18: glyphh.ai is the games site. The text below still describes the earlier products and is to be rewritten.
 
 export const metadata = {
   title: 'Privacy Policy — Glyphh',
-  description: 'What Glyphh AI LLC holds to run Ada Cloud and its hosted language models, why, where and for how long. Glyphh never sells customer data and never trains on it without your opt-in.',
+  description: 'Privacy Policy for Glyphh, by Glyphh AI LLC.',
+  alternates: { canonical: '/privacy' },
 };
 
 export default function PrivacyPage() {
@@ -120,7 +121,6 @@ export default function PrivacyPage() {
           <p>Privacy and security questions and requests: <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

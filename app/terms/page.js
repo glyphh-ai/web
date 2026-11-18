@@ -1,10 +1,11 @@
 // Rewritten 2026-10-22 for Ada Cloud (server docs/specs/ada-cloud.md, docs/pricing.md); counsel to review.
 // Updated 2026-11-10 for Glyphh-hosted language models and token billing (the hosted-model token contract); counsel to review.
-import Footer from '../components/Footer';
+// 2026-11-18: glyphh.ai is the games site. The text below still describes the earlier products and is to be rewritten.
 
 export const metadata = {
   title: 'Terms of Use — Glyphh',
-  description: 'Terms of Use for Glyphh: Ada Cloud, Glyphh-hosted language models, the platform, the APIs, the Claude connector, the plugin and the SDKs, by Glyphh AI LLC.',
+  description: 'Terms of Use for Glyphh, by Glyphh AI LLC.',
+  alternates: { canonical: '/terms' },
 };
 
 export default function TermsPage() {
@@ -135,7 +136,6 @@ export default function TermsPage() {
           <p>Questions about these Terms, and security reports: <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
