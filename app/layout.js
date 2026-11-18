@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       <body>
         <header className="head">
           <div className="head-left">
-            <a href="/" aria-label="Glyphh"><img src="/glyphh-logo-text-white.png" alt="Glyphh" className="logo" /></a>
+            <a href="/" aria-label="Glyphh"><img src="/glyphh-logo-black.png" alt="Glyphh" className="logo" /></a>
             <a className="crumb" href="/">Games</a>
           </div>
         </header>

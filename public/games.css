@@ -28,7 +28,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--focus); outline
 
 .head { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; padding: 0 28px; border-bottom: 1px solid var(--hair); }
 .head-left { display: flex; align-items: center; gap: 14px; }
-.logo { height: 26px; width: auto; }
+.logo { height: 38px; width: auto; }
 .crumb { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); padding-left: 14px; border-left: 1px solid var(--rail); }
 .crumb:hover { color: var(--text); }
 
