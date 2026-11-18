@@ -63,6 +63,63 @@ const GH = `{
   "limits": { "seconds": 120, "memory_mb": 512 }
 }`;
 
+const PIPELINE_MANIFEST = `{
+  "name": "hubspot_pipeline",
+  "description": "HubSpot's deals, written to the graph each hour",
+  "python": "3.13",
+  "functions": { "sync": { "inputs": { "type": "object", "additionalProperties": false } } },
+  "hosts": ["api.hubapi.com"],
+  "secrets": ["HUBSPOT_TOKEN"],
+  "graph": "write",
+  "limits": { "seconds": 900, "memory_mb": 512 },
+  "schedules": [{ "function": "sync", "cron": "5 * * * *", "name": "each_hour" }]
+}`;
+
+const PIPELINE = `from rrotor import Ctx, Result
+
+API = "https://api.hubapi.com/crm/v3/objects"
+
+
+def extract(ctx: Ctx, objects: str, properties: list[str]):
+    """Every record, a page at a time."""
+    headers = {"Authorization": f"Bearer {ctx.secrets['HUBSPOT_TOKEN']}"}
+    after = None
+    while True:
+        params = {"limit": 100, "properties": ",".join(properties), "associations": "companies"}
+        if after:
+            params["after"] = after
+        page = ctx.http.get(f"{API}/{objects}", params=params, headers=headers).raise_for_status().json()
+        yield from page.get("results", [])
+        after = ((page.get("paging") or {}).get("next") or {}).get("after")
+        if not after:
+            return
+
+
+def transform(record: dict) -> dict:
+    """A record as a flat row."""
+    linked = ((record.get("associations") or {}).get("companies") or {}).get("results") or []
+    return {"id": record["id"], **(record.get("properties") or {}), "companies": sorted({a["id"] for a in linked})}
+
+
+def store(ctx: Ctx, rows: list[dict]) -> dict:
+    """The rows as nodes, with an edge to each company a row names."""
+    return ctx.graph.rows(rows, type="deal", key="id", title="dealname", text=["description"],
+                          links={"companies": ("belongs_to", "company")})
+
+
+def sync(ctx: Ctx, inputs: dict) -> Result:
+    rows = [transform(r) for r in extract(ctx, "deals", ["dealname", "amount", "dealstage", "description"])]
+    return Result.done(store(ctx, rows))`;
+
+const GRAPH_APP = `def won_deals(ctx, inputs):
+    deals = ctx.graph.nodes("deal", where={"dealstage": "closedwon"}, limit=200)
+    return Result.done({"rows": [{"name": d["title"], "amount": d["props"].get("amount")} for d in deals]})
+
+
+def ask(ctx, inputs):
+    hits = ctx.graph.search(inputs["q"], limit=8, expand=True)
+    return Result.done({"hits": [{"title": h["title"], "type": h["type"], "passage": h["passage"]} for h in hits]})`;
+
 export const RUNTIME_PAGES = [
   {
     slug: 'runtime',
@@ -78,6 +135,11 @@ export const RUNTIME_PAGES = [
         <Row k="Apps">A kind of program (&quot;kind&quot;: &quot;app&quot;): a page Claude wrote, published from Claude to your organisation’s rrotor, approved by a reviewer and served to your people at /apps/&lt;name&gt;/ (<a href={`${DOCS}/apps`}>Apps</a>)</Row>
         <Row k="CLIs">A kind of program (&quot;kind&quot;: &quot;cli&quot;): a pinned command-line tool such as gh or the glyphh command, run one command at a time (<a href={`${DOCS}/clis`}>CLIs</a>)</Row>
         <Row k="Programs">A folder with a glyphh.json manifest and program.py, deployed by commit, with a local secrets vault, cron schedules the runtime fires itself, a SQLite database and approvals that wait for a person (<a href={`${DOCS}/programs`}>Programs</a>)</Row>
+        <p>
+          And it keeps <strong>the graph</strong>, its semantic layer: one knowledge graph of your organisation’s data,
+          written by pipelines (programs on a schedule) and read by your apps, your programs and Claude (
+          <a href={`${DOCS}/graph`}>Pipelines and the graph</a>).
+        </p>
         <p>
           Claude reaches it over MCP, with rrotor’s own tools; your software through REST or the SDKs’{' '}
           <a href={`${DOCS}/runtime-sdk`}>Runtime client</a>.
@@ -132,7 +194,9 @@ docker compose -f docker-compose.local.yml up -d`}</Code>
             ['program_continue {run_id, answer}', 'Answers a waiting run: an approval or an input'],
             ['program_cancel, run_status, run_log {run_id}', 'Stop a run; its state and last Result; its log'],
             ['approvals', 'Runs waiting for a person'],
+            ['secrets_form {program}', 'Shows you a form to set a program’s secrets yourself: what you type goes to the vault, never into the chat'],
             ['secrets_list, secret_set, secret_delete', 'A program’s secrets: names back, never a value'],
+            ['graph_schema, graph_search, graph_node, graph_nodes, graph_neighbours, graph_upsert, graph_delete', <>The graph, rrotor’s semantic layer (<a key="a" href={`${DOCS}/graph`}>Pipelines and the graph</a>)</>],
             ['schedules_list, schedule_pause, schedule_resume', 'The schedules rrotor fires itself'],
             ['clis_list, cli_run {cli, args, stdin?, files?}', 'The CLIs; one command'],
             ['audit_query, cluster_status', 'The audit log (Enterprise); a cluster’s state'],
@@ -208,6 +272,7 @@ docker compose -f docker-compose.local.yml up -d`}</Code>
             ['data', 'true: a persistent folder outside git, ctx.data'],
             ['limits', 'seconds (1 to 3600, default 300) and memory_mb (64 to 8192, default 512) per run'],
             ['schedules', 'Functions the runtime calls by itself: {function, cron, tz?, input?, name?}'],
+            ['graph', <>read or write: the rrotor’s graph as <code key="c">ctx.graph</code> (<a key="a" href={`${DOCS}/graph`}>Pipelines and the graph</a>)</>],
           ]}
         />
         <p>A deploy refuses (<code>E_MANIFEST</code>, saying where and why) a manifest with an unknown key, a bad value, or a function <code>program.py</code> does not define, read from its syntax tree: no program code runs outside the sandbox.</p>
@@ -227,7 +292,7 @@ docker compose -f docker-compose.local.yml up -d`}</Code>
         </ul>
         <h2 id="secrets">Secrets</h2>
         <ul>
-          <li>The manifest declares the name (<code>{'"secrets": ["ANALYTICS_KEY"]'}</code>); you set the value on the runtime, never in the repo, with <code>secret_set</code> (or <code>PUT /v1/programs/{'{name}'}/secrets/{'{secret}'}</code>). The program reads <code>ctx.secrets["ANALYTICS_KEY"]</code>.</li>
+          <li>The manifest declares the name (<code>{'"secrets": ["ANALYTICS_KEY"]'}</code>); you set the value on the runtime, never in the repo and never in the chat: Claude shows you a form (<code>secrets_form</code>) and what you type goes straight to the vault (or <code>PUT /v1/programs/{'{name}'}/secrets/{'{secret}'}</code> yourself). The program reads <code>ctx.secrets["ANALYTICS_KEY"]</code>.</li>
           <li>Values are encrypted at rest (AES-256-GCM) with the runtime’s own key, made on first use and never sent anywhere. Listing answers each name, whether it is declared and whether it is set: never a value.</li>
           <li>Only a run gets a value. A declared secret not set stops the run before it loads (<code>E_SECRET_MISSING</code>, naming it), so Claude knows what to ask you for. A value a program prints or logs is masked as <code>[secret]</code>.</li>
           <li>Secrets go from you to the runtime, never through Glyphh.</li>
@@ -426,6 +491,89 @@ if (r.status === "done") render(r.data);`}</Code>
             ['POST /apps/{name}/call/{function}', '', 'A run of one of the app’s functions, as the viewer'],
           ]}
         />
+      </>
+    ),
+  },
+  {
+    slug: 'graph',
+    title: 'Pipelines and the graph',
+    lede: 'rrotor keeps one knowledge graph of your organisation’s data, its semantic layer. Pipelines write it, on a schedule; the apps Claude builds, and Claude itself, read it.',
+    body: (
+      <>
+        <h2>What the graph is</h2>
+        <p>
+          One graph for the whole rrotor (from rrotor 0.4.0), kept in SQLite on its own volume. Your data is shaped
+          once, by a pipeline, and everything built on the rrotor reads the same shape.
+        </p>
+        <Row k="Node">A type and a key (deal, d-1042), with a title, props (a JSON object) and text. The type and key name it: writing it again changes it</Row>
+        <Row k="Edge">From a node, a relation (belongs_to), to a node, with props</Row>
+        <Row k="Passage">A node’s words (its title, its props’ values, its text) cut into passages of up to 1,200 characters, each indexed for search</Row>
+        <p>
+          Search is by words: SQLite’s full-text index, stemmed and ranked by BM25. It is not search by meaning: no
+          model runs on rrotor, so there are no embeddings.
+        </p>
+        <h2>Build a pipeline from Claude</h2>
+        <p>With the <a href={`${DOCS}/plugin`}>glyphh plugin</a> and your rrotor connected, say what to connect:</p>
+        <Code>{`connect our HubSpot to rrotor: companies, contacts and deals, every hour`}</Code>
+        <p>The plugin’s rrotor-graph skill:</p>
+        <ol>
+          <li>Reads what the graph already holds (<code>graph_schema</code>), so a new pipeline uses the types and relations that are there.</li>
+          <li>Agrees with you which records become which nodes, each one’s key, title and text, which fields link records, and how often it runs.</li>
+          <li>Writes the pipeline, tests it against a graph kept in memory, commits and deploys it.</li>
+          <li>Shows you a form to set its key (below), runs it once, and reads the schema again to show what it wrote.</li>
+        </ol>
+        <h2>A pipeline is a program</h2>
+        <p>
+          The same <a href={`${DOCS}/programs`}>program</a> as any other, with <code>{'"graph": "write"'}</code> in its
+          manifest, the source’s host, its key as a secret and a schedule. There is no DAG engine: its steps are plain
+          Python functions that one function calls in order.
+        </p>
+        <Code lang="json">{PIPELINE_MANIFEST}</Code>
+        <Code lang="python">{PIPELINE}</Code>
+        <ul>
+          <li><code>ctx.graph.rows(records, type=, key=, title=, text=, props=, links=)</code> writes a table of records: each row a node, <code>text</code> the columns search should read, the other columns its props. <code>{'links={"account_id": ("belongs_to", "account")}'}</code> makes an edge from the row to the account that column names.</li>
+          <li><code>ctx.graph.upsert(nodes, edges)</code> writes them as given: use it for documents, whose <code>text</code> may be up to a million characters.</li>
+          <li>Run again, it writes the same nodes again: the graph keeps one of each type and key, and a node keeps what a write does not name. An edge to a node not written yet makes it, empty, until its own pipeline fills it.</li>
+          <li>What the source dropped stays until the pipeline removes it with <code>ctx.graph.delete</code>.</li>
+          <li>The program never touches the graph’s file: it asks rrotor over its run’s own channel, and rrotor checks what its manifest allows. A program that says <code>read</code> and writes fails <code>E_GRAPH_READONLY</code>; one that names no graph, <code>E_GRAPH_UNDECLARED</code>.</li>
+          <li>Never name a step <code>load</code> or <code>end</code>: those are the hooks rrotor calls before and after every run.</li>
+        </ul>
+        <h2 id="secrets">Keys: a form, never the chat</h2>
+        <ul>
+          <li>A pipeline’s key is a <a href={`${DOCS}/programs#secrets`}>secret</a> its manifest declares. Claude calls <code>secrets_form</code>, which shows a form in Claude: each secret, whether it is set, and a field.</li>
+          <li>What you type goes from the form straight to rrotor’s vault, encrypted there. It is not in the conversation, it is never shown back, and Claude is told only which names were set.</li>
+          <li>Where no form shows (Claude Code in a terminal), set it yourself: <code>PUT /v1/programs/{'{name}'}/secrets/{'{secret}'}</code> with <code>{'{"value": "…"}'}</code>.</li>
+        </ul>
+        <h2>Apps on the graph</h2>
+        <p>
+          An <a href={`${DOCS}/apps`}>app</a> published with <code>{'graph: "read"'}</code> reads the graph through its
+          own functions, one per chart, table or search box; the page calls them as the viewer.
+        </p>
+        <Code lang="python">{GRAPH_APP}</Code>
+        <p>
+          The graph is not divided by role: whoever may open the app sees what its functions answer, so give an app
+          over sensitive data roles.
+        </p>
+        <h2>Routes and tools</h2>
+        <Table
+          head={['Route', 'MCP tool', 'In a program', 'Does']}
+          rows={[
+            ['GET /v1/graph', 'graph_schema', 'ctx.graph.schema()', 'Each type (count, props, the pipelines that wrote it), each relation between two types, the totals'],
+            ['POST /v1/graph/search', 'graph_search', 'ctx.graph.search(query, types=, limit=, expand=)', 'The best nodes for the words, each with the passage that matched, a snippet and a score; expand adds the nodes each is linked to'],
+            ['POST /v1/graph/node', 'graph_node', 'ctx.graph.node(type, key)', 'One node whole, with its edges each way'],
+            ['POST /v1/graph/nodes', 'graph_nodes', 'ctx.graph.nodes(type, where=, limit=, offset=)', 'The nodes of a type, the newest first, whose props equal where'],
+            ['POST /v1/graph/neighbours', 'graph_neighbours', 'ctx.graph.neighbours(type, key, rel=, direction=, depth=)', 'The nodes within 1 to 3 edges, and the edges among them'],
+            ['POST /v1/graph/upsert', 'graph_upsert', 'ctx.graph.upsert(nodes, edges), ctx.graph.rows(…)', 'Nodes and edges written, all of them or none: 2,000 nodes and 10,000 edges a call'],
+            ['POST /v1/graph/delete', 'graph_delete', 'ctx.graph.delete(nodes, edges)', 'Nodes (with their edges) and edges removed'],
+            ['', 'secrets_form', '', 'The form to set a program’s secrets'],
+          ]}
+        />
+        <h2>Limits</h2>
+        <ul>
+          <li>Search is by words, not meaning. Search with the words the data uses.</li>
+          <li>In a cluster the graph is the head’s alone: it does not replicate, a program that names it runs on the head, and a node made head has an empty one until the pipelines run again.</li>
+          <li>Each pipeline holds its own key: there are no connections signed in once and shared.</li>
+        </ul>
       </>
     ),
   },
