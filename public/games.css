@@ -26,9 +26,10 @@ a { color: inherit; text-decoration: none; }
 img, video { max-width: 100%; display: block; }
 button:focus-visible, a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
-.head { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; padding: 0 28px; border-bottom: 1px solid var(--hair); }
+.head { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 88px; padding: 0 28px; border-bottom: 1px solid var(--hair); }
 .head-left { display: flex; align-items: center; gap: 14px; }
 .logo { height: 38px; width: auto; }
+.head .logo { height: 60px; }
 .crumb { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); padding-left: 14px; border-left: 1px solid var(--rail); }
 .crumb:hover { color: var(--text); }
 
@@ -76,7 +77,8 @@ a.card:hover { border-color: var(--text-3); transform: translateY(-2px); }
   .site-foot-brand { grid-column: 1 / -1; }
 }
 @media (max-width: 640px) {
-  .head { padding: 0 18px; }
+  .head { padding: 0 18px; height: 76px; }
+  .head .logo { height: 50px; }
   .frame { padding: 48px 18px 72px; }
   .cards { grid-template-columns: 1fr; }
 }
