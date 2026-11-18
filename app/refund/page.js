@@ -1,10 +1,11 @@
-// Rewritten 2026-10-22 for Ada Cloud's plans (server docs/pricing.md, docs/specs/ada-cloud.md section 7); counsel to review.
-// Updated 2026-11-10 for the Hosted Model prepaid balance (matches Terms of Use sections 7 and 8); counsel to review.
-// 2026-11-18: glyphh.ai is the games site. The text below still describes the earlier products and is to be rewritten.
+// Rewritten 2026-11-18: Glyphh is a game studio. The owner's rule: every purchase in a game is final and Glyphh gives
+// no refunds, with the one carve-out the law demands. Event registrations and league money in Bams & Brags are under
+// that game's own terms (bamsandbrags.com/legal) and are not restated here. A careful draft, not a lawyer's text.
+// test/games.test.mjs checks what the three legal pages may and may not say.
 
 export const metadata = {
   title: 'Refund Policy — Glyphh',
-  description: 'Refund Policy for Glyphh, by Glyphh AI LLC.',
+  description: 'Refund Policy for the games made by Glyphh AI LLC.',
   alternates: { canonical: '/refund' },
 };
 
@@ -17,46 +18,33 @@ export default function RefundPage() {
           <h1 className="policy-title">Refund Policy</h1>
 
           <div className="policy-note">
-            <p>This is a plain-English summary of how Glyphh works today; it will be reviewed by counsel before general availability.</p>
+            <p>This page is written in plain English. It was updated on 18 November 2026 to describe Glyphh as it is now: a small independent game studio, and its games.</p>
           </div>
 
-          <p><strong>Effective Date:</strong> July 3, 2026</p>
-          <p><strong>Last updated 10 November 2026</strong></p>
-          <p>This Refund Policy applies to Glyphh plans and to the prepaid balance for Hosted Models, offered by Glyphh AI LLC. Terms in capitals mean what they mean in our <a href="/terms">Terms of Use</a>.</p>
+          <p><strong>Effective Date:</strong> November 18, 2026</p>
+          <p><strong>Last updated 18 November 2026</strong></p>
+          <p>This Refund Policy applies to every purchase in a game made by Glyphh AI LLC (&ldquo;Glyphh&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). It is part of our <a href="/terms">Terms of Use</a>. The website glyphh.ai sells nothing.</p>
 
-          <h2>1. Free</h2>
-          <p>Free costs nothing and needs no card. Reads past its monthly allowance are refused, never charged. No refund applies. A prepaid balance bought on Free follows section 4.</p>
-
-          <h2>2. Basic, Pro and Team</h2>
-          <p>Basic ($20), Pro ($99) and Team ($299) are monthly subscriptions, billed in advance. You can cancel at any time from the platform. Your plan continues to the end of the period you paid for and is not renewed; your organisation then moves to Free. Your models and precedents are kept, and you can export them at any time.</p>
-          <p>Payments already made are not refunded, and there are no partial refunds for unused time in a period.</p>
-
-          <h2>3. Reads Past the Allowance</h2>
-          <p>On Basic, Pro and Team, reads past the month&apos;s allowance are billed at $1 per 10,000, in arrears on a later invoice. They are charged for reads actually made, so they are not refunded, including after you cancel. If you believe a read count is wrong, write to us within 30 days and we will check it against our records.</p>
-
-          <h2>4. Hosted Model Tokens and the Prepaid Balance</h2>
-          <p>Hosted Model tokens past your plan&apos;s monthly allowance are paid from a prepaid balance you top up in US dollars through Stripe Checkout (Section 8 of our Terms of Use).</p>
+          <h2>1. All Purchases Are Final</h2>
+          <p>Every purchase in our games is final. We give no refunds, except where the law gives you a right we cannot exclude.</p>
+          <p>That covers every game purchase:</p>
           <ul>
-            <li><strong>Top-ups are non-refundable</strong>, except where the law requires a refund or we choose, at our discretion, to give one. Tokens already used are charged at the rate shown when the request was made and are not refunded.</li>
-            <li><strong>No expiry.</strong> Your balance does not expire while your organisation&apos;s account is open, and it stays with your organisation if you cancel or change plan. It earns no interest and cannot be transferred or exchanged for cash.</li>
-            <li><strong>Closing your account.</strong> If your organisation is closed, by you or by us, any unused balance is forfeited unless the law requires otherwise, and any negative balance remains owed.</li>
-            <li><strong>Granted balances</strong> (for example, a promotion) have no cash value and are never refunded.</li>
-            <li><strong>Disputes.</strong> If you believe a token count or charge is wrong, write to us within 30 days of the charge and we will check it against our metering records, which are authoritative. If we find an error, we will correct your balance.</li>
+            <li><strong>Free Fall Frank:</strong> all the Franks ($0.99, once) and the level ROCK BOTTOM ($0.99, once).</li>
+            <li><strong>Bams &amp; Brags:</strong> the pass ($2.99, once) and starting a league ($29.99, once for each league).</li>
+            <li><strong>Crabby Knife Fight:</strong> free. There is nothing to buy.</li>
           </ul>
+          <p>Each purchase is one payment through Stripe, not a subscription, so there is nothing to cancel and nothing renews.</p>
 
-          <h2>5. Plan Changes</h2>
-          <p>You can change plan from the platform. A change does not refund a payment already made, and does not change your prepaid balance.</p>
+          <h2>2. Bams &amp; Brags Events and Leagues</h2>
+          <p>Registrations for a league&apos;s events, and a league&apos;s money, are handled under that game&apos;s own terms, at <a href="https://bamsandbrags.com/legal">bamsandbrags.com/legal</a>.</p>
 
-          <h2>6. Enterprise</h2>
-          <p>Enterprise plans are governed by their contract, including cancellation and any refunds.</p>
+          <h2>3. If You Believe a Charge Is Wrong</h2>
+          <p>Write to <a href="mailto:support@glyphh.ai">support@glyphh.ai</a> first, from the email address on your account, and tell us which game, what was charged and when. We will check it against our records.</p>
 
-          <h2>7. Suspended or Terminated Accounts</h2>
-          <p>If your account is suspended or ended for a breach of our Terms of Use or for non-payment, no refund is issued, including of any prepaid balance, unless the law requires it.</p>
+          <h2>4. Suspended or Ended Accounts</h2>
+          <p>If your account is suspended or ended for a breach of our Terms of Use, no refund is issued, except where the law gives you a right we cannot exclude.</p>
 
-          <h2>8. Your Statutory Rights</h2>
-          <p>Nothing in this policy limits any refund or cancellation rights you have under the consumer-protection laws where you live.</p>
-
-          <h2>9. Contact</h2>
+          <h2>5. Contact</h2>
           <p>Billing questions: <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
         </div>
       </div>

@@ -90,6 +90,34 @@ test('the front page is the studio: header, hero, games, what makes them ours, a
   assert.ok(js.includes('prefers-reduced-motion'));
 });
 
+test('the legal pages are the studio\'s: the company, the one address, and nothing of what Glyphh no longer offers', () => {
+  // Read as written, comments included: a word that is not in the file cannot reach the page.
+  const gone = [
+    /\bAda\b/, /adaL/i, /hosted model/i, /rrotor/i, /plugin/i, /\bSDKs?\b/i, /API key/i, /\b(?:Basic|Pro|Team|Enterprise)\b/,
+    /\bFree plan\b/i, /prepaid/i, /precedent/i, /pricing/i, /platform/i, /api\.glyphh\.ai/i, /analytics/i, /pixel/i,
+    /reviewed by counsel/i, /\[\[OWNER/, /\(\d{3}\)/,
+  ];
+  for (const path of LEGAL) {
+    const page = readFileSync(`${APP}${path}/page.js`, 'utf8');
+    for (const word of gone) assert.ok(!word.test(page), `${path} does not say ${word}`);
+    assert.ok(page.includes('support@glyphh.ai'), `${path} names support@glyphh.ai`);
+    assert.ok(page.includes('Glyphh AI LLC'), `${path} names Glyphh AI LLC`);
+    for (const [address] of page.matchAll(/[\w.+-]+@[\w-]+\.[\w.-]+/g)) assert.equal(address, 'support@glyphh.ai', path);
+    assert.ok(page.includes('<strong>Last updated 18 November 2026</strong>'), `${path} says when it was last updated`);
+    assert.ok(page.includes('It was updated on 18 November 2026'), `${path} opens with the notice`);
+    assert.ok(!/\bglyphh\b/.test(page.replace(/support@glyphh\.ai|glyphh\.ai/g, '')), `${path} writes the name Glyphh, in sentences only`);
+  }
+  // Every purchase is final, in the same words wherever it is said, with the one carve-out.
+  const final = 'We give no refunds, except where the law gives you a right we cannot exclude.';
+  for (const path of ['/terms', '/refund']) assert.ok(readFileSync(`${APP}${path}/page.js`, 'utf8').includes(final), `${path} says purchases are final`);
+  // The prices are the games' own: Free Fall Frank's two at $0.99, the pass and a league in Bams & Brags.
+  for (const path of ['/terms', '/refund']) {
+    const page = readFileSync(`${APP}${path}/page.js`, 'utf8');
+    assert.deepEqual([...page.matchAll(/\$\d+(?:\.\d+)?/g)].map((m) => m[0]), ['$0.99', '$0.99', '$2.99', '$29.99'], `${path} prices`);
+  }
+  assert.ok(!/\$\d/.test(readFileSync(`${APP}/privacy/page.js`, 'utf8')));
+});
+
 test('pages name glyphh.ai as their address, and support@glyphh.ai as the only one to write to', () => {
   for (const page of pages) {
     const html = readFileSync(`${PUBLIC}${page}`, 'utf8');
