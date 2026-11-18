@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Games · Glyphh</title>
-  <meta name="description" content="The games Glyphh makes. Free to play, and you can build your own levels with Claude.">
-  <meta property="og:title" content="Games · Glyphh">
-  <meta property="og:description" content="The games Glyphh makes. Free to play, and you can build your own levels with Claude.">
+  <title>Glyphh · We make games</title>
+  <meta name="description" content="Glyphh is a small independent game studio. Browser games for a phone or a computer, with nothing to install, that you can build on with Claude.">
+  <meta property="og:title" content="Glyphh · We make games">
+  <meta property="og:description" content="A small independent game studio. Browser games for a phone or a computer, that you can build on with Claude.">
   <meta property="og:url" content="https://glyphh.ai/">
   <meta property="og:image" content="https://glyphh.ai/free-fall-frank/card.jpg">
   <link rel="canonical" href="https://glyphh.ai/">
@@ -14,29 +14,155 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="/games.css">
+  <link rel="stylesheet" href="/home.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="home">
   <header class="head">
     <div class="head-left">
-      <a href="https://glyphh.ai" aria-label="Glyphh"><img src="/glyphh-logo-black.png" alt="Glyphh" class="logo"></a>
-      <a class="crumb" href="/">Games</a>
+      <a href="https://glyphh.ai" aria-label="Glyphh"><img src="/glyphh-logo-black.png" alt="Glyphh" class="logo" width="115" height="38"></a>
     </div>
+    <nav class="head-nav" aria-label="On this page">
+      <a href="#games">Games</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
     <a class="btn small" href="mailto:support@glyphh.ai?subject=Advertise%20in%20a%20Glyphh%20game">Advertise</a>
   </header>
 
-  <main class="frame">
-    <section class="intro">
-      <p class="kicker">Games</p>
-      <h1>Games we make.</h1>
-      <p class="lede">Free to play in your browser, on a phone or a computer. Nothing to install.</p>
+  <main>
+    <section class="frame studio-hero">
+      <p class="kicker">Independent game studio</p>
+      <h1>We make games.</h1>
+      <div class="hero-row">
+        <p class="lede">A small studio making browser games for a phone or a computer, with nothing to install. Then you make them bigger: ask Claude to build levels, places and looks of your own.</p>
+        <a class="btn primary big" href="#games">Play the games</a>
+      </div>
+
+      <div class="stage" id="stage">
+        <a class="reel-link tall first" href="/free-fall-frank/">
+          <span class="reel"><video muted loop playsinline preload="none" poster="/free-fall-frank/poster-play.jpg" src="https://freefallfrank.com/ad.mp4" aria-label="Free Fall Frank being played: Frank tumbling down through the gaps"></video></span>
+          <span class="reel-name">Free Fall Frank</span>
+        </a>
+        <a class="reel-link wide" href="/crabby-knife-fight/">
+          <span class="reel"><video muted loop playsinline preload="none" poster="/crabby-knife-fight/poster-wide.jpg" src="https://crabbyknifefight.com/landing/play-wide.mp4" aria-label="Crabby Knife Fight being played: a red crab with a knife running through the dock"></video></span>
+          <span class="reel-name">Crabby Knife Fight</span>
+        </a>
+        <a class="reel-link tall last" href="/bams-and-brags/">
+          <span class="reel"><video muted loop playsinline preload="none" poster="/bams-and-brags/poster-reel.jpg" src="https://bamsandbrags.com/landing/reel-720.mp4" aria-label="Bams &amp; Brags being played: a mah jongg table"></video></span>
+          <span class="reel-name">Bams &amp; Brags</span>
+        </a>
+      </div>
+      <button class="stage-toggle" id="stage-toggle" type="button" hidden>Pause the videos</button>
     </section>
 
-    <section class="cards" id="cards"></section>
+    <section class="frame block-home" id="games">
+      <div class="section-head" data-reveal>
+        <p class="kicker">The games</p>
+        <h2>Three games live. More in the making.</h2>
+        <p class="lede">Free to start, in your browser. Pick one.</p>
+      </div>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section class="frame block-home" id="ours">
+      <div class="section-head" data-reveal>
+        <p class="kicker">What makes them ours</p>
+        <h2>Simple to start. Yours to build on.</h2>
+      </div>
+      <div class="ours">
+        <div class="our" data-reveal>
+          <span class="num">01</span>
+          <h3>Nothing to install</h3>
+          <p>Every game runs in the browser, on a phone or a computer. Open the link and it is there.</p>
+        </div>
+        <div class="our" data-reveal>
+          <span class="num">02</span>
+          <h3>Build your own with Claude</h3>
+          <p>Each game is also a connector for Claude. Ask for a level in Free Fall Frank, a place in Crabby Knife Fight, or a look of your own in Bams &amp; Brags.</p>
+        </div>
+        <div class="our" data-reveal>
+          <span class="num">03</span>
+          <h3>A look and a sound of its own</h3>
+          <p>No two are alike. Every level of Free Fall Frank falls to its own track, the band in Crabby Knife Fight is made as you play, and Bams &amp; Brags has its own rooms, mats and tiles.</p>
+        </div>
+        <div class="our" data-reveal>
+          <span class="num">04</span>
+          <h3>Free to start</h3>
+          <p>Crabby Knife Fight is free, all of it. Free Fall Frank and Bams &amp; Brags are free to play, with a few things to buy once if you want more. No subscriptions.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="strip" data-reveal>
+      <img loading="lazy" width="1280" height="720" src="/crabby-knife-fight/shots/place-1.webp" alt="Crabby Knife Fight: the crab slashing at a gull over buoys in the water, a lighthouse behind in the rain">
+      <img loading="lazy" width="640" height="1386" src="/bams-and-brags/shots/look-beach.webp" alt="Bams &amp; Brags: The Beach House, a blue striped cabana mat and bright tiles">
+      <img loading="lazy" width="780" height="1688" src="/free-fall-frank/shots/street.png" alt="Free Fall Frank: Frank tumbling through a gap, a coin under him">
+      <img loading="lazy" width="1280" height="720" src="/crabby-knife-fight/shots/boss-fitz.webp" alt="Crabby Knife Fight: the crab landing a tenth hit on Fiddler Fitz, a golden fiddler crab">
+      <img loading="lazy" width="640" height="1386" src="/bams-and-brags/shots/look-rooftop.webp" alt="Bams &amp; Brags: The Rooftop, a black and gold Gatsby mat and Gatsby tiles">
+      <img loading="lazy" width="780" height="1688" src="/free-fall-frank/shots/rock-landlord.png" alt="Free Fall Frank: Frank in his duck ring above THE LANDLORD, a big square head in a top hat">
+    </div>
+
+    <section class="frame block-home about" id="about">
+      <div data-reveal>
+        <p class="kicker">About the studio</p>
+        <h2>A small studio.</h2>
+      </div>
+      <p class="statement" data-reveal>Glyphh is a small independent game studio. Three games are live: <a href="/free-fall-frank/">Free Fall Frank</a>, <a href="/bams-and-brags/">Bams &amp; Brags</a> and <a href="/crabby-knife-fight/">Crabby Knife Fight</a>. More are in the making.</p>
+    </section>
+
+    <!-- ABOUT ME: draft from known facts only; Chris to supply the real story -->
+    <section class="frame me" id="me" data-reveal>
+      <img class="me-spike" loading="lazy" width="165" height="200" src="/glyphh-mascot.png" alt="Spike the cat, the studio's mascot">
+      <div>
+        <p class="kicker">About me</p>
+        <h2>Chris Timmerman, founder</h2>
+        <p>I'm Chris, and I founded Glyphh. I design the games myself and build them with Claude, and I like ideas that are simple and bold. The cat is Spike, our mascot: he is the one in the logo.</p>
+        <p class="me-mail">Write to me at <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
+      </div>
+    </section>
+
+    <section class="frame" id="contact">
+      <div class="contact" data-reveal>
+        <div>
+          <p class="kicker">Contact</p>
+          <h2>Say hello, or advertise in a game.</h2>
+          <p>Want your name in front of our players, or have something to tell us? One address reaches the studio.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="btn primary big" href="mailto:support@glyphh.ai">Email support@glyphh.ai</a>
+          <a class="btn big" href="mailto:support@glyphh.ai?subject=Advertise%20in%20a%20Glyphh%20game">Advertise</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="foot">
-    <span>Made by <a href="https://glyphh.ai">Glyphh</a></span>
-    <span>Advertise or anything else: <a href="mailto:support@glyphh.ai">support@glyphh.ai</a></span>
+  <footer class="site-foot">
+    <div class="site-foot-in">
+      <div class="site-foot-brand">
+        <a href="/" aria-label="Glyphh, the front page"><img src="/glyphh-logo-black.png" alt="Glyphh" class="logo" width="115" height="38" loading="lazy"></a>
+        <p>A small independent game studio.</p>
+        <a class="site-foot-mail" href="mailto:support@glyphh.ai">support@glyphh.ai</a>
+      </div>
+      <nav class="site-foot-col" aria-label="Games">
+        <p class="site-foot-label">Games</p>
+        <a href="/free-fall-frank/">Free Fall Frank</a>
+        <a href="/bams-and-brags/">Bams &amp; Brags</a>
+        <a href="/crabby-knife-fight/">Crabby Knife Fight</a>
+      </nav>
+      <nav class="site-foot-col" aria-label="Studio">
+        <p class="site-foot-label">Studio</p>
+        <a href="/#about">About</a>
+        <a href="mailto:support@glyphh.ai?subject=Advertise%20in%20a%20Glyphh%20game">Advertise</a>
+      </nav>
+      <nav class="site-foot-col" aria-label="Legal">
+        <p class="site-foot-label">Legal</p>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/refund">Refunds</a>
+      </nav>
+    </div>
+    <p class="site-foot-legal">&copy; 2026 Glyphh AI LLC</p>
   </footer>
 
   <script src="/home.js" type="module"></script>

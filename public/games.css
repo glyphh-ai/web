@@ -51,7 +51,7 @@ a.card:hover { border-color: var(--text-3); transform: translateY(-2px); }
 .card-art.empty { display: grid; place-items: center; font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-4); }
 .card-body { display: flex; flex-direction: column; gap: 14px; padding: 24px 26px 26px; flex: 1; }
 .card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.card h2 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.card h3 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
 .card p { margin: 0; flex: 1; font-size: 15px; line-height: 1.55; color: var(--text-3); }
 .go { font-size: 20px; color: var(--text); }
 .soon { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-4); white-space: nowrap; }
@@ -59,10 +59,22 @@ a.card:hover { border-color: var(--text-3); transform: translateY(-2px); }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--hair); font-family: var(--mono); font-size: 12px; color: var(--text-4); }
 
-.foot { border-top: 1px solid var(--hair); padding: 28px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 14px; color: var(--text-4); }
-.foot a { color: var(--text-3); }
-.foot a:hover { color: var(--text); }
+/* The footer of every page (its markup is public/footer.js): the logo, the games, the studio, the legal pages. */
+.site-foot { border-top: 1px solid var(--hair); padding: 64px 28px 36px; font-size: 15px; color: var(--text-3); }
+.site-foot-in { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
+.site-foot-brand > a:first-child { display: inline-flex; align-items: center; min-height: 44px; }
+.site-foot-brand p { margin: 16px 0 6px; color: var(--text-3); }
+.site-foot-col { display: flex; flex-direction: column; align-items: flex-start; }
+.site-foot-label { margin: 0 0 8px; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-4); }
+.site-foot-col a, .site-foot-mail { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-2); }
+.site-foot-col a:hover, .site-foot-mail:hover { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+.site-foot-legal { max-width: 1200px; margin: 48px auto 0; padding-top: 24px; border-top: 1px solid var(--hair); font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--text-4); }
 
+@media (max-width: 760px) {
+  .site-foot { padding: 48px 18px 28px; }
+  .site-foot-in { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-foot-brand { grid-column: 1 / -1; }
+}
 @media (max-width: 640px) {
   .head { padding: 0 18px; }
   .frame { padding: 48px 18px 72px; }
