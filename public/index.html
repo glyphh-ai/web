@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Glyphh · We make games</title>
-  <meta name="description" content="Glyphh is a small independent game studio. Browser games for a phone or a computer, with nothing to install, that you can build on with Claude.">
-  <meta property="og:title" content="Glyphh · We make games">
-  <meta property="og:description" content="A small independent game studio. Browser games for a phone or a computer, that you can build on with Claude.">
+  <title>Glyphh · Games and custom apps</title>
+  <meta name="description" content="Glyphh is a small independent studio. We make browser games you can build on with Claude, and we build custom apps for clients, with Claude.">
+  <meta property="og:title" content="Glyphh · Games and custom apps">
+  <meta property="og:description" content="A small independent studio. Browser games you can build on with Claude, and custom apps for clients.">
   <meta property="og:url" content="https://glyphh.ai/">
   <meta property="og:image" content="https://glyphh.ai/free-fall-frank/card.jpg">
   <link rel="canonical" href="https://glyphh.ai/">
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
   <!-- ?v= changes whenever these files do: browsers keep them for hours, and an old one against this page breaks it -->
   <link rel="stylesheet" href="/games.css?v=5">
-  <link rel="stylesheet" href="/home.css?v=5">
+  <link rel="stylesheet" href="/home.css?v=6">
 </head>
 <body class="home">
   <header class="head">
@@ -24,6 +24,7 @@
     </div>
     <nav class="head-nav" aria-label="On this page">
       <a href="#games">Games</a>
+      <a href="#apps">Apps</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -32,10 +33,10 @@
 
   <main>
     <section class="frame studio-hero">
-      <p class="kicker">Independent game studio</p>
+      <p class="kicker">Game studio · Custom apps</p>
       <h1>We make games.</h1>
       <div class="hero-row">
-        <p class="lede">A small studio making browser games for a phone or a computer, with nothing to install. Then you make them bigger: ask Claude to build levels, places and looks of your own.</p>
+        <p class="lede">A small studio making browser games for a phone or a computer, with nothing to install. Then you make them bigger: ask Claude to build levels, places and looks of your own. We also build <a href="#apps">custom apps</a> for clients.</p>
         <a class="btn primary big" href="#games">Play the games</a>
       </div>
 
@@ -58,9 +59,9 @@
 
     <section class="frame block-home" id="games">
       <div class="section-head" data-reveal>
-        <p class="kicker">The games</p>
-        <h2>Three games live. More in the making.</h2>
-        <p class="lede">Free to start, in your browser. Pick one.</p>
+        <p class="kicker">Games and apps</p>
+        <h2>Three games and a singing card.</h2>
+        <p class="lede">All in your browser, nothing to install. The games are free to start.</p>
       </div>
       <div class="cards" id="cards"></div>
     </section>
@@ -103,12 +104,59 @@
       <img loading="lazy" width="780" height="1688" src="/free-fall-frank/shots/rock-landlord.png" alt="Free Fall Frank: Frank in his duck ring above THE LANDLORD, a big square head in a top hat">
     </div>
 
+    <section class="frame block-home" id="apps">
+      <div class="apps" data-reveal>
+        <div>
+          <p class="kicker">Custom apps</p>
+          <h2>We build apps for clients.</h2>
+          <p>A web app, a tool for your team, a game: tell us what you need. We design it and build it with Claude and Claude Code, the same way we build our own games and apps.</p>
+        </div>
+        <div class="apps-actions">
+          <p class="kicker">Work with us</p>
+          <a class="btn primary big" href="mailto:support@glyphh.ai?subject=A%20custom%20app">Email support@glyphh.ai</a>
+          <a class="btn big" href="tel:+15124896516">Call (512) 489-6516</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame block-home" id="claude">
+      <div class="claude" data-reveal>
+        <div class="mascots">
+          <figure class="mascot">
+            <img loading="lazy" width="165" height="200" src="/glyphh-mascot.png" alt="Spike the cat, the Glyphh mascot">
+            <figcaption>Spike, Glyphh</figcaption>
+          </figure>
+          <figure class="mascot">
+            <!-- Claude Code's pixel mascot, drawn here in Claude's orange; no Anthropic file is used. -->
+            <svg class="clawd" viewBox="0 0 14 9" width="182" height="117" role="img" aria-label="Claude Code's pixel mascot, an orange block with two eyes" shape-rendering="crispEdges">
+              <rect x="2" y="0" width="10" height="7" fill="#D97757"/>
+              <rect x="0" y="3" width="2" height="2" fill="#D97757"/>
+              <rect x="12" y="3" width="2" height="2" fill="#D97757"/>
+              <rect x="3" y="7" width="1" height="2" fill="#D97757"/>
+              <rect x="5" y="7" width="1" height="2" fill="#D97757"/>
+              <rect x="8" y="7" width="1" height="2" fill="#D97757"/>
+              <rect x="10" y="7" width="1" height="2" fill="#D97757"/>
+              <rect x="4" y="2" width="1" height="2" fill="#000"/>
+              <rect x="9" y="2" width="1" height="2" fill="#000"/>
+            </svg>
+            <figcaption>Claude Code</figcaption>
+          </figure>
+        </div>
+        <div>
+          <p class="kicker">How we work</p>
+          <!-- WORDING: the one line about Claude. "Built with Claude" only: no partnership claim anywhere. -->
+          <h2>Built with Claude.</h2>
+          <p>Every game and app on this page is built with Claude and Claude Code, and so is the work we do for clients. Our games also have Claude connectors, so you can ask your own Claude to make a level, a place or a look of your own.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="frame block-home about" id="about">
       <div data-reveal>
         <p class="kicker">About the studio</p>
         <h2>A small studio.</h2>
       </div>
-      <p class="statement" data-reveal>Glyphh is a small independent game studio. Three games are live: <a href="/free-fall-frank/">Free Fall Frank</a>, <a href="/bams-and-brags/">Bams &amp; Brags</a> and <a href="/crabby-knife-fight/">Crabby Knife Fight</a>. More are in the making.</p>
+      <p class="statement" data-reveal>Glyphh is a small independent studio. We make games, and we build custom apps for clients. Live now: <a href="/free-fall-frank/">Free Fall Frank</a>, <a href="/bams-and-brags/">Bams &amp; Brags</a>, <a href="/crabby-knife-fight/">Crabby Knife Fight</a> and <a href="https://sendacarol.com">Send a Carol</a>. More are in the making.</p>
     </section>
 
     <!-- ABOUT ME: draft from known facts only; Chris to supply the real story -->
@@ -141,18 +189,20 @@
     <div class="site-foot-in">
       <div class="site-foot-brand">
         <a href="/" aria-label="Glyphh, the front page"><img src="/glyphh-logo-black.png" alt="Glyphh" class="logo" width="115" height="38" loading="lazy"></a>
-        <p>A small independent game studio.</p>
+        <p>A small independent studio: games, and custom apps for clients.</p>
         <a class="site-foot-mail" href="mailto:support@glyphh.ai">support@glyphh.ai</a>
       </div>
-      <nav class="site-foot-col" aria-label="Games">
-        <p class="site-foot-label">Games</p>
+      <nav class="site-foot-col" aria-label="Games and apps">
+        <p class="site-foot-label">Games and apps</p>
         <a href="/free-fall-frank/">Free Fall Frank</a>
         <a href="/bams-and-brags/">Bams &amp; Brags</a>
         <a href="/crabby-knife-fight/">Crabby Knife Fight</a>
+        <a href="https://sendacarol.com">Send a Carol</a>
       </nav>
       <nav class="site-foot-col" aria-label="Studio">
         <p class="site-foot-label">Studio</p>
         <a href="/#about">About</a>
+        <a href="/#apps">Custom apps</a>
         <a href="mailto:support@glyphh.ai?subject=Advertise%20in%20a%20Glyphh%20game">Advertise</a>
       </nav>
       <nav class="site-foot-col" aria-label="Legal">
@@ -165,6 +215,6 @@
     <p class="site-foot-legal">&copy; 2026 Glyphh AI LLC</p>
   </footer>
 
-  <script src="/home.js?v=5" type="module"></script>
+  <script src="/home.js?v=6" type="module"></script>
 </body>
 </html>

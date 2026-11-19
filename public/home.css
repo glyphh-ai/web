@@ -37,7 +37,7 @@
 /* The page's parts. */
 .home .block-home { padding-top: clamp(96px, 12vw, 176px); scroll-margin-top: -48px; }
 .section-head .lede { font-size: clamp(18px, 1.6vw, 21px); }
-.home .cards { margin-top: clamp(36px, 4vw, 56px); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.home .cards { margin-top: clamp(36px, 4vw, 56px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .home .card-art { height: auto; }
 .home .head-left a { display: inline-flex; align-items: center; min-height: 44px; }
 .home .card.is-soon { grid-column: 1 / -1; flex-direction: row; align-items: center; opacity: 1; border-style: dashed; border-color: var(--rail); background: transparent; }
@@ -63,6 +63,24 @@
   .strip { justify-content: center; overflow: hidden; }
   .strip img { height: min(330px, calc((100vw - 176px) / 5.4)); }
 }
+
+/* Custom apps: what we build for clients, then the two ways to reach us. */
+.apps { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr); gap: 36px 64px; align-items: end; }
+.apps p:not(.kicker) { margin: 20px 0 0; max-width: 620px; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; color: var(--text-3); }
+.apps-actions { display: flex; flex-direction: column; gap: 12px; }
+.apps-actions .kicker { margin: 0 0 4px; }
+
+/* Built with Claude: the two mascots side by side, then the line about how we work. Claude Code's mascot is drawn
+   here (an SVG of squares in Claude's orange), never an Anthropic file. */
+.claude { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px 72px; align-items: center; }
+.mascots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px); }
+.mascot { margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 22px; aspect-ratio: 1 / 1; padding: 28px 16px 22px; border-radius: 22px; border: 1px solid var(--rail); background: var(--surface); }
+.mascot img { width: auto; height: 62%; }
+.mascot .clawd { width: 78%; height: auto; margin-bottom: auto; margin-top: auto; }
+.mascot figcaption { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); }
+.claude p:not(.kicker) { margin: 20px 0 0; max-width: 560px; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; color: var(--text-3); }
+.hero-row .lede a { color: var(--text); text-decoration: underline; text-decoration-color: var(--rail); text-underline-offset: 4px; }
+.hero-row .lede a:hover { text-decoration-color: var(--text); }
 
 /* About the studio: the label on the left, the statement large on the right. */
 .about { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); gap: 32px 64px; align-items: start; }
@@ -94,8 +112,7 @@
   .reveal [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
   .reveal [data-reveal].in { opacity: 1; transform: none; }
   .reveal a.card[data-reveal].in:hover { transform: translateY(-2px); transition-duration: 0.15s; }
-  .ours .our:nth-child(even), .cards .card:nth-child(2) { transition-delay: 0.08s; }
-  .cards .card:nth-child(3) { transition-delay: 0.16s; }
+  .ours .our:nth-child(even), .cards .card:nth-child(even):not(.is-soon) {transition-delay: 0.08s; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -109,6 +126,9 @@
   .about { grid-template-columns: minmax(0, 1fr); }
   .contact { grid-template-columns: minmax(0, 1fr); }
   .contact-actions { flex-direction: row; flex-wrap: wrap; }
+  .apps, .claude { grid-template-columns: minmax(0, 1fr); }
+  .apps-actions { flex-direction: row; flex-wrap: wrap; }
+  .apps-actions .kicker { width: 100%; }
 }
 @media (max-width: 640px) {
   /* The header takes two rows: the logo and Advertise, then the page's parts across the width. */
@@ -130,6 +150,8 @@
   .strip { padding: 0 18px; }
   .home .me { align-items: flex-start; gap: 20px; }
   .me-spike { width: 68px; }
-  .contact-actions { flex-direction: column; }
-  .contact-actions .btn { width: 100%; }
+  .contact-actions, .apps-actions { flex-direction: column; }
+  .contact-actions .btn, .apps-actions .btn { width: 100%; }
+  .mascot { padding: 20px 10px 16px; gap: 14px; border-radius: 16px; }
+  .mascot figcaption { font-size: 11px; letter-spacing: 0.1em; }
 }
