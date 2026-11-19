@@ -3,17 +3,25 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { GAMES } from '../public/games.js';
+import { GAMES, pageOf } from '../public/games.js';
 import { FOOTER } from '../public/footer.js';
 
 const PUBLIC = new URL('../public', import.meta.url).pathname;
 const APP = new URL('../app', import.meta.url).pathname;
 const LEGAL = ['/terms', '/privacy', '/refund'];
-const live = GAMES.filter((g) => !g.soon);
+// Everything live has a card; the games with a page here (not the apps with sites of their own) also have a hero video.
+const shown = GAMES.filter((g) => !g.soon);
+const live = GAMES.filter(pageOf);
+const external = shown.filter((g) => g.external);
 const pages = ['/index.html', ...live.map((g) => `${g.href}index.html`)];
 
-test('every live game has a page and a picture', () => {
+test('every live game has a page and a picture; an app with its own site has its address and a picture', () => {
   assert.ok(live.length > 0);
+  for (const g of external) {
+    assert.match(g.href, /^https:\/\/[a-z0-9.-]+$/);
+    assert.ok(existsSync(`${PUBLIC}${g.art}`), g.art);
+  }
+  assert.ok(external.some((g) => g.title === 'Send a Carol' && g.href === 'https://sendacarol.com'));
   for (const g of live) {
     assert.match(g.href, /^\/[a-z0-9-]+\/$/);
     assert.ok(existsSync(`${PUBLIC}${g.href}index.html`), `${g.href}index.html`);
@@ -39,8 +47,8 @@ test('every file a page names is there', () => {
 });
 
 test('every page ends in the one footer: the games, About, Advertise, the legal pages, the company', () => {
-  for (const g of live) assert.ok(FOOTER.includes(`<a href="${g.href}">`), `the footer links ${g.href}`);
-  for (const href of ['/#about', ...LEGAL, 'mailto:support@glyphh.ai', 'mailto:support@glyphh.ai?subject=Advertise%20in%20a%20Glyphh%20game']) {
+  for (const g of shown) assert.ok(FOOTER.includes(`<a href="${g.href}">`), `the footer links ${g.href}`);
+  for (const href of ['/#about', '/#apps', ...LEGAL, 'mailto:support@glyphh.ai', 'mailto:support@glyphh.ai?subject=Advertise%20in%20a%20Glyphh%20game']) {
     assert.ok(FOOTER.includes(`href="${href}"`), `the footer links ${href}`);
   }
   assert.ok(FOOTER.includes('&copy; 2026 Glyphh AI LLC'));
@@ -55,13 +63,27 @@ test('every page ends in the one footer: the games, About, Advertise, the legal 
   assert.match(layout, /__html: FOOTER/);
 });
 
-test('the front page is the studio: header, hero, games, what makes them ours, about, about me, contact', () => {
+test('the front page is the studio: header, hero, games, what makes them ours, custom apps, built with Claude, about, about me, contact', () => {
   const html = readFileSync(`${PUBLIC}/index.html`, 'utf8');
   // The parts, in the order they are read.
-  const parts = ['class="head"', '<h1>We make games.</h1>', 'id="stage"', 'id="games"', 'id="ours"', 'id="about"', 'id="me"', 'id="contact"', '<footer'];
+  const parts = ['class="head"', '<h1>We make games.</h1>', 'id="stage"', 'id="games"', 'id="ours"', 'id="apps"', 'id="claude"', 'id="about"', 'id="me"', 'id="contact"', '<footer'];
   const at = parts.map((part) => html.indexOf(part));
   at.forEach((index, i) => assert.ok(index > (at[i - 1] ?? -1), `${parts[i]} is in its place`));
-  for (const anchor of ['#games', '#about', '#contact']) assert.ok(html.includes(`<a href="${anchor}">`), `the header links ${anchor}`);
+  for (const anchor of ['#games', '#apps', '#about', '#contact']) assert.ok(html.includes(`<a href="${anchor}">`), `the header links ${anchor}`);
+  for (const g of external) assert.ok(html.includes(`<a href="${g.href}">${g.title}</a>`), `the studio statement names ${g.title}`);
+
+  // Custom apps: the one address and the studio's phone, and nothing else to write to or call.
+  const apps = html.slice(html.indexOf('id="apps"'), html.indexOf('id="claude"'));
+  assert.ok(apps.includes('href="mailto:support@glyphh.ai'));
+  assert.ok(apps.includes('<a class="btn big" href="tel:+15124896516">Call (512) 489-6516</a>'));
+  assert.deepEqual([...html.matchAll(/\(\d{3}\)[ \d-]+/g)].map((m) => m[0]), ['(512) 489-6516'], 'the phone is in Custom apps only');
+
+  // Built with Claude: the two mascots (Claude Code's drawn here, no Anthropic file), and no partnership claimed.
+  const claude = html.slice(html.indexOf('id="claude"'), html.indexOf('id="about"'));
+  assert.ok(claude.includes('<h2>Built with Claude.</h2>'));
+  assert.ok(claude.includes('src="/glyphh-mascot.png"') && claude.includes('<svg class="clawd"'));
+  assert.ok(!/anthropic\.com|claude\.ai\//i.test(claude), 'no Anthropic asset is linked');
+  assert.ok(!/partner|endorse|official/i.test(html.replace(/<!--[\s\S]*?-->/g, '')), 'the page claims no partnership with Anthropic');
   assert.equal(html.match(/<h1/g).length, 1);
   assert.ok(html.includes('<a class="btn primary big" href="#games">Play the games</a>'));
   assert.ok(html.includes('<!-- ABOUT ME: draft from known facts only; Chris to supply the real story -->'));
@@ -82,7 +104,7 @@ test('the front page is the studio: header, hero, games, what makes them ours, a
   // The brand is the logo's picture, never the name typed out as a mark; and the page keeps to the games.
   const words = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]*>/g, ' ');
   assert.ok(!/\bglyphh\b/.test(words.replace(/support@glyphh\.ai/g, '')), 'the name is written Glyphh, in sentences only');
-  for (const gone of [/\bAda\b/, /rrotor/i, /\bAI\b(?! LLC)/, /presents/i, /\(\d{3}\)/]) assert.ok(!gone.test(words), `the front page does not say ${gone}`);
+  for (const gone of [/\bAda\b/, /rrotor/i, /\bAI\b(?! LLC)/, /presents/i]) assert.ok(!gone.test(words), `the front page does not say ${gone}`);
 
   const css = readFileSync(`${PUBLIC}/home.css`, 'utf8');
   assert.ok(css.includes('prefers-reduced-motion'));

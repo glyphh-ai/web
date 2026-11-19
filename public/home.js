@@ -1,5 +1,5 @@
-// glyphh.ai's front page: a card per game (games.js), the hero's three videos, and the slow reveal on scroll.
-import { GAMES } from '/games.js?v=5';
+// glyphh.ai's front page: a card per game or app (games.js), the hero's three videos, and the slow reveal on scroll.
+import { GAMES } from '/games.js?v=6';
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
 
@@ -10,7 +10,7 @@ function card(g) {
     : '<div class="card-art empty">Coming soon</div>';
   const inner = `${art}
     <div class="card-body">
-      <div class="card-top"><h3>${esc(g.title)}</h3>${g.soon ? '<span class="soon">Coming soon</span>' : '<span class="go" aria-hidden="true">→</span>'}</div>
+      <div class="card-top"><h3>${esc(g.title)}</h3>${g.soon ? '<span class="soon">Coming soon</span>' : `<span class="go" aria-hidden="true">${g.external ? '↗' : '→'}</span>`}</div>
       <p>${esc(g.blurb)}</p>
       ${tags ? `<div class="tags">${tags}</div>` : ''}
     </div>`;

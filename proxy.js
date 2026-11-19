@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { GAMES } from './public/games.js';
+import { GAMES, pageOf } from './public/games.js';
 
 // glyphh.ai is the games site: plain pages in public/ (the front page and a folder per game) and the legal pages
 // in app/. Next does not answer a folder with its index.html, so this does: `/` is public/index.html and
@@ -7,7 +7,7 @@ import { GAMES } from './public/games.js';
 // is answered by app/[...gone]/route.js.
 
 // A game's address, without its closing slash: '/free-fall-frank'.
-const GAME_PATHS = new Set(GAMES.filter((g) => g.href).map((g) => g.href.replace(/\/$/, '')));
+const GAME_PATHS = new Set(GAMES.filter(pageOf).map((g) => g.href.replace(/\/$/, '')));
 
 // The docs had a host of their own, served by this app. They are gone: the host leads to the site.
 const DOCS_HOST = 'docs.glyphh.ai';

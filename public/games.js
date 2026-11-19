@@ -1,6 +1,8 @@
-// The games on glyphh.ai's front page, one entry each. A new game adds its entry here and a folder of its own
-// (public/<name>/index.html); `soon` shows the card without a link until the game is live. proxy.js serves a game's
-// page from its `href`, and app/sitemap.js lists it.
+// The games and apps on glyphh.ai's front page, one entry each. A new game adds its entry here and a folder of its own
+// (public/<name>/index.html); `soon` shows the card without a link until the game is live; `external` is one with a
+// site of its own, linked from its card and given no page here. proxy.js serves a game's page from its `href`, and
+// app/sitemap.js lists it.
+export const pageOf = (g) => Boolean(g.href) && !g.external;
 export const GAMES = [
   {
     href: '/free-fall-frank/',
@@ -22,6 +24,15 @@ export const GAMES = [
     blurb: 'They took his family in a crab pot. He found a knife. A punk platformer: seven places, and a knife fight with a traitor crab at the end of each.',
     art: '/crabby-knife-fight/card.jpg',
     tags: ['free', 'phone and desktop', 'make places with Claude'],
+  },
+  {
+    // An app of ours with a site of its own: the card links there, and glyphh.ai has no page or hero video for it.
+    href: 'https://sendacarol.com',
+    external: true,
+    title: 'Send a Carol',
+    blurb: 'Custom greeting cards that sing. Say who it is for and add a few photos, and you get an original song with their name in it, set to a little video. For any occasion.',
+    art: '/send-a-carol/card.jpg',
+    tags: ['1 for $4.99', '5 for $14.99', '10 for $24.99'],
   },
   {
     title: 'More games',
