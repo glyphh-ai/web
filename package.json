@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "test": "node --test",
     "start": "next start -p ${PORT:-3000}"
   },
   "dependencies": {
