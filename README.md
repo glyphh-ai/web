@@ -1,39 +1,34 @@
 # glyphh-web
 
-[glyphh.ai](https://glyphh.ai): the games Glyphh makes. The front page is a card per game, and each game has a page
-(videos, screenshots, how to play, how it connects to Claude, Advertise). The games themselves run on their own sites;
-these pages show them and link there (`?src=games`). Nothing else is on the site: no sign-in, no account, no API.
+The Glyphh site, [glyphh.ai](https://glyphh.ai), and the user docs, [docs.glyphh.ai](https://docs.glyphh.ai). Next.js
+(App Router); one app serves both hosts (`middleware.js` maps `docs.glyphh.ai/<page>` to `app/docs`).
 
 | Path | What |
 |---|---|
-| `public/index.html`, `home.js`, `games.css` | The front page |
-| `public/games.js` | The list of games: one entry per card |
-| `public/<game>/` | A game's page (`index.html`) and its pictures; `game.css` and `game.js` are shared by them |
-| `proxy.js` | Answers `/` and `/<game>/` with those files; sends `docs.glyphh.ai` to the site |
-| `app/[...gone]/route.js` | Every address the site no longer has redirects to `/` |
-| `app/terms`, `app/privacy`, `app/refund` | The legal pages (Next.js, `app/layout.js`) |
-| `public/press/`, `public/glyphh-logo-*.png`, `public/glyphh-mascot*.png` | Files other sites link to: keep their addresses |
-| `marketing/` | Delivered files, kept in the repo and read on GitHub; the site does not serve them |
+| `app/page.js` | The home page |
+| `app/products/ada` | The Ada product page |
+| `app/pricing` | Plans and the hosted machine rates, read from the server's `GET /v1/rates` |
+| `app/docs` | The user docs: `content.js` and `pages.js` hold every page, `ui.js` the figures |
+| `app/faq`, `app/blog` | The FAQ; the blog (`posts.js`) |
+| `app/terms`, `app/privacy`, `app/refund`, … | The legal pages |
 
-## Add a game
+## Settings
 
-1. Make a folder `public/<name>/` with its `index.html` (copy a game's page; it uses `/games.css`, `/game.css` and
-   `/game.js`) and its pictures, a `card.jpg` among them.
-2. Add its entry to `public/games.js`: `href: '/<name>/'`, `title`, `blurb`, `art`, `tags`. An entry with
-   `soon: true` and no `href` shows a card without a link.
-
-The front page, the page's address and the sitemap all read `games.js`; nothing else needs a change.
+| Variable | What |
+|---|---|
+| `NEXT_PUBLIC_PLATFORM_URL` | The platform, where Log in and Sign up go (default `https://platform.glyphh.ai`) |
+| `NEXT_PUBLIC_SERVER_URL` | The Glyphh server (default `https://api.glyphh.ai`) |
+| `NEXT_PUBLIC_DISCORD_URL`, `NEXT_PUBLIC_X_URL` | Footer links, shown only when set |
 
 ## Develop
 
 ```bash
 npm ci
-npm run dev      # http://localhost:3000
-npm test         # every game has its page and every file a page names is there
+npm run dev      # http://localhost:3000; the docs at /docs
 npm run build
 ```
 
 ## Deploy
 
-GitHub Actions (`.github/workflows/deploy.yml`) tests, builds and deploys to Fly (`fly.toml`, app `glyphh-ai-web`) on
-every push to `main`.
+GitHub Actions (`.github/workflows/deploy.yml`) builds and deploys to Fly (`fly.toml`, app `glyphh-ai-web`) on every
+push to `main`.
