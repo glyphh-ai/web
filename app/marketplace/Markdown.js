@@ -96,7 +96,7 @@ function blocks(lines, base, key, shift, depth = 0) {
       i++;
       while (i < lines.length && !close.test(lines[i])) body.push(lines[i++]);
       i++;
-      out.push(<pre key={k} className="mk-pre"><code>{body.join('\n')}</code></pre>);
+      out.push(<pre key={k} className="mpmd-pre"><code>{body.join('\n')}</code></pre>);
       continue;
     }
     const heading = HEADING.exec(line);
@@ -119,7 +119,7 @@ function blocks(lines, base, key, shift, depth = 0) {
       i += 2;
       while (i < lines.length && lines[i].trim() && lines[i].includes('|')) rows.push(cells(lines[i++]));
       out.push(
-        <div key={k} className="mk-table">
+        <div key={k} className="mpmd-table">
           <table>
             <thead><tr>{head.map((c, j) => <th key={j}>{inline(c, base, `${k}-h${j}`)}</th>)}</tr></thead>
             <tbody>
@@ -190,5 +190,5 @@ function blocks(lines, base, key, shift, depth = 0) {
 export default function Markdown({ source, path = '', shift = 2, className = '' }) {
   const base = path.split('/').slice(0, -1).join('/');
   const lines = String(source || '').replace(/\r\n?/g, '\n').split('\n');
-  return <div className={`mk ${className}`.trim()}>{blocks(lines, base, 'b', shift)}</div>;
+  return <div className={`mpmd ${className}`.trim()}>{blocks(lines, base, 'b', shift)}</div>;
 }
