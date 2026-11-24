@@ -32,13 +32,12 @@ const MOVED = {
   'fact-trees': to('api'), 'ada-act': to('sdks'), 'ada-sdk': to('sdks'),
   'ada-tools': to('plugin'), mcp: to('plugin'), 'mcp-servers': to('plugin'),
   'quick-start': to('getting-started'), quickstart: to('getting-started'),
-  // rrotor is the runtime you run yourself (2026-10-31): its old addresses land on its pages.
-  runtimes: to('runtime'), rrotor: to('runtime'), 'self-hosting': to('runtime'), 'run-rrotor': to('runtime'),
-  compose: to('runtime'), 'docker-compose': to('runtime'), kubernetes: to('runtime'),
-  helm: to('runtime'), terraform: to('runtime'), clusters: to('runtime'), 'run-a-cluster': to('runtime'),
-  'own-cli': to('clis'),
-  // Apps (2026-11-02): pages Claude publishes to the org's rrotor; the old Artifacts name lands there.
-  artifacts: to('apps'),
+  // Glyphh is Ada (2026-11-24): rrotor's pages are gone, and their addresses land on the docs home.
+  runtime: DOCS, programs: DOCS, clis: DOCS, apps: DOCS, graph: DOCS, 'runtime-sdk': DOCS,
+  runtimes: DOCS, rrotor: DOCS, 'self-hosting': DOCS, 'run-rrotor': DOCS,
+  compose: DOCS, 'docker-compose': DOCS, kubernetes: DOCS,
+  helm: DOCS, terraform: DOCS, clusters: DOCS, 'run-a-cluster': DOCS,
+  artifacts: DOCS, bots: DOCS, templates: DOCS,
   licensing: to('plans'), seats: to('plans'), 'billing-admin': to('plans'),
   logs: to('data'),
 };

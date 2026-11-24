@@ -2,8 +2,8 @@
 //
 // Every request the proxy sees is kept against its session (the glyphh_sid cookie; without one, the visitor's
 // address and user agent together, so a scraper that keeps no cookies is still one session). At the 5th, 20th and
-// 60th request the session's behaviour is turned into facts (the same roles and transforms as rrotor
-// `benchmarks/bots/run.py`, edge features) and Ada Cloud's `bots-edge` model is asked to decide: allow (human),
+// 60th request the session's behaviour is turned into facts (the same roles and transforms as the
+// benchmark the model was seeded from, edge features) and Ada Cloud's `bots-edge` model is asked to decide: allow (human),
 // challenge (ask: either answer is dear) or block (bot). The call never waits on the response: it runs after the
 // response is sent (waitUntil) and its verdict applies from the session's next request.
 //

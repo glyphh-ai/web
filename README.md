@@ -6,8 +6,9 @@ The Glyphh site, [glyphh.ai](https://glyphh.ai), and the user docs, [docs.glyphh
 | Path | What |
 |---|---|
 | `app/page.js` | The home page |
-| `app/products/ada` | The Ada product page |
-| `app/pricing` | Plans and the hosted machine rates, read from the server's `GET /v1/rates` |
+| `app/use-cases` | The use cases, each with its experiment |
+| `app/marketplace` | The Marketplace: shows what is in [glyphh-ai/plugins](https://github.com/glyphh-ai/plugins), read from GitHub (`app/lib/marketplace.js`, refreshed every 10 minutes) |
+| `app/pricing` | The plans of Ada Cloud |
 | `app/docs` | The user docs: `content.js` and `pages.js` hold every page, `ui.js` the figures |
 | `app/faq`, `app/blog` | The FAQ; the blog (`posts.js`) |
 | `app/terms`, `app/privacy`, `app/refund`, … | The legal pages |
@@ -17,7 +18,6 @@ The Glyphh site, [glyphh.ai](https://glyphh.ai), and the user docs, [docs.glyphh
 | Variable | What |
 |---|---|
 | `NEXT_PUBLIC_PLATFORM_URL` | The platform, where Log in and Sign up go (default `https://platform.glyphh.ai`) |
-| `NEXT_PUBLIC_SERVER_URL` | The Glyphh server (default `https://api.glyphh.ai`) |
 | `NEXT_PUBLIC_DISCORD_URL`, `NEXT_PUBLIC_X_URL` | Footer links, shown only when set |
 
 ## Develop

@@ -72,7 +72,13 @@ const nextConfig = {
       // The research page is off the site; the page stays in the tree.
       { source: '/research', destination: '/', permanent: false },
       ...GONE.map((source) => ({ source, destination: '/', permanent: true })),
-      // There is no marketplace: its agreements and code of conduct are gone, and the Terms cover what remains.
+      // Glyphh is Ada (2026-11-24): rrotor and the bots are gone. Their old addresses do not 404.
+      { source: '/products/rrotor', destination: '/', permanent: true },
+      { source: '/products/rrotor/:path*', destination: '/', permanent: true },
+      { source: '/use-cases/claude-bots', destination: '/marketplace', permanent: true },
+      { source: '/blog/a-bot-that-learned-its-job', destination: '/blog', permanent: true },
+      // The old marketplace's agreements and code of conduct are gone, and the Terms cover what remains. The
+      // Marketplace page (/marketplace) only shows what is in github.com/glyphh-ai/plugins.
       ...['/developer-agreement', '/marketplace-terms', '/code-of-conduct'].map((source) => ({ source, destination: '/terms', permanent: true })),
     ];
   },
