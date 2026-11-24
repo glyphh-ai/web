@@ -10,7 +10,7 @@ const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.g
 export default function Nav() {
   const pathname = usePathname() || '/';
   // The section the visitor is in lights up in the accent (OpenClaw's
-  // `.active` link). Products covers every /products/* page.
+  // `.active` link).
   const active = (prefix) => (pathname.startsWith(prefix) ? ' active' : '');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,18 +31,6 @@ export default function Nav() {
     ddCloseTimer.current = setTimeout(() => setDdOpen(false), 260);
   };
   useEffect(() => () => clearTimeout(ddCloseTimer.current), []);
-
-  const [prOpen, setPrOpen] = useState(false);
-  const prCloseTimer = useRef(null);
-  const prEnter = () => {
-    clearTimeout(prCloseTimer.current);
-    setPrOpen(true);
-  };
-  const prLeave = () => {
-    clearTimeout(prCloseTimer.current);
-    prCloseTimer.current = setTimeout(() => setPrOpen(false), 260);
-  };
-  useEffect(() => () => clearTimeout(prCloseTimer.current), []);
 
   const [ucOpen, setUcOpen] = useState(false);
   const ucCloseTimer = useRef(null);
@@ -96,27 +84,7 @@ export default function Nav() {
             <div className="nav-dd">
               <a href="/" className={`nav-dd-trigger${pathname === '/' ? ' active' : ''}`}>Home</a>
             </div>
-            {/* Products (his order, 2026-11-02): Ada, the home, and rrotor. */}
-            <div
-                className={`nav-dd ${prOpen ? 'open' : ''}`}
-                onMouseEnter={prEnter}
-                onMouseLeave={prLeave}
-              >
-                <a href="/products" className={`nav-dd-trigger${active('/products')}`}>
-                  Products
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </a>
-                <div className="nav-dd-panel">
-                  <a href="/" className="nav-dd-item">
-                    <span className="nav-dd-name">Ada</span>
-                    <span className="nav-dd-desc">Decisions from your precedents. Glyphh runs it.</span>
-                  </a>
-                  <a href="/products/rrotor" className="nav-dd-item">
-                    <span className="nav-dd-name">rrotor</span>
-                    <span className="nav-dd-desc">Govern your teams’ AI content. You run it.</span>
-                  </a>
-                </div>
-              </div>
+            {/* Glyphh is Ada (his ruling, 2026-11-24): the home is the product, so there is no Products menu. */}
             <div
                 className={`nav-dd ${ucOpen ? 'open' : ''}`}
                 onMouseEnter={ucEnter}
@@ -135,12 +103,11 @@ export default function Nav() {
                     <span className="nav-dd-name">Loan decisions</span>
                     <span className="nav-dd-desc">Approve or refuse from your past decisions.</span>
                   </a>
-                  <a href="/use-cases/claude-bots" className="nav-dd-item">
-                    <span className="nav-dd-name">Claude bots</span>
-                    <span className="nav-dd-desc">A Claude agent that learns its job.</span>
-                  </a>
                 </div>
               </div>
+            <div className="nav-dd">
+              <a href="/marketplace" className={`nav-dd-trigger${active('/marketplace')}`}>Marketplace</a>
+            </div>
             <div
               className={`nav-dd ${ddOpen ? 'open' : ''}`}
               ref={ddRef}
@@ -185,13 +152,10 @@ export default function Nav() {
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
-        <span className="mobile-menu-group">Products</span>
-        <a href="/" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Ada</a>
-        <a href="/products/rrotor" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>rrotor</a>
         <span className="mobile-menu-group">Use cases</span>
         <a href="/use-cases/support-routing" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Support routing</a>
         <a href="/use-cases/loan-decisions" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Loan decisions</a>
-        <a href="/use-cases/claude-bots" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Claude bots</a>
+        <a href="/marketplace" onClick={() => setMenuOpen(false)}>Marketplace</a>
         <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
         <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
         <a href="https://docs.glyphh.ai" onClick={() => setMenuOpen(false)}>Docs</a>

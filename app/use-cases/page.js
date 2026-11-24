@@ -7,7 +7,7 @@ import './use-cases.css';
 export const metadata = {
   title: 'Use cases — Glyphh',
   description:
-    'What Glyphh Ada classifies, each with the experiment behind it: support ticket routing, loan decisions and the judgment calls of Claude bots.',
+    'What Glyphh Ada classifies, each with the experiment behind it: support ticket routing and loan decisions.',
 };
 
 const USE_CASES = [
@@ -24,13 +24,6 @@ const USE_CASES = [
     title: 'Loan decisions',
     body: 'Approve or refuse from your past decisions, by what each mistake costs you, and ask a person when every answer is dear.',
     proof: 'German Credit: a bank’s cost of 100 against 110 and 114 for Claude',
-  },
-  {
-    href: '/use-cases/claude-bots',
-    kicker: 'Agents',
-    title: 'Claude bots',
-    body: 'A Claude agent run by a program, with Ada gates that make the judgment calls and learn from real outcomes.',
-    proof: '10 of 10 held-out coding tasks at 0.05× the cost of always Opus',
   },
 ];
 

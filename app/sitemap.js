@@ -7,12 +7,10 @@ const SITE = 'https://glyphh.ai';
 export default function sitemap() {
   const pages = [
     ['/', 1.0],
-    ['/products', 0.8],
-    ['/products/rrotor', 0.9],
     ['/use-cases', 0.9],
     ['/use-cases/support-routing', 0.9],
     ['/use-cases/loan-decisions', 0.9],
-    ['/use-cases/claude-bots', 0.9],
+    ['/marketplace', 0.8],
     ['/pricing', 0.8],
     ['/faq', 0.7],
     ['/blog', 0.6],

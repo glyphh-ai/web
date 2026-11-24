@@ -6,7 +6,7 @@ The site's proxy (`middleware.js`, the gate itself in `app/lib/gate.js`) keeps e
 and, at the session's 5th, 20th and 60th request, turns how it has behaved into facts and asks Ada Cloud's
 `bots-edge` model: allow (a person), challenge (either answer is dear), or block (a robot). The question is asked
 after the response is sent (`waitUntil`), so no visitor waits on it; a verdict applies from the session's next
-request. The benchmark behind the model, and what it does and does not prove, is rrotor `benchmarks/bots/`.
+request.
 
 ## The facts of a session
 
@@ -68,7 +68,7 @@ hook for it.
 The seed does not transfer: in the library's logs a robot's busiest second was empty and a person's held a
 page's burst of assets; here Cloudflare serves the assets, so a scraper's burst of pages reads as a person's page
 load. The gate stays in shadow until the model holds a few hundred of glyphh.ai's own labelled sessions; then this
-probe runs again. The benchmark page (rrotor `benchmarks/bots/README.md`) has the full account.
+probe runs again.
 
 ## Trying it
 

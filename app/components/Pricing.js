@@ -2,7 +2,7 @@ import PricingCards from './PricingCards';
 
 // Start in the platform: the one door.
 export const PLATFORM_URL = 'https://platform.glyphh.ai';
-export const SALES_HREF = 'mailto:sales@glyphh.ai?subject=' + encodeURIComponent('Glyphh Enterprise');
+export const SALES_HREF = 'mailto:support@glyphh.ai?subject=' + encodeURIComponent('Glyphh Enterprise');
 
 // The plans of Ada Cloud (live 2026-10-22; the docs' Plans and limits). Never
 // per seat, per model or per install. A plan sets the precedents the
