@@ -73,32 +73,32 @@ a.mp-row:hover, a.mp-row:focus-visible, .mp-skill > summary:hover { background: 
 .mp-item-link:hover { color: var(--text); }
 
 /* markdown from the repo */
-.mk { max-width: 50rem; font-size: 0.95rem; line-height: 1.65; color: var(--muted); overflow-wrap: anywhere; }
-.mk > :first-child { margin-top: 0.9rem; }
-.mk h3, .mk h4, .mk h5, .mk h6 { margin: 1.6rem 0 0.5rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; color: var(--text); }
-.mk h3 { font-size: 1.2rem; }
-.mk h4 { font-size: 1.05rem; }
-.mk h5, .mk h6 { font-size: 0.95rem; }
-.mk p { margin: 0 0 0.9rem; }
-.mk ul, .mk ol { margin: 0 0 0.9rem; padding-left: 1.35rem; }
-.mk li { margin: 0.25rem 0; }
-.mk li > ul, .mk li > ol { margin: 0.25rem 0 0; }
-.mk li > p { margin: 0 0 0.4rem; }
-.mk strong { font-weight: 600; color: var(--text-2); }
-.mk a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-.mk a:hover { text-decoration-thickness: 2px; }
-.mk code { padding: 0.1em 0.35em; border: 1px solid var(--border); border-radius: 5px; background: var(--surface-2); font-family: var(--font-mono); font-size: 0.85em; color: var(--text-2); }
-.mk .mk-pre { margin: 0 0 1rem; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); overflow-x: auto; overflow-wrap: normal; }
-.mk .mk-pre code { padding: 0; border: 0; background: none; font-size: 0.84rem; line-height: 1.6; white-space: pre; color: var(--text-2); }
-.mk blockquote { margin: 0 0 1rem; padding: 0.1rem 0 0.1rem 1rem; border-left: 2px solid var(--border-2); }
-.mk blockquote > :last-child { margin-bottom: 0; }
-.mk hr { margin: 1.5rem 0; border: 0; border-top: 1px solid var(--border); }
-.mk img { max-width: 100%; height: auto; border-radius: 8px; }
-.mk-table { margin: 0 0 1rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; overflow-wrap: normal; }
-.mk-table table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-.mk-table th, .mk-table td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
-.mk-table th { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
-.mk-table tr:last-child td { border-bottom: 0; }
+.mpmd { max-width: 50rem; font-size: 0.95rem; line-height: 1.65; color: var(--muted); overflow-wrap: anywhere; }
+.mpmd > :first-child { margin-top: 0.9rem; }
+.mpmd h3, .mpmd h4, .mpmd h5, .mpmd h6 { margin: 1.6rem 0 0.5rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; color: var(--text); }
+.mpmd h3 { font-size: 1.2rem; }
+.mpmd h4 { font-size: 1.05rem; }
+.mpmd h5, .mpmd h6 { font-size: 0.95rem; }
+.mpmd p { margin: 0 0 0.9rem; }
+.mpmd ul, .mpmd ol { margin: 0 0 0.9rem; padding-left: 1.35rem; }
+.mpmd li { margin: 0.25rem 0; }
+.mpmd li > ul, .mpmd li > ol { margin: 0.25rem 0 0; }
+.mpmd li > p { margin: 0 0 0.4rem; }
+.mpmd strong { font-weight: 600; color: var(--text-2); }
+.mpmd a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.mpmd a:hover { text-decoration-thickness: 2px; }
+.mpmd code { padding: 0.1em 0.35em; border: 1px solid var(--border); border-radius: 5px; background: var(--surface-2); font-family: var(--font-mono); font-size: 0.85em; color: var(--text-2); }
+.mpmd .mpmd-pre { margin: 0 0 1rem; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); overflow-x: auto; overflow-wrap: normal; }
+.mpmd .mpmd-pre code { padding: 0; border: 0; background: none; font-size: 0.84rem; line-height: 1.6; white-space: pre; color: var(--text-2); }
+.mpmd blockquote { margin: 0 0 1rem; padding: 0.1rem 0 0.1rem 1rem; border-left: 2px solid var(--border-2); }
+.mpmd blockquote > :last-child { margin-bottom: 0; }
+.mpmd hr { margin: 1.5rem 0; border: 0; border-top: 1px solid var(--border); }
+.mpmd img { max-width: 100%; height: auto; border-radius: 8px; }
+.mpmd-table { margin: 0 0 1rem; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; overflow-wrap: normal; }
+.mpmd-table table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.mpmd-table th, .mpmd-table td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+.mpmd-table th { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
+.mpmd-table tr:last-child td { border-bottom: 0; }
 
 @media (max-width: 760px) {
   .mp-row, .mp-skill > summary { grid-template-columns: 1fr; padding: 0.95rem 1.1rem; }
