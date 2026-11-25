@@ -3,6 +3,7 @@ import Footer from './components/Footer';
 import CtaBand from './components/CtaBand';
 import ProjectCard from './components/ProjectCard';
 import YouTube from './components/YouTube';
+import HeroCollage, { TechStrip } from './components/HeroCollage';
 import { PROJECTS } from './projects/projects';
 import { POSTS, fmtDate } from './journal/posts';
 import { EPISODES, SHOW, latestEpisode } from './lib/episodes';
@@ -25,20 +26,24 @@ export default function Home() {
     <div className="st">
       <Nav />
       <main className="st-main">
-        <section className="st-hero">
-          <span className="st-kicker">Independent AI engineering studio</span>
-          <h1>
-            <span>Give us a problem.</span>
-            <span>We&rsquo;ll find a solution.</span>
-          </h1>
-          <p className="st-lede">
-            {EXPERIENCE} Combined with the power of artificial intelligence: building applications, exploring ideas and
-            solving real-world problems.
-          </p>
-          <div className="st-actions">
-            <a className="st-btn primary" href="/projects">Explore projects</a>
-            <a className="st-btn" href="/work-with-us">Work with us</a>
+        <section className="st-hero hc-hero">
+          <HeroCollage />
+          <div className="hc-copy">
+            <span className="st-kicker">Independent AI engineering studio</span>
+            <h1>
+              <span>Give us a problem.</span>
+              <span>We&rsquo;ll find a solution.</span>
+            </h1>
+            <p className="st-lede">
+              {EXPERIENCE} Combined with the power of artificial intelligence: building applications, exploring ideas and
+              solving real-world problems.
+            </p>
+            <div className="st-actions">
+              <a className="st-btn primary" href="/projects">Explore projects</a>
+              <a className="st-btn" href="/work-with-us">Work with us</a>
+            </div>
           </div>
+          <TechStrip />
         </section>
 
         <section className="st-section">

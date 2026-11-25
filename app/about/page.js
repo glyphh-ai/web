@@ -20,10 +20,33 @@ export default function AboutPage() {
   return (
     <div className="st">
       <Nav />
-      <main className="st-main st-narrow">
+      <main className="st-main">
         <span className="st-kicker">About</span>
         <h1>Two founders. One problem at a time.</h1>
-        <div className="st-prose" style={{ marginTop: 40 }}>
+        {/* the founders first, side by side: each a card topped with their LinkedIn background */}
+        <div className="st-founders">
+          {publishedPeople().map((p) => (
+            <article key={p.slug} className="st-founder">
+              <div className="st-founder-banner">
+                <img src={p.banner || '/art/router.webp'} alt="" className={p.banner ? '' : 'art'} />
+              </div>
+              <div className="st-founder-body">
+                {p.photo
+                  ? <img className="st-founder-photo" src={p.photo} alt={p.name} />
+                  : <span className="st-founder-photo" aria-hidden="true">{initials(p.name)}</span>}
+                <h2><a href={`/about/${p.slug}`}>{p.name}</a></h2>
+                <p className="st-person-meta">{[p.role, p.location].filter(Boolean).join(' · ')}</p>
+                {p.position ? <p className="st-founder-position">{p.position}</p> : null}
+                <p>{p.summary}</p>
+                <div className="st-founder-links">
+                  <a className="st-btn primary" href={`/about/${p.slug}`}>Read the bio</a>
+                  {p.linkedin ? <a className="st-btn" href={p.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a> : null}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="st-prose st-narrow" style={{ marginTop: 72, padding: 0 }}>
           <p>
             Glyphh is an independent engineering studio, founded by Chris Timmerman and Darrell Whatley and built on
             their 57+ years of combined enterprise software and business experience. Darrell runs support for a large
@@ -57,26 +80,7 @@ export default function AboutPage() {
             a speculative business.
           </p>
         </div>
-        <section className="st-section" style={{ marginTop: 72 }}>
-          <div className="st-section-head"><h2>People</h2></div>
-          <div className="st-people">
-            {publishedPeople().map((p) => (
-              <article key={p.slug} className="st-person">
-                {p.photo
-                  ? <img className="st-person-photo" src={p.photo} alt={p.name} />
-                  : <span className="st-person-photo" aria-hidden="true">{initials(p.name)}</span>}
-                <div>
-                  <h3><a href={`/about/${p.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>{p.name}</a></h3>
-                  <p className="st-person-meta">{[p.role, p.location].filter(Boolean).join(' · ')}</p>
-                  {p.position ? <p className="st-person-meta">{p.position}</p> : null}
-                  <p>{p.summary}</p>
-                  <a className="st-link" href={`/about/${p.slug}`}>Read the bio</a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-        <div className="st-actions">
+        <div className="st-actions st-narrow" style={{ marginLeft: 0, marginRight: 0 }}>
           <a className="st-btn primary" href="/work-with-us">Work with us</a>
           <a className="st-btn" href="/projects">See the projects</a>
         </div>
