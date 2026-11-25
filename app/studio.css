@@ -46,7 +46,8 @@
 .st-card { display: flex; flex-direction: column; border-radius: 16px; border: 1px solid var(--st-hair); background: var(--st-card); overflow: hidden; transition: border-color 0.15s, transform 0.15s; color: inherit; text-decoration: none; }
 a.st-card:hover { border-color: var(--text-3); transform: translateY(-2px); }
 .st-card-art { aspect-ratio: 16 / 9; width: 100%; object-fit: cover; object-position: top; border-bottom: 1px solid var(--st-hair); background: var(--st-card-2); display: block; }
-.st-card-art.empty { display: flex; align-items: flex-end; padding: 18px 20px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; color: var(--st-label); background:
+.st-card-art.empty img { height: 46%; width: auto; opacity: 0.9; }
+.st-card-art.empty { display: flex; align-items: center; justify-content: center; padding: 18px 20px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; color: var(--st-label); background:
   repeating-linear-gradient(90deg, transparent 0 23px, var(--st-hair) 23px 24px), repeating-linear-gradient(0deg, transparent 0 23px, var(--st-hair) 23px 24px), var(--st-card-2); }
 .st-card-body { display: flex; flex-direction: column; gap: 14px; padding: 22px 24px 24px; flex: 1; }
 .st-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
@@ -140,6 +141,21 @@ a.st-card:hover { border-color: var(--text-3); transform: translateY(-2px); }
   .st-two { grid-template-columns: 1fr; }
   .st-section { margin-top: 72px; }
 }
+
+/* A project's own videos (click to play) and its gallery of real screenshots. */
+.st-videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; align-items: start; }
+.st-videos:has(.st-video:not(.tall)) { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.st-video { margin: 0; }
+.st-video.wide-only { grid-column: 1 / -1; }
+.st-video-box { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid var(--st-hair); background: #000; }
+.st-video.tall .st-video-box { aspect-ratio: 9 / 16; max-height: 560px; }
+.st-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+.st-video figcaption, .st-shot figcaption { margin-top: 10px; font-size: 14px; color: var(--text-3); line-height: 1.45; }
+.st-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.st-shot { margin: 0; }
+.st-shot a { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--st-hair); background: var(--st-card-2); }
+.st-shot img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: var(--st-card-2); }
+.st-story p + p { margin-top: 14px; }
 
 /* The logo: the black cat and wordmark with its white sticker outline (glyphh-logo-black.png), one file in both
    themes. It replaces the old wordmark-only files, so it is set taller. */

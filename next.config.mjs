@@ -84,6 +84,15 @@ const nextConfig = {
       move('/products/rrotor', '/projects/rrotor'),
       move('/products/rrotor/:path*', '/projects/rrotor'),
       move('/games', '/projects'),
+      // The GitHub repos' homepages (set when they were open-sourced) use these names for their projects.
+      move('/projects/ada-decision-engine', ENGINE),
+      move('/projects/oliver', '/projects/oliver-project'),
+      move('/projects/glyphh-os', '/projects/os'),
+      move('/projects/glyphh-desktop', '/projects/desktop'),
+      move('/projects/ttool', '/projects'),
+      move('/projects/studio', '/'),
+      // The games' own pages from when glyphh.ai was a games site.
+      ...['free-fall-frank', 'crabby-knife-fight', 'bams-and-brags', 'send-a-carol'].map((g) => move(`/${g}`, `/projects/${g}`)),
       ...GONE.map((s) => move(s, '/projects')),
       // The old marketplace's agreements and code of conduct are gone; the Terms cover what remains.
       ...['/developer-agreement', '/marketplace-terms', '/code-of-conduct'].map((s) => move(s, '/terms')),
