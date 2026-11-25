@@ -1,7 +1,7 @@
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import CtaBand from '../components/CtaBand';
-import { publishedPeople } from '../lib/people';
+import { publishedPeople, initials } from '../lib/people';
 
 /**
  * /about: the studio and its two co-founders. The studio speaks as "we"; each person's bio is in their own voice
@@ -14,12 +14,6 @@ export const metadata = {
   description: 'Glyphh is an independent engineering studio founded by Chris Timmerman and Darrell Whatley, built on their 57+ years of combined enterprise software and business experience.',
   alternates: { canonical: '/about' },
   openGraph: { title: 'About — Glyphh', description: 'Two founders, 57+ years of combined enterprise software and business experience. Real problems, real engineering, no hype.', url: '/about' },
-};
-
-// The first and last names' first letters, for a person without a photo.
-const initials = (name) => {
-  const words = name.split(' ').filter((w) => /^[A-Za-z]/.test(w));
-  return `${words[0][0]}${words[words.length - 1][0]}`;
 };
 
 export default function AboutPage() {
@@ -72,11 +66,11 @@ export default function AboutPage() {
                   ? <img className="st-person-photo" src={p.photo} alt={p.name} />
                   : <span className="st-person-photo" aria-hidden="true">{initials(p.name)}</span>}
                 <div>
-                  <h3>{p.name}</h3>
+                  <h3><a href={`/about/${p.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>{p.name}</a></h3>
                   <p className="st-person-meta">{[p.role, p.location].filter(Boolean).join(' · ')}</p>
                   {p.position ? <p className="st-person-meta">{p.position}</p> : null}
-                  {p.bio.map((para, i) => <p key={i}>{para}</p>)}
-                  {p.linkedin ? <a className="st-link" href={p.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a> : null}
+                  <p>{p.summary}</p>
+                  <a className="st-link" href={`/about/${p.slug}`}>Read the bio</a>
                 </div>
               </article>
             ))}

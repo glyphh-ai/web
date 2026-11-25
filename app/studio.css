@@ -113,6 +113,10 @@ a.st-card:hover { border-color: var(--text-3); transform: translateY(-2px); }
 .st-person-photo { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 1px solid var(--st-hair); background: var(--st-card-2); display: flex; align-items: center; justify-content: center; font: 600 28px var(--font-sans); color: var(--text-2); }
 .st-person p { margin: 0 0 12px; color: var(--text-2); font-size: 17px; }
 .st-person .st-person-meta { margin: 4px 0 14px; font-family: var(--font-mono); font-size: 13px; color: var(--st-label); }
+.st-bio-head { display: flex; align-items: center; gap: 28px; margin-top: 18px; }
+.st-bio-head h1 { margin: 0; }
+.st-bio-photo { flex: none; width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 1px solid var(--st-hair); background: var(--st-card-2); display: flex; align-items: center; justify-content: center; font: 600 44px var(--font-sans); color: var(--text-2); }
+@media (max-width: 760px) { .st-bio-head { flex-direction: column; align-items: flex-start; gap: 18px; } .st-bio-photo { width: 120px; height: 120px; } }
 @media (max-width: 760px) { .st-person { grid-template-columns: 64px 1fr; gap: 16px; } .st-person-photo { width: 64px; height: 64px; font-size: 20px; } }
 
 /* Forms. */
