@@ -5,15 +5,15 @@ import { publishedPeople } from '../lib/people';
 
 /**
  * /about: the studio and its two co-founders. The studio speaks as "we"; each person's bio is in their own voice
- * (app/lib/people.js). Only what is true and on record: Chris's 27 years, the move from a product to a studio. No
+ * (app/lib/people.js). Only what is true and on record: the founders' 57+ years combined (Chris's 27 in his own bio), the move from a product to a studio. No
  * employers, clients, credentials or testimonials are named, because none were given.
  */
 
 export const metadata = {
   title: 'About — Glyphh',
-  description: 'Glyphh is an independent engineering studio founded by Chris Timmerman and Darrell Whatley: real problems, real engineering, no hype.',
+  description: 'Glyphh is an independent engineering studio founded by Chris Timmerman and Darrell Whatley, built on their 57+ years of combined enterprise software experience.',
   alternates: { canonical: '/about' },
-  openGraph: { title: 'About — Glyphh', description: 'Two founders. One studio. Real problems, real engineering, no hype.', url: '/about' },
+  openGraph: { title: 'About — Glyphh', description: 'Two founders, 57+ years of combined enterprise software experience. Real problems, real engineering, no hype.', url: '/about' },
 };
 
 // The first and last names' first letters, for a person without a photo.
@@ -31,7 +31,8 @@ export default function AboutPage() {
         <h1>Two engineers. One problem at a time.</h1>
         <div className="st-prose" style={{ marginTop: 40 }}>
           <p>
-            Glyphh is an independent engineering studio, founded by Chris Timmerman and Darrell Whatley. We take on
+            Glyphh is an independent engineering studio, founded by Chris Timmerman and Darrell Whatley and built on
+            their 57+ years of combined enterprise software experience. We take on
             difficult problems with software engineering and artificial intelligence, build things, run experiments and
             share what we learn, including what doesn&rsquo;t work.
           </p>

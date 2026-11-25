@@ -6,7 +6,7 @@ import YouTube from './components/YouTube';
 import { PROJECTS } from './projects/projects';
 import { POSTS, fmtDate } from './journal/posts';
 import { EPISODES, SHOW, latestEpisode } from './lib/episodes';
-import { HOME_TITLE, HOME_DESCRIPTION, YOUTUBE_URL } from './lib/site';
+import { HOME_TITLE, HOME_DESCRIPTION, YOUTUBE_URL, EXPERIENCE } from './lib/site';
 
 // THE HOME PAGE (the brand brief, 2026-11-25): what Glyphh is, who is behind it and why it exists. The hero, the
 // featured episode, the latest projects, the latest journal entries, a short about, and the call to action.
@@ -28,12 +28,12 @@ export default function Home() {
         <section className="st-hero">
           <span className="st-kicker">Independent AI engineering studio</span>
           <h1>
-            <span>Give me a problem.</span>
-            <span>I&rsquo;ll find a solution.</span>
+            <span>Give us a problem.</span>
+            <span>We&rsquo;ll find a solution.</span>
           </h1>
           <p className="st-lede">
-            27 years of engineering experience, combined with the power of artificial intelligence. Building applications,
-            exploring ideas and solving real-world problems.
+            {EXPERIENCE} Combined with the power of artificial intelligence: building applications, exploring ideas and
+            solving real-world problems.
           </p>
           <div className="st-actions">
             <a className="st-btn primary" href="/projects">Explore projects</a>
@@ -100,8 +100,8 @@ export default function Home() {
           </div>
           <div className="st-prose" style={{ maxWidth: 760 }}>
             <p>
-              Glyphh is an independent engineering studio founded by Chris Timmerman and Darrell Whatley, built on Chris&rsquo;s
-              27 years of writing software and solving problems. Glyphh began as a product, a decision engine called Ada;
+              Glyphh is an independent engineering studio founded by Chris Timmerman and Darrell Whatley, built on their
+              57+ years of combined enterprise software experience. Glyphh began as a product, a decision engine called Ada;
               it&rsquo;s now the home for everything we build, the experiments behind it and the problems we take on for others.
             </p>
             <p>Real problems. Real engineering. No hype.</p>
