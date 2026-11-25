@@ -1,6 +1,7 @@
 import { POSTS } from './journal/posts';
 import { PROJECTS } from './projects/projects';
 import { SITE } from './lib/site';
+import { publishedPeople } from './lib/people';
 
 // The live pages only: what a search engine should index on glyphh.ai. The docs have their own host
 // (docs.glyphh.ai) and are not listed here.
@@ -28,5 +29,6 @@ export default function sitemap() {
     changeFrequency: 'yearly',
     priority: 0.4,
   }));
-  return [...pages, ...projects, ...posts];
+  const people = publishedPeople().map((p) => ({ url: `${SITE}/about/${p.slug}`, changeFrequency: 'monthly', priority: 0.5 }));
+  return [...pages, ...people, ...projects, ...posts];
 }
