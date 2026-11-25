@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import { YOUTUBE_URL } from '../lib/site';
 
-// The studio's navigation (the brand brief, 2026-11-25): Home, Projects, Journal, Labs, About, Work With Me, and
+// The studio's navigation (the brand brief, 2026-11-25): Home, Projects, Journal, Labs, About, Work With Us, and
 // YouTube. No sign-in: there is no account on glyphh.ai any more.
 const LINKS = [
   ['Home', '/'],
@@ -13,7 +13,7 @@ const LINKS = [
   ['Journal', '/journal'],
   ['Labs', '/labs'],
   ['About', '/about'],
-  ['Work With Me', '/work-with-me'],
+  ['Work With Us', '/work-with-us'],
 ];
 
 export default function Nav() {

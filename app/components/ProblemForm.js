@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { EMAIL } from '../lib/site';
 
 /**
- * The two forms, one component: `inquiry` (/work-with-me), a private consulting inquiry, and `problem`
+ * The two forms, one component: `inquiry` (/work-with-us), a private consulting inquiry, and `problem`
  * (/submit-a-problem), a problem for a possible project or episode, with an explicit choice about whether it may be
  * explored in public. Both post to /api/contact, which emails them. No account, nothing stored on the site.
  */
@@ -25,7 +25,7 @@ export default function ProblemForm({ kind }) {
       const body = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(body.error || `Email ${EMAIL} instead.`);
       e.target.reset();
-      setState({ status: 'sent', message: problem ? 'Thank you. I read every problem that comes in.' : 'Thank you. I’ll reply by email.' });
+      setState({ status: 'sent', message: problem ? 'Thank you. We read every problem that comes in.' : 'Thank you. We’ll reply by email.' });
     } catch (err) {
       setState({ status: 'error', message: `${err.message} You can always email ${EMAIL}.` });
     }
@@ -62,11 +62,11 @@ export default function ProblemForm({ kind }) {
         </>
       ) : (
         <fieldset>
-          <legend>May I explore this in public?</legend>
+          <legend>May we explore this in public?</legend>
           <label className="st-radio"><input type="radio" name="consent" value="public" required /> Yes: you may explore it in a video, project or journal entry.</label>
           <label className="st-radio"><input type="radio" name="consent" value="public-anonymous" /> Yes, but never use my name or identifying details.</label>
           <label className="st-radio"><input type="radio" name="consent" value="private" /> No: this is just for you to read.</label>
-          <span className="opt" style={{ fontSize: 13 }}>Nothing you send is ever published without this permission. For paid help, use <a className="st-link" href="/work-with-me">Work With Me</a> instead.</span>
+          <span className="opt" style={{ fontSize: 13 }}>Nothing you send is ever published without this permission. For paid help, use <a className="st-link" href="/work-with-us">Work With Us</a> instead.</span>
         </fieldset>
       )}
       {/* The honeypot: hidden from people, filled in by bots. */}

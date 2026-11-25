@@ -8,7 +8,7 @@ export default function sitemap() {
   const pages = [
     ['/', 1.0],
     ['/projects', 0.9],
-    ['/work-with-me', 0.9],
+    ['/work-with-us', 0.9],
     ['/journal', 0.8],
     ['/labs', 0.8],
     ['/about', 0.7],

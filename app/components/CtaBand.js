@@ -12,7 +12,7 @@ export default function CtaBand() {
         </p>
       </div>
       <div className="st-actions" style={{ marginTop: 0 }}>
-        <a className="st-btn primary" href="/work-with-me">Tell me about your problem</a>
+        <a className="st-btn primary" href="/work-with-us">Tell us about your problem</a>
         <a className="st-btn" href="/submit-a-problem" title={CTA}>Submit a problem for the channel</a>
       </div>
     </section>

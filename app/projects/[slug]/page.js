@@ -19,7 +19,7 @@ const STORY = [
   ['built', 'How it was built'],
   ['decisions', 'Decisions and tradeoffs'],
   ['results', 'Results and limitations'],
-  ['learned', 'What I learned'],
+  ['learned', 'What was learned'],
 ];
 
 export function generateStaticParams() {

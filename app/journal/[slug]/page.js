@@ -59,10 +59,10 @@ function Tail({ url, p, share }) {
       <div className="ix-cta bl-next">
         <div>
           <span className="qs-kicker">Have a problem?</span>
-          <p>Let&rsquo;s solve it. Tell me what is in the way, or send a problem worth exploring in public.</p>
+          <p>Let&rsquo;s solve it. Tell us what is in the way, or send a problem worth exploring in public.</p>
         </div>
         <div className="ix-actions">
-          <a href="/work-with-me" className="os-cta os-cta-primary">Tell me about your problem</a>
+          <a href="/work-with-us" className="os-cta os-cta-primary">Tell us about your problem</a>
           <a href="/projects" className="os-cta os-cta-ghost">Explore projects</a>
         </div>
       </div>

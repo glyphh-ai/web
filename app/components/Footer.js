@@ -17,7 +17,7 @@ const COLS = [
   {
     title: 'Work together',
     links: [
-      ['Work With Me', '/work-with-me'],
+      ['Work With Us', '/work-with-us'],
       ['Submit a problem', '/submit-a-problem'],
       ['Email', `mailto:${EMAIL}`],
     ],
@@ -50,7 +50,7 @@ export default function Footer() {
             </a>
             <p className="ft-tagline">{TAGLINE} Real problems. Real engineering. No hype.</p>
             <p className="ft-contact">
-              <a href="/work-with-me">{CTA}</a>
+              <a href="/work-with-us">{CTA}</a>
               <br />
               <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
               <br />

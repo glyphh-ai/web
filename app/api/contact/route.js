@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 // POST /api/contact: the site's two forms, emailed to support@glyphh.ai through Resend
 // (https://resend.com/docs/api-reference/emails/send-email), the visitor's address as the reply-to so answering is
-// one click. `kind` says which form: `inquiry` (/work-with-me, a private consulting inquiry) or `problem`
+// one click. `kind` says which form: `inquiry` (/work-with-us, a private consulting inquiry) or `problem`
 // (/submit-a-problem, a problem for a possible project or episode, with the sender's choice about public use).
 // Needs the RESEND_API_KEY secret and a glyphh.ai sending domain verified in Resend; CONTACT_TO and CONTACT_FROM
 // override where it goes and who it is from. Without the key it answers 503, and the form points the visitor to the
@@ -70,7 +70,7 @@ export async function POST(request) {
   if (!key) return NextResponse.json({ error: 'The form is not taking messages right now.' }, { status: 503 });
 
   const label = kind === 'problem' ? 'Problem submitted' : 'Consulting inquiry';
-  const page = kind === 'problem' ? 'glyphh.ai/submit-a-problem' : 'glyphh.ai/work-with-me';
+  const page = kind === 'problem' ? 'glyphh.ai/submit-a-problem' : 'glyphh.ai/work-with-us';
   const meta = fields.map(([k, v]) => `${k}: ${v}`).join('\n');
   const text = `${message}\n\n${meta ? `${meta}\n\n` : ''}—\n${name} <${email}>\n${label}, sent from ${page}`;
   const html =

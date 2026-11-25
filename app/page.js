@@ -5,7 +5,7 @@ import ProjectCard from './components/ProjectCard';
 import YouTube from './components/YouTube';
 import { PROJECTS } from './projects/projects';
 import { POSTS, fmtDate } from './journal/posts';
-import { EPISODES, featuredEpisode } from './lib/episodes';
+import { EPISODES, SHOW, latestEpisode } from './lib/episodes';
 import { HOME_TITLE, HOME_DESCRIPTION, YOUTUBE_URL } from './lib/site';
 
 // THE HOME PAGE (the brand brief, 2026-11-25): what Glyphh is, who is behind it and why it exists. The hero, the
@@ -20,8 +20,7 @@ export const metadata = {
 const LATEST = [...PROJECTS.filter((p) => p.featured), ...PROJECTS.filter((p) => !p.featured).sort((a, b) => b.updated.localeCompare(a.updated))].slice(0, 6);
 
 export default function Home() {
-  const ep = featuredEpisode();
-  const project = ep.project ? PROJECTS.find((p) => p.slug === ep.project) : null;
+  const ep = latestEpisode();
   return (
     <div className="st">
       <Nav />
@@ -38,28 +37,32 @@ export default function Home() {
           </p>
           <div className="st-actions">
             <a className="st-btn primary" href="/projects">Explore projects</a>
-            <a className="st-btn" href="/work-with-me">Work with me</a>
+            <a className="st-btn" href="/work-with-us">Work with us</a>
           </div>
         </section>
 
         <section className="st-section">
           <div className="st-section-head">
-            <h2>{ep.video ? 'Latest episode' : 'Coming to the channel'}</h2>
+            <h2>{SHOW.title}</h2>
             <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer">YouTube &rarr;</a>
           </div>
           <div className="st-episode">
             <div className="st-episode-art">
-              {ep.video ? <YouTube id={ep.video} title={ep.title} /> : <span className="empty">Episode in production</span>}
+              {ep ? <YouTube id={ep.video} title={ep.title} /> : <span className="empty">First episode in production</span>}
             </div>
             <div>
-              {!ep.video ? <span className="st-status planned">Not published yet</span> : null}
-              <h3 style={{ fontSize: 26, marginTop: 16, letterSpacing: '-0.02em' }}>{ep.title}</h3>
-              <p style={{ color: 'var(--text-3)' }}>{ep.summary}</p>
-              {project ? <a className="st-link" href={`/projects/${project.slug}`}>The project: {project.title}</a> : null}
+              <p style={{ color: 'var(--text-2)', fontSize: 18, marginTop: 0 }}>{SHOW.summary}</p>
+              {ep ? <h3 style={{ fontSize: 22, letterSpacing: '-0.02em' }}>Latest: {ep.title}</h3> : null}
               <ul className="st-list" style={{ gridTemplateColumns: '1fr', marginTop: 24 }}>
-                {EPISODES.filter((e) => e !== ep).slice(0, 3).map((e) => (
-                  <li key={e.title} style={{ fontSize: 15 }}>{e.title} <span style={{ color: 'var(--st-label)' }}>{e.video ? '' : '· planned'}</span></li>
-                ))}
+                {EPISODES.filter((e) => e !== ep).map((e) => {
+                  const project = e.project ? PROJECTS.find((p) => p.slug === e.project) : null;
+                  return (
+                    <li key={e.title} style={{ fontSize: 15, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+                      {project ? <a href={`/projects/${project.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>{e.title}</a> : <span>{e.title}</span>}
+                      {e.video ? null : <span className="st-status planned" style={{ flexShrink: 0 }}>Planned</span>}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
@@ -97,9 +100,9 @@ export default function Home() {
           </div>
           <div className="st-prose" style={{ maxWidth: 760 }}>
             <p>
-              Glyphh is an independent engineering studio run by me, Chris Timmerman. I&rsquo;ve spent 27 years writing software
-              and solving problems. Glyphh began as a product, a decision engine called Ada; it&rsquo;s now the home for
-              everything I build, the experiments behind it and the problems I take on for others.
+              Glyphh is an independent engineering studio founded by Chris Timmerman and Darrell Whatley, built on Chris&rsquo;s
+              27 years of writing software and solving problems. Glyphh began as a product, a decision engine called Ada;
+              it&rsquo;s now the home for everything we build, the experiments behind it and the problems we take on for others.
             </p>
             <p>Real problems. Real engineering. No hype.</p>
           </div>

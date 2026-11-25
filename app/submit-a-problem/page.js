@@ -18,12 +18,13 @@ export default function SubmitProblemPage() {
         <h1>Give me a problem.</h1>
         <p className="st-lede">
           Got a problem that would make a good episode or experiment? Send it. Any interesting problem counts, technical or
-          not. If I pick it up, it may become a project, a journal entry or a video.
+          not. If we pick it up, the two of us may talk it through and build or test a solution on the show, or it may
+          become a project or a journal entry.
         </p>
         <p className="st-note">
           This is not the consulting form, and nothing here is paid work. You decide below whether the problem may be explored
           in public; without your permission, nothing you send is ever published. If you need help with your own project,
-          use <a className="st-link" href="/work-with-me">Work With Me</a>.
+          use <a className="st-link" href="/work-with-us">Work With Us</a>.
         </p>
         <ProblemForm kind="problem" />
       </main>

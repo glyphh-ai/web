@@ -17,7 +17,7 @@ export default function ProjectsPage() {
       <Nav />
       <main className="st-main">
         <span className="st-kicker">Projects</span>
-        <h1>Things I&rsquo;ve built.</h1>
+        <h1>Things we&rsquo;ve built.</h1>
         <p className="st-lede">
           Applications, experiments, tools and research. Some are finished, some are experiments, some are archived.
           Not every one is a business, and not every experiment worked. Each page tells the problem and what came of it.
