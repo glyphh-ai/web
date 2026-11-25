@@ -4,7 +4,7 @@ import { join } from 'path';
 
 // The social-share image (Open Graph / Twitter card), the studio's (2026-11-25): black, white, a hairline grid, the
 // logo (the black cat and wordmark, glyphh-logo-black.png), the headline and the tagline. No gradients.
-export const alt = 'Glyphh — Give me a problem. I’ll find a solution. The Art of Problem Solving.';
+export const alt = 'Glyphh — Give us a problem. We’ll find a solution. The Art of Problem Solving.';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -44,10 +44,10 @@ export default async function Image() {
           INDEPENDENT AI ENGINEERING STUDIO
         </div>
         <div style={{ display: 'flex', fontSize: '76px', fontWeight: 800, color: '#ffffff', letterSpacing: '-2px', lineHeight: 1.05 }}>
-          Give me a problem.
+          Give us a problem.
         </div>
         <div style={{ display: 'flex', fontSize: '76px', fontWeight: 800, color: '#ffffff', letterSpacing: '-2px', lineHeight: 1.05 }}>
-          I&rsquo;ll find a solution.
+          We&rsquo;ll find a solution.
         </div>
         <div style={{ display: 'flex', fontSize: '30px', color: '#c8c8c8', marginTop: '40px' }}>
           The Art of Problem Solving.

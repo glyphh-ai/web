@@ -1,11 +1,11 @@
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import ProblemForm from '../components/ProblemForm';
-import { EMAIL } from '../lib/site';
+import { EMAIL, EXPERIENCE } from '../lib/site';
 
 export const metadata = {
   title: 'Work With Us — Glyphh',
-  description: 'We help individuals and businesses turn complex problems into practical solutions using software engineering, automation and artificial intelligence.',
+  description: 'We help individuals and businesses turn complex problems into practical solutions using software engineering, automation and artificial intelligence, built on 57+ years of combined enterprise software experience.',
   alternates: { canonical: '/work-with-us' },
   openGraph: { title: 'Have a problem worth solving?', description: 'Consulting, custom software, automation and AI integration from the Glyphh studio.', url: '/work-with-us' },
 };
@@ -29,7 +29,7 @@ export default function WorkWithUsPage() {
         <h1>Have a problem worth solving?</h1>
         <p className="st-lede">
           We help individuals and businesses turn complex problems into practical solutions using software engineering,
-          automation and artificial intelligence.
+          automation and artificial intelligence. {EXPERIENCE}
         </p>
         <section className="st-section" style={{ marginTop: 64 }}>
           <div className="st-section-head"><h2>What we can help with</h2></div>

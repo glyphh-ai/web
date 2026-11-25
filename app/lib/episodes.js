@@ -14,7 +14,7 @@ export const EPISODES = [
   { title: 'I Combined Five AI Models Into One. Is It Actually Smarter?', video: null, published: null, project: 'glyphh-collective' },
   { title: 'Can AI Make Intelligent Decisions Without an LLM?', video: null, published: null, project: 'glyphh-ai-decision-engine' },
   { title: '27 Years of Software Engineering. What AI Has Actually Changed.', video: null, published: null },
-  { title: 'Give Me a Problem. I’ll Build the Solution.', video: null, published: null },
+  { title: 'Give Us a Problem. We’ll Build the Solution.', video: null, published: null },
 ];
 
 export const latestEpisode = () => EPISODES.find((e) => e.video) || null;
