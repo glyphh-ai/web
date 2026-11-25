@@ -3,30 +3,32 @@
  * engine line art) drifting up and down at different speeds, tilted in perspective behind the headline. Pure CSS
  * motion (studio.css .hc-*), stopped for people who ask for reduced motion. Every image is one already on the site.
  */
+// 2026-11-25, the consulting brief: the wall is our software (the Glyphh desktop app, its IDE, research, design,
+// workflows, governance, Glyphh Bot) with the line art between; the games are kept to one tile.
 const COLUMNS = [
   [
-    { src: '/collage/hero_design.jpg', alt: 'The Glyphh desktop app with design work open' },
-    { src: '/art/router.webp', alt: 'The Glyphh router: many requests in, one decision out', art: true },
-    { src: '/projects/crabby-knife-fight/place-1.webp', alt: 'Crabby Knife Fight' },
-    { src: '/collage/home_glyphh-home-2.jpg', alt: 'The Glyphh app with a map and research side by side' },
-    { src: '/projects/send-a-carol/christmas-cover.jpg', alt: 'Send a Carol' },
-    { src: '/art/semantic.webp', alt: 'Semantic data: records to vectors to a graph', art: true },
+    { src: '/collage/app-chat-map.jpg', alt: 'The Glyphh desktop app: chat with a map and photos' },
+    { src: '/collage/app-ide.jpg', alt: 'The Glyphh IDE writing code' },
+    { src: '/art/router.webp', alt: 'Many requests in, one decision out', art: true },
+    { src: '/collage/app-research.jpg', alt: 'Research and a page side by side in Glyphh' },
+    { src: '/collage/app-governance.jpg', alt: 'Governance settings in Glyphh' },
+    { src: '/collage/hero_design.jpg', alt: 'Design work in the Glyphh desktop app' },
   ],
   [
-    { src: '/projects/free-flow/race.jpg', alt: 'Free Flow, a downhill longboard race' },
-    { src: '/collage/hero_code.jpg', alt: 'The Glyphh app writing code' },
-    { src: '/art/rrotor.webp', alt: 'rrotor', art: true },
-    { src: '/projects/bams-and-brags/look-rooftop.webp', alt: 'Bams & Brags mah jongg' },
-    { src: '/collage/glyphh-command-palette.jpg', alt: 'The Glyphh command palette' },
-    { src: '/projects/free-fall-frank/rock-card.jpg', alt: 'Free Fall Frank' },
-  ],
-  [
-    { src: '/art/connect.webp', alt: 'Connections', art: true },
-    { src: '/projects/glyphh-bot/2-rich-chat.jpg', alt: 'Glyphh Bot' },
+    { src: '/collage/app-command-center.jpg', alt: 'The Glyphh command center' },
+    { src: '/collage/app-workflow.jpg', alt: 'A workflow built in Glyphh' },
     { src: '/collage/home_glyphh-home-4.jpg', alt: 'A page built in the Glyphh app' },
-    { src: '/projects/drip/game-snake.jpg', alt: 'Drip games in Claude' },
+    { src: '/art/semantic.webp', alt: 'Records to vectors to a graph', art: true },
+    { src: '/projects/glyphh-bot/2-rich-chat.jpg', alt: 'Glyphh Bot' },
+    { src: '/collage/app-ide-2.jpg', alt: 'Code and a preview in the Glyphh IDE' },
+  ],
+  [
+    { src: '/collage/app-design.jpg', alt: 'Design boards in Glyphh' },
+    { src: '/collage/app-artifact.jpg', alt: 'An app Glyphh built, beside the chat that built it' },
     { src: '/art/govern.webp', alt: 'Governance', art: true },
-    { src: '/collage/v2_chat-1.jpg', alt: 'The Glyphh app chatting with a map' },
+    { src: '/collage/app-captures.jpg', alt: 'Captures and charts in Glyphh' },
+    { src: '/projects/free-flow/race.jpg', alt: 'Free Flow, a 3D game we built' },
+    { src: '/collage/app-split.jpg', alt: 'Several apps side by side in Glyphh' },
   ],
 ];
 
