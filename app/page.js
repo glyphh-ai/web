@@ -27,6 +27,8 @@ export const metadata = {
 const DOCS = 'https://docs.glyphh.ai';
 const PLATFORM = 'https://platform.glyphh.ai';
 const ROUTING = '/use-cases/support-routing';
+// The public demos, no sign-in: the hero's first button (his order, 2026-11-07).
+const DEMO = 'https://demo.glyphh.ai';
 
 const STATS = [
   { n: '97.5%', k: 'Routed right', c: 'Ada, then Claude Fable for the 22% it was unsure of. Claude Fable alone: 96.5%.', href: ROUTING },
@@ -126,8 +128,8 @@ export default function Home() {
             be audited.
           </p>
           <div className="mh-actions">
-            <a href={PLATFORM} className="os-cta os-cta-primary">Start free</a>
-            <a href={ROUTING} className="os-cta os-cta-ghost">See ticket routing in action</a>
+            <a href={DEMO} className="os-cta os-cta-primary">Try Ada live, no sign-in</a>
+            <a href={PLATFORM} className="os-cta os-cta-ghost">Start free</a>
           </div>
         </div>
       </section>
@@ -251,7 +253,7 @@ export default function Home() {
           </div>
           <div className="hs-actions">
             <a href={PLATFORM} className="os-cta os-cta-primary">Start free</a>
-            <a href="/pricing" className="os-cta os-cta-ghost">See pricing</a>
+            <a href={DEMO} className="os-cta os-cta-ghost">Try Ada live</a>
           </div>
         </section>
       </div>
