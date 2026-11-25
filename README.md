@@ -32,3 +32,8 @@ npm run build
 
 GitHub Actions (`.github/workflows/deploy.yml`) builds and deploys to Fly (`fly.toml`, app `glyphh-ai-web`) on every
 push to `main`.
+
+
+## License
+
+Apache-2.0. See LICENSE and NOTICE. Copyright 2026 Chris Timmerman / Glyphh AI LLC. More about it: https://glyphh.ai/projects/studio
