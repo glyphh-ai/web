@@ -1,22 +1,15 @@
 import Nav from './components/Nav';
-import Reveal from './components/Reveal';
 import Footer from './components/Footer';
-import AdaField from './components/AdaField';
-import AdaStills from './components/AdaStills';
-import LetterField from './components/LetterField';
-import Receipt from './components/Receipt';
-import WhyTerminals from './components/WhyTerminals';
-import QuestionCard from './components/QuestionCard';
-import { HOME_TITLE, HOME_DESCRIPTION } from './lib/home-meta';
+import CtaBand from './components/CtaBand';
+import ProjectCard from './components/ProjectCard';
+import YouTube from './components/YouTube';
+import { PROJECTS } from './projects/projects';
+import { POSTS, fmtDate } from './journal/posts';
+import { EPISODES, featuredEpisode } from './lib/episodes';
+import { HOME_TITLE, HOME_DESCRIPTION, YOUTUBE_URL } from './lib/site';
 
-// THE HOME PAGE is Ada (his order, 2026-10-21). The clean-up (his order,
-// 2026-10-25): the hero's words stay word for word and the field becomes the
-// whole hero; each fact once. The order (his orders, 2026-10-26): what Glyphh
-// is, then why Ada (the same question with and without Glyphh, in two real
-// terminals, then the numbers at scale), then the question and the answer,
-// then where it runs.
-// Every number here is the launch post's and the use-case page's
-// (benchmarks/banking77, benchmarks/german-credit in glyphh-ai/glyphh).
+// THE HOME PAGE (the brand brief, 2026-11-25): what Glyphh is, who is behind it and why it exists. The hero, the
+// featured episode, the latest projects, the latest journal entries, a short about, and the call to action.
 
 export const metadata = {
   title: HOME_TITLE,
@@ -24,240 +17,96 @@ export const metadata = {
   alternates: { canonical: '/' },
 };
 
-const DOCS = 'https://docs.glyphh.ai';
-const PLATFORM = 'https://platform.glyphh.ai';
-const ROUTING = '/use-cases/support-routing';
-// The public demos, no sign-in: the hero's first button (his order, 2026-11-07).
-const DEMO = 'https://demo.glyphh.ai';
-
-const STATS = [
-  { n: '97.5%', k: 'Routed right', c: 'Ada, then Claude Fable for the 22% it was unsure of. Claude Fable alone: 96.5%.', href: ROUTING },
-  { n: '$0.22', k: 'Cost for the 200', c: 'Against $300 for the same messages with Claude Fable alone.', href: ROUTING },
-  { n: '156 of 200', k: 'Answered without a model', c: 'Right on 98.7% of the cases Ada kept.', href: ROUTING },
-  { n: '54 to 170 ms', k: 'Time to answer', c: 'In Ada Cloud, up to a million precedents.', href: '/blog/introducing-ada' },
-];
-
-// SECTION 2, WHAT GLYPHH IS (his order, 2026-10-26: "explain what glyphh is and
-// why it matters in ai ... what outcome users want from classifiers and what
-// approach we took that is different"), in the shape typesafe.ai uses: the
-// outcome, the status quo and its cost, the approach, the contrast in one line,
-// then three outcomes. The words are the launch post's (blog/introducing-ada).
-const FRAME = [
-  {
-    k: 'What you want',
-    body: 'A decision your software can act on: the right call where a mistake costs money, a confidence you can set a bar on, the same answer every time, and a reason you can show.',
-  },
-  {
-    k: 'What you get today',
-    body: 'A frontier model reasons from scratch on every call. It pays for every token, can answer differently on a rerun, and answers anyway when it doesn’t know. Training your own means a dataset, a pipeline and a retrain for every change.',
-  },
-  {
-    k: 'The approach we took',
-    body: 'Precedent. Ada answers a new case from the decisions you have already made, the way case law does. It runs on hyperdimensional computing, not a transformer: no training run, no language model in the path, and a decision counts the moment it’s recorded.',
-  },
-];
-
-const PILLARS = [
-  {
-    title: 'Typed decisions',
-    head: 'An outcome, not a paragraph',
-    body: 'Ada answers with one of the outcomes your spec allows and a calibrated probability for each. Your software acts on it with nothing to parse.',
-  },
-  {
-    title: 'Calibrated confidence',
-    head: 'It knows when to ask',
-    body: 'Set the bar. Above it your software acts; below it the case goes to a person or a model, and their answer becomes the next precedent.',
-  },
-  {
-    title: 'Same answer twice',
-    head: 'As reliable as code',
-    body: 'No language model in the path, so the same case gets the same answer, in milliseconds. On 200 loans, a rerun changed none of Ada’s answers; two runs of the same LLM disagreed on 12.',
-  },
-];
-
-const WAYS = [
-  {
-    title: 'From Claude',
-    head: 'Claude builds the model with you',
-    body: 'Add the Glyphh connector and the glyphh plugin. Claude signs in with your Glyphh account, no key to type, and its Ada skill writes the spec, loads your cases and asks the model.',
-    href: `${DOCS}/plugin`,
-  },
-  {
-    title: 'From your software',
-    head: 'Two SDKs and an API',
-    body: 'Python and JavaScript SDKs, or the API, with a key from the platform. One call to decide, one to record the outcome.',
-    href: `${DOCS}/sdks`,
-  },
-  {
-    title: 'From the platform',
-    head: 'Your models and keys in one place',
-    body: 'Sign in to see your models, make keys for your code and follow your usage against your plan.',
-    href: PLATFORM,
-  },
-];
-
-function Tile({ title, head, body, href, i }) {
-  const inner = (
-    <>
-      <LetterField seed={i + 1} />
-      <h3 className="hv-tile-title">{title}{href ? <span className="hv-tile-go" aria-hidden="true">&rarr;</span> : null}</h3>
-      {head ? <p className="hv-tile-head">{head}</p> : null}
-      <p className="hv-tile-body">{body}</p>
-    </>
-  );
-  return href ? <a href={href} className="hv-tile">{inner}</a> : <div className="hv-tile">{inner}</div>;
-}
+const LATEST = [...PROJECTS.filter((p) => p.featured), ...PROJECTS.filter((p) => !p.featured).sort((a, b) => b.updated.localeCompare(a.updated))].slice(0, 6);
 
 export default function Home() {
+  const ep = featuredEpisode();
+  const project = ep.project ? PROJECTS.find((p) => p.slug === ep.project) : null;
   return (
-    <div className="home-page">
-      <Reveal />
+    <div className="st">
       <Nav />
-
-      {/* THE HERO IS THE FIELD (his order, 2026-10-25). The words sit on it in a
-          clear zone (data-clear); the field, the cases and the glow stay off them.
-          The hero runs full width, closed by one hairline at its base, where the
-          frame's rails start (his order, 2026-10-22). */}
-      <section className="mh-hero mh-fill">
-        <AdaField fill interactive />
-        <div className="mh-copy" data-clear>
-          <h1 className="mh-line">Give your code the ability to reason without an LLM.</h1>
-          <p className="mh-what">
-            Glyphh Ada classifies anything you have labelled examples of — tickets, transactions, documents, events and
-            more — returns a confidence, probability gates, and the precedents behind each answer, so every decision can
-            be audited.
+      <main className="st-main">
+        <section className="st-hero">
+          <span className="st-kicker">Independent AI engineering studio</span>
+          <h1>
+            <span>Give me a problem.</span>
+            <span>I&rsquo;ll find a solution.</span>
+          </h1>
+          <p className="st-lede">
+            27 years of engineering experience, combined with the power of artificial intelligence. Building applications,
+            exploring ideas and solving real-world problems.
           </p>
-          <div className="mh-actions">
-            <a href={DEMO} className="os-cta os-cta-primary">Try Ada live, no sign-in</a>
-            <a href={PLATFORM} className="os-cta os-cta-ghost">Start free</a>
+          <div className="st-actions">
+            <a className="st-btn primary" href="/projects">Explore projects</a>
+            <a className="st-btn" href="/work-with-me">Work with me</a>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div className="site-frame">
-        <section className="hs reveal" id="what">
-          <div className="qs-head">
-            <span className="qs-kicker">What Glyphh is</span>
-            <a href="/blog/introducing-ada" className="qs-more">The launch post &rarr;</a>
+        <section className="st-section">
+          <div className="st-section-head">
+            <h2>{ep.video ? 'Latest episode' : 'Coming to the channel'}</h2>
+            <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer">YouTube &rarr;</a>
           </div>
-          <h2 className="ix-h2 hs-h2">Most decisions your business makes aren’t new.</h2>
-          <p className="ix-desc hs-lede">
-            Approve the loan or refuse it. Route the ticket to the team that owns it. Escalate the alert or close it.
-            Each one has been made hundreds of times, and the outcome is on record. Glyphh Ada decides the next one
-            from that record.
-          </p>
-          <div className="hv-panel wg-panel">
-            {FRAME.map((f, i) => (
-              <div key={f.k} className={`wg-cell${i === FRAME.length - 1 ? ' wg-ours' : ''}`}>
-                <span className="wg-k">{f.k}</span>
-                <p className="wg-body">{f.body}</p>
-              </div>
+          <div className="st-episode">
+            <div className="st-episode-art">
+              {ep.video ? <YouTube id={ep.video} title={ep.title} /> : <span className="empty">Episode in production</span>}
+            </div>
+            <div>
+              {!ep.video ? <span className="st-status planned">Not published yet</span> : null}
+              <h3 style={{ fontSize: 26, marginTop: 16, letterSpacing: '-0.02em' }}>{ep.title}</h3>
+              <p style={{ color: 'var(--text-3)' }}>{ep.summary}</p>
+              {project ? <a className="st-link" href={`/projects/${project.slug}`}>The project: {project.title}</a> : null}
+              <ul className="st-list" style={{ gridTemplateColumns: '1fr', marginTop: 24 }}>
+                {EPISODES.filter((e) => e !== ep).slice(0, 3).map((e) => (
+                  <li key={e.title} style={{ fontSize: 15 }}>{e.title} <span style={{ color: 'var(--st-label)' }}>{e.video ? '' : '· planned'}</span></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="st-section">
+          <div className="st-section-head">
+            <h2>Latest projects</h2>
+            <a href="/projects">All projects &rarr;</a>
+          </div>
+          <div className="st-cards">
+            {LATEST.map((p) => <ProjectCard key={p.slug} p={p} />)}
+          </div>
+        </section>
+
+        <section className="st-section">
+          <div className="st-section-head">
+            <h2>From the journal</h2>
+            <a href="/journal">The journal &rarr;</a>
+          </div>
+          <div className="st-rows">
+            {POSTS.slice(0, 3).map((p) => (
+              <a key={p.slug} className="st-row" href={`/journal/${p.slug}`}>
+                <time dateTime={p.date}>{fmtDate(p.date)}</time>
+                <div><h3>{p.title}</h3><p>{p.summary}</p></div>
+              </a>
             ))}
           </div>
-          <p className="wg-line">
-            <span className="wg-them">A language model is built to continue text.</span>{' '}
-            <span className="wg-us">Ada is built to repeat a decision the way your own history made it.</span>
-          </p>
-          <div className="hv-grid hv-grid-3">
-            {PILLARS.map((p, i) => <Tile key={p.title} title={p.title} head={p.head} body={p.body} i={i} />)}
+        </section>
+
+        <section className="st-section">
+          <div className="st-section-head">
+            <h2>About Glyphh</h2>
+            <a href="/about">More &rarr;</a>
+          </div>
+          <div className="st-prose" style={{ maxWidth: 760 }}>
+            <p>
+              Glyphh is an independent engineering studio run by me, Chris Timmerman. I&rsquo;ve spent 27 years writing software
+              and solving problems. Glyphh began as a product, a decision engine called Ada; it&rsquo;s now the home for
+              everything I build, the experiments behind it and the problems I take on for others.
+            </p>
+            <p>Real problems. Real engineering. No hype.</p>
           </div>
         </section>
 
-        {/* WHY ADA (his orders, 2026-10-26): the same question with and without Glyphh, both recorded in real
-            terminals. Claude alone, reading every past decision; Ada alone, no language model. Then the Banking77
-            numbers for the same thing at scale. */}
-        <section className="hs reveal" id="why">
-          <div className="qs-head">
-            <span className="qs-kicker">Why Ada</span>
-            <a href={ROUTING} className="qs-more">The experiment &rarr;</a>
-          </div>
-          <h2 className="ix-h2 hs-h2">The same question, with and without Glyphh.</h2>
-          <p className="ix-desc hs-lede">
-            An expense claim: business class to London, $2,400, over the limit and not pre-approved. Without Glyphh,
-            Claude reads the 40 past decisions and answers. With Glyphh, your software asks Ada, which learned from the
-            same 40.
-          </p>
-          <WhyTerminals />
-          <p className="wt-note">
-            Both are terminal recordings from one laptop on 26 October 2026. They play in real time, lined up so the
-            two questions go in together, and the Claude one ends by scrolling up to the start of its answer. Claude
-            Code ran Claude Fable 5.1 with nothing but the file of past decisions. Its tokens come from the session’s
-            own transcript, priced at Anthropic’s list price. Your code asked Ada Cloud through the Glyphh SDK, with no
-            language model. The 326 ms is the whole round trip from a fresh process, connection setup included.
-          </p>
-          <h3 className="hs-h3">Most cases never need the language model.</h3>
-          <p className="ix-desc hs-lede">
-            Claude reads every past decision on every question, so its bill grows with your history. On 200 bank
-            messages with 10,003 past ones, Ada answered the ones it was sure of and handed the rest to Claude Fable.
-            Together they were more accurate than Claude Fable alone, and cost cents instead of hundreds of dollars.
-          </p>
-          <div className="hv-panel st-panel">
-            <div className="st-row">
-              {STATS.map((s) => (
-                <a key={s.k} href={s.href} className="st">
-                  <span className="st-k">{s.k}</span>
-                  <span className="st-n">{s.n}</span>
-                  <span className="st-c">{s.c}</span>
-                </a>
-              ))}
-            </div>
-            <p className="st-foot">Banking77, 200 held-out messages, 77 intents. The experiment and every run are public.</p>
-          </div>
-        </section>
-
-        {/* THE QUESTION (his order, 2026-10-26), the pair to The answer: a question as Ada holds it, from the real
-            expenses model, and the other questions the site has an experiment or an example for. */}
-        <section className="hs reveal" id="question">
-          <div className="qs-head">
-            <span className="qs-kicker">The question</span>
-            <a href={`${DOCS}/getting-started`} className="qs-more">Make a model &rarr;</a>
-          </div>
-          <h2 className="ix-h2 hs-h2">Ask the questions you already answer every day.</h2>
-          <p className="ix-desc hs-lede">
-            A question is the fields a case has and the outcomes it can lead to. Describe it once, record the decisions
-            you have already made, and ask. Claude can write it with you.
-          </p>
-          <QuestionCard />
-        </section>
-
-        <section className="hs reveal" id="answer">
-          <div className="qs-head">
-            <span className="qs-kicker">The answer</span>
-            <a href={`${DOCS}/sdks`} className="qs-more">The SDKs &rarr;</a>
-          </div>
-          <h2 className="ix-h2 hs-h2">Every answer comes with its receipts.</h2>
-          <p className="ix-desc hs-lede">
-            Ada finds the precedents nearest the case, weighs them and reports what they say: a typed outcome, how sure
-            it is, and the precedents that voted. When nothing is close enough, it says so and asks.
-          </p>
-          <Receipt />
-          <AdaStills />
-          <p className="hs-note">
-            A model is a JSON spec and the cases you have labelled. Each graded case becomes a precedent, and Ada
-            learns its own weights from them.
-          </p>
-        </section>
-
-        <section className="hs reveal" id="where">
-          <div className="qs-head">
-            <span className="qs-kicker">Where it runs</span>
-            <a href={`${DOCS}/getting-started`} className="qs-more">Getting started &rarr;</a>
-          </div>
-          <h2 className="ix-h2 hs-h2">Reach Ada from Claude or from your own code.</h2>
-          <p className="ix-desc hs-lede">
-            Your models live in Ada Cloud, isolated per organisation, with nothing to install or run. We never train on
-            your data. Ada is in every plan, Free included.
-          </p>
-          <div className="hv-grid hv-grid-3">
-            {WAYS.map((t, i) => <Tile key={t.title} {...t} i={i + 3} />)}
-          </div>
-          <div className="hs-actions">
-            <a href={PLATFORM} className="os-cta os-cta-primary">Start free</a>
-            <a href={DEMO} className="os-cta os-cta-ghost">Try Ada live</a>
-          </div>
-        </section>
-      </div>
-
+        <CtaBand />
+      </main>
       <Footer />
     </div>
   );

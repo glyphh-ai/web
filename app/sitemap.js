@@ -1,29 +1,32 @@
-import { POSTS } from './blog/posts';
+import { POSTS } from './journal/posts';
+import { PROJECTS } from './projects/projects';
+import { SITE } from './lib/site';
 
-// The live pages only: what a search engine should index on glyphh.ai. The
-// docs have their own host (docs.glyphh.ai) and are not listed here.
-const SITE = 'https://glyphh.ai';
-
+// The live pages only: what a search engine should index on glyphh.ai. The docs have their own host
+// (docs.glyphh.ai) and are not listed here.
 export default function sitemap() {
   const pages = [
     ['/', 1.0],
-    ['/use-cases', 0.9],
-    ['/use-cases/support-routing', 0.9],
-    ['/use-cases/loan-decisions', 0.9],
-    ['/marketplace', 0.8],
-    ['/pricing', 0.8],
-    ['/faq', 0.7],
-    ['/blog', 0.6],
-    ['/contact', 0.5],
+    ['/projects', 0.9],
+    ['/work-with-me', 0.9],
+    ['/journal', 0.8],
+    ['/labs', 0.8],
+    ['/about', 0.7],
+    ['/submit-a-problem', 0.6],
     ['/terms', 0.2],
     ['/privacy', 0.2],
-    ['/refund', 0.2],
   ].map(([path, priority]) => ({ url: `${SITE}${path === '/' ? '' : path}`, changeFrequency: 'weekly', priority }));
+  const projects = PROJECTS.map((p) => ({
+    url: `${SITE}/projects/${p.slug}`,
+    lastModified: new Date(`${p.updated}T12:00:00Z`),
+    changeFrequency: 'monthly',
+    priority: p.featured ? 0.8 : 0.5,
+  }));
   const posts = POSTS.map((p) => ({
-    url: `${SITE}/blog/${p.slug}`,
+    url: `${SITE}/journal/${p.slug}`,
     lastModified: new Date(`${p.date}T12:00:00Z`),
     changeFrequency: 'yearly',
     priority: 0.4,
   }));
-  return [...pages, ...posts];
+  return [...pages, ...projects, ...posts];
 }

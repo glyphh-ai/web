@@ -1,142 +1,54 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
+import { YOUTUBE_URL } from '../lib/site';
 
-const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL || 'https://platform.glyphh.ai';
-// Log in and Sign up land on the platform, which signs you in first.
+// The studio's navigation (the brand brief, 2026-11-25): Home, Projects, Journal, Labs, About, Work With Me, and
+// YouTube. No sign-in: there is no account on glyphh.ai any more.
+const LINKS = [
+  ['Home', '/'],
+  ['Projects', '/projects'],
+  ['Journal', '/journal'],
+  ['Labs', '/labs'],
+  ['About', '/about'],
+  ['Work With Me', '/work-with-me'],
+];
 
 export default function Nav() {
   const pathname = usePathname() || '/';
-  // The section the visitor is in lights up in the accent (OpenClaw's
-  // `.active` link).
-  const active = (prefix) => (pathname.startsWith(prefix) ? ' active' : '');
+  const active = (href) => (href === '/' ? pathname === '/' : pathname.startsWith(href)) ? ' active' : '';
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [ddOpen, setDdOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const ddRef = useRef(null);
-  const ddCloseTimer = useRef(null);
-
-  // Hover open/close with a grace period: closing instantly on mouseleave
-  // makes the panel vanish while the pointer travels from the trigger to a
-  // menu item, so the links are unclickable. The delay absorbs that.
-  const ddEnter = () => {
-    clearTimeout(ddCloseTimer.current);
-    setDdOpen(true);
-  };
-  const ddLeave = () => {
-    clearTimeout(ddCloseTimer.current);
-    ddCloseTimer.current = setTimeout(() => setDdOpen(false), 260);
-  };
-  useEffect(() => () => clearTimeout(ddCloseTimer.current), []);
-
-  const [ucOpen, setUcOpen] = useState(false);
-  const ucCloseTimer = useRef(null);
-  const ucEnter = () => {
-    clearTimeout(ucCloseTimer.current);
-    setUcOpen(true);
-  };
-  const ucLeave = () => {
-    clearTimeout(ucCloseTimer.current);
-    ucCloseTimer.current = setTimeout(() => setUcOpen(false), 260);
-  };
-  useEffect(() => () => clearTimeout(ucCloseTimer.current), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();   // a page restored mid-scroll gets the bar at once
+    onScroll();
     window.addEventListener('scroll', onScroll);
-    setLoggedIn(document.cookie.includes('yo_logged_in=1'));
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  // Close the dropdown on outside click / Escape
-  useEffect(() => {
-    if (!ddOpen) return;
-    const onDown = (e) => {
-      if (ddRef.current && !ddRef.current.contains(e.target)) setDdOpen(false);
-    };
-    const onKey = (e) => { if (e.key === 'Escape') setDdOpen(false); };
-    document.addEventListener('pointerdown', onDown);
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('pointerdown', onDown);
-      document.removeEventListener('keydown', onKey);
-    };
-  }, [ddOpen]);
-
-  const loginHref = PLATFORM_URL;
-  const signupHref = PLATFORM_URL;
-  const dashHref = PLATFORM_URL;
 
   return (
     <>
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
         <div className="nav-inner">
           <a href="/" className="nav-logo" aria-label="Glyphh">
-            {/* The wordmark alone (his order, 2026-10-25): the cat is the mascot, not the logo. */}
             <img className="logo-dark" src="/glyphh-logo-text-white.png" alt="Glyphh" />
             <img className="logo-light" src="/glyphh-logo-text-black.png" alt="" />
           </a>
           <div className="nav-links">
-            <div className="nav-dd">
-              <a href="/" className={`nav-dd-trigger${pathname === '/' ? ' active' : ''}`}>Home</a>
-            </div>
-            {/* Glyphh is Ada (his ruling, 2026-11-24): the home is the product, so there is no Products menu. */}
-            <div
-                className={`nav-dd ${ucOpen ? 'open' : ''}`}
-                onMouseEnter={ucEnter}
-                onMouseLeave={ucLeave}
-              >
-                <a href="/use-cases" className={`nav-dd-trigger${active('/use-cases')}`}>
-                  Use cases
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </a>
-                <div className="nav-dd-panel">
-                  <a href="/use-cases/support-routing" className="nav-dd-item">
-                    <span className="nav-dd-name">Support routing</span>
-                    <span className="nav-dd-desc">Each ticket to the team that owns it.</span>
-                  </a>
-                  <a href="/use-cases/loan-decisions" className="nav-dd-item">
-                    <span className="nav-dd-name">Loan decisions</span>
-                    <span className="nav-dd-desc">Approve or refuse from your past decisions.</span>
-                  </a>
-                </div>
+            {LINKS.map(([label, href]) => (
+              <div key={href} className="nav-dd">
+                <a href={href} className={`nav-dd-trigger${active(href)}`}>{label}</a>
               </div>
-            <div className="nav-dd">
-              <a href="/marketplace" className={`nav-dd-trigger${active('/marketplace')}`}>Marketplace</a>
-            </div>
-            <div
-              className={`nav-dd ${ddOpen ? 'open' : ''}`}
-              ref={ddRef}
-              onMouseEnter={ddEnter}
-              onMouseLeave={ddLeave}
-            >
-              <a href="/blog" className={`nav-dd-trigger${active('/blog')}`}>Blog</a>
-            </div>
-            <div className="nav-dd">
-              <a href="https://demo.glyphh.ai" className="nav-dd-trigger">Demos</a>
-            </div>
-            <div className="nav-dd">
-              <a href="/pricing" className={`nav-dd-trigger${active('/pricing')}`}>Pricing</a>
-            </div>
-            <div className="nav-dd">
-              <a href="https://docs.glyphh.ai" className={`nav-dd-trigger${active('/docs')}`}>Docs</a>
-            </div>
+            ))}
           </div>
-          {/* No buttons in the bar (the reference has none): the account links
-              are two more mono links, set off by a hairline. */}
           <div className="nav-cta">
-            {loggedIn ? (
-              <a href={dashHref} className="nav-auth-link nav-auth-primary">Dashboard</a>
-            ) : (
-              <>
-                <a href={loginHref} className="nav-auth-link">Log in</a>
-                <a href={signupHref} className="nav-auth-link nav-auth-primary">Sign up</a>
-              </>
-            )}
+            <a href={YOUTUBE_URL} className="nav-auth-link nav-yt" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+              YouTube
+            </a>
             <ThemeToggle />
           </div>
           <button
@@ -154,23 +66,10 @@ export default function Nav() {
         </div>
       </nav>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
-        <span className="mobile-menu-group">Use cases</span>
-        <a href="/use-cases/support-routing" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Support routing</a>
-        <a href="/use-cases/loan-decisions" className="mobile-menu-sub" onClick={() => setMenuOpen(false)}>Loan decisions</a>
-        <a href="/marketplace" onClick={() => setMenuOpen(false)}>Marketplace</a>
-        <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
-        <a href="https://demo.glyphh.ai" onClick={() => setMenuOpen(false)}>Demos</a>
-        <a href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
-        <a href="https://docs.glyphh.ai" onClick={() => setMenuOpen(false)}>Docs</a>
-        {loggedIn ? (
-          <a href={dashHref} className="os-cta os-cta-primary os-cta-sm" onClick={() => setMenuOpen(false)}>Dashboard</a>
-        ) : (
-          <>
-            <a href={loginHref} className="os-cta os-cta-ghost os-cta-sm" onClick={() => setMenuOpen(false)}>Log in</a>
-            <a href={signupHref} className="os-cta os-cta-primary os-cta-sm" onClick={() => setMenuOpen(false)}>Sign up</a>
-          </>
-        )}
+        {LINKS.map(([label, href]) => (
+          <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
+        ))}
+        <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>YouTube</a>
       </div>
     </>
   );

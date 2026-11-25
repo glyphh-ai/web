@@ -1,0 +1,33 @@
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
+import ProblemForm from '../components/ProblemForm';
+
+export const metadata = {
+  title: 'Submit a Problem — Glyphh',
+  description: 'Send an interesting problem for a possible project, journal entry or YouTube episode. You choose whether it may be explored in public.',
+  alternates: { canonical: '/submit-a-problem' },
+  openGraph: { title: 'Give me a problem. I’ll find a solution.', description: 'Submit a problem for a possible Glyphh episode or project.', url: '/submit-a-problem' },
+};
+
+export default function SubmitProblemPage() {
+  return (
+    <div className="st">
+      <Nav />
+      <main className="st-main" style={{ maxWidth: 980 }}>
+        <span className="st-kicker">Submit a problem</span>
+        <h1>Give me a problem.</h1>
+        <p className="st-lede">
+          Got a problem that would make a good episode or experiment? Send it. Any interesting problem counts, technical or
+          not. If I pick it up, it may become a project, a journal entry or a video.
+        </p>
+        <p className="st-note">
+          This is not the consulting form, and nothing here is paid work. You decide below whether the problem may be explored
+          in public; without your permission, nothing you send is ever published. If you need help with your own project,
+          use <a className="st-link" href="/work-with-me">Work With Me</a>.
+        </p>
+        <ProblemForm kind="problem" />
+      </main>
+      <Footer />
+    </div>
+  );
+}

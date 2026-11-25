@@ -1,0 +1,145 @@
+/* The studio's pages (the brand brief, 2026-11-25): black, white and neutrals, strong type, hairlines, generous
+   space. The project board keeps the old games.glyphh.ai cards. Labels never darker than #999 on dark. Every rule is
+   under .st so the docs and the journal keep their own look. */
+
+.st {
+  --st-hair: #2a2a2a;
+  --st-label: #a6a6a6;
+  --st-card: #0b0b0b;
+  --st-card-2: #141414;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+[data-theme="light"] .st { --st-hair: #d6d6d6; --st-label: #5a5a5a; --st-card: #fafafa; --st-card-2: #f0f0f0; }
+
+.st-main { max-width: 1200px; margin: 0 auto; padding: 132px 28px 96px; }
+.st-narrow { max-width: 760px; }
+.st-kicker { display: block; margin: 0 0 14px; font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--st-label); }
+.st h1 { margin: 0; font-size: clamp(40px, 6.4vw, 76px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.02; }
+.st h2 { margin: 0; font-size: clamp(26px, 3.2vw, 36px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+.st h3 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+.st-lede { margin: 22px 0 0; max-width: 680px; font-size: 19px; line-height: 1.55; color: var(--text-3); }
+.st p { line-height: 1.65; }
+.st a.st-link { color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--st-label); }
+.st a.st-link:hover { text-decoration-color: var(--text); }
+.st-section { margin-top: 96px; }
+.st-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--st-hair); }
+.st-section-head a { font-family: var(--font-mono); font-size: 13px; color: var(--text-3); }
+.st-section-head a:hover { color: var(--text); }
+
+/* Buttons: white primary, hairline secondary. */
+.st-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.st-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; border-radius: 8px; border: 1px solid var(--rail); background: transparent; color: var(--text); font: 500 15px var(--font-sans); cursor: pointer; white-space: nowrap; text-decoration: none; }
+.st-btn:hover { border-color: var(--text-3); background: var(--st-card-2); }
+.st-btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.st-btn.primary:hover { opacity: 0.88; }
+.st-btn:disabled { opacity: 0.5; cursor: default; }
+
+/* The hero. */
+.st-hero { padding-top: 40px; }
+.st-hero h1 span { display: block; }
+.st-hero h1 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+
+/* Project cards (the games.glyphh.ai cards). */
+.st-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+.st-card { display: flex; flex-direction: column; border-radius: 16px; border: 1px solid var(--st-hair); background: var(--st-card); overflow: hidden; transition: border-color 0.15s, transform 0.15s; color: inherit; text-decoration: none; }
+a.st-card:hover { border-color: var(--text-3); transform: translateY(-2px); }
+.st-card-art { aspect-ratio: 16 / 9; width: 100%; object-fit: cover; object-position: top; border-bottom: 1px solid var(--st-hair); background: var(--st-card-2); display: block; }
+.st-card-art.empty { display: flex; align-items: flex-end; padding: 18px 20px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; color: var(--st-label); background:
+  repeating-linear-gradient(90deg, transparent 0 23px, var(--st-hair) 23px 24px), repeating-linear-gradient(0deg, transparent 0 23px, var(--st-hair) 23px 24px), var(--st-card-2); }
+.st-card-body { display: flex; flex-direction: column; gap: 14px; padding: 22px 24px 24px; flex: 1; }
+.st-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.st-card h3 { font-size: 21px; }
+.st-card p { margin: 0; flex: 1; font-size: 15px; line-height: 1.55; color: var(--text-3); }
+.st-go { font-size: 20px; }
+.st-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.st-tag { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--st-hair); font-family: var(--font-mono); font-size: 12px; color: var(--st-label); }
+.st-status { padding: 3px 9px; border-radius: 999px; border: 1px solid var(--rail); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); white-space: nowrap; }
+.st-status.planned, .st-status.experimental { border-style: dashed; }
+.st-num { font-family: var(--font-mono); font-size: 12px; color: var(--st-label); }
+
+/* The board's filter row. */
+.st-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 40px 0 28px; }
+.st-chip { padding: 7px 14px; border-radius: 999px; border: 1px solid var(--st-hair); background: transparent; color: var(--text-3); font: 500 13px var(--font-mono); cursor: pointer; }
+.st-chip:hover { color: var(--text); border-color: var(--text-3); }
+.st-chip.on { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+/* A project's page: the story. */
+.st-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0; margin-top: 40px; border-top: 1px solid var(--st-hair); border-bottom: 1px solid var(--st-hair); }
+.st-meta div { padding: 16px 18px 16px 0; }
+.st-meta dt { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--st-label); }
+.st-meta dd { margin: 6px 0 0; font-size: 15px; color: var(--text-2); }
+.st-cover { margin: 40px 0 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--st-hair); }
+.st-cover img { width: 100%; display: block; max-height: 560px; object-fit: cover; object-position: top; }
+.st-story { margin-top: 56px; }
+.st-story section { display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid var(--st-hair); }
+.st-story h2 { font-size: 15px; font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--st-label); padding-top: 4px; }
+.st-story p { margin: 0; font-size: 17px; color: var(--text-2); }
+.st-note { margin-top: 28px; padding: 16px 18px; border: 1px dashed var(--rail); border-radius: 10px; color: var(--text-3); font-size: 15px; }
+.st-links { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Lists of journal entries. */
+.st-rows { display: flex; flex-direction: column; }
+.st-row { display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--st-hair); color: inherit; text-decoration: none; }
+.st-row:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
+.st-row time { font-family: var(--font-mono); font-size: 13px; color: var(--st-label); padding-top: 3px; }
+.st-row p { margin: 6px 0 0; color: var(--text-3); font-size: 15px; }
+
+/* The episode. */
+.st-episode { display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; align-items: center; }
+.st-episode-art { position: relative; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; border: 1px solid var(--st-hair); background: var(--st-card-2); }
+.st-episode-art .empty { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--st-label); }
+.yt-facade, .yt-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: #000; cursor: pointer; }
+.bl-cover .yt-facade, .bl-cover .yt-frame { position: relative; aspect-ratio: 16 / 9; height: auto; }
+.yt-facade img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.yt-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; border-radius: 12px; background: rgba(0, 0, 0, 0.75); color: #fff; display: flex; align-items: center; justify-content: center; }
+.yt-facade:hover .yt-play { background: #000; }
+
+/* The call to action band. */
+.st-cta { margin-top: 112px; padding: 56px; border: 1px solid var(--st-hair); border-radius: 20px; background: var(--st-card); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; }
+.st-cta p { margin: 14px 0 0; max-width: 620px; color: var(--text-3); font-size: 17px; }
+
+/* Two columns of prose (about, labs). */
+.st-prose p { font-size: 18px; color: var(--text-2); margin: 0 0 20px; }
+.st-prose h2 { margin: 56px 0 18px; }
+.st-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0 32px; }
+.st-list li { padding: 16px 0; border-top: 1px solid var(--st-hair); color: var(--text-2); font-size: 16px; }
+
+/* People (/about). */
+.st-people { display: grid; gap: 0; }
+.st-person { display: grid; grid-template-columns: 96px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--st-hair); }
+.st-person-photo { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 1px solid var(--st-hair); background: var(--st-card-2); display: flex; align-items: center; justify-content: center; font: 600 28px var(--font-sans); color: var(--text-2); }
+.st-person p { margin: 0 0 12px; color: var(--text-2); font-size: 17px; }
+.st-person .st-person-meta { margin: 4px 0 14px; font-family: var(--font-mono); font-size: 13px; color: var(--st-label); }
+@media (max-width: 760px) { .st-person { grid-template-columns: 64px 1fr; gap: 16px; } .st-person-photo { width: 64px; height: 64px; font-size: 20px; } }
+
+/* Forms. */
+.st-form { margin-top: 44px; display: grid; gap: 22px; max-width: 680px; }
+.st-form label { display: grid; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-2); }
+.st-form label span.opt { color: var(--st-label); font-weight: 400; }
+.st-form input, .st-form textarea, .st-form select { width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--rail); background: var(--st-card); color: var(--text); font: 400 16px var(--font-sans); }
+.st-form textarea { min-height: 160px; resize: vertical; line-height: 1.5; }
+.st-form input:focus, .st-form textarea:focus, .st-form select:focus { outline: 2px solid var(--text-3); outline-offset: 1px; }
+.st-form fieldset { margin: 0; padding: 18px; border: 1px solid var(--st-hair); border-radius: 10px; display: grid; gap: 12px; }
+.st-form legend { padding: 0 6px; font-size: 14px; font-weight: 500; color: var(--text-2); }
+.st-form .st-radio { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; color: var(--text-2); }
+.st-form .st-radio input { width: auto; margin-top: 4px; }
+.st-form .st-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.st-form-status { font-size: 15px; color: var(--text-2); }
+.st-form-status.error { color: #ff9d9d; }
+.st-two { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+
+@media (max-width: 760px) {
+  .st-main { padding: 104px 18px 72px; }
+  .st-cards { grid-template-columns: 1fr; }
+  .st-story section { grid-template-columns: 1fr; gap: 10px; }
+  .st-episode { grid-template-columns: 1fr; }
+  .st-row { grid-template-columns: 1fr; gap: 6px; }
+  .st-cta { padding: 32px 24px; }
+  .st-two { grid-template-columns: 1fr; }
+  .st-section { margin-top: 72px; }
+}
+
+/* The YouTube link in the bar. */
+.nav-yt { display: inline-flex; align-items: center; gap: 6px; }

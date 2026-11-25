@@ -21,7 +21,16 @@ export default function PrivacyPage() {
           </div>
 
           <p><strong>Effective Date:</strong> July 3, 2026</p>
-          <p><strong>Last updated 10 November 2026</strong></p>
+          <p><strong>Last updated 25 November 2026</strong></p>
+          <h2>Since 25 November 2026</h2>
+          <p>
+            Glyphh is now a studio site, and the hosted service (the platform, the Ada API, the account API, the connector and
+            Hosted Models) is shut down. glyphh.ai has no accounts. What the site holds now: what you send through the Work With
+            Me and Submit a Problem forms, which is emailed to support@glyphh.ai through our email provider (Resend) and is not
+            stored on the site; and anonymous page analytics (Google Analytics). A problem you submit is only ever explored in
+            public if you said it may be, and never with your name if you asked us not to use it. To have anything you sent
+            deleted, email support@glyphh.ai. The policy below describes the shut-down service and is kept for the record.
+          </p>
           <p>This policy explains what Glyphh AI LLC (&ldquo;Glyphh&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) holds when you use Glyphh: the platform at platform.glyphh.ai, the Ada API at ada.glyphh.ai, the account API and Claude connector at api.glyphh.ai, Glyphh-hosted language models (&ldquo;Hosted Models&rdquo;), the Glyphh plugin, the SDKs, and the website glyphh.ai. Use of Glyphh is governed by our <a href="/terms">Terms of Use</a>.</p>
 
           <h2>In short</h2>
