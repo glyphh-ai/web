@@ -3,7 +3,8 @@
  * /about/<slug>. High-level bios drawn from each person's LinkedIn profile, not job histories: no employers, clients
  * or titles by company are named. Each bio is in its person's own voice. `summary` is the short line on /about;
  * `bio` is the bio page. `position` is a day role given without an employer's name. `photo` is a path in public/
- * (optional); without one the person's initials are shown. `draft: true` keeps an entry off the site.
+ * (optional); without one the person's initials are shown. `banner` is their LinkedIn background image, the top of
+ * their card on /about (optional; without one the card shows the Glyphh router art). `draft: true` keeps an entry off the site.
  */
 export const PEOPLE = [
   {
@@ -14,6 +15,7 @@ export const PEOPLE = [
     location: 'Austin, Texas',
     position: 'Runs AI governance and innovation for an enterprise software company.',
     photo: '/people/chris-timmerman.jpg',
+    banner: '/people/chris-timmerman-banner.jpg',
     linkedin: 'https://www.linkedin.com/in/christophertimmerman',
     summary:
       'I’ve spent 27 years in enterprise software, from identity and security architecture to running global services and support teams, and now AI governance. I built Ada, the decision engine Glyphh started with.',
