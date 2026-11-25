@@ -3,13 +3,13 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 // The social-share image (Open Graph / Twitter card), the studio's (2026-11-25): black, white, a hairline grid, the
-// wordmark, the headline and the tagline. No gradients.
+// logo (the black cat and wordmark, glyphh-logo-black.png), the headline and the tagline. No gradients.
 export const alt = 'Glyphh — Give me a problem. I’ll find a solution. The Art of Problem Solving.';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 export default async function Image() {
-  const logo = readFileSync(join(process.cwd(), 'public', 'glyphh-logo-text-white.png'));
+  const logo = readFileSync(join(process.cwd(), 'public', 'glyphh-logo-black.png'));
   const logoSrc = `data:image/png;base64,${logo.toString('base64')}`;
 
   return new ImageResponse(
@@ -39,7 +39,7 @@ export default async function Image() {
           }}
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logoSrc} width={289} height={90} alt="Glyphh" style={{ marginBottom: '54px' }} />
+        <img src={logoSrc} width={363} height={120} alt="Glyphh" style={{ marginBottom: '54px' }} />
         <div style={{ display: 'flex', fontSize: '22px', color: '#a6a6a6', letterSpacing: '4px', marginBottom: '22px' }}>
           INDEPENDENT AI ENGINEERING STUDIO
         </div>
