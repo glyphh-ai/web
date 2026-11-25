@@ -101,7 +101,7 @@ export default function Home() {
           <div className="st-prose" style={{ maxWidth: 760 }}>
             <p>
               Glyphh is an independent engineering studio founded by Chris Timmerman and Darrell Whatley, built on their
-              57+ years of combined enterprise software experience. Glyphh began as a product, a decision engine called Ada;
+              57+ years of combined enterprise software and business experience. Glyphh began as a product, a decision engine called Ada;
               it&rsquo;s now the home for everything we build, the experiments behind it and the problems we take on for others.
             </p>
             <p>Real problems. Real engineering. No hype.</p>

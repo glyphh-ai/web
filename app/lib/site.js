@@ -8,6 +8,6 @@ export const TAGLINE = 'The Art of Problem Solving.';
 export const CTA = 'Have a problem? Let’s solve it.';
 export const HOME_TITLE = 'Glyphh — The Art of Problem Solving';
 // The studio's experience is the two founders' together; Chris's own 27 years stay in his bio only.
-export const EXPERIENCE = 'Built on Chris and Darrell’s 57+ years of combined enterprise software experience.';
+export const EXPERIENCE = 'Built on Chris and Darrell’s 57+ years of combined enterprise software and business experience.';
 export const HOME_DESCRIPTION =
   `An independent AI engineering studio. ${EXPERIENCE} Building applications, exploring ideas and solving real-world problems with artificial intelligence.`;

@@ -5,7 +5,7 @@ import { EMAIL, EXPERIENCE } from '../lib/site';
 
 export const metadata = {
   title: 'Work With Us — Glyphh',
-  description: 'We help individuals and businesses turn complex problems into practical solutions using software engineering, automation and artificial intelligence, built on 57+ years of combined enterprise software experience.',
+  description: 'We help individuals and businesses turn complex problems into practical solutions using software engineering, automation and artificial intelligence, built on 57+ years of combined enterprise software and business experience.',
   alternates: { canonical: '/work-with-us' },
   openGraph: { title: 'Have a problem worth solving?', description: 'Consulting, custom software, automation and AI integration from the Glyphh studio.', url: '/work-with-us' },
 };

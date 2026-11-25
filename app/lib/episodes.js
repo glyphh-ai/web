@@ -5,7 +5,7 @@
  * `project` names the project page it belongs to.
  */
 export const SHOW = {
-  title: 'The show: two engineers, one problem per episode',
+  title: 'The show: two founders, one problem per episode',
   summary: 'Chris and Darrell take one problem, talk it through, then build or test a solution on camera. Some work. Some don’t. Either way, you see how.',
 };
 
