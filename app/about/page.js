@@ -11,9 +11,9 @@ import { publishedPeople } from '../lib/people';
 
 export const metadata = {
   title: 'About — Glyphh',
-  description: 'Glyphh is an independent engineering studio founded by Chris Timmerman and Darrell Whatley, built on their 57+ years of combined enterprise software experience.',
+  description: 'Glyphh is an independent engineering studio founded by Chris Timmerman and Darrell Whatley, built on their 57+ years of combined enterprise software and business experience.',
   alternates: { canonical: '/about' },
-  openGraph: { title: 'About — Glyphh', description: 'Two founders, 57+ years of combined enterprise software experience. Real problems, real engineering, no hype.', url: '/about' },
+  openGraph: { title: 'About — Glyphh', description: 'Two founders, 57+ years of combined enterprise software and business experience. Real problems, real engineering, no hype.', url: '/about' },
 };
 
 // The first and last names' first letters, for a person without a photo.
@@ -28,11 +28,13 @@ export default function AboutPage() {
       <Nav />
       <main className="st-main st-narrow">
         <span className="st-kicker">About</span>
-        <h1>Two engineers. One problem at a time.</h1>
+        <h1>Two founders. One problem at a time.</h1>
         <div className="st-prose" style={{ marginTop: 40 }}>
           <p>
             Glyphh is an independent engineering studio, founded by Chris Timmerman and Darrell Whatley and built on
-            their 57+ years of combined enterprise software experience. We take on
+            their 57+ years of combined enterprise software and business experience. Darrell runs support for a large
+            enterprise software company and brings how enterprises support customers at scale; Chris runs AI governance
+            and innovation for a company and brings how enterprises adopt AI responsibly. We take on
             difficult problems with software engineering and artificial intelligence, build things, run experiments and
             share what we learn, including what doesn&rsquo;t work.
           </p>
@@ -72,6 +74,7 @@ export default function AboutPage() {
                 <div>
                   <h3>{p.name}</h3>
                   <p className="st-person-meta">{[p.role, p.location].filter(Boolean).join(' · ')}</p>
+                  {p.position ? <p className="st-person-meta">{p.position}</p> : null}
                   {p.bio.map((para, i) => <p key={i}>{para}</p>)}
                   {p.linkedin ? <a className="st-link" href={p.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a> : null}
                 </div>

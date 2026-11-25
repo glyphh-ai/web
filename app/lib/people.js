@@ -1,7 +1,8 @@
 /**
  * The people behind Glyphh, its two co-founders, for /about's People section. Only what is true and on record: no
  * employers, clients, credentials or achievements until they are given. Each bio is in its person's own voice; a
- * person whose facts have not arrived shows a name, a role and a link, and no bio. `photo` is a path in public/
+ * person whose facts have not arrived shows a name, a role and a link, and no bio. `position` is a day role given
+ * without an employer's name. `photo` is a path in public/
  * (optional); without one the person's initials are shown. `draft: true` keeps an entry off the page.
  */
 export const PEOPLE = [
@@ -10,6 +11,8 @@ export const PEOPLE = [
     name: 'Christopher “Chris” Timmerman',
     role: 'Co-founder',
     location: 'Austin, Texas',
+    // His day role, as he gave it; no employer is named.
+    position: 'Runs AI governance and innovation for a company.',
     photo: null,
     linkedin: 'https://www.linkedin.com/in/christophertimmerman',
     bio: [
@@ -21,6 +24,8 @@ export const PEOPLE = [
     name: 'Darrell Whatley',
     role: 'Co-founder',
     location: null,
+    // His day role, as Chris gave it; no employer is named.
+    position: 'Runs support for a large enterprise software company.',
     photo: null,
     linkedin: 'https://www.linkedin.com/in/darrell-whatley-51b324',
     bio: [],
