@@ -1,10 +1,11 @@
 // Rewritten 2026-10-22 for Ada Cloud (server docs/specs/ada-cloud.md, docs/pricing.md); counsel to review.
 // Updated 2026-11-10 for Glyphh-hosted language models and token billing (the hosted-model token contract); counsel to review.
+// Rewritten 2026-11-25 for the studio site; the Ada Cloud terms are kept below as an archived section.
 import Footer from '../components/Footer';
 
 export const metadata = {
   title: 'Terms of Use — Glyphh',
-  description: 'Terms of Use for Glyphh: Ada Cloud, Glyphh-hosted language models, the platform, the APIs, the Claude connector, the plugin and the SDKs, by Glyphh AI LLC.',
+  description: 'Terms of Use for glyphh.ai, the Glyphh studio site by Glyphh AI LLC: the site, its open-source projects, the forms and no warranty, with the shut-down Ada Cloud terms archived below.',
 };
 
 export default function TermsPage() {
@@ -16,11 +17,37 @@ export default function TermsPage() {
           <h1 className="policy-title">Terms of Use</h1>
 
           <div className="policy-note">
-            <p>This is a plain-English summary of how Glyphh works today; it will be reviewed by counsel before general availability.</p>
+            <p>This is a plain-English summary; it will be reviewed by counsel.</p>
           </div>
 
-          <p><strong>Effective Date:</strong> July 3, 2026</p>
-          <p><strong>Last updated 10 November 2026</strong></p>
+          <p><strong>Last updated 25 November 2026</strong></p>
+          <p>These terms cover glyphh.ai, the site of Glyphh, an independent AI engineering studio run by Glyphh AI LLC (&ldquo;Glyphh&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). By using the site you agree to them. How we handle what you send us is in our <a href="/privacy">Privacy Policy</a>.</p>
+
+          <h2>The site and its content</h2>
+          <p>The site, its writing, images, videos, designs and the Glyphh name and logo belong to Glyphh AI LLC unless a page says otherwise. You may read, link to and share the pages, and quote them with a link back. Please don&apos;t copy the site wholesale or use the Glyphh name or logo in a way that suggests we endorse you.</p>
+          <p>Projects, write-ups and results are shared as we built and measured them. Work marked Planned or Experimental is exactly that: it may change, stall or never ship.</p>
+
+          <h2>Open-source projects</h2>
+          <p>Code we publish on GitHub is open source under the Apache License 2.0, unless its repository says otherwise. The licence file in each repository governs your use of that code; these terms do not add to it or take from it.</p>
+
+          <h2>The forms</h2>
+          <p>The Work With Us and Submit a Problem forms send what you write to <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>. Send only what you have the right to share, and nothing confidential you would not want us to read. Sending a form does not create a contract or an engagement; any paid work is agreed separately, in writing.</p>
+          <p>When you submit a problem you choose whether we may explore it in public, with your name, without it, or not at all. We follow that choice.</p>
+
+          <h2>No warranty</h2>
+          <p>THE SITE, ITS CONTENT AND ANY CODE OR RESULTS SHOWN ON IT ARE PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. Nothing on the site is professional advice. To the maximum extent the law allows, Glyphh AI LLC is not liable for any loss arising from your use of the site or anything on it.</p>
+
+          <h2>Links elsewhere</h2>
+          <p>The site links to YouTube, GitHub and other sites, which have their own terms. We are not responsible for them.</p>
+
+          <h2>Changes, law and contact</h2>
+          <p>We may update these terms; the date above shows the latest version. They are governed by the laws of the State of Delaware. Questions: <a href="mailto:support@glyphh.ai">support@glyphh.ai</a>.</p>
+
+          <h2 style={{ marginTop: '3.5rem' }}>Archived: Ada Cloud Terms of Use</h2>
+          <div className="policy-note">
+            <p>Ada Cloud (the platform, the Ada API, the account API, the Claude connector and Hosted Models) is shut down. The terms below governed it and are kept for the record; they no longer apply to glyphh.ai, and some links in them point to pages that no longer exist.</p>
+          </div>
+          <p><strong>Effective Date:</strong> July 3, 2026 &middot; <strong>Last updated</strong> 10 November 2026</p>
           <p>These Terms of Use (&ldquo;Terms&rdquo;) govern your use of Glyphh, provided by Glyphh AI LLC (&ldquo;Glyphh&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). Glyphh is a cloud service that we run (the &ldquo;Service&rdquo;). It is made of: the platform at platform.glyphh.ai; the Ada API at ada.glyphh.ai; the account API and the Claude connector at api.glyphh.ai; Glyphh-hosted language models, reached through an OpenAI-compatible chat API (&ldquo;Hosted Models&rdquo;); the Glyphh plugin for Claude Code; and the open-source SDKs. By creating an account or using the Service you agree to these Terms. If you accept them for an organisation, you confirm you may bind it. How we handle data is in our <a href="/privacy">Privacy Policy</a>. If you have a signed agreement with us (for example, an Enterprise contract), it governs where it conflicts with these Terms.</p>
 
           <h2>1. Eligibility</h2>

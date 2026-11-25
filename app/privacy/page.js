@@ -26,7 +26,7 @@ export default function PrivacyPage() {
           <p>
             Glyphh is now a studio site, and the hosted service (the platform, the Ada API, the account API, the connector and
             Hosted Models) is shut down. glyphh.ai has no accounts. What the site holds now: what you send through the Work With
-            Me and Submit a Problem forms, which is emailed to support@glyphh.ai through our email provider (Resend) and is not
+            Us and Submit a Problem forms, which is emailed to support@glyphh.ai through our email provider (Resend) and is not
             stored on the site; and anonymous page analytics (Google Analytics). A problem you submit is only ever explored in
             public if you said it may be, and never with your name if you asked us not to use it. To have anything you sent
             deleted, email support@glyphh.ai. The policy below describes the shut-down service and is kept for the record.

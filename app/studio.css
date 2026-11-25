@@ -141,5 +141,10 @@ a.st-card:hover { border-color: var(--text-3); transform: translateY(-2px); }
   .st-section { margin-top: 72px; }
 }
 
+/* The logo: the black cat and wordmark with its white sticker outline (glyphh-logo-black.png), one file in both
+   themes. It replaces the old wordmark-only files, so it is set taller. */
+.nav-logo img { height: 34px; width: auto; }
+.ft-logo img { height: 46px; width: auto; }
+
 /* The YouTube link in the bar. */
 .nav-yt { display: inline-flex; align-items: center; gap: 6px; }

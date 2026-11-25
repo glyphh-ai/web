@@ -15,9 +15,9 @@ export const metadata = {
   title: HOME_TITLE,
   description: HOME_DESCRIPTION,
   icons: {
-    icon: [{ url: '/glyphh-mascot-square-black.png', type: 'image/png' }],
-    shortcut: '/glyphh-mascot-square-black.png',
-    apple: '/glyphh-mascot-square-black.png',
+    icon: [{ url: '/favicon.ico', sizes: '32x32' }, { url: '/favicon-96x96.png', type: 'image/png', sizes: '96x96' }],
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
   openGraph: {
     title: HOME_TITLE,
@@ -45,7 +45,7 @@ const JSON_LD = {
       alternateName: 'Glyphh',
       slogan: 'The Art of Problem Solving.',
       url: 'https://glyphh.ai',
-      logo: 'https://glyphh.ai/glyphh-logo-text-black.png',
+      logo: 'https://glyphh.ai/glyphh-logo-black.png',
       email: 'support@glyphh.ai',
       founder: { '@type': 'Person', name: 'Chris Timmerman' },
       sameAs: ['https://github.com/glyphh-ai', 'https://www.youtube.com/@glyphhai'],
