@@ -1,11 +1,13 @@
-// One project on the board (the old games.glyphh.ai card): its picture, title, status, summary and tags.
+// One project on the board (the old games.glyphh.ai card): its picture, title, status, summary and tags. A project
+// with no real picture yet shows the plain mascot, never a made-up image.
 export default function ProjectCard({ p }) {
   const status = p.status.toLowerCase().replace(/\s+/g, '-');
+  const art = p.card || p.cover;
   return (
     <a className="st-card" href={`/projects/${p.slug}`}>
-      {p.cover
-        ? <img className="st-card-art" src={p.cover} alt="" loading="lazy" />
-        : <div className="st-card-art empty">{p.number ? `${p.number} · ` : ''}{p.category}</div>}
+      {art
+        ? <img className="st-card-art" src={art} alt="" loading="lazy" decoding="async" />
+        : <div className="st-card-art empty"><img src="/glyphh-mascot.png" alt="" loading="lazy" /></div>}
       <div className="st-card-body">
         <div className="st-card-top">
           <h3>{p.title}</h3>
