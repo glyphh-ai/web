@@ -1,7 +1,7 @@
 import './globals.css';
+import './studio.css';
 import { Geist, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
-import AdPixels from './components/AdPixels';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
@@ -34,8 +34,7 @@ export const metadata = {
   },
 };
 
-// What search engines read about Glyphh (schema.org): the company, and Ada
-// with its plans (server docs/pricing.md). Only what exists.
+// What search engines read about Glyphh (schema.org): the studio, and who runs it. Only what exists.
 const JSON_LD = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -43,25 +42,13 @@ const JSON_LD = {
       '@type': 'Organization',
       '@id': 'https://glyphh.ai/#org',
       name: 'Glyphh AI LLC',
+      alternateName: 'Glyphh',
+      slogan: 'The Art of Problem Solving.',
       url: 'https://glyphh.ai',
       logo: 'https://glyphh.ai/glyphh-logo-text-black.png',
       email: 'support@glyphh.ai',
+      founder: { '@type': 'Person', name: 'Chris Timmerman' },
       sameAs: ['https://github.com/glyphh-ai', 'https://www.youtube.com/@glyphhai'],
-    },
-    {
-      '@type': 'SoftwareApplication',
-      name: 'Glyphh Ada',
-      url: 'https://glyphh.ai/',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web (cloud API)',
-      description: HOME_DESCRIPTION,
-      publisher: { '@id': 'https://glyphh.ai/#org' },
-      offers: [
-        { '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD', description: '1,000 precedents, 5,000 reads a month.' },
-        { '@type': 'Offer', name: 'Basic', price: '20', priceCurrency: 'USD', description: 'A month: 10,000 precedents, 50,000 reads a month.' },
-        { '@type': 'Offer', name: 'Pro', price: '99', priceCurrency: 'USD', description: 'A month: 100,000 precedents, 1,000,000 reads a month.' },
-        { '@type': 'Offer', name: 'Team', price: '299', priceCurrency: 'USD', description: 'A month: 1,000,000 precedents, 5,000,000 reads a month.' },
-      ],
     },
   ],
 };
@@ -103,7 +90,6 @@ export default function RootLayout({ children }) {
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
         {children}
-        <AdPixels />
       </body>
     </html>
   );
