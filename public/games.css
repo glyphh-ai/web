@@ -1,0 +1,84 @@
+/* glyphh.ai, every page: black, white text, hairlines, white primary buttons, Geist and JetBrains Mono, the logo
+   image. Purple is the focus ring and links only. Labels never darker than #999 on black. */
+
+:root {
+  --bg: #000000;
+  --surface: #0d0d0d;
+  --surface-2: #141414;
+  --rail: #5a5a5a;
+  --hair: #242424;
+  --text: #ffffff;
+  --text-2: #eaeaea;
+  --text-3: #c8c8c8;
+  --text-4: #a6a6a6;
+  --focus: #c68cff;
+  --link: #c68cff;
+  --radius: 8px;
+  --sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+img, video { max-width: 100%; display: block; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.head { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 88px; padding: 0 28px; border-bottom: 1px solid var(--hair); }
+.head-left { display: flex; align-items: center; gap: 14px; }
+.logo { height: 38px; width: auto; }
+.head .logo { height: 60px; }
+.crumb { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); padding-left: 14px; border-left: 1px solid var(--rail); }
+.crumb:hover { color: var(--text); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 20px; border-radius: var(--radius); border: 1px solid var(--rail); background: transparent; color: var(--text); font: 500 15px var(--sans); cursor: pointer; white-space: nowrap; }
+.btn:hover { background: var(--surface-2); border-color: var(--text-3); }
+.btn.primary { background: #fff; color: #000; border-color: #fff; }
+.btn.primary:hover { opacity: 0.88; }
+.btn.small { padding: 8px 14px; font-size: 14px; }
+
+.frame { max-width: 1200px; margin: 0 auto; padding: 72px 28px 96px; }
+.kicker { margin: 0 0 14px; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); }
+h1 { margin: 0; font-size: clamp(40px, 6vw, 64px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; }
+.lede { margin: 16px 0 0; max-width: 620px; font-size: 18px; line-height: 1.5; color: var(--text-3); }
+
+/* The front page: a card per game. */
+.cards { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+.card { display: flex; flex-direction: column; border-radius: 16px; border: 1px solid var(--hair); background: var(--surface); overflow: hidden; transition: border-color 0.15s, transform 0.15s; }
+a.card:hover { border-color: var(--text-3); transform: translateY(-2px); }
+.card-art { aspect-ratio: 16 / 9; width: 100%; object-fit: cover; border-bottom: 1px solid var(--hair); background: var(--surface-2); }
+.card-art.empty { display: grid; place-items: center; font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-4); }
+.card-body { display: flex; flex-direction: column; gap: 14px; padding: 24px 26px 26px; flex: 1; }
+.card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.card h3 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.card p { margin: 0; flex: 1; font-size: 15px; line-height: 1.55; color: var(--text-3); }
+.go { font-size: 20px; color: var(--text); }
+.soon { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-4); white-space: nowrap; }
+.card.is-soon { opacity: 0.75; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--hair); font-family: var(--mono); font-size: 12px; color: var(--text-4); }
+
+/* The footer of every page (its markup is public/footer.js): the logo, the games, the studio, the legal pages. */
+.site-foot { border-top: 1px solid var(--hair); padding: 64px 28px 36px; font-size: 15px; color: var(--text-3); }
+.site-foot-in { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
+.site-foot-brand > a:first-child { display: inline-flex; align-items: center; min-height: 44px; }
+.site-foot-brand p { margin: 16px 0 6px; color: var(--text-3); }
+.site-foot-col { display: flex; flex-direction: column; align-items: flex-start; }
+.site-foot-label { margin: 0 0 8px; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-4); }
+.site-foot-col a, .site-foot-mail { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-2); }
+.site-foot-col a:hover, .site-foot-mail:hover { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+.site-foot-legal { max-width: 1200px; margin: 48px auto 0; padding-top: 24px; border-top: 1px solid var(--hair); font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--text-4); }
+
+@media (max-width: 760px) {
+  .site-foot { padding: 48px 18px 28px; }
+  .site-foot-in { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-foot-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .head { padding: 0 18px; height: 76px; }
+  .head .logo { height: 50px; }
+  .frame { padding: 48px 18px 72px; }
+  .cards { grid-template-columns: 1fr; }
+}

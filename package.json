@@ -1,11 +1,12 @@
 {
   "name": "glyphh-web",
-  "license": "Apache-2.0",
+  "license": "LicenseRef-Proprietary",
   "version": "1.0.1-beta.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "test": "node --test",
     "start": "next start -p ${PORT:-3000}"
   },
   "dependencies": {

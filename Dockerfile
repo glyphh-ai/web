@@ -1,9 +1,4 @@
 # glyphh-web — Next.js standalone build for Fly.
-#
-# Heroku builds this app with the Node buildpack (Procfile `next start`); Fly runs
-# containers, so this Dockerfile is the Fly-side equivalent. NEXT_PUBLIC_* values
-# are BAKED AT BUILD TIME into the client bundle — they arrive as build args (set
-# in fly.toml [build.args]), not runtime env. All three are public URLs.
 
 # ── build ─────────────────────────────────────────────────────────────────────
 FROM node:24-alpine AS build
