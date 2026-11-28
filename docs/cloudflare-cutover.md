@@ -72,6 +72,6 @@ running, and still deployed on every `main` push during the parallel period.
 ## Naming convention (standing)
 
 Fly apps are **`<org-slug>-<folder>`** mirroring the GitHub repos: `glyphh-ai-web`,
-`glyphh-ai-server`, … Deploy tokens are app-scoped
+`glyphh-ai-server`, `glyphh-ai-rrotor-nam`, … Deploy tokens are app-scoped
 (`fly tokens create deploy -a <app>`), one per repo, stored as `FLY_API_TOKEN` in that
 repo's Actions secrets. Deploys go through GitHub Actions — never a local `fly deploy`.

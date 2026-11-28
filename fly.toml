@@ -1,10 +1,10 @@
-# glyphh-web on Fly — the studio's site (glyphh.ai, and docs.glyphh.ai), behind Cloudflare.
+# glyphh-web on Fly — the games site (glyphh.ai), sits behind Cloudflare.
 #
 # Deploys go through GitHub Actions (.github/workflows/deploy.yml) — never a
 # local `fly deploy` push once the pipeline is live.
 
 # Naming convention (Chris, 2026-08-03): Fly apps are <org-slug>-<folder> —
-# glyphh-ai-web, mirroring the GitHub repo (glyphh-ai/web).
+# glyphh-ai-web, glyphh-ai-server, … mirroring the GitHub repos (glyphh-ai/web).
 app = "glyphh-ai-web"
 primary_region = "iad"
 
@@ -13,7 +13,7 @@ primary_region = "iad"
   force_https = true
   auto_stop_machines = "stop"
   auto_start_machines = true
-  # Marketing front door: keep one machine warm — no cold starts on first paint.
+  # The front door: keep one machine warm — no cold starts on first paint.
   min_machines_running = 1
 
 [[vm]]
